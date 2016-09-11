@@ -1,0 +1,487 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\newcommand{\Ker}{\mathop{\mathrm{Ker}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\newcommand{\xar}{\mathop{\mathrm{char}}}
+
+%\def\Ker{{\rm Ker}}%
+%\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+%\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лекторы И.\,В.~Аржанцев и Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2014/2015 учебный год}
+
+
+\bigskip
+
+\section*{Лекция~10}
+
+\medskip
+
+{\it Конечные поля. Простое подполе и порядок конечного поля.
+Автоморфизм Фробениуса. Теорема существования и единственности для
+конечных полей. Поле из четырех элементов. Цикличность
+мультипликативной группы. Неприводимые многочлены над конечным
+полем. Подполя конечного поля.}
+
+\medskip
+
+В этой лекции будем использовать следующее обозначение: $K^\times =
+K \setminus \lbrace 0 \rbrace$~--- мультипликативная группа
+поля~$K$.
+
+Пусть $K$~--- конечное поле. Тогда его характеристика отлична от
+нуля и потому равна некоторому простому числу~$p$. Значит, $K$
+содержит поле $\ZZ_p$ в качестве простого подполя.
+
+\begin{theorem} \label{thm1}
+Число элементов конечного поля равно $p^n$ для некоторого простого
+$p$ и натурального $n$.
+\end{theorem}
+
+\begin{proof}
+Пусть $K$~--- конечное поле характеристики~$p$, и пусть размерность
+$K$ над простым подполем $\ZZ_p$ равна~$n$. Выберем в $K$ базис
+$e_1, \ldots, e_n$ над $\ZZ_p$. Тогда каждый элемент из $K$
+однозначно представляется в виде $\alpha_1 e_1 + \ldots + \alpha_n
+e_n$, где $\alpha_1, \ldots, \alpha_n$ пробегают~$\ZZ_p$.
+Следовательно, в $K$ ровно $p^n$ элементов.
+\end{proof}
+
+Пусть $K$~--- произвольное поле характеристики $p > 0$. Рассмотрим
+отображение
+$$
+\varphi \colon K \to K, \quad a \mapsto a^p.
+$$
+Покажем, что $\varphi$~--- гомоморфизм. Для любых $a,b \in K$ по
+формуле бинома Ньютона имеем
+$$
+(a + b)^p = a^p + C_p^1 a^{p-1}b + C_p^2 a^{p-2}b^2 + \ldots +
+C_p^{p-1} a b^{p-1} + b^p.
+$$
+Так как $p$~--- простое число, то все биномиальные коэффициенты
+$C_p^i$ при $1 \leqslant i \leqslant p-1$ делятся на~$p$. Это
+значит, что в нашем поле характеристики $p$ все эти коэффициенты
+обнуляются, в результате чего получаем $(a + b)^p = a^p + b^p$.
+Ясно, что $(ab)^p = a^p b^p$, так что $\varphi$~--- гомоморфизм.
+Ядро любого гомоморфизма колец является идеалом, поэтому $\Ker
+\varphi$~--- идеал в~$K$. Но в поле нет собственных идеалов, поэтому
+$\Ker \varphi = \lbrace 0 \rbrace$, откуда $\varphi$ инъективен.
+
+Если поле $K$ конечно, то инъективное отображение из $K$ в $K$
+автоматически биективно. В этой ситуации $\varphi$ называется {\it
+автоморфизмом Фробениуса} поля $K$.
+
+\begin{remark}
+Пусть $K$~--- произвольное поле и $\psi$~--- произвольный
+автоморфизм (т.\,е. изоморфизм на себя) поля~$K$. Легко видеть, что
+множество неподвижных точек $K^{\psi} = \{ a \in K \mid \psi(a) =
+a\}$ является подполем в~$K$.
+\end{remark}
+
+Прежде чем перейти к следующей теореме, обсудим понятие формальной
+производной многочлена. Пусть $K[x]$~--- кольцо многочленов над
+произвольным полем~$K$. Формальной производной называется
+отображение $K[x] \to K[x]$, которое каждому многочлену $f(x) =
+a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1 x + a_0$ сопоставляет
+многочлен $f'(x) = na_n x^{n-1} + (n-1)a_{n-1}x^{n-2} + \ldots +
+a_1$. Из определения следует, что это отображение линейно. Легко
+проверить, что для любых $f,g \in K[x]$ справедливо привычное нам
+равенство $(fg)' = f'g + fg'$ (в~силу дистрибутивности умножения
+проверка этого равенства сводится к случаю, когда $f,g$~---
+одночлены). В~частности, $(f(x)^m)' = mf(x)^{m-1}$ для любых $f(x)
+\in K[x]$ и $m \in \NN$.
+
+\begin{theorem} \label{thm2}
+Для всякого простого числа $p$ и натурального числа $n$ существует
+единственное \textup(с точностью до изоморфизма\textup) поле из
+$p^n$ элементов.
+\end{theorem}
+
+\begin{proof}
+Положим $q = p^n$ для краткости.
+
+{\it Единственность.}\ Пусть поле $K$ содержит $q$ элементов. Тогда
+мультипликативная группа $K^{\times}$ имеет порядок $q-1$. По
+следствию~3 из теоремы Лагранжа мы имеем $a^{q-1}=1$ для всех $a \in
+K \setminus \{0\}$, откуда $a^q - a = 0$ для всех $a\in K$. Это
+значит, что все элементы поля $K$ являются корнями многочлена $x^q -
+x \in \ZZ_p[x]$. Отсюда следует, что $K$ является полем разложения
+многочлена $x^q - x$ над $\ZZ_p$. Из теоремы о полях разложения,
+формулировавшейся на прошлой лекции, следует, что поле $K$
+единственно с точностью до изоморфизма.
+
+\smallskip
+
+{\it Существование.} Пусть $K$~--- поле разложения многочлена $f(x)
+= x^q - x \in \ZZ_p[x]$. Тогда имеем $f'(x)= qx^{q-1} - 1 =\nobreak
+-1$ ($qx^{q-1}$ обнуляется, так как $q$ делится на~$p$, а $p$~---
+характеристика поля~$\ZZ_p$). Покажем, что многочлен $f(x)$ не имеет
+кратных корней в~$K$. Действительно, если $\alpha$~--- корень
+кратности $m \geqslant 2$, то $f(x) = (x - \alpha)^m g(x)$ для
+некоторого многочлена $g(x) \in \ZZ_p[x]$. Но тогда $f'(x) =
+m(x-\alpha)^{m-1} g(x) + (x - \alpha)^m g'(x)$, откуда видно, что
+$f'(x)$ делится на $(x - \alpha)$. Но последнее невозможно, ибо
+$f'(x) = -1$~--- многочлен нулевой степени. Итак, многочлен $f(x)$
+имеет ровно $q$ различных корней в поле~$K$. Заметим, что эти
+корни~--- в точности неподвижные точки автоморфизма $\varphi^n =
+\underbrace{\varphi \circ \ldots \circ \varphi}_n$, где
+$\varphi$~--- автоморфизм Фробениуса. В~самом деле, для элемента $a
+\in K$ равенство $a^q - a = 0$ выполнено тогда и только тогда, когда
+$a^{p^n} = a$, т.\,е. $\varphi^n(a) = a$. Значит, корни многочлена
+$x^q-x$ образуют подполе в~$K$, которое по определению поля
+разложения совпадает с~$K$. Следовательно, в поле $K$ ровно $q$
+элементов.
+\end{proof}
+
+Конечныe поля еще называют {\it полями Галуа}. Поле из $q$ элементов
+обозначают $\FF_q$. Например, $\FF_p \cong \ZZ_p$.
+
+\begin{example}
+Построим явно поле из четырёх элементов. Многочлен $x^2+x+1$
+неприводим над $\ZZ_2$. Значит, факторкольцо $\ZZ_2[x]/(x^2+x+1)$
+является полем и его элементы~--- это классы $\overline{0},
+\overline{1}, \overline{x}, \overline{x+1}$ (запись $\overline a$
+означает класс элемента $a$ в факторкольце $\ZZ_2[x]/(x^2+x+1)$).
+Например, произведение $\overline{x} \cdot \overline{x+1}$~--- это
+класс элемента $x^2+x$, который равен $\overline{1}$.
+\end{example}
+
+\begin{proposition}
+Мультипликативная группа конечного поля $\FF_q$ является
+циклической.
+\end{proposition}
+
+\begin{proof}
+Заметим, что $\FF_q^\times$~--- конечная абелева группа, и обозначим
+через $m$ её экспоненту (см. конец лекции~4). Предположим, что
+группа $\FF_q^{\times}$ не является циклической. Тогда $m < q-1$ по
+следствию~2 лекции~4. По определению экспоненты это значит, что $a^m
+= 1$ для всех $a \in \FF_q^{\times}$. Но тогда многочлен $x^m-1$
+имеет в поле $\FF_q$ больше корней, чем его степень,~---
+противоречие.
+\end{proof}
+
+\begin{theorem}
+Конечное поле $\FF_q$, где $q=p^n$, можно реализовать в виде
+$\ZZ_p[x]/(h(x))$, где $h(x)$~--- неприводимый многочлен степени $n$
+над $\ZZ_p$. В~частности, для всякого $n \in \NN$ в кольце
+$\ZZ_p[x]$ есть неприводимый многочлен степени~$n$.
+\end{theorem}
+
+\begin{proof}
+Пусть $\alpha$~--- порождающий элемент группы $\FF_q^{\times}$.
+Тогда минимальное подполе $\ZZ_p(\alpha)$ поля~$\FF_q$, содержащее
+$\alpha$, совпадает с~$\FF_q$. Значит, поле $\FF_q$ изоморфно полю
+$\ZZ_p[x]/(h(x))$, где $h(x)$~--- минимальный многочлен элемента
+$\alpha$ над $\ZZ_p$. Из результатов прошлой лекции следует, что
+многочлен $h(x)$ неприводим. Поскольку степень расширения $[\FF_q :
+\ZZ_p]$ равна~$n$, этот многочлен имеет степень~$n$.
+\end{proof}
+
+\begin{theorem}
+Всякое подполе поля $\FF_q$, где $q=p^n$, изоморфно $\FF_{p^m}$, где
+$m$~--- делитель числа $n$. Обратно, для каждого делителя $m$ числа
+$n$ в поле $\FF_q$ существует ровно одно подполе из $p^m$ элементов.
+\end{theorem}
+
+\begin{proof}
+Пусть $F$~--- подполе поля $\FF_q$. По определению простого подполя
+имеем $F \supset \ZZ_p$, откуда $\xar F = p$. Тогда
+теорема~\ref{thm1} нам сообщает, что $|F| = p^m$ для некоторого $m
+\in \NN$. По теореме~\ref{thm2} имеем $F \cong\nobreak \FF_{p^m}$.
+Обозначим через $s$ степень (конечного) расширения $F \subset
+\FF_q$. Рассуждая так же, как в доказательстве теоремы~\ref{thm1},
+мы получим $p^n = (p^m)^s$, откуда $p^n = p^{ms}$ и $m$ делит~$n$.
+
+Пусть теперь $m$~--- делитель числа~$n$, т.\,е. $n = ms$ для
+некоторого $s \in \NN$. Рассмотрим многочлены $f(x) = x^{p^n} - x$ и
+$g(x) = x^{p^m} - x$ над $\ZZ_p$. Заметим, что для элемента $a \in
+\FF_q$ равенства $a^{p^m} = a$ следует
+$$
+a^{p^n} = a^{p^{ms}} = a^{(p^m)^s} =
+(\ldots((a^{p^m})^{p^m})^{p^m}\ldots)^{p^m} \ \text{($s$ раз возвели
+в степень $p^m$)} = a.
+$$
+Поэтому каждый корень многочлена $g(x)$ является и корнем многочлена
+$f(x)$. Отсюда поле разложения многочлена $f(x)$ лежит в поле
+разложения многочлена $g(x)$. Значит, $\FF_{p^m}$ содержится в
+$\FF_{p^n}$.
+
+Наконец, все элементы подполя из $p^m$ элементов неподвижны при
+автоморфизме $\psi = \underbrace{\varphi \circ \ldots \circ
+\varphi}_m \colon x \mapsto x^{p^m}$ ($\varphi$~--- автоморфизм
+Фробениуса). Поскольку число корней многочлена $x^{p^m}-x$ в поле
+$\FF_q$ не превосходит~$p^m$, множество элементов данного подполя
+совпадает с множеством неподвижных точек автоморфизма~$\psi$.
+Значит, такое подполе единственно.
+\end{proof}
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~9,
+\S\,5)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~5, \S\,2)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава~14, \S\,68)
+\bibitem{LN}
+Р.~Лидл и Г.~Нидеррайтер. Конечные поля (2 тома). М.: Мир, 1988
+(главы~2--3)
+\end{thebibliography}
+
+
+
+\end{document}

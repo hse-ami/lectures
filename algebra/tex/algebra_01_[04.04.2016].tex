@@ -1,0 +1,536 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\def\Ker{{\rm Ker}}%
+\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exc}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лектор Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2015/2016 учебный год}
+
+
+\bigskip
+
+\section*{Лекция 1}
+
+\medskip
+
+{\it Полугруппы и группы: основные определения и примеры. Группы
+подстановок и группы матриц. Подгруппы. Порядок элемента и
+циклические подгруппы. Смежные классы и индекс подгруппы. Теорема
+Лагранжа.}
+
+\medskip
+
+\begin{definition}
+{\it Множество с бинарной операцией}~--- это множество $M$ с
+заданным отображением
+$$
+M\times M \to M, \quad (a,b) \mapsto a\circ b.
+$$
+\end{definition}
+
+Множество с бинарной операцией обычно обозначают $(M,\circ)$.
+
+\begin{definition}
+Множество с бинарной операцией $(M,\circ)$ называется {\it
+полугруппой}, если данная бинарная операция {\it ассоциативна},
+т.\,е.
+$$
+a\circ (b \circ c) = (a\circ b)\circ c \quad \text{для всех} \ a,b,c\in M.
+$$
+\end{definition}
+
+Не все естественно возникающие операции ассоциативны. Например, если
+$M=\NN$ и $a\circ b:=a^b$, то
+$$
+2^{\left(1^2\right)}=2\ne (2^1)^2=4.
+$$
+
+Другой пример неассоциативной бинарной операции: $M = \ZZ$ и $a
+\circ b := a - b$ (проверьте!).
+
+Полугруппу обычно обозначают $(S,\circ)$.
+
+\begin{definition}
+Полугруппа $(S,\circ)$ называется {\it моноидом}, если в ней есть
+{\it нейтральный элемент}, т.\,е. такой элемент $e\in S$, что
+$e\circ a=a\circ e=a$ для любого $a\in S$.
+\end{definition}
+
+Во Франции полугруппа $(\NN,+)$ является моноидом, а в России нет.
+
+\begin{remark}
+Если в полугруппе есть нейтральный элемент, то он один. В самом
+деле, $e_1\circ e_2=e_1=e_2$.
+\end{remark}
+
+\begin{definition}
+Моноид $(S,\circ)$ называется {\it группой}, если для каждого
+элемента $a\in S$ найдется {\it обратный элемент}, т.\,е. такой
+$b\in S$, что $a\circ b = b\circ a= e$.
+\end{definition}
+
+\begin{exc}
+Докажите, что если обратный элемент существует, то он один.
+\end{exc}
+
+Обратный элемент обозначается $a^{-1}$. Группу принято обозначать
+$(G,\circ)$ или просто $G$, когда понятно, о какой операции идёт
+речь. Обычно символ $\circ$ для обозначения операции опускают и
+пишут просто $ab$.
+
+\begin{definition}
+Группа $G$ называется {\it коммутативной} или {\it абелевой}, если
+групповая операция {\it коммутативна}, т.\,е. $ab=ba$ для любых
+$a,b\in G$.
+\end{definition}
+
+Если в случае произвольной группы $G$ принято использовать
+мультипликативные обозначения для групповой операции~--- $gh$, $e$,
+$g^{-1}$, то в теории абелевых групп чаще используют аддитивные
+обозначения, т.\,е. $a+b$, $0$, $-a$.
+
+\begin{definition}
+{\it Порядок} группы $G$~--- это число элементов в~$G$. Группа
+называется {\it конечной}, если её порядок конечен, и {\it
+бесконечной} иначе.
+\end{definition}
+
+Порядок группы $G$ обозначается $|G|$.
+
+\smallskip
+
+Приведём несколько серий примеров групп.
+
+\smallskip
+
+1) Числовые аддитивные группы: \ $(\ZZ,+)$, $(\QQ,+)$, $(\RR,+)$,
+$(\CC,+)$, $(\ZZ_n,+)$.
+
+\smallskip
+
+2) Числовые мультипликативные группы: \
+$(\QQ\setminus\{0\},\times)$, $(\RR\setminus\{0\},\times)$,
+$(\CC\setminus\{0\},\times)$,
+$(\ZZ_p\setminus\{\overline{0}\},\times)$, $p$~--- простое.
+
+3) Группы матриц: \ $\GL_n(\RR)=\{A\in\Mat(n\times n, \RR) \mid
+\det(A)\ne 0\}$;  \ $\SL_n(\RR)=\{A\in\Mat(n\times n, \RR) \mid
+\det(A)=1\}$.
+
+4) Группы подстановок: \ симметрическая группа $S_n$~--- все
+подстановки длины $n$, $|S_n|=n!$;
+
+знакопеременная группа $A_n$~--- чётные подстановки длины $n$,
+$|A_n|=n!/2$.
+
+\begin{exc}
+Докажите, что группа $S_n$ коммутативна $\Leftrightarrow$ $n
+\leqslant 2$, а $A_n$ коммутативна $\Leftrightarrow$ $n \leqslant
+3$.
+\end{exc}
+
+\begin{definition}
+Подмножество $H$ группы $G$ называется {\it подгруппой}, если выполнены следующие три условия: (1) $e \in H$; \quad (2) $ab\in H$ для любых $a,b
+\in H$; \quad (3) $a^{-1}\in H$ для любого
+$a\in H$.
+\end{definition}
+
+\begin{exc}
+Проверьте, что $H$ является подгруппой тогда и только тогда, когда
+ $H$ непусто и $ab^{-1}\in H$ для любых $a,b\in H$.
+\end{exc}
+
+В каждой группе $G$ есть {\it несобственные} подгруппы $H=\{e\}$ и
+$H=G$. Все прочие подгруппы называются {\it собственными}. Например,
+чётные числа $2\ZZ$ образуют собственную подгруппу в $(\ZZ,+)$.
+
+\begin{proposition} \label{sbgrz}
+Всякая подгруппа в $(\ZZ,+)$ имеет вид $k\ZZ$ для некоторого целого
+неотрицательного $k$.
+\end{proposition}
+
+\begin{proof}
+Пусть $H$~--- подгруппа в $\ZZ$. Если $H=\{0\}$, положим $k=0$.
+Иначе пусть $k$~--- наименьшее натуральное число, лежащее в~$H$
+(почему такое есть?). Тогда $k\ZZ \subseteq H$. С другой стороны,
+если $a\in H$ и $a=qk+r$~--- результат деления $a$ на $k$ с
+остатком, то $0 \leqslant r \leqslant k-1$ и $r = a - qk \in H$.
+Отсюда $r=0$ и $H=k\ZZ$.
+\end{proof}
+
+\begin{definition}
+Пусть $G$~--- группа и $g\in G$. {\it Циклической подгруппой},
+порождённой элементом~$g$, называется подмножество $\{g^n \mid
+n\in\ZZ\}$ в $G$.
+\end{definition}
+
+Циклическая подгруппа, порождённая элементом $g$, обозначается
+$\langle g\rangle$. Элемент $g$ называется {\it порождающим} или
+{\it образующим} для подгруппы $\langle g\rangle$. Например,
+подгруппа $2\ZZ$ в $(\ZZ,+)$ является циклической, и в качестве
+порождающего элемента в ней можно взять $g=2$ или $g=-2$. Другими
+словами, $2\ZZ=\langle 2\rangle=\langle -2\rangle$.
+
+\begin{definition}
+Пусть $G$~--- группа и $g\in G$. {\it Порядком} элемента $g$
+называется такое наименьшее натуральное число~$m$, что $g^m=e$. Если
+такого натурального числа $m$ не существует, говорят, что порядок
+элемента $g$ равен бесконечности.
+\end{definition}
+
+Порядок элемента обозначается $\ord(g)$. Заметим, что $\ord(g)=1$ тогда и только тогда, когда $g=e$.
+
+Следующее предложение объясняет, почему для порядка группы и порядка элемента используется одно и то же слово.
+
+\begin{proposition} \label{p1}
+Пусть $G$~--- группа и $g\in G$. Тогда $\ord(g)=|\langle g\rangle|$.
+\end{proposition}
+
+\begin{proof}
+Заметим, что если $g^k=g^s$, то $g^{k-s}=e$. Поэтому если элемент
+$g$ имеет бесконечный порядок, то все элементы $g^n$, $n\in\ZZ$,
+попарно различны, и подгруппа $\langle g\rangle$ содержит бесконечно
+много элементов. Если же порядок элемента $g$ равен $m$, то из
+минимальности числа $m$ следует, что элементы $e=g^0, g=g^1,
+g^2,\ldots,g^{m-1}$ попарно различны. Далее, для всякого $n\in\ZZ$
+мы имеем $n=mq+r$, где $0 \leqslant r \leqslant m-1$, и
+$$
+g^n=g^{mq+r}=(g^m)^qg^r=e^qg^r=g^r.
+$$
+Следовательно, $\langle g\rangle=\{e,g,\ldots, g^{m-1}\}$ и
+$|\langle g\rangle|=m$.
+\end{proof}
+
+\begin{definition}
+Группа $G$ называется {\it циклической}, если найдётся такой элемент
+$g\in G$, что $G=\langle g\rangle$.
+\end{definition}
+
+Ясно, что любая циклическая группа коммутативна и не более чем
+счётна. Примерами циклических групп являются группы $(\ZZ,+)$ и
+$(\ZZ_n,+)$, $n \ge 1$.
+
+Перейдем ещё к одному сюжету, связанному с парой группа--подгруппа.
+
+\begin{definition}
+Пусть $G$~--- группа, $H\subseteq G$~--- подгруппа и $g\in G$. {\it
+Левым смежным классом} элемента $g$ группы $G$ по подгруппе $H$
+называется подмножество
+$$
+gH=\{gh \mid h\in H\}.
+$$
+\end{definition}
+
+\begin{lemma} \label{l1}
+Пусть $G$~--- группа, $H\subseteq G$~--- её подгруппа и $g_1,g_2\in
+G$. Тогда либо $g_1H=g_2H$, либо $g_1H\cap g_2H=\varnothing$.
+\end{lemma}
+
+\begin{proof}
+Предположим, что $g_1H\cap g_2H\ne\varnothing$, т.\,е.
+$g_1h_1=g_2h_2$ для некоторых $h_1,h_2\in H$. Нужно доказать, что
+$g_1H=g_2H$. Заметим, что $g_1H=g_2h_2h_1^{-1}H\subseteq g_2H$.
+Обратное включение доказывается аналогично.
+\end{proof}
+
+\begin{lemma} \label{l2}
+Пусть $G$~--- группа и $H\subseteq G$~--- конечная подгруппа. Тогда
+$|gH|=|H|$ для любого $g\in G$.
+\end{lemma}
+
+\begin{proof}
+Поскольку $gH=\{gh \mid h\in H\}$, в $|gH|$ элементов не больше, чем
+в~$H$. Если $gh_1=gh_2$, то домножаем слева на $g^{-1}$ и получаем
+$h_1=h_2$. Значит, все элементы вида $gh$, где $h\in H$, попарно
+различны, откуда $|gH|=|H|$.
+\end{proof}
+
+\begin{definition}
+Пусть $G$~--- группа и $H\subseteq G$~--- подгруппа. {\it Индексом}
+подгруппы $H$ в группе $G$ называется число левых смежных классов
+$G$ по~$H$.
+\end{definition}
+
+Индекс группы $G$ по подгруппе $H$ обозначается $[G:H]$.
+
+\smallskip
+
+{\bf Теорема Лагранжа}.\ Пусть $G$~--- конечная группа и $H\subseteq
+G$~--- подгруппа. Тогда
+$$
+|G| = |H| \cdot [G:H].
+$$
+
+\begin{proof}
+Каждый элемент группы $G$ лежит в (своём) левом смежном классе по
+подгруппе $H$, разные смежные классы не пересекаются
+(лемма~\ref{l1}) и каждый из них содержит по $|H|$ элементов
+(лемма~\ref{l2}).
+\end{proof}
+
+На следующей лекции мы обсудим следствия из данной теоремы.
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~4,
+$\S$~1,3,5)
+\bibitem{Ko1}
+А.\,И.~Кострикин. Введение в алгебру. Основы алгебры. М.: Наука.
+Физматлит, 1994 (глава~4, $\S$~1-2)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~1, $\S$~2)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава~13, $\S$~54-56)
+\end{thebibliography}
+
+\end{document}

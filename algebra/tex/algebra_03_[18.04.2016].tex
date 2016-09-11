@@ -1,0 +1,544 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\newcommand{\Ker}{\mathop{\mathrm{Ker}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+
+%\def\Ker{{\rm Ker}}%
+%\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exc}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лектор Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2015/2016 учебный год}
+
+
+\bigskip
+
+\section*{Лекция 3}
+
+\medskip
+
+{\it Факторизация по
+сомножителям. Конечно порождённые и свободные абелевы группы. Подгруппы
+свободных абелевых групп.}
+
+\medskip
+
+Следующий результат связывает конструкции факторгруппы и прямого
+произведения.
+
+{\bf Теорема о факторизации по сомножителям}. \ Пусть $H_1, \ldots,
+H_m$~--- нормальные подгруппы в группах $G_1, \ldots, G_m$
+соответственно. Тогда $H_1 \times \ldots \times H_m$~--- нормальная
+подгруппа в $G_1 \times \ldots \times G_m$ и имеет место изоморфизм
+групп
+$$
+(G_1 \times \ldots \times G_m) / (H_1 \times \ldots \times H_m)
+\cong G_1 / H_1 \times \ldots \times G_m / H_m.
+$$
+
+\begin{proof}
+Прямая проверка показывает, что $H_1\times\ldots\times H_m$~---
+нормальная подгруппа в $G_1\times\ldots\times G_m$. Требуемый
+изоморфизм устанавливается отображением
+$$
+(g_1,\ldots,g_m)(H_1\times\ldots\times H_m)\mapsto
+(g_1H_1,\ldots,g_mH_m).
+$$
+\end{proof}
+
+\begin{theorem}
+Пусть $n=ml$~--- разложение натурального числа $n$ на два взаимно
+простых множителя. Тогда имеет место изоморфизм групп
+$$
+\ZZ_n\cong \ZZ_m\times\ZZ_l.
+$$
+\end{theorem}
+
+\begin{proof}
+Рассмотрим отображение
+$$
+\varphi\colon \ZZ_n\to \ZZ_m\times\ZZ_l, \quad k \ (\text{mod}\ n)
+\mapsto (k\ (\text{mod}\ m), k\ (\text{mod}\  l)).
+$$
+Поскольку $m$ и $l$ делят~$n$, отображение $\varphi$ определено
+корректно. Ясно, что $\varphi$~--- гомоморфизм. Далее, если $k$
+переходит в нейтральный элемент $(0,0)$, то $k$ делится и на $m$, и
+на $l$, а~значит, делится на $n$ в силу взаимной простоты $m$ и~$l$.
+Отсюда следует, что гомоморфизм $\varphi$ инъективен. Поскольку
+множества $\ZZ_n$ и $\ZZ_m\times\ZZ_l$ содержат одинаковое число
+элементов, отображение $\varphi$ биективно.
+\end{proof}
+
+\begin{corollary} \label{corpr}
+Пусть $n \geqslant 2$~--- натуральное число и $n=p_1^{k_1}\ldots
+p_s^{k_s}$~--- его разложение в произведение простых множителей
+\textup(где $p_i \ne p_j$ при $i \ne j$\textup). Тогда имеет место
+изоморфизм групп
+$$
+\ZZ_n\cong\ZZ_{p_1^{k_1}}\times\ldots\times\ZZ_{p_s^{k_s}}.
+$$
+\end{corollary}
+
+Всюду в этой и следующей лекции $(A,+)$~--- абелева группа с
+аддитивной формой записи операции. Для произвольного элемента $a\in
+A$ и целого числа $s$ положим
+$$
+sa =
+\begin{cases}
+\underbrace{a + \ldots + a}_s, & \text{ если } s > 0; \\
+0, & \text{ если } s = 0; \\
+\underbrace{(-a) + \ldots + (-a)}_{|s|}, & \text{ если } s < 0.
+\end{cases}
+$$
+
+\begin{definition}
+Абелева группа $A$ называется {\it конечно порождённой}, если
+найдутся такие элементы $a_1,\ldots,a_n\in A$, что всякий элемент
+$a\in A$ представим в виде $a=s_1a_1 + \ldots + s_na_n$ для
+некоторых целых чисел $s_1, \ldots, s_n$. При этом элементы $a_1,
+\ldots, a_n$ называются {\it порождающими} или {\it образующими}
+группы~$A$.
+\end{definition}
+
+\begin{remark}
+Всякая конечно порождённая группа конечна или счётна.
+\end{remark}
+
+\begin{remark}
+Всякая конечная группа является конечно порождённой.
+\end{remark}
+
+\begin{definition}
+Конечно порождённая абелева группа $A$ называется {\it свободной},
+если в ней существует {\it базис}, т.\,е. такой набор элементов
+$a_1,\ldots, a_n$, что каждый элемент $a\in A$ единственным образом
+представим в виде $a=s_1a_1 + \ldots + s_na_n$, где $s_1, \ldots,
+s_n \in \ZZ$. При этом число $n$ называется {\it рангом} свободной
+абелевой группы $A$ и обозначается $\rk\,A$.
+\end{definition}
+
+\begin{example}
+Абелева группа $\ZZ^n:=\{(c_1,\ldots,c_n) \mid c_i\in\ZZ\}$ является
+свободной с базисом
+$$
+\begin{aligned}
+e_1 &= (1,0,\ldots,0), \\
+e_2 &= (0,1,\ldots,0),\\
+ &\ldots \\
+e_n &= (0,0,\ldots,1).
+\end{aligned}
+$$
+Этот базис называется {\it стандартным}. В группе $\ZZ^n$ можно
+найти и много других базисов. Ниже мы все их опишем.
+\end{example}
+
+\begin{proposition}
+Ранг свободной абелевой группы определён корректно, т.\,е. любые два
+её базиса содержат одинаковое число элементов.
+\end{proposition}
+
+\begin{proof}
+Пусть $a_1, \ldots, a_n$ и $b_1, \ldots, b_m$~--- два базиса
+группы~$A$. Предположим, что $n < m$. Элементы $b_1, \ldots, b_m$
+однозначно разлагаются по базису $a_1, \ldots, a_n$, поэтому мы
+можем записать
+$$
+\begin{aligned}
+b_1 &= s_{11}a_1 + s_{12}a_2 + \ldots + s_{1n}a_n, \\
+b_2 &= s_{21}a_1 + s_{22}a_2 + \ldots + s_{2n}a_n,\\
+ &\ldots \\
+b_m &= s_{m1}a_1 + s_{m2}a_2 + \ldots + s_{mn}a_n,
+\end{aligned}
+$$
+где все коэффициенты $s_{ij}$~--- целые числа. Рассмотрим
+прямоугольную матрицу $S = (s_{ij})$ размера $m \times n$. Так как
+$n < m$, то ранг этой матрицы не превосходит~$n$, а~значит, строки
+этой матрицы линейно зависимы над~$\QQ$. Домножая коэффициенты этой
+зависимости на наименьшее общее кратное их знаменателей, мы найдём
+такие целые $s_1, \ldots, s_m$, из которых не все равны нулю, что
+$s_1 b_1 + \ldots + s_m b_m=0$. Поскольку $0 = 0b_1 + \ldots +
+0b_m$, это противоречит однозначной выразимости элемента $0$ через
+базис $b_1, \ldots, b_m$.
+\end{proof}
+
+\begin{proposition}
+Всякая свободная абелева группа ранга $n$ изоморфна группе $\ZZ^n$.
+\end{proposition}
+
+\begin{proof}
+Пусть $A$~--- свободная абелева группа, и пусть $a_1,\ldots,a_n$~---
+её базис. Рассмотрим отображение
+$$\varphi \colon \ZZ^n \to A, \quad (s_1, \ldots, s_n)
+\mapsto s_1a_1 + \ldots + s_na_n.
+$$
+Легко видеть, что $\varphi$~--- гомоморфизм. Так как всякий элемент
+$a \in A$ представим в виде $s_1a_1 + \ldots + s_na_n$, где $s_1,
+\ldots, s_n \in \ZZ$, то $\varphi$ сюръективен. Из единственности
+такого представления следует инъективность~$\varphi$. Значит,
+$\varphi$~--- изоморфизм.
+\end{proof}
+
+Пусть $e_1', \ldots, e_n'$~--- некоторый набор элементов из $\ZZ^n$.
+Выразив эти элементы через стандартный базис $e_1, \ldots, e_n$, мы
+можем записать
+$$
+(e_1', \ldots, e_n') = (e_1, \ldots, e_n)C,
+$$
+где $C$~--- целочисленная квадратная матрица порядка~$n$.
+
+\begin{proposition}
+Элементы $e_1', \ldots, e_n'$ составляют базис группы $\ZZ^n$ тогда
+и только тогда, когда $\det C = \pm 1$.
+\end{proposition}
+
+\begin{proof}
+Предположим сначала, что $e'_1, \ldots, e'_n$~--- базис. Тогда
+элементы $e_1, \ldots, e_n$ через него выражаются, поэтому $(e_1,
+\ldots, e_n) = (e'_1, \ldots, e'_n) D$ для некоторой целочисленной
+квадратной матрицы $D$ порядка~$n$. Но тогда $(e_1, \ldots, e_n) =
+(e_1, \ldots, e_n)CD$, откуда $CD = E_n$, где $E_n$~--- единичная
+матрица порядка~$n$. Значит, $(\det C)(\det D) = 1$. Учитывая, что
+$\det C$ и $\det D$~--- целые числа, мы получаем $\det C = \pm 1$.
+
+Обратно, пусть $\det C = \pm 1$. Тогда матрица $C^{-1}$ является
+целочисленной, а соотношение $(e_1, \ldots, e_n) = (e'_1, \ldots,
+e'_n)C^{-1}$ показывает, что элементы $e_1, \ldots, e_n$ выражаются
+через $e'_1, \ldots, e'_n$. Но $e_1, \ldots, e_n$~--- базис, поэтому
+элементы $e'_1, \ldots, e'_n$ порождают группу~$\ZZ^n$. Осталось
+доказать, что всякий элемент из $\ZZ^n$ однозначно через них
+выражается. Предположим, что $s'_1e'_1 + \ldots + s'_ne'_n =
+s''_1e'_1 + \ldots + s''_n e'_n$ для некоторых целых чисел $s'_1,
+\ldots, s'_n, s''_1, \ldots, s''_n$. Мы можем это переписать в
+следующем виде:
+$$
+(e'_1, \ldots, e'_n)
+\begin{pmatrix} s'_1 \\ \vdots \\ s'_n \end{pmatrix} =
+(e'_1, \ldots, e'_n)
+\begin{pmatrix} s''_1 \\ \vdots \\ s''_n \end{pmatrix}.
+$$
+Учитывая, что $(e'_1, \ldots, e'_n) = (e_1, \ldots, e_n)C$ и что
+$e_1, \ldots, e_n$~--- это базис, получаем
+$$
+C \begin{pmatrix} s'_1 \\ \vdots \\ s'_n \end{pmatrix} = C
+\begin{pmatrix} s''_1 \\ \vdots \\ s''_n \end{pmatrix}.
+$$
+Домножая это равенство слева на~$C^{-1}$, окончательно получаем
+$$
+\begin{pmatrix} s'_1 \\ \vdots \\ s'_n \end{pmatrix} =
+\begin{pmatrix} s''_1 \\ \vdots \\ s''_n \end{pmatrix}.
+$$
+\end{proof}
+
+\begin{theorem}
+Всякая подгруппа $N$ свободной абелевой группы $L$ ранга $n$
+является свободной абелевой группой ранга $\leqslant n$.
+\end{theorem}
+
+\begin{proof}
+Воспользуемся индукцией по $n$. При $n=0$ доказывать нечего. Пусть
+$n>0$ и $e_1,\ldots,e_n$~--- базис группы $L$. Рассмотрим в $L$
+подгруппу
+$$
+L_1 = \langle e_1,\ldots,e_{n-1}\rangle : = \ZZ e_1 + \ldots + \ZZ
+e_{n-1}.
+$$
+Это свободная абелева группа ранга $n-1$. По предположению индукции
+подгруппа $N_1:=N\cap L_1 \subseteq L_1$ является свободной абелевой
+группой ранга $m \leqslant n-1$. Зафиксируем в $N_1$ базис $f_1,
+\ldots, f_m$.
+
+Рассмотрим отображение
+$$
+\varphi \colon N \to \ZZ, \quad s_1e_1 + \ldots + s_ne_n \mapsto
+s_n.
+$$
+Легко видеть, что $\varphi$~--- гомоморфизм и что $\Ker \varphi =
+N_1$. Далее, $\Im \varphi$~--- подгруппа в~$\ZZ$, по предложению~1
+из лекции~1 она имеет вид $k \ZZ$ для некоторого целого $k \geqslant
+0$. Если $k=0$, то $N \subseteq L_1$, откуда $N = N_1$ и всё
+доказано. Если $k>0$, то пусть $f_{m+1}$~--- какой-нибудь элемент из
+$N$, для которого $\varphi(f_{m+1}) = k$. Докажем, что $f_1, \ldots,
+f_m, f_{m+1}$~--- базис в~$N$. Пусть $f \in N$~--- произвольный
+элемент, и пусть $\varphi(f) = sk$, где $s \in \ZZ$. Тогда
+$\varphi(f - sf_{m+1}) = 0$, откуда $f - sf_{m+1} \in N_1$ и,
+следовательно, $f - sf_{m+1} = s_1 f_1 + \ldots + s_m f_m$ для
+некоторых $s_1, \ldots, s_m \in \ZZ$. Значит, $f = s_1 f_1 + \ldots
++ s_m f_m + s f_{m+1}$ и элементы $f_1, \ldots, f_m, f_{m+1}$
+порождают группу~$N$. Осталось доказать, что они образуют базис
+в~$N$. Предположим, что
+$$
+s_1 f_1 + \ldots + s_m f_m + s_{m+1} f_{m+1} = s'_1 f_1 + \ldots +
+s'_m f_m + s'_{m+1} f_{m+1}
+$$
+для некоторых целых чисел $s_1, \ldots, s_m, s_{m+1}, s'_1, \ldots,
+s'_m, s'_{m+1}$. Рассмотрев образ обеих частей этого равенства при
+гомоморфизме~$\varphi$, получаем $s_{m+1} k = s'_{m+1} k$, откуда
+$s_{m+1} = s'_{m+1}$ и
+$$
+s_1 f_1 + \ldots + s_m f_m = s'_1 f_1 + \ldots + s'_m f_m.
+$$
+Но $f_1, \ldots, f_m$~--- базис в~$N_1$, поэтому $s_1 = s'_1$,
+\ldots, $s_m = s'_m$.
+\end{proof}
+
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~9,
+\S\,1)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~2, \S\,3)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава~13, \S\,60)
+\end{thebibliography}
+\end{document}

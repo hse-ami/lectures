@@ -1,0 +1,211 @@
+\input{header.tex}
+
+\begin{document}
+\section{Лекция 24 от 14.03.2016}
+
+\subsection*{Корневые подпространства}
+
+Вспомним конец прошлой лекции.
+
+Пусть $V$ --- векторное пространство над полем $F$, $\phi \in L(V)$ --- линейный оператор.
+
+Вектор $v \in V$ --- корневой для $\phi$, отвечающий собственному значению $\lambda \in F$ тогда и только тогда, когда существует $m \geqslant 0 $ такое, что $(\phi - \lambda \id)^{m}(v) = 0.$ Высотой корневого вектора называется наименьшее такое $m$.
+
+Корневым подпространством называется пространство из корневых векторов, соответствующих одному значению $\lambda$. Другими словами, $V^{\lambda}(\phi) = \{v \in V \; \vline \; \exists m \geqslant 0 : (\phi - \lambda \id)^{m}(v) = 0\}$. Поскольку собственный вектор является корневым вектором высоты 1, то собственное подпространство включено в корневое подпространство с тем же значением: $V_{\lambda}(\phi) \subseteq V^{\lambda}(\phi).$
+
+\begin{Suggestion}
+	Корневое подпространство нетривиально тогда и только тогда, когда $\lambda$ является собственным значением. Другими словами, $V^{\lambda}(\phi) \neq \{0\} 	
+	\Leftrightarrow \chi_{\phi}(\lambda) = 0.$
+\end{Suggestion}
+\begin{proof}\
+	\begin{itemize}
+		\item[$\Leftarrow$]
+		$\chi_{\phi}(\lambda) = 0 \Rightarrow V_{\lambda}(\phi) \neq \{0\} \Rightarrow V^{\lambda}(\phi) \neq \{0\}$, так как $V^{\lambda}(\phi) \supset V_{\lambda}(\phi)$.
+		\item[$\Rightarrow$]
+		Пусть $V^{\lambda}(\phi) \neq \{0\} \Rightarrow \exists v \neq 0 \in V^{\lambda}(\phi) \Rightarrow \exists m \geqslant 1: (\phi - \lambda \id)^{m}(v) = 0$. \\
+		Рассмотрим $u = (\phi - \lambda \id)^{m - 1}(v) \neq 0,$ тогда:
+		\begin{gather*}
+		(\phi - \lambda \id)(u) = (\phi - \lambda \id)(\phi - \lambda \id)^{m - 1}(v) = (\phi - \lambda \id)^{m}(v) = 0.
+		\end{gather*}
+		То есть вектор $u$ --- это вектор, для которого $(\phi - \lambda \id)(u) = 0$, то есть собственный вектор. Следовательно $\lambda$ --- собственное значение.
+	\end{itemize}
+\end{proof}
+\begin{Suggestion}
+	Для любого собственного значения $\lambda \in F$ подпространство $V^{\lambda}(\phi)$ инвариантно относительно $\phi$.
+\end{Suggestion}
+\begin{proof}
+	Пусть $v$ --- корневой вектор высоты $m$. Докажем, что $\phi(v)$ --- также корневой вектор. 
+	
+	Заметим, что если $u = (\phi - \lambda \id)(v),$ то $u$ --- корневой вектор высоты $m - 1$, и, соответственно, лежит в корневом подпространстве:
+	$$
+	u = (\phi - \lambda \id)(v) = \phi(v) - \lambda{v} \in V^{\lambda}(\phi).
+	$$
+	Мы получили, что 
+	$\phi(v) \in \lambda{v} + V^{\lambda}(\phi).$ 
+	Но $\lambda{v} \in V^{\lambda}(\phi)$, то есть $\lambda{v} + V^{\lambda}(\phi) = V^{\lambda}(\phi)$ и $\phi(v) \in V^{\lambda}(\phi)$. Что и означает, что пространство инвариантно относительно оператора $\phi$.
+\end{proof}
+Положим для краткости, что $\phi - \lambda \id = \phi_{\lambda}$.
+
+\vspace{0.2cm}
+Заметим, что ядра степеней линейного оператора <<вкладываются>> друг в друга --- те векторы, которые стали нулевыми при применении линейного оператора $\phi^k_\lambda$, при применении линейного оператора $\phi_\lambda$ ещё раз так и остаются нулевыми, а также <<добиваются>> (переводятся в нулевые) некоторые ранее ненулевые векторы. Итого, получаем следующее:
+\[
+V_\lambda(\phi) = \ker\phi_\lambda \subset \ker\phi^2_\lambda \subset \ldots \subset \ker\phi^m_\lambda 
+\subset \ldots
+\]
+Причём существует такое $m$, что $\ker\phi^m_\lambda = \ker\phi^{m + 1}_\lambda$, так как $V$ --- конечномерно и размерность его не может увеличиваться бесконечно. Выберем наименьшее такое $m$.
+\begin{Task}
+	Доказать, что для любого $s \geqslant 0$ выполняется равенство $\ker\phi^m_\lambda = \ker\phi^{m + s}_\lambda.$
+\end{Task}
+Заметим также, что $V^{\lambda}(\phi) = \ker\phi^m_\lambda.$ Пусть $k_i = \dim\ker\phi^i_\lambda$.
+Тогда:
+ $$ \dim{V_{\lambda}(\phi)} = k_1 < k_2 < \ldots < k_m =  \dim{V^{\lambda}(\phi)}.
+ $$
+ 
+ Будем обозначать как $\limref{\phi}{V}$ ограничение линейного оператора на пространство $V$.
+ 
+\begin{Suggestion}\
+	\begin{enumerate}
+		\item Характеристический многочлен линейного отображения $\phi \; \vline_{V^{\lambda}(\phi)}$ равен $(t - \lambda)^{k_m}$.
+		\item Если $\mu \neq \lambda$, то линейный оператор $\phi - \mu \id$ невырожден на  $V^{\lambda}(\phi)$.
+	\end{enumerate}
+\end{Suggestion}
+
+\begin{proof}
+	Напомним, что $k_i = \dim \ker \phi^i_\l$, для $i = 1, \ldots, m$. Пусть также $k_0 = 0$.
+	
+	Выберем базис $\mathbb{e} = (e_1, \ldots, e_{k_m})$ в $V^{\lambda}(\phi)$ так, чтобы
+	$(e_1, \ldots, e_{k_i})$ также был базисом в  $\ker\phi^{i}_\lambda$. Тогда матрица ограничения $\phi_\l$ на $V^{\l}(\phi)$ в этом базисе имеет блочный вид:
+	\begin{gather*}
+	A(\limref{\phi_\l}{V^\l(\phi)}, \e) = 
+	\begin{pmatrix}
+	  0 & * & * & \ldots & * & * \\
+	  0 & 0 & * & \ldots & * & * \\
+	  0 & 0 & 0 & \ldots & * & * \\
+	  \vdots &\vdots &\vdots & \ddots & \vdots & \vdots\\
+	  0 & 0 & 0 & \ldots & 0 & * \\
+	  0 & 0 & 0 &\ldots & 0 & 0
+	\end{pmatrix},
+	\end{gather*}
+	где $(i, j)$-ый блок --- это матрица $\Mat_{(k_i - k_{i - 1}) \times (k_j - k_{j - 1})}$.
+	
+	Но тогда:
+	\begin{gather*}
+	A(\limref{\phi}{V^\l(\phi)}, \e) = A(\limref{\phi_\l}{V^\l(\phi)}, \e) + \l E =
+	\begin{pmatrix}
+  		A_1 & * & * & \ldots & * & * \\
+  	    0 & A_2 & * & \ldots & * & * \\
+  	    0 & 0 & A_3 & \ldots & * & * \\
+  		\vdots &\vdots &\vdots & \ddots & \vdots & \vdots\\
+  		0 & 0 & 0 & \ldots & A_{m-1} & * \\
+  		0 & 0 & 0 & \ldots & 0 & A_m
+ 	\end{pmatrix}, \quad \text{где } A_i = \lambda E_{k_i - k_{i - 1}} \quad (*)
+	\end{gather*}
+	А значит, характеристический многочлен линейного отображения $\limref{\phi}{V^\l(\phi)}$ равен $(t - \lambda)^{k_m}$.
+	
+	Теперь докажем невырожденность линейного оператора $(\phi - \mu\id)$ при $\mu \neq \l$.
+	
+	Рассмотрим матрицу ограничения этого оператора на корневое подпространство:
+	$$
+	A(\limref{(\phi - \mu \id)}{V^\l(\phi)}, \e) = A(\limref{\phi}{V^\l(\phi)}, \e) - \mu E.
+	$$
+	
+	Она имеет вид $(*)$, где $A_i = (\lambda - \mu)E_{k_i}$. Следовательно,
+	$$
+	\det(\limref{(\phi - \mu \id)}{V^\l(\phi)}) = (\lambda - \mu)^{k_m} \neq 0.
+	$$
+	Что и означает, что линейный оператор невырожден.
+\end{proof}
+
+\begin{Suggestion}
+	Если $\lambda$ -- собственное значение $\phi$, то $\dim{V^{\lambda}(\phi)}$ равен кратности 
+	$\lambda$ как корня многочлена $\chi_\phi(t)$.
+\end{Suggestion}
+
+\begin{proof}
+	Пусть $(e_1, \ldots, e_k)$ --- базис $V^{\lambda}(\phi),\ k = \dim{V^{\lambda}(\phi)}$. Дополним $(e_1, \ldots, e_k)$  до базиса $\mathbb{e} = (e_1, \ldots, e_n)$ всего пространства $V$. Тогда матрица линейного оператора имеет следующий вид:
+	\begin{gather*}
+	A_\phi = 
+		\begin{pmatrix}
+		\begin{array}{c|c}
+		B & * \\ \hline
+		0 & C
+		\end{array}
+		\end{pmatrix},\quad B \in M_k,\ C \in M_{n-k} \\
+		\chi_\phi(t) = \det(tE - A) = \det(tE - B)\det(tE - C).
+	\end{gather*}
+	
+	Заметим, что $\det(tE - B)$ --- это характеристический многочлен $\limref{\phi}{V^\l(\phi)}$, следовательно, 
+	$$
+	\chi_\phi(t) = (t - \lambda)^k\det(tE - C).
+	$$
+	Осталось показать, что $\lambda$ --- не корень $\det(tE - C)$.
+	
+	Пусть $W = \langle e_{k+1}, \ldots, e_n \rangle$. Тогда рассмотрим линейный оператор $\psi \in L(W)$, у которого матрица в базисе $(e_{k+1}, \ldots, e_n)$ есть $C$. Предположим, что $\det(\lambda E - C) = 0.$ Это значит, что $\lambda$~--- собственное 	значение для $\psi$ и существует вектор $w \in W,\ w \neq 0$ такой, что $\psi(w) = \lambda w$.
+	
+	Тогда:
+	\begin{gather*}
+	\phi(w) = \l w + u, \quad u \in V^\l(\phi) \\
+	\phi(w) - \l w \in V^\l(\phi) \\
+	(\phi - \l\id)(w) \in V^\l(\phi) \Rightarrow w \in V^\l(\phi)
+	\end{gather*}
+	Получили противоречие. Значит, $\l$ --- не корень $\det(tE - C)$.
+\end{proof}
+
+\begin{Consequence}
+	$V^{\lambda}(\phi) = \ker\phi^s_\lambda$, где $s$ --- кратность $\lambda$ как корня многочлена $\chi_\phi(t)$.
+\end{Consequence}
+
+\begin{Suggestion}
+	Если $\lambda_1, \ldots, \lambda_k$, где $\lambda_i \neq \lambda_j$ при $i \neq j$ --- собственные значения $\phi$, то сумма $V^{\lambda_1}(\phi) + \ldots + V^{\lambda_k}(\phi)$ --- прямая.
+\end{Suggestion}
+
+\begin{proof}
+	Докажем индукцией по $k$.
+	
+	База при $k = 1$ --- ясно.
+	
+	Теперь пусть утверждение доказано для всех значений, меньших $k$. Докажем для $k$.
+	
+	Выберем векторы $v_i \in V^{\lambda_i}(\phi)$ такие, что $v_1 + \ldots + v_k = 0$. Пусть $m$ --- высота вектора $v_k$. Тогда применим к нашей сумме оператор $\phi^m_{\lambda_k}$, получив следующее:
+	\[
+	\phi^m_{\lambda_k}(v_1) + \ldots + \phi^m_{\lambda_k}(v_{k-1}) + \phi^m_{\lambda_k}(v_k) = 0.
+	\]
+	С другой стороны, $ \phi^m_{\lambda_k}(v_k) = 0$, то есть:
+	\[
+	\phi^m_{\lambda_k}(v_1) + \ldots + \phi^m_{\lambda_k}(v_{k-1}) + \phi^m_{\lambda_k}(v_k) = \phi^m_{\lambda_k}(v_1) + \ldots + \phi^m_{\lambda_k}(v_{k-1}) = 0.
+	\]
+	Тогда по предположению индукции $\phi^m_{\lambda_k}(v_1) = \ldots = \phi^m_{\lambda_k}(v_{k-1}) = 0$. Hо
+	$ \limref{\phi_{\l_k}}{V^{\l_i}(\phi)}$ невырожден и, следовательно, обратим при $i \neq k$. Значит, $v_1 = \ldots = v_{k-1} = 0$. Но тогда и $v_k = 0$. 
+	
+	Следовательно, сумма прямая, что нам и требовалось.
+\end{proof}
+
+\begin{Theorem}
+	Если характеристический многочлен $\chi_\phi(t)$ разлагается на линейные множители, причём $\chi_\phi(t) = (t - \lambda_1)^{k_1}\ldots(t - \lambda_s)^{k_s}$, то $V = \bigoplus_{i = 1}^s  V^{\lambda_i}(\phi)$.
+\end{Theorem}
+
+\begin{proof}
+	Так как сумма $ V^{\lambda_1}(\phi) + \ldots +  V^{\lambda_s}(\phi)$ прямая и для любого $i$ выполняется, что $\dim(V^{\lambda_i}(\phi)) = k_i$, то: 
+	$$
+	\dim(V^{\lambda_1}(\phi) + \ldots +  V^{\lambda_s}(\phi)) = k_1 + \ldots + k_s = \dim{V}.
+	$$
+	Следовательно, $V = \bigoplus_{i = 1}^s  V^{\lambda_i}(\phi)$.
+\end{proof}
+
+\subsection{Жордановы клетки}
+\begin{Def}
+Пусть $\lambda \in F$. \textbf{Жордановой клеткой} порядка $n$, отвечающей значению $\lambda$, называется матрица вида:
+\begin{gather*}
+J_\l^n = 
+\begin{pmatrix}
+\l & 1 & 0 & \ldots & 0 & 0 \\
+0 & \l & 1 & \ldots & 0 & 0 \\
+0 & 0 & \l & \ddots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & \ddots & \vdots \\
+0 & 0 & 0 & \ldots & \l & 1 \\
+0 & 0 & 0 & \ldots & 0 & \l
+\end{pmatrix} \in M_n(F).
+\end{gather*}
+\end{Def}
+
+\end{document}

@@ -1,0 +1,221 @@
+\input{header.tex}
+
+\begin{document}
+
+\section*{Лекция 5 от 26.01.2016}
+
+\subsection*{Быстрая сортировка. Продолжение}
+Говоря об алгоритме быстрой сортировки (\textsc{QSort}), мы рассматривали только случаи, когда все элементы различны. Однако это далеко не всегда так. Если в входном массиве есть равные элементы, то алгоритм может застопориться. Для того, чтобы избежать этого, изменим алгоритм \textsc{Partition}. Попытаемся преобразовывать массив таким образом, чтобы в левой части стояли элементы строго меньшие опорного, в правой --- строго большие, а в середине --- равные ему:
+\[\begin{array}{|c|c|c|c|c|}
+	\hline
+	\phantom{x}  & \dots & x & \dots & \phantom{x}  \\
+	\hline
+\end{array}
+\longrightarrow
+\begin{array}{|c|c|c|}
+    \hline
+    <x&=x&>x\\
+    \hline
+\end{array}\]
+
+Обозначим за опорный элемент последний. Будем проходиться по массиву от начала до конца, выставляя элементы в нужном порядке (? — ещё не просмотренные элементы):
+\[\begin{array}{lllll}
+    \hline
+   	\multicolumn{1}{|c|}{<x} & \multicolumn{1}{|c|}{>x} & \multicolumn{1}{|c|}{  ?  } & \multicolumn{1}{|c|}{=x} & \multicolumn{1}{|c|}{x}\\
+    \hline
+    [1, i) & [i, j) & [j, k) & [k, n) & n
+\end{array}\]
+
+\begin{algorithm}
+\caption{Модифицированный алгоритм \textsc{Partition}}
+\begin{algorithmic}[1]
+\Function{Partition}{$a$}
+\State $i \mathrel{:=} 1$
+\State $j \mathrel{:=} 1$
+\State $k \mathrel{:=} n - 1$
+\While{$j < k$}
+	\If{$a[j] = a[n]$}
+		\State $k \mathrel{:=} k - 1$
+		\State $a[j], a[k] \mathrel{:=} a[k], a[j]$
+	\Else \If{$a[j] < a[n]$}
+		\State $a[i], a[j] \mathrel{:=} a[j], a[i]$
+		\State $j \mathrel{:=} j + 1$
+		\State $i \mathrel{:=} i + 1$
+	\Else
+		\State $j \mathrel{:=} j + 1$
+	\EndIf
+	\EndIf
+\EndWhile
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Заметим, что $j = k$ (так как алгоритм не закончит работу до тех пор, пока это не станет верно). Тогда на выходе получится массив вида:
+
+\[\begin{array}{lll}
+    \hline
+    \multicolumn{1}{|c|}{<x} & \multicolumn{1}{|c|}{>x} & \multicolumn{1}{|c|}{=x}\\
+    \hline
+    [1, i) & [i, j) & [k, n]
+\end{array}\]
+
+Остаётся только переставить части массива:
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\State  $j \mathrel{:=} n$
+\While{$i < k$ and $j \geqslant k$}
+	\State $a[i], a[j] \mathrel{:=} a[j], a[i]$
+	\State $i \mathrel{:=} i + 1$
+	\State $j \mathrel{:=} j - 1$
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+ 
+\
+
+\textbf{В:} Самая быстрая из наших сортировок --- $O(n \log n)$. А можно ли быстрее?
+
+\textbf{О:} На основе только сравнений --- нет. 
+
+Использовать разобранные нами сортировки можно на любых сущностях, для которых определена операция сравнения.
+
+Предположим теперь, что мы сортируем натуральные числа, не превосходящие некоторого числа $C$.
+
+Создадим массив $b$ размера $C$, заполненный нулями. Будем проходить по исходному массиву $a$ и на каждом шаге будем добавлять 1 к соответствующему элементу массива $b$: 
+\[b[a[i]] \mathrel{:=} b[a[i]] + 1\]
+Потом, проходя по получившемуся массиву $b$, будем восстанавливать исходный массив уже в отсортированном виде.
+
+Такая сортировка будет работать за $O(n)$, однако, она не универсальна.
+
+Вернёмся к универсальным сортировкам. Рассмотрим дерево для массива $a = [6, 5, 2]$:
+
+\begin{center}
+\begin{forest}
+for tree={
+	%parent anchor=south,
+	%child anchor=north,
+	if n children=0{
+		font=\itshape,
+		%tier=terminal,
+	}{},
+}
+[{$\mathbf{a[1] < a[2]}$}
+	[{$a[1] < a[3]$}
+		[{$a[2] < a[3]$}
+			[{$(6, 5, 2)$}
+			]
+			[{$(5, 6, 2)$}
+			]
+		]
+		[{$(2, 6, 5)$}
+		]
+	]
+	[{$\mathbf{a[2] < a[3]}$}
+		[{$a[1] < a[3]$}
+			[{$(5, 6, 2)$}
+			]
+			[{$(5, 2, 6)$}
+			]
+		]
+		[{$\mathbf{(2, 6, 5)}$}
+		]
+	]
+]
+\end{forest}
+\end{center}
+
+Подобное дерево можно составить для любого детерминированного\footnote{Детерминированный алгоритм — алгоритмический процесс, который выдаёт предопределённый результат для заданных входных данных. Например, \textsc{QSort}, выбирающий опорный элемент случайным образом, не является детерминированным.} алгоритма сортировки, зафиксировав $n$. Сложность алгоритма будет являться высота $h$ дерева. Посчитаем это $h$:
+\begin{itemize}
+	\item[$\blacktriangleright$] Так как алгоритм должен работать на любой перестановке из $n$ элементов, то у дерева не может быть меньше, чем $n!$ листов.
+	\item[$\blacktriangleright$] Так как сравнение --- бинарная операция, то у каждой вершины не более двух потомков. Тогда в дереве не может быть больше, чем $2^h$ листьев.
+	\item[$\blacktriangleright$] Тогда $2^h \geqslant n! \iff h \geqslant \log_2 n!$.
+	Заметим, что:
+	\[n! = 1 \cdot 2 \cdot \ldots \cdot \left\lfloor\frac{n}{2}\right\rfloor \cdot \underbrace{ \left(\left\lfloor\frac{n}{2}\right\rfloor + 1\right) \cdot \ldots (n - 1) \cdot n}_\text{каждый из $\frac{n}{2}$ элементов не меньше $\frac{n}{2}$} \geqslant \left(\frac{n}{2}\right)^{\frac{n}{2}} \]
+	Тогда $h \geqslant \log_2 \left(\frac{n}{2}\right)^{\frac{n}{2}} = \frac{n}{2} \log_2 \frac{n}{2} = \Omega(n \log n)$. Из этого следует, что отсортировать произвольный массив с помощью только сравнений меньше, чем за $\Omega(n \log n)$ операций, невозможно.
+\end{itemize}
+
+\subsection*{Поиск медианы}
+
+Медиана --- такой элемент массива, что не меньше половины элементов меньше неё, и не меньше половины --- больше.
+
+Для отсортированного массива размера $n$ медиана будет  находиться под номером $\dfrac{n + 1}{2}$ для нечётных $n$ и $\dfrac{n}{2}$ для чётных $n$.
+Пример: для массива (8, 1, 3, 5, 6, 9) медианой будет являться~5.
+
+Как же найти медиану?
+Очевидно, что можно отсортировать и взять средний --- $\Theta(n)$.
+
+А можно ли найти медиану ли за линейное время?
+Можно.
+Напишем алгоритм, находящий элемент, стоящий на k-ом месте в массиве, получающемся из входного после сортировки.
+Это называется поиском $k$-ой порядковой статистики.
+Составим этот алгоритм, немного модифицировав QSort:
+
+\begin{algorithm}
+\caption{Поиск $k$-ой порядковой статистики}
+\begin{algorithmic}[1]
+\Function{Select}{$a, k$}
+	\State choose pivot $a[p]$
+	\State $i \mathrel{:=} \textsc{Partition}(a, p)$
+	\If{$i \mathrel{:=} k$}
+		\State return $a[i]$	
+	\EndIf
+	\If{$i > k$}
+		\State return $\textsc{Select}(a[1 \ldots i - 1], k)$
+	\Else
+		\State return $\textsc{Select}(a[i + 1 \ldots n], k - i)$
+	\EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Как и в быстрой сортировке, неправильно выбранный опорный элемент портит скорость до $n^2$. Будем выбирать опорный элемент случайным образом. Попробуем посчитать время работы в среднем случае.
+
+$j$-подзадача размера $n'$. $\left( \frac{3}{4} \right)^{j+1}n < n' \leqslant \left( \frac{3}{4} \right)^{j}n$
+
+Как и в QSort, в среднем мы потратим две попытки на переход к следующему $j$.
+
+Максимальное $j$ --- $O(\log_\frac{4}{3} n)$
+
+$T(n) \leqslant \sum\limits_{j=0}^{\log_{\frac{4}{3}}n} 2\cdot c\cdot \left( \frac{3}{4} \right)^jn = 2cn\sum\limits_{j=0}^{\log_{\frac{4}{3}}n}\left( \frac{3}{4} \right)^j \leqslant 2cn$
+
+Время работы алгоритма в худшем случае всё ещё $O(n^2)$.
+Худший случай — когда на каждом шаге мы отщеплем всего один элемент.
+Для достижения лучшего случая, на каждом шаге нужно выбирать в качестве опорного элемента медиану.
+
+\subsection*{Медиана медиан}
+Попробуем несколько модифицировать наш алгоритм.
+Разобьём входной массив на группы по 5 элементов.
+Отсортируем каждую такую группу.
+Так как размер каждой группы зафиксирован, время сортировки не зависит от $n$.
+Зависит только количество сортировок.
+Возьмём медиану в каждой группе и применим алгоритм нахождения медианы к получившемуся массиву медиан.
+Выберем её в качестве опорного элемента.
+
+\begin{algorithm}
+\caption{Поиск $k$-ой порядковой статистики 2}
+\begin{algorithmic}[1]
+\Function{Select}{$a, k$}
+	\State Divide a into groups of 5
+	\State Choose medians $m_1,\ldots m_\frac{n}{5}$
+	\State $x = \textsc{Select}([m_1,\ldots, m_\frac{n}{5}], \frac{n}{10})$
+	\State choose $x$ as pivot $a[p]$
+	\State $i \mathrel{:=} \textsc{Partition}(a, p)$
+	\If{$i \mathrel{:=} k$}
+		\State return $a[i]$	
+	\EndIf	
+	\If{$i > k$}
+		\State return $\textsc{Select}(a[1 \ldots i - 1], k)$
+	\Else
+		\State return $\textsc{Select}(a[i + 1 \ldots n], k - i)$
+	\EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+$T(n) \leqslant cn + T\left(\frac{n}{5}\right) + T\left( \frac{7}{10}n \right)$
+
+$T(n) \leqslant ln$ для некоторого $l$
+
+$T(n) \leqslant cn + T(\frac{n}{5}) + T(\frac{7}{10}) \leqslant cn + \frac{ln}{5} + \frac{7}{10}ln$
+\end{document}
