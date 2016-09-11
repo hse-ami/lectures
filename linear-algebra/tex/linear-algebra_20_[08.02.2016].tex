@@ -1,0 +1,259 @@
+\input{header.tex}
+
+\begin{document}
+\renewcommand{\phi}{\varphi}
+
+\section{Лекция 20 от 08.02.2016}
+
+\subsection{Линейные отображения (продолжение)}
+Пусть $\phi\colon V \rightarrow W$ --- линейное отображение.
+
+\begin{Suggestion}\
+	\begin{enumerate}
+		\item $\Ker \phi$ --- подпространство в $V$.
+		\item $\Im \phi$ --- подпространство в $W$.
+		
+	\end{enumerate}
+\end{Suggestion}
+
+\begin{proof}
+    Проверим по определению.
+    \begin{enumerate}
+        \item \begin{itemize}
+            \item $\phi(0_v) = 0_w$ --- этот факт мы уже доказали.
+            \item $v_1, v_2 \in \Ker \phi \Rightarrow \phi(v_1+v_2) = \phi(v_1) + \phi(v_2) = 0_w + 0_w = 0_w \Rightarrow v_1+v_2 \in \Ker \phi$.
+            \item $v \in \Ker \phi, \alpha \in F \Rightarrow \phi(\alpha v) = \alpha \phi(v) = \alpha 0 = 0$, то есть $\alpha v$ тоже лежит в ядре.
+        \end{itemize}
+        \item \begin{itemize}
+            \item $0_w = \phi(0_v) \Rightarrow 0_w \in \Im(\phi)$.
+            \item $w_1, w_2 \in \Im \phi \Rightarrow \exists v_1, v_2 \in V\colon w_1 = \phi(v_1), w_2 = \phi(v_2) \Rightarrow w_1 + w_2 = \phi(v_1) + \phi(v_2) = \phi(v_1 + v_2) \Rightarrow w_1 + w_2 \in \Im \phi$.
+            \item $w \in \Im \phi, \alpha \in F \Rightarrow \exists v \in V \colon \phi(v) = w \Rightarrow \alpha w = \alpha \phi(v) = \phi(\alpha v) \Rightarrow \alpha w \in \Im \phi$.
+            
+        \end{itemize}
+    \end{enumerate}
+    То есть все условия подпространства по определению выполнены и предложение доказано.
+\end{proof}
+
+\begin{Suggestion}\
+    \begin{enumerate}
+        \item Отображение $\phi$ инъективно тогда и только тогда, когда $\Ker \phi = \{0\}$.
+        \item Отображение $\phi$ сюръективно тогда и только тогда, когда $\Im \phi = W$.
+    \end{enumerate} 
+\end{Suggestion}
+
+\begin{proof}\
+    \begin{enumerate}
+        \item \begin{itemize}
+            \item $[\Rightarrow]$ Очевидно.
+            \item $[\Leftarrow]$ $v_1, v_2 \in V :\ \phi(v_1)=\phi(v_2) \Rightarrow \phi (v_1 - v_2) = 0 \Rightarrow v_1 - v_2 = 0 \Rightarrow v_1 = v_2 $.
+        \end{itemize}
+        \item Очевидно из определения образа.
+    \end{enumerate}
+\end{proof}
+
+\begin{Consequence}
+    Отображение $\phi$ является изоморфизмом тогда и только тогда, когда $\Ker \phi~=~\{0\}$ и $\Im \phi = W$.
+\end{Consequence}
+
+\begin{Suggestion}
+    Пусть $U \subset V$ --- подпространство и $e_1, \ldots, e_k$ --- его базис. Тогда:
+    \begin{enumerate}
+        \item $\phi(U)$ --- подпространство, $\phi(U) = \langle \phi(e_1), \ldots, \phi(e_k)\rangle$;
+        \item $\dim \phi(U) \leqslant \dim U$.
+    \end{enumerate}
+\end{Suggestion}
+
+\begin{proof}\
+    \begin{enumerate}
+        \item $\phi(x_1e_1 + x_2e_2 + \ldots + x_ke_k) = x_1\phi(e_1) + \ldots + x_k\phi(e_k) \in \langle \phi(e_1), \ldots, \phi(e_k)\rangle$.
+        \item $\phi(U) = \langle\phi(e_1), \ldots, \phi(e_k)\rangle \Rightarrow \dim \phi(U) \leqslant \dim U$ по основной лемме о линейной зависимости.
+    \end{enumerate}
+\end{proof}
+
+Пусть $V, W$ --- векторные пространства, $\mathbb{e} = (e_1, \ldots, e_n)$ --- базис $V$, $\mathbb{f} = (f_1, \ldots, f_m)$ --- базис $W$, $A$ --- матрица $\phi$ по отношению к $\mathbb{e},\ \mathbb{f}$.
+
+\begin{Suggestion}
+    $\dim \Im \phi = \rk A$.
+\end{Suggestion}
+
+\begin{proof}
+    \begin{gather*}
+        v \in V,\ v = x_1e_1 + \ldots x_ne_n\\
+        \phi(v) = y_1f_1 + \ldots y_mf_m 
+    \end{gather*}
+    Тогда:
+    $$
+    \begin{pmatrix}
+        y_1\\
+        \vdots\\
+        y_m
+    \end{pmatrix}
+    = A \begin{pmatrix}
+        x_1\\
+        \vdots\\
+        x_n
+    \end{pmatrix}.
+    $$
+   \par  $A^{\left(j\right)}$ --- столбец координат в базисе $\mathbb{f}$, $\alpha_1, \ldots, \alpha_n \in F$.
+   \[
+        \alpha_1 \phi(e_1) + \ldots + \alpha_n \phi(e_n) = 0 \Leftrightarrow \alpha_1 A^{\left(1\right)} + \ldots + \alpha_n A^{\left(n\right)} = 0
+   \]
+   Отсюда следует, что:
+   \[
+        \rk A = \rk\{\phi(e_1), \ldots, \phi(e_n)\} = \dim \underbrace{\langle\phi(e_1), \ldots, \phi(e_n)\rangle}_{\Im\phi} = \dim \Im \phi.
+   \]
+\end{proof}
+
+\begin{Consequence}
+    Величина $\rk A$ не зависит от выбора базисов $\mathbb{e}$ и $\mathbb{f}$.
+\end{Consequence}
+
+\begin{Def}
+    Величина $\rk A$ называется рангом линейного отображения $\phi$. Обозначение:~$\rk \phi$.
+\end{Def}
+
+\begin{Consequence}
+    Если $\dim V = \dim W = n$, то $\phi$--- изоморфизм тогда и только тогда, когда $\det A \neq 0$. Тогда $A$ --- квадратная.
+\end{Consequence}
+
+\begin{proof}
+\ 
+\par $[\Rightarrow]$ $\phi$ --- изоморфизм, следовательно:
+    \[
+        \Im \phi = W \Rightarrow \dim \Im \phi = n \Rightarrow \rk A = n
+        \Rightarrow \det A \neq 0.
+    \]
+\par $[\Leftarrow]$ $\det A \neq 0 \Rightarrow \exists A^{-1}$.
+\[ \begin{pmatrix} 
+    y_1\\
+    \vdots\\
+    y_m
+\end{pmatrix} = A 
+\begin{pmatrix}
+x_1\\
+\vdots\\
+x_n
+\end{pmatrix}
+\Rightarrow 
+\begin{pmatrix}
+x_1\\
+\vdots\\
+x_n
+\end{pmatrix} = A^{-1} \begin{pmatrix} 
+    y_1\\
+    \vdots\\
+    y_m
+\end{pmatrix}
+\]
+Таким образом, линейное отображение $\phi$ является биекцией, а значит, и изоморфизмом.
+\end{proof}
+
+\begin{Consequence}
+    Пусть $A \in \Mat_{k\times m},\ B\in \Mat_{m\times n}$. Тогда $\rk AB \leqslant \min\{\rk A, \rk B\}$.
+\end{Consequence}
+
+\begin{proof}
+    Реализуем $A$ и $B$ как матрицы линейных отображений, то есть $\phi_A\colon F^m \rightarrow~F^k,\\ \phi_B\colon F^n \rightarrow F^m$. Тогда $AB$ будет матрицей отображения $\phi_A \circ \phi_B$.
+    \[
+        \rk(AB) = \rk (\phi_A\circ\phi_B)
+        \begin{cases}
+            \leqslant \dim \Im \phi_A = \rk A \\
+            \leqslant \dim \Im \phi_B = \rk B 
+
+        \end{cases}
+    \]
+Первое неравенство следует из того, что $\Im(\phi_A\circ \phi_B) \subset \Im \phi_A$, откуда в свою очередь следует, что $\dim \Im (\phi_A\circ \phi_B) \leqslant \dim \Im \phi_A$. Рассматривая второе неравенство, получаем: 
+    \[
+        \Im (\phi_A\circ \phi_B) = \phi_A(\Im \phi_B) \Rightarrow \dim \Im (\phi_A\circ \phi_B)= \dim(\phi_A(\Im\phi_B)) \leqslant \dim\Im \phi_B.
+    \]
+\end{proof}
+
+\begin{Task}\
+    \begin{itemize}
+        \item Если $A$ квадратна и $\det A \neq 0$, то $\rk AB = \rk B$.
+        \item Если $B \in M_n$ и $\det B \neq 0$, то $\rk AB = \rk A$.
+    \end{itemize}
+\end{Task}
+
+\begin{Theorem}
+    $\dim \Im V = \dim \phi - \dim \Ker \phi$.
+\end{Theorem}
+
+Существует 2 способа доказательства. Рассмотрим оба.
+
+\begin{proof}[Бескоординатный способ]
+     Пусть $\dim \Ker \phi = k$ и $e_1, \ldots, e_k$ --- базис в $\Ker \phi$. Дополним его до базиса $V$ векторами $e_k, \ldots, e_n$. Тогда:
+    \[
+        \Im \phi = \langle\phi(e_1), \ldots, \phi(e_k), \ldots, \phi(e_n)\rangle = \langle0, 0, \ldots, 0, \phi(e_{k+1}), \ldots, \phi(e_n)\rangle = \langle\phi(e_{k+1}), \ldots, \phi(e_{n})\rangle
+    \]
+    
+Пусть $\alpha_{k+1}\phi(e_{k+1}) + \ldots + \alpha_n\phi(e_n) = 0$ для некоторых $\alpha_1, \ldots, \alpha_n \in F$. Тогда:
+\begin{gather*}
+    \phi(\alpha_{k+1}e_{k+1} + \ldots + \alpha_ne_n) = 0 \\
+    \alpha_{k+1}e_{k+1} + \ldots + \alpha_ne_n \in \Ker \phi \\
+    \alpha_{k+1}e_{k+1} + \ldots + \alpha_ne_n = \beta_1e_1 + \ldots \beta_ke_k,
+\end{gather*}
+для некоторых $\beta_1, \ldots, \beta_k \in F$.
+
+Но так как $e_1, \ldots, e_n$ --- базис в $V$, то $\alpha_{k+1} =  \ldots = \alpha_n = \beta_1 = \ldots = \beta_k = 0$. То есть векторы $\phi(e_1), \ldots, \phi(e_n)$ линейно независимы, а значит, образуют базис $\Im \phi$. Что и означает, что $\dim\Im\phi = n - k = \dim V - \dim\Ker\phi$.
+\end{proof}
+
+\begin{proof}[Координатный способ]
+    Зафиксируем базис $\mathbb{e} = (e_1, \ldots, e_n)$ в $V$ и базис $\mathbb{f} = (f_1, \ldots, f_m)$ в $W$. Пусть $A$ --- матрица $\phi$ в базисе $\mathbb{f}$. Тогда $v = x_1e_1 + \ldots + x_ne_n$, $\phi(v) = y_1f_1 + \ldots + y_mf_m$. Получим, что $\begin{pmatrix} y_1\\ \vdots \\ y_m \end{pmatrix} = A \begin{pmatrix} x_1\\ \vdots \\ x_n\end{pmatrix}$. 
+    
+    $\Ker \phi$ состоит из векторов, координаты которых удовлетворяют СЛУ $ A \begin{pmatrix} x_1\\ \vdots \\ x_n\end{pmatrix} = 0$. Ранее в курсе мы уже доказали, что размерность пространства решений равна $n - \rk A$, то есть $\dim \Im \phi = n - \rk A = \dim V - \dim \Ker \phi$.
+\end{proof}
+
+\subsection{Линейные операторы}
+
+Пусть $V$ --- конечномерное векторное пространство.
+
+\begin{Def}
+    Линейным оператором (или линейным преобразованием) называется всякое линейное отображение $\phi \colon V \rightarrow V$, то есть из $V$ в себя. Обозначение: $L(V) = \Hom(V, V)$.
+\end{Def}
+
+\par Пусть $\mathbb{e} = (e_1, \ldots, e_n)$ --- базис в $V$ и $\phi \in L(V)$. Тогда:
+$$
+\left(\phi(e_1), \ldots, \phi(e_n)\right) = \left(e_1, \ldots, e_n\right)A,
+$$
+где $A$ --- матрица линейного оператора в базисе $\mathbb{e}$. В столбце $A^{\left( j\right)}$ стоят координаты $\phi(e_j)$ в базисе $\mathbb{e}$. Матрица $A$ --- квадратная. 
+\begin{Examples}\
+    \begin{enumerate}
+        \item $\forall v \in V : \phi(v) = 0$ --- нулевая матрица.
+        \item Тождественный оператор: $\forall v \in V : \id(v) = v$ --- единичная матрица.
+        \item Скалярный оператор $\lambda \id(v) = \lambda V$ --- матрица $\lambda E$ в любом базисе.
+    \end{enumerate}
+\end{Examples}
+
+\begin{Consequence}[Следствия из общих фактов о линейных отображениях]\
+    \begin{enumerate}
+        \item Всякий линейный оператор однозначно определяется своей матрицей в любом фиксированном базисе.
+        \item Для всякой квадратной матрицы существует, причем единственный, линейный оператор $\phi$ такой, что матрица $\phi$ есть $A$.
+        \item Пусть $\phi \in L(V)$, $A$ --- матрица $\phi$ в базисе $\mathbb{e}$. Тогда:
+        \begin{gather*}
+            v = x_1e_1 + \ldots + x_ne_n\\ \phi(v) = y_1e_1 + \ldots + y_n e_n \\
+            \begin{pmatrix}
+                y_1\\
+                \vdots \\
+                y_n
+            \end{pmatrix} = A \begin{pmatrix}
+                x_1\\
+                \vdots \\
+                x_n
+            \end{pmatrix}
+        \end{gather*}
+    \end{enumerate}
+\end{Consequence}
+Пусть $\phi \in L(V)$, $A$ --- матрица $\phi$ в базисе $\mathbb{e} = (e_1, \ldots, e_n)$. Пусть $\mathbb{e}' = (e_1', \ldots, e_n')$ --- другой базис, причём $(e_1', \ldots, e_n') = (e_1, \ldots, e_n)C$, где $C$ --- матрица перехода, и $A'$ --- матрица $\phi$ в базисе $\mathbb{e}'$.
+\begin{Suggestion}
+    $A' = C^{-1}AC$.
+\end{Suggestion}
+\begin{proof}
+    \begin{gather}
+        (e_1', \ldots, e_n') = (e_1, \ldots, e_n)C  \\
+        e_j' = \sum\limits_{i=1}^{n} c_{ij}e_j \\
+        \phi(e_j') = \phi\left(\sum\limits_{i=1}^{n} c_{ij}e_j\right) = \sum\limits_{i=1}^nc_{ij}\phi(e_j)\\
+        (\phi(e_1'), \ldots, \phi(e_n')) = (\phi(e_1),\ldots,\phi(e_n))C = (e_1, \ldots, e_n)AC= (e_1', \ldots, e_n')\underbrace{C^{-1}AC}_{A'}
+    \end{gather}
+\end{proof}
+\end{document}

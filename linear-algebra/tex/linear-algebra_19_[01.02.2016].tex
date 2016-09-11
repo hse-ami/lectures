@@ -1,0 +1,206 @@
+\input{header.tex}
+
+\begin{document}
+\renewcommand{\phi}{\varphi}
+
+\section{Лекция 19 от 01.02.2016}
+
+\subsection{Изоморфизм (продолжение)}
+На прошлой лекции мы ввели теорему и доказали одну лемму. Напомним их.
+
+\begin{Theorem}
+Два конечномерных векторных пространства $V$ и $W$ изоморфны тогда и только тогда, когда  $\dim V \hm= \dim W$.
+\end{Theorem}
+
+\begin{Lemma}[1]
+Если $\dim V = n$, то $V \simeq F^n$.
+\end{Lemma}
+
+\begin{Comment}
+Говорят, что функция $\phi$ \textit{отождествляет} пространство $V$ с пространством $F^n$, если $\phi: V \isom F^n$.
+\end{Comment}
+
+Но перед тем, как доказывать эту теорему, докажем лучше еще одну лемму.
+\begin{Lemma}[2]
+Пусть $\phi: V \isom W$ --- изоморфизм векторных пространств, а $e_1, \ldots, e_n$--- базис $V$. Тогда $\phi(e_1), \ldots, \phi(e_n)$ --- базис $W$.
+\end{Lemma}
+
+\begin{proof}
+Пусть $w \in W$ --- произвольный вектор. Положим $v \in V$ таковым, что $v \hm= \phi^{-1}(w)$.
+\begin{gather*}
+\begin{aligned}
+v &= x_1e_1 + \ldots + x_ne_n, \quad x_i \in F \\
+w &= \phi(v) = \phi(x_1e_1 + \ldots + x_ne_n) = x_1\phi(e_1) + \ldots + x_n\phi(e_n)
+\end{aligned} \Rightarrow W = \langle \phi(e_1), \ldots, \phi(e_n)\rangle
+\end{gather*}
+
+Покажем, что $\phi(e_1), \ldots, \phi(e_n)$ --- линейно независимые вектора.
+
+Пусть $\alpha_1, \ldots, \alpha_n \in F$ таковы, что $\alpha_1\phi(e_1) + \ldots + \alpha_n\phi(e_n) = 0$. Это то же самое, что $\phi(\alpha_1 e_1 \hm+ \ldots + \alpha_n e_n) = 0$. Применяя $\phi^{-1}$, получаем $\alpha_1 e_1 + \ldots \alpha_n e_n = \phi^{-1}(0) = 0$. Но так как $e_1, \ldots, e_n$~--- базис в $V$, то $\alpha_1 = \ldots= \alpha_n = 0$, и потому вектора $\phi(e_1), \ldots, \phi(e_n)$ линейно независимы. Следовательно, этот набор векторов --- базис в $W$.
+\end{proof}
+
+Теперь приступим наконец к доказательству теоремы.
+\begin{proof} \ 
+\begin{description}
+\item[$\Rightarrow$] $V \simeq W \Rightarrow \exists \phi: V \isom W$. Тогда по лемме 2, если $e_1, \ldots, e_n$ --- базис $V$, то $\phi(e_1), \ldots, \phi(e_n)$ --- базис $W$, и тогда $\dim V = \dim W$.  
+\item[$\Leftarrow$] Пусть $\dim V = \dim W = n$. Тогда по лемме 1 существуют изоморфизмы $\phi: V \isom F^n$ и $\psi : W \isom F^n$. Следовательно, $\psi^{-1}\circ\phi: V \rightarrow W$ --- изоморфизм.
+\end{description}
+\end{proof}
+
+То есть получается, что с точностью до изоморфизма существует только одно векторное пространство размерности $n$. Однако не стоит заканчивать на этом курс линейной алгебры. Теперь главная наша проблема --- это как из бесконечного множества базисов в каждом векторном пространстве выбрать тот, который будет наиболее простым и удобным для каждой конкретной задачи. 
+
+Например, рассмотрим вектор $v \in F^n$ с координатами $v = \begin{pmatrix*}x_1 \\ \vdots \\ x_n\end{pmatrix*}$. Пусть $v \neq 0$. Тогда существует такой базис $e_1, \ldots, e_n$, что $v = e_1$, то есть в этом базисе вектор имеет координаты $v = \begin{pmatrix*}1 \\ 0\\ \vdots\\0\end{pmatrix*}$.
+
+Пусть $V$, $W$ --- векторные пространства над $F$, и $e_1, \ldots, e_n$ --- базис $V$.
+\begin{Suggestion} \ 
+\begin{enumerate}
+\item Всякое линейное отображение $\phi : V \rightarrow W$ однозначно определяется векторами $\phi(e_1), \ldots, \phi(e_n)$.
+\item Для всякого набора векторов $f_1, \ldots, f_n \in W$ существует единственное линейное отображение $\phi: V \rightarrow W$ такое, что $\phi(e_1) = f_1, \phi(e_2) = f_2, \ldots, \phi(e_n) = f_n$.
+\end{enumerate}
+\end{Suggestion}
+\begin{proof} \ 
+\begin{enumerate}
+\item Пусть $v \in V$, $v = x_1 e_1 + \ldots + x_ne_n$, где $x_i \in F$. Тогда $\phi(v) = x_1\phi(e_1) + \ldots + x_n \phi(e_n)$, то есть если мы знаем  вектора $\phi(e_i)$, то сможем задать $\phi(v)$ для любого $v \in V$.
+\item Определим отображение $\phi: V \rightarrow W$ по формуле $\phi(x_1 e_1 + \ldots + x_n e_n) = x_1f_1 + \ldots + x_nf_n$. Прямая проверка показывает, что $\phi$ линейна, а единственность следует из пункта 1.
+\end{enumerate}
+\end{proof}
+
+\begin{Consequence}
+Если $\dim V = \dim W = n$, то для всякого базиса $e_1, \ldots, e_n$ пространства $V$ и всякого базиса $f_1, \ldots , f_n$ пространства $W$ существует единственный изоморфизм $\phi: V \isom W$ такой, что $\phi(e_1) = f_1, \ldots, \phi(e_n) = f_n$.
+\end{Consequence}
+\begin{proof}
+Из пункта 2. предложения следует, что существует единственное линейное отображение $\phi: V \rightarrow W$ такое, что $\phi(e_1) = f_1, \ldots, \phi(e_n) = f_n$. Но тогда $\phi(x_1e_1 + \ldots + x_ne_n) \hm= x_1\phi(e_1) + \ldots + x_n\phi(e_n) = x_1f_1 + \ldots + x_nf_n$ для любых $x_i \in F$. Отсюда следует, что $\phi$ --- биекция. 
+\end{proof}
+
+\subsection{Матрицы линейных отображений}
+
+Пусть $V$ и $W$ --- векторные пространства, $\mathbb{e} = (e_1, \ldots, e_n)$ --- базис $V$, $\mathbb{f} = (f_1, \ldots, f_m)$ --- базис $W$, $\phi: V \rightarrow W$ --- линейное отображение. Тогда:
+\[
+\phi(e_j) = a_{1j}f_1 + \ldots + a_{mj}f_m = \sum_{i = 1}^{m}a_{ij}f_i.
+\]
+
+\begin{Def}
+Матрица $A = (a_{ij}) \in Mat_{m \times n}(F)$ называется \textit{матрицей линейного отображения $\phi$} в базисах $\mathbb{e}$ и $\mathbb{f}$ (или по отношению к базисам $\mathbb{e}$ и $\mathbb{f}$).
+\end{Def}
+
+\begin{Comment}
+Существует биекция $\{\text{линейные отображения } V \rightarrow W \} \rightleftarrows Mat_{m\times n}$.
+\end{Comment}
+
+\begin{Comment}
+В $A^{(j)}$ стоят координаты $\phi(e_j)$ в базисе $\mathbb{f}$.
+\[
+(\phi(e_1), \ldots, \phi(e_n)) = (f_1, \ldots, f_m)\cdot A
+\]
+\end{Comment}
+
+Рассмотрим пример.
+
+Пусть $P_n = F[x]_{\leqslant n}$ --- множество многочленов над полем $F$ степени не выше $n$. Возьмем дифференцирование $\Delta: P_n \rightarrow P_{n-1}$.
+
+Базис $P_n$ --- $1, x, x^2, \ldots, x^n$. Базис $P_{n-1}$ --- $1, x, \ldots, x^{n-1}$. Тогда матрица линейного отображения будет размерности $n \times (n+1)$ и иметь следующий вид.
+\[
+\begin{pmatrix*}
+0 & 1 & 0 & 0 & \dots & 0 \\
+0 & 0 & 2 & 0 & \dots & 0 \\
+0 & 0 & 0 & 3 & \dots & 0 \\
+\hdotsfor{6} \\
+0 & 0 & 0 & 0 & \dots & n
+\end{pmatrix*}
+\] 
+
+\begin{Suggestion}
+Если $v = x_1 e_1 + \ldots + x_ne_n$ и $\phi(v) = y_1f_1 + \ldots + y_mf_m$, то 
+\[
+\begin{pmatrix*}
+y_1 \\
+\vdots \\
+y_m
+\end{pmatrix*}
+= A \cdot
+\begin{pmatrix*}
+x_1 \\
+\vdots \\
+x_n
+\end{pmatrix*}
+\]
+\end{Suggestion}
+
+\begin{proof}
+С одной стороны:
+\[
+\phi(v) = x_1 \phi(e_1) + \ldots + x_n\phi(e_n) = (\phi(e_1), \ldots, \phi(e_n))\begin{pmatrix*}x_1 \\ \vdots \\ x_n\end{pmatrix*} = (f_1, \ldots, f_m)A\begin{pmatrix*}x_1 \\ \vdots \\ x_n\end{pmatrix*}.
+\]
+Однако с другой стороны:
+\[
+\phi(v) = (f_1, \ldots, f_m)\begin{pmatrix*}y_1 \\ \vdots \\ y_m\end{pmatrix*}.
+\]
+Сравнивая обе части, получаем требуемое.
+\end{proof}
+
+А теперь проанализируем операции над матрицами линейных отображений.
+
+$V$ и $W$ --- векторные пространства. \textbf{Обозначение:} $\Hom(V, W):=$ множество всех линейных отображений $V \rightarrow W$.
+
+Пусть $\phi, \psi \in \Hom(V, W)$.
+
+\begin{Def}\ 
+\begin{enumerate}
+\item $\phi + \psi \in \Hom(V, W)$ --- это $(\phi + \psi)(v):= \phi(v) + \psi(v)$.
+\item $\alpha \in F, \alpha\phi \in \Hom(V, W)$ --- это $(\alpha\phi)(v) := \alpha(\phi(v))$.
+\end{enumerate}
+\end{Def}
+
+\begin{Task}\
+\begin{enumerate}
+\item Проверить, что $\phi + \psi$ и $\alpha\phi$ действительно принадлежат $\Hom(V, W)$.
+\item Проверить, что $\Hom(V, W)$ является векторным пространством.
+\end{enumerate}
+\end{Task}
+
+\begin{Suggestion}
+Пусть $\mathbb{e} = (e_1, \ldots, e_n)$ --- базис $V$, $\mathbb{f} = (f_1, \ldots, f_m)$ --- базис $W$, $\phi, \psi \in \Hom(V, W)$. При этом $A_{\phi}$ --- матрица линейного отображения $\phi$, $A_{\psi}$ --- матрица для $\psi$, $A_{\phi+\psi}$ --- для $\phi + \psi$, а $A_{\alpha\phi}$ --- для $\alpha\phi$.
+
+Тогда $A_{\phi+\psi} = A_{\phi} + A_{\psi}$ и $A_{\alpha\phi} = \alpha A_{\phi}$.
+\end{Suggestion}
+\begin{proof}
+Упражнение.
+\end{proof}
+
+Теперь возьмем три векторных пространства --- $U, V$ и $W$ размерности $n, m$ и $k$ соответственно, и их базисы $\mathbb{e}, \mathbb{f}$ и $\mathbb{g}$. Также рассмотрим цепочку линейных отображений $U \xrightarrow{\psi} V \xrightarrow{\phi} W$. Пусть $A$ --- матрица $\phi$ в базисах $\mathbb{f}$ и $\mathbb{g}$, $B$ --- матрица $\psi$ в базисах $\mathbb{e}$ и $\mathbb{f}$, $C$ --- матрица $\phi\circ\psi$ в базисах $\mathbb{e}$ и $\mathbb{g}$.
+
+\begin{Suggestion}
+$C = AB$.
+\end{Suggestion}
+\begin{Comment}
+Собственно говоря, отсюда и взялось впервые определение умножения матриц.
+\end{Comment}
+\begin{proof} Запишем по определению:
+\begin{align*}
+(\phi \circ \psi)(e_r) &= \sum_{p = 1}^{k}c_{pr}g_p, \quad r = 1, \ldots, n \\
+\psi(e_r) &= \sum_{q = 1}^{m}b_{qr}f_q, \quad r = 1, \ldots, n \\
+\phi(f_q) &= \sum_{p = 1}^{k}a_{pq}g_p, \quad q = 1, \ldots, m
+\end{align*}
+Тогда:
+\begin{gather*}
+(\psi\circ\psi)(e_r) = \phi(\psi(e_r)) = \phi\left(\sum_{q = 1}^{m}b_{qr}f_g \right) = \sum_{q = 1}^{m}b_{qr}\phi(f_g) = \sum_{q = 1}^{m}b_{qr}\left(\sum_{p = 1}^{k}a_{pq}g_p \right) = \sum_{p = 1}^{k}\left(\sum_{q = 1}^{m}a_{pq}b_{qr} \right)g_p \\
+\Downarrow \\
+c_{pr} = \sum_{q = 1}^{m}a_{pq}b_{qr} \\
+\Downarrow\\
+ C = AB
+\end{gather*}
+\end{proof}
+
+И снова, пусть $V$ и $W$ --- векторные пространства с линейным отображением $\phi: V \rightarrow W$.
+
+\begin{Def}
+\textit{Ядро $\phi$} --- это множество $\Ker\phi := \{v \in V \mid \phi(v) = 0 \}$.
+\end{Def} 
+\begin{Def}
+\textit{Образ $\phi$} --- это множество $\Im \phi := \{w \in W \mid \exists v \in V : \phi(v) = w \}$.
+\end{Def}
+
+\begin{Examples}
+Все то же $\Delta: P_n \rightarrow P_{n-1}$. Для него $\Ker \Delta = \{f \mid f = const\},\  \Im \Delta = P_{n-1}$.
+\end{Examples}
+\end{document}

@@ -1,0 +1,71 @@
+% Размер страницы и шрифта
+\documentclass[12pt,a4paper]{article}
+
+%% Работа с русским языком
+\usepackage{cmap}                   % поиск в PDF
+\usepackage{mathtext}               % русские буквы в формулах
+\usepackage[T2A]{fontenc}           % кодировка
+\usepackage[utf8]{inputenc}         % кодировка исходного текста
+\usepackage[english,russian]{babel} % локализация и переносы
+
+%% Изменяем размер полей
+\usepackage[top=0.5in, bottom=0.75in, left=0.625in, right=0.625in]{geometry}
+
+%% Различные пакеты для работы с математикой
+\usepackage{mathtools}  % Тот же amsmath, только с некоторыми поправками
+\usepackage{amssymb}    % Математические символы
+\usepackage{amsthm}     % Пакет для написания теорем
+\usepackage{amstext}
+\usepackage{array}
+\usepackage{amsfonts}
+\usepackage{icomma}     % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Графика
+\usepackage[pdftex]{graphicx}
+\graphicspath{{images/}}
+
+%% Прочие пакеты
+\usepackage{listings}               % Пакет для написания кода на каком-то языке программирования
+\usepackage{algorithm}              % Пакет для написания алгоритмов
+\usepackage[noend]{algpseudocode}   % Подключает псевдокод, отключает end if и иже с ними
+\usepackage{indentfirst}            % Начало текста с красной строки
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}   % Ссылки
+\usepackage{pgfplots}               % Графики
+\pgfplotsset{compat=1.12}
+\usepackage{forest}                 % Деревья
+\usepackage{titlesec}               % Изменение формата заголовков
+\usepackage[normalem]{ulem}         % Для зачёркиваний
+\usepackage[autocite=footnote]{biblatex}    % Кавычки для цитат и прочее
+\usepackage[makeroom]{cancel}       % И снова зачёркивание (на этот раз косое)
+
+% Изменим формат \section и \subsection:
+\titleformat{\section}
+	{\vspace{1cm}\centering\LARGE\bfseries} % Стиль заголовка
+	{}                                      % префикс
+	{0pt}                                   % Расстояние между префиксом и заголовком
+	{}                                      % Как отображается префикс
+\titleformat{\subsection}                   	% Аналогично для \subsection
+	{\Large\bfseries}
+	{}
+	{0pt}
+	{}
+
+% Поправленный вид lstlisting
+\lstset { %
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Теоремы и утверждения. В комменте указываем номер лекции, в которой это используется.
+\newtheorem*{hanoi_recurrent}{Свойство} % Лекция 1
+\let\epsilent\varepsilon                % Лекция 8
+\DeclareMathOperator{\rk}{rank}         % Лекция 20
+
+% Информация об авторах
+\author{Группа лектория ФКН ПМИ 2015-2016 \\
+	Никита Попов \\
+	Тамерлан Таболов \\
+	Лёша Хачиянц}
+\title{Лекции по предмету \\
+	\textbf{Алгоритмы и структуры данных}}
+\date{2016 год}

@@ -1,0 +1,3865 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\newcommand{\Ker}{\mathop{\mathrm{Ker}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\newcommand{\xar}{\mathop{\mathrm{char}}}
+
+%\def\Ker{{\rm Ker}}%
+%\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+%\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{exc}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+
+
+\begin{document}
+	%
+	\sloppy
+	s\thispagestyle{empty}
+	%
+	\centerline{\large \bf Лекции курса \guillemotleft
+		Алгебра\guillemotright{}, лекторы И.\,В.~Аржанцев и Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2015/2016 учебный год}
+
+
+\tableofcontents
+
+\newpage
+
+\section*{Лекция 1}
+
+
+\medskip
+
+{\it Полугруппы и группы: основные определения и примеры. Группы
+подстановок и группы матриц. Подгруппы. Порядок элемента и
+циклические подгруппы. Смежные классы и индекс подгруппы. Теорема
+Лагранжа.}
+
+\medskip
+
+\begin{definition}
+{\it Множество с бинарной операцией}~--- это множество $M$ с
+заданным отображением
+$$
+M\times M \to M, \quad (a,b) \mapsto a\circ b.
+$$
+\end{definition}
+
+Множество с бинарной операцией обычно обозначают $(M,\circ)$.
+
+\begin{definition}
+Множество с бинарной операцией $(M,\circ)$ называется {\it
+полугруппой}, если данная бинарная операция {\it ассоциативна},
+т.\,е.
+$$
+a\circ (b \circ c) = (a\circ b)\circ c \quad \text{для всех} \ a,b,c\in M.
+$$
+\end{definition}
+
+Не все естественно возникающие операции ассоциативны. Например, если
+$M=\NN$ и $a\circ b:=a^b$, то
+$$
+2^{\left(1^2\right)}=2\ne (2^1)^2=4.
+$$
+
+Другой пример неассоциативной бинарной операции: $M = \ZZ$ и $a
+\circ b := a - b$ (проверьте!).
+
+Полугруппу обычно обозначают $(S,\circ)$.
+
+\begin{definition}
+Полугруппа $(S,\circ)$ называется {\it моноидом}, если в ней есть
+{\it нейтральный элемент}, т.\,е. такой элемент $e\in S$, что
+$e\circ a=a\circ e=a$ для любого $a\in S$.
+\end{definition}
+
+Во Франции полугруппа $(\NN,+)$ является моноидом, а в России нет.
+
+\begin{remark}
+Если в полугруппе есть нейтральный элемент, то он один. В самом
+деле, $e_1\circ e_2=e_1=e_2$.
+\end{remark}
+
+\begin{definition}
+Моноид $(S,\circ)$ называется {\it группой}, если для каждого
+элемента $a\in S$ найдется {\it обратный элемент}, т.\,е. такой
+$b\in S$, что $a\circ b = b\circ a= e$.
+\end{definition}
+
+\begin{exc}
+Докажите, что если обратный элемент существует, то он один.
+\end{exc}
+
+Обратный элемент обозначается $a^{-1}$. Группу принято обозначать
+$(G,\circ)$ или просто $G$, когда понятно, о какой операции идёт
+речь. Обычно символ $\circ$ для обозначения операции опускают и
+пишут просто $ab$.
+
+\begin{definition}
+Группа $G$ называется {\it коммутативной} или {\it абелевой}, если
+групповая операция {\it коммутативна}, т.\,е. $ab=ba$ для любых
+$a,b\in G$.
+\end{definition}
+
+Если в случае произвольной группы $G$ принято использовать
+мультипликативные обозначения для групповой операции~--- $gh$, $e$,
+$g^{-1}$, то в теории абелевых групп чаще используют аддитивные
+обозначения, т.\,е. $a+b$, $0$, $-a$.
+
+\begin{definition}
+{\it Порядок} группы $G$~--- это число элементов в~$G$. Группа
+называется {\it конечной}, если её порядок конечен, и {\it
+бесконечной} иначе.
+\end{definition}
+
+Порядок группы $G$ обозначается $|G|$.
+
+\smallskip
+
+Приведём несколько серий примеров групп.
+
+\smallskip
+
+1) Числовые аддитивные группы: \ $(\ZZ,+)$, $(\QQ,+)$, $(\RR,+)$,
+$(\CC,+)$, $(\ZZ_n,+)$.
+
+\smallskip
+
+2) Числовые мультипликативные группы: \
+$(\QQ\setminus\{0\},\times)$, $(\RR\setminus\{0\},\times)$,
+$(\CC\setminus\{0\},\times)$,
+$(\ZZ_p\setminus\{\overline{0}\},\times)$, $p$~--- простое.
+
+3) Группы матриц: \ $\GL_n(\RR)=\{A\in\Mat(n\times n, \RR) \mid
+\det(A)\ne 0\}$;  \ $\SL_n(\RR)=\{A\in\Mat(n\times n, \RR) \mid
+\det(A)=1\}$.
+
+4) Группы подстановок: \ симметрическая группа $S_n$~--- все
+подстановки длины $n$, $|S_n|=n!$;
+
+знакопеременная группа $A_n$~--- чётные подстановки длины $n$,
+$|A_n|=n!/2$.
+
+\begin{exc}
+Докажите, что группа $S_n$ коммутативна $\Leftrightarrow$ $n
+\leqslant 2$, а $A_n$ коммутативна $\Leftrightarrow$ $n \leqslant
+3$.
+\end{exc}
+
+\begin{definition}
+Подмножество $H$ группы $G$ называется {\it подгруппой}, если выполнены следующие три условия: (1) $e \in H$; \quad (2) $ab\in H$ для любых $a,b
+\in H$; \quad (3) $a^{-1}\in H$ для любого
+$a\in H$.
+\end{definition}
+
+\begin{exc}
+Проверьте, что $H$ является подгруппой тогда и только тогда, когда
+ $H$ непусто и $ab^{-1}\in H$ для любых $a,b\in H$.
+\end{exc}
+
+В каждой группе $G$ есть {\it несобственные} подгруппы $H=\{e\}$ и
+$H=G$. Все прочие подгруппы называются {\it собственными}. Например,
+чётные числа $2\ZZ$ образуют собственную подгруппу в $(\ZZ,+)$.
+
+\begin{proposition} \label{sbgrz}
+Всякая подгруппа в $(\ZZ,+)$ имеет вид $k\ZZ$ для некоторого целого
+неотрицательного $k$.
+\end{proposition}
+
+\begin{proof}
+Пусть $H$~--- подгруппа в $\ZZ$. Если $H=\{0\}$, положим $k=0$.
+Иначе пусть $k$~--- наименьшее натуральное число, лежащее в~$H$
+(почему такое есть?). Тогда $k\ZZ \subseteq H$. С другой стороны,
+если $a\in H$ и $a=qk+r$~--- результат деления $a$ на $k$ с
+остатком, то $0 \leqslant r \leqslant k-1$ и $r = a - qk \in H$.
+Отсюда $r=0$ и $H=k\ZZ$.
+\end{proof}
+
+\begin{definition}
+Пусть $G$~--- группа и $g\in G$. {\it Циклической подгруппой},
+порождённой элементом~$g$, называется подмножество $\{g^n \mid
+n\in\ZZ\}$ в $G$.
+\end{definition}
+
+Циклическая подгруппа, порождённая элементом $g$, обозначается
+$\langle g\rangle$. Элемент $g$ называется {\it порождающим} или
+{\it образующим} для подгруппы $\langle g\rangle$. Например,
+подгруппа $2\ZZ$ в $(\ZZ,+)$ является циклической, и в качестве
+порождающего элемента в ней можно взять $g=2$ или $g=-2$. Другими
+словами, $2\ZZ=\langle 2\rangle=\langle -2\rangle$.
+
+\begin{definition}
+Пусть $G$~--- группа и $g\in G$. {\it Порядком} элемента $g$
+называется такое наименьшее натуральное число~$m$, что $g^m=e$. Если
+такого натурального числа $m$ не существует, говорят, что порядок
+элемента $g$ равен бесконечности.
+\end{definition}
+
+Порядок элемента обозначается $\ord(g)$. Заметим, что $\ord(g)=1$ тогда и только тогда, когда $g=e$.
+
+Следующее предложение объясняет, почему для порядка группы и порядка элемента используется одно и то же слово.
+
+\begin{proposition} \label{p1}
+Пусть $G$~--- группа и $g\in G$. Тогда $\ord(g)=|\langle g\rangle|$.
+\end{proposition}
+
+\begin{proof}
+Заметим, что если $g^k=g^s$, то $g^{k-s}=e$. Поэтому если элемент
+$g$ имеет бесконечный порядок, то все элементы $g^n$, $n\in\ZZ$,
+попарно различны, и подгруппа $\langle g\rangle$ содержит бесконечно
+много элементов. Если же порядок элемента $g$ равен $m$, то из
+минимальности числа $m$ следует, что элементы $e=g^0, g=g^1,
+g^2,\ldots,g^{m-1}$ попарно различны. Далее, для всякого $n\in\ZZ$
+мы имеем $n=mq+r$, где $0 \leqslant r \leqslant m-1$, и
+$$
+g^n=g^{mq+r}=(g^m)^qg^r=e^qg^r=g^r.
+$$
+Следовательно, $\langle g\rangle=\{e,g,\ldots, g^{m-1}\}$ и
+$|\langle g\rangle|=m$.
+\end{proof}
+
+\begin{definition}
+Группа $G$ называется {\it циклической}, если найдётся такой элемент
+$g\in G$, что $G=\langle g\rangle$.
+\end{definition}
+
+Ясно, что любая циклическая группа коммутативна и не более чем
+счётна. Примерами циклических групп являются группы $(\ZZ,+)$ и
+$(\ZZ_n,+)$, $n \ge 1$.
+
+Перейдем ещё к одному сюжету, связанному с парой группа--подгруппа.
+
+\begin{definition}
+Пусть $G$~--- группа, $H\subseteq G$~--- подгруппа и $g\in G$. {\it
+Левым смежным классом} элемента $g$ группы $G$ по подгруппе $H$
+называется подмножество
+$$
+gH=\{gh \mid h\in H\}.
+$$
+\end{definition}
+
+\begin{lemma} \label{l1}
+Пусть $G$~--- группа, $H\subseteq G$~--- её подгруппа и $g_1,g_2\in
+G$. Тогда либо $g_1H=g_2H$, либо $g_1H\cap g_2H=\varnothing$.
+\end{lemma}
+
+\begin{proof}
+Предположим, что $g_1H\cap g_2H\ne\varnothing$, т.\,е.
+$g_1h_1=g_2h_2$ для некоторых $h_1,h_2\in H$. Нужно доказать, что
+$g_1H=g_2H$. Заметим, что $g_1H=g_2h_2h_1^{-1}H\subseteq g_2H$.
+Обратное включение доказывается аналогично.
+\end{proof}
+
+\begin{lemma} \label{l2}
+Пусть $G$~--- группа и $H\subseteq G$~--- конечная подгруппа. Тогда
+$|gH|=|H|$ для любого $g\in G$.
+\end{lemma}
+
+\begin{proof}
+Поскольку $gH=\{gh \mid h\in H\}$, в $|gH|$ элементов не больше, чем
+в~$H$. Если $gh_1=gh_2$, то домножаем слева на $g^{-1}$ и получаем
+$h_1=h_2$. Значит, все элементы вида $gh$, где $h\in H$, попарно
+различны, откуда $|gH|=|H|$.
+\end{proof}
+
+\begin{definition}
+Пусть $G$~--- группа и $H\subseteq G$~--- подгруппа. {\it Индексом}
+подгруппы $H$ в группе $G$ называется число левых смежных классов
+$G$ по~$H$.
+\end{definition}
+
+Индекс группы $G$ по подгруппе $H$ обозначается $[G:H]$.
+
+\smallskip
+
+{\bf Теорема Лагранжа}.\ Пусть $G$~--- конечная группа и $H\subseteq
+G$~--- подгруппа. Тогда
+$$
+|G| = |H| \cdot [G:H].
+$$
+
+\begin{proof}
+Каждый элемент группы $G$ лежит в (своём) левом смежном классе по
+подгруппе $H$, разные смежные классы не пересекаются
+(лемма~\ref{l1}) и каждый из них содержит по $|H|$ элементов
+(лемма~\ref{l2}).
+\end{proof}
+
+На следующей лекции мы обсудим следствия из данной теоремы.
+
+
+\newpage
+
+\section*{Лекция 2}
+
+\medskip
+
+{\it Следствия из теоремы Лагранжа. Нормальные подгруппы. Факторгруппы и теорема о гомоморфизме. Прямое произведение групп. Разложение конечной циклической группы.}
+
+\medskip
+
+Рассмотрим некоторые следствия из теоремы Лагранжа.
+
+\begin{corollary} \label{c1}
+Пусть $G$~--- конечная группа и $H\subseteq G$~--- подгруппа. Тогда
+$|H|$ делит $|G|$.
+\end{corollary}
+
+\begin{corollary} \label{c2}
+Пусть $G$~--- конечная группа и $g\in G$. Тогда $\ord(g)$ делит
+$|G|$.
+\end{corollary}
+
+\begin{proof}
+Это вытекает из следствия~\ref{c1} и предложения~2 прошлой лекции.
+\end{proof}
+
+\begin{corollary} \label{c3}
+Пусть $G$~--- конечная группа и $g\in G$. Тогда $g^{|G|}=e$.
+\end{corollary}
+
+\begin{proof}
+Согласно следствию~\ref{c2}, мы имеем $|G|=\ord(g) \cdot s$, откуда
+$g^{|G|}=(g^{\ord(g)})^s=e^s=e$.
+\end{proof}
+
+\begin{corollary} \label{c5}
+Пусть $G$~--- группа. Предположим, что $|G|$~--- простое число.
+Тогда $G$~--- циклическая группа, порождаемая любым своим
+неединичным элементом.
+\end{corollary}
+
+\begin{proof}
+Пусть $g\in G$~--- произвольный неединичный элемент. Тогда
+циклическая подгруппа $\langle g\rangle$ содержит более одного
+элемента и $|\langle g\rangle|$ делит $|G|$ по следствию~\ref{c1}.
+Значит, $|\langle g\rangle|=|G|$, откуда $G=\langle g\rangle$.
+\end{proof}
+
+Наряду с левым смежным классом можно определить {\it правый смежный
+класс} элемента $g$ группы $G$ по подгруппе $H$:
+$$
+Hg=\{hg \mid h\in H\}.
+$$
+
+Повторяя доказательство теоремы Лагранжа для правых смежных классов,
+мы получим, что для конечной группы $G$ число правых смежных классов
+по подгруппе $H$ равно числу левых смежных классов и равно
+$|G|/|H|$. В то же время равенство $gH=Hg$ выполнено не всегда.
+Разумеется, оно выполнено, если группа $G$ абелева. Подгруппы $H$
+(неабелевых) групп $G$, для которых $gH=Hg$ выполнено для любого
+$g\in G$, будут изучаться в следующей лекции.
+
+\begin{definition}
+Подгруппа $H$ группы $G$ называется {\it нормальной}, если $gH=Hg$
+для любого $g\in G$.
+\end{definition}
+
+\begin{proposition}
+Для подгруппы $H \subseteq G$ следующие условия эквивалентны:
+
+\vspace{-2mm}
+\begin{enumerate}
+\item[(1)]
+$H$ нормальна;
+
+\item[(2)]
+$gHg^{-1} \subseteq H$ для любого $g \in G$;
+
+\item[(3)]
+$gHg^{-1}=H$ для любого $g\in G$.
+\end{enumerate}
+\end{proposition}
+
+\vspace{-6mm}
+
+\begin{proof}
+(1)$\Rightarrow$(2) Пусть $h \in H$ и $g \in G$. Поскольку $gH =
+Hg$, имеем $gh = h'g$ для некоторого $h' \in H$. Тогда $ghg^{-1} =
+h'gg^{-1} = h' \in H$.\\
+(2)$\Rightarrow$(3) Так как $gHg^{-1} \subseteq H$, остаётся
+проверить обратное включение. Для $h \in H$ имеем $h = gg^{-1} h g
+g^{-1} = g(g^{-1}hg)g^{-1} \subseteq gHg^{-1}$, поскольку $g^{-1}hg
+\in H$ в силу пункта~(2), где вместо $g$ взято $g^{-1}$.
+
+(3)$\Rightarrow$(1) Для произвольного $g \in G$ в силу (3) имеем $gH
+= gHg^{-1} g \subseteq Hg$, так что $gH \subseteq Hg$. Аналогично
+проверяется обратное включение.
+\end{proof}
+\vspace{-1mm}
+
+Условие (2) в этом предложении кажется излишним, но именно его
+удобно проверять при доказательстве нормальности подгруппы~$H$.
+
+Обозначим через $G/H$ множество (левых) смежных классов группы $G$
+по нормальной подгруппе~$H$. На $G/H$ можно определить бинарную
+операцию следующим образом:
+$$
+(g_1H)(g_2H):=g_1g_2H.
+$$
+
+Зачем здесь нужна нормальность подгруппы $H$? Для проверки
+корректности: заменим $g_1$ и $g_2$ другими представителями $g_1h_1$
+и $g_2h_2$ тех же смежных классов. Нужно проверить, что
+$g_1g_2H=g_1h_1g_2h_2H$. Это следует из того, что
+$g_1h_1g_2h_2=g_1g_2(g_2^{-1}h_1g_2)h_2$ и $g_2^{-1}h_1g_2$ лежит в
+$H$.
+
+Ясно, что указанная операция на множестве $G/H$ ассоциативна,
+обладает нейтральным элементом $eH$ и для каждого элемента $gH$ есть
+обратный элемент $g^{-1}H$.
+
+\begin{definition}
+Множество $G/H$ с указанной операцией называется {\it факторгруппой}
+группы $G$ по нормальной подгруппе $H$.
+\end{definition}
+
+\begin{example}
+Если $G=(\ZZ,+)$ и $H=n\ZZ$, то $G/H$~--- это в точности группа
+вычетов $(\ZZ_n,+)$.
+\end{example}
+
+Как представлять себе факторгруппу? В этом помогает теорема о
+гомоморфизме. Но прежде чем её сформулировать, обсудим ещё несколько
+понятий.
+
+\begin{definition}
+Пусть $G$ и $F$~--- группы. Отображение $\varphi\colon G\to F$
+называется {\it гомоморфизмом}, если
+$\varphi(ab)=\varphi(a)\varphi(b)$ для любых $a,b\in G$.
+\end{definition}
+
+\begin{remark}
+Подчеркнём, что в этом определении произведение $ab$ берётся в
+группе~$G$, в то время как произведение $\varphi(a) \varphi(b)$~---
+в группе~$F$.
+\end{remark}
+
+\begin{lemma}
+Пусть $\varphi \colon G \to F$~--- гомоморфизм групп, и пусть $e_G$
+и $e_F$~--- нейтральные элементы групп $G$ и $F$ соответственно.
+Тогда:
+
+\vspace{-2mm}
+\begin{enumerate}
+\item[(а)]
+$\varphi(e_G) = e_F$;
+
+\item[(б)]
+$\varphi(a^{-1})=\varphi(a)^{-1}$ для любого $a\in G$.
+\end{enumerate}
+\end{lemma}
+
+\vspace{-5mm}
+
+\begin{proof}
+(а) Имеем $\varphi(e_G)=\varphi(e_Ge_G)=\varphi(e_G)\varphi(e_G)$.
+Теперь умножая крайние части этого равенства на $\varphi(e_G)^{-1}$
+(например, слева), получим $e_F = \varphi(e_G)$.
+
+(б) Имеем $\varphi(a^{-1}) \varphi(a) = \varphi(a^{-1}a) =
+\varphi(e_G) = e_F$, откуда $\varphi(a^{-1}) = \varphi(a)^{-1}$.
+\end{proof}
+
+\begin{definition}
+Гомоморфизм групп $\varphi\colon G\to F$ называется {\it
+изоморфизмом}, если отображение $\varphi$ биективно.
+\end{definition}
+
+\begin{exc}
+Пусть $\varphi\colon G\to F$~--- изоморфизм групп. Проверьте, что
+обратное отображение $\varphi^{-1}\colon F \to G$ также является
+изоморфизмом.
+\end{exc}
+
+\begin{definition}
+Группы $G$ и $F$ называют {\it изоморфными}, если между ними
+существует изоморфизм.
+
+Обозначение: $G\cong F$ (или $G \simeq F$).
+\end{definition}
+
+В алгебре группы рассматривают с точностью до изоморфизма:
+изоморфные группы считаются \guillemotleft
+одинаковыми\guillemotright{}.
+
+\begin{definition}
+С каждым гомоморфизмом групп $\varphi\colon G\to F$ связаны его {\it
+ядро}
+$$
+\Ker(\varphi)=\{g\in G \mid \varphi(g)=e_F\}
+$$
+и {\it образ}
+$$
+\Im(\varphi)=\{a\in F \mid \exists g\in G : \varphi(g)=a\}.
+$$
+\end{definition}
+
+Ясно, что $\Ker(\varphi)\subseteq G$ и $\Im(\varphi)\subseteq F$~---
+подгруппы.
+
+\begin{lemma}
+Гомоморфизм групп $\varphi \colon G \to F$ инъективен тогда и только
+тогда, когда $\Ker(\varphi) = \{e_G\}$.
+\end{lemma}
+\vspace{-3mm}
+\begin{proof}
+Ясно, что если $\varphi$ инъективен, то $\Ker(\varphi) = \lbrace e_G
+\rbrace$. Обратно, пусть $g_1, g_2 \in G$ и $\varphi(g_1) =
+\varphi(g_2)$. Тогда $g_1^{-1} g_2 \in \Ker(\varphi)$, поскольку
+$\varphi(g_1^{-1} g_2) = \varphi(g_1^{-1}) \varphi(g_2) =
+\varphi(g_1)^{-1} \varphi (g_2) = e_F$. Отсюда $g_1^{-1}g_2 = e_G$ и
+$g_1 = g_2$.
+\end{proof}
+
+\begin{corollary}
+Гомоморфизм групп $\varphi\colon G\to F$ является изоморфизмом тогда
+и только тогда, когда $\Ker(\varphi)=\{e_G\}$ и $\Im(\varphi)=F$.
+\end{corollary}
+
+\begin{proposition}
+Пусть $\varphi \colon G \to F$~--- гомоморфизм групп. Тогда
+подгруппа $\Ker(\varphi)$ нормальна в~$G$.
+\end{proposition}
+\vspace{-3mm}
+\begin{proof}
+Достаточно проверить, что $g^{-1}hg \in \Ker(\varphi)$ для любых
+$g\in G$ и $h \in \Ker(\varphi)$. Это следует из цепочки равенств
+$$
+\varphi(g^{-1}hg) = \varphi(g^{-1}) \varphi(h) \varphi(g) =
+\varphi(g^{-1}) e_F \varphi(g) = \varphi(g^{-1}) \varphi(g) =
+\varphi(g)^{-1} \varphi (g) = e_F.
+$$
+\end{proof}
+
+{\bf Теорема о гомоморфизме}. Пусть $\varphi\colon G\to F$~---
+гомоморфизм групп. Тогда группа $\Im(\varphi)$ изоморфна
+факторгруппе $G/\Ker(\varphi)$.
+
+\begin{proof}
+Рассмотрим отображение $\psi \colon G / \Ker(\varphi) \to F$,
+заданное формулой $\psi(g\Ker(\varphi)) = \varphi(g)$. Проверка
+корректности: равенство $\varphi(gh_1)=\varphi(gh_2)$ для любых
+$h_1,h_2\in\Ker(\varphi)$ следует из цепочки
+$$
+\varphi(gh_1)=\varphi(g)\varphi(h_1)=\varphi(g)=\varphi(g)\varphi(h_2)=\varphi(gh_2).
+$$
+Отображение $\psi$ сюръективно по построению и инъективно в силу
+того, что $\varphi(g) = e_F$ тогда и только тогда, когда $g \in \Ker
+(\varphi)$ (т.\,е. $g\Ker(\varphi) = \Ker(\varphi)$). Остаётся
+проверить, что $\psi$~--- гомоморфизм:
+$$
+\psi((g\Ker(\varphi))(g'\Ker(\varphi))) = \psi(gg'\Ker(\varphi)) =
+\varphi(gg') = \varphi(g)\varphi(g') =
+\psi(g\Ker(\varphi))\psi(g'\Ker(\varphi)).
+$$
+\end{proof}
+
+Тем самым, чтобы удобно реализовать факторгруппу $G/H$, можно найти
+такой гомоморфизм $\varphi\colon G\to F$ в некоторую группу~$F$, что
+$H = \Ker(\varphi)$, и тогда $G/H \cong \Im(\varphi)$.
+
+\begin{example}
+Пусть $G=(\RR,+)$ и $H=(\ZZ,+)$. Рассмотрим группу
+$F=(\CC\setminus\{0\},\times)$ и гомоморфизм
+$$
+\varphi\colon G\to F, \quad a\mapsto e^{2\pi\imath a} = \cos (2\pi
+a) + i \sin (2\pi a).
+$$
+Тогда $\Ker(\varphi)=H$ и факторгруппа $G/H$ изоморфна окружности
+$S^1$, рассматриваемой как подгруппа в~$F$, состоящая из комплексных
+чисел с модулем~$1$.
+\end{example}
+
+Определим ещё одну важную конструкцию, позволяющую строить новые
+группы из имеющихся.
+
+\begin{definition}
+{\it Прямым произведением} групп $G_1, \ldots, G_m$ называется
+множество
+$$
+G_1\times\ldots\times G_m=\{(g_1,\ldots,g_m) \mid g_1\in G_1,\ldots,
+g_m\in G_m\}
+$$
+с операцией
+$(g_1,\ldots,g_m)(g_1',\ldots,g_m')=(g_1g_1',\ldots,g_mg_m')$.
+\end{definition}
+
+Ясно, что эта операция ассоциативна, обладает нейтральным элементом
+$(e_{G_1},\ldots,e_{G_m})$ и для каждого элемента $(g_1,\ldots,g_m)$
+есть обратный элемент $(g_1^{-1},\ldots,g_m^{-1})$.
+
+\begin{remark}
+Группа $G_1\times\ldots\times G_m$ коммутативна в точности тогда,
+когда коммутативна каждая из групп $G_1,\ldots, G_m$.
+\end{remark}
+
+\begin{remark}
+Если все группы $G_1, \ldots, G_m$ конечны, то $|G_1 \times \ldots
+\times G_m| = |G_1| \cdot \ldots \cdot |G_m|$.
+\end{remark}
+
+\begin{definition}
+Группа $G$ \textit{раскладывается в прямое произведение} своих подгрупп $H_1, \ldots, H_m$, если отображение $H_1 \times \ldots \times H_M \rightarrow G$, $(h_1, \ldots, h_m) \mapsto h_1 \cdot \ldots \cdot h_m$ является изоморфизмом.
+\end{definition}
+
+
+\newpage
+
+\section*{Лекция 3}
+
+\medskip
+
+{\it Факторизация по
+сомножителям. Конечно порождённые и свободные абелевы группы. Подгруппы
+свободных абелевых групп.}
+
+\medskip
+
+Следующий результат связывает конструкции факторгруппы и прямого
+произведения.
+
+{\bf Теорема о факторизации по сомножителям}. \ Пусть $H_1, \ldots,
+H_m$~--- нормальные подгруппы в группах $G_1, \ldots, G_m$
+соответственно. Тогда $H_1 \times \ldots \times H_m$~--- нормальная
+подгруппа в $G_1 \times \ldots \times G_m$ и имеет место изоморфизм
+групп
+$$
+(G_1 \times \ldots \times G_m) / (H_1 \times \ldots \times H_m)
+\cong G_1 / H_1 \times \ldots \times G_m / H_m.
+$$
+
+\begin{proof}
+Прямая проверка показывает, что $H_1\times\ldots\times H_m$~---
+нормальная подгруппа в $G_1\times\ldots\times G_m$. Требуемый
+изоморфизм устанавливается отображением
+$$
+(g_1,\ldots,g_m)(H_1\times\ldots\times H_m)\mapsto
+(g_1H_1,\ldots,g_mH_m).
+$$
+\end{proof}
+
+\begin{theorem}
+Пусть $n=ml$~--- разложение натурального числа $n$ на два взаимно
+простых множителя. Тогда имеет место изоморфизм групп
+$$
+\ZZ_n\cong \ZZ_m\times\ZZ_l.
+$$
+\end{theorem}
+
+\begin{proof}
+Рассмотрим отображение
+$$
+\varphi\colon \ZZ_n\to \ZZ_m\times\ZZ_l, \quad k \ (\text{mod}\ n)
+\mapsto (k\ (\text{mod}\ m), k\ (\text{mod}\  l)).
+$$
+Поскольку $m$ и $l$ делят~$n$, отображение $\varphi$ определено
+корректно. Ясно, что $\varphi$~--- гомоморфизм. Далее, если $k$
+переходит в нейтральный элемент $(0,0)$, то $k$ делится и на $m$, и
+на $l$, а~значит, делится на $n$ в силу взаимной простоты $m$ и~$l$.
+Отсюда следует, что гомоморфизм $\varphi$ инъективен. Поскольку
+множества $\ZZ_n$ и $\ZZ_m\times\ZZ_l$ содержат одинаковое число
+элементов, отображение $\varphi$ биективно.
+\end{proof}
+
+\begin{corollary} \label{corpr}
+Пусть $n \geqslant 2$~--- натуральное число и $n=p_1^{k_1}\ldots
+p_s^{k_s}$~--- его разложение в произведение простых множителей
+\textup(где $p_i \ne p_j$ при $i \ne j$\textup). Тогда имеет место
+изоморфизм групп
+$$
+\ZZ_n\cong\ZZ_{p_1^{k_1}}\times\ldots\times\ZZ_{p_s^{k_s}}.
+$$
+\end{corollary}
+
+Всюду в этой и следующей лекции $(A,+)$~--- абелева группа с
+аддитивной формой записи операции. Для произвольного элемента $a\in
+A$ и целого числа $s$ положим
+$$
+sa =
+\begin{cases}
+\underbrace{a + \ldots + a}_s, & \text{ если } s > 0; \\
+0, & \text{ если } s = 0; \\
+\underbrace{(-a) + \ldots + (-a)}_{|s|}, & \text{ если } s < 0.
+\end{cases}
+$$
+
+\begin{definition}
+Абелева группа $A$ называется {\it конечно порождённой}, если
+найдутся такие элементы $a_1,\ldots,a_n\in A$, что всякий элемент
+$a\in A$ представим в виде $a=s_1a_1 + \ldots + s_na_n$ для
+некоторых целых чисел $s_1, \ldots, s_n$. При этом элементы $a_1,
+\ldots, a_n$ называются {\it порождающими} или {\it образующими}
+группы~$A$.
+\end{definition}
+
+\begin{remark}
+Всякая конечно порождённая группа конечна или счётна.
+\end{remark}
+
+\begin{remark}
+Всякая конечная группа является конечно порождённой.
+\end{remark}
+
+\begin{definition}
+Конечно порождённая абелева группа $A$ называется {\it свободной},
+если в ней существует {\it базис}, т.\,е. такой набор элементов
+$a_1,\ldots, a_n$, что каждый элемент $a\in A$ единственным образом
+представим в виде $a=s_1a_1 + \ldots + s_na_n$, где $s_1, \ldots,
+s_n \in \ZZ$. При этом число $n$ называется {\it рангом} свободной
+абелевой группы $A$ и обозначается $\rk\,A$.
+\end{definition}
+
+\begin{example}
+Абелева группа $\ZZ^n:=\{(c_1,\ldots,c_n) \mid c_i\in\ZZ\}$ является
+свободной с базисом
+$$
+\begin{aligned}
+e_1 &= (1,0,\ldots,0), \\
+e_2 &= (0,1,\ldots,0),\\
+ &\ldots \\
+e_n &= (0,0,\ldots,1).
+\end{aligned}
+$$
+Этот базис называется {\it стандартным}. В группе $\ZZ^n$ можно
+найти и много других базисов. Ниже мы все их опишем.
+\end{example}
+
+\begin{proposition}
+Ранг свободной абелевой группы определён корректно, т.\,е. любые два
+её базиса содержат одинаковое число элементов.
+\end{proposition}
+
+\begin{proof}
+Пусть $a_1, \ldots, a_n$ и $b_1, \ldots, b_m$~--- два базиса
+группы~$A$. Предположим, что $n < m$. Элементы $b_1, \ldots, b_m$
+однозначно разлагаются по базису $a_1, \ldots, a_n$, поэтому мы
+можем записать
+$$
+\begin{aligned}
+b_1 &= s_{11}a_1 + s_{12}a_2 + \ldots + s_{1n}a_n, \\
+b_2 &= s_{21}a_1 + s_{22}a_2 + \ldots + s_{2n}a_n,\\
+ &\ldots \\
+b_m &= s_{m1}a_1 + s_{m2}a_2 + \ldots + s_{mn}a_n,
+\end{aligned}
+$$
+где все коэффициенты $s_{ij}$~--- целые числа. Рассмотрим
+прямоугольную матрицу $S = (s_{ij})$ размера $m \times n$. Так как
+$n < m$, то ранг этой матрицы не превосходит~$n$, а~значит, строки
+этой матрицы линейно зависимы над~$\QQ$. Домножая коэффициенты этой
+зависимости на наименьшее общее кратное их знаменателей, мы найдём
+такие целые $s_1, \ldots, s_m$, из которых не все равны нулю, что
+$s_1 b_1 + \ldots + s_m b_m=0$. Поскольку $0 = 0b_1 + \ldots +
+0b_m$, это противоречит однозначной выразимости элемента $0$ через
+базис $b_1, \ldots, b_m$.
+\end{proof}
+
+\begin{proposition}
+Всякая свободная абелева группа ранга $n$ изоморфна группе $\ZZ^n$.
+\end{proposition}
+
+\begin{proof}
+Пусть $A$~--- свободная абелева группа, и пусть $a_1,\ldots,a_n$~---
+её базис. Рассмотрим отображение
+$$\varphi \colon \ZZ^n \to A, \quad (s_1, \ldots, s_n)
+\mapsto s_1a_1 + \ldots + s_na_n.
+$$
+Легко видеть, что $\varphi$~--- гомоморфизм. Так как всякий элемент
+$a \in A$ представим в виде $s_1a_1 + \ldots + s_na_n$, где $s_1,
+\ldots, s_n \in \ZZ$, то $\varphi$ сюръективен. Из единственности
+такого представления следует инъективность~$\varphi$. Значит,
+$\varphi$~--- изоморфизм.
+\end{proof}
+
+Пусть $e_1', \ldots, e_n'$~--- некоторый набор элементов из $\ZZ^n$.
+Выразив эти элементы через стандартный базис $e_1, \ldots, e_n$, мы
+можем записать
+$$
+(e_1', \ldots, e_n') = (e_1, \ldots, e_n)C,
+$$
+где $C$~--- целочисленная квадратная матрица порядка~$n$.
+
+\begin{proposition}
+Элементы $e_1', \ldots, e_n'$ составляют базис группы $\ZZ^n$ тогда
+и только тогда, когда $\det C = \pm 1$.
+\end{proposition}
+
+\begin{proof}
+Предположим сначала, что $e'_1, \ldots, e'_n$~--- базис. Тогда
+элементы $e_1, \ldots, e_n$ через него выражаются, поэтому $(e_1,
+\ldots, e_n) = (e'_1, \ldots, e'_n) D$ для некоторой целочисленной
+квадратной матрицы $D$ порядка~$n$. Но тогда $(e_1, \ldots, e_n) =
+(e_1, \ldots, e_n)CD$, откуда $CD = E_n$, где $E_n$~--- единичная
+матрица порядка~$n$. Значит, $(\det C)(\det D) = 1$. Учитывая, что
+$\det C$ и $\det D$~--- целые числа, мы получаем $\det C = \pm 1$.
+
+Обратно, пусть $\det C = \pm 1$. Тогда матрица $C^{-1}$ является
+целочисленной, а соотношение $(e_1, \ldots, e_n) = (e'_1, \ldots,
+e'_n)C^{-1}$ показывает, что элементы $e_1, \ldots, e_n$ выражаются
+через $e'_1, \ldots, e'_n$. Но $e_1, \ldots, e_n$~--- базис, поэтому
+элементы $e'_1, \ldots, e'_n$ порождают группу~$\ZZ^n$. Осталось
+доказать, что всякий элемент из $\ZZ^n$ однозначно через них
+выражается. Предположим, что $s'_1e'_1 + \ldots + s'_ne'_n =
+s''_1e'_1 + \ldots + s''_n e'_n$ для некоторых целых чисел $s'_1,
+\ldots, s'_n, s''_1, \ldots, s''_n$. Мы можем это переписать в
+следующем виде:
+$$
+(e'_1, \ldots, e'_n)
+\begin{pmatrix} s'_1 \\ \vdots \\ s'_n \end{pmatrix} =
+(e'_1, \ldots, e'_n)
+\begin{pmatrix} s''_1 \\ \vdots \\ s''_n \end{pmatrix}.
+$$
+Учитывая, что $(e'_1, \ldots, e'_n) = (e_1, \ldots, e_n)C$ и что
+$e_1, \ldots, e_n$~--- это базис, получаем
+$$
+C \begin{pmatrix} s'_1 \\ \vdots \\ s'_n \end{pmatrix} = C
+\begin{pmatrix} s''_1 \\ \vdots \\ s''_n \end{pmatrix}.
+$$
+Домножая это равенство слева на~$C^{-1}$, окончательно получаем
+$$
+\begin{pmatrix} s'_1 \\ \vdots \\ s'_n \end{pmatrix} =
+\begin{pmatrix} s''_1 \\ \vdots \\ s''_n \end{pmatrix}.
+$$
+\end{proof}
+
+\begin{theorem}
+Всякая подгруппа $N$ свободной абелевой группы $L$ ранга $n$
+является свободной абелевой группой ранга $\leqslant n$.
+\end{theorem}
+
+\begin{proof}
+Воспользуемся индукцией по $n$. При $n=0$ доказывать нечего. Пусть
+$n>0$ и $e_1,\ldots,e_n$~--- базис группы $L$. Рассмотрим в $L$
+подгруппу
+$$
+L_1 = \langle e_1,\ldots,e_{n-1}\rangle : = \ZZ e_1 + \ldots + \ZZ
+e_{n-1}.
+$$
+Это свободная абелева группа ранга $n-1$. По предположению индукции
+подгруппа $N_1:=N\cap L_1 \subseteq L_1$ является свободной абелевой
+группой ранга $m \leqslant n-1$. Зафиксируем в $N_1$ базис $f_1,
+\ldots, f_m$.
+
+Рассмотрим отображение
+$$
+\varphi \colon N \to \ZZ, \quad s_1e_1 + \ldots + s_ne_n \mapsto
+s_n.
+$$
+Легко видеть, что $\varphi$~--- гомоморфизм и что $\Ker \varphi =
+N_1$. Далее, $\Im \varphi$~--- подгруппа в~$\ZZ$, по предложению~1
+из лекции~1 она имеет вид $k \ZZ$ для некоторого целого $k \geqslant
+0$. Если $k=0$, то $N \subseteq L_1$, откуда $N = N_1$ и всё
+доказано. Если $k>0$, то пусть $f_{m+1}$~--- какой-нибудь элемент из
+$N$, для которого $\varphi(f_{m+1}) = k$. Докажем, что $f_1, \ldots,
+f_m, f_{m+1}$~--- базис в~$N$. Пусть $f \in N$~--- произвольный
+элемент, и пусть $\varphi(f) = sk$, где $s \in \ZZ$. Тогда
+$\varphi(f - sf_{m+1}) = 0$, откуда $f - sf_{m+1} \in N_1$ и,
+следовательно, $f - sf_{m+1} = s_1 f_1 + \ldots + s_m f_m$ для
+некоторых $s_1, \ldots, s_m \in \ZZ$. Значит, $f = s_1 f_1 + \ldots
++ s_m f_m + s f_{m+1}$ и элементы $f_1, \ldots, f_m, f_{m+1}$
+порождают группу~$N$. Осталось доказать, что они образуют базис
+в~$N$. Предположим, что
+$$
+s_1 f_1 + \ldots + s_m f_m + s_{m+1} f_{m+1} = s'_1 f_1 + \ldots +
+s'_m f_m + s'_{m+1} f_{m+1}
+$$
+для некоторых целых чисел $s_1, \ldots, s_m, s_{m+1}, s'_1, \ldots,
+s'_m, s'_{m+1}$. Рассмотрев образ обеих частей этого равенства при
+гомоморфизме~$\varphi$, получаем $s_{m+1} k = s'_{m+1} k$, откуда
+$s_{m+1} = s'_{m+1}$ и
+$$
+s_1 f_1 + \ldots + s_m f_m = s'_1 f_1 + \ldots + s'_m f_m.
+$$
+Но $f_1, \ldots, f_m$~--- базис в~$N_1$, поэтому $s_1 = s'_1$,
+\ldots, $s_m = s'_m$.
+\end{proof}
+
+
+
+\newpage
+
+\section*{Лекция 4}
+
+\medskip
+
+{\it Теорема о согласованных базисах. Алгоритм
+приведения целочисленной матрицы к диагональному виду. Строение конечно порождённых абелевых групп. Конечные абелевы группы. } % Экспонента конечной абелевой группы.}
+
+В~теории абелевых групп операция прямого произведения конечного
+числа групп обычно называется \textit{прямой суммой} и обозначается
+символом~$\oplus$, так что пишут $A_1 \oplus A_2 \oplus \ldots
+\oplus A_n$ вместо $A_1 \times A_2 \times \ldots \times A_n$.
+
+Дадим более точное описание подгрупп свободных абелевых групп.
+
+\smallskip
+
+{\bf Теорема о согласованных базисах.}\ Для всякой подгруппы $N$
+свободной абелевой группы $L$ ранга $n$ найдётся такой базис $e_1,
+\ldots, e_n$ группы $L$ и такие натуральные числа $u_1, \ldots,
+u_m$, $m \leqslant n$, что $u_1 e_1, \ldots, u_m e_m$~--- базис
+группы $N$ и $u_i | u_{i+1}$ при $i = 1, \ldots, m-1$.
+
+\smallskip
+
+\begin{remark}
+Числа $u_1, \ldots, u_p$, фигурирующие в теореме о согласованных
+базисах, называются {\it инвариантными множителями} подгруппы $N
+\subseteq L$. Можно показать, что они определены по подгруппе
+однозначно.
+\end{remark}
+
+\begin{corollary}
+В~условиях теоремы о согласованных базисах имеет место изоморфизм
+$$
+L / N \cong \ZZ_{u_1} \times \ldots \times \ZZ_{u_m} \times
+\underbrace{\ZZ \times \ldots \times \ZZ}_{n - m}.
+$$
+\end{corollary}
+
+\begin{proof}
+Рассмотрим изоморфизм $L \cong \ZZ^n = \underbrace{\ZZ \times \ldots
+\times \ZZ}_n$, сопоставляющий произвольному элементу $s_1 e_1 +
+\ldots + s_n e_n \in L$ набор $(s_1, \ldots, s_n) \in \ZZ^n$. При
+этом изоморфизме подгруппа $N \subseteq L$ отождествляется с
+подгруппой
+$$
+u_1 \ZZ \times \ldots \times u_m \ZZ \times \underbrace{\lbrace 0
+\rbrace \times \ldots \times \lbrace 0 \rbrace}_{n-m} \subseteq
+\ZZ^n.
+$$
+Теперь требуемый результат получается применением теоремы о
+факторизации по сомножителям.
+\end{proof}
+
+Теперь вернемся к доказательству теоремы о согласованных базисов.
+Однако это требует некоторой подготовки.
+
+\begin{definition}
+{\it Целочисленными элементарными преобразованиями строк} матрицы
+называются преобразования следующих трёх типов:
+
+1) прибавление к одной строке другой, умноженной на целое число;
+
+2) перестановка двух строк;
+
+3) умножение одной строки на $-1$.
+
+Аналогично определяются {\it целочисленные элементарные
+преобразования столбцов} матрицы.
+\end{definition}
+
+Прямоугольную матрицу $C=(c_{ij})$ размера $n\times m$ назовём {\it
+диагональной} и обозначим $\text{diag}(u_1,\ldots,u_p)$, если
+$c_{ij}=0$ при $i\ne j$ и $c_{ii}=u_i$ при $i=1,\ldots,p$, где
+$p=\text{min}(n,m)$.
+
+\begin{proposition} \label{palg}
+Всякую прямоугольную целочисленную матрицу $C=(c_{ij})$ с помощью
+элементарных преобразований строк и столбцов можно привести к виду
+$\text{diag}(u_1,\ldots,u_p)$, где $u_1,\ldots,u_p \geqslant 0$ и
+$u_i|u_{i+1}$ при $i=1,\ldots,p-1$.
+\end{proposition}
+
+\begin{proof}
+Если $C=0$, то доказывать нечего. Если $C\ne 0$, но $c_{11}=0$, то
+переставим строки и столбцы и получим $c_{11}\ne 0$. Умножив, если
+нужно, первую строку на $-1$, добьёмся условия $c_{11}>0$. Теперь
+будем стремиться уменьшить~$c_{11}$.
+
+Если какой-то элемент $c_{i1}$ не делится на $c_{11}$, то разделим с
+остатком: $c_{i1}=qc_{11}+r$. Вычитая из $i$-й строки $1$-ю строку,
+умноженную на~$q$, и затем переставляя $1$-ю и $i$-ю строки,
+уменьшаем~$c_{11}$. Повторяя эту процедуру, в~итоге добиваемся, что
+все элементы $1$-й строки и $1$-го столбца делятся на $c_{11}$.
+
+Если какой-то $c_{ij}$ не делится на $c_{11}$, то поступаем
+следующим образом. Вычтя из $i$-й строки $1$-ю строку с подходящим
+коэффициентом, добьёмся $c_{i1}=0$. После этого прибавим к $1$-й
+строке $i$-ю строку. При этом $c_{11}$ не изменится, а $c_{1j}$
+перестанет делиться на $c_{11}$, и мы вновь сможем уменьшить
+$c_{11}$.
+
+В~итоге добьёмся того, что все элементы делятся на~$c_{11}$. После
+этого обнулим все элементы $1$-й строки и $1$-го столбца, начиная со
+вторых, и продолжим процесс с меньшей матрицей.
+\end{proof}
+
+Теперь мы готовы доказать теорему о согласованных базисах.
+
+\begin{proof}[Доказательство теоремы о согласованных базисах]
+Мы знаем, что $N$ является свободной абелевой группой ранга $m
+\leqslant n$. Пусть $e_1, \ldots, e_n$~--- базис в $L$ и $f_1,
+\ldots, f_m$~--- базис в~$N$. Тогда $(f_1, \ldots, f_m) = (e_1,
+\ldots, e_n)C$, где $C$~--- целочисленная матрица размера $n \times
+m$ и ранга~$m$. Покажем, что целочисленные элементарные
+преобразования строк (столбцов) матрицы $C$~--- это в точности
+элементарные преобразования над базисом в~$L$ (в~$N$). Для этого
+рассмотрим сначала случай строк. Заметим, что каждое из
+целочисленных элементарных преобразований строк реализуется при
+помощи умножения матрицы $C$ слева на квадратную матрицу~$P$
+порядка~$n$, определяемую следующим образом:
+
+(1) в случае прибавления к $i$-й строке $j$-й, умноженной на целое
+число~$z$, в матрице~$P$ на диагонали стоят единицы, на $(ij)$-м
+месте~--- число~$z$, а на остальных местах~--- нули;
+
+(2) в случае перестановки $i$-й и $j$-й строк имеем $p_{ij} = p_{ji}
+= 1$, $p_{kk} = 1$ при $k \ne i,j$, а на остальных местах стоят
+нули;
+
+(3) в случае умножения $i$-й строки на $-1$ имеем $p_{ii} = -1$,
+$p_{jj} = 1$ при $j \ne i$, а на остальных местах стоят нули.
+
+Теперь заметим, что равенство $(f_1, \ldots, f_m) = (e_1, \ldots,
+e_n)C$ эквивалентно равенству $(f_1, \ldots, f_m) = (e_1, \ldots,
+e_n)P^{-1} PC$. Таким образом, базис $(f_1, \ldots, f_m)$ выражается
+через новый базис $(e'_1, \ldots, e'_n) := (e_1, \ldots, e_n)P^{-1}$
+при помощи матрицы~$PC$.
+
+В случае столбцов всё аналогично: каждое из целочисленых
+элементарных преобразований столбцов реализуется при помощи
+умножения матрицы $C$ справа на некоторую квадратную матрицу $Q$
+порядка~$m$ (определяемую почти так же, как~$P$). В~этом случае
+имеем $(f_1, \ldots, f_m)Q = (e_1, \ldots, e_n)CQ$, так что новый
+базис $(f'_1, \ldots, f'_m) := (f_1, \ldots, f_m)Q$ выражается через
+$(e_1, \ldots, e_n)$ при помощи матрицы $CQ$.
+
+Воспользовавшись предложением~\ref{palg}, мы можем привести матрицу
+$C$ при помощи целочисленных элементарных преобразований строк и
+столбцов к диагональному виду~$C'' = \text{diag}(u_1, \ldots, u_m)$,
+где $u_i | u_{i+1}$ для всех $i = 1, \ldots, m-1$. С~учётом
+сказанного выше это означает, что для некоторого базиса $e''_1,
+\ldots, e''_n$ в~$L$ и некоторого базиса $f''_1, \ldots, f''_m$
+в~$N$ справедливо соотношение $(f''_1, \ldots, f''_m) = (e''_1,
+\ldots, e''_n) C''$. Иными словами, $f''_i = u_i e''_i$ для всех $i
+= 1, \ldots, m$, а~это и требовалось.
+\end{proof}
+
+\begin{definition}
+Конечная абелева группа $A$ называется {\it примарной}, если её
+порядок равен $p^k$ для некоторого простого числа~$p$.
+\end{definition}
+
+\begin{remark}
+В общем случае (когда группы не предполагаются коммутативными)
+конечная группа $G$ с~условием $|G| = p^k$ ($p$~--- простое)
+называется {\it $p$-группой}.
+\end{remark}
+
+Следствие~1 лекции~3 показывает, что каждая конечная циклическая
+группа разлагается в прямую сумму примарных циклических подгрупп.
+
+\begin{theorem} \label{traz}
+Всякая конечно порождённая абелева группа $A$ разлагается в прямую
+сумму примарных и бесконечных циклических подгрупп, т.\,е.
+\begin{equation} \label{eqn}
+A \cong \ZZ_{p_1^{k_1}} \oplus \ldots \oplus \ZZ_{p_s^{k_s}} \oplus
+\ZZ \oplus \ldots \oplus \ZZ,
+\end{equation}
+где $p_1, \ldots, p_s$~--- простые числа \textup(не обязательно
+попарно различные\textup) и $k_1, \ldots, k_s \in \NN$. Кроме того,
+число бесконечных циклических слагаемых, а~также число и порядки
+примарных циклических слагаемых определено однозначно.
+\end{theorem}
+
+Сразу выделим некоторые следствия из этой теоремы.
+
+\begin{corollary}
+Абелева группа $A$ является конечно порождённой тогда и только тогда, когда $A$ разлагается в прямую сумму циклических подгрупп. 
+\end{corollary}
+
+\begin{proof}
+В одну сторону следует из теоремы. В другую сторону: пусть $A = A_1 \oplus \ldots \oplus A_m$, где $A_i$~--- циклическая подгруппа, то есть $A_i = \langle a_i \rangle$, $a_i \in A$. Тогда $\{a_1, \ldots, a_m \}$ --- набор порождающих элементов для группы $A$.
+\end{proof}
+
+\begin{corollary}
+Всякая конечная абелева группа разлагается в прямую сумму примарных
+циклических подгрупп, причём число и порядки примарных циклических
+слагаемых определено однозначно.
+\end{corollary}
+
+Теперь преступим к доказательству самой теоремы.
+
+\begin{proof}
+Пусть $a_1,\ldots,a_n$~--- конечная система порождающих группы $A$.
+Рассмотрим гомоморфизм
+$$
+\varphi \colon \ZZ^n \to A, \quad (s_1, \ldots, s_n) \mapsto s_1 a_1
++ \ldots + s_n a_n.
+$$
+Ясно, что $\varphi$ сюръективен. Тогда по теореме о гомоморфизме
+получаем $A \cong \ZZ^n / N$, где $N = \Ker \varphi$. По теореме о
+согласованных базисах существует такой базис $e_1, \ldots, e_n$
+группы $\ZZ^n$ и такие натуральные числа $u_1, \ldots, u_m$, $m
+\leqslant n$, что $u_1 e_1, \ldots, u_m e_m$~--- базис группы~$N$.
+Тогда имеем
+$$
+\begin{array}{ccccccccccccc}
+L &=& \langle e_1 \rangle &\oplus & \ldots & \oplus & \langle e_m
+\rangle & \oplus & \langle e_{m+1} \rangle & \oplus & \ldots &
+\oplus & \langle e_n \rangle, \\
+N &=& \langle u_1e_1 \rangle & \oplus & \ldots & \oplus & \langle
+u_m e_m \rangle &\oplus & \lbrace 0 \rbrace & \oplus & \ldots &
+\oplus & \lbrace 0 \rbrace.
+\end{array}
+$$
+Применяя теорему о факторизации по сомножителям, мы получаем
+$$
+\ZZ^n / N \cong \ZZ / u_1 \ZZ \oplus \ldots \oplus \ZZ / u_m \ZZ
+\oplus \underbrace{\ZZ / \lbrace 0 \rbrace \oplus \ldots \oplus \ZZ
+/ \lbrace 0 \rbrace}_{n-m} \cong \ZZ_{u_1} \oplus \ldots \oplus
+\ZZ_{u_m} \oplus \underbrace{\ZZ \oplus \ldots \oplus \ZZ}_{n-m}.
+$$
+Чтобы добиться разложения~(\ref{eqn}), остаётся представить каждое
+из циклических слагаемых $\ZZ_{u_i}$ в виде прямой суммы примарных
+циклических подгрупп, воспользовавшись следствием~1 из лекции~3.
+
+Перейдём к доказательству единственности разложения~(\ref{eqn}).
+Пусть $\langle c \rangle_q$ обозначает циклическую группу порядка
+$q$ с порождающей~$c$. Пусть имеется разложение
+\begin{equation} \label{eqn2}
+A = \langle c_1\rangle_{p_1^{k_1}} \oplus \ldots \oplus \langle c_s
+\rangle_{p_s^{k_s}} \oplus \langle c_{s+1} \rangle_{\infty} \oplus
+\ldots \oplus \langle c_{s+t} \rangle_{\infty}
+\end{equation}
+(заметьте, что мы просто переписали в другом виде правую часть
+соотношения~(\ref{eqn})). Рассмотрим в~$A$ так называемую {\it
+подгруппу кручения}
+$$
+\Tor A := \{ a \in A \mid ma=0 \ \text{для некоторого} \ m \in \NN
+\}.
+$$
+Иными словами, $\Tor A$~--- это подгруппа в~$A$, состоящая из всех
+элементов конечного порядка. Выделим эту подгруппу в
+разложении~(\ref{eqn2}). Рассмотрим произвольный элемент $a \in A$.
+Он представим в виде
+$$
+a = r_1c_1 + \ldots + r_m c_m + r_{m+1} c_{m+1} + \ldots + r_n c_n
+$$
+для некоторых целых чисел $r_1, \ldots, r_n$. Легко видеть, что $a$
+имеет конечный порядок тогда и только тогда, когда $r_{m+1} = \ldots
+= r_m = 0$. Отсюда получаем, что
+\begin{equation} \label{eqn3}
+\Tor A = \langle c_1 \rangle_{p_1^{k_1}} \oplus \ldots \oplus
+\langle c_s \rangle_{p_s^{k_s}}.
+\end{equation}
+Применяя опять теорему о факторизации по сомножителям, мы получаем
+$A / \Tor A \cong \ZZ^t$, где $t$ --- количество бесконечных 
+циклических подгрупп в разложении~(\ref{eqn}). Отсюда следует, 
+что число $t$ однозначно выражается в терминах самой группы~$A$ 
+(как ранг свободной абелевой группы $A / \Tor A$). Значит, $t$ 
+не зависит от разложения~(\ref{eqn2}).
+
+Однозначность числа и порядков примарных циклических
+групп будет доказана на следующей лекции.
+
+\end{proof}
+
+%Далее, для каждого простого числа $p$ определим в $A$ {\it подгруппу
+%$p$-кручения}
+%\begin{equation} \label{eqn4}
+%\Tor_p A := \{ a\in A \mid p^ka=0 \ \text{для некоторого} \ k \in
+%\NN \}.
+%\end{equation}
+%Ясно, что $\Tor_p A \subset \Tor A$. Выделим подгруппу $\Tor_p A$ в
+%разложении~(\ref{eqn3}). Легко видеть, что $\langle c_i
+%\rangle_{p_i^{k_i}} \subseteq \Tor_p A$ для всех $i$ с условием $p_i
+%= p$. Если же $p_i \ne p$, то по следствию~2 из теоремы Лагранжа
+%(см. лекцию~1) порядок любого ненулевого элемента $x \in \langle c_i
+%\rangle_{p_i^{k_i}}$ является степенью числа~$p_i$, а~значит, $p^k x
+%\ne 0$ для всех $k \in \NN$. Отсюда следует, что $\Tor_p A$ является
+%суммой тех конечных слагаемых в разложении~(\ref{eqn3}), порядки
+%которых суть степени~$p$. Поэтому доказательство теперь сводится к
+%случаю, когда $A$~--- примарная группа.
+%
+%Пусть $|A|=p^k$ и
+%$$
+%A = \langle c_1\rangle_{p^{k_1}}\oplus\ldots\oplus\langle
+%c_r\rangle_{p^{k_r}}, \quad k_1+\ldots+k_r=k.
+%$$
+%Докажем индукцией по~$k$, что набор чисел $k_1, \ldots, k_r$ не
+%зависит от разложения.
+%
+%Если $k = 1$, то $|A| = p$, но тогда $A \cong \ZZ_p$ по следствию~5
+%из теоремы Лагранжа (см. лекцию~1). Пусть теперь $k > 1$. Рассмотрим
+%подгруппу $pA: = \{ pa \mid a \in A \}$. В~терминах
+%равенства~(\ref{eqn4}) имеем
+%$$
+%pA = \langle pc_1 \rangle_{p^{k_1-1}} \oplus \ldots \oplus \langle
+%pc_r\rangle_{p^{k_r-1}}.
+%$$
+%В частности, при $k_i = 1$ соответствующее слагаемое равно $\lbrace
+%0 \rbrace$ (и тем самым исчезает). Так как $|pA| = p^{k - r} < p^k$,
+%то по предположению индукции группа $pA$ разлагается в прямую сумму
+%примарных циклических подгрупп однозначно с точностью до порядка
+%слагаемых. Следовательно, ненулевые числа в наборе $k_1 - 1, \ldots,
+%k_r-1$ определены однозначно (с точностью до перестановки). Отсюда
+%мы находим значения $k_i$, отличные от~$1$. Количество тех~$k_i$,
+%которые равны~$1$, однозначно восстанавливается из условия $k_1 +
+%\ldots + k_r = k$.
+%\end{proof}
+
+%Заметим, что теорема о согласованных базисах даёт нам другое
+%разложение конечной абелевой группы~$A$:
+%\begin{equation} \label{eqn5}
+%A=\ZZ_{u_1}\oplus\ldots\oplus\ZZ_{u_m}, \quad \text{где} \
+%u_i|u_{i+1} \ \text{при} \ i = 1, \ldots, m-1.
+%\end{equation}
+%Числа $u_1, \ldots, u_m$ называют {\it инвариантными множителями}
+%конечной абелевой группы~$A$.
+%
+%\begin{definition}
+%{\it Экспонентой} конечной абелевой группы $A$ называется число
+%$\exp A$, равное наименьшему общему кратному порядков элементов
+%из~$A$.
+%\end{definition}
+%
+%\begin{remark}
+%Легко видеть, что $\exp A = \min \lbrace n \in \NN \mid ma = 0 \
+%\text{для всех} \ a \in A \rbrace$.
+%\end{remark}
+%
+%\begin{proposition}
+%Экспонента конечной абелевой группы~$A$ равна её последнему
+%инвариантному множителю~$u_m$.
+%\end{proposition}
+%
+%\begin{proof}
+%Обратимся к разложению~(\ref{eqn5}). Так как $u_i | u_m$ для всех $i
+%= 1, \ldots, m$, то $u_ma=0$ для всех $a \in A$. Это означает, что
+%$\exp A \leqslant u_m$ (и тем самым $\exp A \, | u_m$). С~другой
+%стороны, в $A$ имеется циклическая подгруппа порядка $u_m$. Значит,
+%$\exp A \geqslant u_m$.
+%\end{proof}
+%
+%\begin{corollary}
+%Конечная абелева группа $A$ является циклической тогда и только
+%тогда, когда $\exp A =\nobreak |A|$.
+%\end{corollary}
+%
+%\begin{proof}
+%Группа $A$ является циклической тогда и только тогда, когда в
+%разложении~(\ref{eqn5}) присутствует только одно слагаемое, т.\,е.
+%$A = \ZZ_{u_m}$ и $|A| = u_m$.
+%\end{proof}
+
+\newpage
+
+\section*{Лекция 5}
+
+\medskip
+
+{\it Строение конечно порождённых абелевых груп (продолжение). Экспонента
+конечной абелевой группы. Действие группы на множестве. Орбиты и стабилизаторы.}
+%Транзитивные и свободные действия. Три действия группы на себе.
+%Теорема Кэли. Классы сопряжённости.}
+
+Продолжим доказательство теоремы с прошлой лекции.
+
+\begin{theorem} \label{traz}
+Всякая конечно порождённая абелева группа $A$ разлагается в прямую
+сумму примарных и бесконечных циклических подгрупп, т.\,е.
+\begin{equation} \label{eqn}
+A \cong \ZZ_{p_1^{k_1}} \oplus \ldots \oplus \ZZ_{p_s^{k_s}} \oplus
+\ZZ \oplus \ldots \oplus \ZZ,
+\end{equation}
+где $p_1, \ldots, p_s$~--- простые числа \textup(не обязательно
+попарно различные\textup) и $k_1, \ldots, k_s \in \NN$. Кроме того,
+число бесконечных циклических слагаемых, а~также число и порядки
+примарных циклических слагаемых определено однозначно.
+\end{theorem}
+
+\begin{proof}
+На прошлой лекции мы доказали существование разложения и то, что количество
+бесконечных циклических групп $\ZZ$ определено однозначно. Для этого мы вводили
+понятие \textit{подгруппы кручения}:
+\begin{equation} \label{eqn3}
+\Tor A = \langle c_1 \rangle_{p_1^{k_1}} \oplus \ldots \oplus
+\langle c_s \rangle_{p_s^{k_s}}.
+\end{equation}
+Далее, для каждого простого числа $p$ определим в $A$ {\it подгруппу
+$p$-кручения}
+\begin{equation} \label{eqn4}
+\Tor_p A := \{ a\in A \mid p^ka=0 \ \text{для некоторого} \ k \in
+\NN \}.
+\end{equation}
+Ясно, что $\Tor_p A \subset \Tor A$. Выделим подгруппу $\Tor_p A$ в
+разложении~(\ref{eqn3}). Легко видеть, что $\langle c_i
+\rangle_{p_i^{k_i}} \subseteq \Tor_p A$ для всех $i$ с условием $p_i
+= p$. Если же $p_i \ne p$, то по следствию~2 из теоремы Лагранжа
+(см. лекцию~2) порядок любого ненулевого элемента $x \in \langle c_i
+\rangle_{p_i^{k_i}}$ является степенью числа~$p_i$, а~значит, $p^k x
+\ne 0$ для всех $k \in \NN$. Отсюда следует, что $\Tor_p A$ является
+суммой тех конечных слагаемых в разложении~(\ref{eqn3}), порядки
+которых суть степени~$p$. Поэтому доказательство теперь сводится к
+случаю, когда $A$~--- примарная группа.
+
+Пусть $|A|=p^k$ и
+$$
+A = \langle c_1\rangle_{p^{k_1}}\oplus\ldots\oplus\langle
+c_r\rangle_{p^{k_r}}, \quad k_1+\ldots+k_r=k.
+$$
+Докажем индукцией по~$k$, что набор чисел $k_1, \ldots, k_r$ не
+зависит от разложения.
+
+Если $k = 1$, то $|A| = p$, но тогда $A \cong \ZZ_p$ по следствию~5
+из теоремы Лагранжа (см. лекцию~2). Пусть теперь $k > 1$. Рассмотрим
+подгруппу $pA: = \{ pa \mid a \in A \}$. В~терминах
+равенства~(\ref{eqn4}) имеем
+$$
+pA = \langle pc_1 \rangle_{p^{k_1-1}} \oplus \ldots \oplus \langle
+pc_r\rangle_{p^{k_r-1}}.
+$$
+В частности, при $k_i = 1$ соответствующее слагаемое равно $\lbrace
+0 \rbrace$ (и тем самым исчезает). Так как $|pA| = p^{k - r} < p^k$,
+то по предположению индукции группа $pA$ разлагается в прямую сумму
+примарных циклических подгрупп однозначно с точностью до порядка
+слагаемых. Следовательно, ненулевые числа в наборе $k_1 - 1, \ldots,
+k_r-1$ определены однозначно (с точностью до перестановки). Отсюда
+мы находим значения $k_i$, отличные от~$1$. Количество тех~$k_i$,
+которые равны~$1$, однозначно восстанавливается из условия $k_1 +
+\ldots + k_r = k$.
+\end{proof}
+
+Заметим, что теорема о согласованных базисах даёт нам другое
+разложение конечной абелевой группы~$A$:
+\begin{equation} \label{eqn5}
+A=\ZZ_{u_1}\oplus\ldots\oplus\ZZ_{u_m}, \quad \text{где} \
+u_i|u_{i+1} \ \text{при} \ i = 1, \ldots, m-1.
+\end{equation}
+Числа $u_1, \ldots, u_m$ называют {\it инвариантными множителями}
+конечной абелевой группы~$A$.
+
+\begin{definition}
+{\it Экспонентой} конечной абелевой группы $A$ называется число
+$\exp A$, равное наименьшему общему кратному порядков элементов
+из~$A$. Легко заметить, что это равносильно следующему условию:
+$$
+\exp A = \min \lbrace n \in \NN \mid na = 0 \
+\text{для всех} \ a \in A \rbrace
+$$
+\end{definition}
+
+\begin{proposition}
+Экспонента конечной абелевой группы~$A$ равна её последнему
+инвариантному множителю~$u_m$.
+\end{proposition}
+
+\begin{proof}
+Обратимся к разложению~(\ref{eqn5}). Так как $u_i | u_m$ для всех $i
+= 1, \ldots, m$, то $u_ma=0$ для всех $a \in A$. Это означает, что
+$\exp A \leqslant u_m$ (и тем самым $\exp A \, | u_m$). С~другой
+стороны, в $A$ имеется циклическая подгруппа порядка $u_m$. Значит,
+$\exp A \geqslant u_m$.
+\end{proof}
+
+\begin{corollary}
+Конечная абелева группа $A$ является циклической тогда и только
+тогда, когда $\exp A =\nobreak |A|$.
+\end{corollary}
+
+\begin{proof}
+Группа $A$ является циклической тогда и только тогда, когда в
+разложении~(\ref{eqn5}) присутствует только одно слагаемое, т.\,е.
+$A = \ZZ_{u_m}$ и $|A| = u_m$.
+\end{proof}
+
+
+Пусть $G$~--- произвольная группа и $X$~--- некоторое множество.
+
+\begin{definition}
+\textit{Действием} группы $G$ на множестве $X$ называется
+отображение $G\times X\to X$, $(g,x)\mapsto gx$, удовлетворяющее
+следующим условиям:
+
+1) $ex=x$ для любого $x\in X$ ($e$~--- нейтральный элемент
+группы~$G$);
+
+2) $g(hx)=(gh)x$ для всех $g,h\in G$ и $x\in X$.
+
+Обозначение: $G:X$.
+\end{definition}
+
+Если задано действие группы $G$ на множестве~$X$, то каждый элемент
+$g \in G$ определяет биекцию $a_g \colon X \to\nobreak X$ по правилу
+$a_g(x) = gx$ (обратным отображением для $a_g$ будет $a_{g^{-1}}$).
+Обозначим через $S(X)$ группу всех биекций (перестановок) множества
+$X$ с операцией композиции. Тогда отображение $a \colon G \to S(X)$,
+$g \mapsto a_g$, является гомоморфизмом групп. Действительно, для
+произвольных элементов $g,h \in G$ и $x \in X$ имеем
+$$
+a_{gh}(x) = (gh)x = g(hx) = g a_h(x) = a_g (a_h(x)) = (a_g a_h)(x).
+$$
+Можно показать, что задание действия группы $G$ на множестве $X$
+равносильно заданию соответствующего гомоморфизма $a \colon G \to
+S(X)$.
+
+\begin{example}
+Симметрическая группа $S_n$ естественно действует на множестве $X =
+\lbrace 1, 2, \ldots, n \rbrace$ по формуле $\sigma x =\nobreak
+\sigma (x)$ ($\sigma \in S_n$, $x \in X$). Условие~1) здесь
+выполнено по определению тождественной подстановки, условие~2)
+выполнено по определению композиции подстановок.
+\end{example}
+
+Пусть задано действие группы $G$ на множестве~$X$.
+
+\begin{definition}
+{\it Орбитой} точки $x\in X$ называется подмножество
+$$
+Gx = \lbrace x' \in X \mid x' = gx \ \text{для некоторого} \ g \in G
+\rbrace = \{ gx \mid g\in G\}.
+$$
+\end{definition}
+
+\begin{remark}
+Для точек $x, x' \in X$ отношение \guillemotleft$x'$ лежит в орбите
+$Gx$\guillemotright{} является отношением эквивалентности:
+
+(1) (рефлексивность) $x \in Gx$ для всех $x \in X$: это верно, так
+как $x = ex \in Gx$ для всех $x \in X$;
+
+(2) (симметричность) если $x' \in Gx$, то $x \in Gx'$: это верно,
+так как из условия $x' = gx$ следует $x = ex = (g^{-1}g)x =
+g^{-1}(gx) = g^{-1}x' \in Gx'$;
+
+(3) (транзитивность) если $x' \in Gx$ и $x'' \in Gx'$, то $x'' \in
+Gx$: это верно, так как из условий $x' = gx$ и $x'' = hx'$ следует
+$x'' = hx' = h(gx) = (hg)x \in Gx$.
+
+Отсюда вытекает, что множество $X$ разбивается в объединение попарно
+непересекающихся орбит действия группы~$G$.
+\end{remark}
+
+\begin{definition}
+{\it Стабилизатором \textup(стационарной подгруппой\textup)} точки
+$x \in X$ называется подгруппа $\St(x) := \{ g \in G \mid gx = x
+\}$.
+\end{definition}
+
+\begin{exercise}
+Проверьте, что множество $\St(x)$ действительно является подгруппой
+в~$G$.
+\end{exercise}
+
+%\begin{example}
+%Рассмотрим действие группы $\SL_n(\RR)$, $n \geqslant 2$ на
+%множестве~$\RR^n$, заданное формулой $(A, v) \mapsto A \cdot v$, где
+%в правой части вектор $v$ рассматривается как столбец своих
+%координат. Оказывается, что для этого действия имеется всего две
+%орбиты $\lbrace 0 \rbrace$ и $\RR^n \setminus \lbrace 0 \rbrace$.
+%Чтобы показать, что $\RR^n \setminus\nobreak \lbrace 0 \rbrace$
+%действительно является одной орбитой, достаточно проверить, что
+%всякий ненулевой вектор можно получить, подействовав на элемент
+%$e_1$ (первый базисный вектор) подходящей матрицей из
+%группы~$\SL_n(\RR)$. Пусть $v \in \RR^n$~--- произвольный вектор с
+%координатами $(x_1, \ldots, x_n)$. Покажем, что существует
+%матрица~$A \in \SL_n(\RR)$, для которой $Ae_1 = v$ или,
+%эквивалентно,
+%\begin{equation} \label{eqn1}
+%A\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix} =
+%\begin{pmatrix} x_1\\ x_2 \\ \vdots \\ x_n \end{pmatrix}.
+%\end{equation}
+%Из уравнения~(\ref{eqn1}) следует, что в первом столбце матрицы~$A$
+%должны стоять в точности числа $x_1, \ldots, x_n$. Как мы знаем из
+%линейной алгебры, вектор $v$ можно дополнить до базиса $v, v_2,
+%\ldots, v_n$ пространства~$\RR^n$. Пусть $A'$~--- квадратная матрица
+%порядка~$n$, в которой по столбцам записаны координаты векторов $v,
+%v_2, \ldots, v_n$. Эта матрица невырожденна и удовлетворяет условию
+%$A'e_1 = v$ (а~также $A'e_i = v_i$ для всех $i = 2, \ldots, n$).
+%Однако её определитель может быть отличен от~$1$. Поделив все
+%элементы последнего столбца матрицы $A'$ на $\det A'$, мы получим
+%искомую матрицу~$A$ с определителем~$1$. Итак, мы показали, что
+%$\RR^n \setminus \lbrace 0 \rbrace$~--- одна орбита для нашего
+%действия. Легко видеть, что стабилизатор точки $e_1$ при этом будет
+%состоять из всех матриц в $\SL_n(\RR)$, у которых первый столбец
+%равен $\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}$. (У
+%любой другой точки стабилизатор будет другим!)
+%\end{example}
+
+\begin{lemma}
+Пусть конечная группа $G$ действует на множестве~$X$. Тогда для
+всякого элемента $x\in X$ справедливо равенство
+$$
+|Gx| = |G| / |\St(x)|.
+$$
+В~частности, число элементов в \textup(любой\textup) орбите делит
+порядок группы~$G$.
+\end{lemma}
+
+\begin{proof}
+Рассмотрим множество\footnote{Это множество может не быть
+факторгруппой, так как подгруппа $\St(x)$ не обязана быть нормальной
+в~$G$.} $G / \St(x)$ левых смежных классов группы $G$ по подгруппе
+$\St(x)$ и определим отображение $\psi \colon G / \St(x) \to Gx$ по
+формуле $g\St(x) \mapsto gx$. Это определение корректно, поскольку
+для любого другого представителя $g'$ левого смежного класса
+$g\St(x)$ имеем $g' = g h$, где $h \in \St(x)$, и тогда $g'x = (gh)x
+= g(hx) = gx$. Сюръективность отображения $\psi$ следует из
+определения орбиты $Gx$. Проверим инъективность. Предположим, что
+$g_1 \St(x) = g_2 \St(x)$ для некоторых $g_1, g_2 \in G$. Тогда
+$g_1x = g_2x$. Подействовав на левую и правую части элементом
+$g_2^{-1}$, получим $(g_2^{-1}g_1)x = x$, откуда $g_2^{-1}g_1 \in
+\St(x)$. Последнее и означает, что $g_1 \St(x) = g_2 \St(x)$. Итак,
+мы показали, что отобржание $\psi$ является биекцией. Значит, $|Gx|
+= |G / \St(x)| = [G : \St(x)]$ и требуемое равенство вытекает из
+теоремы Лагранжа (см. лекцию~1).
+\end{proof}
+
+\begin{example}
+Рассмотрим действие группы $S^1 = \lbrace z \in \CC \mid |z| = 1
+\rbrace$ на множестве~$\CC$, заданное
+формулой $(z,w) \mapsto zw$, где $z \in S^1$, $w \in \CC$,
+а~$zw$~--- обычное произведение комплексных чисел. Для этого
+действия орбитами будут множества вида $|z| = c$, где $c \in
+\RR_{\geqslant 0}$,~--- это всевозможные окружности с центром в
+нуле, а также отдельная орбита, состоящая из нуля. Имеем
+$$
+\St(z) =
+\begin{cases}
+\lbrace 1 \rbrace, & \text{если} \ z \ne 0;\\
+S^1, & \text{если} \ z = 0.
+\end{cases}
+$$
+\end{example}
+
+%
+%Пусть снова группа $G$ действует на множестве~$X$.
+%
+%\begin{definition}
+%Действие $G$ на $X$ называется {\it транзитивным}, если для любых
+%$x, x' \in X$ найдётся такой элемент $g \in G$, что $x' = gx$.
+%(Иными словами, все точки множества $X$ образуют одну орбиту.)
+%\end{definition}
+%
+%\begin{definition}
+%Действие $G$ на $X$ называется {\it свободным}, если для любой точки
+%$x \in X$ условие $gx=x$ влечёт $g=e$. (Иными словами, $\St(x) =
+%\lbrace e \rbrace$ для всех $x \in X$.)
+%\end{definition}
+%
+%\begin{definition}
+%Действие $G$ на $X$ называется {\it эффективным}, если условие
+%$gx=x$ для всех $x\in X$ влечёт $g=e$. (Иными словами, $\bigcap
+%\limits_{x \in X} \St(x) = \lbrace e \rbrace$.)
+%\end{definition}
+%
+%\begin{remark}
+%Из определений следует, что всякое свободное действие эффективно.
+%Обратное утверждение неверно, как показывает пример~1 при $n
+%\geqslant 3$, см. ниже.
+%\end{remark}
+%
+%В~примерах 1--3 все действия эффективны. В~примере~1 действие
+%транзитивно, свободно при $n \leqslant 2$ и не свободно при $n
+%\geqslant 3$. В~примере~2 действие не транзитивно и не свободно; но
+%если его ограничить на подмножество $\CC \setminus \lbrace 0
+%\rbrace$ (то есть выбросить из $\CC$ точку~$0$), то оно станет
+%свободным. В примере~3 действие не транзитивно и не свободно; но
+%если его ограничить на подмножество $\RR^n \setminus \lbrace 0
+%\rbrace$, то оно станет транзитивным.
+%
+%\begin{remark}
+%Действие $G$ на $X$ эффективно тогда и только тогда, когда
+%определяемый им гомоморфизм $a \colon G \to S(X)$ инъективен.
+%\end{remark}
+%
+%\begin{definition}
+%{\it Ядром неэффективности} действия группы $G$ на множестве~$X$
+%называется подгруппа $K = \{ g\in G \mid gx = x \ \text{для всех} \
+%x\in X\}$.
+%\end{definition}
+%
+%Легко проверить, что $K = \Ker a$, где $a \colon G \to S(X)$~---
+%определяемый действием гомоморфизм. Отсюда следует, что $K$~---
+%нормальная подгруппа в~$G$. Рассмотрим факторгруппу $G/K$ и
+%определим её действие на множестве $X$ по формуле $(gK)x = gx$.
+%Поскольку $kx = x$ для всех $k \in K$ и $x \in X$, действие
+%определено корректно.
+%
+%\begin{lemma}
+%Определённое выше действие группы $G/K$ на множестве $X$ является
+%эффективным.
+%\end{lemma}
+%
+%\begin{proof}
+%Пусть элемент $g \in G$ таков, что $(gK)x = x$ для всех $x \in X$.
+%Тогда $gx = x$ для всех $x \in X$, откуда $g \in K$ и $gK = K$.
+%\end{proof}
+%
+%Пусть $G$~--- произвольная группа. Рассмотрим три действия $G$ на
+%самой себе, т.\,е. положим $X=G$:
+%
+%1) действие {\it умножениями слева}: $(g,h)\mapsto gh$;
+%
+%2) действие {\it умножениями справа}: $(g,h)\mapsto hg^{-1}$;
+%
+%3) действие {\it сопряжениями}: $(g,h)\mapsto ghg^{-1}$.
+%
+%Непосредственно проверяется, что первые два действия свободны и
+%транзитивны. Орбиты третьего действия называются {\it классами
+%сопряжённости} группы~$G$. Например, $\{e\}$~--- класс сопряжённости
+%в любой группе. В~частности, для нетривиальных групп действие
+%сопряжениями не является транзитивным.
+%
+%\begin{definition}
+%Два действия группы $G$ на множествах $X$ и $Y$ называются {\it
+%изоморфными}, если существует такая биекция $\varphi\colon X\to Y$,
+%что
+%\begin{equation} \label{eqn2}
+%\varphi(gx)=g\varphi(x) \ \text{для любых} \ g\in G, x\in X.
+%\end{equation}
+%\end{definition}
+%
+%\begin{proposition}
+%Всякое свободное транзитивное действие группы $G$ на множестве $X$
+%изоморфно действию группы $G$ на себе левыми сдвигами.
+%\end{proposition}
+%
+%\begin{proof}
+%Зафиксируем произвольный элемент $x\in X$. Покажем, что отображение
+%$\varphi \colon G\to X$, заданное формулой $\varphi(h) = hx$,
+%является искомой биекцией. Сюръективность (соответственно
+%инъективность) отображения $\varphi$ следует из транзитивности
+%(соответственно свободности) действия $G$ на~$X$.
+%Условие~(\ref{eqn2}) следует из цепочки равенств $\varphi(gh) =
+%(gh)x = g(hx) = g(\varphi(h))$.
+%\end{proof}
+%
+%\begin{corollary}
+%Действия группы $G$ на себе правыми и левыми сдвигами изоморфны.
+%\end{corollary}
+%
+%\smallskip
+%
+%{\bf Теорема Кэли.} Всякая конечная группа $G$ порядка $n$ изоморфна
+%подгруппе симметрической группы~$S_n$.
+%
+%\begin{proof}
+%Рассмотрим действие группы $G$ на себе левыми сдвигами. Как мы
+%знаем, это действие свободно, поэтому соответствующий гомоморфизм $a
+%\colon G \to S(G) \simeq\nobreak S_n$ инъективен, т.\,е. $\Ker a =
+%\lbrace e \rbrace$. Учитывая, что $G / \lbrace e \rbrace \cong G$,
+%по теореме о гомоморфизме получаем $G \cong \Im a$.
+%\end{proof}
+
+
+\newpage
+
+\section*{Лекция 6}
+
+\medskip
+
+{\it Три действия группы на себе. Теорема Кэли. Классы сопряжённости.
+Кольца. Делители нуля, обратимые элементы, нильпотенты. Поля и алгебры.
+Идеалы. }
+% и факторкольца. Теорема о
+%гомоморфизме. Центр алгебры матриц над полем. Простота алгебры
+%матриц над полем.}
+
+\medskip
+
+Пусть $G$~--- произвольная группа. Рассмотрим три действия $G$ на
+самой себе, т.\,е. положим $X=G$:
+
+1) действие {\it умножениями слева (левыми сдвигами)}: $(g,h)\mapsto gh$;
+
+2) действие {\it умножениями справа (правыми сдвигами)}: $(g,h)\mapsto hg^{-1}$;
+
+3) действие {\it сопряжениями}: $(g,h)\mapsto ghg^{-1}$.
+
+\begin{remark}
+Для действий левыми и правыми сдвигами есть ровно одна орбита (сама $G$) и
+стабилизатор любой точки тривиален, то есть $\St(x) = \{0\}$.
+\end{remark}
+
+\begin{definition}
+Орбитой действия сопряжениями называются \textit{классами сопряженности}
+\end{definition}
+
+\begin{example}
+В любой группе $G$ есть класс сопряженности $\{e\}$. \\Также, если $G$ коммутативна, то $\{x\}$ является классом сопряженности для всех $x$ из $G$.
+\end{example}
+
+\smallskip
+
+{\bf Теорема Кэли.} Всякая конечная группа $G$ порядка $n$ изоморфна
+подгруппе симметрической группы~$S_n$.
+
+\begin{proof}
+Рассмотрим действие группы $G$ на себе левыми сдвигами. Как мы
+знаем, это действие свободно, поэтому соответствующий гомоморфизм $a
+\colon G \to S(G) \simeq\nobreak S_n$ инъективен, т.\,е. $\Ker a =
+\lbrace e \rbrace$. Учитывая, что $G / \lbrace e \rbrace \cong G$,
+по теореме о гомоморфизме получаем $G \cong \Im a$.
+\end{proof}
+
+\medskip
+
+Теперь приступим к изучению колец.
+\begin{definition}
+{\it Кольцом} называется множество $R$ с двумя бинарными операциями
+\guillemotleft $+$\guillemotright{}~(сложение) и \guillemotleft
+$\times$\guillemotright{}~(умножение), обладающими следующими
+свойствами:
+
+1) $(R,+)$ является абелевой группой (называемой {\it аддитивной
+группой} кольца $R$);
+
+2) выполнены {\it левая и правая дистрибутивности}, т.е.
+$$
+a(b+c)=ab+ac \quad \text{и} \quad (b+c)a=ba+ca \quad \text{для всех}
+\ a,b,c\in R.
+$$
+
+В этом курсе мы рассматриваем только ассоциативные кольца с
+единицей, поэтому дополнительно считаем, что выполнены ещё два
+свойства:
+
+3) $a(bc)=(ab)c$ для всех $a,b,c\in R$ (\textit{ассоциативность
+умножения});
+
+4) существует такой элемент $1\in R$ (называемый \textit{единицей}),
+что
+\begin{equation} \label{eq1}
+a1 = 1a = a \ \text{для всякого} \ a \in R.
+\end{equation}
+\end{definition}
+
+\begin{remark}
+В произвольном кольце $R$ выполнены равенства
+\begin{equation} \label{eq2}
+a0 = 0a = 0 \ \text{для всякого} \ a \in R.
+\end{equation}
+В самом деле, имеем $a0 = a(0 + 0) = a0 + a0$, откуда $0 = a0$.
+Аналогично устанавливается равенство $0a = 0$.
+\end{remark}
+
+\begin{remark}
+Если кольцо $R$ содержит более одного элемента, то $0\ne 1$. Это
+следует из соотношений~(\ref{eq1}) и~(\ref{eq2}).
+\end{remark}
+
+\textbf{Примеры колец:}
+\begin{enumerate}[label=\textup{(\arabic*)},ref=\textup{\arabic*}]
+\item \label{ex_num}
+числовые кольца $\ZZ$, $\QQ$, $\RR$, $\CC$;
+
+\item
+кольцо $\ZZ_n$ вычетов по модулю~$n$;
+
+\item \label{ex_mat}
+кольцо $\Mat(n\times n, \RR)$ матриц с коэффициентами из~$\RR$;
+
+\item \label{ex_pol}
+кольцо $\RR[x]$ многочленов от переменной $x$ с коэффициентами
+из~$\RR$;
+
+\item
+кольцо $\RR[[x]]$ \textit{формальных степенных рядов} от переменной
+$x$ с коэффициентами из~$\RR$:
+$$
+\RR[[x]] := \lbrace \sum \limits_{i = 0}^\infty a_i x^i \mid a_i \in
+\RR \rbrace;
+$$
+
+\item \label{ex_func}
+кольцо $\FFF(M, \RR)$ всех функций из множества $M$ во
+множество~$\RR$ с операциями поточечного сложения и умножения:
+$$
+(f_1 + f_2)(m) := f_1(m) + f_2(m); \quad (f_1f_2)(m) := f_1(m)
+f_2(m) \quad \text{для всех} \quad f_1,f_2 \in \FFF(M, \RR), m \in
+M.
+$$
+\end{enumerate}
+
+\begin{remark}
+В примерах (\ref{ex_mat})--(\ref{ex_func}) вместо $\RR$ можно брать
+любое кольцо, в частности $\ZZ$, $\QQ$, $\CC$, $\ZZ_n$.
+\end{remark}
+
+\begin{remark}
+Обобщая пример~(\ref{ex_pol}), можно рассматривать кольцо $\RR[x_1,
+\ldots, x_n]$ многочленов от нескольких переменных $x_1, \ldots,
+x_n$ с коэффициентами из~$\RR$.
+\end{remark}
+
+\begin{definition}
+Кольцо $R$ называется {\it коммутативным}, если $ab=ba$ для всех
+$a,b\in R$.
+\end{definition}
+
+Все перечисленные в примерах (\ref{ex_num})--(\ref{ex_func}) кольца,
+кроме $\Mat(n\times n, \RR)$ при $n \geqslant 2$, коммутативны.
+
+Пусть $R$~--- кольцо.
+
+\begin{definition}
+Элемент $a\in R$ называется {\it обратимым}, если найдётся такой
+$b\in R$, что $ab=ba=1$. Такой элемент $b$ обозначается классическим образом как $a^{-1}$.
+\end{definition}
+
+\begin{remark}
+Все обратимые элементы кольца $R$ образуют группу относительно
+операции умножения.
+\end{remark}
+
+\begin{definition}
+Элемент $a\in R$ называется \textit{левым} (соответственно
+\textit{правым}) \textit{делителем нуля}, если $a \ne 0$ и найдётся
+такой $b \in R$, $b\ne 0$, что $ab=0$ (соответственно $ba = 0$).
+\end{definition}
+
+\begin{remark}
+В~случае коммутативных колец понятия левого и правого делителей нуля
+совпадают, поэтому говорят просто о делителях нуля.
+\end{remark}
+
+\begin{remark}
+Все делители нуля в $R$ необратимы: если $ab = 0$, $a \ne 0$, $b \ne
+0$ и существует $a^{-1}$, то получаем $a^{-1}ab = a^{-1}0$, откуда
+$b = 0$~--- противоречие.
+\end{remark}
+
+\begin{definition}
+Элемент $a\in R$ называется {\it нильпотентом}, если $a \ne 0$ и
+найдётся такое $m \in \NN$, что $a^m=0$.
+\end{definition}
+
+\begin{remark}
+Всякий нильпотент в $R$ является делителем нуля: если $a \ne 0$,
+$a^m = 0$ и число $m$ наименьшее с таким свойством, то $m \geqslant
+2$ и $a^{m-1} \ne 0$, откуда $aa^{m-1} = a^{m-1}a = 0$.
+\end{remark}
+
+%\begin{definition}
+%Элемент $a\in R$ называется {\it идемпотентом}, если $a^2=a$.
+%\end{definition}
+
+\begin{definition}
+{\it Полем} называется коммутативное ассоциативное кольцо $K$ с
+единицей, в котором всякий ненулевой элемент обратим.
+\end{definition}
+
+\begin{remark}
+Тривиальное кольцо $\lbrace 0 \rbrace$ полем не считается, поэтому
+$0 \ne 1$ в любом поле.
+\end{remark}
+
+\textbf{Примеры полей:} $\QQ$, $\RR$, $\CC$, $\ZZ_2$.
+
+\begin{proposition}
+Кольцо вычетов $\ZZ_n$ является полем тогда и только тогда, когда
+$n$~--- простое число.
+\end{proposition}
+
+\begin{proof}
+Если число $n$ составное, то $n = m k$, где $1 < m, k < n$. Тогда
+$\overline{m} \overline{k} = \overline{n} = \overline{0}$.
+Следовательно, $\overline k$ и $\overline m$~--- делители нуля в
+$\ZZ_n$, ввиду чего не все ненулевые элементы там обратимы.
+
+Если $n = p$~--- простое число, то возьмём произвольный ненулевой
+вычет $\overline{a} \in \ZZ_p$ и покажем, что он обратим. Рассмотрим
+вычеты
+\begin{equation} \label{eq3}
+\overline{1} \overline{a}, \overline{2} \overline{a}, \ldots,
+\overline{(p-1)} \overline{a}.
+\end{equation}
+Если $\overline{r} \overline{a} = \overline{s} \overline{a}$ при $1
+\leqslant r,s \leqslant p-1$, то число $(r - s)a$ делится на~$p$. В
+силу взаимной простоты чисел $a$ и $p$ получаем, что число $r - s$
+делится на~$p$. Тогда из условия $|r-s| \leqslant p - 2$ следует,
+что $r = s$. Это рассуждение показывает, что все вычеты~(\ref{eq3})
+попарно различны. Поскольку все они отличны от нуля, среди них
+должна найтись единица: существует такое $b \in \lbrace 1, \ldots,
+p-1 \rbrace$, что $\overline{b} \overline{a}=\overline{1}$. Это и
+означает, что вычет $\overline{a}$ обратим.
+\end{proof}
+
+\begin{definition}
+{\it Алгеброй} над полем $K$ (или кратко \textit{$K$-алгеброй})
+называется множество $A$ с операциями сложения, умножения и
+умножения на элементы поля $K$, обладающими следующими свойствами:
+
+1) относительно сложения и умножения $A$ есть кольцо;
+
+2) относительно сложения и умножения на элементы из $K$ множество
+$A$ есть векторное пространство;
+
+3 $(\lambda a)b=a(\lambda b)=\lambda(ab)$ для любых $\lambda\in K$ и
+$a,b\in A$.
+
+{\it Размерностью} алгебры $A$ называется её размерность как
+векторного пространства над~$K$. (Обозначение: $\dim_K A$.)
+\end{definition}
+
+\textbf{Примеры.}
+
+1) Алгебра матриц $\Mat(n\times n, K)$ над
+произвольным полем~$K$. Её размерность равна $n^2$.
+
+2) Алгебра $K[x]$ многочленов от переменной $x$ над произвольным
+полем~$K$. Её размерность равна~$\infty$.
+
+3) $K, F$ --- поля, $K \subset F$, $F$ --- алгебра над $K$. \\
+Если это $\RR \subset \CC$, то $\dim_\RR\CC = 2$.\\
+Если это $\QQ \subset \RR$, то $\dim_\QQ\RR = \infty$.
+
+\begin{definition}
+\textit{Подкольцом} кольца $R$ называется всякое подмножество $R'
+\subseteq R$, замкнутое относительно операций сложения и умножения
+(т.\,е. $a + b \in R'$ и $ab \in R'$ для всех $a,b \in R'$) и
+являющееся кольцом относительно этих операций. \textit{Подполем}
+называется всякое подкольцо, являющееся полем.
+\end{definition}
+
+Например, $\ZZ$ является подкольцом в~$\QQ$, а~скалярные матрицы
+образуют подполе в кольце $\Mat(n \times n, \RR)$.
+
+\begin{remark}
+Если $K$~--- подполе поля~$F$, то $F$ является алгеброй над~$K$.
+Так, поле $\CC$ является бесконечномерной алгеброй над~$\QQ$, тогда
+как над $\RR$ имеет размерность~$2$.
+\end{remark}
+
+\begin{definition}
+\textit{Подалгеброй} алгебры $A$ (над полем~$K$) называется всякое
+подмножество $A' \subseteq A$, замкнутое относительно всех трёх
+имеющихся в $A$ операций (сложения, умножения и умножения на
+элементы из~$K$) и являющееся алгеброй (над~$K$) относительно этих
+операций.
+\end{definition}
+
+Легко видеть, что подмножество $A' \subseteq A$ является алгеброй
+тогда и только тогда, когда оно является одновременно подкольцом и
+векторным подпространством в~$A$.
+
+Гомоморфизмы колец, алгебр определяются естественным образом как
+отображения, сохраняющие все операции.
+
+\begin{exercise}
+Сформулируйте точные определения гомоморфизма колец и гомоморфизма
+алгебр.
+\end{exercise}
+
+\begin{definition}
+\textit{Изоморфизмом} колец, алгебр называется всякий гомоморфизм,
+являющийся биекцией.
+\end{definition}
+
+В теории групп нормальные подгруппы обладают тем свойством, что по
+ним можно \guillemotleft факторизовать\guillemotright{}. В~этом
+смысле аналогами нормальных подгрупп в теории колец служат идеалы.
+
+\begin{definition}
+Подмножество $I$ кольца $R$ называется (\textit{двусторонним}) {\it
+идеалом}, если оно является подгруппой по сложению и $ra\in I$,
+$ar\in I$ для любых $a\in I$, $r\in R$.
+\end{definition}
+
+\begin{remark}
+В~некоммутативных кольцах рассматривают также левые и правые идеалы.
+\end{remark}
+
+В каждом кольце $R$ есть {\it несобственные} идеалы $I=0$ и $I=R$.
+Все остальные идеалы называются {\it собственными}.
+
+\begin{exercise}
+Пусть $R$~--- коммутативное кольцо. С~каждым элементом $a \in R$
+связан идеал $(a) := \{ ra \mid r \in R \}$.
+\end{exercise}
+
+\begin{definition}
+Идеал $I$ называется {\it главным}, если существует такой элемент
+$a\in R$, что $I=(a)$. (В~этой ситуации говорят, что $I$ порождён
+элементом~$a$.)
+\end{definition}
+
+\textbf{Пример.} В~кольце $\ZZ$ подмножество $k \ZZ$ ($k \in \ZZ$)
+является главным идеалом, порождённым элементом~$k$. Более того, все
+идеалы в $\ZZ$ являются главными.
+
+\begin{remark}
+Главный идеал $(a)$ является несобственным тогда и только тогда,
+когда $a=0$ или $a$ обратим.
+\end{remark}
+
+Более общо, с каждым подмножеством $S \subseteq R$ связан идеал
+$$
+(S) := \{ r_1 a_1 + \ldots + r_k a_k \mid a_i \in S, r_i \in R,
+k\in\NN\}.
+$$
+(Проверьте, что это действительно идеал!) Это наименьший по
+включению идеал в~$R$, содержащий подмножество~$S$. В~этой ситуации
+говорят, что идеал $I=(S)$ порождён подмножеством~$S$.
+
+%
+%Вернёмся к случаю произвольного кольца $R$. Поскольку любой идеал
+%$I$ является подгруппой абелевой группы $(R,+)$, мы можем
+%рассмотреть факторгруппу $R/I$. Введём на ней умножение по формуле
+%$$
+%(a+I)(b+I) := ab + I.
+%$$
+%Покажем, что это определение корректно. Пусть элементы $a',b' \in R$
+%таковы, что $a' + I = a + I$ и $b' + I = b + I$. Проверим, что $a'b'
+%+ I = ab + I$. Заметим, что $a' = a + x$ и $b' = b + y$ для
+%некоторых $x, y \in I$. Тогда
+%$$
+%a'b' + I = (a + x)(b + y) + I = ab + ay + xb + xy + I = ab + I,
+%$$
+%поскольку $ay, xb, xy \in I$ в силу определения идеала.
+%
+%\begin{exercise}
+%Проверьте, что множество $R/I$ является кольцом относительно
+%имеющейся там операции сложения и только что введённой операции
+%умножения.
+%\end{exercise}
+%
+%\begin{definition}
+%Кольцо $R/I$ называется {\it факторкольцом} кольца $R$ по
+%идеалу~$I$.
+%\end{definition}
+%
+%\textbf{Пример.} $\ZZ / n \ZZ = \ZZ_n$.
+%
+%Пусть $\varphi\colon R\to R'$~--- гомоморфизм колец. Тогда
+%определены его ядро $\Ker \varphi = \lbrace r \in R \mid \varphi(r)
+%= 0 \rbrace$ и образ $\Im \varphi = \lbrace \varphi(r) \mid r \in R
+%\rbrace \subseteq R'$.
+%
+%\begin{lemma}
+%Ядро $\Ker \varphi$ является идеалом в~$R$.
+%\end{lemma}
+%
+%\begin{proof}
+%Так как $\varphi$~--- гомоморфизм абелевых групп, то $\Ker \varphi$
+%является подгруппой в $R$ по сложению. Покажем теперь, что $ra \in
+%\Ker \varphi$ и $ar \in \Ker \varphi$ для произвольных элементов $a
+%\in \Ker \varphi$ и $r \in R$. Имеем $\varphi(ra) = \varphi(r)
+%\varphi(a) = \varphi(r) 0 = 0$, откуда $ra \in \Ker \varphi$.
+%Аналогично получаем $ar \in \Ker \varphi$.
+%\end{proof}
+%
+%\begin{exercise}
+%Проверьте, $\Im \varphi$~--- подкольцо в~$R'$.
+%\end{exercise}
+%
+%\smallskip
+%
+%{\bf Теорема о гомоморфизме для колец.}\ Пусть $\varphi\colon R\to
+%R'$~-- гомоморфизм колец. Тогда имеет место изоморфизм
+%$$
+%R/\Ker\,\varphi\cong\Im\varphi.
+%$$
+%
+%\smallskip
+%
+%\begin{proof}
+%Положим для краткости $I = \Ker \varphi$ и рассмотрим отображение
+%$$
+%\pi \colon R/I \to \Im \varphi, \quad a+I \mapsto \varphi(a).
+%$$
+%Из доказательства теоремы о гомоморфизме для групп следует, что
+%отображение $\pi$ корректно определено и является изоморфизмом
+%абелевых групп (по сложению). Покажем, что $\pi$~--- изоморфизм
+%колец. Для этого остаётся проверить, что $\pi$ сохраняет операцию
+%умножения:
+%$$
+%\pi((a+I)(b+I)) = \pi(ab+I) = \varphi(ab) = \varphi(a) \varphi(b) =
+%\pi(a+I) \pi(b+I).
+%$$
+%\end{proof}
+%
+%\begin{example}
+%Пусть $R = \FFF(M, \RR)$. Зафиксируем произвольную точку $m_0 \in M$
+%и рассмотрим гомоморфизм $\varphi \colon R \to \RR$, $f \mapsto
+%f(m_0)$. Ясно, что гомоморфизм $\varphi$ сюръективен. Его ядром
+%является идеал $I$ всех функций, обращающихся в нуль в точке $m_0$.
+%По теореме о гомоморфизме получаем $R / I \cong \RR$.
+%\end{example}
+%
+%\begin{definition}
+%Кольцо $R$ называется {\it простым}, если в нём нет собственных
+%(двусторонних) идеалов.
+%\end{definition}
+%
+%\textbf{Пример.} Всякое поле является простым кольцом.
+%
+%\begin{definition}
+%\textit{Центром} алгебры $A$ над полем $K$ называется её
+%подмножество
+%$$
+%Z(A) = \{ a \in A \mid ab = ba \ \text{для всех} \ b \in A \}.
+%$$
+%\end{definition}
+%
+%\begin{theorem}
+%Пусть $K$~--- поле, $n$~--- натуральное число и $A = \Mat(n \times
+%n, K)$~--- алгебра квадратных матриц порядка~$n$ над полем~$K$.
+%
+%\textup{(1)} $Z(A) = \lbrace \lambda E \mid \lambda \in K \rbrace$,
+%где $E$~--- единичная матрица \textup(в частности, $Z(A)$~---
+%одномерное подпространство в~$A$\textup);
+%
+%\textup{(2)} алгебра $A$ проста \textup(как кольцо\textup).
+%\end{theorem}
+%
+%\begin{proof}
+%Для каждой пары индексов $i,j \in \lbrace 1, \ldots, n \rbrace$
+%обозначим через $E_{ij}$ соответствующую \textit{матричную
+%единицу}~--- такую матрицу, в которой на $(i,j)$-месте стоит
+%единица, а на всех остальных местах~--- нули. Непосредственная
+%проверка показывает, что
+%$$
+%E_{ij}E_{kl} =
+%\begin{cases}
+%E_{il}, & \ \text{если} \ j = k;\\
+%0, & \ \text{если} \ j \ne k.
+%\end{cases}
+%$$
+%Заметим, что матричные единицы образуют базис в~$A$ и всякая матрица
+%$X = (x_{kl})$ представима в виде $X = \sum \limits_{k,l = 1}^n
+%x_{kl} E_{kl}$.
+%
+%(1) Пусть матрица $X = \sum \limits_{k,l = 1}^n x_{kl} E_{kl}$ лежит
+%в $Z(A)$. Тогда $X$ коммутирует со всеми матричными единицами.
+%Выясним, что означает условие $XE_{ij} = E_{ij}X$. Имеем
+%$$
+%XE_{ij} = (\sum \limits_{k,l = 1}^n x_{kl} E_{kl})E_{ij} = \sum
+%\limits_{k = 1}^n x_{ki}E_{kj}; \qquad E_{ij}X = E_{ij}(\sum
+%\limits_{k,l = 1}^n x_{kl} E_{kl}) = \sum \limits_{l = 1}^n
+%x_{jl}E_{il}.
+%$$
+%Сравнивая правые части двух равенств, получаем $x_{ii} = x_{jj}$,
+%$x_{ki}=0$ при $k \ne i$ и $x_{jl}=0$ при $j \ne l$. Поскольку эти
+%равенства имеют место при любых значениях $i,j$, мы получаем, что
+%матрица $X$ скалярна, т.\,е. $X = \lambda E$ для некоторого $\lambda
+%\in K$. С~другой стороны, ясно, что всякая скалярная матрица лежит в
+%$Z(A)$.
+%
+%(2) Пусть $I$~--- двусторонний идеал алгебры~$A$. Если $I \ne
+%\lbrace 0 \rbrace$, то $I$ содержит ненулевую матрицу~$X$. Покажем,
+%что тогда $I = A$. Пусть индексы $k,l$ таковы, что $x_{kl} \ne 0$.
+%Тогда
+%$$
+%E_{ik} X E_{lj} = E_{ik}(\sum_{p,q = 1}^n x_{pq} E_{pq}) E_{lj} =
+%E_{ik} \sum \limits_{p = 1}^n x_{pl}E_{pj} = x_{kl} E_{ij} \in I.
+%$$
+%Домножая $x_{kl}E_{ij}$ на скалярную матрицу $(x_{kl})^{-1}E$, мы
+%получаем, что $E_{ij} \in I$. Из произвольности выбора $i,j$
+%следует, что все матричные единицы лежат в~$I$. Отсюда $I = A$, что
+%и требовалось.
+%\end{proof}
+
+
+\newpage
+
+\section*{Лекция~7}
+
+\medskip
+
+{\it Факторкольца. Теорема о
+гомоморфизме колец. Евклидовы кольца, кольца главных идеалов и факториальные
+кольца.}
+
+\medskip
+
+
+
+Вернёмся к случаю произвольного кольца $R$. Поскольку любой идеал
+$I$ является подгруппой абелевой группы $(R,+)$, мы можем
+рассмотреть факторгруппу $R/I$. Введём на ней умножение по формуле
+$$
+(a+I)(b+I) := ab + I.
+$$
+Покажем, что это определение корректно. Пусть элементы $a',b' \in R$
+таковы, что $a' + I = a + I$ и $b' + I = b + I$. Проверим, что $a'b'
++ I = ab + I$. Заметим, что $a' = a + x$ и $b' = b + y$ для
+некоторых $x, y \in I$. Тогда
+$$
+a'b' + I = (a + x)(b + y) + I = ab + ay + xb + xy + I = ab + I,
+$$
+поскольку $ay, xb, xy \in I$ в силу определения идеала.
+
+\begin{exercise}
+Проверьте, что множество $R/I$ является кольцом относительно
+имеющейся там операции сложения и только что введённой операции
+умножения.
+\end{exercise}
+
+\begin{definition}
+Кольцо $R/I$ называется {\it факторкольцом} кольца $R$ по
+идеалу~$I$.
+\end{definition}
+
+\textbf{Пример.} $\ZZ / n \ZZ = \ZZ_n$.
+
+Пусть $\varphi\colon R\to R'$~--- гомоморфизм колец. Тогда
+определены его ядро $\Ker \varphi = \lbrace r \in R \mid \varphi(r)
+= 0 \rbrace$ и образ $\Im \varphi = \lbrace \varphi(r) \mid r \in R
+\rbrace \subseteq R'$.
+
+\begin{lemma}
+Ядро $\Ker \varphi$ является идеалом в~$R$.
+\end{lemma}
+
+\begin{proof}
+Так как $\varphi$~--- гомоморфизм абелевых групп, то $\Ker \varphi$
+является подгруппой в $R$ по сложению. Покажем теперь, что $ra \in
+\Ker \varphi$ и $ar \in \Ker \varphi$ для произвольных элементов $a
+\in \Ker \varphi$ и $r \in R$. Имеем $\varphi(ra) = \varphi(r)
+\varphi(a) = \varphi(r) 0 = 0$, откуда $ra \in \Ker \varphi$.
+Аналогично получаем $ar \in \Ker \varphi$.
+\end{proof}
+
+\begin{exercise}
+Проверьте, $\Im \varphi$~--- подкольцо в~$R'$.
+\end{exercise}
+
+\smallskip
+
+{\bf Теорема о гомоморфизме для колец.}\ Пусть $\varphi\colon R\to
+R'$~-- гомоморфизм колец. Тогда имеет место изоморфизм
+$$
+R/\Ker\,\varphi\cong\Im\varphi.
+$$
+
+\smallskip
+
+\begin{proof}
+Положим для краткости $I = \Ker \varphi$ и рассмотрим отображение
+$$
+\pi \colon R/I \to \Im \varphi, \quad a+I \mapsto \varphi(a).
+$$
+Из доказательства теоремы о гомоморфизме для групп следует, что
+отображение $\pi$ корректно определено и является изоморфизмом
+абелевых групп (по сложению). Покажем, что $\pi$~--- изоморфизм
+колец. Для этого остаётся проверить, что $\pi$ сохраняет операцию
+умножения:
+$$
+\pi((a+I)(b+I)) = \pi(ab+I) = \varphi(ab) = \varphi(a) \varphi(b) =
+\pi(a+I) \pi(b+I).
+$$
+\end{proof}
+
+\begin{example}\ 
+\begin{enumerate}
+\item Пусть $R = \FFF(M, \RR)$. Зафиксируем произвольную точку $m_0 \in M$
+и рассмотрим гомоморфизм $\varphi \colon R \to \RR$, $f \mapsto
+f(m_0)$. Ясно, что гомоморфизм $\varphi$ сюръективен. Его ядром
+является идеал $I$ всех функций, обращающихся в нуль в точке $m_0$.
+По теореме о гомоморфизме получаем $R / I \cong \RR$.
+\item Рассмотрим отображение $\varphi \colon \RR[x] \to \CC$, $f \mapsto f(i)$. Очевидно, что $\varphi$ --- гомоморфизм, причем сюръективный. Если функция принадлежит ядру $\varphi$, то есть $f(i) = 0$, то $(x - i) \mid f$ в кольце $\CC[x]$. Но и сопряженный к корню также будет являться корнем многочлена, так что дополнительно $(x + i) \mid f$. Итого, получаем, что $f \in (x - i)(x + i) = (x^2 + 1)$ и, соответственно, $\Ker \varphi  \subseteq (x^2 + 1)$. В обратную сторону включение тем более очевидно. Далее, по теореме о гомоморфизме получаем $\RR[x] / (x^2 + 1) \cong \CC$.
+\end{enumerate}
+\end{example}
+
+%\begin{definition}
+%Кольцо $R$ называется {\it простым}, если в нём нет собственных
+%(двусторонних) идеалов.
+%\end{definition}
+%
+%\textbf{Пример.} Всякое поле является простым кольцом.
+%
+%\begin{definition}
+%\textit{Центром} алгебры $A$ над полем $K$ называется её
+%подмножество
+%$$
+%Z(A) = \{ a \in A \mid ab = ba \ \text{для всех} \ b \in A \}.
+%$$
+%\end{definition}
+%
+%\begin{theorem}
+%Пусть $K$~--- поле, $n$~--- натуральное число и $A = \Mat(n \times
+%n, K)$~--- алгебра квадратных матриц порядка~$n$ над полем~$K$.
+%
+%\textup{(1)} $Z(A) = \lbrace \lambda E \mid \lambda \in K \rbrace$,
+%где $E$~--- единичная матрица \textup(в частности, $Z(A)$~---
+%одномерное подпространство в~$A$\textup);
+%
+%\textup{(2)} алгебра $A$ проста \textup(как кольцо\textup).
+%\end{theorem}
+%
+%\begin{proof}
+%Для каждой пары индексов $i,j \in \lbrace 1, \ldots, n \rbrace$
+%обозначим через $E_{ij}$ соответствующую \textit{матричную
+%единицу}~--- такую матрицу, в которой на $(i,j)$-месте стоит
+%единица, а на всех остальных местах~--- нули. Непосредственная
+%проверка показывает, что
+%$$
+%E_{ij}E_{kl} =
+%\begin{cases}
+%E_{il}, & \ \text{если} \ j = k;\\
+%0, & \ \text{если} \ j \ne k.
+%\end{cases}
+%$$
+%Заметим, что матричные единицы образуют базис в~$A$ и всякая матрица
+%$X = (x_{kl})$ представима в виде $X = \sum \limits_{k,l = 1}^n
+%x_{kl} E_{kl}$.
+%
+%(1) Пусть матрица $X = \sum \limits_{k,l = 1}^n x_{kl} E_{kl}$ лежит
+%в $Z(A)$. Тогда $X$ коммутирует со всеми матричными единицами.
+%Выясним, что означает условие $XE_{ij} = E_{ij}X$. Имеем
+%$$
+%XE_{ij} = (\sum \limits_{k,l = 1}^n x_{kl} E_{kl})E_{ij} = \sum
+%\limits_{k = 1}^n x_{ki}E_{kj}; \qquad E_{ij}X = E_{ij}(\sum
+%\limits_{k,l = 1}^n x_{kl} E_{kl}) = \sum \limits_{l = 1}^n
+%x_{jl}E_{il}.
+%$$
+%Сравнивая правые части двух равенств, получаем $x_{ii} = x_{jj}$,
+%$x_{ki}=0$ при $k \ne i$ и $x_{jl}=0$ при $j \ne l$. Поскольку эти
+%равенства имеют место при любых значениях $i,j$, мы получаем, что
+%матрица $X$ скалярна, т.\,е. $X = \lambda E$ для некоторого $\lambda
+%\in K$. С~другой стороны, ясно, что всякая скалярная матрица лежит в
+%$Z(A)$.
+%
+%(2) Пусть $I$~--- двусторонний идеал алгебры~$A$. Если $I \ne
+%\lbrace 0 \rbrace$, то $I$ содержит ненулевую матрицу~$X$. Покажем,
+%что тогда $I = A$. Пусть индексы $k,l$ таковы, что $x_{kl} \ne 0$.
+%Тогда
+%$$
+%E_{ik} X E_{lj} = E_{ik}(\sum_{p,q = 1}^n x_{pq} E_{pq}) E_{lj} =
+%E_{ik} \sum \limits_{p = 1}^n x_{pl}E_{pj} = x_{kl} E_{ij} \in I.
+%$$
+%Домножая $x_{kl}E_{ij}$ на скалярную матрицу $(x_{kl})^{-1}E$, мы
+%получаем, что $E_{ij} \in I$. Из произвольности выбора $i,j$
+%следует, что все матричные единицы лежат в~$I$. Отсюда $I = A$, что
+%и требовалось.
+%\end{proof}
+
+
+Далее в этой лекции всюду предполагается, что $R$~--- коммутативное кольцо
+без делителей нуля.
+
+\begin{definition}
+Говорят, что элемент $b \in R$ {\it делит} элемент $a\in R$ ($b$~---
+\textit{делитель}~$a$, $a$ \textit{делится} на~$b$; пишут $b \,|\,
+a$) если существует элемент $c\in R$, для которого $a=bc$.
+\end{definition}
+
+\begin{definition}
+Два элемента $a, b \in R$ называются {\it ассоциированными}, если
+$a=bc$ для некоторого обратимого элемента $c$ кольца~$R$.
+\end{definition}
+
+\begin{remark}
+Легко видеть, что отношение ассоциированности является отношением
+эквивалентности на кольце~$R$.
+\end{remark}
+
+\begin{definition}
+Кольцо $R$ без делителей нуля, не являющееся полем, называется {\it
+евклидовым}, если существует функция
+$$
+N\colon R\setminus\{0\} \to \ZZ_{\geqslant 0}
+$$
+(называемая {\it нормой}), удовлетворяющая следующим условиям:
+
+1) $N(ab) \geqslant N(a)$ для всех $a, b \in R \setminus \{0\}$;
+
+2) для любых $a, b \in R$, $b \ne 0$, существуют такие $q,r\in R$,
+что $a = qb + r$ и либо $r = 0$, либо $N(r) < N(b)$.
+\end{definition}
+
+Неформально говоря, условие 2) означает возможность \guillemotleft
+деления с остатком\guillemotright{} в кольце~$R$.
+
+\textbf{Примеры евклидовых колец:}
+
+1) $\ZZ$ с нормой $N(a) = |a|$;
+
+2) $K[x]$ (где $K$~--- произвольное поле) с нормой $N(f) = \deg f$.
+
+\begin{lemma} \label{lemma_first}
+Пусть $R$~--- евклидово кольцо и $a,b \in R \setminus \lbrace 0
+\rbrace$. Равенство $N(ab) = N(a)$ выполнено тогда и только тогда,
+когда $b$ обратим.
+\end{lemma}
+
+\begin{proof}
+Если $b$ обратим, то $N(a)\leqslant N(ab)\leqslant
+N(abb^{-1})=N(a)$, откуда $N(ab)=N(a)$.
+
+Пусть теперь $N(ab) = N(a)$. Разделим $a$ на $ab$ с остатком: $a =
+qab + r$, где либо $r = 0$, либо $N(r) < N(ab)$. Если $r \ne 0$, то
+с учётом равенства $r = a(1-qb)$ имеем $N(a) \leqslant N(a(1-qb)) =
+N(r) < N(ab) = N(a)$~--- противоречие. Значит, $r = 0$ и $a = qab$,
+откуда $a(1 - qb) = 0$. Так как в $R$ нет делителей нуля и $a \ne
+0$, то $1 - qb = 0$, откуда $qb = 1$, т.\,е. $b$ обратим.
+\end{proof}
+
+
+\begin{definition}
+Кольцо $R$ называется \textit{кольцом главных идеалов}, если всякий
+идеал в $R$ является главным.
+\end{definition}
+
+\begin{theorem} \label{thm_er_rpi}
+Всякое евклидово кольцо $R$ является кольцом главных идеалов.
+\end{theorem}
+
+\begin{proof}
+Пусть $I$~--- произвольный идеал в~$R$. Если $I = \lbrace 0
+\rbrace$, то $I = (0)$ и поэтому $I$ является главным. Далее
+считаем, что $I \ne \lbrace 0 \rbrace$. Пусть $a \in I \setminus
+\lbrace 0 \rbrace$~--- элемент с наименьшей нормой. Тогда главный
+идеал $(a)$ содержится в~$I$. Предположим, что какой-то элемент $b
+\in I$ не лежит в~$(a)$, т.\,е. не делится на~$a$. Тогда разделим
+$b$ на $a$ с остатком: $b = qa + r$, где $r \ne 0$ и $N(r) < N(a)$.
+Так как $r = b - aq$, то $r \in I$, что в силу неравенства $N(r) <
+N(a)$ противоречит нашему выбору элемента~$a$.
+\end{proof}
+
+\begin{definition}
+{\it Наибольшим общим делителем} элементов $a$ и $b$ кольца $R$
+называется их общий делитель, который делится на любой другой их
+общий делитель. Он обозначается $(a,b)$.
+\end{definition}
+
+\begin{remark}
+Если наибольший общий делитель двух элементов $a,b \in R$
+существует, то он определён однозначно с точностью до
+ассоциированности, т.\,е. умножения на обратимый элемент кольца~$R$.
+\end{remark}
+
+\begin{theorem} \label{thm_lcd}
+Пусть $R$~--- евклидово кольцо и $a,b$~--- произвольные элементы.
+Тогда:
+
+\textup{(1)} существует наибольший общий делитель $(a,b)$;
+
+\textup{(2)} существуют такие элементы $u,v \in R$, что $(a,b) = ua
++ vb$.
+\end{theorem}
+
+\begin{proof}\ \\
+\underline{Способ 1}:  утверждение (1) получается применением
+(прямого хода) алгоритма Евклида, а~утверждение~(2)~--- применением
+обратного хода в алгоритме Евклида.
+
+\underline{Способ 2}: рассмотрим идеал $I = (a, b)$. Так как $R$ --- кольцо главных идеалов, то существует такой элемент $d \in R$, что $I = (d)$ и существуют $x, y \in R$ такие, что 
+$$
+d = ax + dy. \qquad (*)
+$$
+Покажем, что $d = (a, b)$. Для начала, так как $a$ и $b$ лежат в идеале $I = (d)$, то они оба делятся на $d$, то есть $d$ является одним из их делителей. А из равенства $(*)$ ясно, что любой другой общий делитель $a$ и $b$ будет также делиться на $d$. Итого, $d$ --- наибольший общий делитель.
+\end{proof}
+
+\begin{definition}
+Ненулевой необратимый элемент $p$ кольца $R$ называется {\it
+простым}, если он не может быть представлен в виде $p = a b$, где
+$a, b \in R$~--- необратимые элементы.
+\end{definition}
+
+\begin{remark}
+Простые элементы в кольце многочленов $K[x]$ над полем $K$ принято
+называть {\it неприводимыми многочленами}.
+\end{remark}
+
+\begin{lemma} \label{ll}
+Если простой элемент $p$ евклидова кольца $R$ делит произведение
+$a_1a_2\ldots a_n$, то он делит один из сомножителей.
+\end{lemma}
+
+\begin{proof}
+Индукция по~$n$. Пусть $n=2$ и предположим, что $p$ не делит~$a_1$.
+Тогда $(p, a_1) = 1$ и по утверждению~(2) теоремы~\ref{thm_lcd}
+найдутся такие элементы $u, v \in R$, что $1 = up + v a_1$. Умножая
+обе части этого равенства на~$a_2$, получаем
+$$
+a_2 = upa_2 + v a_1a_2.
+$$
+Легко видеть, что $p$ делит правую часть последнего равенства,
+поэтому $p$ делит и левую часть, т.\,е.~$a_2$.
+
+При $n > 2$ применяем предыдущее рассуждение к $(a_1 \ldots
+a_{n-1})a_n$ и пользуемся предположением индукции.
+\end{proof}
+
+\begin{definition}
+Кольцо $R$ называется {\it факториальным}, если всякий его ненулевой
+необратимый элемент \guillemotleft разложим на простые
+множители\guillemotright{}, т.\,е. представим в виде произведения
+(конечного числа) простых элементов, причём это представление
+единственно с точностью до перестановки множителей и
+ассоциированности.
+\end{definition}
+
+Более формально единственность разложения на простые множители
+следует понимать так: если для элемента $a \in R$ есть два
+представления
+$$
+a = p_1 p_2 \ldots p_n = q_1q_2 \ldots q_m,
+$$
+где все элементы $p_i, q_j$ простые, то $n = m$ и существует такая
+подстановка $\sigma \in S_n$, что для каждого $i = 1,\ldots, n$
+элементы $p_i$ и $q_{\sigma(i)}$ ассоциированы.
+
+\begin{theorem} \label{thm_er_ufd}
+Всякое евклидово кольцо $R$ является факториальным.
+\end{theorem}
+
+\begin{proof}[Доказательство \textup{состоит из двух шагов.}]~
+
+\textit{Шаг}~1. Сначала докажем, что всякий ненулевой необратимый
+элемент из $R$ разложим на простые множители. Предположим, что это
+не так, и среди всех элементов, не разложимых на простые множители,
+выберем элемент $a$ с наименьшей нормой. Тогда $a$ не может быть
+простым (иначе он разложим в произведение, состоящее из одного
+простого множителя), поэтому существует представление вида $a = bc$,
+где $b,c \in R$~--- ненулевые необратимые элементы. Но тогда в силу
+леммы~\ref{lemma_first} имеем $N(b) < N(a)$ и $N(c) < N(a)$, поэтому
+элементы $b$ и $c$ разложимы на простые множители. Но тогда и $a$
+разложим~--- противоречие.
+
+\textit{Шаг}~2. Докажем теперь индукцией по~$n$, что если для
+некоторого элемента $a \in R$ имеются два разложения
+$$
+a = p_1p_2\ldots p_n=q_1q_2\ldots q_m,
+$$
+где все элемнты $p_i$ и $q_j$ простые, то $m=n$ и после подходящей
+перенумерации элементов $q_j$ окажется, что при всех $i = 1,\ldots,
+n$ элемент $p_i$ ассоциирован с~$q_i$.
+
+Если $n=1$, то $a = p_1$; тогда из определения простого элемента
+следует, что $m = 1$ и тем самым $q_1 = p_1$. Пусть теперь $n > 1$.
+Тогда элемент $p_1$ делит произведение $q_1 q_2 \ldots q_m$. По
+лемме~\ref{ll} этот элемент делит некоторый~$q_i$, а значит,
+ассоциирован с ним. Выполнив перенумерацию, можно считать, что $i =
+1$ и $q_1 = cp_1$ для некоторого обратимого элемента $c \in R$. Так
+как в $R$ нет делителей нуля, то мы можем сократить на~$p_1$, после
+чего получится равенство
+$$
+p_2 p_3 \ldots p_n = (cq_2)q_3 \ldots q_m
+$$
+(заметьте, что элемент $cq_2$ прост!). Дальше используем
+предположение индукции.
+\end{proof}
+
+Можно показать (см. листок с задачами к лекции~6), что при $n
+\geqslant 2$ кольцо многочленов $K[x_1, \ldots, x_n]$ над
+произвольным полем~$K$ не является кольцом главных идеалов, а
+значит, по теореме~\ref{thm_er_rpi} это кольцо не является
+евклидовым. Тем не менее, наша цель в оставшейся части этой
+лекции~--- доказать, что кольцо $K[x_1, \ldots, x_n]$ факториально.
+
+Начнём издалека. С~каждым (коммутативным) кольцом $R$ (без делителей
+нуля) связано его \textit{поле отношений}~$K$. Элементами этого поля
+являются дроби вида $\frac{a}{b}$, где $a,b \in R$ и $b\ne 0$, со
+стандартными правилами отождествления ($\frac{a}{b} = \frac{c}{d}
+\Leftrightarrow ad = bc$), сложения ($\frac{a}{b} + \frac{c}{d} =
+\frac{ad+bc}{bd}$) и умножения ($\frac{a}{b}\frac{c}{d} =
+\frac{ac}{bd}$). Кольцо $R$ реализуется как подкольцо в~$K$,
+состоящее из всех дробей вида $\frac{a}{1}$.
+
+\textbf{Модельный пример:} $\QQ$ есть поле отношений кольца~$\ZZ$.
+
+Всякий гомоморфизм колец $\varphi \colon R \to R'$ индуцирует
+гомоморфизм $\widetilde \varphi \colon R[x] \to R'[x]$
+соответствующих колец многочленов, задаваемый по правилу
+$$
+a_n x^n + a_{n-1} x^{n-1} + \ldots a_1 x + a_0 \mapsto \varphi(a_n)
+x^n + \varphi(a_{n-1}) x^{n-1} + \ldots \varphi(a_1) x +
+\varphi(a_0).
+$$
+Вспомнив, как определяется умножение в кольце многочленов, легко
+показать, что $\widetilde \varphi$ действительно является
+гомоморфизмом.
+
+В~частности, если $R$~--- кольцо и $K$~--- его поле частных, то
+вложение $R \hookrightarrow K$ индуцирует вложение $R[x]
+\hookrightarrow K[x]$, так что всякий многочлен с коэффициентами из
+$R$ можно рассматривать как многочлен с коэффициентами из~$K$.
+
+Пусть $R$~--- кольцо.
+
+\begin{definition}
+Многочлен $f(x)\in R[x]$ называется {\it примитивным}, если в $R$
+нет необратимого элемента, который делит все коэффициенты многочлена
+$f(x)$.
+\end{definition}
+
+{\bf Лемма Гаусса.}\ Если $R$~--- факториальное кольцо c полем
+отношений $K$ и многочлен $f(x) \in R[x]$ разлагается в произведение
+двух многочленов в кольце $K[x]$, то он разлагается в произведение
+двух пропорциональных им многочленов в кольце~$R[x]$.
+
+В доказательстве леммы Гаусса нам потребуются следующие факты.
+
+\begin{exercise} \label{ex_1}
+Пусть $R$~--- факториальное кольцо и $p \in R$~--- простой элемент.
+Тогда в факторкольце $R/(p)$ нет делителей нуля.
+\end{exercise}
+
+\begin{exercise} \label{ex_2}
+Пусть $R$~--- (коммутативное) кольцо (без делителей нуля). Тогда в
+кольце многочленов $R[x]$ также нет делителей нуля.
+\end{exercise}
+
+\begin{proof}[Доказательство леммы Гаусса]
+Пусть $f(x) = g(x)h(x)$, где $g(x), h(x)\in K[x]$. Так как кольцо
+$R$ факториально, то для любого набора элементов из $R$ определены
+наибольший общий делитель и наименьшее общее кратное. С~учётом этого
+приведём все коэффициенты многочлена $g(x)$ к общему знаменателю,
+после чего вынесем за скобку этот общий знаменатель и наибольший
+общий делитель всех числителей. В результате в скобках останется
+примитивный многочлен $g_1(x) \in R[x]$, а за скобками~--- некоторый
+элемент из поля~$K$. Аналогичным образом найдём примитивный
+многочлен $h_1(x) \in R[x]$, который пропорционален
+многочлену~$h(x)$. Теперь мы можем записать $f(x)=\frac{u}{v}g_1(x)
+h_1(x)$, где $u,v \in R$, $v \ne 0$ и без ограничения общности можно
+считать $(u,v)=1$. Для завершения доказательства достаточно
+показать, что элемент $v$ обратим (и тогда разложение $f(x) =
+(uv^{-1}g_1(x))h_1(x)$ будет искомым).
+
+Предположим, что $v$ необратим. Тогда найдётся простой элемент $p
+\in R$, который делит~$v$. Рассмотрим гомоморфизм факторизации
+$\varphi \colon R \to R/(p)$, $a \mapsto a + (p)$, и соответствующий
+ему гомоморфизм колец многочленов $\widetilde \varphi \colon R[x]
+\to (R/(p))[x]$. В кольце $R[x]$ у нас имеется равенство $vf(x) =
+ug_1(x)h_1(x)$. Взяв образ обеих частей этого равенства при
+гомоморфизме $\widetilde \varphi$, мы получим следующее равенство в
+кольце $(R / (p))[x]$:
+\begin{equation} \label{eqn}
+\widetilde \varphi(v) \widetilde \varphi(f(x)) = \widetilde
+\varphi(u) \widetilde \varphi(g_1(x)) \widetilde \varphi(h_1(x)).
+\end{equation}
+Поскольку $p$ делит~$v$, имеем $\widetilde \varphi(v) = 0$, поэтому
+левая часть равенства~(\ref{eqn}) равна нулю. С другой стороны, из
+условия $(u,v) = 1$ следует, что $\widetilde \varphi(u) \ne 0$, а из
+примитивности многочленов $g_1(x)$ и $h_1(x)$ вытекает, что
+$\widetilde \varphi(g_1(x)) \ne 0$ и $\widetilde \varphi(h_1(x)) \ne
+0$. Таким образом, все три множителя в правой части
+равенства~(\ref{eqn}) отличны от нуля. Из упражнений~\ref{ex_1}
+и~\ref{ex_2} вытекает, что в кольце $(R / (p))[x]$ нет делителей
+нуля, поэтому правая часть равенства~(\ref{eqn}) отлична от нуля, и
+мы пришли к противоречию.
+\end{proof}
+
+\begin{corollary} \label{cc}
+Если многочлен $f(x)\in R[x]$ может быть разложен в произведение
+двух многочленов меньшей степени в кольце $K[x]$, то он может быть
+разложен и в произведение двух многочленов меньшей степени в кольце
+$R[x]$.
+\end{corollary}
+
+\begin{theorem}
+Если кольцо $R$ факториально, то кольцо многочленов $R[x]$ также
+факториально.
+\end{theorem}
+
+\begin{proof}
+Следствие~\ref{cc} показывает, что простые элементы кольца
+$R[x]$~--- это в точности элементы одного из следующих двух типов:
+
+1) простые элементы кольца $R$ (рассматриваемые как многочлены
+степени~$0$ в $R[x]$);
+
+2) примитивные многочлены из $R[x]$, неприводимые над полем
+отношений~$K$.
+
+Ясно, что каждый многочлен из $R[x]$ разлагается в произведение
+таких многочленов. Предположим, что какой-то элемент из $R[x]$ двумя
+способами представим в виде такого произведения:
+$$
+a_1 \ldots a_n b_1(x) \ldots b_m(x) = a'_1 \ldots a'_k b'_1(x)
+\ldots b'_l(x),
+$$
+где $a_i, a'_j$~--- простые элементы типа~1 и $b_i(x), b'_j(x)$~---
+простые элементы типа~2.
+
+Рассмотрим эти разложения в кольце $K[x]$. Как мы уже знаем из
+теоремы~\ref{thm_er_ufd}, кольцо $K[x]$ факториально. Отсюда
+следует, что $m = l$ и после подходящей перенумерации элементов
+$b'_j(x)$ получается, что при всех $j = 1, \ldots, m$ элементы
+$b_j(x)$ и $b'_j(x)$ ассоциированы в $K[x]$, а в силу примитивности
+они ассоциированы и в $R[x]$. После сокращения всех таких элементов
+у нас останутся два разложения на простые множители (какого-то)
+элемента из~$R$. Но кольцо $R$ факториально, поэтому эти два
+разложения совпадают с точностью до перестановки множителей и
+ассоциированности.
+\end{proof}
+
+\begin{theorem}
+Пусть $K$~--- произвольное поле. Тогда кольцо многочленов
+$K[x_1,\ldots,x_n]$ факториально.
+\end{theorem}
+
+\begin{proof}
+Воспользуемся индукцией по~$n$. При $n=1$ наше кольцо евклидово и по
+теореме~\ref{thm_er_ufd} факториально. При $n > 1$ имеем $K[x_1,
+\ldots, x_n] = K[x_1, \ldots, x_{n-1}][x_n]$, кольцо $K[x_1, \ldots,
+x_{n-1}]$ факториально по предположению индукции и требуемый
+результат следует из предыдущей теоремы.
+\end{proof}
+
+\begin{remark}
+Несмотря на естественность условия единственности разложения на
+простые множители, большинство колец не являются факториальными.
+Например, таковым не является кольцо $\ZZ[\sqrt{-5}]$, состоящее из
+всех комплексных чисел вида $a + b \sqrt{-5}$, где $a,b \in \ZZ$: в
+этом кольце число $6$ разлагается на простые множители двумя
+различными способами: $6 = 2 \cdot 3 = (1 + \sqrt{-5})(1 -
+\sqrt{-5})$.
+\end{remark}
+
+\newpage
+
+\section*{Лекция~8}
+
+\medskip
+
+{\it Элементарные симметрические многочлены. Основная теорема о
+	симметрических многочленах. Лексикографический порядок. Теорема
+	Виета. Дискриминант многочлена.}
+
+\medskip
+
+Вернемся ненадолго к теме прошлой лекции. Рассмотрим кольцо $R = K[x_1, \ldots, x_n]$, где 	$K$ --- поле. 
+На семинарах разбиралось, что оно не является кольцом главных идеалов и, соответственно, евклидовым кольцом. Однако несмотря на это:
+
+\textbf{Теорема.} Кольцо $R$ факториально.
+
+Впрочем, доказывать эту теорему мы не будем.
+
+Вернемся теперь к теме текущей лекции. Пусть $K$~--- произвольное поле.
+
+\begin{definition}
+	Многочлен $f(x_1,\ldots,x_n)\in K[x_1,\ldots,x_n]$ называется {\it
+		симметрическим}, если
+	$f(x_{\tau(1)},\ldots,x_{\tau(n)})=f(x_1,\ldots,x_n)$ для всякой
+	перестановки $\tau \in S_n$.
+\end{definition}
+
+\textbf{Примеры:}
+
+1) Многочлен $x_1x_2 + x_2x_3$ не является симметрическим, а вот многочлен $x_1x_2 + x_2x_3 + x_1x_3$ --- является.
+
+2) {\it Степенные суммы} $s_k(x_1, \ldots, x_n) = x_1^k + x_2^k +
+\ldots + x_n^k$ являются симметрическими многочленами.
+
+3) {\it Элементарные симметрические многочлены}
+$$
+\sigma_1(x_1, \ldots, x_n) = x_1 + x_2 + \ldots + x_n;
+$$
+$$
+\sigma_2(x_1, \ldots, x_n) = \sum \limits_{1 \leqslant i < j
+	\leqslant n} x_i x_j;
+$$
+$$
+..................................................
+$$
+$$
+\sigma_k(x_1, \ldots, x_n) = \sum \limits_{1 \leqslant i_1 < i_2 <
+	\ldots < i_k \leqslant n} x_{i_1} x_{i_2} \ldots x_{i_k};
+$$
+$$
+..................................................
+$$
+$$
+\sigma_n(x_1, \ldots, x_n) = x_1 x_2 \ldots x_n
+$$
+являются симметрическими.
+
+5) Определитель Вандермонда
+$$
+V(x_1, \ldots, x_n) =
+\begin{vmatrix}
+1 & x_1 & x_1^2 & \ldots & x_1^{n-1} \\
+1 & x_2 & x_2^2 & \ldots & x_2^{n-1} \\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+1 & x_n & x_n^2 & \ldots & x_n^{n-1}
+\end{vmatrix} =
+\prod \limits_{1 \leqslant i < j \leqslant n} (x_j - x_i)
+$$
+симметрическим многочленом не является (при перестановке индексов
+умножается на её знак), а вот его квадрат уже является.
+
+Основная цель этой лекции~--- понять, как устроены все
+симметрические многочлены.
+
+Легко видеть, что все симметрические многочлены образуют подкольцо
+(и даже подалгебру) в $K[x_1, \ldots, x_n]$. В~частности, если
+$F(y_1, \ldots, y_k)$~--- произвольный многочлен и $f_1(x_1, \ldots,
+x_n)$, $\ldots$, $f_k(x_1, \ldots, x_n)$~--- симметрические
+многочлены, то многочлен
+$$
+F(f_1(x_1, \ldots, x_n), \ldots, f_k(x_1, \ldots, x_n)) \in K[x_1,
+\ldots, x_n]
+$$
+также является симметрическим. Мы покажем, что всякий симметрический
+многочлен однозначно выражается через элементарные симметрические
+многочлены.
+
+\medskip
+
+{\bf Основная теорема о симметрических многочленах.}\ Для всякого
+симметрического многочлена $f(x_1, \ldots, x_n)$ существует и
+единственен такой многочлен $F(y_1, \ldots, y_n)$, что
+$$
+f(x_1, \ldots, x_n) = F(\sigma_1(x_1, \ldots, x_n), \ldots,
+\sigma_n(x_1, \ldots, x_n)).
+$$
+
+\textbf{Пример.} $s_2(x_1, \ldots, x_n) = x_1^2 + \ldots + x_n^2 =
+(x_1 + \ldots + x_n)^2 - 2\sum \limits_{1 \leqslant i < j \leqslant
+	n} x_i x_j = \sigma_1^2 - 2\sigma_2$, откуда $F(y_1, \ldots, y_n) =
+y_1^2 - 2y_2$.
+
+
+Доказательство этой теоремы потребует некоторой подготовки. Начнём с
+того, что определим старший член многочлена от многих переменных.
+
+Пусть $M_n$~--- множество всех одночленов от переменных $x_1,
+\ldots, x_n$. Определим на $M_n$ {\it лексикографический порядок}
+следующим образом:
+$$
+ax_1^{i_1}x_2^{i_2}\ldots x_n^{i_n} \prec bx_1^{j_1}x_2^{j_2}\ldots
+x_n^{j_n} \quad \Leftrightarrow \quad \exists k: \: i_1=j_1,\ldots,
+i_{k-1}=j_{k-1}, i_k<j_k.
+$$
+Например, $x_1^2x_3^9 \prec x_1^2x_2$.
+
+\ \\
+\textbf{Свойства:}
+
+1) Лексикографический порядок обладает свойством
+транзитивности: если $u,v,w \in M_n$, $u \prec v$ и $v \prec w$, то
+$u \prec w$ (докажите это).
+
+2) Если $u,v,w \in M_n$ и $u \prec v$, то $uw \prec vw$.
+
+Свойство транзитивности лексикографического порядка позволяет
+корректно определить следующее понятие.
+
+\begin{definition}
+	{\it Старшим членом} ненулевого многочлена $f(x_1,\ldots,x_n)$
+	называется наибольший в лексикографическом порядке встречающий в нём
+	одночлен. Обозначение: $L(f)$.
+\end{definition}
+
+\textbf{Примеры:}
+
+1) $L(s_k) = x_1^k$;
+
+2) $L(\sigma_k) = x_1x_2 \ldots x_k$.
+
+
+{\bf Лемма о старшем члене.}\, Пусть $f(x_1, \ldots, x_n), g(x_1,
+\ldots, x_n) \in K[x_1, \ldots, x_n]$~--- произвольные ненулевые
+многочлены. Тогда $L(f g ) = L(f) L(g)$.
+
+\begin{proof}
+	Пусть $u$~--- какой-то одночлен многочлена~$f$ и $v$~--- какой-то
+	одночлен многочлена~$g$. По определению старшего члена имеем
+	\begin{equation} \label{inequalities}
+		u \preccurlyeq L(f), \quad v \preccurlyeq L(g).
+	\end{equation}
+	Тогда $uv \preccurlyeq uL(g) \preccurlyeq L(f)L(g)$, т.\,е. $uv
+	\preccurlyeq L(f) L(g)$. Более того, легко видеть, что $uv \prec
+	L(f) L(g)$ тогда и только тогда, когда хотя бы одно из
+	\guillemotleft неравенств\guillemotright{} (\ref{inequalities})
+	является строгим. Отсюда следует, что после раскрытия скобок в
+	произведении $fg$ одночлен $L(f)L(g)$ будет старше всех остальных
+	возникающих одночленов. Ясно, что после приведения подобных членов
+	этот одночлен сохранится и будет по-прежнему старше всех остальных
+	одночленов, поэтому $L(f)L(g) = L(fg)$.
+\end{proof}
+
+\begin{lemma} \label{lemma_1}
+	Если $ax_1^{k_1}x_2^{k_2}\ldots x_n^{k_n}$~--- старший член
+	некоторого симметрического многочлена~$f(x_1, \ldots, x_n)$, то $k_1
+	\geqslant k_2 \geqslant \ldots \geqslant k_n$.
+\end{lemma}
+
+\begin{proof}
+	От противного. Пусть $k_i < k_{i+1}$ для некоторого~$i \in \lbrace
+	1, \ldots, n-1 \rbrace$. Тогда, будучи симметрическим, многочлен $f$
+	содержит одночлен $ax_1^{k_1} \ldots
+	x_{i-1}^{k_{i-1}}x_i^{k_{i+1}}x_{i+1}^{k_i}x_{i+2}^{k_{i+2}} \ldots
+	x_n^{k_n}$, который старше $L(f)$. Противоречие.
+\end{proof}
+
+\begin{lemma} \label{lemma_2}
+	Пусть $k_1, \ldots, k_n$~--- целые неотрицательные числа. Если $k_1
+	\geqslant k_2 \geqslant \ldots \geqslant k_n$, то существуют и
+	единственны такие целые неотрицательные числа $l_1, l_2, \ldots,
+	l_n$, что
+	$$
+	x_1^{k_1}x_2^{k_2}\ldots x_n^{k_n}=
+	L(\sigma_1(x_1,\ldots,x_n)^{l_1}\sigma_2(x_1,\ldots,x_n)^{l_2}\ldots\sigma_n(x_1,\ldots,x_n)^{l_n}).
+	$$
+\end{lemma}
+
+\begin{proof}
+	С учётом леммы о старшем члене требуемое условие означает, что
+	искомые числа $l_1, \ldots, l_n$ удовлетворяют системе
+	$$
+	\begin{cases}
+	l_1 + l_2 + \ldots + l_n = k_1; \\
+	\phantom{l_1 + {}} l_2 + \ldots + l_n = k_2;\\
+	\phantom{l_1 + l_2 + .} \ldots\ldots\ldots\ldots\\
+	\phantom{l_1 + l_s + \ldots + {}} l_n = k_n,
+	\end{cases}
+	$$
+	из которой они легко находятся:
+	\begin{align*}
+		l_i &= k_i - k_{i+1} \quad \text{при} \ 1 \leqslant i \leqslant n-1; \\
+		l_n &= k_n.
+	\end{align*}
+\end{proof}
+
+\begin{proof}[Доказательство основной теоремы о симметрических многочленах]
+	Пусть $f(x_1, \ldots, x_n)$~--- произвольный симметрический
+	многочлен.
+	
+	Сначала докажем существование искомого многочлена~$F(y_1, \ldots,
+	y_n)$. Если $f(x_1, \ldots, x_n)$~--- нулевой многочлен, то можно
+	взять $F(y_1,\ldots, y_n) = 0$. Далее считаем, что $f(x_1, \ldots,
+	x_n) \ne 0$. Пусть $L(f) = ax_1^{k_1} \ldots x_n^{k_n}$, $a \ne 0$.
+	Тогда $k_1 \geqslant k_2 \geqslant \ldots \geqslant k_n$ в силу
+	леммы~\ref{lemma_1}. По лемме~\ref{lemma_2} найдётся одночлен от
+	элементарных симметрических многочленов
+	$a\sigma_1^{l_1}\ldots\sigma_n^{l_n}$, старший член которого
+	совпадает с~$L(f)$. Положим $f_1 := f -
+	a\sigma_1^{l_1}\ldots\sigma_n^{l_n}$. Если $f_1 = 0$, то $f = a
+	\sigma_1^{l_1} \ldots \sigma_n^{l_n}$ и искомым многочленом будет
+	$F(y_1, \ldots, y_n) = ay_1^{l_1} \ldots y_n^{l_n}$. Если же $f_1
+	\ne 0$, то $L(f_1) \prec L(f)$. Повторим ту же процедуру: вычтя из
+	$f_1$ подходящий одночлен от $\sigma_1, \ldots, \sigma_n$, мы
+	получим новый многочлен~$f_2$ со следующим свойством: либо $f_2 = 0$
+	(и тогда мы получаем выражение $f$ через элементерные симметрические
+	многочлены), либо $L(f_2) \prec L(f_1)$. Многократно повторяя эту
+	процедуру, мы получим последовательность многочленов $f, f_1, f_2,
+	\ldots$ со свойством $L(f) \succ L(f_1) \succ L(f_2) \succ \ldots$.
+	Покажем, что процесс закончится, т.\,е. найдётся такое~$m$, что $f_m
+	= 0$ (и тогда мы получим представление $f$ в виде многочлена от
+	$\sigma_1, \ldots, \sigma_n$). Для этого заметим, что переменная
+	$x_1$ входит в старший член каждого из многочленов $f_1, f_2,
+	\ldots$ в степени, не превышающей $k_1$. Но в силу
+	леммы~\ref{lemma_1} одночленов с таким условием имеется лишь
+	конечное число, поэтому процесс не может продолжаться бесконечно.
+	
+	Теперь докажем единственность многочлена $F(y_1, \ldots, y_n)$.
+	Предположим, что
+	$$
+	f(x_1, \ldots, x_n) = F(\sigma_1(x_1, \ldots, x_n), \ldots,
+	\sigma_n(x_1, \ldots, x_n) = G(\sigma_1(x_1, \ldots, x_n), \ldots,
+	\sigma_n(x_1, \ldots, x_n))
+	$$
+	для двух различных многочленов $F(y_1, \ldots, y_n), G(y_1, \ldots,
+	y_n) \in K[y_1, \ldots, y_n]$. Тогда многочлен $$H(y_1, \ldots, y_n)
+	:= F(y_1, \ldots, y_n) - G(y_1, \ldots, y_n)$$ является ненулевым,
+	но $H(\sigma_1(x_1, \ldots, x_n), \ldots, \sigma_n(x_1, \ldots,
+	x_n)) = 0$. Покажем, что такое невозможно. Пусть $H_1, \ldots,
+	H_s$~--- все ненулевые одночлены в~$H$. Обозначим через $w_i$
+	старший член многочлена $$H_i(\sigma_1(x_1, \ldots, x_n), \ldots,
+	\sigma_n(x_1, \ldots, x_n)) \in K[x_1, \ldots, x_n].$$ В~силу
+	леммы~\ref{lemma_2} среди одночленов $w_1, \ldots, w_s$ нет
+	пропорциональных. Выберем из них старший в лексикографическом
+	порядке. Он не может сократиться ни с одним членов в выражении
+	$$
+	H_1(\sigma_1(x_1, \ldots, x_n), \ldots, \sigma_n(x_1, \ldots, x_n))
+	+ \ldots + H_s(\sigma_1(x_1, \ldots, x_n), \ldots, \sigma_n(x_1,
+	\ldots, x_n)),
+	$$
+	поэтому $H(\sigma_1(x_1, \ldots, x_n), \ldots, \sigma_n(x_1, \ldots,
+	x_n)) \ne 0$, и мы пришли к противоречию.
+\end{proof}
+
+На практике многочлен $F(y_1, \ldots, y_n)$ можно искать, повторяя
+описанный в доказательстве алгоритм, однако он может потребовать
+много вычислений. Более эффективным для нахождения многочлена
+$F(y_1, \ldots, y_n)$ является метод неопределённых коэффициентов,
+который планируется разобрать на семинарах.
+
+{\bf Теорема Виета}. Пусть $\alpha_1,\ldots,\alpha_n$~--- корни
+многочлена $x^n + a_{n-1}x^{n-1} + \dots + a_1x + a_0$. Тогда
+$$
+\sigma_k(\alpha_1,\ldots,\alpha_n)=(-1)^k a_{n-k}, \quad k = 1,
+\ldots, n.
+$$
+
+\begin{proof}
+	Достаточно приравнять коэффициенты при $x^{n-k}$ в левой и правой
+	частях равенства
+	$$
+	x^n+a_{n-1}x^{n-1}+\dots+a_1x+a_0=(x-\alpha_1)(x-\alpha_2)\ldots
+	(x-\alpha_n).
+	$$
+\end{proof}
+
+Из теоремы Виета и основной теоремы о симметрических многочленах
+следует, что мы можем выразить значение любого симметрического
+многочлена от корней данного многочлена через коэффициенты, не
+находя самих корней.
+
+\begin{definition}
+	{\it Дискриминантом} многочлена $h(x)=a_nx^n+\ldots+a_1x+a_0$ с
+	корнями $\alpha_1, \ldots, \alpha_n$ называется выражение
+	$$
+	D(h) = a_n^{2n-2} \prod \limits_{1 \leqslant i < j \leqslant n}
+	(\alpha_i - \alpha_j)^2.
+	$$
+\end{definition}
+
+\begin{remark}
+	Дискриминант $D(h)$ является симметрическим многочленом от
+	$\alpha_1, \ldots, \alpha_n$, а значит, в соответствии с
+	вышесказанным он является многочленом от коэффициентов $a_n,
+	a_{n-1}, \ldots, a_0$.
+\end{remark}
+
+\begin{remark}
+	Непосредствено из определения следует, что $D(h) = 0$ тогда и только
+	тогда, когда многочлен $h$ имеет кратный корень.
+\end{remark}
+%
+%\begin{example}
+%Пусть $h(x)=ax^2+bx+c$. Тогда
+%$$
+%D(h)=a^2(\alpha_2-\alpha_1)^2=a^2((\alpha_1+\alpha_2)^2-4\alpha_1\alpha_2)=
+%a^2((-b/a)^2-4c/a)=b^2-4ac.
+%$$
+%\end{example}
+%
+%\bigskip
+%
+%\textbf{Понятие о базисе Грёбнера\footnote{Это необязательный
+%материал, в программу экзамена он не войдёт.}.} Рассмотрим в кольце
+%$K[x_1, \ldots, x_n]$ идеал~$I$, порождённый многочленами $f_1,
+%\ldots, f_k$. Как выяснить алгоритмически, принадлежит ли данный
+%многочлен $f \in K[x_1, \ldots, x_n]$ идеалу~$I$? Другими словами,
+%представим ли многочлен $f$ в виде $f_1h_1+\ldots+f_kh_k$ для
+%некоторых многочленов $h_1, \ldots, h_k \in K[x_1, \ldots, x_n]$?
+%При $k=1$ или $n=1$ ответить на этот вопрос легко, в общем случае
+%сложнее.
+%
+%{\it Базисом Грёбнера} идеала $I$ в кольце $K[x_1,\ldots,x_n]$
+%называется такой набор многочленов $g_1, \ldots, g_m \in I$, что для
+%всякого $g \in I$ старший член $g$ делится на старший член одного из
+%$g_i$. Оказывается, базис Грёбнера данного идеала всегда существует
+%и его можно эффективно построить, исходя из набора порождающих $f_1,
+%\ldots, f_k$ (алгоритм Бухбергера и его модификации). Имея такой
+%базис, мы можем проводить редукции, т.\,е. вычитать из данного
+%многочлена $f$ один из элементов базиса Грёбнера, умноженный на
+%некоторый многочлен так, чтобы старший член сократился. Осуществляя
+%редукции, мы за конечное число шагов выясним, лежит ли $f$ в идеале.
+%
+%Базисы Грёбнера позволяют алгоритмически решать и многие другие
+%задачи, связанные с системами полиномиальных уравнений.
+
+
+\newpage
+
+\section*{Лекция~9}
+
+\medskip
+
+{\it Примеры полей. Характеристика поля. Расширения полей,
+	алгебраические и трансцендентные элементы. Минимальные многочлен.
+	Конечное расширение и его степень. Присоединение корня многочлена.
+	Поле разложения многочлена: существование и единственность.}
+
+\medskip
+
+Мы знаем не так много примеров полей. Это бесконечные поля $\QQ$,
+$\RR$, $\CC$ и конечные поля $\ZZ_p$, где $p$~--- простое число.
+Конструкция поля отношений позволяет строить новые поля из уже
+имеющихся. А именно, если $K$~--- произвольное поле, то можно
+рассмотреть поле отношений $K(x)$ кольца многочленов $K[x]$ (это
+поле называется \textit{полем рациональных дробей} над~$K$).
+Элементами поля $K(x)$ являются дроби $f(x)/g(x)$, где $f(x), g(x)
+\in K[x]$ и $g(x) \ne 0$.
+
+Несколько других примеров полей:
+$$
+\QQ(\sqrt{2}) = \{a + b \sqrt{2} \mid a, b \in \QQ\}, \quad
+\QQ(\sqrt[3]{2}) = \{a + b \sqrt[3]{2} + c\sqrt[3]{4} \mid a, b,
+c\in\QQ\}, \quad \QQ(\sqrt{-1}) = \{a + b\sqrt{-1} \mid a, b \in \QQ
+\}.
+$$
+
+\begin{definition}
+	Пусть $K$~--- произвольное поле. {\it Характеристикой} поля $K$
+	называется такое наименьшее натуральное число $p$, что
+	$\underbrace{1+\ldots+1}_p = 0$. Если такого натурального $p$ не
+	существует, говорят, что характеристика поля равна нулю.
+	Обозначение: $\xar K$.
+\end{definition}
+
+Например, $\xar \QQ = \xar \RR = \xar \CC = 0$ и $\xar \ZZ_p = \xar
+\ZZ_p(x) = p$.
+
+Из определения следует, что всякое поле характеристики нуль
+бесконечно. Примером бесконечного поля характеристики $p > 0$
+является поле $\ZZ_p(x)$.
+
+\begin{proposition}
+	Характеристика произвольного поля $K$ либо равна нулю, либо является
+	простым числом.
+\end{proposition}
+
+\begin{proof}
+	Положим $p = \xar K$ и предположим, что $p > 0$. Так как $0 \ne 1$
+	в~$K$, то $p \geqslant 2$. Если число $p$ не является простым, то $p
+	= mk$ для некоторых $m,k \in \NN$, $1 < m,k < p$. Тогда в $K$ верно
+	равенство
+	$$
+	0 = \underbrace{1 + \ldots + 1}_{mk} = (\underbrace{1 + \ldots +
+		1}_m)(\underbrace{1 + \ldots + 1}_k).
+	$$
+	В~силу минимальности числа~$p$ в последнем выражении обе скобки
+	отличны от нуля, но такое невозможно, так как в поле нет делителей
+	нуля.
+\end{proof}
+
+\begin{exercise}
+	Пересечение любого семейства подполей фиксированного поля~$K$
+	является подполем в~$K$. В частности, для всякого подмножества $S
+	\subseteq K$ существует наименьшее по включению подполе в~$K$,
+	содержащее~$S$. Это подполе совпадает с пересечением всех подполей
+	в~$K$, содержащих~$S$.
+\end{exercise}
+
+Из приведённого выше упражнения следует, что в каждом поле
+существует наименьшее по включению подполе, оно называется {\it
+	простым подполем}.
+
+\begin{proposition}
+	Пусть $K$~--- поле и $K_0$~--- его простое подполе. Тогда:
+	
+	\textup{(1)} если $\xar K = p > 0$, то $K_0 \cong \ZZ_p$;
+	
+	\textup{(2)} если $\xar K = 0$, то $K_0 \cong \QQ$.
+\end{proposition}
+
+\begin{proof}
+	Пусть $\langle 1 \rangle \subseteq K$~--- циклическая подгруппа по
+	сложению, порождённая единицей. Заметим, что $\langle 1 \rangle$~---
+	подкольцо в~$K$. Поскольку всякое подполе поля $K$ содержит единицу,
+	оно содержит и множество~$\langle 1 \rangle$. Следовательно,
+	$\langle 1 \rangle \subseteq K_0$.
+	
+	Если $\xar K = p > 0$, то мы имеем изоморфизм колец $\langle 1
+	\rangle \simeq \ZZ_p$. Но, как мы уже знаем из лекции~6,
+	кольцо~$\ZZ_p$ является полем, поэтому $K_0 = \langle 1 \rangle
+	\simeq \ZZ_p$.
+	
+	Если же $\xar K = 0$, то мы имеем изоморфизм колец $\langle 1
+	\rangle \cong \ZZ$. Тогда $K_0$ содержит все дроби вида $a/b$, где
+	$a,b \in \langle 1 \rangle$ и $b \ne 0$. Ясно, что все такие дроби
+	образуют поле, изоморфное полю~$\QQ$.
+\end{proof}
+
+\begin{definition}
+	Если $K$~--- подполе поля $F$, то говорят, что $F$~--- {\it
+		расширение} поля~$K$.
+\end{definition}
+
+Например, всякое поле есть расширение своего простого подполя.
+
+\begin{definition}
+	{\it Степенью} расширения полей $K \subseteq F$ называется
+	размерность поля $F$ как векторного пространства над полем~$K$.
+	Обозначение $[F : K]$.
+\end{definition}
+
+Например, $[\CC : \RR] = 2$ и $[\RR : \QQ] = \infty$.
+
+\begin{definition}
+	Расширение полей $K\subseteq F$ называется {\it конечным}, если $[F
+	: K] < \infty$.
+\end{definition}
+
+\begin{proposition}
+	Пусть $K\subseteq F$ и $F\subseteq L$~--- конечные расширения полей.
+	Тогда расширение $F\subseteq L$ также конечно и $[L:K]=[L:F][F:K]$.
+\end{proposition}
+
+\begin{proof}
+	Пусть $e_1,\ldots,e_n$~--- базис $F$ над $K$ и $f_1,\ldots,f_m$~---
+	базис $L$ над $F$. Достаточно доказать, что множество
+	\begin{equation} \label{eqn_basis}
+	\lbrace e_i f_j \mid i = 1,\ldots,n;\, j = 1,\ldots, m \rbrace
+	\end{equation}
+	является базисом $L$ над~$K$. Для этого сначала покажем, что
+	произвольный элемент $a\in L$ представим в виде линейной комбинации
+	элементов (\ref{eqn_basis}) с коэффициентами из~$K$. Поскольку $f_1,
+	\ldots, f_m$~--- базис $L$ над~$F$, имеем $a = \sum \limits_{j=1}^m
+	\alpha_j f_j$ для некоторых $\alpha_j \in F$. Далее, поскольку $e_1,
+	\ldots, e_n$~--- базис $F$ над~$K$, для каждого $j = 1, \ldots, m$
+	имеем $\alpha_j = \sum \limits_{i = 1}^n \beta_{ij} e_i$ для
+	некоторых $\beta_{ij}\in K$. Отсюда получаем, что $a = \sum
+	\limits_{i=1}^n \sum \limits_{j=1}^n \beta_{ij} (e_if_j)$.
+	
+	Теперь проверим линейную независимость элементов~(\ref{eqn_basis}).
+	Пусть $\sum \limits_{i=1}^n \sum \limits_{j=1}^n \gamma_{ij}
+	(e_jf_i) = 0$, где $\gamma_{ij} \in K$. Переписав это равенство в
+	виде $\sum \limits_{j=1}^m (\sum \limits_{i=1}^n \gamma_{ij}e_i)f_j
+	= 0$ и воспользовавшись тем, что элементы $f_1, \ldots, f_m$ линейно
+	независимы над~$F$, мы получим $\sum \limits_{i=1}^n \gamma_{ij}e_i
+	= 0$ для каждого $j = 1, \ldots, m$. Теперь из линейной
+	независимости элементов $e_1, \ldots, e_n$ над~$K$ вытекает, что
+	$\gamma_{ij} = 0$ при всех $i,j$. Таким образом,
+	элементы~(\ref{eqn_basis}) линейно независимы.
+\end{proof}
+
+Пусть $K\subseteq F$~--- расширение полей.
+
+\begin{definition}
+	Элемент $\alpha \in F$ называется {\it алгебраическим} над подполем
+	$K$, если существует ненулевой многочлен $f(x)\in K[x]$, для
+	которого $f(\alpha) = 0$. В~противном случае $\alpha$ называется
+	{\it трансцендентным} элементом над~$K$.
+\end{definition}
+
+\begin{definition}
+	{\it Минимальным многочленом} алгебраического элемента $\alpha \in
+	F$ над подполем $K$ называется ненулевой многочлен $h_\alpha(x)$
+	наименьшей степени, для которого $h_\alpha(\alpha) = 0$.
+\end{definition}
+
+\begin{lemma} \label{lemma_min_pol}
+	Пусть $\alpha \in F$~--- алгебраический элемент над~$K$ и
+	$h_\alpha(x)$~--- его минимальный многочлен. Тогда:
+	
+	\textup{(а)} $h_\alpha(x)$ определён однозначно с точностью до
+	пропорциональности;
+	
+	\textup{(б)} $h_\alpha(x)$ является неприводимым многочленом над
+	полем~$K$;
+	
+	\textup{(в)} для произвольного многочлена $f(x)\in K[x]$ равенство
+	$f(\alpha)=0$ имеет место тогда и только тогда, когда $h_\alpha(x)$
+	делит~$f(x)$.
+\end{lemma}
+
+\begin{proof}
+	(а) Пусть $h'_\alpha(x)$~--- ещё один минимальный многочлен элемента
+	$\alpha$ над~$K$. Тогда $\deg h_\alpha(x) = \deg h'_\alpha(x)$.
+	Умножив многочлены $h_\alpha(x)$ и $h'_\alpha(x)$ на подходящие
+	константы, добьёмся того, чтобы их старшие коэффициенты стали равны
+	единице. После этого положим $g(x) = h_\alpha(x) - h'_\alpha(x)$.
+	Тогда $g(\alpha) = 0$ и $\deg g(x) < \deg h_\alpha(x)$. Учитывая
+	определение минимального многочлена, мы получаем $g(x) = 0$.
+	
+	(б) Пусть $h_\alpha(x) = h_1(x) h_2(x)$ для некоторых $h_1(x),
+	h_2(x) \in K[x]$, причём $0 < \deg h_i(x) < \deg h_\alpha(x)$ при $i
+	= 1,2$. Так как $h_\alpha(\alpha) = 0$, то либо $h_1(\alpha)=0$,
+	либо $h_2(\alpha)=0$, что противоречит минимальности~$h_\alpha(x)$.
+	
+	(в) Очевидно, что если $h_\alpha(x)$ делит $f(x)$, то $f(\alpha) =
+	0$. Докажем обратное утверждение. Разделим $f(x)$ на $h_\alpha(x)$ с
+	остатком: $f(x) = q(x)h_\alpha(x) + r(x)$, где $q(x), r(x) \in K[x]$
+	и $\deg r(x) < \deg h_\alpha(x)$. Тогда условие $f(\alpha)=0$ влечёт
+	$r(\alpha) = 0$. Из минимальности многочлена $h_\alpha(x)$ получаем
+	$r(x)=0$.
+\end{proof}
+
+Для каждого элемента $\alpha \in F$ обозначим через $K(\alpha)$
+наименьшее подполе в~$F$, содержащее $K$ и~$\alpha$.
+
+\begin{proposition}
+	Пусть $\alpha \in F$~--- алгебраический элемент над~$K$ и $n$~---
+	степень его минимального многочлена над~$K$. Тогда
+	$$
+	K(\alpha) = \{\beta_0 + \beta_1 \alpha + \ldots + \beta_{n-1}
+	\alpha^{n-1} \mid \beta_0, \ldots, \beta_{n-1} \in K\}.
+	$$
+	Кроме того, элементы $1, \alpha, \alpha^2, \ldots, \alpha^{n-1}$
+	линейно независимы над~$K$. В~частности, $[K(\alpha) : K] = n$.
+\end{proposition}
+
+\begin{proof}
+	Легко видеть, что
+	$$
+	K(\alpha) = \lbrace \frac{f(\alpha)}{g(\alpha)} \mid f(x), g(x) \in
+	K[x], f(\alpha) \ne 0 \rbrace.
+	$$
+	Действительно, такие элементы лежат в любом подполе поля~$F$,
+	содержащем~$K$ и~$\alpha$, и сами образуют поле. Теперь возьмём
+	произвольный элемент $\frac{f(\alpha)}{g(\alpha)} \in K(\alpha)$ и
+	покажем, что он представим в виде, указанном в условии. Пусть
+	$h_\alpha(x) \in K[x]$~--- минимальный многочлен элемента~$\alpha$
+	над~$K$. Поскольку $g(\alpha) \ne 0$, в силу
+	леммы~\ref{lemma_min_pol}(в) многочлен $h_\alpha(x)$ не
+	делит~$g(x)$. Но $h_\alpha(x)$ неприводим по
+	лемме~\ref{lemma_min_pol}(б), поэтому $(g(x), h_\alpha(x)) = 1$.
+	Значит, существуют такие многочлены $u(x), v(x) \in K[x]$, что $u(x)
+	g(x) + v(x) h_\alpha(x) = 1$. Подставляя в последнее равенство $x =
+	\alpha$, мы получаем $u(\alpha) g(\alpha) = 1$. Отсюда
+	$\frac{f(\alpha)}{g(\alpha)} = f(\alpha) u(\alpha)$, и мы избавились
+	от знаменателя. Теперь уменьшим степень числителя. Пусть $r(x)$~---
+	остаток от деления $f(x)u(x)$ на~$h_\alpha(x)$. Тогда $f(\alpha)
+	u(\alpha) = r(\alpha)$ и, значит, $\frac{f(\alpha)}{g(\alpha)} =
+	r(\alpha)$, что показывает представимость элемента
+	$\frac{f\alpha)}{g(\alpha)}$ в требуемом виде.
+	
+	Остаётся показать, что элементы $1, \alpha, \ldots, \alpha^{n-1}$
+	поля $F$ линейно независимы над~$K$. Если $$\gamma_0 + \gamma_1
+	\alpha + \ldots + \gamma_{n-1} \alpha^{n-1} = 0$$ для некоторых
+	$\gamma_0, \gamma_1, \ldots, \gamma_{n-1} \in K$, то для многочлена
+	$w(x) = \gamma_0 + \gamma_1x + \ldots + \gamma_{n-1}x^{n-1} \in
+	K[x]$ получаем $w(\alpha) = 0$. Тогда из
+	леммы~\ref{lemma_min_pol}(в) и условия $\deg w(x) < \deg
+	h_\alpha(x)$ вытекает, что $w(x) = 0$, то есть $\gamma_0 = \gamma_1
+	= \ldots = \gamma_{n-1} = 0$.
+\end{proof}
+
+\begin{theorem}
+	Пусть $K$~--- произвольное поле и $f(x)\in K[x]$~--- многочлен
+	положительной степени. Тогда существует конечное расширение
+	$K\subseteq F$, в котором многочлен $f(x)$ имеет корень.
+\end{theorem}
+
+\begin{proof}
+	Достаточно построить конечное расширение, в~котором имеет корень
+	один из неприводимых делителей $p(x)$ многочлена~$f(x)$.
+	
+	Покажем сначала, что факторкольцо $K[x]/(p(x))$ является полем. В
+	самом деле, если многочлен $g(x) \in\nobreak K[x]$ не делится
+	на~$p(x)$, то $(g(x), p(x)) = 1$, и тогда существуют многочлены
+	$u(x), v(x) \in K[x]$, для которых $u(x) g(x) + v(x) p(x) = 1$. Взяв
+	образ последнего равенства в факторкольце $K[x] / (p(x))$, мы
+	получим
+	$$(u(x) + (p(x))) (g(x) + (p(x))) = 1 + (p(x)),$$ т.\,е. элемент
+	$u(x)+(p(x))$ является обратным к $g(x)+(p(x))$. Значит, $K[x] /
+	(p(x))$~--- поле, и мы возьмём его в качестве~$F$.
+	
+	Заметим теперь, что расширение $K \subseteq F$ является конечным.
+	Действительно, для всякого многочлена $g(x) \in K[x]$ в поле $F =
+	K[x]/(p(x))$ имеем $g(x) + (p(x)) = r(x) + (p(x))$, где $r(x)$~---
+	остаток от деления $g(x)$ на $p(x)$. Отсюда следует, что $F$
+	порождается как векторное пространство над~$K$ элементами
+	$$
+	1 + (p(x)), x + (p(x)), \ldots, x^{n-1} + (p(x)),
+	$$
+	где $n = \deg p(x)$. (Так же легко показать, что эти элементы
+	образуют базис в $F$ над~$K$.)
+	
+	Остаётся показать, что в поле $F$ многочлен $p(x)$ имеет корень. Это
+	похоже на обман, но корнем будет... $x + (p(x))$. Действительно,
+	пусть $p(x) = a_n x^n + a_{n-1} x^{n-1} + a_1x + a_0$, где $a_0,
+	a_1, \ldots, a_n \in K$. Тогда
+	\begin{multline*}
+		p(x + (p(x))) = a_n(x + (p(x)))^n + a_{n-1} (x + (p(x)))^{n-1} +
+		\ldots + a_1 (x + (p(x)) + a_0 =\\
+		= (a_nx^n + a_{n-1}x^{n-1} + \ldots a_1 x + a_0) + (p(x)) = p(x) +
+		(p(x)) = (p(x)),
+	\end{multline*}
+	а $(p(x))$ есть не что иное, как нуль в~$F$.
+\end{proof}
+
+Говорят, что поле $K[x] / (p(x))$ получено из поля $K$ {\it
+	присоединением корня} неприводимого многочлена~$p(x)$. Нетрудно
+проверить, что если $\alpha$~--- некоторый корень многочлена $p(x)$
+в $K[x]/(p(x))$, то поле $K[x]/(p(x))$ совпадает с подполем
+$K(\alpha)$.
+
+\begin{definition}
+	Пусть $K$~--- некоторое поле и $f(x)\in K[x]$~--- многочлен
+	положительной степени. {\it Полем разложения} многочлена $f(x)$
+	называется такое расширение $F$ поля~$K$, что
+	
+	(1) многочлен $f(x)$ разлагается над $F$ на линейные множители;
+	
+	(2) корни многочлена $f(x)$ не лежат ни в каком собственном подполе
+	поля~$F$, содержащем~$K$.
+\end{definition}
+
+\begin{example}
+	Рассмотрим многочлен $f(x) = x^4+x^3+x^2+x+1$ над $\QQ$. Так как
+	$(x-1)f(x) = x^5-1$, корнями многочлена $f(x)$ являются все корни
+	степени $5$ из единицы, отличные от единицы. Если присоединить к
+	$\QQ$ один из корней $\epsilon$ многочлена~$f$, то его остальные
+	корни можно получить, возводя число $\epsilon$ в натуральные
+	степени. Таким образом, присоединение одного корня сразу приводит к
+	полю разложения многочлена.
+\end{example}
+
+
+\begin{example}
+	Многочлен $f(x)=x^3-2$ неприводим над полем $\QQ$. Присоединение к
+	полю $\QQ$ корня этого многочлена приводит к полю $\QQ[x]/(x^3-2)
+	\cong \QQ(\sqrt[3]{2})$. Данное поле не является полем разложения
+	многочлена~$f(x)$, поскольку в нём $f(x)$ имеет только один корень и
+	не имеет двух других корней. Поскольку корнями данного многочлена
+	являются числа
+	$$
+	\sqrt[3]{2}, \quad \sqrt[3]{2}(-\frac{1}{2} + \cfrac{\sqrt{-3}}{2}),
+	\quad \sqrt[3]{2}(-\frac{1}{2} - \frac{\sqrt{-3}}{2}),
+	$$
+	полем разложения многочлена $f(x)$ является поле
+	$$
+	F = \{\alpha_0 + \alpha_1 \sqrt[3]{2} + \alpha_2 \sqrt[3]{4} +
+	\alpha_3 \sqrt{-3} + \alpha_4 \sqrt[3]{2} \sqrt{-3} + \alpha_5
+	\sqrt[3]{4} \sqrt{-3} \mid \alpha_i \in \QQ\},
+	$$
+	которое имеет над $\QQ$ степень~$6$.
+\end{example}
+
+Пусть $F$ и $F'$~--- два расширения поля~$K$. Говорят, что
+изоморфизм $F \xrightarrow{\sim} F'$ является \textit{тождественным
+	на~$K$}, если при этом изоморфизме каждый элемент поля $K$ переходит
+в себя.
+
+\begin{theorem}
+	Поле разложения любого многочлена $f(x) \in K[x]$ существует и
+	единственно с точностью до изоморфизма, тождественного на~$K$.
+\end{theorem}
+
+Доказательство этой теоремы можно найти, например, в книге
+Э.\,Б.~Винберга \guillemotleft Курс алгебры\guillemotright{}. Мы не
+включаем это доказательство в программу нашего курса.
+
+
+\newpage
+
+\section*{Лекция~10}
+
+\medskip
+
+{\it Конечные поля. Простое подполе и порядок конечного поля.
+	Автоморфизм Фробениуса. Теорема существования и единственности для
+	конечных полей. Поле из четырех элементов. Цикличность
+	мультипликативной группы. Неприводимые многочлены над конечным
+	полем. Подполя конечного поля.}
+
+\medskip
+
+В этой лекции будем использовать следующее обозначение: $K^\times =
+K \setminus \lbrace 0 \rbrace$~--- мультипликативная группа
+поля~$K$.
+
+Пусть $K$~--- конечное поле. Тогда его характеристика отлична от
+нуля и потому равна некоторому простому числу~$p$. Значит, $K$
+содержит поле $\ZZ_p$ в качестве простого подполя.
+
+\begin{theorem} \label{thm1}
+	Число элементов конечного поля равно $p^n$ для некоторого простого
+	$p$ и натурального $n$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $K$~--- конечное поле характеристики~$p$, и пусть размерность
+	$K$ над простым подполем $\ZZ_p$ равна~$n$. Выберем в $K$ базис
+	$e_1, \ldots, e_n$ над $\ZZ_p$. Тогда каждый элемент из $K$
+	однозначно представляется в виде $\alpha_1 e_1 + \ldots + \alpha_n
+	e_n$, где $\alpha_1, \ldots, \alpha_n$ пробегают~$\ZZ_p$.
+	Следовательно, в $K$ ровно $p^n$ элементов.
+\end{proof}
+
+Пусть $K$~--- произвольное поле характеристики $p > 0$. Рассмотрим
+отображение
+$$
+\varphi \colon K \to K, \quad a \mapsto a^p.
+$$
+Покажем, что $\varphi$~--- гомоморфизм. Для любых $a,b \in K$ по
+формуле бинома Ньютона имеем
+$$
+(a + b)^p = a^p + C_p^1 a^{p-1}b + C_p^2 a^{p-2}b^2 + \ldots +
+C_p^{p-1} a b^{p-1} + b^p.
+$$
+Так как $p$~--- простое число, то все биномиальные коэффициенты
+$C_p^i$ при $1 \leqslant i \leqslant p-1$ делятся на~$p$. Это
+значит, что в нашем поле характеристики $p$ все эти коэффициенты
+обнуляются, в результате чего получаем $(a + b)^p = a^p + b^p$.
+Ясно, что $(ab)^p = a^p b^p$, так что $\varphi$~--- гомоморфизм.
+Ядро любого гомоморфизма колец является идеалом, поэтому $\Ker
+\varphi$~--- идеал в~$K$. Но в поле нет собственных идеалов, поэтому
+$\Ker \varphi = \lbrace 0 \rbrace$, откуда $\varphi$ инъективен.
+
+Если поле $K$ конечно, то инъективное отображение из $K$ в $K$
+автоматически биективно. В этой ситуации $\varphi$ называется {\it
+	автоморфизмом Фробениуса} поля $K$.
+
+\begin{remark}
+	Пусть $K$~--- произвольное поле и $\psi$~--- произвольный
+	автоморфизм (т.\,е. изоморфизм на себя) поля~$K$. Легко видеть, что
+	множество неподвижных точек $K^{\psi} = \{ a \in K \mid \psi(a) =
+	a\}$ является подполем в~$K$.
+\end{remark}
+
+Прежде чем перейти к следующей теореме, обсудим понятие формальной
+производной многочлена. Пусть $K[x]$~--- кольцо многочленов над
+произвольным полем~$K$. Формальной производной называется
+отображение $K[x] \to K[x]$, которое каждому многочлену $f(x) =
+a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1 x + a_0$ сопоставляет
+многочлен $f'(x) = na_n x^{n-1} + (n-1)a_{n-1}x^{n-2} + \ldots +
+a_1$. Из определения следует, что это отображение линейно. Легко
+проверить, что для любых $f,g \in K[x]$ справедливо привычное нам
+равенство $(fg)' = f'g + fg'$ (в~силу дистрибутивности умножения
+проверка этого равенства сводится к случаю, когда $f,g$~---
+одночлены). В~частности, $(f(x)^m)' = mf(x)^{m-1}$ для любых $f(x)
+\in K[x]$ и $m \in \NN$.
+
+\begin{theorem} \label{thm2}
+	Для всякого простого числа $p$ и натурального числа $n$ существует
+	единственное \textup(с точностью до изоморфизма\textup) поле из
+	$p^n$ элементов.
+\end{theorem}
+
+\begin{proof}
+	Положим $q = p^n$ для краткости.
+	
+	{\it Единственность.}\ Пусть поле $K$ содержит $q$ элементов. Тогда
+	мультипликативная группа $K^{\times}$ имеет порядок $q-1$. По
+	следствию~3 из теоремы Лагранжа мы имеем $a^{q-1}=1$ для всех $a \in
+	K \setminus \{0\}$, откуда $a^q - a = 0$ для всех $a\in K$. Это
+	значит, что все элементы поля $K$ являются корнями многочлена $x^q -
+	x \in \ZZ_p[x]$. Отсюда следует, что $K$ является полем разложения
+	многочлена $x^q - x$ над $\ZZ_p$. Из теоремы о полях разложения,
+	формулировавшейся на прошлой лекции, следует, что поле $K$
+	единственно с точностью до изоморфизма.
+	
+	\smallskip
+	
+	{\it Существование.} Пусть $K$~--- поле разложения многочлена $f(x)
+	= x^q - x \in \ZZ_p[x]$. Тогда имеем $f'(x)= qx^{q-1} - 1 =\nobreak
+	-1$ ($qx^{q-1}$ обнуляется, так как $q$ делится на~$p$, а $p$~---
+	характеристика поля~$\ZZ_p$). Покажем, что многочлен $f(x)$ не имеет
+	кратных корней в~$K$. Действительно, если $\alpha$~--- корень
+	кратности $m \geqslant 2$, то $f(x) = (x - \alpha)^m g(x)$ для
+	некоторого многочлена $g(x) \in \ZZ_p[x]$. Но тогда $f'(x) =
+	m(x-\alpha)^{m-1} g(x) + (x - \alpha)^m g'(x)$, откуда видно, что
+	$f'(x)$ делится на $(x - \alpha)$. Но последнее невозможно, ибо
+	$f'(x) = -1$~--- многочлен нулевой степени. Итак, многочлен $f(x)$
+	имеет ровно $q$ различных корней в поле~$K$. Заметим, что эти
+	корни~--- в точности неподвижные точки автоморфизма $\varphi^n =
+	\underbrace{\varphi \circ \ldots \circ \varphi}_n$, где
+	$\varphi$~--- автоморфизм Фробениуса. В~самом деле, для элемента $a
+	\in K$ равенство $a^q - a = 0$ выполнено тогда и только тогда, когда
+	$a^{p^n} = a$, т.\,е. $\varphi^n(a) = a$. Значит, корни многочлена
+	$x^q-x$ образуют подполе в~$K$, которое по определению поля
+	разложения совпадает с~$K$. Следовательно, в поле $K$ ровно $q$
+	элементов.
+\end{proof}
+
+Конечныe поля еще называют {\it полями Галуа}. Поле из $q$ элементов
+обозначают $\FF_q$. Например, $\FF_p \cong \ZZ_p$.
+
+\begin{example}
+	Построим явно поле из четырёх элементов. Многочлен $x^2+x+1$
+	неприводим над $\ZZ_2$. Значит, факторкольцо $\ZZ_2[x]/(x^2+x+1)$
+	является полем и его элементы~--- это классы $\overline{0},
+	\overline{1}, \overline{x}, \overline{x+1}$ (запись $\overline a$
+	означает класс элемента $a$ в факторкольце $\ZZ_2[x]/(x^2+x+1)$).
+	Например, произведение $\overline{x} \cdot \overline{x+1}$~--- это
+	класс элемента $x^2+x$, который равен $\overline{1}$.
+\end{example}
+
+\begin{proposition}
+	Мультипликативная группа конечного поля $\FF_q$ является
+	циклической.
+\end{proposition}
+
+\begin{proof}
+	Заметим, что $\FF_q^\times$~--- конечная абелева группа, и обозначим
+	через $m$ её экспоненту (см. конец лекции~4). Предположим, что
+	группа $\FF_q^{\times}$ не является циклической. Тогда $m < q-1$ по
+	следствию~2 лекции~4. По определению экспоненты это значит, что $a^m
+	= 1$ для всех $a \in \FF_q^{\times}$. Но тогда многочлен $x^m-1$
+	имеет в поле $\FF_q$ больше корней, чем его степень,~---
+	противоречие.
+\end{proof}
+
+\begin{theorem}
+	Конечное поле $\FF_q$, где $q=p^n$, можно реализовать в виде
+	$\ZZ_p[x]/(h(x))$, где $h(x)$~--- неприводимый многочлен степени $n$
+	над $\ZZ_p$. В~частности, для всякого $n \in \NN$ в кольце
+	$\ZZ_p[x]$ есть неприводимый многочлен степени~$n$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\alpha$~--- порождающий элемент группы $\FF_q^{\times}$.
+	Тогда минимальное подполе $\ZZ_p(\alpha)$ поля~$\FF_q$, содержащее
+	$\alpha$, совпадает с~$\FF_q$. Значит, поле $\FF_q$ изоморфно полю
+	$\ZZ_p[x]/(h(x))$, где $h(x)$~--- минимальный многочлен элемента
+	$\alpha$ над $\ZZ_p$. Из результатов прошлой лекции следует, что
+	многочлен $h(x)$ неприводим. Поскольку степень расширения $[\FF_q :
+	\ZZ_p]$ равна~$n$, этот многочлен имеет степень~$n$.
+\end{proof}
+
+\begin{theorem}
+	Всякое подполе поля $\FF_q$, где $q=p^n$, изоморфно $\FF_{p^m}$, где
+	$m$~--- делитель числа $n$. Обратно, для каждого делителя $m$ числа
+	$n$ в поле $\FF_q$ существует ровно одно подполе из $p^m$ элементов.
+\end{theorem}
+
+\begin{proof}
+	Пусть $F$~--- подполе поля $\FF_q$. По определению простого подполя
+	имеем $F \supset \ZZ_p$, откуда $\xar F = p$. Тогда
+	теорема~\ref{thm1} нам сообщает, что $|F| = p^m$ для некоторого $m
+	\in \NN$. По теореме~\ref{thm2} имеем $F \cong\nobreak \FF_{p^m}$.
+	Обозначим через $s$ степень (конечного) расширения $F \subset
+	\FF_q$. Рассуждая так же, как в доказательстве теоремы~\ref{thm1},
+	мы получим $p^n = (p^m)^s$, откуда $p^n = p^{ms}$ и $m$ делит~$n$.
+	
+	Пусть теперь $m$~--- делитель числа~$n$, т.\,е. $n = ms$ для
+	некоторого $s \in \NN$. Рассмотрим многочлены $f(x) = x^{p^n} - x$ и
+	$g(x) = x^{p^m} - x$ над $\ZZ_p$. Заметим, что для элемента $a \in
+	\FF_q$ равенства $a^{p^m} = a$ следует
+	$$
+	a^{p^n} = a^{p^{ms}} = a^{(p^m)^s} =
+	(\ldots((a^{p^m})^{p^m})^{p^m}\ldots)^{p^m} \ \text{($s$ раз возвели
+		в степень $p^m$)} = a.
+	$$
+	Поэтому каждый корень многочлена $g(x)$ является и корнем многочлена
+	$f(x)$. Отсюда поле разложения многочлена $f(x)$ лежит в поле
+	разложения многочлена $g(x)$. Значит, $\FF_{p^m}$ содержится в
+	$\FF_{p^n}$.
+	
+	Наконец, все элементы подполя из $p^m$ элементов неподвижны при
+	автоморфизме $\psi = \underbrace{\varphi \circ \ldots \circ
+		\varphi}_m \colon x \mapsto x^{p^m}$ ($\varphi$~--- автоморфизм
+	Фробениуса). Поскольку число корней многочлена $x^{p^m}-x$ в поле
+	$\FF_q$ не превосходит~$p^m$, множество элементов данного подполя
+	совпадает с множеством неподвижных точек автоморфизма~$\psi$.
+	Значит, такое подполе единственно.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,268 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{cmap}           % Пакет для поиска в полученной пдфке
+\usepackage[utf8]{inputenc} % Ззамена кодировки файла на utf8
+\usepackage[T2A]{fontenc}   % Подключение кодировки шрифтов
+\usepackage[russian]{babel} % Использование русского языка 
+\usepackage[left=2cm, right=2cm, top=1cm, bottom=2cm]{geometry} % Изменение размеров полей
+\usepackage{indentfirst}    % Красная строка в начале текста
+\usepackage{amsmath, amsfonts, amsthm, mathtools, amssymb, icomma, units, yfonts}
+\usepackage{amsthm} % Пакет для нормального оформления теорем
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esvect}
+\usepackage{enumitem}
+\usetikzlibrary{calc,matrix}
+
+%Теоремы
+%11.01.2016
+\newtheorem*{standartbase}{Теорема о стандартном базисе}
+\newtheorem*{fulllemma}{Лемма}
+\newtheorem*{sl1}{Следствие 1}
+\newtheorem*{sl2}{Следствие 2}
+\newtheorem*{monotonousbase}{Теорема о монотонном базисе}
+\newtheorem*{scheme}{Утверждение 1}
+\newtheorem*{n2}{Утверждение 2}
+\newtheorem*{zhegalkin}{Теорема Жегалкина}
+\newtheorem*{poste}{Теорема Поста}
+
+%18.01.2016
+\newtheorem*{on2n}{Теорема}
+\newtheorem*{o2ndivn}{Теорема}
+\newtheorem*{existsFgthen2ndivn}{Теорема}
+
+\renewcommand{\qedsymbol}{\textbf{Q.E.D.}}
+\newcommand{\definition}{\underline{Определение:} }
+\newcommand{\statement}{\underline{Утверждение:} }
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+
+
+
+\begin{document}
+\title{Дискретная математика. Модуль 3. Лекция 3}
+\author{Лекторий ПМИ ФКН 2015-2016\\Гринберг Вадим\\Жижин Пётр\\Пузырев Дмитрий}
+\date{25 января 2016}
+
+\maketitle
+\section{Равномощные множества. Конечные и бесконечные. Счётные множества. Свойства счётных множеств}
+\subsection*{Равномощные множества. Конечные множества}
+\definition Равномощными множествами называются такие множества,
+между которыми установима биекция. Обозначение: $A \sim B$.
+
+\underline{Очевидные свойства равномощных множеств:} $\forall A$ -- множеств.
+\begin{itemize}
+        \item $A \sim A$.
+        \item $A \sim B \Rightarrow B \sim A$.
+        \item $A \sim B, B \sim C \Rightarrow A \sim C$.
+\end{itemize}
+
+\definition Множество $A$ -- конечно тогда и только тогда,
+когда $\exists n \in \N_0: A \sim [n]$ ($[n] = \left\{ 1, 2, \ldots, n \right\}, [0] = \varnothing$).
+
+Но ведь могло бы так получиться, что $[n] \sim [k]$? Оказывается, нет.
+
+\statement Если $n > k \Rightarrow [n] \nsim [k]$.
+\begin{proof}
+    Докажем по индукции от $n$.
+    \begin{description}
+        \item[\textbf{База}] \hfill \\
+            $n = 0 \Rightarrow \forall k \Rightarrow n < k \Rightarrow $ 
+            Нет таких множеств $\Rightarrow [n] \nsim [k]$.
+        \item[\textbf{Предположение}] \hfill \\
+            $\forall j \leqslant n \Rightarrow \forall k < j \Rightarrow [j] \nsim [k]$.
+        \item[\textbf{Переход}] \hfill \\
+            $k < n + 1$. Докажать: $[n+1] \nsim [k]$. Предположим это не так.
+
+            Тогда существует функция $f: [n+1] \to [k]$ и $f$ -- биекция. 
+            Пусть $f(n+1) = b$. Но $b$ может и не совпадать с $k$. Для этого введём
+            транспозицию $\tau: [k] \to [k], \tau(b) = k, \tau(k)=b,
+            \forall i \neq k, i \neq b \Rightarrow \tau(i)=i$.
+
+            Получили функцию $g = \tau \circ f$. Причем $g$ -- биекция как композиция
+            двух биекций. $g(n+1)=\tau(b)=k$ и $g([n])=[k-1]$ (так как $g$ -- биекция).
+
+            Получили биекцию $g: [n] \to [k-1], k - 1 < n$, а это противоречит 
+            предположению индукции ($k-1 < j = n$).
+
+            А значит $[n+1] \nsim [k]$.
+    \end{description}
+\end{proof}
+\subsection*{Бесконечные множества. Счётные множества}
+\definition Множество бесконечно тогда и только тогда, когда оно не конечно.
+
+$A$ -- бесконечно. Значит $A$ -- не пусто. $\exists a_o \in A$. 
+Пусто ли $A\setminus {a_0}$? Нет. Иначе $A$ -- содержит один элемент и конечно.
+Тогда $\exists a_1 \in A\setminus {a_0}$. Множество и без этих двух элементов 
+бесконечно. Ну и так далее.
+
+\definition Получившееся множество $A' = \{a_0, a_1, a_2, \ldots, a_n, \ldots\}$ 
+назовем счётным (равномощным множеству натуральных чисел).
+Биекция в этом случае очевидна: $f: i \mapsto a_i$.
+
+\statement $\N$ -- бесконечно.
+\begin{proof}
+    Пусть это не так и $\exists f: [n] \to \N$ -- инъекция. Тогда верно следующее:
+    $\N \ni max\{f(0), f(1), \ldots, f(n)\}+1 \notin f([n])$. А значит $f$ -- не биекция.
+    А значит $\N$ не равномощно никакому $[n]$.
+\end{proof}
+    
+Заметим вот что: $\N \setminus \{0\} \to \N$ путём биекции $f: n \mapsto n-1$.
+
+\statement Множество бесконечно тогда и только тогда, когда оно равномощно 
+собственному подмножеству.
+\begin{proof}
+    Докажем, что если множество бесконечно, то оно равномощно некоторому подмножеству.
+
+    Как мы уже выяснили, в любом бесконечном множестве есть счётное подмножество.
+    Пусть $B = \{b_0, b_1, \ldots, b_n, \ldots\}$ -- счётное подмножество
+    бесконечного множества $A$.
+
+    Установим биекцию $f: A \setminus \{b_0\} \to A$.
+    \[
+    f(x) = \begin{cases}
+        b_{n-1}, x \in B \\
+        x, x \notin B
+    \end{cases}
+    \]
+    Получили то, что и требовалось.
+
+    В обратную сторону доказывается на семинарах, но примерно так:
+    пусть $B \subset A, B \sim A$. Пусть $A$ -- конечно. Тогда $|B| < |A|$
+\end{proof}
+
+\subsection*{Свойства счётных множеств}
+\begin{enumerate}
+        \item
+            \label{prop:AsubsetA}
+            $A$ -- счётное множество. Тогда $A \subseteq A$ счётно или конечно.
+            \begin{proof}
+                $A = \{a_0, a_1, \ldots, a_n, \ldots\}$. Вычеркнем все элементы, в $A'$
+                не входящие. $A' = \{a_{j_0}, a_{j_1}, \ldots, a_{j_n}, \ldots\}$.
+
+                Если последовательность $\{a_{j_n}\}$ конечна, то и $A'$ конечно.
+                Если она бесконечна, то $A'$ очевидно счётно.
+            \end{proof}
+        \item 
+            \label{prop:acupb}
+            Если $A,B$ -- счётные, то и $A \cup B$ счётно.
+            \begin{proof}
+                $A = (a_0, a_1, \ldots, a_n, \ldots)$. 
+                $B = (b_1, b_2, \ldots, b_n, \ldots)$.
+
+                $A \cup B = (a_0, b_0, a_1, b_1 \ldots, a_n, b_n, \ldots)$.
+
+                Но может получиться так, что в новой последовательности некоторые элементы
+                встречаются по два раза (они входят в оба множества). Вычеркнем
+                каждый такой элемент по одному разу. И получим последовательность,
+                задающую счётное множество.
+            \end{proof}
+        \item $\Z$ -- счётно.
+            \begin{proof}
+                $Z = \N \cup (-\N)$ -- объединение счётных множеств. Счётно по свойству
+                \ref{prop:acupb} ($-A = \{-a \ |\ a \in A\}$).
+            \end{proof}
+        \item 
+            \label{prop:acupbnotinf}
+            Если $A$ -- счётно, а $B$ -- конечно или счётно, то $A \cup B$ счётно.
+            \begin{proof}
+                Доказывается аналогично свойству \ref{prop:acupb}.
+            \end{proof}
+       \item Если $A$ -- счётно. И $B_1, B_2, \ldots, B_k$ -- счётны или конечны, то
+            $A \cup B_1 \cup \ldots \cup B_k$ -- счётно.
+            \begin{proof}
+                К доказательству свойства \ref{prop:acupbnotinf} нужно добавить
+                доказательство по индукции.
+            \end{proof}
+       \item
+           \label{prop:Fsetcup}
+           Счётное объединение конечных или бесконечных множеств конечно или счётно.
+
+           $\{A_0, A_1, \ldots, A_n, \ldots\} = \mathfrak{F} \sim \N$. $A_i$ -- множество.
+           $\mathfrak{F}$ называется семейством множеств. 
+           $A = \bigcup\limits_{i=0}^{\infty} A_i$.
+
+           \statement $A$ -- счётно.
+           \begin{proof}
+               \begin{align*}
+                   A_0 &= (a_{00}, a_{01}, \ldots, a_{0n}, \ldots) \\
+                   A_1 &= (a_{10}, a_{11}, \ldots, a_{1n}, \ldots) \\
+               \end{align*}
+               Некоторые из множеств могут быть конечны. Дополним их до счётных
+               пустым символом $\lambda \notin A$.
+
+               Построим последовательность: $a_{00}, a_{01}, a_{10}, a_{02},
+               a_{11}, a_{20}, \ldots$. (то есть проходим последовательно все значения
+               сумм индексов от $0$ до $\infty$).
+
+               Теперь исключим из последовательности повторения и символы $\lambda$.
+               Получим требуемую последовательность $(a'_0, a'_1, \ldots, a'_n, \ldots)$.
+
+               Теперь получим функцию $f: [n] \to A$ или $f: \N \to A$. $f$ -- биекция.
+               В первом случае множество конечно, во втором счётно.
+
+               Можно было бы и не вводить $\lambda$, а исключать эти элементы сразу,
+               но так проще (нет никаких условий).
+           \end{proof}
+
+           \underline{Примеры:} 
+           \begin{itemize}
+                \item Пусть $A_i = \{i\}$. Тогда $A = \N$ (счётно).
+                \item Пусть $A_i = \{1\}$. Тогда $A = \{1\}$ (конечно).
+           \end{itemize}
+
+      \item
+          \label{prop:CartProdAB}
+          Декартово произведение счётных множеств счётно.
+          Напомним, что \[A \times B = \left\{ (a; b)\ |\ a \in A, b \in B \right\}\]
+          \begin{proof}
+              $A = (a_0, \ldots, a_n, \ldots) \Rightarrow 
+              A \times B = \{a_0\} \times B \cup \ldots \cup
+              \{a_n\} \times B \cup \ldots \Rightarrow A \times B $ -- счётно
+              (по свойству \ref{prop:Fsetcup}). 
+          \end{proof}
+      \item 
+          \label{prop:Apown}
+          Если $A$ -- счётно, то $A^k$ -- счётно.
+          \begin{proof}
+              Очевидно по индукции из свойства \ref{prop:CartProdAB}.
+          \end{proof}
+      \item $\Q$ -- счётно.
+          \begin{proof}
+              Рассмотрим множество $\Q_p$ несократимых дробей. 
+              Пусть функция $f: \Q_p \to \Z \times \N_+$ -- инъекция
+              (она переводит дробь в пару чисел числитель-знаменатель).
+              Тогда она является биекцией на $f(\Q_p) \subset \Z \times \N_+$. 
+              Причём $f(\Q_p)$ тогда счётно по свойству \ref{prop:AsubsetA}
+              так как не является конечным, а $\Z \times \N_+$ счётно
+              по свойству \ref{prop:CartProdAB}.
+          \end{proof}
+      \item Пусть $A^*$ -- конечные последовательности конечного (непустого) или 
+          счётного алфафита $A$.
+
+          \statement $A^*$ -- счётно
+          \begin{proof}
+              $A^* = \bigcup\limits_{n=0}^{\infty} A^n$. При этом $A^n$ -- слова длины $n$.
+              $A^n$ -- счётно по свойству \ref{prop:Apown}. И тогда само $A^*$ счётно
+              по свойству \ref{prop:Fsetcup}.
+          \end{proof}
+      \item \definition $\alpha \in \R$ -- алгебраическое число тогда и только тогда, 
+          когда $\alpha$ -- корень некоторого многочлена с целыми коэфициентами.
+
+          \statement Множество алгебраических чисел счётно.
+          \begin{proof}
+              Приведём только план доказательства:
+              \begin{enumerate}
+                      \item Докажем, что многочленов с целыми коэфициентами счётно.
+                      \item Для каждого из этих многочленов есть не более $n$ корней --
+                          алгебраических чисел.
+                      \item Удаляем повторяющиеся корни.
+                      \item Получим все алгебраические числа, которых, очевидно, 
+                          счётно.
+              \end{enumerate}
+          \end{proof}
+\end{enumerate}
+
+\end{document}

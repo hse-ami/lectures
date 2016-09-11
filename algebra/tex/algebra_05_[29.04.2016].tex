@@ -1,0 +1,677 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\newcommand{\Ker}{\mathop{\mathrm{Ker}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+%\newcommand{\Tor}{\mathop{\mathrm{Tor}}}
+
+%\def\Ker{{\rm Ker}}%
+%\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+%\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лектор Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2015/2016 учебный год}
+
+
+\bigskip
+
+\section*{Лекция 5}
+
+\medskip
+
+{\it Строение конечно порождённых абелевых груп (продолжение). Экспонента
+конечной абелевой группы. Действие группы на множестве. Орбиты и стабилизаторы.}
+%Транзитивные и свободные действия. Три действия группы на себе.
+%Теорема Кэли. Классы сопряжённости.}
+
+Продолжим доказательство теоремы с прошлой лекции.
+
+\begin{theorem} \label{traz}
+Всякая конечно порождённая абелева группа $A$ разлагается в прямую
+сумму примарных и бесконечных циклических подгрупп, т.\,е.
+\begin{equation} \label{eqn}
+A \cong \ZZ_{p_1^{k_1}} \oplus \ldots \oplus \ZZ_{p_s^{k_s}} \oplus
+\ZZ \oplus \ldots \oplus \ZZ,
+\end{equation}
+где $p_1, \ldots, p_s$~--- простые числа \textup(не обязательно
+попарно различные\textup) и $k_1, \ldots, k_s \in \NN$. Кроме того,
+число бесконечных циклических слагаемых, а~также число и порядки
+примарных циклических слагаемых определено однозначно.
+\end{theorem}
+
+\begin{proof}
+На прошлой лекции мы доказали существование разложения и то, что количество
+бесконечных циклических групп $\ZZ$ определено однозначно. Для этого мы вводили
+понятие \textit{подгруппы кручения}:
+\begin{equation} \label{eqn3}
+\Tor A = \langle c_1 \rangle_{p_1^{k_1}} \oplus \ldots \oplus
+\langle c_s \rangle_{p_s^{k_s}}.
+\end{equation}
+Далее, для каждого простого числа $p$ определим в $A$ {\it подгруппу
+$p$-кручения}
+\begin{equation} \label{eqn4}
+\Tor_p A := \{ a\in A \mid p^ka=0 \ \text{для некоторого} \ k \in
+\NN \}.
+\end{equation}
+Ясно, что $\Tor_p A \subset \Tor A$. Выделим подгруппу $\Tor_p A$ в
+разложении~(\ref{eqn3}). Легко видеть, что $\langle c_i
+\rangle_{p_i^{k_i}} \subseteq \Tor_p A$ для всех $i$ с условием $p_i
+= p$. Если же $p_i \ne p$, то по следствию~2 из теоремы Лагранжа
+(см. лекцию~2) порядок любого ненулевого элемента $x \in \langle c_i
+\rangle_{p_i^{k_i}}$ является степенью числа~$p_i$, а~значит, $p^k x
+\ne 0$ для всех $k \in \NN$. Отсюда следует, что $\Tor_p A$ является
+суммой тех конечных слагаемых в разложении~(\ref{eqn3}), порядки
+которых суть степени~$p$. Поэтому доказательство теперь сводится к
+случаю, когда $A$~--- примарная группа.
+
+Пусть $|A|=p^k$ и
+$$
+A = \langle c_1\rangle_{p^{k_1}}\oplus\ldots\oplus\langle
+c_r\rangle_{p^{k_r}}, \quad k_1+\ldots+k_r=k.
+$$
+Докажем индукцией по~$k$, что набор чисел $k_1, \ldots, k_r$ не
+зависит от разложения.
+
+Если $k = 1$, то $|A| = p$, но тогда $A \cong \ZZ_p$ по следствию~5
+из теоремы Лагранжа (см. лекцию~2). Пусть теперь $k > 1$. Рассмотрим
+подгруппу $pA: = \{ pa \mid a \in A \}$. В~терминах
+равенства~(\ref{eqn4}) имеем
+$$
+pA = \langle pc_1 \rangle_{p^{k_1-1}} \oplus \ldots \oplus \langle
+pc_r\rangle_{p^{k_r-1}}.
+$$
+В частности, при $k_i = 1$ соответствующее слагаемое равно $\lbrace
+0 \rbrace$ (и тем самым исчезает). Так как $|pA| = p^{k - r} < p^k$,
+то по предположению индукции группа $pA$ разлагается в прямую сумму
+примарных циклических подгрупп однозначно с точностью до порядка
+слагаемых. Следовательно, ненулевые числа в наборе $k_1 - 1, \ldots,
+k_r-1$ определены однозначно (с точностью до перестановки). Отсюда
+мы находим значения $k_i$, отличные от~$1$. Количество тех~$k_i$,
+которые равны~$1$, однозначно восстанавливается из условия $k_1 +
+\ldots + k_r = k$.
+\end{proof}
+
+Заметим, что теорема о согласованных базисах даёт нам другое
+разложение конечной абелевой группы~$A$:
+\begin{equation} \label{eqn5}
+A=\ZZ_{u_1}\oplus\ldots\oplus\ZZ_{u_m}, \quad \text{где} \
+u_i|u_{i+1} \ \text{при} \ i = 1, \ldots, m-1.
+\end{equation}
+Числа $u_1, \ldots, u_m$ называют {\it инвариантными множителями}
+конечной абелевой группы~$A$.
+
+\begin{definition}
+{\it Экспонентой} конечной абелевой группы $A$ называется число
+$\exp A$, равное наименьшему общему кратному порядков элементов
+из~$A$. Легко заметить, что это равносильно следующему условию:
+$$
+\exp A = \min \lbrace n \in \NN \mid na = 0 \
+\text{для всех} \ a \in A \rbrace
+$$
+\end{definition}
+
+\begin{proposition}
+Экспонента конечной абелевой группы~$A$ равна её последнему
+инвариантному множителю~$u_m$.
+\end{proposition}
+
+\begin{proof}
+Обратимся к разложению~(\ref{eqn5}). Так как $u_i | u_m$ для всех $i
+= 1, \ldots, m$, то $u_ma=0$ для всех $a \in A$. Это означает, что
+$\exp A \leqslant u_m$ (и тем самым $\exp A \, | u_m$). С~другой
+стороны, в $A$ имеется циклическая подгруппа порядка $u_m$. Значит,
+$\exp A \geqslant u_m$.
+\end{proof}
+
+\begin{corollary}
+Конечная абелева группа $A$ является циклической тогда и только
+тогда, когда $\exp A =\nobreak |A|$.
+\end{corollary}
+
+\begin{proof}
+Группа $A$ является циклической тогда и только тогда, когда в
+разложении~(\ref{eqn5}) присутствует только одно слагаемое, т.\,е.
+$A = \ZZ_{u_m}$ и $|A| = u_m$.
+\end{proof}
+
+
+Пусть $G$~--- произвольная группа и $X$~--- некоторое множество.
+
+\begin{definition}
+\textit{Действием} группы $G$ на множестве $X$ называется
+отображение $G\times X\to X$, $(g,x)\mapsto gx$, удовлетворяющее
+следующим условиям:
+
+1) $ex=x$ для любого $x\in X$ ($e$~--- нейтральный элемент
+группы~$G$);
+
+2) $g(hx)=(gh)x$ для всех $g,h\in G$ и $x\in X$.
+
+Обозначение: $G:X$.
+\end{definition}
+
+Если задано действие группы $G$ на множестве~$X$, то каждый элемент
+$g \in G$ определяет биекцию $a_g \colon X \to\nobreak X$ по правилу
+$a_g(x) = gx$ (обратным отображением для $a_g$ будет $a_{g^{-1}}$).
+Обозначим через $S(X)$ группу всех биекций (перестановок) множества
+$X$ с операцией композиции. Тогда отображение $a \colon G \to S(X)$,
+$g \mapsto a_g$, является гомоморфизмом групп. Действительно, для
+произвольных элементов $g,h \in G$ и $x \in X$ имеем
+$$
+a_{gh}(x) = (gh)x = g(hx) = g a_h(x) = a_g (a_h(x)) = (a_g a_h)(x).
+$$
+Можно показать, что задание действия группы $G$ на множестве $X$
+равносильно заданию соответствующего гомоморфизма $a \colon G \to
+S(X)$.
+
+\begin{example}
+Симметрическая группа $S_n$ естественно действует на множестве $X =
+\lbrace 1, 2, \ldots, n \rbrace$ по формуле $\sigma x =\nobreak
+\sigma (x)$ ($\sigma \in S_n$, $x \in X$). Условие~1) здесь
+выполнено по определению тождественной подстановки, условие~2)
+выполнено по определению композиции подстановок.
+\end{example}
+
+Пусть задано действие группы $G$ на множестве~$X$.
+
+\begin{definition}
+{\it Орбитой} точки $x\in X$ называется подмножество
+$$
+Gx = \lbrace x' \in X \mid x' = gx \ \text{для некоторого} \ g \in G
+\rbrace = \{ gx \mid g\in G\}.
+$$
+\end{definition}
+
+\begin{remark}
+Для точек $x, x' \in X$ отношение \guillemotleft$x'$ лежит в орбите
+$Gx$\guillemotright{} является отношением эквивалентности:
+
+(1) (рефлексивность) $x \in Gx$ для всех $x \in X$: это верно, так
+как $x = ex \in Gx$ для всех $x \in X$;
+
+(2) (симметричность) если $x' \in Gx$, то $x \in Gx'$: это верно,
+так как из условия $x' = gx$ следует $x = ex = (g^{-1}g)x =
+g^{-1}(gx) = g^{-1}x' \in Gx'$;
+
+(3) (транзитивность) если $x' \in Gx$ и $x'' \in Gx'$, то $x'' \in
+Gx$: это верно, так как из условий $x' = gx$ и $x'' = hx'$ следует
+$x'' = hx' = h(gx) = (hg)x \in Gx$.
+
+Отсюда вытекает, что множество $X$ разбивается в объединение попарно
+непересекающихся орбит действия группы~$G$.
+\end{remark}
+
+\begin{definition}
+{\it Стабилизатором \textup(стационарной подгруппой\textup)} точки
+$x \in X$ называется подгруппа $\St(x) := \{ g \in G \mid gx = x
+\}$.
+\end{definition}
+
+\begin{exercise}
+Проверьте, что множество $\St(x)$ действительно является подгруппой
+в~$G$.
+\end{exercise}
+
+%\begin{example}
+%Рассмотрим действие группы $\SL_n(\RR)$, $n \geqslant 2$ на
+%множестве~$\RR^n$, заданное формулой $(A, v) \mapsto A \cdot v$, где
+%в правой части вектор $v$ рассматривается как столбец своих
+%координат. Оказывается, что для этого действия имеется всего две
+%орбиты $\lbrace 0 \rbrace$ и $\RR^n \setminus \lbrace 0 \rbrace$.
+%Чтобы показать, что $\RR^n \setminus\nobreak \lbrace 0 \rbrace$
+%действительно является одной орбитой, достаточно проверить, что
+%всякий ненулевой вектор можно получить, подействовав на элемент
+%$e_1$ (первый базисный вектор) подходящей матрицей из
+%группы~$\SL_n(\RR)$. Пусть $v \in \RR^n$~--- произвольный вектор с
+%координатами $(x_1, \ldots, x_n)$. Покажем, что существует
+%матрица~$A \in \SL_n(\RR)$, для которой $Ae_1 = v$ или,
+%эквивалентно,
+%\begin{equation} \label{eqn1}
+%A\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix} =
+%\begin{pmatrix} x_1\\ x_2 \\ \vdots \\ x_n \end{pmatrix}.
+%\end{equation}
+%Из уравнения~(\ref{eqn1}) следует, что в первом столбце матрицы~$A$
+%должны стоять в точности числа $x_1, \ldots, x_n$. Как мы знаем из
+%линейной алгебры, вектор $v$ можно дополнить до базиса $v, v_2,
+%\ldots, v_n$ пространства~$\RR^n$. Пусть $A'$~--- квадратная матрица
+%порядка~$n$, в которой по столбцам записаны координаты векторов $v,
+%v_2, \ldots, v_n$. Эта матрица невырожденна и удовлетворяет условию
+%$A'e_1 = v$ (а~также $A'e_i = v_i$ для всех $i = 2, \ldots, n$).
+%Однако её определитель может быть отличен от~$1$. Поделив все
+%элементы последнего столбца матрицы $A'$ на $\det A'$, мы получим
+%искомую матрицу~$A$ с определителем~$1$. Итак, мы показали, что
+%$\RR^n \setminus \lbrace 0 \rbrace$~--- одна орбита для нашего
+%действия. Легко видеть, что стабилизатор точки $e_1$ при этом будет
+%состоять из всех матриц в $\SL_n(\RR)$, у которых первый столбец
+%равен $\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}$. (У
+%любой другой точки стабилизатор будет другим!)
+%\end{example}
+
+\begin{lemma}
+Пусть конечная группа $G$ действует на множестве~$X$. Тогда для
+всякого элемента $x\in X$ справедливо равенство
+$$
+|Gx| = |G| / |\St(x)|.
+$$
+В~частности, число элементов в \textup(любой\textup) орбите делит
+порядок группы~$G$.
+\end{lemma}
+
+\begin{proof}
+Рассмотрим множество\footnote{Это множество может не быть
+факторгруппой, так как подгруппа $\St(x)$ не обязана быть нормальной
+в~$G$.} $G / \St(x)$ левых смежных классов группы $G$ по подгруппе
+$\St(x)$ и определим отображение $\psi \colon G / \St(x) \to Gx$ по
+формуле $g\St(x) \mapsto gx$. Это определение корректно, поскольку
+для любого другого представителя $g'$ левого смежного класса
+$g\St(x)$ имеем $g' = g h$, где $h \in \St(x)$, и тогда $g'x = (gh)x
+= g(hx) = gx$. Сюръективность отображения $\psi$ следует из
+определения орбиты $Gx$. Проверим инъективность. Предположим, что
+$g_1 \St(x) = g_2 \St(x)$ для некоторых $g_1, g_2 \in G$. Тогда
+$g_1x = g_2x$. Подействовав на левую и правую части элементом
+$g_2^{-1}$, получим $(g_2^{-1}g_1)x = x$, откуда $g_2^{-1}g_1 \in
+\St(x)$. Последнее и означает, что $g_1 \St(x) = g_2 \St(x)$. Итак,
+мы показали, что отобржание $\psi$ является биекцией. Значит, $|Gx|
+= |G / \St(x)| = [G : \St(x)]$ и требуемое равенство вытекает из
+теоремы Лагранжа (см. лекцию~1).
+\end{proof}
+
+\begin{example}
+Рассмотрим действие группы $S^1 = \lbrace z \in \CC \mid |z| = 1
+\rbrace$ на множестве~$\CC$, заданное
+формулой $(z,w) \mapsto zw$, где $z \in S^1$, $w \in \CC$,
+а~$zw$~--- обычное произведение комплексных чисел. Для этого
+действия орбитами будут множества вида $|z| = c$, где $c \in
+\RR_{\geqslant 0}$,~--- это всевозможные окружности с центром в
+нуле, а также отдельная орбита, состоящая из нуля. Имеем
+$$
+\St(z) =
+\begin{cases}
+\lbrace 1 \rbrace, & \text{если} \ z \ne 0;\\
+S^1, & \text{если} \ z = 0.
+\end{cases}
+$$
+\end{example}
+
+%
+%Пусть снова группа $G$ действует на множестве~$X$.
+%
+%\begin{definition}
+%Действие $G$ на $X$ называется {\it транзитивным}, если для любых
+%$x, x' \in X$ найдётся такой элемент $g \in G$, что $x' = gx$.
+%(Иными словами, все точки множества $X$ образуют одну орбиту.)
+%\end{definition}
+%
+%\begin{definition}
+%Действие $G$ на $X$ называется {\it свободным}, если для любой точки
+%$x \in X$ условие $gx=x$ влечёт $g=e$. (Иными словами, $\St(x) =
+%\lbrace e \rbrace$ для всех $x \in X$.)
+%\end{definition}
+%
+%\begin{definition}
+%Действие $G$ на $X$ называется {\it эффективным}, если условие
+%$gx=x$ для всех $x\in X$ влечёт $g=e$. (Иными словами, $\bigcap
+%\limits_{x \in X} \St(x) = \lbrace e \rbrace$.)
+%\end{definition}
+%
+%\begin{remark}
+%Из определений следует, что всякое свободное действие эффективно.
+%Обратное утверждение неверно, как показывает пример~1 при $n
+%\geqslant 3$, см. ниже.
+%\end{remark}
+%
+%В~примерах 1--3 все действия эффективны. В~примере~1 действие
+%транзитивно, свободно при $n \leqslant 2$ и не свободно при $n
+%\geqslant 3$. В~примере~2 действие не транзитивно и не свободно; но
+%если его ограничить на подмножество $\CC \setminus \lbrace 0
+%\rbrace$ (то есть выбросить из $\CC$ точку~$0$), то оно станет
+%свободным. В примере~3 действие не транзитивно и не свободно; но
+%если его ограничить на подмножество $\RR^n \setminus \lbrace 0
+%\rbrace$, то оно станет транзитивным.
+%
+%\begin{remark}
+%Действие $G$ на $X$ эффективно тогда и только тогда, когда
+%определяемый им гомоморфизм $a \colon G \to S(X)$ инъективен.
+%\end{remark}
+%
+%\begin{definition}
+%{\it Ядром неэффективности} действия группы $G$ на множестве~$X$
+%называется подгруппа $K = \{ g\in G \mid gx = x \ \text{для всех} \
+%x\in X\}$.
+%\end{definition}
+%
+%Легко проверить, что $K = \Ker a$, где $a \colon G \to S(X)$~---
+%определяемый действием гомоморфизм. Отсюда следует, что $K$~---
+%нормальная подгруппа в~$G$. Рассмотрим факторгруппу $G/K$ и
+%определим её действие на множестве $X$ по формуле $(gK)x = gx$.
+%Поскольку $kx = x$ для всех $k \in K$ и $x \in X$, действие
+%определено корректно.
+%
+%\begin{lemma}
+%Определённое выше действие группы $G/K$ на множестве $X$ является
+%эффективным.
+%\end{lemma}
+%
+%\begin{proof}
+%Пусть элемент $g \in G$ таков, что $(gK)x = x$ для всех $x \in X$.
+%Тогда $gx = x$ для всех $x \in X$, откуда $g \in K$ и $gK = K$.
+%\end{proof}
+%
+%Пусть $G$~--- произвольная группа. Рассмотрим три действия $G$ на
+%самой себе, т.\,е. положим $X=G$:
+%
+%1) действие {\it умножениями слева}: $(g,h)\mapsto gh$;
+%
+%2) действие {\it умножениями справа}: $(g,h)\mapsto hg^{-1}$;
+%
+%3) действие {\it сопряжениями}: $(g,h)\mapsto ghg^{-1}$.
+%
+%Непосредственно проверяется, что первые два действия свободны и
+%транзитивны. Орбиты третьего действия называются {\it классами
+%сопряжённости} группы~$G$. Например, $\{e\}$~--- класс сопряжённости
+%в любой группе. В~частности, для нетривиальных групп действие
+%сопряжениями не является транзитивным.
+%
+%\begin{definition}
+%Два действия группы $G$ на множествах $X$ и $Y$ называются {\it
+%изоморфными}, если существует такая биекция $\varphi\colon X\to Y$,
+%что
+%\begin{equation} \label{eqn2}
+%\varphi(gx)=g\varphi(x) \ \text{для любых} \ g\in G, x\in X.
+%\end{equation}
+%\end{definition}
+%
+%\begin{proposition}
+%Всякое свободное транзитивное действие группы $G$ на множестве $X$
+%изоморфно действию группы $G$ на себе левыми сдвигами.
+%\end{proposition}
+%
+%\begin{proof}
+%Зафиксируем произвольный элемент $x\in X$. Покажем, что отображение
+%$\varphi \colon G\to X$, заданное формулой $\varphi(h) = hx$,
+%является искомой биекцией. Сюръективность (соответственно
+%инъективность) отображения $\varphi$ следует из транзитивности
+%(соответственно свободности) действия $G$ на~$X$.
+%Условие~(\ref{eqn2}) следует из цепочки равенств $\varphi(gh) =
+%(gh)x = g(hx) = g(\varphi(h))$.
+%\end{proof}
+%
+%\begin{corollary}
+%Действия группы $G$ на себе правыми и левыми сдвигами изоморфны.
+%\end{corollary}
+%
+%\smallskip
+%
+%{\bf Теорема Кэли.} Всякая конечная группа $G$ порядка $n$ изоморфна
+%подгруппе симметрической группы~$S_n$.
+%
+%\begin{proof}
+%Рассмотрим действие группы $G$ на себе левыми сдвигами. Как мы
+%знаем, это действие свободно, поэтому соответствующий гомоморфизм $a
+%\colon G \to S(G) \simeq\nobreak S_n$ инъективен, т.\,е. $\Ker a =
+%\lbrace e \rbrace$. Учитывая, что $G / \lbrace e \rbrace \cong G$,
+%по теореме о гомоморфизме получаем $G \cong \Im a$.
+%\end{proof}
+
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~10,
+\S\,3)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~1, \S\,3)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава~13, \S\,57)
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,645 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\newcommand{\Ker}{\mathop{\mathrm{Ker}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\newcommand{\xar}{\mathop{\mathrm{char}}}
+
+%\def\Ker{{\rm Ker}}%
+%\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+%\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лекторы И.\,В.~Аржанцев и Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2014/2015 учебный год}
+
+
+\bigskip
+
+\section*{Лекция~9}
+
+\medskip
+
+{\it Примеры полей. Характеристика поля. Расширения полей,
+алгебраические и трансцендентные элементы. Минимальные многочлен.
+Конечное расширение и его степень. Присоединение корня многочлена.
+Поле разложения многочлена: существование и единственность.}
+
+\medskip
+
+Мы знаем не так много примеров полей. Это бесконечные поля $\QQ$,
+$\RR$, $\CC$ и конечные поля $\ZZ_p$, где $p$~--- простое число.
+Конструкция поля отношений позволяет строить новые поля из уже
+имеющихся. А именно, если $K$~--- произвольное поле, то можно
+рассмотреть поле отношений $K(x)$ кольца многочленов $K[x]$ (это
+поле называется \textit{полем рациональных дробей} над~$K$).
+Элементами поля $K(x)$ являются дроби $f(x)/g(x)$, где $f(x), g(x)
+\in K[x]$ и $g(x) \ne 0$.
+
+Несколько других примеров полей:
+$$
+\QQ(\sqrt{2}) = \{a + b \sqrt{2} \mid a, b \in \QQ\}, \quad
+\QQ(\sqrt[3]{2}) = \{a + b \sqrt[3]{2} + c\sqrt[3]{4} \mid a, b,
+c\in\QQ\}, \quad \QQ(\sqrt{-1}) = \{a + b\sqrt{-1} \mid a, b \in \QQ
+\}.
+$$
+
+\begin{definition}
+Пусть $K$~--- произвольное поле. {\it Характеристикой} поля $K$
+называется такое наименьшее натуральное число $p$, что
+$\underbrace{1+\ldots+1}_p = 0$. Если такого натурального $p$ не
+существует, говорят, что характеристика поля равна нулю.
+Обозначение: $\xar K$.
+\end{definition}
+
+Например, $\xar \QQ = \xar \RR = \xar \CC = 0$ и $\xar \ZZ_p = \xar
+\ZZ_p(x) = p$.
+
+Из определения следует, что всякое поле характеристики нуль
+бесконечно. Примером бесконечного поля характеристики $p > 0$
+является поле $\ZZ_p(x)$.
+
+\begin{proposition}
+Характеристика произвольного поля $K$ либо равна нулю, либо является
+простым числом.
+\end{proposition}
+
+\begin{proof}
+Положим $p = \xar K$ и предположим, что $p > 0$. Так как $0 \ne 1$
+в~$K$, то $p \geqslant 2$. Если число $p$ не является простым, то $p
+= mk$ для некоторых $m,k \in \NN$, $1 < m,k < p$. Тогда в $K$ верно
+равенство
+$$
+0 = \underbrace{1 + \ldots + 1}_{mk} = (\underbrace{1 + \ldots +
+1}_m)(\underbrace{1 + \ldots + 1}_k).
+$$
+В~силу минимальности числа~$p$ в последнем выражении обе скобки
+отличны от нуля, но такое невозможно, так как в поле нет делителей
+нуля.
+\end{proof}
+
+\begin{exercise}
+Пересечение любого семейства подполей фиксированного поля~$K$
+является подполем в~$K$. В частности, для всякого подмножества $S
+\subseteq K$ существует наименьшее по включению подполе в~$K$,
+содержащее~$S$. Это подполе совпадает с пересечением всех подполей
+в~$K$, содержащих~$S$.
+\end{exercise}
+
+Из приведённого выше упражнения следует, что в каждом поле
+существует наименьшее по включению подполе, оно называется {\it
+простым подполем}.
+
+\begin{proposition}
+Пусть $K$~--- поле и $K_0$~--- его простое подполе. Тогда:
+
+\textup{(1)} если $\xar K = p > 0$, то $K_0 \cong \ZZ_p$;
+
+\textup{(2)} если $\xar K = 0$, то $K_0 \cong \QQ$.
+\end{proposition}
+
+\begin{proof}
+Пусть $\langle 1 \rangle \subseteq K$~--- циклическая подгруппа по
+сложению, порождённая единицей. Заметим, что $\langle 1 \rangle$~---
+подкольцо в~$K$. Поскольку всякое подполе поля $K$ содержит единицу,
+оно содержит и множество~$\langle 1 \rangle$. Следовательно,
+$\langle 1 \rangle \subseteq K_0$.
+
+Если $\xar K = p > 0$, то мы имеем изоморфизм колец $\langle 1
+\rangle \simeq \ZZ_p$. Но, как мы уже знаем из лекции~6,
+кольцо~$\ZZ_p$ является полем, поэтому $K_0 = \langle 1 \rangle
+\simeq \ZZ_p$.
+
+Если же $\xar K = 0$, то мы имеем изоморфизм колец $\langle 1
+\rangle \cong \ZZ$. Тогда $K_0$ содержит все дроби вида $a/b$, где
+$a,b \in \langle 1 \rangle$ и $b \ne 0$. Ясно, что все такие дроби
+образуют поле, изоморфное полю~$\QQ$.
+\end{proof}
+
+\begin{definition}
+Если $K$~--- подполе поля $F$, то говорят, что $F$~--- {\it
+расширение} поля~$K$.
+\end{definition}
+
+Например, всякое поле есть расширение своего простого подполя.
+
+\begin{definition}
+{\it Степенью} расширения полей $K \subseteq F$ называется
+размерность поля $F$ как векторного пространства над полем~$K$.
+Обозначение $[F : K]$.
+\end{definition}
+
+Например, $[\CC : \RR] = 2$ и $[\RR : \QQ] = \infty$.
+
+\begin{definition}
+Расширение полей $K\subseteq F$ называется {\it конечным}, если $[F
+: K] < \infty$.
+\end{definition}
+
+\begin{proposition}
+Пусть $K\subseteq F$ и $F\subseteq L$~--- конечные расширения полей.
+Тогда расширение $F\subseteq L$ также конечно и $[L:K]=[L:F][F:K]$.
+\end{proposition}
+
+\begin{proof}
+Пусть $e_1,\ldots,e_n$~--- базис $F$ над $K$ и $f_1,\ldots,f_m$~---
+базис $L$ над $F$. Достаточно доказать, что множество
+\begin{equation} \label{eqn_basis}
+\lbrace e_i f_j \mid i = 1,\ldots,n;\, j = 1,\ldots, m \rbrace
+\end{equation}
+является базисом $L$ над~$K$. Для этого сначала покажем, что
+произвольный элемент $a\in L$ представим в виде линейной комбинации
+элементов (\ref{eqn_basis}) с коэффициентами из~$K$. Поскольку $f_1,
+\ldots, f_m$~--- базис $L$ над~$F$, имеем $a = \sum \limits_{j=1}^m
+\alpha_j f_j$ для некоторых $\alpha_j \in F$. Далее, поскольку $e_1,
+\ldots, e_n$~--- базис $F$ над~$K$, для каждого $j = 1, \ldots, m$
+имеем $\alpha_j = \sum \limits_{i = 1}^n \beta_{ij} e_i$ для
+некоторых $\beta_{ij}\in K$. Отсюда получаем, что $a = \sum
+\limits_{i=1}^n \sum \limits_{j=1}^n \beta_{ij} (e_if_j)$.
+
+Теперь проверим линейную независимость элементов~(\ref{eqn_basis}).
+Пусть $\sum \limits_{i=1}^n \sum \limits_{j=1}^n \gamma_{ij}
+(e_jf_i) = 0$, где $\gamma_{ij} \in K$. Переписав это равенство в
+виде $\sum \limits_{j=1}^m (\sum \limits_{i=1}^n \gamma_{ij}e_i)f_j
+= 0$ и воспользовавшись тем, что элементы $f_1, \ldots, f_m$ линейно
+независимы над~$F$, мы получим $\sum \limits_{i=1}^n \gamma_{ij}e_i
+= 0$ для каждого $j = 1, \ldots, m$. Теперь из линейной
+независимости элементов $e_1, \ldots, e_n$ над~$K$ вытекает, что
+$\gamma_{ij} = 0$ при всех $i,j$. Таким образом,
+элементы~(\ref{eqn_basis}) линейно независимы.
+\end{proof}
+
+Пусть $K\subseteq F$~--- расширение полей.
+
+\begin{definition}
+Элемент $\alpha \in F$ называется {\it алгебраическим} над подполем
+$K$, если существует ненулевой многочлен $f(x)\in K[x]$, для
+которого $f(\alpha) = 0$. В~противном случае $\alpha$ называется
+{\it трансцендентным} элементом над~$K$.
+\end{definition}
+
+\begin{definition}
+{\it Минимальным многочленом} алгебраического элемента $\alpha \in
+F$ над подполем $K$ называется ненулевой многочлен $h_\alpha(x)$
+наименьшей степени, для которого $h_\alpha(\alpha) = 0$.
+\end{definition}
+
+\begin{lemma} \label{lemma_min_pol}
+Пусть $\alpha \in F$~--- алгебраический элемент над~$K$ и
+$h_\alpha(x)$~--- его минимальный многочлен. Тогда:
+
+\textup{(а)} $h_\alpha(x)$ определён однозначно с точностью до
+пропорциональности;
+
+\textup{(б)} $h_\alpha(x)$ является неприводимым многочленом над
+полем~$K$;
+
+\textup{(в)} для произвольного многочлена $f(x)\in K[x]$ равенство
+$f(\alpha)=0$ имеет место тогда и только тогда, когда $h_\alpha(x)$
+делит~$f(x)$.
+\end{lemma}
+
+\begin{proof}
+(а) Пусть $h'_\alpha(x)$~--- ещё один минимальный многочлен элемента
+$\alpha$ над~$K$. Тогда $\deg h_\alpha(x) = \deg h'_\alpha(x)$.
+Умножив многочлены $h_\alpha(x)$ и $h'_\alpha(x)$ на подходящие
+константы, добьёмся того, чтобы их старшие коэффициенты стали равны
+единице. После этого положим $g(x) = h_\alpha(x) - h'_\alpha(x)$.
+Тогда $g(\alpha) = 0$ и $\deg g(x) < \deg h_\alpha(x)$. Учитывая
+определение минимального многочлена, мы получаем $g(x) = 0$.
+
+(б) Пусть $h_\alpha(x) = h_1(x) h_2(x)$ для некоторых $h_1(x),
+h_2(x) \in K[x]$, причём $0 < \deg h_i(x) < \deg h_\alpha(x)$ при $i
+= 1,2$. Так как $h_\alpha(\alpha) = 0$, то либо $h_1(\alpha)=0$,
+либо $h_2(\alpha)=0$, что противоречит минимальности~$h_\alpha(x)$.
+
+(в) Очевидно, что если $h_\alpha(x)$ делит $f(x)$, то $f(\alpha) =
+0$. Докажем обратное утверждение. Разделим $f(x)$ на $h_\alpha(x)$ с
+остатком: $f(x) = q(x)h_\alpha(x) + r(x)$, где $q(x), r(x) \in K[x]$
+и $\deg r(x) < \deg h_\alpha(x)$. Тогда условие $f(\alpha)=0$ влечёт
+$r(\alpha) = 0$. Из минимальности многочлена $h_\alpha(x)$ получаем
+$r(x)=0$.
+\end{proof}
+
+Для каждого элемента $\alpha \in F$ обозначим через $K(\alpha)$
+наименьшее подполе в~$F$, содержащее $K$ и~$\alpha$.
+
+\begin{proposition}
+Пусть $\alpha \in F$~--- алгебраический элемент над~$K$ и $n$~---
+степень его минимального многочлена над~$K$. Тогда
+$$
+K(\alpha) = \{\beta_0 + \beta_1 \alpha + \ldots + \beta_{n-1}
+\alpha^{n-1} \mid \beta_0, \ldots, \beta_{n-1} \in K\}.
+$$
+Кроме того, элементы $1, \alpha, \alpha^2, \ldots, \alpha^{n-1}$
+линейно независимы над~$K$. В~частности, $[K(\alpha) : K] = n$.
+\end{proposition}
+
+\begin{proof}
+Легко видеть, что
+$$
+K(\alpha) = \lbrace \frac{f(\alpha)}{g(\alpha)} \mid f(x), g(x) \in
+K[x], f(\alpha) \ne 0 \rbrace.
+$$
+Действительно, такие элементы лежат в любом подполе поля~$F$,
+содержащем~$K$ и~$\alpha$, и сами образуют поле. Теперь возьмём
+произвольный элемент $\frac{f(\alpha)}{g(\alpha)} \in K(\alpha)$ и
+покажем, что он представим в виде, указанном в условии. Пусть
+$h_\alpha(x) \in K[x]$~--- минимальный многочлен элемента~$\alpha$
+над~$K$. Поскольку $g(\alpha) \ne 0$, в силу
+леммы~\ref{lemma_min_pol}(в) многочлен $h_\alpha(x)$ не
+делит~$g(x)$. Но $h_\alpha(x)$ неприводим по
+лемме~\ref{lemma_min_pol}(б), поэтому $(g(x), h_\alpha(x)) = 1$.
+Значит, существуют такие многочлены $u(x), v(x) \in K[x]$, что $u(x)
+g(x) + v(x) h_\alpha(x) = 1$. Подставляя в последнее равенство $x =
+\alpha$, мы получаем $u(\alpha) g(\alpha) = 1$. Отсюда
+$\frac{f(\alpha)}{g(\alpha)} = f(\alpha) u(\alpha)$, и мы избавились
+от знаменателя. Теперь уменьшим степень числителя. Пусть $r(x)$~---
+остаток от деления $f(x)u(x)$ на~$h_\alpha(x)$. Тогда $f(\alpha)
+u(\alpha) = r(\alpha)$ и, значит, $\frac{f(\alpha)}{g(\alpha)} =
+r(\alpha)$, что показывает представимость элемента
+$\frac{f\alpha)}{g(\alpha)}$ в требуемом виде.
+
+Остаётся показать, что элементы $1, \alpha, \ldots, \alpha^{n-1}$
+поля $F$ линейно независимы над~$K$. Если $$\gamma_0 + \gamma_1
+\alpha + \ldots + \gamma_{n-1} \alpha^{n-1} = 0$$ для некоторых
+$\gamma_0, \gamma_1, \ldots, \gamma_{n-1} \in K$, то для многочлена
+$w(x) = \gamma_0 + \gamma_1x + \ldots + \gamma_{n-1}x^{n-1} \in
+K[x]$ получаем $w(\alpha) = 0$. Тогда из
+леммы~\ref{lemma_min_pol}(в) и условия $\deg w(x) < \deg
+h_\alpha(x)$ вытекает, что $w(x) = 0$, то есть $\gamma_0 = \gamma_1
+= \ldots = \gamma_{n-1} = 0$.
+\end{proof}
+
+\begin{theorem}
+Пусть $K$~--- произвольное поле и $f(x)\in K[x]$~--- многочлен
+положительной степени. Тогда существует конечное расширение
+$K\subseteq F$, в котором многочлен $f(x)$ имеет корень.
+\end{theorem}
+
+\begin{proof}
+Достаточно построить конечное расширение, в~котором имеет корень
+один из неприводимых делителей $p(x)$ многочлена~$f(x)$.
+
+Покажем сначала, что факторкольцо $K[x]/(p(x))$ является полем. В
+самом деле, если многочлен $g(x) \in\nobreak K[x]$ не делится
+на~$p(x)$, то $(g(x), p(x)) = 1$, и тогда существуют многочлены
+$u(x), v(x) \in K[x]$, для которых $u(x) g(x) + v(x) p(x) = 1$. Взяв
+образ последнего равенства в факторкольце $K[x] / (p(x))$, мы
+получим
+$$(u(x) + (p(x))) (g(x) + (p(x))) = 1 + (p(x)),$$ т.\,е. элемент
+$u(x)+(p(x))$ является обратным к $g(x)+(p(x))$. Значит, $K[x] /
+(p(x))$~--- поле, и мы возьмём его в качестве~$F$.
+
+Заметим теперь, что расширение $K \subseteq F$ является конечным.
+Действительно, для всякого многочлена $g(x) \in K[x]$ в поле $F =
+K[x]/(p(x))$ имеем $g(x) + (p(x)) = r(x) + (p(x))$, где $r(x)$~---
+остаток от деления $g(x)$ на $p(x)$. Отсюда следует, что $F$
+порождается как векторное пространство над~$K$ элементами
+$$
+1 + (p(x)), x + (p(x)), \ldots, x^{n-1} + (p(x)),
+$$
+где $n = \deg p(x)$. (Так же легко показать, что эти элементы
+образуют базис в $F$ над~$K$.)
+
+Остаётся показать, что в поле $F$ многочлен $p(x)$ имеет корень. Это
+похоже на обман, но корнем будет... $x + (p(x))$. Действительно,
+пусть $p(x) = a_n x^n + a_{n-1} x^{n-1} + a_1x + a_0$, где $a_0,
+a_1, \ldots, a_n \in K$. Тогда
+\begin{multline*}
+p(x + (p(x))) = a_n(x + (p(x)))^n + a_{n-1} (x + (p(x)))^{n-1} +
+\ldots + a_1 (x + (p(x)) + a_0 =\\
+= (a_nx^n + a_{n-1}x^{n-1} + \ldots a_1 x + a_0) + (p(x)) = p(x) +
+(p(x)) = (p(x)),
+\end{multline*}
+а $(p(x))$ есть не что иное, как нуль в~$F$.
+\end{proof}
+
+Говорят, что поле $K[x] / (p(x))$ получено из поля $K$ {\it
+присоединением корня} неприводимого многочлена~$p(x)$. Нетрудно
+проверить, что если $\alpha$~--- некоторый корень многочлена $p(x)$
+в $K[x]/(p(x))$, то поле $K[x]/(p(x))$ совпадает с подполем
+$K(\alpha)$.
+
+\begin{definition}
+Пусть $K$~--- некоторое поле и $f(x)\in K[x]$~--- многочлен
+положительной степени. {\it Полем разложения} многочлена $f(x)$
+называется такое расширение $F$ поля~$K$, что
+
+(1) многочлен $f(x)$ разлагается над $F$ на линейные множители;
+
+(2) корни многочлена $f(x)$ не лежат ни в каком собственном подполе
+поля~$F$, содержащем~$K$.
+\end{definition}
+
+\begin{example}
+Рассмотрим многочлен $f(x) = x^4+x^3+x^2+x+1$ над $\QQ$. Так как
+$(x-1)f(x) = x^5-1$, корнями многочлена $f(x)$ являются все корни
+степени $5$ из единицы, отличные от единицы. Если присоединить к
+$\QQ$ один из корней $\epsilon$ многочлена~$f$, то его остальные
+корни можно получить, возводя число $\epsilon$ в натуральные
+степени. Таким образом, присоединение одного корня сразу приводит к
+полю разложения многочлена.
+\end{example}
+
+
+\begin{example}
+Многочлен $f(x)=x^3-2$ неприводим над полем $\QQ$. Присоединение к
+полю $\QQ$ корня этого многочлена приводит к полю $\QQ[x]/(x^3-2)
+\cong \QQ(\sqrt[3]{2})$. Данное поле не является полем разложения
+многочлена~$f(x)$, поскольку в нём $f(x)$ имеет только один корень и
+не имеет двух других корней. Поскольку корнями данного многочлена
+являются числа
+$$
+\sqrt[3]{2}, \quad \sqrt[3]{2}(-\frac{1}{2} + \cfrac{\sqrt{-3}}{2}),
+\quad \sqrt[3]{2}(-\frac{1}{2} - \frac{\sqrt{-3}}{2}),
+$$
+полем разложения многочлена $f(x)$ является поле
+$$
+F = \{\alpha_0 + \alpha_1 \sqrt[3]{2} + \alpha_2 \sqrt[3]{4} +
+\alpha_3 \sqrt{-3} + \alpha_4 \sqrt[3]{2} \sqrt{-3} + \alpha_5
+\sqrt[3]{4} \sqrt{-3} \mid \alpha_i \in \QQ\},
+$$
+которое имеет над $\QQ$ степень~$6$.
+\end{example}
+
+Пусть $F$ и $F'$~--- два расширения поля~$K$. Говорят, что
+изоморфизм $F \xrightarrow{\sim} F'$ является \textit{тождественным
+на~$K$}, если при этом изоморфизме каждый элемент поля $K$ переходит
+в себя.
+
+\begin{theorem}
+Поле разложения любого многочлена $f(x) \in K[x]$ существует и
+единственно с точностью до изоморфизма, тождественного на~$K$.
+\end{theorem}
+
+Доказательство этой теоремы можно найти, например, в книге
+Э.\,Б.~Винберга \guillemotleft Курс алгебры\guillemotright{}. Мы не
+включаем это доказательство в программу нашего курса.
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~1,
+\S\S\,3--6 и глава~9, \S\,5)
+\bibitem{Ko1}
+А.\,И.~Кострикин. Введение в алгебру. Основы алгебры. М.: Наука.
+Физматлит, 1994 (глава~4, \S\,3)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~5, \S\,1)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава~14, \S\S\,66-67)
+\end{thebibliography}
+
+
+
+\end{document}

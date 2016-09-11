@@ -1,0 +1,58 @@
+\input{header.tex}
+
+\begin{document}
+\maketitle
+
+Вход --- множество точек $(x_i, y_i)$. Выход --- $i, j: d((x_i, y_i), (x_j, y_j))$ --- минимально.
+
+``Разделяй и властвуй'':
+
+\begin{lstlisting}
+closest_pair_rec(P_x, P_y)
+    if n < 4 then
+        solve directly
+    L_x := P_x[1..ceil(n/2)]. L_y = ...
+    R_x := P_x[ceil(n/2)+1..n], R_y = ...
+    (l_1, l_2) := closest_pair_rec(L_x, L_y)
+    (r_1, r_2) := closest_pair_rec(R_x, R_y)
+    delta := min(d(l_1, l_2), d(r_1, r_2))
+    
+    S_x^l := {(x, y) \in L_x | x^*-x < delta}
+    S_x^r := {(x, y) \in L_x | x-x^* < delta}
+
+    S_y := {(x, y) \in P_y | |x-x^*| \leqslant delta}
+
+    for i := 1 to |S_y| do
+        c_i := argmin_{i-15\leqslant j\leqslant i+15}(d(S_y[i], S_y[j]))
+        if d(S_y[i], s_y[c]) < delta then
+
+        WAAAAAAAAT
+\end{lstlisting}
+
+\begin{lstlisting}
+closest_pair(P)
+    P_x := sort P by x
+    P_y := sort P by y
+    closest_pair_rec(P_x, P_y)
+\end{lstlisting}
+
+Теперь нужно объединить. Сколько времени у нас есть?
+
+Для $n\log n$ $T(n) = 2T(\frac{n}{2}) + O(n)$, то есть у нас остаётся $O(n)$
+
+Теперь нам нужно проверить, нет ли пары ближе, не по рзные стороны от границы. Нам интересна ближайшая такая пара, но только если расстояние меньше delta.
+
+Пусть $x^* = max\left\{ x\mid(x, y)\in L_x \right\}$
+
+\begin{lstlisting}
+\end{lstlisting}
+
+Тут картинка
+
+Рассмотрим точки, попавшие в полосу. Для всех точек в $L_x$ нам не обязательно рассматривать все точки в полосе в $R_y$. Рассмотрим только те, что по $y$ лежат в delta-окрестности
+
+
+Возьмём полосу и поделим на квадраты со стороной $\delta/2$. Сколько точек в каждом таком квадрате? Если там есть две точки, то расстояние между ними меньше $\delta$, а это невозможно.
+
+Понятно, что между точками на расстоянии $<\delta$ не более трёх рядов квадратов. Значит, всегда будет достаточно рассмотреть 15 ближайших точек.
+\end{document}

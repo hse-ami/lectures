@@ -1,0 +1,788 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\newcommand{\Ker}{\mathop{\mathrm{Ker}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+%\newcommand{\Tor}{\mathop{\mathrm{Tor}}}
+
+%\def\Ker{{\rm Ker}}%
+%\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+%\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лектор Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2015/2016 учебный год}
+
+
+\bigskip
+
+\section*{Лекция 6}
+
+\medskip
+
+{\it Три действия группы на себе. Теорема Кэли. Классы сопряжённости.
+Кольца. Делители нуля, обратимые элементы, нильпотенты. Поля и алгебры.
+Идеалы. }
+% и факторкольца. Теорема о
+%гомоморфизме. Центр алгебры матриц над полем. Простота алгебры
+%матриц над полем.}
+
+\medskip
+
+Пусть $G$~--- произвольная группа. Рассмотрим три действия $G$ на
+самой себе, т.\,е. положим $X=G$:
+
+1) действие {\it умножениями слева (левыми сдвигами)}: $(g,h)\mapsto gh$;
+
+2) действие {\it умножениями справа (правыми сдвигами)}: $(g,h)\mapsto hg^{-1}$;
+
+3) действие {\it сопряжениями}: $(g,h)\mapsto ghg^{-1}$.
+
+\begin{remark}
+Для действий левыми и правыми сдвигами есть ровно одна орбита (сама $G$) и
+стабилизатор любой точки тривиален, то есть $\St(x) = \{0\}$.
+\end{remark}
+
+\begin{definition}
+Орбитой действия сопряжениями называются \textit{классами сопряженности}
+\end{definition}
+
+\begin{example}
+В любой группе $G$ есть класс сопряженности $\{e\}$. \\Также, если $G$ коммутативна, то $\{x\}$ является классом сопряженности для всех $x$ из $G$.
+\end{example}
+
+\smallskip
+
+{\bf Теорема Кэли.} Всякая конечная группа $G$ порядка $n$ изоморфна
+подгруппе симметрической группы~$S_n$.
+
+\begin{proof}
+Рассмотрим действие группы $G$ на себе левыми сдвигами. Как мы
+знаем, это действие свободно, поэтому соответствующий гомоморфизм $a
+\colon G \to S(G) \simeq\nobreak S_n$ инъективен, т.\,е. $\Ker a =
+\lbrace e \rbrace$. Учитывая, что $G / \lbrace e \rbrace \cong G$,
+по теореме о гомоморфизме получаем $G \cong \Im a$.
+\end{proof}
+
+\medskip
+
+Теперь приступим к изучению колец.
+\begin{definition}
+{\it Кольцом} называется множество $R$ с двумя бинарными операциями
+\guillemotleft $+$\guillemotright{}~(сложение) и \guillemotleft
+$\times$\guillemotright{}~(умножение), обладающими следующими
+свойствами:
+
+1) $(R,+)$ является абелевой группой (называемой {\it аддитивной
+группой} кольца $R$);
+
+2) выполнены {\it левая и правая дистрибутивности}, т.е.
+$$
+a(b+c)=ab+ac \quad \text{и} \quad (b+c)a=ba+ca \quad \text{для всех}
+\ a,b,c\in R.
+$$
+
+В этом курсе мы рассматриваем только ассоциативные кольца с
+единицей, поэтому дополнительно считаем, что выполнены ещё два
+свойства:
+
+3) $a(bc)=(ab)c$ для всех $a,b,c\in R$ (\textit{ассоциативность
+умножения});
+
+4) существует такой элемент $1\in R$ (называемый \textit{единицей}),
+что
+\begin{equation} \label{eq1}
+a1 = 1a = a \ \text{для всякого} \ a \in R.
+\end{equation}
+\end{definition}
+
+\begin{remark}
+В произвольном кольце $R$ выполнены равенства
+\begin{equation} \label{eq2}
+a0 = 0a = 0 \ \text{для всякого} \ a \in R.
+\end{equation}
+В самом деле, имеем $a0 = a(0 + 0) = a0 + a0$, откуда $0 = a0$.
+Аналогично устанавливается равенство $0a = 0$.
+\end{remark}
+
+\begin{remark}
+Если кольцо $R$ содержит более одного элемента, то $0\ne 1$. Это
+следует из соотношений~(\ref{eq1}) и~(\ref{eq2}).
+\end{remark}
+
+\textbf{Примеры колец:}
+\begin{enumerate}[label=\textup{(\arabic*)},ref=\textup{\arabic*}]
+\item \label{ex_num}
+числовые кольца $\ZZ$, $\QQ$, $\RR$, $\CC$;
+
+\item
+кольцо $\ZZ_n$ вычетов по модулю~$n$;
+
+\item \label{ex_mat}
+кольцо $\Mat(n\times n, \RR)$ матриц с коэффициентами из~$\RR$;
+
+\item \label{ex_pol}
+кольцо $\RR[x]$ многочленов от переменной $x$ с коэффициентами
+из~$\RR$;
+
+\item
+кольцо $\RR[[x]]$ \textit{формальных степенных рядов} от переменной
+$x$ с коэффициентами из~$\RR$:
+$$
+\RR[[x]] := \lbrace \sum \limits_{i = 0}^\infty a_i x^i \mid a_i \in
+\RR \rbrace;
+$$
+
+\item \label{ex_func}
+кольцо $\FFF(M, \RR)$ всех функций из множества $M$ во
+множество~$\RR$ с операциями поточечного сложения и умножения:
+$$
+(f_1 + f_2)(m) := f_1(m) + f_2(m); \quad (f_1f_2)(m) := f_1(m)
+f_2(m) \quad \text{для всех} \quad f_1,f_2 \in \FFF(M, \RR), m \in
+M.
+$$
+\end{enumerate}
+
+\begin{remark}
+В примерах (\ref{ex_mat})--(\ref{ex_func}) вместо $\RR$ можно брать
+любое кольцо, в частности $\ZZ$, $\QQ$, $\CC$, $\ZZ_n$.
+\end{remark}
+
+\begin{remark}
+Обобщая пример~(\ref{ex_pol}), можно рассматривать кольцо $\RR[x_1,
+\ldots, x_n]$ многочленов от нескольких переменных $x_1, \ldots,
+x_n$ с коэффициентами из~$\RR$.
+\end{remark}
+
+\begin{definition}
+Кольцо $R$ называется {\it коммутативным}, если $ab=ba$ для всех
+$a,b\in R$.
+\end{definition}
+
+Все перечисленные в примерах (\ref{ex_num})--(\ref{ex_func}) кольца,
+кроме $\Mat(n\times n, \RR)$ при $n \geqslant 2$, коммутативны.
+
+Пусть $R$~--- кольцо.
+
+\begin{definition}
+Элемент $a\in R$ называется {\it обратимым}, если найдётся такой
+$b\in R$, что $ab=ba=1$. Такой элемент $b$ обозначается классическим образом как $a^{-1}$.
+\end{definition}
+
+\begin{remark}
+Все обратимые элементы кольца $R$ образуют группу относительно
+операции умножения.
+\end{remark}
+
+\begin{definition}
+Элемент $a\in R$ называется \textit{левым} (соответственно
+\textit{правым}) \textit{делителем нуля}, если $a \ne 0$ и найдётся
+такой $b \in R$, $b\ne 0$, что $ab=0$ (соответственно $ba = 0$).
+\end{definition}
+
+\begin{remark}
+В~случае коммутативных колец понятия левого и правого делителей нуля
+совпадают, поэтому говорят просто о делителях нуля.
+\end{remark}
+
+\begin{remark}
+Все делители нуля в $R$ необратимы: если $ab = 0$, $a \ne 0$, $b \ne
+0$ и существует $a^{-1}$, то получаем $a^{-1}ab = a^{-1}0$, откуда
+$b = 0$~--- противоречие.
+\end{remark}
+
+\begin{definition}
+Элемент $a\in R$ называется {\it нильпотентом}, если $a \ne 0$ и
+найдётся такое $m \in \NN$, что $a^m=0$.
+\end{definition}
+
+\begin{remark}
+Всякий нильпотент в $R$ является делителем нуля: если $a \ne 0$,
+$a^m = 0$ и число $m$ наименьшее с таким свойством, то $m \geqslant
+2$ и $a^{m-1} \ne 0$, откуда $aa^{m-1} = a^{m-1}a = 0$.
+\end{remark}
+
+%\begin{definition}
+%Элемент $a\in R$ называется {\it идемпотентом}, если $a^2=a$.
+%\end{definition}
+
+\begin{definition}
+{\it Полем} называется коммутативное ассоциативное кольцо $K$ с
+единицей, в котором всякий ненулевой элемент обратим.
+\end{definition}
+
+\begin{remark}
+Тривиальное кольцо $\lbrace 0 \rbrace$ полем не считается, поэтому
+$0 \ne 1$ в любом поле.
+\end{remark}
+
+\textbf{Примеры полей:} $\QQ$, $\RR$, $\CC$, $\ZZ_2$.
+
+\begin{proposition}
+Кольцо вычетов $\ZZ_n$ является полем тогда и только тогда, когда
+$n$~--- простое число.
+\end{proposition}
+
+\begin{proof}
+Если число $n$ составное, то $n = m k$, где $1 < m, k < n$. Тогда
+$\overline{m} \overline{k} = \overline{n} = \overline{0}$.
+Следовательно, $\overline k$ и $\overline m$~--- делители нуля в
+$\ZZ_n$, ввиду чего не все ненулевые элементы там обратимы.
+
+Если $n = p$~--- простое число, то возьмём произвольный ненулевой
+вычет $\overline{a} \in \ZZ_p$ и покажем, что он обратим. Рассмотрим
+вычеты
+\begin{equation} \label{eq3}
+\overline{1} \overline{a}, \overline{2} \overline{a}, \ldots,
+\overline{(p-1)} \overline{a}.
+\end{equation}
+Если $\overline{r} \overline{a} = \overline{s} \overline{a}$ при $1
+\leqslant r,s \leqslant p-1$, то число $(r - s)a$ делится на~$p$. В
+силу взаимной простоты чисел $a$ и $p$ получаем, что число $r - s$
+делится на~$p$. Тогда из условия $|r-s| \leqslant p - 2$ следует,
+что $r = s$. Это рассуждение показывает, что все вычеты~(\ref{eq3})
+попарно различны. Поскольку все они отличны от нуля, среди них
+должна найтись единица: существует такое $b \in \lbrace 1, \ldots,
+p-1 \rbrace$, что $\overline{b} \overline{a}=\overline{1}$. Это и
+означает, что вычет $\overline{a}$ обратим.
+\end{proof}
+
+\begin{definition}
+{\it Алгеброй} над полем $K$ (или кратко \textit{$K$-алгеброй})
+называется множество $A$ с операциями сложения, умножения и
+умножения на элементы поля $K$, обладающими следующими свойствами:
+
+1) относительно сложения и умножения $A$ есть кольцо;
+
+2) относительно сложения и умножения на элементы из $K$ множество
+$A$ есть векторное пространство;
+
+3 $(\lambda a)b=a(\lambda b)=\lambda(ab)$ для любых $\lambda\in K$ и
+$a,b\in A$.
+
+{\it Размерностью} алгебры $A$ называется её размерность как
+векторного пространства над~$K$. (Обозначение: $\dim_K A$.)
+\end{definition}
+
+\textbf{Примеры.}
+
+1) Алгебра матриц $\Mat(n\times n, K)$ над
+произвольным полем~$K$. Её размерность равна $n^2$.
+
+2) Алгебра $K[x]$ многочленов от переменной $x$ над произвольным
+полем~$K$. Её размерность равна~$\infty$.
+
+3) $K, F$ --- поля, $K \subset F$, $F$ --- алгебра над $K$. \\
+Если это $\RR \subset \CC$, то $\dim_\RR\CC = 2$.\\
+Если это $\QQ \subset \RR$, то $\dim_\QQ\RR = \infty$.
+
+\begin{definition}
+\textit{Подкольцом} кольца $R$ называется всякое подмножество $R'
+\subseteq R$, замкнутое относительно операций сложения и умножения
+(т.\,е. $a + b \in R'$ и $ab \in R'$ для всех $a,b \in R'$) и
+являющееся кольцом относительно этих операций. \textit{Подполем}
+называется всякое подкольцо, являющееся полем.
+\end{definition}
+
+Например, $\ZZ$ является подкольцом в~$\QQ$, а~скалярные матрицы
+образуют подполе в кольце $\Mat(n \times n, \RR)$.
+
+\begin{remark}
+Если $K$~--- подполе поля~$F$, то $F$ является алгеброй над~$K$.
+Так, поле $\CC$ является бесконечномерной алгеброй над~$\QQ$, тогда
+как над $\RR$ имеет размерность~$2$.
+\end{remark}
+
+\begin{definition}
+\textit{Подалгеброй} алгебры $A$ (над полем~$K$) называется всякое
+подмножество $A' \subseteq A$, замкнутое относительно всех трёх
+имеющихся в $A$ операций (сложения, умножения и умножения на
+элементы из~$K$) и являющееся алгеброй (над~$K$) относительно этих
+операций.
+\end{definition}
+
+Легко видеть, что подмножество $A' \subseteq A$ является алгеброй
+тогда и только тогда, когда оно является одновременно подкольцом и
+векторным подпространством в~$A$.
+
+Гомоморфизмы колец, алгебр определяются естественным образом как
+отображения, сохраняющие все операции.
+
+\begin{exercise}
+Сформулируйте точные определения гомоморфизма колец и гомоморфизма
+алгебр.
+\end{exercise}
+
+\begin{definition}
+\textit{Изоморфизмом} колец, алгебр называется всякий гомоморфизм,
+являющийся биекцией.
+\end{definition}
+
+В теории групп нормальные подгруппы обладают тем свойством, что по
+ним можно \guillemotleft факторизовать\guillemotright{}. В~этом
+смысле аналогами нормальных подгрупп в теории колец служат идеалы.
+
+\begin{definition}
+Подмножество $I$ кольца $R$ называется (\textit{двусторонним}) {\it
+идеалом}, если оно является подгруппой по сложению и $ra\in I$,
+$ar\in I$ для любых $a\in I$, $r\in R$.
+\end{definition}
+
+\begin{remark}
+В~некоммутативных кольцах рассматривают также левые и правые идеалы.
+\end{remark}
+
+В каждом кольце $R$ есть {\it несобственные} идеалы $I=0$ и $I=R$.
+Все остальные идеалы называются {\it собственными}.
+
+\begin{exercise}
+Пусть $R$~--- коммутативное кольцо. С~каждым элементом $a \in R$
+связан идеал $(a) := \{ ra \mid r \in R \}$.
+\end{exercise}
+
+\begin{definition}
+Идеал $I$ называется {\it главным}, если существует такой элемент
+$a\in R$, что $I=(a)$. (В~этой ситуации говорят, что $I$ порождён
+элементом~$a$.)
+\end{definition}
+
+\textbf{Пример.} В~кольце $\ZZ$ подмножество $k \ZZ$ ($k \in \ZZ$)
+является главным идеалом, порождённым элементом~$k$. Более того, все
+идеалы в $\ZZ$ являются главными.
+
+\begin{remark}
+Главный идеал $(a)$ является несобственным тогда и только тогда,
+когда $a=0$ или $a$ обратим.
+\end{remark}
+
+Более общо, с каждым подмножеством $S \subseteq R$ связан идеал
+$$
+(S) := \{ r_1 a_1 + \ldots + r_k a_k \mid a_i \in S, r_i \in R,
+k\in\NN\}.
+$$
+(Проверьте, что это действительно идеал!) Это наименьший по
+включению идеал в~$R$, содержащий подмножество~$S$. В~этой ситуации
+говорят, что идеал $I=(S)$ порождён подмножеством~$S$.
+
+%
+%Вернёмся к случаю произвольного кольца $R$. Поскольку любой идеал
+%$I$ является подгруппой абелевой группы $(R,+)$, мы можем
+%рассмотреть факторгруппу $R/I$. Введём на ней умножение по формуле
+%$$
+%(a+I)(b+I) := ab + I.
+%$$
+%Покажем, что это определение корректно. Пусть элементы $a',b' \in R$
+%таковы, что $a' + I = a + I$ и $b' + I = b + I$. Проверим, что $a'b'
+%+ I = ab + I$. Заметим, что $a' = a + x$ и $b' = b + y$ для
+%некоторых $x, y \in I$. Тогда
+%$$
+%a'b' + I = (a + x)(b + y) + I = ab + ay + xb + xy + I = ab + I,
+%$$
+%поскольку $ay, xb, xy \in I$ в силу определения идеала.
+%
+%\begin{exercise}
+%Проверьте, что множество $R/I$ является кольцом относительно
+%имеющейся там операции сложения и только что введённой операции
+%умножения.
+%\end{exercise}
+%
+%\begin{definition}
+%Кольцо $R/I$ называется {\it факторкольцом} кольца $R$ по
+%идеалу~$I$.
+%\end{definition}
+%
+%\textbf{Пример.} $\ZZ / n \ZZ = \ZZ_n$.
+%
+%Пусть $\varphi\colon R\to R'$~--- гомоморфизм колец. Тогда
+%определены его ядро $\Ker \varphi = \lbrace r \in R \mid \varphi(r)
+%= 0 \rbrace$ и образ $\Im \varphi = \lbrace \varphi(r) \mid r \in R
+%\rbrace \subseteq R'$.
+%
+%\begin{lemma}
+%Ядро $\Ker \varphi$ является идеалом в~$R$.
+%\end{lemma}
+%
+%\begin{proof}
+%Так как $\varphi$~--- гомоморфизм абелевых групп, то $\Ker \varphi$
+%является подгруппой в $R$ по сложению. Покажем теперь, что $ra \in
+%\Ker \varphi$ и $ar \in \Ker \varphi$ для произвольных элементов $a
+%\in \Ker \varphi$ и $r \in R$. Имеем $\varphi(ra) = \varphi(r)
+%\varphi(a) = \varphi(r) 0 = 0$, откуда $ra \in \Ker \varphi$.
+%Аналогично получаем $ar \in \Ker \varphi$.
+%\end{proof}
+%
+%\begin{exercise}
+%Проверьте, $\Im \varphi$~--- подкольцо в~$R'$.
+%\end{exercise}
+%
+%\smallskip
+%
+%{\bf Теорема о гомоморфизме для колец.}\ Пусть $\varphi\colon R\to
+%R'$~-- гомоморфизм колец. Тогда имеет место изоморфизм
+%$$
+%R/\Ker\,\varphi\cong\Im\varphi.
+%$$
+%
+%\smallskip
+%
+%\begin{proof}
+%Положим для краткости $I = \Ker \varphi$ и рассмотрим отображение
+%$$
+%\pi \colon R/I \to \Im \varphi, \quad a+I \mapsto \varphi(a).
+%$$
+%Из доказательства теоремы о гомоморфизме для групп следует, что
+%отображение $\pi$ корректно определено и является изоморфизмом
+%абелевых групп (по сложению). Покажем, что $\pi$~--- изоморфизм
+%колец. Для этого остаётся проверить, что $\pi$ сохраняет операцию
+%умножения:
+%$$
+%\pi((a+I)(b+I)) = \pi(ab+I) = \varphi(ab) = \varphi(a) \varphi(b) =
+%\pi(a+I) \pi(b+I).
+%$$
+%\end{proof}
+%
+%\begin{example}
+%Пусть $R = \FFF(M, \RR)$. Зафиксируем произвольную точку $m_0 \in M$
+%и рассмотрим гомоморфизм $\varphi \colon R \to \RR$, $f \mapsto
+%f(m_0)$. Ясно, что гомоморфизм $\varphi$ сюръективен. Его ядром
+%является идеал $I$ всех функций, обращающихся в нуль в точке $m_0$.
+%По теореме о гомоморфизме получаем $R / I \cong \RR$.
+%\end{example}
+%
+%\begin{definition}
+%Кольцо $R$ называется {\it простым}, если в нём нет собственных
+%(двусторонних) идеалов.
+%\end{definition}
+%
+%\textbf{Пример.} Всякое поле является простым кольцом.
+%
+%\begin{definition}
+%\textit{Центром} алгебры $A$ над полем $K$ называется её
+%подмножество
+%$$
+%Z(A) = \{ a \in A \mid ab = ba \ \text{для всех} \ b \in A \}.
+%$$
+%\end{definition}
+%
+%\begin{theorem}
+%Пусть $K$~--- поле, $n$~--- натуральное число и $A = \Mat(n \times
+%n, K)$~--- алгебра квадратных матриц порядка~$n$ над полем~$K$.
+%
+%\textup{(1)} $Z(A) = \lbrace \lambda E \mid \lambda \in K \rbrace$,
+%где $E$~--- единичная матрица \textup(в частности, $Z(A)$~---
+%одномерное подпространство в~$A$\textup);
+%
+%\textup{(2)} алгебра $A$ проста \textup(как кольцо\textup).
+%\end{theorem}
+%
+%\begin{proof}
+%Для каждой пары индексов $i,j \in \lbrace 1, \ldots, n \rbrace$
+%обозначим через $E_{ij}$ соответствующую \textit{матричную
+%единицу}~--- такую матрицу, в которой на $(i,j)$-месте стоит
+%единица, а на всех остальных местах~--- нули. Непосредственная
+%проверка показывает, что
+%$$
+%E_{ij}E_{kl} =
+%\begin{cases}
+%E_{il}, & \ \text{если} \ j = k;\\
+%0, & \ \text{если} \ j \ne k.
+%\end{cases}
+%$$
+%Заметим, что матричные единицы образуют базис в~$A$ и всякая матрица
+%$X = (x_{kl})$ представима в виде $X = \sum \limits_{k,l = 1}^n
+%x_{kl} E_{kl}$.
+%
+%(1) Пусть матрица $X = \sum \limits_{k,l = 1}^n x_{kl} E_{kl}$ лежит
+%в $Z(A)$. Тогда $X$ коммутирует со всеми матричными единицами.
+%Выясним, что означает условие $XE_{ij} = E_{ij}X$. Имеем
+%$$
+%XE_{ij} = (\sum \limits_{k,l = 1}^n x_{kl} E_{kl})E_{ij} = \sum
+%\limits_{k = 1}^n x_{ki}E_{kj}; \qquad E_{ij}X = E_{ij}(\sum
+%\limits_{k,l = 1}^n x_{kl} E_{kl}) = \sum \limits_{l = 1}^n
+%x_{jl}E_{il}.
+%$$
+%Сравнивая правые части двух равенств, получаем $x_{ii} = x_{jj}$,
+%$x_{ki}=0$ при $k \ne i$ и $x_{jl}=0$ при $j \ne l$. Поскольку эти
+%равенства имеют место при любых значениях $i,j$, мы получаем, что
+%матрица $X$ скалярна, т.\,е. $X = \lambda E$ для некоторого $\lambda
+%\in K$. С~другой стороны, ясно, что всякая скалярная матрица лежит в
+%$Z(A)$.
+%
+%(2) Пусть $I$~--- двусторонний идеал алгебры~$A$. Если $I \ne
+%\lbrace 0 \rbrace$, то $I$ содержит ненулевую матрицу~$X$. Покажем,
+%что тогда $I = A$. Пусть индексы $k,l$ таковы, что $x_{kl} \ne 0$.
+%Тогда
+%$$
+%E_{ik} X E_{lj} = E_{ik}(\sum_{p,q = 1}^n x_{pq} E_{pq}) E_{lj} =
+%E_{ik} \sum \limits_{p = 1}^n x_{pl}E_{pj} = x_{kl} E_{ij} \in I.
+%$$
+%Домножая $x_{kl}E_{ij}$ на скалярную матрицу $(x_{kl})^{-1}E$, мы
+%получаем, что $E_{ij} \in I$. Из произвольности выбора $i,j$
+%следует, что все матричные единицы лежат в~$I$. Отсюда $I = A$, что
+%и требовалось.
+%\end{proof}
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~1,
+\S\,3,4,6,8,9 и глава~9, \S\,2)
+\bibitem{Ko1}
+А.\,И.~Кострикин. Введение в алгебру. Основы алгебры. М.: Наука.
+Физматлит, 1994 (глава~4, \S\,3)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~4, \S\,1,4)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава 14, \S\,63--64)
+\end{thebibliography}
+
+\end{document}

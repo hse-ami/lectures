@@ -1,0 +1,590 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\def\Ker{{\rm Ker}}%
+\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exc}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лектор Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2015/2016 учебный год}
+
+
+\bigskip
+
+\section*{Лекция 2}
+
+\medskip
+
+{\it Следствия из теоремы Лагранжа. Нормальные подгруппы. Факторгруппы и теорема о гомоморфизме. Прямое произведение групп. Разложение конечной циклической группы.}
+
+\medskip
+
+Рассмотрим некоторые следствия из теоремы Лагранжа.
+
+\begin{corollary} \label{c1}
+Пусть $G$~--- конечная группа и $H\subseteq G$~--- подгруппа. Тогда
+$|H|$ делит $|G|$.
+\end{corollary}
+
+\begin{corollary} \label{c2}
+Пусть $G$~--- конечная группа и $g\in G$. Тогда $\ord(g)$ делит
+$|G|$.
+\end{corollary}
+
+\begin{proof}
+Это вытекает из следствия~\ref{c1} и предложения~2 прошлой лекции.
+\end{proof}
+
+\begin{corollary} \label{c3}
+Пусть $G$~--- конечная группа и $g\in G$. Тогда $g^{|G|}=e$.
+\end{corollary}
+
+\begin{proof}
+Согласно следствию~\ref{c2}, мы имеем $|G|=\ord(g) \cdot s$, откуда
+$g^{|G|}=(g^{\ord(g)})^s=e^s=e$.
+\end{proof}
+
+\begin{corollary} \label{c5}
+Пусть $G$~--- группа. Предположим, что $|G|$~--- простое число.
+Тогда $G$~--- циклическая группа, порождаемая любым своим
+неединичным элементом.
+\end{corollary}
+
+\begin{proof}
+Пусть $g\in G$~--- произвольный неединичный элемент. Тогда
+циклическая подгруппа $\langle g\rangle$ содержит более одного
+элемента и $|\langle g\rangle|$ делит $|G|$ по следствию~\ref{c1}.
+Значит, $|\langle g\rangle|=|G|$, откуда $G=\langle g\rangle$.
+\end{proof}
+
+Наряду с левым смежным классом можно определить {\it правый смежный
+класс} элемента $g$ группы $G$ по подгруппе $H$:
+$$
+Hg=\{hg \mid h\in H\}.
+$$
+
+Повторяя доказательство теоремы Лагранжа для правых смежных классов,
+мы получим, что для конечной группы $G$ число правых смежных классов
+по подгруппе $H$ равно числу левых смежных классов и равно
+$|G|/|H|$. В то же время равенство $gH=Hg$ выполнено не всегда.
+Разумеется, оно выполнено, если группа $G$ абелева. Подгруппы $H$
+(неабелевых) групп $G$, для которых $gH=Hg$ выполнено для любого
+$g\in G$, будут изучаться в следующей лекции.
+
+\begin{definition}
+Подгруппа $H$ группы $G$ называется {\it нормальной}, если $gH=Hg$
+для любого $g\in G$.
+\end{definition}
+
+\begin{proposition}
+Для подгруппы $H \subseteq G$ следующие условия эквивалентны:
+
+\vspace{-2mm}
+\begin{enumerate}
+\item[(1)]
+$H$ нормальна;
+
+\item[(2)]
+$gHg^{-1} \subseteq H$ для любого $g \in G$;
+
+\item[(3)]
+$gHg^{-1}=H$ для любого $g\in G$.
+\end{enumerate}
+\end{proposition}
+
+\vspace{-6mm}
+
+\begin{proof}
+(1)$\Rightarrow$(2) Пусть $h \in H$ и $g \in G$. Поскольку $gH =
+Hg$, имеем $gh = h'g$ для некоторого $h' \in H$. Тогда $ghg^{-1} =
+h'gg^{-1} = h' \in H$.\\
+(2)$\Rightarrow$(3) Так как $gHg^{-1} \subseteq H$, остаётся
+проверить обратное включение. Для $h \in H$ имеем $h = gg^{-1} h g
+g^{-1} = g(g^{-1}hg)g^{-1} \subseteq gHg^{-1}$, поскольку $g^{-1}hg
+\in H$ в силу пункта~(2), где вместо $g$ взято $g^{-1}$.
+
+(3)$\Rightarrow$(1) Для произвольного $g \in G$ в силу (3) имеем $gH
+= gHg^{-1} g \subseteq Hg$, так что $gH \subseteq Hg$. Аналогично
+проверяется обратное включение.
+\end{proof}
+\vspace{-1mm}
+
+Условие (2) в этом предложении кажется излишним, но именно его
+удобно проверять при доказательстве нормальности подгруппы~$H$.
+
+Обозначим через $G/H$ множество (левых) смежных классов группы $G$
+по нормальной подгруппе~$H$. На $G/H$ можно определить бинарную
+операцию следующим образом:
+$$
+(g_1H)(g_2H):=g_1g_2H.
+$$
+
+Зачем здесь нужна нормальность подгруппы $H$? Для проверки
+корректности: заменим $g_1$ и $g_2$ другими представителями $g_1h_1$
+и $g_2h_2$ тех же смежных классов. Нужно проверить, что
+$g_1g_2H=g_1h_1g_2h_2H$. Это следует из того, что
+$g_1h_1g_2h_2=g_1g_2(g_2^{-1}h_1g_2)h_2$ и $g_2^{-1}h_1g_2$ лежит в
+$H$.
+
+Ясно, что указанная операция на множестве $G/H$ ассоциативна,
+обладает нейтральным элементом $eH$ и для каждого элемента $gH$ есть
+обратный элемент $g^{-1}H$.
+
+\begin{definition}
+Множество $G/H$ с указанной операцией называется {\it факторгруппой}
+группы $G$ по нормальной подгруппе $H$.
+\end{definition}
+
+\begin{example}
+Если $G=(\ZZ,+)$ и $H=n\ZZ$, то $G/H$~--- это в точности группа
+вычетов $(\ZZ_n,+)$.
+\end{example}
+
+Как представлять себе факторгруппу? В этом помогает теорема о
+гомоморфизме. Но прежде чем её сформулировать, обсудим ещё несколько
+понятий.
+
+\begin{definition}
+Пусть $G$ и $F$~--- группы. Отображение $\varphi\colon G\to F$
+называется {\it гомоморфизмом}, если
+$\varphi(ab)=\varphi(a)\varphi(b)$ для любых $a,b\in G$.
+\end{definition}
+
+\begin{remark}
+Подчеркнём, что в этом определении произведение $ab$ берётся в
+группе~$G$, в то время как произведение $\varphi(a) \varphi(b)$~---
+в группе~$F$.
+\end{remark}
+
+\begin{lemma}
+Пусть $\varphi \colon G \to F$~--- гомоморфизм групп, и пусть $e_G$
+и $e_F$~--- нейтральные элементы групп $G$ и $F$ соответственно.
+Тогда:
+
+\vspace{-2mm}
+\begin{enumerate}
+\item[(а)]
+$\varphi(e_G) = e_F$;
+
+\item[(б)]
+$\varphi(a^{-1})=\varphi(a)^{-1}$ для любого $a\in G$.
+\end{enumerate}
+\end{lemma}
+
+\vspace{-5mm}
+
+\begin{proof}
+(а) Имеем $\varphi(e_G)=\varphi(e_Ge_G)=\varphi(e_G)\varphi(e_G)$.
+Теперь умножая крайние части этого равенства на $\varphi(e_G)^{-1}$
+(например, слева), получим $e_F = \varphi(e_G)$.
+
+(б) Имеем $\varphi(a^{-1}) \varphi(a) = \varphi(a^{-1}a) =
+\varphi(e_G) = e_F$, откуда $\varphi(a^{-1}) = \varphi(a)^{-1}$.
+\end{proof}
+
+\begin{definition}
+Гомоморфизм групп $\varphi\colon G\to F$ называется {\it
+изоморфизмом}, если отображение $\varphi$ биективно.
+\end{definition}
+
+\begin{exc}
+Пусть $\varphi\colon G\to F$~--- изоморфизм групп. Проверьте, что
+обратное отображение $\varphi^{-1}\colon F \to G$ также является
+изоморфизмом.
+\end{exc}
+
+\begin{definition}
+Группы $G$ и $F$ называют {\it изоморфными}, если между ними
+существует изоморфизм.
+
+Обозначение: $G\cong F$ (или $G \simeq F$).
+\end{definition}
+
+В алгебре группы рассматривают с точностью до изоморфизма:
+изоморфные группы считаются \guillemotleft
+одинаковыми\guillemotright{}.
+
+\begin{definition}
+С каждым гомоморфизмом групп $\varphi\colon G\to F$ связаны его {\it
+ядро}
+$$
+\Ker(\varphi)=\{g\in G \mid \varphi(g)=e_F\}
+$$
+и {\it образ}
+$$
+\Im(\varphi)=\{a\in F \mid \exists g\in G : \varphi(g)=a\}.
+$$
+\end{definition}
+
+Ясно, что $\Ker(\varphi)\subseteq G$ и $\Im(\varphi)\subseteq F$~---
+подгруппы.
+
+\begin{lemma}
+Гомоморфизм групп $\varphi \colon G \to F$ инъективен тогда и только
+тогда, когда $\Ker(\varphi) = \{e_G\}$.
+\end{lemma}
+\vspace{-3mm}
+\begin{proof}
+Ясно, что если $\varphi$ инъективен, то $\Ker(\varphi) = \lbrace e_G
+\rbrace$. Обратно, пусть $g_1, g_2 \in G$ и $\varphi(g_1) =
+\varphi(g_2)$. Тогда $g_1^{-1} g_2 \in \Ker(\varphi)$, поскольку
+$\varphi(g_1^{-1} g_2) = \varphi(g_1^{-1}) \varphi(g_2) =
+\varphi(g_1)^{-1} \varphi (g_2) = e_F$. Отсюда $g_1^{-1}g_2 = e_G$ и
+$g_1 = g_2$.
+\end{proof}
+
+\begin{corollary}
+Гомоморфизм групп $\varphi\colon G\to F$ является изоморфизмом тогда
+и только тогда, когда $\Ker(\varphi)=\{e_G\}$ и $\Im(\varphi)=F$.
+\end{corollary}
+
+\begin{proposition}
+Пусть $\varphi \colon G \to F$~--- гомоморфизм групп. Тогда
+подгруппа $\Ker(\varphi)$ нормальна в~$G$.
+\end{proposition}
+\vspace{-3mm}
+\begin{proof}
+Достаточно проверить, что $g^{-1}hg \in \Ker(\varphi)$ для любых
+$g\in G$ и $h \in \Ker(\varphi)$. Это следует из цепочки равенств
+$$
+\varphi(g^{-1}hg) = \varphi(g^{-1}) \varphi(h) \varphi(g) =
+\varphi(g^{-1}) e_F \varphi(g) = \varphi(g^{-1}) \varphi(g) =
+\varphi(g)^{-1} \varphi (g) = e_F.
+$$
+\end{proof}
+
+{\bf Теорема о гомоморфизме}. Пусть $\varphi\colon G\to F$~---
+гомоморфизм групп. Тогда группа $\Im(\varphi)$ изоморфна
+факторгруппе $G/\Ker(\varphi)$.
+
+\begin{proof}
+Рассмотрим отображение $\psi \colon G / \Ker(\varphi) \to F$,
+заданное формулой $\psi(g\Ker(\varphi)) = \varphi(g)$. Проверка
+корректности: равенство $\varphi(gh_1)=\varphi(gh_2)$ для любых
+$h_1,h_2\in\Ker(\varphi)$ следует из цепочки
+$$
+\varphi(gh_1)=\varphi(g)\varphi(h_1)=\varphi(g)=\varphi(g)\varphi(h_2)=\varphi(gh_2).
+$$
+Отображение $\psi$ сюръективно по построению и инъективно в силу
+того, что $\varphi(g) = e_F$ тогда и только тогда, когда $g \in \Ker
+(\varphi)$ (т.\,е. $g\Ker(\varphi) = \Ker(\varphi)$). Остаётся
+проверить, что $\psi$~--- гомоморфизм:
+$$
+\psi((g\Ker(\varphi))(g'\Ker(\varphi))) = \psi(gg'\Ker(\varphi)) =
+\varphi(gg') = \varphi(g)\varphi(g') =
+\psi(g\Ker(\varphi))\psi(g'\Ker(\varphi)).
+$$
+\end{proof}
+
+Тем самым, чтобы удобно реализовать факторгруппу $G/H$, можно найти
+такой гомоморфизм $\varphi\colon G\to F$ в некоторую группу~$F$, что
+$H = \Ker(\varphi)$, и тогда $G/H \cong \Im(\varphi)$.
+
+\begin{example}
+Пусть $G=(\RR,+)$ и $H=(\ZZ,+)$. Рассмотрим группу
+$F=(\CC\setminus\{0\},\times)$ и гомоморфизм
+$$
+\varphi\colon G\to F, \quad a\mapsto e^{2\pi\imath a} = \cos (2\pi
+a) + i \sin (2\pi a).
+$$
+Тогда $\Ker(\varphi)=H$ и факторгруппа $G/H$ изоморфна окружности
+$S^1$, рассматриваемой как подгруппа в~$F$, состоящая из комплексных
+чисел с модулем~$1$.
+\end{example}
+
+Определим ещё одну важную конструкцию, позволяющую строить новые
+группы из имеющихся.
+
+\begin{definition}
+{\it Прямым произведением} групп $G_1, \ldots, G_m$ называется
+множество
+$$
+G_1\times\ldots\times G_m=\{(g_1,\ldots,g_m) \mid g_1\in G_1,\ldots,
+g_m\in G_m\}
+$$
+с операцией
+$(g_1,\ldots,g_m)(g_1',\ldots,g_m')=(g_1g_1',\ldots,g_mg_m')$.
+\end{definition}
+
+Ясно, что эта операция ассоциативна, обладает нейтральным элементом
+$(e_{G_1},\ldots,e_{G_m})$ и для каждого элемента $(g_1,\ldots,g_m)$
+есть обратный элемент $(g_1^{-1},\ldots,g_m^{-1})$.
+
+\begin{remark}
+Группа $G_1\times\ldots\times G_m$ коммутативна в точности тогда,
+когда коммутативна каждая из групп $G_1,\ldots, G_m$.
+\end{remark}
+
+\begin{remark}
+Если все группы $G_1, \ldots, G_m$ конечны, то $|G_1 \times \ldots
+\times G_m| = |G_1| \cdot \ldots \cdot |G_m|$.
+\end{remark}
+
+\begin{definition}
+Группа $G$ \textit{раскладывается в прямое произведение} своих подгрупп $H_1, \ldots, H_m$, если отображение $H_1 \times \ldots \times H_M \rightarrow G$, $(h_1, \ldots, h_m) \mapsto h_1 \cdot \ldots \cdot h_m$ является изоморфизмом.
+\end{definition}
+
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~4,
+$\S$~6 и глава~10, $\S$~1)
+\bibitem{Ko1}
+А.\,И.~Кострикин. Введение в алгебру. Основы алгебры. М.: Наука.
+Физматлит, 1994 (глава~4, $\S$~2)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~1, $\S$~4)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава~13, $\S$~58, 60)
+\end{thebibliography}
+
+
+\end{document}

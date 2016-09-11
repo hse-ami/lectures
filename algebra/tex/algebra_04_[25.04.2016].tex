@@ -1,0 +1,644 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\medskipamount}
+
+\newcommand{\Ker}{\mathop{\mathrm{Ker}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+%\newcommand{\Tor}{\mathop{\mathrm{Tor}}}
+
+%\def\Ker{{\rm Ker}}%
+%\def\Im{{\rm Im}}%
+\def\Mat{{\rm Mat}}%
+\def\cont{{\rm cont}}%
+%\def\Tor{{\rm Tor}}%
+\def\Char{{\rm Char}}%
+\def\signum{{\rm sig}}%
+\def\Sym{{\rm Sym}}%
+\def\St{{\rm St}}%
+\def\Aut{{\rm Aut}}%
+\def\Chi{{\mathbb X}}%
+\def\Tau{{\rm T}}%
+\def\Rho{{\rm R}}%
+\def\rk{{\rm rk}}%
+\def\ggT{{\rm ggT}}%
+\def\kgV{{\rm kgV}}%
+\def\Div{{\rm Div}}%
+\def\div{{\rm div}}%
+\def\quot{/\!\!/}%
+\def\mal{\! \cdot \!}%
+\def\Of{{\mathcal{O}}}
+%
+\def\subgrpneq{\le}%
+\def\subgrp{\le}%
+\def\ideal#1{\le_{#1}}%
+\def\submod#1{\le_{#1}}%
+%
+\def\Bild{{\rm Bild}}%
+\def\Kern{{\rm Kern}}%
+\def\bangle#1{{\langle #1 \rangle}}%
+\def\rq#1{\widehat{#1}}%
+\def\t#1{\widetilde{#1}}%
+\def\b#1{\overline{#1}}%
+%
+\def\abs#1{{\vert #1 \vert}}%
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}%
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}%
+%
+\def\C{{\rm C}}%
+\def\O{{\rm O}}%
+\def\HH{{\mathbb H}}%
+\def\LL{{\mathbb L}}%
+\def\FF{{\mathbb F}}%
+\def\CC{{\mathbb C}}%
+\def\KK{{\mathbb K}}%
+\def\TT{{\mathbb T}}%
+\def\ZZ{{\mathbb Z}}%
+\def\RR{{\mathbb R}}%
+\def\SS{{\mathbb S}}%
+\def\NN{{\mathbb N}}%
+\def\QQ{{\mathbb Q}}%
+\def\PP{{\mathbb P}}%
+\def\AA{{\mathbb A}}%
+%
+\def\eins{{\mathbf 1}}%
+%
+\def\AG{{\rm AG}}%
+\def\Aut{{\rm Aut}}%
+\def\Hol{{\rm Hol}}%
+\def\GL{{\rm GL}}%
+\def\SL{{\rm SL}}%
+\def\SO{{\rm SO}}%
+\def\Sp{{\rm Sp}}%
+\def\gl{\mathfrak{gl}}%
+\def\rg{{\rm rg}}%
+\def\sl{\mathfrak{sl}}%
+\def\HDiv{{\rm HDiv}}%
+\def\CDiv{{\rm CDiv}}%
+\def\Res{{\rm Res}}%
+\def\Pst{{\rm Pst}}%
+\def\Nst{{\rm Nst}}%
+\def\rad{{\rm rad}}%
+\def\GL{{\rm GL}}%
+\def\Tr{{\rm Tr}}%
+\def\Pic{{\rm Pic}}%
+\def\Hom{{\rm Hom}}%
+\def\hom{{\rm hom}}%
+\def\Mor{{\rm Mor}}%
+\def\codim{{\rm codim}}%
+\def\Supp{{\rm Supp}}%
+\def\Spec{{\rm Spec}}%
+\def\Proj{{\rm Proj}}%
+\def\Maps{{\rm Maps}}%
+\def\cone{{\rm cone}}%
+\def\ord{{\rm ord}}%
+\def\pr{{\rm pr}}%
+\def\id{{\rm id}}%
+\def\mult{{\rm mult}}%
+\def\inv{{\rm inv}}%
+\def\neut{{\rm neut}}%
+%
+\def\AAA{\mathcal{A}}
+\def\BBB{\mathcal{B}}
+\def\CCC{\mathcal{C}}
+\def\EEE{\mathcal{E}}
+\def\FFF{\mathcal{F}}
+
+\def\CF{{\rm CF}}
+\def\GCD{{\rm GCD}}
+\def\Mat{{\rm Mat}}
+\def\End{{\rm End}}
+\def\cont{{\rm cont}}
+\def\Kegel{{\rm Kegel}}
+\def\Char{{\rm Char}}
+\def\Der{{\rm Der}}
+\def\signum{{\rm sg}}
+\def\grad{{\rm grad}}
+\def\Spur{{\rm Spur}}
+\def\Sym{{\rm Sym}}
+\def\Alt{{\rm Alt}}
+\def\Abb{{\rm Abb}}
+\def\Chi{{\mathbb X}}
+\def\Tau{{\rm T}}
+\def\Rho{{\rm R}}
+\def\ad{{\rm ad}}
+\def\Frob{{\rm Frob}}
+\def\Rang{{\rm Rang}}
+\def\SpRang{{\rm SpRang}}
+\def\ZRang{{\rm ZRang}}
+\def\ggT{{\rm ggT}}
+\def\kgV{{\rm kgV}}
+\def\Div{{\rm Div}}
+\def\div{{\rm div}}
+\def\quot{/\!\!/}
+\def\mal{\! \cdot \!}
+\def\add{{\rm add}}
+\def\mult{{\rm mult}}
+\def\smult{{\rm smult}}
+
+\def\subgrpneq{\le}
+\def\subgrp{\le}
+\def\ideal#1{\unlhd_{#1}}
+\def\submod#1{\le_{#1}}
+
+\def\Bild{{\rm Bild}}
+\def\Kern{{\rm Kern}}
+\def\Kon{{\rm Kon}}
+\def\bangle#1{{\langle #1 \rangle}}
+\def\rq#1{\widehat{#1}}
+\def\t#1{\widetilde{#1}}
+\def\b#1{\overline{#1}}
+
+\def\abs#1{{\vert #1 \vert}}
+\def\norm#1#2{{\Vert #1 \Vert}_{#2}}
+\def\PS#1#2{{\sum_{\nu=0}^{\infty} #1_{\nu} #2^{\nu}}}
+
+
+\def\eins{{\mathbf 1}}
+
+\def\ElM{{\rm ElM}}
+\def\ZOp{{\rm ZOp}}
+\def\SpOp{{\rm SpOp}}
+\def\Gal{{\rm Gal}}
+\def\Def{{\rm Def}}
+\def\Fix{{\rm Fix}}
+\def\ord{{\rm ord}}
+\def\Aut{{\rm Aut}}
+\def\Hol{{\rm Hol}}
+\def\GL{{\rm GL}}
+\def\SL{{\rm SL}}
+\def\SO{{\rm SO}}
+\def\Sp{{\rm Sp}}
+\def\Spann{{\rm Spann}}
+\def\Lin{{\rm Lin}}
+\def\gl{\mathfrak{gl}}
+\def\rg{{\rm rg}}
+\def\sl{\mathfrak{sl}}
+\def\so{\mathfrak{so}}
+\def\sp{\mathfrak{sp}}
+\def\gg{\mathfrak{g}}
+\def\HDiv{{\rm HDiv}}
+\def\CDiv{{\rm CDiv}}
+\def\Res{{\rm Res}}
+\def\Pst{{\rm Pst}}
+\def\Nst{{\rm Nst}}
+\def\WDiv{{\rm WDiv}}
+\def\GL{{\rm GL}}
+\def\Tr{{\rm Tr}}
+\def\Pic{{\rm Pic}}
+\def\Hom{{\rm Hom}}
+\def\hom{{\rm hom}}
+\def\Mor{{\rm Mor}}
+\def\codim{{\rm codim}}
+\def\Supp{{\rm Supp}}
+\def\Spec{{\rm Spec}}
+\def\Proj{{\rm Proj}}
+\def\Maps{{\rm Maps}}
+\def\cone{{\rm cone}}
+\def\ord{{\rm ord}}
+\def\pr{{\rm pr}}
+\def\id{{\rm id}}
+\def\mult{{\rm mult}}
+\def\inv{{\rm inv}}
+\def\neut{{\rm neut}}
+\def\trdeg{{\rm trdeg}}
+\def\sing{{\rm sing}}
+\def\reg{{\rm reg}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{problem}{Задача}
+%
+\theoremstyle{remark}
+\newtheorem{exc}{Упражнение}
+\newtheorem{remark}{Замечание}
+\newtheorem{example}{Пример}
+
+\renewcommand{\theenumi}{\textup{(\alph{enumi})}}
+\renewcommand{\labelenumi}{\theenumi}
+\newcounter{property}
+\renewcommand{\theproperty}{\textup{(\arabic{property})}}
+\newcommand{\property}{\refstepcounter{property}\item}
+\newcounter{prooperty}
+\renewcommand{\theprooperty}{\textup{(\arabic{prooperty})}}
+\newcommand{\prooperty}{\refstepcounter{prooperty}\item}
+
+\makeatletter
+\def\keywords#1{{\def\@thefnmark{\relax}\@footnotetext{#1}}}
+\let\subjclass\keywords
+\makeatother
+%
+\begin{document}
+%
+\sloppy
+%\thispagestyle{empty}
+%
+\centerline{\large \bf Лекции курса \guillemotleft
+Алгебра\guillemotright{}, лектор Р.\,С.~Авдеев}
+
+\smallskip
+
+\centerline{\large ФКН НИУ ВШЭ, 1-й курс ОП ПМИ, 4-й модуль,
+2015/2016 учебный год}
+
+
+\bigskip
+
+\section*{Лекция 4}
+
+\medskip
+
+{\it Теорема о согласованных базисах. Алгоритм
+приведения целочисленной матрицы к диагональному виду. Строение конечно порождённых абелевых групп. Конечные абелевы группы. } % Экспонента конечной абелевой группы.}
+
+В~теории абелевых групп операция прямого произведения конечного
+числа групп обычно называется \textit{прямой суммой} и обозначается
+символом~$\oplus$, так что пишут $A_1 \oplus A_2 \oplus \ldots
+\oplus A_n$ вместо $A_1 \times A_2 \times \ldots \times A_n$.
+
+Дадим более точное описание подгрупп свободных абелевых групп.
+
+\smallskip
+
+{\bf Теорема о согласованных базисах.}\ Для всякой подгруппы $N$
+свободной абелевой группы $L$ ранга $n$ найдётся такой базис $e_1,
+\ldots, e_n$ группы $L$ и такие натуральные числа $u_1, \ldots,
+u_m$, $m \leqslant n$, что $u_1 e_1, \ldots, u_m e_m$~--- базис
+группы $N$ и $u_i | u_{i+1}$ при $i = 1, \ldots, m-1$.
+
+\smallskip
+
+\begin{remark}
+Числа $u_1, \ldots, u_p$, фигурирующие в теореме о согласованных
+базисах, называются {\it инвариантными множителями} подгруппы $N
+\subseteq L$. Можно показать, что они определены по подгруппе
+однозначно.
+\end{remark}
+
+\begin{corollary}
+В~условиях теоремы о согласованных базисах имеет место изоморфизм
+$$
+L / N \cong \ZZ_{u_1} \times \ldots \times \ZZ_{u_m} \times
+\underbrace{\ZZ \times \ldots \times \ZZ}_{n - m}.
+$$
+\end{corollary}
+
+\begin{proof}
+Рассмотрим изоморфизм $L \cong \ZZ^n = \underbrace{\ZZ \times \ldots
+\times \ZZ}_n$, сопоставляющий произвольному элементу $s_1 e_1 +
+\ldots + s_n e_n \in L$ набор $(s_1, \ldots, s_n) \in \ZZ^n$. При
+этом изоморфизме подгруппа $N \subseteq L$ отождествляется с
+подгруппой
+$$
+u_1 \ZZ \times \ldots \times u_m \ZZ \times \underbrace{\lbrace 0
+\rbrace \times \ldots \times \lbrace 0 \rbrace}_{n-m} \subseteq
+\ZZ^n.
+$$
+Теперь требуемый результат получается применением теоремы о
+факторизации по сомножителям.
+\end{proof}
+
+Теперь вернемся к доказательству теоремы о согласованных базисов.
+Однако это требует некоторой подготовки.
+
+\begin{definition}
+{\it Целочисленными элементарными преобразованиями строк} матрицы
+называются преобразования следующих трёх типов:
+
+1) прибавление к одной строке другой, умноженной на целое число;
+
+2) перестановка двух строк;
+
+3) умножение одной строки на $-1$.
+
+Аналогично определяются {\it целочисленные элементарные
+преобразования столбцов} матрицы.
+\end{definition}
+
+Прямоугольную матрицу $C=(c_{ij})$ размера $n\times m$ назовём {\it
+диагональной} и обозначим $\text{diag}(u_1,\ldots,u_p)$, если
+$c_{ij}=0$ при $i\ne j$ и $c_{ii}=u_i$ при $i=1,\ldots,p$, где
+$p=\text{min}(n,m)$.
+
+\begin{proposition} \label{palg}
+Всякую прямоугольную целочисленную матрицу $C=(c_{ij})$ с помощью
+элементарных преобразований строк и столбцов можно привести к виду
+$\text{diag}(u_1,\ldots,u_p)$, где $u_1,\ldots,u_p \geqslant 0$ и
+$u_i|u_{i+1}$ при $i=1,\ldots,p-1$.
+\end{proposition}
+
+\begin{proof}
+Если $C=0$, то доказывать нечего. Если $C\ne 0$, но $c_{11}=0$, то
+переставим строки и столбцы и получим $c_{11}\ne 0$. Умножив, если
+нужно, первую строку на $-1$, добьёмся условия $c_{11}>0$. Теперь
+будем стремиться уменьшить~$c_{11}$.
+
+Если какой-то элемент $c_{i1}$ не делится на $c_{11}$, то разделим с
+остатком: $c_{i1}=qc_{11}+r$. Вычитая из $i$-й строки $1$-ю строку,
+умноженную на~$q$, и затем переставляя $1$-ю и $i$-ю строки,
+уменьшаем~$c_{11}$. Повторяя эту процедуру, в~итоге добиваемся, что
+все элементы $1$-й строки и $1$-го столбца делятся на $c_{11}$.
+
+Если какой-то $c_{ij}$ не делится на $c_{11}$, то поступаем
+следующим образом. Вычтя из $i$-й строки $1$-ю строку с подходящим
+коэффициентом, добьёмся $c_{i1}=0$. После этого прибавим к $1$-й
+строке $i$-ю строку. При этом $c_{11}$ не изменится, а $c_{1j}$
+перестанет делиться на $c_{11}$, и мы вновь сможем уменьшить
+$c_{11}$.
+
+В~итоге добьёмся того, что все элементы делятся на~$c_{11}$. После
+этого обнулим все элементы $1$-й строки и $1$-го столбца, начиная со
+вторых, и продолжим процесс с меньшей матрицей.
+\end{proof}
+
+Теперь мы готовы доказать теорему о согласованных базисах.
+
+\begin{proof}[Доказательство теоремы о согласованных базисах]
+Мы знаем, что $N$ является свободной абелевой группой ранга $m
+\leqslant n$. Пусть $e_1, \ldots, e_n$~--- базис в $L$ и $f_1,
+\ldots, f_m$~--- базис в~$N$. Тогда $(f_1, \ldots, f_m) = (e_1,
+\ldots, e_n)C$, где $C$~--- целочисленная матрица размера $n \times
+m$ и ранга~$m$. Покажем, что целочисленные элементарные
+преобразования строк (столбцов) матрицы $C$~--- это в точности
+элементарные преобразования над базисом в~$L$ (в~$N$). Для этого
+рассмотрим сначала случай строк. Заметим, что каждое из
+целочисленных элементарных преобразований строк реализуется при
+помощи умножения матрицы $C$ слева на квадратную матрицу~$P$
+порядка~$n$, определяемую следующим образом:
+
+(1) в случае прибавления к $i$-й строке $j$-й, умноженной на целое
+число~$z$, в матрице~$P$ на диагонали стоят единицы, на $(ij)$-м
+месте~--- число~$z$, а на остальных местах~--- нули;
+
+(2) в случае перестановки $i$-й и $j$-й строк имеем $p_{ij} = p_{ji}
+= 1$, $p_{kk} = 1$ при $k \ne i,j$, а на остальных местах стоят
+нули;
+
+(3) в случае умножения $i$-й строки на $-1$ имеем $p_{ii} = -1$,
+$p_{jj} = 1$ при $j \ne i$, а на остальных местах стоят нули.
+
+Теперь заметим, что равенство $(f_1, \ldots, f_m) = (e_1, \ldots,
+e_n)C$ эквивалентно равенству $(f_1, \ldots, f_m) = (e_1, \ldots,
+e_n)P^{-1} PC$. Таким образом, базис $(f_1, \ldots, f_m)$ выражается
+через новый базис $(e'_1, \ldots, e'_n) := (e_1, \ldots, e_n)P^{-1}$
+при помощи матрицы~$PC$.
+
+В случае столбцов всё аналогично: каждое из целочисленых
+элементарных преобразований столбцов реализуется при помощи
+умножения матрицы $C$ справа на некоторую квадратную матрицу $Q$
+порядка~$m$ (определяемую почти так же, как~$P$). В~этом случае
+имеем $(f_1, \ldots, f_m)Q = (e_1, \ldots, e_n)CQ$, так что новый
+базис $(f'_1, \ldots, f'_m) := (f_1, \ldots, f_m)Q$ выражается через
+$(e_1, \ldots, e_n)$ при помощи матрицы $CQ$.
+
+Воспользовавшись предложением~\ref{palg}, мы можем привести матрицу
+$C$ при помощи целочисленных элементарных преобразований строк и
+столбцов к диагональному виду~$C'' = \text{diag}(u_1, \ldots, u_m)$,
+где $u_i | u_{i+1}$ для всех $i = 1, \ldots, m-1$. С~учётом
+сказанного выше это означает, что для некоторого базиса $e''_1,
+\ldots, e''_n$ в~$L$ и некоторого базиса $f''_1, \ldots, f''_m$
+в~$N$ справедливо соотношение $(f''_1, \ldots, f''_m) = (e''_1,
+\ldots, e''_n) C''$. Иными словами, $f''_i = u_i e''_i$ для всех $i
+= 1, \ldots, m$, а~это и требовалось.
+\end{proof}
+
+\begin{definition}
+Конечная абелева группа $A$ называется {\it примарной}, если её
+порядок равен $p^k$ для некоторого простого числа~$p$.
+\end{definition}
+
+\begin{remark}
+В общем случае (когда группы не предполагаются коммутативными)
+конечная группа $G$ с~условием $|G| = p^k$ ($p$~--- простое)
+называется {\it $p$-группой}.
+\end{remark}
+
+Следствие~1 лекции~3 показывает, что каждая конечная циклическая
+группа разлагается в прямую сумму примарных циклических подгрупп.
+
+\begin{theorem} \label{traz}
+Всякая конечно порождённая абелева группа $A$ разлагается в прямую
+сумму примарных и бесконечных циклических подгрупп, т.\,е.
+\begin{equation} \label{eqn}
+A \cong \ZZ_{p_1^{k_1}} \oplus \ldots \oplus \ZZ_{p_s^{k_s}} \oplus
+\ZZ \oplus \ldots \oplus \ZZ,
+\end{equation}
+где $p_1, \ldots, p_s$~--- простые числа \textup(не обязательно
+попарно различные\textup) и $k_1, \ldots, k_s \in \NN$. Кроме того,
+число бесконечных циклических слагаемых, а~также число и порядки
+примарных циклических слагаемых определено однозначно.
+\end{theorem}
+
+Сразу выделим некоторые следствия из этой теоремы.
+
+\begin{corollary}
+Абелева группа $A$ является конечно порождённой тогда и только тогда, когда $A$ разлагается в прямую сумму циклических подгрупп. 
+\end{corollary}
+
+\begin{proof}
+В одну сторону следует из теоремы. В другую сторону: пусть $A = A_1 \oplus \ldots \oplus A_m$, где $A_i$~--- циклическая подгруппа, то есть $A_i = \langle a_i \rangle$, $a_i \in A$. Тогда $\{a_1, \ldots, a_m \}$ --- набор порождающих элементов для группы $A$.
+\end{proof}
+
+\begin{corollary}
+Всякая конечная абелева группа разлагается в прямую сумму примарных
+циклических подгрупп, причём число и порядки примарных циклических
+слагаемых определено однозначно.
+\end{corollary}
+
+Теперь преступим к доказательству самой теоремы.
+
+\begin{proof}
+Пусть $a_1,\ldots,a_n$~--- конечная система порождающих группы $A$.
+Рассмотрим гомоморфизм
+$$
+\varphi \colon \ZZ^n \to A, \quad (s_1, \ldots, s_n) \mapsto s_1 a_1
++ \ldots + s_n a_n.
+$$
+Ясно, что $\varphi$ сюръективен. Тогда по теореме о гомоморфизме
+получаем $A \cong \ZZ^n / N$, где $N = \Ker \varphi$. По теореме о
+согласованных базисах существует такой базис $e_1, \ldots, e_n$
+группы $\ZZ^n$ и такие натуральные числа $u_1, \ldots, u_m$, $m
+\leqslant n$, что $u_1 e_1, \ldots, u_m e_m$~--- базис группы~$N$.
+Тогда имеем
+$$
+\begin{array}{ccccccccccccc}
+L &=& \langle e_1 \rangle &\oplus & \ldots & \oplus & \langle e_m
+\rangle & \oplus & \langle e_{m+1} \rangle & \oplus & \ldots &
+\oplus & \langle e_n \rangle, \\
+N &=& \langle u_1e_1 \rangle & \oplus & \ldots & \oplus & \langle
+u_m e_m \rangle &\oplus & \lbrace 0 \rbrace & \oplus & \ldots &
+\oplus & \lbrace 0 \rbrace.
+\end{array}
+$$
+Применяя теорему о факторизации по сомножителям, мы получаем
+$$
+\ZZ^n / N \cong \ZZ / u_1 \ZZ \oplus \ldots \oplus \ZZ / u_m \ZZ
+\oplus \underbrace{\ZZ / \lbrace 0 \rbrace \oplus \ldots \oplus \ZZ
+/ \lbrace 0 \rbrace}_{n-m} \cong \ZZ_{u_1} \oplus \ldots \oplus
+\ZZ_{u_m} \oplus \underbrace{\ZZ \oplus \ldots \oplus \ZZ}_{n-m}.
+$$
+Чтобы добиться разложения~(\ref{eqn}), остаётся представить каждое
+из циклических слагаемых $\ZZ_{u_i}$ в виде прямой суммы примарных
+циклических подгрупп, воспользовавшись следствием~1 из лекции~3.
+
+Перейдём к доказательству единственности разложения~(\ref{eqn}).
+Пусть $\langle c \rangle_q$ обозначает циклическую группу порядка
+$q$ с порождающей~$c$. Пусть имеется разложение
+\begin{equation} \label{eqn2}
+A = \langle c_1\rangle_{p_1^{k_1}} \oplus \ldots \oplus \langle c_s
+\rangle_{p_s^{k_s}} \oplus \langle c_{s+1} \rangle_{\infty} \oplus
+\ldots \oplus \langle c_{s+t} \rangle_{\infty}
+\end{equation}
+(заметьте, что мы просто переписали в другом виде правую часть
+соотношения~(\ref{eqn})). Рассмотрим в~$A$ так называемую {\it
+подгруппу кручения}
+$$
+\Tor A := \{ a \in A \mid ma=0 \ \text{для некоторого} \ m \in \NN
+\}.
+$$
+Иными словами, $\Tor A$~--- это подгруппа в~$A$, состоящая из всех
+элементов конечного порядка. Выделим эту подгруппу в
+разложении~(\ref{eqn2}). Рассмотрим произвольный элемент $a \in A$.
+Он представим в виде
+$$
+a = r_1c_1 + \ldots + r_m c_m + r_{m+1} c_{m+1} + \ldots + r_n c_n
+$$
+для некоторых целых чисел $r_1, \ldots, r_n$. Легко видеть, что $a$
+имеет конечный порядок тогда и только тогда, когда $r_{m+1} = \ldots
+= r_m = 0$. Отсюда получаем, что
+\begin{equation} \label{eqn3}
+\Tor A = \langle c_1 \rangle_{p_1^{k_1}} \oplus \ldots \oplus
+\langle c_s \rangle_{p_s^{k_s}}.
+\end{equation}
+Применяя опять теорему о факторизации по сомножителям, мы получаем
+$A / \Tor A \cong \ZZ^t$, где $t$ --- количество бесконечных 
+циклических подгрупп в разложении~(\ref{eqn}). Отсюда следует, 
+что число $t$ однозначно выражается в терминах самой группы~$A$ 
+(как ранг свободной абелевой группы $A / \Tor A$). Значит, $t$ 
+не зависит от разложения~(\ref{eqn2}).
+
+Однозначность числа и порядков примарных циклических
+групп будет доказана на следующей лекции.
+
+\end{proof}
+
+%Далее, для каждого простого числа $p$ определим в $A$ {\it подгруппу
+%$p$-кручения}
+%\begin{equation} \label{eqn4}
+%\Tor_p A := \{ a\in A \mid p^ka=0 \ \text{для некоторого} \ k \in
+%\NN \}.
+%\end{equation}
+%Ясно, что $\Tor_p A \subset \Tor A$. Выделим подгруппу $\Tor_p A$ в
+%разложении~(\ref{eqn3}). Легко видеть, что $\langle c_i
+%\rangle_{p_i^{k_i}} \subseteq \Tor_p A$ для всех $i$ с условием $p_i
+%= p$. Если же $p_i \ne p$, то по следствию~2 из теоремы Лагранжа
+%(см. лекцию~1) порядок любого ненулевого элемента $x \in \langle c_i
+%\rangle_{p_i^{k_i}}$ является степенью числа~$p_i$, а~значит, $p^k x
+%\ne 0$ для всех $k \in \NN$. Отсюда следует, что $\Tor_p A$ является
+%суммой тех конечных слагаемых в разложении~(\ref{eqn3}), порядки
+%которых суть степени~$p$. Поэтому доказательство теперь сводится к
+%случаю, когда $A$~--- примарная группа.
+%
+%Пусть $|A|=p^k$ и
+%$$
+%A = \langle c_1\rangle_{p^{k_1}}\oplus\ldots\oplus\langle
+%c_r\rangle_{p^{k_r}}, \quad k_1+\ldots+k_r=k.
+%$$
+%Докажем индукцией по~$k$, что набор чисел $k_1, \ldots, k_r$ не
+%зависит от разложения.
+%
+%Если $k = 1$, то $|A| = p$, но тогда $A \cong \ZZ_p$ по следствию~5
+%из теоремы Лагранжа (см. лекцию~1). Пусть теперь $k > 1$. Рассмотрим
+%подгруппу $pA: = \{ pa \mid a \in A \}$. В~терминах
+%равенства~(\ref{eqn4}) имеем
+%$$
+%pA = \langle pc_1 \rangle_{p^{k_1-1}} \oplus \ldots \oplus \langle
+%pc_r\rangle_{p^{k_r-1}}.
+%$$
+%В частности, при $k_i = 1$ соответствующее слагаемое равно $\lbrace
+%0 \rbrace$ (и тем самым исчезает). Так как $|pA| = p^{k - r} < p^k$,
+%то по предположению индукции группа $pA$ разлагается в прямую сумму
+%примарных циклических подгрупп однозначно с точностью до порядка
+%слагаемых. Следовательно, ненулевые числа в наборе $k_1 - 1, \ldots,
+%k_r-1$ определены однозначно (с точностью до перестановки). Отсюда
+%мы находим значения $k_i$, отличные от~$1$. Количество тех~$k_i$,
+%которые равны~$1$, однозначно восстанавливается из условия $k_1 +
+%\ldots + k_r = k$.
+%\end{proof}
+
+%Заметим, что теорема о согласованных базисах даёт нам другое
+%разложение конечной абелевой группы~$A$:
+%\begin{equation} \label{eqn5}
+%A=\ZZ_{u_1}\oplus\ldots\oplus\ZZ_{u_m}, \quad \text{где} \
+%u_i|u_{i+1} \ \text{при} \ i = 1, \ldots, m-1.
+%\end{equation}
+%Числа $u_1, \ldots, u_m$ называют {\it инвариантными множителями}
+%конечной абелевой группы~$A$.
+%
+%\begin{definition}
+%{\it Экспонентой} конечной абелевой группы $A$ называется число
+%$\exp A$, равное наименьшему общему кратному порядков элементов
+%из~$A$.
+%\end{definition}
+%
+%\begin{remark}
+%Легко видеть, что $\exp A = \min \lbrace n \in \NN \mid ma = 0 \
+%\text{для всех} \ a \in A \rbrace$.
+%\end{remark}
+%
+%\begin{proposition}
+%Экспонента конечной абелевой группы~$A$ равна её последнему
+%инвариантному множителю~$u_m$.
+%\end{proposition}
+%
+%\begin{proof}
+%Обратимся к разложению~(\ref{eqn5}). Так как $u_i | u_m$ для всех $i
+%= 1, \ldots, m$, то $u_ma=0$ для всех $a \in A$. Это означает, что
+%$\exp A \leqslant u_m$ (и тем самым $\exp A \, | u_m$). С~другой
+%стороны, в $A$ имеется циклическая подгруппа порядка $u_m$. Значит,
+%$\exp A \geqslant u_m$.
+%\end{proof}
+%
+%\begin{corollary}
+%Конечная абелева группа $A$ является циклической тогда и только
+%тогда, когда $\exp A =\nobreak |A|$.
+%\end{corollary}
+%
+%\begin{proof}
+%Группа $A$ является циклической тогда и только тогда, когда в
+%разложении~(\ref{eqn5}) присутствует только одно слагаемое, т.\,е.
+%$A = \ZZ_{u_m}$ и $|A| = u_m$.
+%\end{proof}
+
+\bigskip
+
+\begin{thebibliography}{99}
+\bibitem{Vi}
+Э.\,Б.~Винберг. Курс алгебры. М.: Факториал Пресс, 2002 (глава~9,
+$\S$~1)
+\bibitem{Ko3}
+А.\,И.~Кострикин. Введение в алгебру. Основные структуры алгебры.
+М.: Наука. Физматлит, 2000 (глава~2, $\S$~3)
+\bibitem{SZ}
+Сборник задач по алгебре под редакцией А.\,И.~Кострикина. Новое
+издание. М.: МЦНМО, 2009 (глава~13, $\S$~60)
+\end{thebibliography}
+
+\end{document}

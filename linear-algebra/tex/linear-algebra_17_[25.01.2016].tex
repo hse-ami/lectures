@@ -1,0 +1,179 @@
+\input{header.tex}
+
+\begin{document}
+\section{Лекция 17 от 25.01.2016}
+\subsection{Овеществление и комплексификация}
+Пусть $V$ --- векторное пространство над $\mathbb{C}$.
+\begin{Def}
+Овеществление пространства $V$ --- это то же пространство $V$, рассматриваемое как пространство над $\mathbb{R}$. Обозначение: $V_\mathbb{R}$.
+\end{Def}
+Операция умножения на элементы $\mathbb{R}$ в $V$ уже есть, так как $\mathbb{R}$ --- подполе в $\mathbb{C}$.
+
+\begin{Examples}
+$\mathbb{C}_\mathbb{R} = \mathbb{R}^2$.
+\end{Examples}
+\begin{Suggestion}
+$V$ --- векторное пространство над $\mathbb{C}$, $\dim V < \infty$. Тогда $\dim V_\mathbb{R} = 2\dim V$.
+\end{Suggestion}
+\begin{proof}
+Пусть $e_1, \ldots, e_n$ --- базис в $V$. Тогда $V = \{z_1e_1 + \ldots + z_ne_n\ |\ z_k \in \mathbb{C}\}$, причём такая запись единственная в силу определения базиса. Пусть $z_k = a_k+ib_k$, причём такая запись тоже единственная. Тогда будем иметь
+\begin{gather*}
+V = \{ \left(a_1+ib_1\right)e_1 + \ldots + \left(a_n+ib_n\right)e_n\ |\ a_k, b_k \in \mathbb{R}\} =\\
+= \{a_1e_1 + \ldots + a_ne_n + b_1ie_1 + \ldots + b_nie_n\ |\ a_k, b_k \in \mathbb{R}\}
+\end{gather*}
+И причём такая запись тоже единственная. Выходит, что $e_1, e_2, \ldots, e_n, ie_1, ie_2, \ldots, ie_n$ --- базис в $V_\mathbb{R}$, в котором $2n = 2\dim V$ элементов.
+\end{proof}
+\begin{Def}
+Комплексификация пространства $W$ --- это множество $W\times W = W^\mathbb{C} \hm{=} \{\left( u, v\right)\ |\ u,v \in W\}$ с операциями $\left(u_1, v_1\right) + \left(u_2, v_2\right) = \left(u_1+u_2, v_1+v_2\right)$, $\left(a, b\right)\left(u, v\right) \hm{=} \left(au-bv, av+bu\right)$.
+\end{Def}
+\begin{Examples}
+$\mathbb{R}^\mathbb{C} = \mathbb{R}$.
+\end{Examples}
+
+\begin{Statement}
+В нём выполняются все 8 аксиом векторного пространства над $\mathbb{C}$.
+\end{Statement}
+$W$ отождествляется подмножеством $\{\left(u, 0\right)\ |\ u\in W\}$. Действительно
+\[
+w\in W\Leftrightarrow \left(w,0\right) \in W^\mathbb{C};\ i\left(w,0\right) = \left(0, w\right) \in W^\mathbb{C}
+\]
+В итоге $\forall \left(u, v\right) \in W^\mathbb{C}$ представим в виде 
+\[
+\left(u,v\right) = \left(u,0\right) + \left(0,v\right) = \left(u,0\right) + i\left(v,0\right) = u+iv
+\]
+То есть $W^\mathbb{C} = \{u+iv\ |\ u,v\in W\}$. 
+\begin{Suggestion}
+$\dim W^\mathbb{C} = \dim W$
+\end{Suggestion}
+\begin{Comment}
+Здесь $W^\mathbb{C}$ --- пространство над $\mathbb{C}$, а $W$ --- над $\mathbb{R}$.
+\end{Comment}
+\begin{proof}
+Пусть $e_1, \ldots, e_n$ --- базис в $W$. Тогда 
+\begin{gather*}
+W^\mathbb{C} = \{\left(u,v\right)\ |\ u,v \in W\} = \{\left(a_1e_1 + a_2e_2 + \ldots + a_ne_n, b_1e_1 + b_2e_2 + \ldots + b_ne_n\right)\ |\ a_k,b_k \in \mathbb{R}\} = \\
+= \{\left(a_1e_1,b_1e_1\right) + \ldots + \left(a_ne_n, b_ne_n\right)\} = \{\left(a_1+ib_1\right)e_1 + \ldots +\left(a_n + ib_n)e_n\right)\} = \\
+= \{z_1e_1 + \ldots + z_ne_n\ |\ z_k \in \mathbb{C} \}
+\end{gather*}
+То есть выходит, что $e_1, \ldots, e_n$ --- базис в $W^\mathbb{C}$.
+\end{proof}
+
+\subsection{Сумма подпространств}
+Пусть $V$ --- конечномерное векторное пространство, а $U$ и $W$ --- подпространства (в качестве упражнения лектор предлагает доказать, что их пересечение --- тоже подпространство).
+
+\begin{Def}
+Сумма подпространств $U$ и $W$ --- это множество.
+\[
+U+W = \{u + w\ |\ u \in U, w \in W\}
+\]
+\end{Def}
+
+\begin{Comment}
+$\dim \left( U \cap W \right) \leqslant \dim U \leqslant \dim \left(U + W\right)$
+\end{Comment}
+
+\begin{Examples}
+Двумерные плоскости в пространстве $\mathbb{R}^3$ содержат общую прямую.
+\end{Examples}
+
+\begin{Theorem}
+$\dim \left(U \cap W\right) = \dim U + \dim W - \dim \left(U+W\right)$
+\end{Theorem}
+
+\begin{proof}
+Положим $p = \dim \left(U \cap W\right)$, $k = \dim U$, $m = \dim W$. Выберем базис $a \hm{=} \{ a_1, \ldots, a_p\}$ в пересечении. Его можно дополнить до базиса $W$ и до базиса $U$. Значит $\exists b = \{ b_1, \ldots, b_{k-p}\}$ такой, что $a\cup b$ --- базис в $U$ и $\exists c = \{ c_1, \ldots, c_{m-p}\}$ такой, что $a \cup c$ --- базис в $W$.
+
+Докажем, что $a \cup b \cup c$ --- базис в $U+W$.
+
+Во-первых, докажем, что $U+W$ порождается множеством $a \cup b \cup c$.
+\begin{gather*}
+\left.
+\begin{aligned}
+    &v \in U+W \Rightarrow \exists u \in U, w \in W\colon \ v = u+w\\
+    &u \in U=\langle a \cup b\rangle \subset \langle a \cup b \cup c\rangle\\
+    &w \in W=\langle a \cup c\rangle \subset \langle a \cup b \cup c\rangle\\
+\end{aligned}
+\right|
+    \Rightarrow v = u + w \in \langle a \cup b \cup c\rangle 
+    \Rightarrow U + W = \langle a \cup b \cup c\rangle
+\end{gather*}
+
+Во-вторых, докажем линейную независимость векторов из $a \cup b \cup c$.
+
+Пусть скаляры $\alpha_1, \ldots, \alpha_p$, $\beta_1, \ldots, \beta_{k-p}$, $\gamma_1, \ldots, \gamma_{m-p}$ таковы, что:
+\begin{gather*}
+\underbrace{\alpha_1a_1+ \ldots +\alpha_pa_p}_x + \underbrace{\beta_1b_1+ \ldots +\beta_{k-p}b_{k-p}}_y + \underbrace{\gamma_1c_1 + \ldots + \gamma_{m-p}c_{m-p}}_z=0\\
+x+y+z = 0\\
+z = -x -y\\
+z \in W\\
+-x-y \in U\cap W\\
+\Rightarrow \exists \lambda_1,\ldots, \lambda_p \in F \colon z = \lambda_1a_1+\ldots+\lambda_pa_p 
+\end{gather*}
+Тогда $\lambda_1a_1 + \ldots + \lambda_pa_p - \gamma_1c_1 - \ldots - \gamma_{m-p}c_{m-p} = 0$. Но $a \cup c$ --- базис $W$. Следовательно, $\lambda_1 \hm{=} \ldots = \lambda_p = \gamma_1 = \ldots = \gamma_{m-p} = 0$. Но тогда $0 = x+y = \alpha_1a_1 + \ldots + \alpha_pa_p + \beta_1b_1 + \ldots + \beta_{k-p}b_{k-p}$. Но $a\cup b$ --- базис $U+W \Rightarrow \alpha_1 = \ldots = \alpha_p = \beta_1 = \ldots = \beta_{k-p} = 0$. Итого, все коэффициенты равны нулю и линейная независимость тем самым доказана. То есть $a \cup b \cup c$ --- базис $U+W$. 
+\begin{gather*}
+    \dim \left(U+W\right) = |a\cup b \cup c| = |a| + |b| + |c| = p + k-p + m-p = k + m -p =\\
+    =\dim U + \dim W - \dim\left(U\cap W\right)
+\end{gather*}
+\end{proof}
+
+\begin{Def}
+Если $U \cap W = \{0\}$, то $U + W$ называется прямой суммой.
+\end{Def}
+\begin{Consequence}
+В таком случае $\dim\left(U+W\right) = \dim U + \dim W$.
+\end{Consequence}
+\begin{Examples}
+    $U$ --- плоскость, $W$ --- прямая в $\mathbb{R}^3$.
+\end{Examples}
+
+\subsection{Переход к новому базису}
+Пусть $V$ --- векторное пространство, $\dim V = n$, $e_1, \ldots, e_n$ --- базис. То есть
+\[
+\forall v \in V \quad \exists!\: v = x_1e_1 + \ldots + x_ne_n,
+\]
+где $x_1, \ldots, x_n \in F$ --- координаты вектора $v$ в базисе $\left(e_1, \ldots, e_n\right)$. 
+Пусть также есть базис $e_1', \ldots, e_n'$:
+\begin{align*}
+    e_1' &= c_{11}e_1 + c_{21}e_2 + \ldots + c_{n1}e_n\\
+    e_2' &= c_{12}e_1 + c_{22}e_2 + \ldots + c_{n2}e_n\\
+    \vdots\\
+    e_n' &= c_{1n}e_1 + c_{2n}e_2 + \ldots + c_{nn}e_n
+\end{align*}
+Обозначим матрицу $C = \left(c_{ij}\right)$. Тогда можно переписать $\left(e_1', \ldots, e_n'\right)$ как $\left(e_1, \ldots, e_n\right)\cdot C$.
+\begin{Suggestion}
+$e_1', \ldots, e_n'$ образуют базис тогда и только тогда, когда $\det C \neq 0$.
+\end{Suggestion}
+
+\begin{proof} \ 
+\begin{itemize}
+\item[{$[\Rightarrow]$}] $e_1', \ldots, e_n'$ --- базис, а значит $\exists C' \in M_n \colon$
+\begin{gather*}
+\left(e_1, \ldots, e_n\right) = \left(e_1', \ldots, e_n'\right)C' = \left(e_1, \ldots, e_n\right)CC'\\
+E = CC'\\
+C' = C^{-1} \Leftrightarrow \exists C^{-1} \Leftrightarrow \det{C} \neq 0
+\end{gather*}
+\item[{$[\Leftarrow]$}] $\det C \neq 0 \Rightarrow \exists C^{-1}$. Покажем, что $e_1', \ldots, e_n'$ в таком случае линейно независимы. Пусть $x_1e_1' + x_2e_2' + \ldots + x_ne_n' = 0$. Тогда можно записать
+\begin{gather*}
+\left(e_1', e_2', \ldots, e_n'\right) 
+\begin{pmatrix}
+    x_1\\
+    x_2\\
+    \vdots\\
+    x_n
+\end{pmatrix} = 0\\
+\left(e_1, \ldots, e_n\right)C\begin{pmatrix}
+    x_1\\
+    x_2\\
+    \vdots\\
+    x_n
+\end{pmatrix} = 0
+\end{gather*}
+Поскольку $\left(e_1, \ldots, e_n\right)$ --- базис, то $C \begin{pmatrix}
+    x_1\\
+    x_2\\
+    \vdots\\
+    x_n
+\end{pmatrix} = 0$. Умножая слева на обратную матрицу, получаем, что $x_1 = x_2 = \ldots = x_n = 0$
+\end{itemize}
+\end{proof}
+\end{document}
