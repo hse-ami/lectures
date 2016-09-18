@@ -71,7 +71,7 @@
 
 %% Информация об авторах
 \author{Группа лектория ФКН ПМИ 2016-2017 \\
-  Руслан Хайдуров, Иовлева Анастасия, Дискин Михаил}
+  Михаил Дискин, Анастасия Иовлева, Руслан Хайдуров.}
 \title{Лекции по предмету \\
   \textbf{Математический анализ-3}}
 \date{2016/2017 учебный год}
@@ -86,7 +86,7 @@
 %% Делаем верхний и нижний колонтитулы
 \fancyhf{}
 \fancyhead[R]{\head}
-\fancyfoot[R]{{\small {\it Руслан Хайдуров, Иовлева Анастасия, Дискин Михаил. Математический анализ-3}}}
+\fancyfoot[R]{{\small {\it М. Дискин, А. Иовлева, Р. Хайдуров. Математический анализ-3}}}
 \fancyhead[L]{\thepage}
 
 %% Функция для обнуление конкретного счётчика
@@ -152,6 +152,14 @@
 \def\prop{\par\smallskip\refstepcounter{prop}\textbf{\arabic{prop}}}
 \newtheorem*{Properties}{Свойства \prop}
 
+\newcounter{test}\setcounter{test}{0}
+\def\test{\par\smallskip\refstepcounter{test}\textbf{\arabic{test}}}
+\newtheorem*{Test}{Признак \test}
+
+\newcounter{comptest}\setcounter{comptest}{0}
+\def\comptest{\par\smallskip\refstepcounter{comptest}\textbf{\arabic{comptest}}}
+\newtheorem*{CompTest}{Признак сравнения \comptest}
+
 \renewcommand{\Re}{\mathrm{Re\:}}
 \renewcommand{\Im}{\mathrm{Im\:}}
 \newcommand{\Arg}{\mathrm{Arg\:}}
@@ -182,3 +190,13 @@
 
 \newcommand{\vvector}[1]{\begin{pmatrix}{#1}_1 \\\vdots\\{#1}_n\end{pmatrix}}
 \renewcommand{\vector}[1]{({#1}_1, \ldots, {#1}_n)}
+
+\newcommand{\rarr}{\rightarrow}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+
+\setlist[itemize]{itemsep=0pt, topsep=0pt}
+\setlist[enumerate]{itemsep=0pt, topsep=0pt}
