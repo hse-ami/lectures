@@ -109,7 +109,7 @@ $$
 \end{Test}
 
 \begin{proof}
-Признак Крамера при $b_n = n$.
+Признак Куммера при $b_n = n$.
 \end{proof}
 
 Покажем, зачем нужен признак Раабе. Пусть $a_n = \frac{1}{n^\alpha}$. Тогда:
@@ -145,9 +145,9 @@ $$
 Рассмотрим подробней последний случай, когда $\alpha=\beta=1$. Воспользуемся формой из признака Куммера при $b_n = n\ln n$ и равенством из условия:
 \begin{gather*}
 v_n = \frac{a_n}{a_{n+1}}b_n - b_{n+1} = \left( 1 + \frac{1}{n} + o\left( \frac{1}{n^{1+\eps}}\right) \right)n\ln n - (n+1)\ln(n+1) = \\
-= (n+1)\left( \ln n - \ln(n+1) \right) + o\left( \frac{ln n}{n^\eps} \right) = \\
-= -(n+1)\ln\left( 1 + \frac{1}{n} \right) + o\left( \frac{ln n}{n^\eps} \right) = \\
-= -(n+1)\left( \frac{1}{n} + o(\frac{1}{n}) \right) + o\left( \frac{ln n}{n^\eps} \right) \longrightarrow -1
+= (n+1)\left( \ln n - \ln(n+1) \right) + o\left( \frac{\ln n}{n^\eps} \right) = \\
+= -(n+1)\ln\left( 1 + \frac{1}{n} \right) + o\left( \frac{\ln n}{n^\eps} \right) = \\
+= -(n+1)\left( \frac{1}{n} + o\left(\frac{1}{n}\right) \right) + o\left( \frac{\ln n}{n^\eps} \right) \longrightarrow -1
 \end{gather*}
 Итого, по признаку Куммера ряд действительно расходится.
 \end{proof}
