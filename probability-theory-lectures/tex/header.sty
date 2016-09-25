@@ -1,0 +1,69 @@
+%% Настройка поддержки русского языка
+\usepackage{cmap}                   % Поиск по кириллице
+\usepackage{mathtext}               % Кириллица в формулах
+\usepackage[T1,T2A]{fontenc}        % Кодировки шрифтов
+\usepackage[utf8]{inputenc}         % Кодировка текста
+\usepackage[english,russian]{babel} % Подключение поддержки языков
+
+%% Настройка размеров полей
+\usepackage[top=1in, bottom=1in, left=0.8in, right=0.8in]{geometry}
+
+%% Математические пакеты
+\usepackage{mathtools}              % Тот же amsmath, только с некоторыми поправками
+\usepackage{amssymb}                % Математические символы
+\usepackage{amsthm}                 % Оформление теорем
+\usepackage{amstext}                % Текстовые вставки в формулы
+\usepackage{amsfonts}               % Математические шрифты
+\usepackage{icomma}                 % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{enumitem}               % Для выравнивания itemize (\begin{itemize}[align=left])
+\usepackage{array}                  % Таблицы и матрицы
+
+%% Шрифты
+\usepackage{euscript}               % Шрифт Евклид
+\usepackage{mathrsfs}               % \mathscr{}
+
+%% Графика
+\usepackage[pdftex]{graphicx}       % Вставка картинок
+\graphicspath{{images/}}            % Стандартный путь к картинкам
+\usepackage{tikz}                   % Рисование всего
+\usepackage{pgfplots}               % Графики
+\usepackage{circuitikz}				% Электрические цепи
+\usepackage{wrapfig}				% Обволакивание изображений текстом
+
+%% Прочие пакеты
+\usepackage{indentfirst}                    % Красная строка в начале текста
+\usepackage{epigraph}                       % Эпиграфы
+\usepackage{fancybox,fancyhdr}              % Колонтитулы
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}   % Ссылки
+\usepackage{titlesec}                       % Изменение формата заголовков
+\usepackage[normalem]{ulem}                 % Для зачёркиваний
+\usepackage[makeroom]{cancel}               % И снова зачёркивание (на этот раз косое)
+\usepackage{makecell}						% Разбиение клетки по диагонали
+
+%% Прочее
+\mathtoolsset{showonlyrefs=true}        % Показывать номера только у тех формул,
+                                        % на которые есть \eqref{} в тексте.
+\renewcommand{\headrulewidth}{1.8pt}    % Изменяем размер верхнего отступа колонтитула
+\renewcommand{\footrulewidth}{0.0pt}    % Изменяем размер нижнего отступа колонтитула
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+%% Информация об авторах
+\author{Денис Беляков \\ Никита Попов \\ Алексей Хачиянц}
+\title{Лекции по предмету \\ \textbf{Теория вероятностей}}
+\date{2016/2017 учебный год}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Примечание}
+\newtheorem{exercise}{Упражнение}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+
+\theoremstyle{plain}
+\newtheorem*{frequency-stability}{Принцип устойчивости частоты}
+\newtheorem*{law-of-total-probability}{Формула полной вероятности}
+\newtheorem*{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{problem}{Задача}
+\newtheorem*{hypothesis}{Гипотеза}

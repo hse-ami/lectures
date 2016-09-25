@@ -53,10 +53,10 @@ g(x) = \sum\limits_{i = 0}^{n - 1} b_ix^i$.
     \Function{Умножение 2 длинных чисел}{$h(x)$} \Comment{$h(x)$ --- 
     перемножение 2 многочленов $f(x)$ и $g(x)$.}
       \Let{$carry$}{0}
-      \For{$i = 0 \text{ to } 2n - 2$}
+      \For{$i \gets 0 \text{ to } 2n - 1$}
         \Let{$h_i$}{$h_i + carry$}
         \Let{$carry$}{$\left\lfloor\frac{h_i}{10}\right\rfloor$}
-        \Let{$h_i$}{$h_i \mod 10$}
+        \Let{$h_i$}{$h_i \Mod 10$}
       \EndFor
     \EndFunction
   \end{algorithmic}
