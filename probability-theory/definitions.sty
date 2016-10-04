@@ -1,0 +1,38 @@
+%% Символы
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}          % Знак "независимы"
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\renewcommand{\Pr}{\operatorname{\mathsf{P}}}   % Вероятность
+\newcommand{\E}{\operatorname{\mathsf{E}}}      % Матожидание
+\newcommand{\D}{\operatorname{\mathsf{D}}}      % Дисперсия
+\newcommand{\cov}{\operatorname{\mathsf{cov}}}  % Ковариация
+\newcommand{\N}{\mathbb{N}}             % Натуральные числа
+\newcommand{\Z}{\mathbb{Z}}             % Целые числа
+\newcommand{\R}{\mathbb{R}}             % Действительные числа
+\renewcommand{\leq}{\leqslant}          % Меньше или равно
+\renewcommand{\geq}{\geqslant}          % Больше или равно
+\renewcommand{\phi}{\varphi}            % Фи
+\renewcommand{\epsilon}{\varepsilon}    % Эпсилон
+\renewcommand{\emptyset}{\varnothing}   % Пустое множество
+
+%% Алгоритмы
+\renewcommand{\algorithmicrequire}{\textbf{Вход:}}
+\renewcommand{\algorithmicensure}{\textbf{Выход:}}
+\renewcommand{\algorithmiccomment}[1]{\hspace*{\fill}\{#1\}}
+\floatname{algorithm}{Алгоритм}
+\newcommand{\algname}[1]{\textsc{#1}}
+
+%% Теоремы и иже с ними
+\theoremstyle{remark}
+\newtheorem*{remark}{Примечание}
+\newtheorem*{exercise}{Упражнение}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+
+\theoremstyle{plain}
+\newtheorem*{frequency-stability}{Принцип устойчивости частоты}
+\newtheorem*{law-of-total-probability}{Формула полной вероятности}
+\newtheorem*{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{problem}{Задача}
+\newtheorem*{hypothesis}{Гипотеза}
