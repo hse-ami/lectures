@@ -1,0 +1,107 @@
+%% Настройка поддержки русского языка
+\usepackage{cmap}                   % Поиск по кириллице
+\usepackage{mathtext}               % Кириллица в формулах
+\usepackage[T1,T2A]{fontenc}        % Кодировки шрифтов
+\usepackage[utf8]{inputenc}         % Кодировка текста
+\usepackage[english,russian]{babel} % Подключение поддержки языков
+
+%% Настройка размеров полей
+\usepackage[top=1in, bottom=1in, left=0.8in, right=0.8in]{geometry}
+
+%% Математические пакеты
+\usepackage[fleqn]{mathtools}              % Тот же amsmath, только с некоторыми поправками
+\usepackage{amssymb}                % Математические символы
+\usepackage{amsthm}                 % Оформление теорем
+\usepackage{amstext}                % Текстовые вставки в формулы
+\usepackage{amsfonts}               % Математические шрифты
+\usepackage{icomma}                 % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{enumitem}               % Для выравнивания itemize (\begin{itemize}[align=left])
+\usepackage{array}                  % Таблицы и матрицы
+
+% Пакеты для алгоритмов
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{listings}
+
+%% Шрифты
+\usepackage{euscript}               % Шрифт Евклид
+\usepackage{mathrsfs}               % \mathscr{}
+
+%% Графика
+\usepackage[pdftex]{graphicx}       % Вставка картинок
+\graphicspath{{images/}}            % Стандартный путь к картинкам
+\usepackage{tikz}                   % Рисование всего
+\usepackage{pgfplots}               % Графики
+\usepackage{circuitikz}             % Электрические цепи
+\usepackage{wrapfig}                % Обволакивание изображений текстом
+
+%% Прочие пакеты
+\usepackage{indentfirst}                                % Красная строка в начале текста
+\usepackage{epigraph}                                   % Эпиграфы
+\usepackage{fancybox,fancyhdr}                          % Колонтитулы
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}   % Ссылки
+\usepackage{titlesec}                                   % Изменение формата заголовков
+\usepackage[normalem]{ulem}                             % Для зачёркиваний
+\usepackage[makeroom]{cancel}                           % И снова зачёркивание (на этот раз косое)
+\usepackage{makecell}                                   % Разбиение клетки по диагонали
+\usepackage{xifthen}                                    % if-else в определениях комманд
+
+%% Прочее
+\mathtoolsset{showonlyrefs=true}        % Показывать номера только у тех формул,
+                                        % на которые есть \eqref{} в тексте.
+\renewcommand{\headrulewidth}{1.8pt}    % Изменяем размер верхнего отступа колонтитула
+\renewcommand{\footrulewidth}{0.0pt}    % Изменяем размер нижнего отступа колонтитула
+
+
+%% Замена цвета гиперссылки на заметку на синий
+\makeatletter
+\def\@footnotecolor{red}
+\define@key{Hyp}{footnotecolor}{%
+    \HyColor@HyperrefColor{#1}\@footnotecolor%
+}
+\def\@footnotemark{%
+    \leavevmode
+    \ifhmode\edef\@x@sf{\the\spacefactor}\nobreak\fi
+    \stepcounter{Hfootnote}%
+    \global\let\Hy@saved@currentHref\@currentHref
+    \hyper@makecurrent{Hfootnote}%
+    \global\let\Hy@footnote@currentHref\@currentHref
+    \global\let\@currentHref\Hy@saved@currentHref
+    \hyper@linkstart{footnote}{\Hy@footnote@currentHref}%
+    \@makefnmark
+    \hyper@linkend
+    \ifhmode\spacefactor\@x@sf\fi
+    \relax
+}%
+\makeatother
+
+%% Параметры колонтитулов
+\hypersetup{footnotecolor=blue}
+\fancyfoot{}
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RE]{\rightmark}
+
+%% Сброс счётчика задач в каждой section
+\makeatletter
+\@addtoreset{problem}{section}
+\makeatother
+
+%% Титульный лист
+\renewcommand{\titlepage}{\begingroup
+    \hbox{
+          \hspace*{0.12\textwidth}
+          \rule{1pt}{\textheight}
+          \hspace*{0.05\textwidth}
+          \parbox[b]{0.775\textwidth}{
+              {\includegraphics[width=\linewidth]{image}}\\[2\baselineskip]
+              {\noindent\Huge\bfseries Теория вероятностей}\\[\baselineskip]
+              {\large\textrm{Конспекты лекций и семинаров}}\\[3\baselineskip]
+              {\Large\textsc{Лектор: Д.А. Шабанов}}\\[\baselineskip]
+              {Конспекты вели Денис Беляков, Никита Попов и Алексей Хачиянц}\\[6\baselineskip]
+              {\noindent НИУ ВШЭ, 2016-2017}\\[\baselineskip]
+          }
+    }
+    \endgroup
+}
