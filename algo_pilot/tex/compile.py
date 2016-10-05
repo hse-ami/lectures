@@ -25,7 +25,7 @@ with open('temp.tex', 'w', encoding="utf8") as temp:
     for elem in os.listdir('./'):
         if elem.startswith('hse_algo_pilot') and elem.endswith('.tex'):
             lectures.append(elem)
-            proc = subprocess.Popen(['pdflatex', '-output-directory', '../', elem])
+            proc = subprocess.Popen(['pdflatex', '--shell-escape', '-output-directory', '../', elem])
             proc.communicate()
     lectures.sort()
 
@@ -50,7 +50,7 @@ with open('temp.tex', 'w', encoding="utf8") as temp:
 
 # In order to create table of contents, I have to compile it twice.
 for _ in range(2):
-    proc = subprocess.Popen(['pdflatex', 'temp.tex'])
+    proc = subprocess.Popen(['pdflatex', '--shell-escape', 'temp.tex'])
     proc.communicate()
 
 # Saving the file
@@ -69,7 +69,7 @@ os.chdir('tex')
 
 # Removing the litter
 for file in os.listdir('./'):
-    if not (file.endswith('.tex') or file.endswith('.py') or file.endswith('.sty') or file.endswith('images')):
+    if not (file.endswith('.tex') or file.endswith('.py') or file.endswith('.sty') or file.endswith('images') or file.endswith('dot')):
         os.remove(os.path.join('./', file))
 os.remove('./temp.tex')
 
@@ -78,5 +78,5 @@ os.remove('./temp.tex')
 os.chdir('..')
 for file in os.listdir('./'):
     if not (file.endswith('tex') or file.endswith('py') or file.endswith('sty') 
-        or file.endswith('pdf') or file.endswith('colloc') or file.endswith('images')):
+        or file.endswith('pdf') or file.endswith('colloc') or file.endswith('images') or file.endswith('dot')):
         os.remove(os.path.join('./', file))
