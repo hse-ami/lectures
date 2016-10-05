@@ -78,7 +78,7 @@
         \item Для любой функции \(\phi(x)\) выполняется \(\E[\phi(\xi)] = \sum\limits_{a \in \xi(\Omega)} \phi(a)\Pr(\xi = a)\);
         \item Если \(\Pr(\xi = c) = 1\) для некоторой константы \(c\), то \(\E[\xi] = c\);
         \item Если \(\xi \geq 0\), то \(\E[\xi] \geq 0\); 
-        \item Если \(E[\xi] = 0\), то \(\Pr(\xi = 0) = 1\);
+        \item Если \(E[\xi] = 0\) и \(\xi \geq 0\), то \(\Pr(\xi = 0) = 1\);
         \item Если \(\xi\) и \(\eta\) независимы, то \(\E[\xi\eta] = \E[\xi]\E[\eta]\).
     \end{enumerate}
 \end{theorem}
@@ -114,6 +114,8 @@
         \item \(\xi \geq 0 \implies \E[\xi] \geq \E[0] \geq 0\).
         
         \item \(\E[\xi] = \sum\limits_{\omega \in \Omega} \underbrace{\xi(\omega)}_{\geq 0}\underbrace{\Pr(\omega)}_{\geq 0} = 0 \implies \forall \omega \in \Omega\ \xi(\omega)\Pr(\omega) = 0\). Тогда если \(\xi(\omega) \neq 0\), то \(\Pr(\omega) = 0\). Тогда \(\Pr(\xi = 0) = 1\).
+        
+        Заметим, что если величина может быть и отрицательной, то это свойство не выполняется. Предположим, что \(\xi\) равновероятно принимает значения 1 и \(-1\). Тогда \(\E[\xi] = 0\), но \(\Pr(\xi = 0) = 0\).
         
         \item 
         \begin{multline*}
