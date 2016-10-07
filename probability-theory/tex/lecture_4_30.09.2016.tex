@@ -1,0 +1,185 @@
+\section{Лекция от 30.09.2016}
+
+\subsection{Сходимость случайных величин. Закон больших чисел.} 
+
+\begin{definition}
+	Пусть \(\{\xi_n,\ n \in \N\}\) --- последовательность случайных величин. Тогда будем говорить, что \(\xi_n\) \emph{сходится по вероятности} к некоторой случайной величине \(\xi\), если для любого положительного \(\alpha \text{ при } n \to \infty \text{ выполняется }  \Pr(\left|\xi_n - \xi \right| \geq \alpha) \to 0\).\\ Обозначение: \(\xi_n \prto \xi\).
+\end{definition}
+
+% и в Феллере говорится о независимых и ОДИНАКОВО РАСПРЕДЕЛЕННЫХ с.в. Где истина, брат?
+\begin{theorem}[Закон больших чисел]
+	Пусть имеется последовательность попарно некоррелированных случайных величин \(\{\xi_n,\ n \in \N\}\) и \(\exists c \text{ такое, что } \D[\xi_n] \leq c \text{ для любых } n \in \N\).
+	Обозначим через \(S_n = \xi_1 + \ldots + \xi_n.\) сумму первых $ n $ случайных величин.
+    Тогда \(\frac{S_n - \E[S_n]}{n} \prto 0.\)
+\end{theorem}
+\begin{proof}
+	В силу того, что \(\cov(\xi_i, \xi_j) = 0 \  \forall i \neq j,  \text{ то } \D[S_n] = \D[\xi_1 + \ldots + \xi_n] = \cov(\xi_1 + \ldots + \xi_n, \xi_1 + \ldots + \xi_n) = \sum\limits_{i=1}^{n}\cov(\xi_i, \xi_i) = \sum\limits_{i=1}^{n}\D[\xi_i] \leq n \cdot c.\)
+	
+	\noindentДалее по свойству дисперсии \(\D[\frac{S_n - \E[S_n]}{n}] = \frac{1}{n^2}\D[S_n].\) А исходя из рассуждения выше, данную величину можно оценить сверху: \(\frac{1}{n^2}\D[S_n] \leq \frac{c}{n}.\)
+	
+	\noindentНаконец, для любых положительных $ \alpha $ по неравенству Чебышёва \(\Pr(\left|\frac{S_n - \E[s_n]}{n}\right| \geq \alpha) \leq \frac{\D[\frac{S_n - \E[S_n]}{n}]}{\alpha^2}.\) Осталось только ограничить числитель уже имеющейся оценкой. \(\frac{\D[\frac{S_n - \E[S_n]}{n}]}{\alpha^2} \leq \frac{c}{n\alpha^2}.\) Несложно увидеть, что данная величина стремится к нулю при \(n \to \infty.\)
+\end{proof}
+
+\noindent\textbf{Следствие:} \textit{Пусть \(\{\xi_n, n \in \N \}\) --- последовательность попарно независимых случайных величин, \(\E[\xi_n] = \alpha\) и \(\exists c > 0\) такое, что \(\D[\xi_n] \leq c\). Тогда \(\frac{\xi_1 + \ldots + \xi_n}{n} \prto \alpha \).}
+
+\begin{proof}
+	Из условия независимости случайных величин нам хватит следствия о том, что они являются некоррелированными. Из Закона больших чисел следует, что \(\frac{S_n - \E[S_n]}{n} \prto 0.\)
+	\(\frac{S_n}{n} - \alpha \prto 0\)
+	Также заметим, что в  силу определения сходимости, \(\frac{S_n}{n} \prto \alpha \).
+\end{proof}
+%Не понимаю пока, что происходит с матожиданием...
+
+Давайте попробуем осознать, в чем заключается смысл Закона больших чисел.
+Пусть случайная величина задается индикатором происхождения события,  \(\xi_i = I \)\{событие $ A $ произошло в $ i $-ом эксперименте\}, при этом все эксперименты проводятся независимо друг от друга ($ \xi_n $ является независимой случайной величиной). Обозначим за \(\vartheta(A)\) частоту появления события $ A $ в $ n $-м количестве экспериментов, \(\vartheta_n(A) = \frac{\xi_1 + \ldots + \xi_n}{n}.\)
+Тогда по Закону больших чисел \(\vartheta_n(A) \prto \E[\xi_i] = \E[I\text{\{событие $ A $ произошло в $ i $-ом эксперименте\}}] = \Pr(A).\) Выходит, что Закон больших чисел является теоретическим обоснованием принципа устойчивости частот. 
+
+\begin{definition}
+	Последовательность случайных \(\{\xi_n,\ n \in \N\} \) сходится к случайной величине $ \xi $ c вероятностью 1 (или \emph{почти наверное}\footnote{Название ``сходимость почти наверное'' произошло от применяющегося в англоязычной литературе термина ``almost sure convergence''.}), если \(\Pr(\lim\limits_{n \to \infty}\xi_n \to \xi) = \Pr(\omega : \lim\limits_{n \to \infty}\xi_n(\omega) = \xi(\omega)) = 1.\) Обозначение: \(\xi_n \asto \xi\) (сходится \emph{почти наверное}).
+\end{definition}
+\begin{remark}
+	Если \(\forall \omega \in \Omega,\  \Pr(\omega) > 0, \text{ то } \xi_n \asto \xi \Leftrightarrow \forall \omega \in \Omega, \  \xi_n(\omega) \to \xi(\omega). \)	
+\end{remark}
+
+
+\begin{theorem}
+	В дикретных вероятностных пространствах \(\xi_n \prto \xi \iff \xi_n \asto \xi\).
+\end{theorem}
+
+\begin{proof}
+	Докажем по очереди в обе стороны:
+	\begin{itemize}
+		\item \(\xi_n \prto \xi \implies \xi_n \asto \xi\)\par
+            Из сходимости \emph{по вероятности} следует сходимость \emph{почти наверное}. Для доказательства этого факта нужно показать, что \(\forall \omega_0 \in \Omega : \Pr(\omega_0) > 0 \) выполняется сходимость \(\xi_n(\omega_0) \to \xi(\omega_0). \) 
+            Пусть такой сходимости нет, \(\xi_n(\omega_0) \nrightarrow \xi(\omega_0).\) В этом случае из отрицания определения о сходимости \emph{почти наверное} существуют такое положительное $ \alpha_0 $ и подпоследовательность \(\{\xi_{n_k}(\omega_0), k \in \N \} \), что \(\forall k \in \N,\  \Pr(\left|\xi_{n_k} - \xi(\omega_0)\xi\right|) \geq \alpha_0 \). Но тогда для любых натуральных \( k,\  \Pr(\left|\xi_{n_k} - \xi\right| \geq \alpha_0 ) \geq \Pr(\omega_0) > 0. \) Получаем противоречие с определением сходимости \emph{по вероятности}. Значит, \(\xi_n \prto \xi \implies \xi_n \asto \xi\).  
+		\item \(\xi_n \asto \xi \implies \xi_n \prto \xi\)\par
+            Из сходимости \emph{почти наверное} следует, что \(\Pr(\lim\limits_{n \to \infty}\xi_n = \xi) = 1.\)	Следовательно, выполнено и \(\xi_n(\omega) \to \xi(\omega) \) для \(\omega \in \Omega : \Pr(\omega) > 0. \) Теперь нужно проверить, выполняется ли условие сходимости \emph{по вероятности}: \(\Pr(\left|\xi_n - \xi \right| \geq \alpha) \to 0\). 
+			Пусть \(\Omega = \{\omega_i, i \in \N\} \). Теперь для любого положительного $ \delta $ выберем номер, от него зависящий, такой что \(\sum\limits_{i > N} \Pr(\omega_i) \leq \delta.\) Тогда 
+			\begin{multline*}
+			\Pr(\left|\xi_n - \xi \right| \geq \alpha) = \sum\limits_{
+				\substack {
+				i:\\
+				\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
+				}
+			}
+			\Pr(\omega_i) = \sum\limits_{
+				\substack {
+				i:\\
+				i\leq \N, \\   
+				\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
+				}
+			}\Pr(\omega_i) \ + \\ + \sum\limits_{
+			\substack {
+			i:\\
+			i > \N, \\  
+			\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
+				}
+			} \Pr(\omega_i) \leq \delta + \sum\limits_{
+			\substack {
+			i:\\
+			i\leq \N, \\
+		    \left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha,\\ Pr(\omega_i) > 0)
+				}
+			} \Pr(\omega_i).  
+			\end{multline*}
+		Теперь нужно перейти к пределу при \(n \to \infty.\) Но чтобы избежать ситуации, когда предела не существует, перейдем к верхнему пределу для тех же $ n $. Также заметим, что так как \(\xi_n(\omega_i) \to \xi(\omega_i)\), начиная c некоторого $ n $, $ \omega_i $ перестает входить в сумму:  
+		\[
+			\overline{\lim_{n \to \infty}}\Pr(\left|\xi_n - \xi\right| \geq \alpha) \leq \delta + 0.
+		\]
+		А в силу произвольности \(\delta > 0\) можно говорить о том, что этот предел стремится к нулю.
+	\end{itemize}
+\end{proof}
+\textbf{Вопрос 1:} Как оценить скорость сходимости $\frac{S_n}{n} - a$ к нулю?
+
+\textbf{Вопрос 2:} Как оценить скорость сходимости $P\left(\left|\frac{S_n}{n} - a\right|\right) \geq \epsilon$ к нулю?
+
+\subsection{Схема испытаний Бернулли}
+
+Сначала введём вспомогательное определение:
+
+\begin{definition}
+    Случайные величины $\xi$ и $\eta$ называют \emph{одинаково распределёнными}, если 
+    \[
+        \begin{cases}
+            \xi(\Omega) = \eta(\Omega); \\
+            \forall x \in \xi(\Omega), \Pr[\xi = x] = \Pr(\eta = x).
+        \end{cases}
+    \]
+
+    Говоря простым языком, у этих случайных величин совпадают возможные значения и их вероятности.
+
+    \textbf{Обозначение:} $\xi \eqdist \eta$.
+\end{definition}
+
+\textbf{Описание:} Схема испытаний Бернули подразумевает много однородных экспериментов, в каждом из которых возможно два исхода --- ``успех'' и ``неудача''; при этом нас интересует распределение числа успехов.
+
+\textbf{Математическая модель:} Пусть $\{\xi_i\}$ --- независимые \emph{одинаково распределённые} случайные величины (например, последовательные броски монеты); $\xi_i(\Omega) = \left\{ 0; 1 \right\}$; пусть также $\Pr(\xi_i = 1) = p$ --- вероятность успеха каждого отдельного эксперимента. Введём также обозначение $S_n = \sum\limits_{i = 1}^n \xi_i$ --- случайную величину, обозначающую количество успехов.
+
+Распределение $S_n$ кажется очевидным: $S_n \sim \mathrm{Bin}(n, p)$, т.е. $\Pr(S_n = k) = C_n^kp^k(1-p)^{n-k}$.
+
+\begin{exercise}
+    Докажите, что распределение $S_n$ и вправду биномиально.
+\end{exercise}
+
+\begin{exercise}
+    В качестве упражнения, читателю предлагается оценить, сколько нужно попыток, чтобы $\frac{\text{число успехов}}{\text{число попыток}}$ было примерно равно $p$, т.е. как быстро наблюдаемая вероятность сходится к реальной. Для этого предлагается оценить следующую вероятность:
+\end{exercise}
+\[
+    \Pr\left(\left|\frac{S_n}{n}-p\right|\geq \epsilon\right) = ?
+\]
+
+Кстати говоря, $p$ совершенно не обязана быть константой и может являться функцией от $n$: $p(n)$.
+
+Тогда, вообще говоря, есть несколько отдельных случаев:
+
+\begin{itemize}
+    \item
+        $np(n) \xrightarrow[n\to\infty]{} \lambda > 0$. 
+
+        \begin{theorem}[Пуассон]
+
+            Пусть $np(n) \xrightarrow[n\to\infty]{} \lambda > 0$. 
+            Тогда 
+                \[
+                    \forall k \in \Z_+, \Pr(S_n = k) \xrightarrow[n\to\infty]{} e^{-\lambda}\frac{\lambda^k}{k!}.
+                \]
+        \end{theorem}
+        \begin{proof}
+            \begin{multline*}
+                C_n^kp^k(1-p)^{n-k} =
+                \frac{n(n-1)(n-2)\ldots(n-k+1)}{k!}p(n)^k(1-p(n))^{n-k} \sim\\\sim
+                \frac{n^k}{k!}\left(\frac{\lambda}{n}+o\left(\frac{1}{n}\right)\right)^k\left( 1-\frac{\lambda}{n}+o\left( \frac{1}{n} \right) \right)^{n-k} =\\=
+                \frac{1}{k!}\left(\lambda+o\left(1\right)\right)^k\left( 1-\frac{\lambda}{n}+o\left( \frac{1}{n} \right) \right)^{n-k} \xrightarrow[n\to\infty]{}
+                \frac{\lambda^k}{k!}e^{-\lambda}
+            \end{multline*}
+        \end{proof}
+        \textbf{Следствие:} $P(S_n = k) \overset{d}{\to} P(\xi = k),\ \xi \sim \mathrm{Pois}(\lambda)$ --- сходимость \emph{по распределению}.
+
+    \item
+        $np(n) \xrightarrow[n\to\infty]{} \infty$. 
+
+        Сделаем ещё одно отступлление в сторону и рассмотрим величину $\frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}}$.
+        Легко понять, что 
+        \[
+            \E[S_n] = np.
+        \]
+        
+        Несложно также показать, что 
+        \[
+            \D[S_n] = \sum\D[\xi_i] + \sum\cov[x_i, x_j] = \sum\D[\xi_i] = n\D[\xi_1] = n\left( \E[\xi_1^2]-\left( \E[\xi_1] \right)^2 \right) = npq.
+        \]
+
+        \begin{theorem}[Муавр-Лаплас]
+            Пусть $p$ --- константа. Введём обозначение
+            \[
+                P_n(a,b)\mathop{:=} P\left( a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} < b \right).
+            \]
+
+            Тогда 
+            \[
+                \sup_{a<b} \left|P_n(a, b) - \int\limits_a^b\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}}dx\right| \xrightarrow[n\to\infty]{} 0
+            \]
+        \end{theorem}
+        \begin{proof}
+            Без доказательства.
+        \end{proof}
+\end{itemize}
