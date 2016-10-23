@@ -9,22 +9,24 @@
 	\begin{Def}
 		Будем говорить, что $f_n(x)$ сходится поточечно к $f(x)$, если
 		$$
-		\forall x \in X\; \forall \varepsilon>0\; \exists N\in \N\colon \; \forall n>N\; |f_n(x) - f(x)| < \varepsilon
+		\forall x \in X\; \forall \varepsilon>0\; \exists N\in \N\colon \; \forall n>N\; |f_n(x) - f(x)| < \varepsilon.
 		$$
-		Обозначение: $f_n(x) \overset{X}{\underset{n\to\infty}{\longrightarrow}} f(x)$
 	\end{Def}
-	Почему такое определение не совсем удобно для нас? Сходимость в каждой точке может быть своя, произвольная, хотелось бы, чтобы свойства функций $f_n$ и $f$ были похожи. Вот, например,
+	\begin{Designation}
+	$f_n(x) \overset{X}{\underset{n\to\infty}{\longrightarrow}} f(x)$.
+	\end{Designation}
+	Почему такое определение не совсем удобно для нас? Сходимость в каждой точке может быть своя, произвольная, а хотелось бы, чтобы свойства функций $f_n$ и $f$ были похожи. Приведем пример, когда это не выполняется.
 	\begin{Examples}
-		Если $f_n(x) = x^n$, $X = [0;1]$, тогда
+		Если $f_n(x) = x^n$, $X = [0;1]$, то
 		$$
 		f_n(x) \overset{[0;1]}{\underset{n\to\infty}{\longrightarrow}}		
 		\begin{cases*}
 			0,\;x<1\\
 			1,\;x = 1
-		\end{cases*}
+		\end{cases*}.
 		$$
 	\end{Examples}
-	То есть бывает так, что все функции последовательности непрерывны на отрезке и стремятся к разрвной функции.
+	То есть бывает так, что все функции последовательности непрерывны на отрезке и стремятся к разрывной функции.
 	\par Для устранения этого недостатка введём другое определение сходимости функциональной последовательности.
 	\begin{Def}
 		Будем говорить, что последовательность функций $\{f_n(x)\}_{n=1}^\infty$ сходится к $f(x)$ равномерно на множестве $X$, если 
@@ -33,37 +35,40 @@
 		$$
 	\end{Def}
 	\begin{Designation}
-		$f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$
+		$f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$.
 	\end{Designation}
-	Из определений сразу очевидно следует утверждение
+	Из определений сразу очевидно следует утверждение.
 	\begin{Statement}
 		Если $f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то $f_n(x) \overset{X}{\underset{n\to\infty}{\longrightarrow}} f(x)$.
 	\end{Statement}
-	\par А что если нам даны последовательность $f_n(x)$, функция $f(x)$ и множество $X$, как нам понять, сходится ли $f_n(x)$ к $f(x)$? Существует мощный способ. Обозначим $r_n(x) =\underset{x \in X}{\sup}\;|f_n(x) - f(x)|$.
+	
+	А что, если нам даны последовательность $f_n(x)$, функция $f(x)$ и множество $X$, то как нам понять, сходится ли $f_n(x)$ к $f(x)$?
+	
+	Существует мощный способ. Обозначим $r_n(x) =\underset{x \in X}{\sup}\;|f_n(x) - f(x)|$.
 	\begin{Statement}
-		$f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) \Leftrightarrow r_n\to 0$
+		$f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) \Leftrightarrow r_n\to 0$.
 	\end{Statement}
 	\begin{proof}\ \\
 		\textbf{Необходимость}. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon/2$. Тогда
 		\begin{gather*}
-			\exists N\in \N \colon\; \forall n>N\; \forall x \in X\; |f_n(x) - f(x)| < \varepsilon_1\\
-			\Rightarrow r_n =  \underset{x \in X}{\sup}\; |f_n(x) - f(x)| \leqslant \varepsilon_1 < \varepsilon
+			\exists N\in \N \colon\; \forall n>N\; \forall x \in X\; |f_n(x) - f(x)| < \varepsilon_1,\\
+			\Rightarrow r_n =  \underset{x \in X}{\sup}\; |f_n(x) - f(x)| \leqslant \varepsilon_1 < \varepsilon.
 		\end{gather*}
 		То есть $r_n \to 0$ при $n\to \infty$.
 		\par \textbf{Достаточность}.
 		$$
-		\forall \varepsilon > 0\; \exists N \in \N\colon \; \forall n>N\; r_n < \varepsilon \Rightarrow \forall x \in X\; |f_n(x) - f(x)| < \varepsilon
+		\forall \varepsilon > 0\; \exists N \in \N\colon \; \forall n>N\; r_n < \varepsilon \Rightarrow \forall x \in X\; |f_n(x) - f(x)| < \varepsilon.
 		$$
 	\end{proof}
-	Часто это утверждение называют \textbf{супремум-критерием}. Для приведённого выше примера $f_n(x) = x^n$
+	Часто это утверждение называют \textbf{супремум-критерием}. Для приведённого выше примера $f_n(x) = x^n$.
 	\begin{Statement}\ \\		
 		\begin{enumerate}
-			\item $x^n \overset{[0;1]}{\underset{n\to\infty}{\longrightarrow}} 0$
-			\item $x^n \overset{[0;1]}{\underset{n\to\infty}{\not\rightrightarrows}} 0$
+			\item $x^n \overset{[0;1]}{\underset{n\to\infty}{\longrightarrow}} 0$.
+			\item $x^n \overset{[0;1]}{\underset{n\to\infty}{\not\rightrightarrows}} 0$.
 		\end{enumerate}
 	\end{Statement}
 	\begin{proof}
-		$r_n = \underset{x\in(0;1)}{\sup}\;|x^n - 1| = 1 \not\to 0$ 
+		$r_n = \underset{x\in(0;1)}{\sup}\;|x^n - 1| = 1 \not\to 0$.
 	\end{proof}
 	Есть ещё одна подобного рода последовательность.
 	$$
@@ -73,28 +78,28 @@
 	\begin{Statement}
 		Если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$ и $g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} g(x)$, $\alpha \in \R$, то 
 		\begin{enumerate}
-			\item $f_n(x) + g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) + g(x)$
-			\item $\alpha f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} \alpha f(x)$
+			\item $f_n(x) + g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) + g(x)$,
+			\item $\alpha f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} \alpha f(x)$.
 		\end{enumerate}
 	\end{Statement}
 	\begin{proof}
 		Докажем пункт 1, второй доказывается аналогичною. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon / 2$. Тогда
 		\begin{gather*}
-			\exists N_1 \in \N\colon \; \forall x\in X\; |f_n(x) - f(x) | < \varepsilon_1\\
-			\exists N_2 \in \N\colon \; \forall x\in X\; |g_n(x) - g(x) | < \varepsilon_1\\
+			\exists N_1 \in \N\colon \; \forall x\in X\; |f_n(x) - f(x) | < \varepsilon_1,\\
+			\exists N_2 \in \N\colon \; \forall x\in X\; |g_n(x) - g(x) | < \varepsilon_1.\\
 		\end{gather*}
 		Положим $N = \max\{N_1, N_2\}$. Тогда
 		$$
-			|(f_n(x) + g_n(x)) - (f(x) + g(x))| \leqslant |f_n(x) - f(x)| + |g_n(x) - g(x)| < \varepsilon_1 + \varepsilon_1 = \varepsilon
+			|(f_n(x) + g_n(x)) - (f(x) + g(x))| \leqslant |f_n(x) - f(x)| + |g_n(x) - g(x)| < \varepsilon_1 + \varepsilon_1 = \varepsilon.
 		$$
 		Получили требуемое.
 	\end{proof}
 	\begin{Statement}
-		Если $f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$ и $g(x)$ ограничена на множестве $X$, то $f_n(x)g(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) g(x)$
+		Если $f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$ и $g(x)$ ограничена на множестве $X$, то\\ $f_n(x)g(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) g(x)$.
 	\end{Statement}
 	\begin{proof}
 		$\exists C>0\colon\; \forall x\in X\; |g(x)| < C$. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon/C$. Найдём такое $N\in \N$, что 
-		$\forall n>N,\; \forall x\in X\; |f_n(x) - f(x)| < \varepsilon_1$. Тогда $\forall n >N\colon \forall x\in X\; |f_n(x)g(x) - f(x)g(x)| < C\varepsilon_1 = \varepsilon$. 
+		$\forall n>N,\; \forall x\in X\; |f_n(x) - f(x)| < \varepsilon_1$. Тогда \\$\forall n >N\colon \forall x\in X\; |f_n(x)g(x) - f(x)g(x)| < C\varepsilon_1 = \varepsilon$. 
 	\end{proof}
 	\begin{Comment}
 		Если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, $g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} g(x)$ и $f(x),\; g(x)$ ограничены на множестве $X$, то $f_n(x)g_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)g(x)$.
@@ -102,7 +107,8 @@
 	\begin{Comment}
 		Если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$ и $f(x)$ отделена от нуля (т.е. существует такое $\alpha>0$, что для любого элемента множества $X$ $|f(x)| \geqslant \alpha$), то $\cfrac{1}{f_n(x)} \overset{X}{\underset{n\to\infty}{\rightrightarrows}} \cfrac{1}{f(x)}$. 
 	\end{Comment}
-	Доказательство этих фактов остаётся в качестве управжнения. \textbf{Указание}. Рассмотреть $\cfrac{1}{f_n} - \cfrac{1}{f} = (f-f_n)\cfrac{1}{f_n\cdot f}$.
+	Доказательство этих фактов остаётся в качестве управжнения. \textbf{Указание}. Рассмотреть \\$\cfrac{1}{f_n} - \cfrac{1}{f} = (f-f_n)\cfrac{1}{f_n\cdot f}$.
+
 	\subsection{Геометрический смысл равномерной сходимости}
 	Несложно понять, что если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то для всякого $\varepsilon > 0$, начиная с какого-то $N\in \N$ для всех $n>N$ все графики функций $f_n(x)$ окажется в $\varepsilon$-коридоре функции $f(x)$.
 	\subsection{Критерий Коши равномерной сходимости}
@@ -125,7 +131,7 @@
 		\par \textbf{1 $\Rightarrow$ 2}. Пусть $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$.
 		\par Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon / 2$. Найдём такое $N\in \N\; \forall n>N\; \forall x\in X$ верно $ |f_n(x) - f(x)| < \varepsilon_1$. Тогда $\forall n,m > N\; \forall x \in X$ выполнено
 		$$
-			|f_n(x) - f_m(x)| \leqslant |f_n(x) - f(x)| + |f(x) - f_m(x)| < \varepsilon_1 + \varepsilon_1 = \varepsilon
+			|f_n(x) - f_m(x)| \leqslant |f_n(x) - f(x)| + |f(x) - f_m(x)| < \varepsilon_1 + \varepsilon_1 = \varepsilon.
 		$$
 	\end{proof}
 	\subsection{Функциональные ряды}
@@ -136,18 +142,18 @@
 	Отсюда же можно сформулировать ряд утверждений, которые по сути мы уже доказали.
 	\begin{Statement}
 		Пусть $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_1(x)$, 
-		$\sum\limits_{n=1}^\infty g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_2(x)$. Тогда их почленная сумма $\sum\limits_{n=1}^\infty  (f_n(x) + g_n(x) ) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_1(x) + S_2(x)$
+		$\sum\limits_{n=1}^\infty g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_2(x)$. Тогда их почленная сумма $\sum\limits_{n=1}^\infty  (f_n(x) + g_n(x) ) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_1(x) + S_2(x)$.
 	\end{Statement}
 	\begin{Statement}
 		Если $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S(x)$, $\alpha \in \R$, то
 		$$
-			\sum\limits_{n=1}^\infty \alpha f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} \alpha S(x)
+			\sum\limits_{n=1}^\infty \alpha f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} \alpha S(x).
 		$$
 	\end{Statement}
 	\begin{Statement}
 		Если $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S(x)$, а $g(x)$ ограничена на $X$, то 
 		$$
-		\sum\limits_{n=1}^\infty g(x) f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} g(x)S(x)
+		\sum\limits_{n=1}^\infty g(x) f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} g(x)S(x).
 		$$
 	\end{Statement}
 	Ну и конечно, мы не обойдёмся без критерия Коши.
@@ -156,12 +162,12 @@
 		\begin{enumerate}
 			\item $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} ???$ (опять же, сходится куда-то).
 			\item Выполняется условие Коши 
-			$$\forall \varepsilon >0\; \exists N \in \N\colon \; \forall m>N,\; \forall p \in \N,\; \forall x\in X\; \left|\sum_{n=m+1}^{m+p} f_n(x)\right| < \varepsilon
+			$$\forall \varepsilon >0\; \exists N \in \N\colon \; \forall m>N,\; \forall p \in \N,\; \forall x\in X\; \left|\sum_{n=m+1}^{m+p} f_n(x)\right| < \varepsilon.
 			$$
 		\end{enumerate}
 	\end{Statement}
 	Отсюда же нахаляву получаем утверждение.
 	\begin{Statement}[Необходимое условие равномерной сходимости функционального ряда]
-		Если $\sum\limits_{n=1}^\infty f_n(x)  \overset{X}{\underset{n\to\infty}{\rightrightarrows}}$, то $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} 0$
+		Если $\sum\limits_{n=1}^\infty f_n(x)  \overset{X}{\underset{n\to\infty}{\rightrightarrows}}$, то $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} 0$.
 	\end{Statement}
 \end{document}
