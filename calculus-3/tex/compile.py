@@ -20,13 +20,11 @@ with open('temp.tex', 'w', encoding="utf8") as temp:
     temp.write('\\pagestyle{fancy}\n\n')
     temp.write('\\tableofcontents\n\n')
 
-    # Collecting text from separate lecture files and compiling each lecture again
+    # Collecting text from separate lecture files
     lectures = []
     for elem in os.listdir('./'):
         if elem.startswith('calculus-3') and elem.endswith('.tex'):
             lectures.append(elem)
-            proc = subprocess.Popen(['pdflatex', '-output-directory', '../', elem])
-            proc.communicate()
     lectures.sort()
 
     # Adding it to the temp file
@@ -77,6 +75,6 @@ os.remove('./temp.tex')
 # Removing rubbish
 os.chdir('..')
 for file in os.listdir('./'):
-    if not (file.endswith('tex') or file.endswith('py') or file.endswith('sty') 
+    if not (file.endswith('tex') or file.endswith('py') or file.endswith('sty')
         or file.endswith('pdf') or file.endswith('colloc') or file.endswith('images')):
         os.remove(os.path.join('./', file))
