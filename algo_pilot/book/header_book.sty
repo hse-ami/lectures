@@ -14,7 +14,7 @@
 \setlength{\parskip}{\medskipamount}
 
 %% Изменяем размер полей
-\usepackage[top=0.7in, bottom=0.75in, left=0.625in, right=0.625in]{geometry}
+\usepackage[top=0.8in, bottom=0.75in, left=0.625in, right=0.625in]{geometry}
 
 %% Изменяем размер отступов колонтитулов
 \renewcommand{\headrulewidth}{1.8pt}
@@ -37,12 +37,14 @@
 \usepackage{amsfonts}
 \usepackage{icomma}         % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
 \usepackage{enumitem}       % Для выравнивания itemize (\begin{itemize}[align=left])
+\usepackage{ifthen}
+
 
 % Номера формул
 \mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
 
 % Ссылки
-\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+\usepackage[urlcolor=blue]{hyperref}
 
 % Шрифты
 \usepackage{euscript}  % Шрифт Евклид
@@ -77,24 +79,38 @@
 
 
 %% Информация об авторах
-\author{Группа лектория ФКН ПМИ 2016-2017\\
-  Данила Кутенин}
-\title{Лекции по предмету \\
-  \textbf{Алгоритмы 2}}
-\date{2016/2017 учебный год}
+%% Титульный лист
+\renewcommand{\titlepage}{\begingroup
+    \hbox{
+          \hspace*{0.12\textwidth}
+          \rule{1pt}{\textheight}
+          \hspace*{0.05\textwidth}
+          \parbox[b]{0.775\textwidth}{
+              {\includegraphics[width=\linewidth]{../images/velosiped.jpg}}\\[2\baselineskip]
+              {\noindent\Huge\bfseries Избранные главы алгоритмов и
+              структур данных}\\[\baselineskip]
+              {\large\textrm{Конспекты лекций}}\\[3\baselineskip]
+              {\Large\textsc{Лектор: Г.О. Евстропов}}\\[\baselineskip]
+              {Под редакцией Данилы Кутенина}\\[6\baselineskip]
+              {\noindent НИУ ВШЭ, 2015-2016}\\[\baselineskip]
+          }
+    }
+    \endgroup
+}
+
 
 
 %% Для колонтитула
 \def\head{
-{\it \small НИУ ВШЭ $\bullet$ Факультет компьютерных наук $\bullet$
+{\it \small  НИУ ВШЭ $\bullet$ Факультет компьютерных наук $\bullet$
 Прикладная математика и информатика}
 }
 
 %% Делаем верхний и нижний колонтитулы
 \fancyhf{}
-\fancyhead[R]{\head}
-\fancyfoot[R]{{\small {\it Данила Кутенин. Лекции от Глебаса}}}
-\fancyhead[L]{\thepage}
+\fancyhead[L]{\ifthenelse{\isodd{\thepage}}{\head}{\thepage}}
+\fancyhead[R]{\ifthenelse{\isodd{\thepage}}{\thepage}{\head}}
+
 
 %% Функция для обнуление конкретного счётчика
 \def\ob#1{\setcounter{#1}{0}}
@@ -187,10 +203,12 @@
 \renewcommand{\C}{\mathbb{C}}
 \newcommand{\E}{\mathbb{E}}
 \renewcommand{\O}{\mathcal{O}}
-\newcommand{\Pclass}{\mathsf{P}}
-\newcommand{\NPclass}{\mathsf{NP}}
-\newcommand{\coNPclass}{\mathsf{coNP}}
-\newcommand{\NPCclass}{\mathsf{NPC}}
+\newcommand{\Pclass}{\mathbf{P}}
+\newcommand{\NPclass}{\mathbf{NP}}
+\newcommand{\coNPclass}{\mathbf{coNP}}
+\newcommand{\NPCclass}{\mathbf{NPC}}
+\newcommand{\SAT}{\mathsf{SAT}}
+
 
 \newcommand{\vvector}[1]{\begin{pmatrix}{#1}_1 \\\vdots\\{#1}_n\end{pmatrix}}
 \renewcommand{\vector}[1]{({#1}_1, \ldots, {#1}_n)}
