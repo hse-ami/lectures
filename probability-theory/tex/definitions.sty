@@ -1,9 +1,28 @@
 %% Символы
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}          % Знак "независимы"
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
-\renewcommand{\Pr}{\operatorname{\mathsf{P}}}   % Вероятность
-\newcommand{\E}{\operatorname{\mathsf{E}}}      % Матожидание
-\newcommand{\D}{\operatorname{\mathsf{D}}}      % Дисперсия
+
+\providecommand\given{}
+\DeclarePairedDelimiterX\brackets[1]{(}{)}{
+    \renewcommand\given{  \nonscript\:
+        \delimsize\vert
+        \nonscript\:
+        \mathopen{}
+        \allowbreak}
+    #1
+}
+\DeclarePairedDelimiterX\squarebrackets[1]{[}{]}{
+    \renewcommand\given{  \nonscript\:
+        \delimsize\vert
+        \nonscript\:
+        \mathopen{}
+        \allowbreak}
+    #1
+}
+\let\Pr\undefined
+\NewDocumentCommand{\Pr}{g}{\mathsf{P}\IfNoValueTF{#1}{}{\brackets*{#1}}}
+\NewDocumentCommand{\E}{g}{\mathsf{E}\IfNoValueTF{#1}{}{\squarebrackets*{#1}}}
+\NewDocumentCommand{\D}{g}{\mathsf{D}\IfNoValueTF{#1}{}{\squarebrackets*{#1}}}
 \newcommand{\cov}{\operatorname{\mathsf{cov}}}  % Ковариация
 \newcommand{\eqdist}{\overset{d}{=}}    % Одинаково распределённые величины
 \newcommand{\prto}{\xrightarrow{\Pr}}	% Сходимость по вероятности (probably to)
