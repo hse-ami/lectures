@@ -26,7 +26,7 @@
     Пусть \(S_n \sim \mathrm{Bin}(n, p)\), а \(\lambda = \E{S_n} = np\). Тогда для любого \(t > 0\) выполнено следующее:
     \[\Pr{S_n \geq \lambda + t} \leq \exp\left( -\frac{t^2}{2(\lambda + \frac{t}{3})} \right), \qquad\Pr{S_n \leq \lambda - t} \leq \exp\left( -\frac{t^2}{2\lambda} \right).\]
 \end{theorem}
-\begin{proof}
+\begin{proof}\footnote{Краткая идея доказательства: достаём бубен и преобразуем. (А.Х.)}
     Пусть $t < n - \lambda$, тогда $\forall u > 0$:
     
     \[
@@ -102,6 +102,7 @@
         Значит, $\Pr{S_n \geq \lambda + t} \leq \exp\left( -\frac{t^2}{2\left( \lambda+\frac{t}{3} \right)} \right)$
     \end{itemize}
 \end{proof}
+
 
 К счастью, на экзамене будет достаточно понимать идею, и не требуется точное воспроизведение всех 
 вычислений.
