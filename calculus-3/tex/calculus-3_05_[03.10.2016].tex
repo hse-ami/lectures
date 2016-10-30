@@ -10,37 +10,31 @@
 	\end{Def}
 
 	\begin{Theorem}[Коши]
-		Пусть ряд $\sum\limits_{n=1}^{\infty}a_n$ абсолютно сходится, и его сумма равна $A$. Тогда любая его перестановка $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ также сходится абсолютно, и ее сумма равна $A$.
+		Пусть ряд $\sum\limits_{n=1}^{\infty}a_n$ абсолютно сходится, и его сумма равна $A$. Тогда любая его перестановка $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ также сходится абсолютно, и её сумма равна $A$.
 	\end{Theorem}
-	\begin{proof}\ \\
-	\textit{Абсолютная сходимость:}
-	
-	Докажем, что $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ абсолютно сходится.
-			
-			Обозначим $A_+ := \sum\limits_{n=1}^{\infty}|a_n|$.
-			Возьмём произвольное $N\in \mathbb{N}$ и покажем, что  $\sum\limits_{n=1}^{N}|a_{\sigma(n)}| \leq A_+$ (тогда возрастающая последовательность частичных сумм $\sum\limits_{n=1}^{\infty}|a_{\sigma(n)}|$ ограничена и ряд сходится).
+	\begin{proof} [Доказательство абсолютной сходимости:]  
+		Докажем, что $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ абсолютно сходится.
+		Обозначим $A_+ := \sum\limits_{n=1}^{\infty}|a_n|$.
+		Возьмём произвольное $N\in \mathbb{N}$ и покажем, что  $\sum\limits_{n=1}^{N}|a_{\sigma(n)}| \leq A_+$ (тогда возрастающая последовательность частичных сумм $\sum\limits_{n=1}^{\infty}|a_{\sigma(n)}|$ ограничена и ряд сходится).
 
-			Определим $N := \max \left\{\sigma(1), \sigma(2), \dots, \sigma(N)\right\}$.  Тогда очевидно, что $\sum\limits_{n=1}^{N}|a_{\sigma(n)}| \leq \sum\limits_{n=1}^{M}|a_{n}|$, так как правая сумма содержит в себе и все слагаемые левой суммы. Но из этого неизбежно следует и  $\sum\limits_{n=1}^{N}|a_{\sigma(n)}| \leq A_+$, потому что любая частичная сумма $\sum\limits_{n=1}^{M}|a_{n}|$ неотрицательного ряда не больше всей его суммы.
-	
-	\textit{Сходимость к тому же значению:}
-	
-		 Докажем, что $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ сходится к $A$. Пусть есть некоторое $\eps>0$. Возьмём такое $N\in \mathbb{N}$, что $\sum\limits_{n=N}^{\infty}|a_{n}|< \frac{\eps}{2}$. (Тогда $\left| \sum\limits_{n=1}^{N}a_{n} - A\right| = \left| \sum\limits_{N+1}^{\infty}a_{n}\right| \leq |\sum\limits_{N+1}^{\infty}|a_{n}| < \frac{\eps}{2}$.)
+		Определим $M := \max \left\{\sigma(1), \sigma(2), \dots, \sigma(N)\right\}$.  Тогда очевидно, что $\sum\limits_{n=1}^{N}|a_{\sigma(n)}| \leq \sum\limits_{n=1}^{M}|a_{n}|$, так как правая сумма содержит в себе и все слагаемые левой суммы. Но из этого неизбежно следует и  $\sum\limits_{n=1}^{N}|a_{\sigma(n)}| \leq A_+$, потому что любая частичная сумма $\sum\limits_{n=1}^{M}|a_{n}|$ ряда с неотрицательными слагаемыми не больше всей его суммы.
+	\end{proof}
+	\begin{proof} [Доказательство сходимости к тому же значению:]		
+		Докажем, что $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ сходится к $A$. Пусть есть некоторое $\eps>0$. Возьмём такое $N\in \mathbb{N}$, что $\sum\limits_{n=N}^{\infty}|a_{n}| < \frac{\eps}{2}$. (Тогда $\left| \sum\limits_{n=1}^{N}a_{n} - A\right| = \left| \sum\limits_{N+1}^{\infty}a_{n}\right| \leq \sum\limits_{N+1}^{\infty}|a_{n}| < \frac{\eps}{2}$.) 
+		
+		Обозначим $M := \max\{ \sigma^{-1}(1), \sigma^{-1}(2)\dots \sigma^{-1}(N)\}$.
 		 
-		 Обозначим $M := \max\{ \sigma^{-1}(1), \sigma^{-1}(2)\dots \sigma^{-1}(N)\}$.
-		 
-		 Тогда для любого $\tilde{M}>M$:
+		Тогда для любого $\tilde{M}>M$:
 		\begin{multline}
-		 \left| \sum\limits_{m=1}^{\tilde{M}}a_{\sigma(m)} -A \right|\leq \left| \sum\limits_{m=1}^{\tilde{M}}a_{\sigma(m)} - \sum\limits_{n=1}^{N}a_{n} \right| + \left| , \sum\limits_{n=1}^{N}a_{n} - A \right| < \\ <
-		 \left| \sum\limits_{m=1\dots \tilde{M},\ \sigma(m)>N }^{\tilde{M}}a_{\sigma(m)}\right| + \frac{\eps}{2} \leq   \sum\limits_{m=1\dots \tilde{M},\ \sigma(m)>N }^{\tilde{M}}|a_{\sigma(m)}| + \frac{\eps}{2} \leq \\ \leq
-		 \sum\limits_{n=N+1}^{max\{ \sigma(1), \sigma(2)\dots \sigma(N)\}}|a_n| + \frac{\eps}{2} < \eps
+		 \left| \sum\limits_{m=1}^{\tilde{M}}a_{\sigma(m)} - A \right|\leq \left| \sum\limits_{m=1}^{\tilde{M}}a_{\sigma(m)} - \sum\limits_{n=1}^{N}a_{n} \right| + \left| \sum\limits_{n=1}^{N}a_{n} - A \right| < \\ < \left| \sum\limits_{\substack{m=1\dots \tilde{M}\\ \sigma(m)>N} }^{\tilde{M}}a_{\sigma(m)}\right| + \frac{\eps}{2} \leq   \sum\limits_{\substack {m=1\dots \tilde{M} \\ \sigma(m)>N} }^{\tilde{M}}|a_{\sigma(m)}| + \frac{\eps}{2} \leq \\ \leq \sum\limits_{n=N+1}^{\max\{ \sigma(1)\dots \sigma(N)\}}|a_n| + \frac{\eps}{2} \leq \sum\limits_{n=N+1}^{\infty}a_{|a_n|} +  \frac{\eps}{2} < \eps
 		 \end{multline}	
 	\end{proof}
 	
 	
 	Теперь пусть $\sum\limits_{n=1}^{\infty}a_n$ сходится условно. В нём бесконечно много положительных слагаемых и бесконечно много отрицательных, так как иначе он сходился бы абсолютно. Через $\{p_n\}$ обозначим последовательность всех неотрицательных слагаемых, а через $\{q_n\}$, соответственно, отрицательных. 
 	
-	Раз $\sum\limits_{n=1}^{\infty}a_n$ сходится, то $\{a_n\}$ --- сходящаяся последовательность, а значит и $\{p_n\}$ и $\{q_n\}$ тоже сходятся.
-	При этом $\sum\limits_{n=1}^{\infty}p_n$ и $\sum\limits_{n=1}^{\infty}q_n$ --- расходятся.
+	Раз $\sum\limits_{n=1}^{\infty}a_n$ сходится, то $\{a_n\}$ --- сходящаяся к нулю последовательность, а значит и $\{p_n\}$ и $\{q_n\}$ тоже сходятся.
+	При этом несложно понять, что $\sum\limits_{n=1}^{\infty}p_n$ и $\sum\limits_{n=1}^{\infty}q_n$ --- расходятся. Так как если бы оба этих ряда сходились, то $\sum\limits_{n=1}^{\infty}a_n$ сходился бы абсолютно, а если бы один из них сходился, а другой --- расходился, то  $\sum\limits_{n=1}^{\infty}a_n$ бы расходился.
 	
 	\begin{Theorem}[Римана]
 		Пусть ряд $\sum\limits_{n=1}^{\infty}a_n$ сходится условно. Тогда:
@@ -48,12 +42,12 @@
 			\item для любого $A \in \mathbb{R}$ найдётся такая перестановка $\sigma$, что $\sum\limits_{n=1}^{\infty}a_{\sigma(n)} = A $;
 			\item существует такая перестановка $\sigma$, что ряд $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ расходится к $+\infty$;
 			\item существует такая перестановка $\sigma$, что ряд $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ расходится к $-\infty$;
-			\item существует такая перестановка $\sigma$, что для ряда $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ последовательность частичных сумм предела не имеет.
+			\item существует такая перестановка $\sigma$, что для ряда $\sum\limits_{n=1}^{\infty}a_{\sigma(n)}$ последовательность частичных сумм не имеет ни конечного ни бесконечного предела.
 		\end{enumerate}
 	\end{Theorem}
 	\begin{proof} \ 
 		\begin{enumerate}
-			\item Возмём произвольное $A \in \mathbb{R}$.  
+			\item Возьмём произвольное $A \in \mathbb{R}$.  
 			
 			Найдём наименьшее $k_1 \in \mathbb{N}$ такое что $p_1+p_2+\dots+p_{k_1} > A$. 
 			
@@ -76,17 +70,18 @@
 			\item Аналогично предыдущим, например, доводя сумму последовательно до 1, -1, 2, -2, 3, -3 и так далее.
 		\end{enumerate}
 	\end{proof}
-
+\newpage
 \subsection{Произведение числовых рядов}
-	Произведение пары конечных сумм определено вполне естественным и понятным образом:
+	Произведение пары конечных сумм записывается вполне естественным и понятным образом:
 	\[
 	\sum\limits_{n=1}^{N}a_n \cdot \sum\limits_{m=1}^{M}b_m = (a_1 + \dots + a_n) (b_1 + \dots + b_m)=\sum\limits_{n=1, \ m=1}^{N,\  M}a_nb_m
 	\]
 	C бесконечными суммами всё менее понятно. Казалось бы,
-	
 	\[
-	\sum\limits_{n=1}^{\infty}a_n \cdot \sum\limits_{m=1}^{\infty}b_m = \sum\limits_{n=1, \ m=1}^{\infty}a_nb_m,
+	\sum\limits_{n=1}^{\infty}a_n \cdot \sum\limits_{m=1}^{\infty}b_m = \sum\limits_{n=1 \ m=1}^{\infty}a_nb_m,
 	\] однако объект в правой части равенства мы не определяли.
+
+	\medskip
 	
 	\begin{wrapfigure}{l}{0.3\linewidth}
 		\begin{tabular}[t]{c|ccccc}
@@ -99,13 +94,15 @@
 			& $a_1$ & $a_2$ & $a_3$ & $a_4$ &$\dots$ 
 		\end{tabular}
 		\caption{Нумерация по квадратам}
-		\vspace{-40pt}
+		\vspace{-50pt}
 	\end{wrapfigure}
 	Но по крайней мере множество пар индексов $(n,\ m)$ счетно, а значит и множество слагаемых в сумме счётно, то есть его можно занумеровать и таким образом превратить произведение рядов в обычный ряд. Вопрос лишь в том, как именно это сделать.
 	
 	\begin{Theorem}[Коши о произведении абсолютно сходящихся рядов]
-		Пусть ряд $\sum\limits_{n=1}^{\infty}a_n =A $ и$ \sum\limits_{m=1}^{\infty}b_m = B$, причём оба ряда абсолютно сходятся. Тогда ряд из произведений $a_nb_m$, занумерованных в любом порядке, сходится абсолютно и его сумма равна $A\cdot B$.
-	\end{Theorem}
+		Пусть $\sum\limits_{n=1}^{\infty}a_n =A $ и$ \sum\limits_{m=1}^{\infty}b_m = B$, причём оба ряда абсолютно сходятся. Тогда ряд из произведений $a_nb_m$, занумерованных в любом порядке, сходится абсолютно и его сумма равна $A\cdot B$.
+	\end{Theorem} 
+	
+\smallskip
 
 	\begin{proof} По недавно доказанной теореме Коши о перестановках абсолютно сходящегося ряда нам достаточно доказать, что хотя бы при какой-то одной нумерации ряд из произведений абсолютно сходится к $A\cdot B$.	
 		
@@ -115,9 +112,11 @@
 		\] 
 		то есть ряд $\sum\limits_{k=1}^{\infty}c_k$ сходится абсолютно. 
 		Сумму этого ряда посчитать теперь совсем несложно:
-		\[\sum\limits_{k=1}^{\infty}c_k = \lim\limits_{K\rarr \infty} \sum\limits_{k=1}^{K}c_k = \lim\limits_{K\rarr \infty} \sum\limits_{k=1}^{K^2}c_k = \lim\limits_{K\rarr \infty} \left(\sum\limits_{n=1}^{K}a_n\right)\left(\sum\limits_{m=1}^{K}b_m\right)=A\cdot B.
+		\[\sum\limits_{k=1}^{\infty}c_k = \lim\limits_{K\rarr \infty} \sum\limits_{k=1}^{K}c_k = \lim\limits_{K\rarr \infty} \sum\limits_{k=1}^{K^2}c_k = \lim\limits_{K\rarr \infty} \left(\sum\limits_{n=1}^{K}a_n\right)\left(\sum\limits_{m=1}^{K}b_m\right)=A\cdot B
 		\]
 		\end{proof}
+		
+		\newpage
 	\begin{wrapfigure}{r}{0.3\linewidth}
 		\begin{tabular}[t]{c|ccccc}
 			$\vdots$ &15& $\iddots$& & & \\
@@ -129,15 +128,15 @@
 			& $a_1$ & $a_2$ & $a_3$ & $a_4$ &$\dots$ \\
 		\end{tabular}
 		\caption{Нумерация по треугольникам}
-		\vspace{-70pt}
+		\vspace{-60pt}
 	\end{wrapfigure}
-	Если хоть один из рядов не сходится абсолютно, такое утверждение уже неверно. Так что для всех остальных случаев важно договориться о нумерации. Один из часто встречающихся удобных способов нумерации, который в дальнейшем будет подразумеваться по умолчанию --- это так называемая <<нумерация по треугольникам>>, или <<произведение Коши>>.
+	Если хоть один из рядов не сходится абсолютно, такое утверждение уже неверно. Так что для всех остальных случаев важно договориться о нумерации. Один из часто встречающихся удобных способов нумерации, который в дальнейшем будет подразумеваться по умолчанию --- это так называемая <<нумерация по треугольникам>> или <<произведение Коши>>.
 	\begin{Def}
-		Для рядов $\sum\limits_{n=1}^{\infty}a_n$ и$ \sum\limits_{m=1}^{\infty}b_m$ их произведением называется ряд  $\sum\limits_{k=1}^{\infty}c_k$, где $c_k =\sum\limits_{j=1}^{k}a_kb_{k-j}$
+		Для рядов $\sum\limits_{n=1}^{\infty}a_n$ и$ \sum\limits_{m=1}^{\infty}b_m$ их произведением называется ряд  $\sum\limits_{k=1}^{\infty}c_k$, где $c_k =\sum\limits_{j=0}^{k}a_kb_{k-j}$
 	\end{Def}
 	
 	\begin{Theorem}[Мертенса]
-		Пусть ряд $\sum\limits_{n=1}^{\infty}a_n = A $ и$ \sum\limits_{m=1}^{\infty}b_m = B$, причём хотя бы один из рядов сходится абсолютно. Тогда $\sum\limits_{k=1}^{\infty}\sum\limits_{j=1}^{k}a_kb_{k-j} = AB$.
+		Пусть ряд $\sum\limits_{n=1}^{\infty}a_n = A $ и$ \sum\limits_{m=1}^{\infty}b_m = B$, причём хотя бы один из рядов сходится абсолютно. Тогда $\sum\limits_{k=1}^{\infty}\sum\limits_{j=0}^{k}a_kb_{k-j} = AB.$
 	\end{Theorem}
 	
 	Доказательство этой теоремы опустим.

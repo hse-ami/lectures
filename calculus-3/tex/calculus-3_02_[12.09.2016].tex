@@ -184,9 +184,8 @@ $$
 \begin{proof}
 Для удобства введем две вспомогательные функции: $f_S(x) = f(x-1)$ и $S(x) = f(\lfloor x \rfloor)$.
 
-\begin{center}
-\includegraphics[scale=0.5]{03-01.png}
-\end{center}
+
+
 
 Тогда мы получаем, что $f(1) + f(2) + \ldots + f(N) = \int\limits_1^N S(x)dx$. Значит, ряд $\sum\limits_{n=1}^\infty f(n)$ сходится тогда и только тогда, когда сходится интеграл $\int\limits_1^\infty S(x)dx$. В свою очередь, несложно заметить, что сходимость этого интеграла влечет за собой сходимость интеграла $\int\limits^\infty_1 f(x)dx$, так как  при наших ограничениях $S(x) \geqslant f(x)$. С другой стороны, сходимость интеграла $\int\limits_1^\infty f(x)dx$ эквивалентна сходимости интеграла $\int\limits_2^\infty f_S(x)dx$, а она влечет за собой сходимость интеграла $\int\limits_1^\infty  S(x)dx$, так как $S(x) \leq f_S(x)$.
 
