@@ -1,0 +1,129 @@
+\section{Лекция от 07.10.2016}
+
+\subsection{Скорость сходимости закона больших чисел}
+Ранее мы формулировали два вопроса, связанные со скоростью сходимости закона больших чисел. Ответим на них.
+
+\begin{enumerate}
+    \item Для нахождения ответа на первый вопрос воспользуемся теоремой Муавра-Лапласа:
+    \[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\varepsilon \leq \frac{S_n - \E{S_n}}{\sqrt{\D{S_n}}} \leq \varepsilon} \geq 1 - \delta.\]
+    
+    Как было доказано ранее, \(\E{S_n} = np\), а \(\D{S_n} = np(1 - p)\). Тогда преобразуем это выражение:
+    \[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\epsilon\sqrt{\frac{p(1 - p)}{n}} \leq \frac{S_n}{n} - p \leq \epsilon\sqrt{\frac{p(1 - p)}{n}}} \geq 1 - \delta.\]
+    
+    Тогда получаем, что для любого \(\delta > 0\) существует достаточно большое \(n > n(\delta)\) такое, что выполнено
+    \[\Pr{\frac{S_n}{n} - p = \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)} \geq 1 - \delta.\]
+    
+    Из этого следует, что скорость сходимости \(\frac{S_n}{n} - p\) к 0 есть \(\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\).
+    
+    \item Теперь приступим ко второму вопросу. Для него достаточно применить неравенство Чебышёва:
+    \[\Pr{\left|\frac{S_n}{n}-p\right| \geq \epsilon} \leq \frac{\D{\frac{S_n}{n}}}{\epsilon^2} =
+    \frac{np(1 - p)}{n^2\epsilon^2} = \mathcal{O}\left(\frac{1}{n}\right).\]
+\end{enumerate}
+
+\subsection{Неравенство Чернова}
+Следующая теорема показывает то, насколько вероятно отклонение случайной величины от её математического ожидания.
+\begin{theorem}[Неравенство Чернова]
+    Пусть \(S_n \sim \mathrm{Bin}(n, p)\), а \(\lambda = \E{S_n} = np\). Тогда для любого \(t > 0\) выполнено следующее:
+    \[\Pr{S_n \geq \lambda + t} \leq \exp\left( -\frac{t^2}{2(\lambda + \frac{t}{3})} \right), \qquad\Pr{S_n \leq \lambda - t} \leq \exp\left( -\frac{t^2}{2\lambda} \right).\]
+\end{theorem}
+\begin{proof}
+    Пусть $t < n - \lambda$, тогда $\forall u > 0$:
+    
+    \[
+    \Pr{S_n > \lambda + t} =
+    \Pr{e^{uS_n} > e^{u(\lambda + t)}} \leq
+    \left\{ \text{по неравенству Маркова} \right\} \leq
+    \frac{\E{e^{uS_n}}}{e^{u(\lambda + t)}}
+    \]
+    \[
+    \E{e^{uS_n}} = \sum\limits_{k = 1}^n e^{uk} C_n^k p^k (1-p)^{n-k} = (1-p+pe^u)^n
+    \]
+    
+    Примем $x = e^u$ и будем минимизировать $\frac{\E{e^{uS_n}}}{e^{u(\lambda + t)}}$ по $x$; для этого, для
+    начала, найдём производную:
+    
+    \begin{multline*}
+        (x^{-(\lambda + t)}(1-p+px)^n)' = -(\lambda + t)x^{-(\lambda + t + 1)}(1-p+px)^n + np
+        x^{-(\lambda+t)}(1-p+px)^{n-1} = 0
+    \end{multline*}
+    
+    Что означает, что \( -(\lambda + t)(1-p+px) + npx = 0 \) и $x = \frac{(\lambda+t)(1-p)}{p(n-\lambda-t)}$.
+    
+    Теперь можно и к доказательству самого утверждения перейти:
+    \newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+    \begin{itemize}
+        \item \circled{$\leq$}
+        \begin{multline*}
+            \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\cdot
+            \left(1-p+\frac{(\lambda+t)(1-p)}{n-\lambda-t}\right)^n =\\=
+            \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\cdot
+            (1-p)^n\left(\frac{n}{n-\lambda-t}\right)^n =\\=
+            \frac{p^{\lambda+t}n^{\lambda+t}}{(\lambda+t)^{\lambda+t}}\cdot
+            \left(\frac{n(1-p)}{n-\lambda-t}\right)^{n-\lambda-t} =\\=
+            \left(\frac{\lambda}{\lambda+t}\right)^{\lambda+t}\cdot
+            \left(\frac{n-\lambda}{n-\lambda-t}\right)^{n-\lambda-t} =\\=
+            \exp\left( -(\lambda+t)\ln\frac{\lambda+t}{\lambda}
+            -(n-\lambda-t)\ln\frac{n-\lambda-t}{n-\lambda}\right) =\\=
+            \exp\left( -\lambda\phi\left( \frac{t}{\lambda} \right) - (n-\lambda)\phi\left(
+            \frac{t}{n-\lambda}
+            \right) \right),\ \text{где $\phi(x)=(x+1)\ln(x+1)-x$}
+        \end{multline*}
+        
+        Заметим, что $\forall x > -1,\ \phi(x)>0$. Значит,
+        \[
+        \Pr{S_n \geq \lambda + t} \leq \exp\left(-\lambda\phi\left( \frac{t}{\lambda} \right) \right)
+        \]
+        и, аналогично,
+        \[
+        \Pr{S_n \leq \lambda - t} \leq \exp\left(-\lambda\phi\left( \frac{-t}{\lambda} \right)
+        \right).
+        \]
+        
+        Далее заметим, что $\phi(0) = 0$ и $\phi'(x) = 1 - 1 + \ln(x+1) = \ln(x+1) \leq x$; из этого
+        следует, что для любого $y < 0$ выполняется
+        
+        \[
+        -\phi(y) = \int\limits_y^0 \phi'(x)dx \leq \int\limits_y^0xdx = -\frac{y^2}{2}
+        \]
+        
+        Значит, $\phi(y) \geq \frac{y^2}{2}$ и $\Pr{S_n \leq \lambda - t} \leq e^{-\frac{t^2}{2}}$.
+        
+        \item \circled{$\geq$}
+        
+        Дальше идёт полное шаманство [sic].
+        
+        При $x>0$,
+        \[
+        \phi''(x) = \frac{1}{1+x} \geq \frac{1}{\left( 1+\frac{x}{3} \right)^3} = \left(
+        \frac{x^2}{2\left( 1+\frac{x}{3} \right)} \right)'' \implies
+        \phi(x) \geq \frac{x^2}{2\left( 1+\frac{x}{3} \right)}
+        \]
+        
+        Значит, $\Pr{S_n \geq \lambda + t} \leq \exp\left( -\frac{t^2}{2\left( \lambda+\frac{t}{3} \right)} \right)$
+    \end{itemize}
+\end{proof}
+
+К счастью, на экзамене будет достаточно понимать идею, и не требуется точное воспроизведение всех 
+вычислений.
+
+\subsection{Алгебры событий}
+\begin{definition}
+    Пусть $\mathcal{A}$ --- система событий на $(\Omega, \Pr)$. Она называется \emph{алгеброй}, если
+    
+    \begin{enumerate}
+        \item $\Omega \in \mathcal{A}$;
+        \item $\forall A \in \mathcal{A},\ \overline{A} \in \mathcal{A}$;
+        \item $\forall A, B \in \mathcal{A},\ A\cap B \in \mathcal{A}$;
+    \end{enumerate}
+\end{definition}
+
+\noindent \textbf{Утверждение:} алгебра замкнута по основным операциям: $\cup, \setminus, \triangle$.
+
+\noindent\textbf{Примеры:}
+
+\begin{itemize}
+    \item $\left\{ \emptyset, \Omega \right\}$;
+    \item $2^{\Omega}$;
+    \item $\left\{ \emptyset, \Omega, A, \overline{A}\right\}$ --- алгебра, порождённая $A$;
+    \item $\alpha\left( A_1, \ldots, A_n \right) $ --- минимальная алгебра, содержащая $A_1, \ldots, A_n$.
+\end{itemize}
