@@ -54,7 +54,7 @@
     Из определения \(T_2\) следует, что \(A_i\) не зависит от событий \(\{A_j \mid j \in T_2\}\). Но тогда
     \[\Pr{A_i \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} = \Pr{A_i} \leq x_i \prod\limits_{(i, j) \in E} (1 - x_j).\]
     
-    Теперь рассмотрим числитель. Положим, что \(T_1 = \{j_{1}, j_{2}, \dots, j_{m}\}\). Если вышло так, что \(m = 0\), то знаменатель равен 1 и нужное нам неравенство выполняется. Иначе же воспользуемся формулой произведения вероятностей и предположением индукции:
+    Теперь рассмотрим знаменатель. Положим, что \(T_1 = \{j_{1}, j_{2}, \dots, j_{m}\}\). Если вышло так, что \(m = 0\), то знаменатель равен 1 и нужное нам неравенство выполняется. Иначе же воспользуемся формулой произведения вероятностей и предположением индукции:
     \[\begin{aligned}
     \Pr{\left(\bigcap\limits_{j \in T_1} \overline{A_j}\right) \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} &= \Pr{A_{j_1} \given \left(\bigcap\limits_{s = 2}^{m}\overline{A_{j_s}}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}\Pr{\left(\bigcap\limits_{s = 2}^{m}\overline{A_{j_s}}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} \\
     &\geq (1 - x_{j_1})\Pr{\left(\bigcap\limits_{s = 2}^{m}\overline{A_{j_s}}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} \\
