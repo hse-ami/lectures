@@ -38,7 +38,7 @@
 Тогда по Закону больших чисел \(\vartheta_n(A) \prto \E[\xi_i] = \E[I\text{\{событие $ A $ произошло в $ i $-ом эксперименте\}}] = \Pr(A).\) Выходит, что Закон больших чисел является теоретическим обоснованием принципа устойчивости частот. 
 
 \begin{definition}
-	Последовательность случайных \(\{\xi_n,\ n \in \N\} \) сходится к случайной величине $ \xi $ c вероятностью 1 (или \emph{почти наверное}\footnote{Название ``сходимость почти наверное'' произошло от применяющегося в англоязычной литературе термина ``almost sure convergence''.}), если \(\Pr(\lim\limits_{n \to \infty}\xi_n \to \xi) = \Pr(\omega : \lim\limits_{n \to \infty}\xi_n(\omega) = \xi(\omega)) = 1.\) Обозначение: \(\xi_n \asto \xi\) (сходится \emph{почти наверное}).
+	Последовательность случайных величин \(\{\xi_n,\ n \in \N\} \) сходится к случайной величине $ \xi $ c вероятностью 1 (или \emph{почти наверное}\footnote{Название ``сходимость почти наверное'' произошло от применяющегося в англоязычной литературе термина ``almost sure convergence''.}), если \(\Pr(\lim\limits_{n \to \infty}\xi_n \to \xi) = \Pr(\omega : \lim\limits_{n \to \infty}\xi_n(\omega) = \xi(\omega)) = 1.\) Обозначение: \(\xi_n \asto \xi\) (сходится \emph{почти наверное}).
 \end{definition}
 \begin{remark}
 	Если \(\forall \omega \in \Omega,\  \Pr(\omega) > 0, \text{ то } \xi_n \asto \xi \Leftrightarrow \forall \omega \in \Omega, \  \xi_n(\omega) \to \xi(\omega). \)	
@@ -57,7 +57,7 @@
             Пусть такой сходимости нет, \(\xi_n(\omega_0) \nrightarrow \xi(\omega_0).\) В этом случае существуют такое положительное $ \alpha_0 $ и подпоследовательность \(\{\xi_{n_k}(\omega_0), k \in \N \} \), что \(\forall k \in \N,\  \Pr(\left|\xi_{n_k}(\omega_0) - \xi(\omega_0)\right|) \geq \alpha_0 \). Но тогда для любых натуральных \( k,\  \Pr(\left|\xi_{n_k} - \xi\right| \geq \alpha_0 ) \geq \Pr(\omega_0) > 0. \) Получаем противоречие с определением сходимости \emph{по вероятности}. Значит, \(\xi_n \prto \xi \implies \xi_n \asto \xi\).  
 		\item \(\xi_n \asto \xi \implies \xi_n \prto \xi\)\par
             Из сходимости \emph{почти наверное} следует, что \(\Pr(\lim\limits_{n \to \infty}\xi_n = \xi) = 1.\)	Следовательно, выполнено и \(\xi_n(\omega) \to \xi(\omega) \) для \(\omega \in \Omega : \Pr(\omega) > 0. \) Теперь нужно проверить, выполняется ли условие сходимости \emph{по вероятности}: \(\Pr(\left|\xi_n - \xi \right| \geq \alpha) \to 0\). 
-			Пусть \(\Omega = \{\omega_i, i \in \N\} \). Теперь для любого положительного $ \delta $ выберем номер, от него зависящий, такой что \(\sum\limits_{i > N} \Pr(\omega_i) \leq \delta.\) Тогда 
+			Пусть \(\Omega = \{\omega_i, i \in \N\} \). Теперь для любого положительного $ \delta $ выберем номер $ N  = N(\delta) $, от него зависящий, такой что \(\sum\limits_{i > N} \Pr(\omega_i) \leq \delta.\) Тогда 
 			\begin{multline*}
 			\Pr(\left|\xi_n - \xi \right| \geq \alpha) = \sum\limits_{
 				\substack {
@@ -68,20 +68,20 @@
 			\Pr(\omega_i) = \sum\limits_{
 				\substack {
 				i:\\
-				i\leq \N, \\   
+				i\leq N, \\   
 				\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
 				}
 			}\Pr(\omega_i) \ + \\ + \sum\limits_{
 			\substack {
 			i:\\
-			i > \N, \\  
+			i > N, \\  
 			\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
 				}
 			} \Pr(\omega_i) \leq \delta + \sum\limits_{
 			\substack {
 			i:\\
-			i\leq \N, \\
-		    \left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha,\\ Pr(\omega_i) > 0)
+			i\leq N, \\
+		    \left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha,\\ \Pr(\omega_i) > 0)
 				}
 			} \Pr(\omega_i).  
 			\end{multline*}
@@ -162,28 +162,27 @@
         $np(n) \xrightarrow[n\to\infty]{} \infty$. 
 
         Сделаем ещё одно отступлление в сторону и рассмотрим величину $\frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}}$.
-        Легко понять, что 
+        Пусть \(\xi_1, \ldots, \xi_n \) --- $ n $ бернуллиевских случайных величин с \(\Pr{\xi_i = 1},\ \Pr{\xi_i = 0} = q,\ p + q = 1. \) Тогда для \(S_n = \xi_1 + \ldots + xi_n \) 
+        находим, что 
         \[
             \E[S_n] = np.
         \]
         
         Несложно также показать, что 
         \[
-            \D[S_n] = \sum\D[\xi_i] + \sum\cov[x_i, x_j] = \sum\D[\xi_i] = n\D[\xi_1] = n\left( \E[\xi_1^2]-\left( \E[\xi_1] \right)^2 \right) = npq.
+            \D[S_n] = \sum\D[\xi_i] + \sum\cov[x_i, x_j] = \sum\D[\xi_i] = n\D[\xi_1] = n\left( \E[\xi_1^2]-\left( \E[\xi_1] \right)^2 \right) = n(p - p^2) = npq.
         \]
 
-        \begin{theorem}[Муавр-Лаплас]
-            Пусть $p$ --- константа. Введём обозначение
+        \begin{theorem}[Муавра-Лапласа]
+           Если вероятность $p$ появления случайного события в каждом испытании постоянна (и находится в промежутке $ (0, 1) $), тогда вероятность $ \Pr_n(a, b) $ того, что в $ n $ испытаниях данное событие состоится не менее $ a $ раз и не более, чем $ b $ раз
             \[
-                P_n(a,b)\mathop{:=} P\left( a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} < b \right).
+                \Pr_n(a,b)\mathop{:=} \Pr\left( a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} < b \right).
             \]
 
             Тогда 
             \[
-                \sup_{a<b} \left|P_n(a, b) - \int\limits_a^b\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}}dx\right| \xrightarrow[n\to\infty]{} 0
+                \sup_{a<b} \left|\Pr_n(a, b) - \int\limits_a^b\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}}dx\right| \xrightarrow[n\to\infty]{} 0
             \]
         \end{theorem}
-        \begin{proof}
-            Без доказательства.
-        \end{proof}
+    
 \end{itemize}
