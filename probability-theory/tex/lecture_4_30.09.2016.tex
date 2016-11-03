@@ -52,44 +52,26 @@
 \begin{proof}
 	Докажем по очереди в обе стороны:
 	\begin{itemize}
-		\item \(\xi_n \prto \xi \implies \xi_n \asto \xi\)\par
-            Из сходимости \emph{по вероятности} следует сходимость \emph{почти наверное}. Для доказательства этого факта нужно показать, что \(\forall \omega_0 \in \Omega : \Pr(\omega_0) > 0 \) выполняется сходимость \(\xi_n(\omega_0) \to \xi(\omega_0). \) 
-            Пусть такой сходимости нет, \(\xi_n(\omega_0) \nrightarrow \xi(\omega_0).\) В этом случае существуют такое положительное $ \alpha_0 $ и подпоследовательность \(\{\xi_{n_k}(\omega_0), k \in \N \} \), что \(\forall k \in \N,\  \Pr(\left|\xi_{n_k}(\omega_0) - \xi(\omega_0)\right|) \geq \alpha_0 \). Но тогда для любых натуральных \( k,\  \left|\xi_{n_k} - \xi\right| \geq \alpha_0  \geq \Pr(\omega_0) > 0. \) Получаем противоречие с определением сходимости \emph{по вероятности}. Значит, \(\xi_n \prto \xi \implies \xi_n \asto \xi\).  
-		\item \(\xi_n \asto \xi \implies \xi_n \prto \xi\)\par
-            Из сходимости \emph{почти наверное} следует, что \(\Pr(\lim\limits_{n \to \infty}\xi_n = \xi) = 1.\)	Следовательно, выполнено и \(\xi_n(\omega) \to \xi(\omega) \) для \(\omega \in \Omega : \Pr(\omega) > 0. \) Теперь нужно проверить, выполняется ли условие сходимости \emph{по вероятности}: \(\Pr(\left|\xi_n - \xi \right| \geq \alpha) \to 0\). 
-			Пусть \(\Omega = \{\omega_i, i \in \N\} \). Теперь для любого положительного $ \delta $ выберем номер $ N  = N(\delta) $, от него зависящий, такой что \(\sum\limits_{i > N} \Pr(\omega_i) \leq \delta.\) Тогда 
-			\begin{multline*}
-			\Pr(\left|\xi_n - \xi \right| \geq \alpha) = \sum\limits_{
-				\substack {
-				i:\\
-				\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
-				}
-			}
-			\Pr(\omega_i) = \sum\limits_{
-				\substack {
-				i:\\
-				i\leq N, \\   
-				\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
-				}
-			}\Pr(\omega_i) \ + \\ + \sum\limits_{
-			\substack {
-			i:\\
-			i > N, \\  
-			\left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha
-				}
-			} \Pr(\omega_i) \leq \delta + \sum\limits_{
-			\substack {
-			i:\\
-			i\leq N, \\
-		    \left|\xi_n(\omega_i) - \xi(\omega_i) \right| \geq \alpha,\\ \Pr(\omega_i) > 0)
-				}
-			} \Pr(\omega_i).  
-			\end{multline*}
-		Теперь нужно перейти к пределу при \(n \to \infty.\) Но чтобы избежать ситуации, когда предела не существует, перейдем к верхнему пределу для тех же $ n $. Также заметим, что так как \(\xi_n(\omega_i) \to \xi(\omega_i)\), начиная c некоторого $ n $, $ \omega_i $ перестает входить в сумму:  
-		\[
-			\overline{\lim_{n \to \infty}}\Pr(\left|\xi_n - \xi\right| \geq \alpha) \leq \delta + 0.
-		\]
-		А в силу произвольности \(\delta > 0\) можно говорить о том, что этот предел стремится к нулю.
+        \item[{[\(\Rightarrow\)]}] Допустим, что \(\xi_n \prto \xi\). Докажем, что тогда для любого \(\omega \in \Omega\), для которого \(\Pr{\omega} > 0\), выполнено \(\xi_n(\omega) \to \xi(\omega)\) (стремится в понимании предела последовательности).
+        
+        Пусть есть элементарный исход \(\omega_0\) такой, что сходимости нет: \(\xi_n(\omega_0) \nrightarrow \xi(\omega_0)\). В таком случае существует положительное \(\alpha\) и подпоследовательность \(\{\xi_{n_k}(\omega_0)\}_{k = 1}^{\infty}\) такие, что \(\forall k \in \N \left|\xi_{n_k}(\omega_0) - \xi(\omega_0)\right| \geq \alpha\). Но тогда \(\Pr{\left|\xi_{n_k} - \xi\right| \geq \alpha}  \geq \Pr(\omega_0) > 0\). Но по определению сходимости по вероятности \(\Pr{\left|\xi_{n_k} - \xi\right| \geq \alpha} \to 0\). Получаем противоречие. Следовательно, \(\xi_n \asto \xi\).
+        
+        \item[{[\(\Leftarrow\)]}] Пусть \(\xi_n \asto \xi\). Согласно определению, \(\Pr(\lim\limits_{n \to \infty}\xi_n = \xi) = 1\). Это равносильно тому, что для любого \(\omega \in \Omega\), для которого \(\Pr{\omega} > 0\), выполнено \(\xi_n(\omega) \to \xi(\omega)\).
+        
+        Докажем, что выполнено условие сходимости \emph{по вероятности}: \(\Pr{\left|\xi_n - \xi \right| \geq \alpha} \to 0\) для любого положительного \(\alpha\). Пусть \(\Omega = \{\omega_i \mid i \in \N\}\). Зафиксируем произвольное \(\delta > 0\) и выберем номер \(N = N(\delta)\) такой, что \(\sum\limits_{i > N} \Pr(\omega_i) \leq \delta\). Тогда
+        \[\begin{aligned}
+        \Pr{\left|\xi_n - \xi\right| \geq \alpha} &= \sum_{i\,:\,\left|\xi_n(\omega_i) - \xi(\omega_i)\right| \geq \alpha} \Pr{\omega_i} \\
+        &= \sum_{\substack{i\,:\,i \leq N \\ \left|\xi_n(\omega_i) - \xi(\omega_i)\right| \geq \alpha}} \Pr{\omega_i} + \sum_{\substack{i\,:\,i > N \\ \left|\xi_n(\omega_i) - \xi(\omega_i)\right| \geq \alpha}} \Pr{\omega_i} \\
+        &\leq \sum_{\substack{i\,:\,i \leq N \\ \left|\xi_n(\omega_i) - \xi(\omega_i)\right| \geq \alpha}} \Pr{\omega_i} + \sum_{i > N} \Pr{\omega_i} \\
+        &\leq \sum_{\substack{i\,:\,i \leq N \\ \left|\xi_n(\omega_i) - \xi(\omega_i)\right| \geq \alpha}} \Pr{\omega_i} + \delta.
+        \end{aligned}\]
+        
+        Теперь нужно перейти к пределу при \(n \to \infty.\) Но чтобы избежать ситуации, когда предела не существует, перейдем к верхнему пределу для тех же \(n\). Также заметим, что так как \(\xi_n(\omega_i) \to \xi(\omega_i)\), начиная c некоторого \(n\), \(\omega_i\) перестает входить в сумму. Тогда первая сумма стремится к нулю и
+        \[
+        \overline{\lim_{n \to \infty}} \Pr{\left|\xi_n - \xi\right| \geq \alpha} \leq 0 + \delta.
+        \]
+        
+        В силу произвольности \(\delta > 0\) можно говорить о том, что этот предел стремится к нулю. \(\qedhere\)
 	\end{itemize}
 \end{proof}
 \textbf{Вопрос 1:} Как оценить скорость сходимости $\frac{S_n}{n} - a$ к нулю?
@@ -101,11 +83,11 @@
 Сначала введём вспомогательное определение:
 
 \begin{definition}
-    Случайные величины $\xi$ и $\eta$ называют \emph{одинаково распределёнными}, если 
+    Случайные величины \(\xi\) и \(\eta\) называют \emph{одинаково распределёнными}, если 
     \[
         \begin{cases}
             \xi(\Omega) = \eta(\Omega); \\
-            \forall x \in \xi(\Omega), \Pr[\xi = x] = \Pr(\eta = x).
+            \forall x \in \xi(\Omega), \Pr{\xi = x} = \Pr{\eta = x}.
         \end{cases}
     \]
 
