@@ -18,17 +18,6 @@
     
     Отсюда получаем, что \(\frac{S_n}{n} = p + \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\).
     
-    %\item Для нахождения ответа на первый вопрос воспользуемся теоремой Муавра-Лапласа:
-    %\[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\varepsilon \leq \frac{S_n - \E{S_n}}{\sqrt{\D{S_n}}} \leq \varepsilon} \geq 1 - \delta.\]
-    
-    %Как было доказано ранее, \(\E{S_n} = np\), а \(\D{S_n} = np(1 - p)\). Тогда преобразуем это выражение:
-    %\[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\epsilon\sqrt{\frac{p(1 - p)}{n}} \leq \frac{S_n}{n} - p \leq \epsilon\sqrt{\frac{p(1 - p)}{n}}} \geq 1 - \delta.\]
-    
-    %Тогда получаем, что для любого \(\delta > 0\) существует достаточно большое \(n > n(\delta)\) такое, что выполнено
-    %\[\Pr{\frac{S_n}{n} - p = \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)} \geq 1 - \delta.\]
-    
-    %Из этого следует, что скорость сходимости \(\frac{S_n}{n} - p\) к 0 есть \(\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\).
-    
     \item Теперь приступим ко второму вопросу. Для него достаточно применить неравенство Чебышёва:
     \[\Pr{\left|\frac{S_n}{n}-p\right| \geq \epsilon} \leq \frac{\D{\frac{S_n}{n}}}{\epsilon^2} =
     \frac{np(1 - p)}{n^2\epsilon^2} = \mathcal{O}\left(\frac{1}{n}\right).\]
@@ -40,80 +29,53 @@
     Пусть \(S_n \sim \mathrm{Bin}(n, p)\), а \(\lambda = \E{S_n} = np\). Тогда для любого \(t > 0\) выполнено следующее:
     \[\Pr{S_n \geq \lambda + t} \leq \exp\left( -\frac{t^2}{2(\lambda + \frac{t}{3})} \right), \qquad\Pr{S_n \leq \lambda - t} \leq \exp\left( -\frac{t^2}{2\lambda} \right).\]
 \end{theorem}
-\begin{proof}\footnote{Краткая идея доказательства: достаём бубен и преобразуем. (А.Х.)}
-    Пусть $t < n - \lambda$, тогда $\forall u > 0$:
+\begin{proof}
+    Крайний случай для первого неравенства~--- \(t = n - \lambda\)~--- особого интереса не вызывает. Поэтому положим, что \(t < n - \lambda\).
     
-    \[
-    \Pr{S_n > \lambda + t} =
-    \Pr{e^{uS_n} > e^{u(\lambda + t)}} \leq
-    \left\{ \text{по неравенству Маркова} \right\} \leq
-    \frac{\E{e^{uS_n}}}{e^{u(\lambda + t)}}
-    \]
-    \[
-    \E{e^{uS_n}} = \sum\limits_{k = 1}^n e^{uk} C_n^k p^k (1-p)^{n-k} = (1-p+pe^u)^n
-    \]
+    Заметим, что для любого положительного \(u\) выполнено следующее:
+    \[\Pr{S_n \geq \lambda + t} = \Pr{e^{uS_n} \geq e^{u(\lambda + t)}} \leq \left\{\text{по неравенству Маркова}\right\} \leq \frac{\E{e^{uS_n}}}{e^{u(\lambda + t)}}.\]
     
-    Примем $x = e^u$ и будем минимизировать $\frac{\E{e^{uS_n}}}{e^{u(\lambda + t)}}$ по $x$; для этого, для
-    начала, найдём производную:
+    Посчитаем \(\E{e^{uS_n}}\):
+    \[\E{e^{uS_n}} = \sum\limits_{k = 1}^{n} e^{uk}\binom{n}{k}p^{k}(1 - p)^{n - k} = \sum\limits_{k = 1}^{n}\binom{n}{k}(pe^u)^{k}(1 - p)^{n - k} = (1 - p + pe^u)^n.\]
     
-    \begin{multline*}
-        (x^{-(\lambda + t)}(1-p+px)^n)' = -(\lambda + t)x^{-(\lambda + t + 1)}(1-p+px)^n + np
-        x^{-(\lambda+t)}(1-p+px)^{n-1} = 0
-    \end{multline*}
+    Положим \(x = e^u\). Тогда
+    \[\Pr{S_n \geq \lambda + t} \leq x^{-(\lambda + t)}(1 - p + px)^n.\]
     
-    Что означает, что \( -(\lambda + t)(1-p+px) + npx = 0 \) и $x = \frac{(\lambda+t)(1-p)}{p(n-\lambda-t)}$.
+    Минимизируем это выражение по \(x\). Для этого посчитаем производную и приравняем её к нулю:
+    \[(x^{-(\lambda + t)}(1-p+px)^n)' = -(\lambda + t)x^{-(\lambda + t + 1)}(1-p+px)^n + np
+    x^{-(\lambda+t)}(1-p+px)^{n-1} = 0.\]
     
-    Теперь можно и к доказательству самого утверждения перейти:
-    \newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+    Отсюда получаем, что \(-(\lambda + t)(1 - p + px) + npx = 0\) и \(x = \frac{(\lambda + t)(1 - p)}{p(n - \lambda - t)}\). Тогда получаем следующую оценку сверху:
+    \[\begin{aligned}
+    \Pr{S_n \geq \lambda + t} &\leq \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\left(1 - p + p\frac{(\lambda + t)(1 - p)}{p(n - \lambda - t)}\right)^n \\
+    &= \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\left(\frac{n(1 - p)}{n - \lambda - t}\right)^n \\
+    &= \left(\frac{np}{\lambda + t}\right)^{\lambda + t}\left(\frac{n - np}{n - \lambda - t}\right)^{n - \lambda - t} \\
+    &= \left(\frac{\lambda}{\lambda + t}\right)^{\lambda + t}\left(\frac{n - \lambda}{n - \lambda - t}\right)^{n - \lambda - t}
+    \end{aligned}\]
+    
+    Представим эту оценку в следующем виде:
+    \[\left(\frac{\lambda}{\lambda + t}\right)^{\lambda + t}\left(\frac{n - \lambda}{n - \lambda - t}\right)^{n - \lambda - t} = \exp\left\{-(\lambda + t)\ln\left(1 + \frac{t}{\lambda}\right) - (n - \lambda - t)\ln\left(1 - \frac{t}{n - \lambda}\right)\right\}.\]
+    
+    Введём функцию \(\phi(x) = (1 + x)\ln(1 + x) - x\) для \(x > -1\). Тогда (проверьте):
+    \[\Pr{S_n \geq \lambda + t} \leq \exp\left\{-\lambda\phi\left(\frac{t}{\lambda}\right) - (n - \lambda)\phi\left(-\frac{t}{n - \lambda}\right)\right\}.\]
+    
+    Теперь заметим, что если \(x > -1\), то \(\phi(x) > 0\). Тогда будет верно следующее (вторую оценку можно получить абсолютно аналогично первой, только взяв \(-u\) вместо \(u\)):
+    \[\begin{aligned}
+    \Pr{S_n \geq \lambda + t} &\leq \exp\left\{-\lambda\phi\left(\frac{t}{\lambda}\right)\right\}, \\
+    \Pr{S_n \leq \lambda - t} &\leq \exp\left\{-\lambda\phi\left(\frac{-t}{\lambda}\right)\right\}.
+    \end{aligned}\]
+    
+    А теперь достаём бубен и начинаем оптимизировать:
     \begin{itemize}
-        \item \circled{$\leq$}
-        \begin{multline*}
-            \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\cdot
-            \left(1-p+\frac{(\lambda+t)(1-p)}{n-\lambda-t}\right)^n =\\=
-            \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\cdot
-            (1-p)^n\left(\frac{n}{n-\lambda-t}\right)^n =\\=
-            \frac{p^{\lambda+t}n^{\lambda+t}}{(\lambda+t)^{\lambda+t}}\cdot
-            \left(\frac{n(1-p)}{n-\lambda-t}\right)^{n-\lambda-t} =\\=
-            \left(\frac{\lambda}{\lambda+t}\right)^{\lambda+t}\cdot
-            \left(\frac{n-\lambda}{n-\lambda-t}\right)^{n-\lambda-t} =\\=
-            \exp\left( -(\lambda+t)\ln\frac{\lambda+t}{\lambda}
-            -(n-\lambda-t)\ln\frac{n-\lambda-t}{n-\lambda}\right) =\\=
-            \exp\left( -\lambda\phi\left( \frac{t}{\lambda} \right) - (n-\lambda)\phi\left(
-            \frac{t}{n-\lambda}
-            \right) \right),\ \text{где $\phi(x)=(x+1)\ln(x+1)-x$}
-        \end{multline*}
+        \item[{[\(\leq\)]}] Заметим, что \(\phi(0) = 0\) и \(\phi'(x) = 1 - 1 + \ln(x + 1) = \ln(x + 1) \leq x\). Тогда
+        \[-\phi(y) = \int\limits_{y}^{0} \phi'(x)\,\mathrm{d}x \leq \int\limits_{y}^{0} x\,\mathrm{d}x = -\frac{y^2}{2}.\]
         
-        Заметим, что $\forall x > -1,\ \phi(x)>0$. Значит,
-        \[
-        \Pr{S_n \geq \lambda + t} \leq \exp\left(-\lambda\phi\left( \frac{t}{\lambda} \right) \right)
-        \]
-        и, аналогично,
-        \[
-        \Pr{S_n \leq \lambda - t} \leq \exp\left(-\lambda\phi\left( \frac{-t}{\lambda} \right)
-        \right).
-        \]
+        Отсюда получаем, что \(\phi(y) \geq \frac{y^2}{2}\) и \(\Pr{S_n \leq \lambda - t} \leq \exp\left\{-\frac{t^2}{2\lambda}\right\}\).
         
-        Далее заметим, что $\phi(0) = 0$ и $\phi'(x) = 1 - 1 + \ln(x+1) = \ln(x+1) \leq x$; из этого
-        следует, что для любого $y < 0$ выполняется
+        \item[{[\(\geq\)]}] Дальше идёт полное шаманство (sic!). Заметим, что 
+        \[\phi''(x) = \frac{1}{1 + x} \geq \frac{1}{\left(1 + \frac{x}{3}\right)^3} = \left(\frac{x^2}{2\left(1 + \frac{x}{3}\right)}\right)'' \implies \phi(x) \geq \frac{x^2}{2\left(1 + \frac{x}{3}\right)}.\]
         
-        \[
-        -\phi(y) = \int\limits_y^0 \phi'(x)dx \leq \int\limits_y^0xdx = -\frac{y^2}{2}
-        \]
-        
-        Значит, $\phi(y) \geq \frac{y^2}{2}$ и $\Pr{S_n \leq \lambda - t} \leq e^{-\frac{t^2}{2}}$.
-        
-        \item \circled{$\geq$}
-        
-        Дальше идёт полное шаманство [sic].
-        
-        При $x>0$,
-        \[
-        \phi''(x) = \frac{1}{1+x} \geq \frac{1}{\left( 1+\frac{x}{3} \right)^3} = \left(
-        \frac{x^2}{2\left( 1+\frac{x}{3} \right)} \right)'' \implies
-        \phi(x) \geq \frac{x^2}{2\left( 1+\frac{x}{3} \right)}
-        \]
-        
-        Значит, $\Pr{S_n \geq \lambda + t} \leq \exp\left( -\frac{t^2}{2\left( \lambda+\frac{t}{3} \right)} \right)$
+        Отсюда получаем, что \(\Pr{S_n \geq \lambda + t} \leq \exp\left\{-\dfrac{t^2}{2\left(\lambda + \frac{t}{3}\right)}\right\}\).
     \end{itemize}
 \end{proof}
 
@@ -124,21 +86,22 @@
 \subsection{Алгебры событий}
 \begin{definition}
     Пусть $\mathcal{A}$ --- система событий на $(\Omega, \Pr)$. Она называется \emph{алгеброй}, если
-    
     \begin{enumerate}
-        \item $\Omega \in \mathcal{A}$;
-        \item $\forall A \in \mathcal{A},\ \overline{A} \in \mathcal{A}$;
-        \item $\forall A, B \in \mathcal{A},\ A\cap B \in \mathcal{A}$;
+        \item \(\Omega \in \mathcal{A}\),
+        \item Если \(A \in \mathcal{A}\), то и \(\overline{A} \in \mathcal{A}\),
+        \item Если \(A \in \mathcal{A}\) и \(B \in \mathcal{A}\), то и \(A \cap B \in \mathcal{A}\).
     \end{enumerate}
 \end{definition}
 
-\noindent \textbf{Утверждение:} алгебра замкнута по основным операциям: $\cup, \setminus, \triangle$.
+\begin{exercise}
+    Докажите, что алгебра замкнута по основным операциям: \(\cup\), \(\setminus\), \(\triangle\).
+\end{exercise}
 
 \noindent\textbf{Примеры:}
 
 \begin{itemize}
-    \item $\left\{ \emptyset, \Omega \right\}$;
-    \item $2^{\Omega}$;
-    \item $\left\{ \emptyset, \Omega, A, \overline{A}\right\}$ --- алгебра, порождённая $A$;
-    \item $\alpha\left( A_1, \ldots, A_n \right) $ --- минимальная алгебра, содержащая $A_1, \ldots, A_n$.
+    \item \(\left\{ \emptyset, \Omega \right\}\);
+    \item \(2^{\Omega}\);
+    \item \(\left\{ \emptyset, \Omega, A, \overline{A}\right\}\)~--- алгебра, порождённая \(A\);
+    \item \(\alpha\left( A_1, \ldots, A_n \right)\)~--- минимальная алгебра, содержащая \(A_1, \dots, A_n\).
 \end{itemize}
