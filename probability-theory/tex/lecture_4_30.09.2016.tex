@@ -137,12 +137,12 @@
 
 \begin{itemize}
     \item
-        $np(n) \xrightarrow[n\to\infty]{} \lambda > 0$. 
+        $np(n) \xrightarrow[n\to\infty]{} \lambda > 0$.
 
         \begin{theorem}[Пуассон]
 
-            Пусть $np(n) \xrightarrow[n\to\infty]{} \lambda > 0$. 
-            Тогда 
+            Пусть $np(n) \xrightarrow[n\to\infty]{} \lambda > 0$.
+            Тогда
                 \[
                     \forall k \in \Z_+, \Pr(S_n = k) \xrightarrow[n\to\infty]{} e^{-\lambda}\frac{\lambda^k}{k!}.
                 \]
@@ -159,30 +159,33 @@
         \textbf{Следствие:} $P(S_n = k) \overset{d}{\to} P(\xi = k),\ \xi \sim \mathrm{Pois}(\lambda)$ --- сходимость \emph{по распределению}.
 
     \item
-        $np(n) \xrightarrow[n\to\infty]{} \infty$. 
+        $np(n) \xrightarrow[n\to\infty]{} \infty$.
 
         Сделаем ещё одно отступлление в сторону и рассмотрим величину $\frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}}$.
         Пусть \(\xi_1, \ldots, \xi_n \) --- $ n $ бернуллиевских случайных величин с \(\Pr{\xi_i = 1} = p,\ \Pr{\xi_i = 0} = q,\ p~+~q~=~1. \) Тогда для \(S_n = \xi_1 + \ldots + \xi_n \) 
-        находим, что 
+        находим, что
         \[
             \E[S_n] = np.
         \]
-        
-        Несложно также показать, что 
-        \[
-            \D[S_n] = \sum\D[\xi_i] + \sum\cov[x_i, x_j] = \sum\D[\xi_i] = n\D[\xi_1] = n\left( \E[\xi_1^2]-\left( \E[\xi_1] \right)^2 \right) = n(p - p^2) = npq.
-        \]
+
+        Несложно также показать, что
+        \begin{multline*}
+            \D[S_n] = \sum\D[\xi_i] + \sum\cov[x_i, x_j] = \sum\D[\xi_i] = n\D[\xi_1] =\\= n\left( \E[\xi_1^2]-\left( \E[\xi_1] \right)^2 \right) = n(p - p^2) = npq.
+        \end{multline*}
 
         \begin{theorem}[Муавра-Лапласа]
-           Если вероятность $p$ появления случайного события в каждом испытании постоянна (и находится в промежутке $ (0, 1) $), тогда вероятность $ \Pr_n(a, b) $ того, что в $ n $ испытаниях данное событие состоится не менее $ a $ раз и не более, чем $ b $ раз
+           Пусть вероятность $p$ появления случайного события в каждом испытании постоянна (и находится в
+           промежутке $ (0, 1) $). Обозначим через $S_n$ количество испытаний, в которых произошло это
+           событие. Также через $ \Pr_n(a, b) $ обозначим вероятность того, что в $ n $ испытаниях данное
+           событие состоится не менее $ a $ раз и не более, чем $ b $ раз:
             \[
                 \Pr_n(a,b)\mathop{:=} \Pr\left( a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} < b \right).
             \]
 
-            Тогда 
+            Тогда
             \[
                 \sup_{a<b} \left|\Pr_n(a, b) - \int\limits_a^b\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}}dx\right| \xrightarrow[n\to\infty]{} 0
             \]
         \end{theorem}
-    
+
 \end{itemize}
