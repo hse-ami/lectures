@@ -4,16 +4,30 @@
 Ранее мы формулировали два вопроса, связанные со скоростью сходимости закона больших чисел. Ответим на них.
 
 \begin{enumerate}
-    \item Для нахождения ответа на первый вопрос воспользуемся теоремой Муавра-Лапласа:
-    \[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\varepsilon \leq \frac{S_n - \E{S_n}}{\sqrt{\D{S_n}}} \leq \varepsilon} \geq 1 - \delta.\]
+    \item В первом пункте от нас требуется найти скорость сходимости \(\frac{S_n}{n} - p\) к нулю, где \(S_n \sim \mathrm{Bin}(n, p)\). Для этого вспомним теорему Муавра-Лапласа:
+    \[\Pr{a < \frac{S_n - \E{S_n}}{\sqrt{\D{S_n}}} \leq b} \to \int_{a}^{b} \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\,\mathrm{d}x = c, c \in (0, 1).\]
     
-    Как было доказано ранее, \(\E{S_n} = np\), а \(\D{S_n} = np(1 - p)\). Тогда преобразуем это выражение:
-    \[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\epsilon\sqrt{\frac{p(1 - p)}{n}} \leq \frac{S_n}{n} - p \leq \epsilon\sqrt{\frac{p(1 - p)}{n}}} \geq 1 - \delta.\]
+    Преобразуем условие вероятности, пользуясь тем, что \(\E{S_n} = np\), а \(\D{S_n} = np(1 - p)\):
+    \[a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} \leq b \implies \frac{a\sqrt{p(1 - p)}}{\sqrt{n}} < \frac{S_n}{n} - p \leq \frac{b\sqrt{p(1 - p)}}{\sqrt{n}}.\]
     
-    Тогда получаем, что для любого \(\delta > 0\) существует достаточно большое \(n > n(\delta)\) такое, что выполнено
-    \[\Pr{\frac{S_n}{n} - p = \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)} \geq 1 - \delta.\]
+    Возьмём \(\delta \in (0, 1)\) такое, что \(1 - \delta < c\). Тогда при достаточно больших \(n\) выполнено (по определению предела):
+    \[\Pr{\frac{c_1}{\sqrt{n}} < \frac{S_n}{n} - p \leq \frac{c_2}{\sqrt{n}}} > 1 - \delta.\]
     
-    Из этого следует, что скорость сходимости \(\frac{S_n}{n} - p\) к 0 есть \(\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\).
+    Увеличивая расстояние между \(a\) и \(b\) и увеличивая \(n\), получаем следующий результат:
+    \[\lim\limits_{n, |a - b| \to \infty} \Pr{\frac{S_n}{n} - p = \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)} = 1.\]
+    
+    Отсюда получаем, что \(\frac{S_n}{n} = p + \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\).
+    
+    %\item Для нахождения ответа на первый вопрос воспользуемся теоремой Муавра-Лапласа:
+    %\[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\varepsilon \leq \frac{S_n - \E{S_n}}{\sqrt{\D{S_n}}} \leq \varepsilon} \geq 1 - \delta.\]
+    
+    %Как было доказано ранее, \(\E{S_n} = np\), а \(\D{S_n} = np(1 - p)\). Тогда преобразуем это выражение:
+    %\[\forall \varepsilon > 0 \exists \delta = \delta(\varepsilon) > 0 : \Pr{-\epsilon\sqrt{\frac{p(1 - p)}{n}} \leq \frac{S_n}{n} - p \leq \epsilon\sqrt{\frac{p(1 - p)}{n}}} \geq 1 - \delta.\]
+    
+    %Тогда получаем, что для любого \(\delta > 0\) существует достаточно большое \(n > n(\delta)\) такое, что выполнено
+    %\[\Pr{\frac{S_n}{n} - p = \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)} \geq 1 - \delta.\]
+    
+    %Из этого следует, что скорость сходимости \(\frac{S_n}{n} - p\) к 0 есть \(\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\).
     
     \item Теперь приступим ко второму вопросу. Для него достаточно применить неравенство Чебышёва:
     \[\Pr{\left|\frac{S_n}{n}-p\right| \geq \epsilon} \leq \frac{\D{\frac{S_n}{n}}}{\epsilon^2} =
