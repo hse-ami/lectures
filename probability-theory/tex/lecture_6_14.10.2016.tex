@@ -6,7 +6,7 @@
 Введём понятие \emph{графа зависимости}.
 
 \begin{definition}
-    \emph{Графом зависимости} \(D = (V, E)\) для событий \(A_1, A_2, \dots, A_n\) называют ориентированный граф такой, что \(V = \{1, 2, \dots, n\}\), а для любого \(1 \leq i \leq n\) событие \(A_i\) независимо с событиями \(A_j\), если \((i, j) \notin E\).
+    \emph{Графом зависимости} \(D = (V, E)\) для событий \(A_1, A_2, \dots, A_n\) называют ориентированный граф такой, что \(V = \{1, 2, \dots, n\}\), а для любого \(1 \leq i \leq n\) событие \(A_i\) независимо от событий \(A_j\), а также от всевозможных объединений и пересечений данных событий, если \((i, j) \notin E\). 
 \end{definition}
 
 \begin{theorem}[Несимметричный случай локальной леммы Ловаса]
@@ -38,37 +38,73 @@
 \end{proof}
 
 Теперь перейдём к доказательству леммы.
+
 \begin{proof}
-    Докажем следующее утверждение: для любого \(1 \leq i \leq n\) и любого набора чисел \(T \subset \{1, 2, \dots, n\} \setminus \{i\}\) справедливо неравенство \[\Pr{A_i \given \bigcap_{j \in T} \overline{A_j}} \leq x_i.\]
-    
-    В основе доказательства лежит индукция по размеру множества \(T\). Базовый случай~--- \(T = \emptyset\). Тогда из условия следует, что \(\Pr{A_i} \leq x_i\).
-    
-    Теперь предположим, что утверждение верно для любых множеств размера \(t' < t\). Докажем, что из этого следует, что оно выполняется и для множеств размера \(t\). Для этого зафиксируем произвольное множество \(T\) размера \(t\) и построим два множества: \(T_1 = \{j \in T \mid (i, j) \in E\}\) и \(T_2 = T \setminus T_1\). Тогда
-    
-    \[\begin{aligned}
-    \Pr{A_i \given \bigcap_{j \in T} \overline{A_j}} &= \Pr{A_i \given \left(\bigcap_{j \in T_1} \overline{A_j}\right) \cap \left(\bigcap_{j \in T_2} \overline{A_j}\right)}
-    = \frac{\Pr{A_i \cap \left(\bigcap\limits_{j \in T_1} \overline{A_j}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}}{\Pr{\left(\bigcap\limits_{j \in T_1} \overline{A_j}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}} \\
-    &= \frac{\Pr{A_i \cap \left(\bigcap\limits_{j \in T_1} \overline{A_j}\right) \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}}{\Pr{\left(\bigcap\limits_{j \in T_1} \overline{A_j}\right) \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}} \leq \frac{\Pr{A_i \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}}{\Pr{\left(\bigcap\limits_{j \in T_1} \overline{A_j}\right) \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}}.
-    \end{aligned}\]
-    
-    Из определения \(T_2\) следует, что \(A_i\) не зависит от событий \(\{A_j \mid j \in T_2\}\). Но тогда
-    \[\Pr{A_i \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} = \Pr{A_i} \leq x_i \prod\limits_{(i, j) \in E} (1 - x_j).\]
-    
-    Теперь рассмотрим знаменатель. Положим, что \(T_1 = \{j_{1}, j_{2}, \dots, j_{m}\}\). Если вышло так, что \(m = 0\), то знаменатель равен 1 и нужное нам неравенство выполняется. Иначе же воспользуемся формулой произведения вероятностей и предположением индукции:
-    \[\begin{aligned}
-    \Pr{\left(\bigcap\limits_{j \in T_1} \overline{A_j}\right) \given \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} &= \Pr{A_{j_1} \given \left(\bigcap\limits_{s = 2}^{m}\overline{A_{j_s}}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)}\Pr{\left(\bigcap\limits_{s = 2}^{m}\overline{A_{j_s}}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} \\
-    &\geq (1 - x_{j_1})\Pr{\left(\bigcap\limits_{s = 2}^{m}\overline{A_{j_s}}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} \\
-    &\geq (1 - x_{j_1})(1 - x_{j_2})\Pr{\left(\bigcap\limits_{s = 3}^{m}\overline{A_{j_s}}\right) \cap \left(\bigcap\limits_{j \in T_2} \overline{A_j}\right)} \\
-    &\geq \dots \\
-    &\geq \prod_{s = 1}^{m} (1 - x_{j_s}) \geq \prod\limits_{(i, j) \in E} (1 - x_j).
-    \end{aligned}\]
-    
-    Тогда
-    \[\Pr{A_i \given \bigcap_{j \in T} \overline{A_j}} \leq \frac{x_i \prod\limits_{(i, j) \in E} (1 - x_j)}{\prod\limits_{(i, j) \in E} (1 - x_j)} = x_i \implies \Pr{\overline{A_i} \given \bigcap_{j \in T} \overline{A_j}} \geq 1 - x_i.\]
-    
-    Осталось лишь применить полученный результат к вероятности того, что ни одно из событий \(A_1, A_2, \dots, A_n\) не выполнится:
-    
-    \[\Pr{\bigcap\limits_{i = 1}^{n} \overline{A_i}} = \Pr{\overline{A_1} \given \bigcap\limits_{i = 2}^{n} \overline{A_i}}\Pr{\overline{A_2} \given \bigcap\limits_{i = 3}^{n} \overline{A_i}}\dotsc\Pr{\overline{A_{n - 1}} \given \overline{A_n}}\Pr{\overline{A_n}} \geq \prod\limits_{i = 1}^{n}(1 - x_i) > 0. \qedhere\]
+	Разобьем доказательство на подпункты.
+	\begin{enumerate} 		
+		\item 
+		Докажем индукцией по $ t $, что \(\forall i = 1, \ldots, n \), для любого набора чисел \(T \in \{1, \ldots, n\} \setminus \{i\} \), \(t = \left|T\right| < n\) , справедливо неравенство 
+		\(
+		\Pr(A_i\mid\bigcap\limits_{j \in T}\overline{A_j}) \leq x_i. 
+		\)
+		
+		Пусть $ t = 1 $. Тогда неравенство примет следующий вид:
+		\[
+		\Pr(A_i\mid\overline{A_j}) =
+		\begin{cases}
+		\Pr(A_i),& (i, j) \notin E \\
+		\frac{\Pr(A_i \cap \overline{A_j})}{\Pr(\overline{A_j})} \leq \frac{\Pr(A_i)}{\Pr(\overline{A_j})} \leq \frac{x_i(1-x_j)}{1 - x_j},& (i, j) \in E
+		\end{cases}
+		\]
+		Так как по условию \(\Pr(A_i) \leq x_i \prod\limits_{(i, j) \in E}(1 - x_j) \leq x_i (1 - x_j),\) вероятность \( \Pr(\overline{A_j}) = 1 - \Pr(A_j) \geq 1 - x_j.\) 
+		
+		Также, если \(T = \emptyset\), из условия следует, что \(\Pr{A_i} \leq x_i\).
+		
+		Предполагая, что неравенство выполняется для всех $ t' < t $, докажем для его для $ t $. Положим \(T_1 = \{j \in T, (i, j) \in E \}, T_2 = T \setminus T_1 \). Тогда:
+		\[
+		\Pr\left(A_i\mid \bigcap\limits_{j \in T}\overline{A_j}\right) = \frac
+		{\Pr\left(A_i \cap(\bigcap\limits_{j \in T_1}\overline{A_j})\mid \bigcap\limits_{k \in T_2} \overline{A_k}\right)}
+		{\Pr\left(\bigcap\limits_{j \in T_1}\overline{A_j}\mid\bigcap\limits_{k \in T_2}\overline{A_k}\right)}
+		\leq
+		\frac
+		{\Pr\left(A_i\mid\bigcap\limits_{k \in T_2} \overline{A_k}\right)}
+		{\Pr\left(\bigcap\limits_{j \in T_1} \overline{A_j}\mid\bigcap\limits_{k \in T_2} \overline{A_k}\right)}. 
+		\]
+		
+		Для оценки числителя заметим, что событие $ A_i $ взаимно независимо с событиями \(\{A_k : k \in T_2\}\). Следовательно, 
+		\(
+		\Pr\left(A_i\mid\bigcap\limits_{k \in T_2} \overline{A_k}\right) = \Pr(A_i) \leq
+		x_i \prod\limits_{(i, j) \in E}(1 - x_j).
+		\)
+		
+		Предположим $ T_1 = \{j_1, \ldots, j_r \} $. При $ r = 0 $ неравенство 	\(
+		\Pr\left(A_i\mid\bigcap\limits_{j \in T}\overline{A_j}\right) \leq x_i. 
+		\) заведомо выполняется, так как в нашем графе нет ребер, связывающих вершину $ i $ с другими вершинами, а значит, событие $ A_i $ не зависит ни от одного события $ A_j $, где $ j \in T $.
+		
+		Для оценки знаменателя применим предположение индукции. В случаях, когда $ r > 0 $, используя формулу умножения вероятностей, получаем
+		\begin{multline*}
+			\Pr\left(\bigcap\limits_{j \in T_1}\overline{A_j}\mid\bigcap\limits_{k \in T_2}\overline{A_k}\right) = 
+			\Pr\left(\overline{A_{j_1}}\mid\bigcap\limits_{s = 2}^{r}\overline{A_{j_s}} \cap \bigcap\limits_{k \in T_2}\overline{A_k}\right)
+			\Pr\left(\overline{A_{j_2}}\mid\bigcap\limits_{s = 3}^{r}\overline{A_{j_s}} \cap \bigcap\limits_{k \in T_2}\overline{A_k}\right) \ldots \\ \ldots \Pr\left(\overline{A_{j_r}}\mid\bigcap\limits_{k \in T_2}\overline{A_k}\right) \geq
+			(1 - x_{j_1}) \ldots (1 - x_{j_r}) \geq \prod\limits_{(i, j) \in E}(1 - x_j). 
+		\end{multline*}
+		
+		Следовательно, 
+		\(
+		\Pr\left(A_i\mid \bigcap\limits_{j \in T}\overline{A_j}\right) \leq
+		\frac{x_i\prod\limits_{(i, j) \in E}(1 - x_j)}
+		{\prod\limits_{(i, j) \in E}(1 - x_j)} = x_i.
+		\)
+		
+		\item 
+		Запишем окончательный результат рассуждений выше с использованием формулы полной вероятности и полученной в первом пункте оценки.
+		\[
+		\Pr\left(\bigcap\limits_{i = 1}^{n} \overline{A_i}\right) = \Pr\left(\overline{A_1}\mid\bigcap\limits_{i = 2}^{n}\overline{A_i}\right) 
+		\Pr\left(\overline{A_2}\mid\bigcap\limits_{i = 3}^{n}\overline{A_i}\right)
+		\ldots \Pr\left(\overline{A_n}\right) \geq (1 - x_1)(1 - x_2) \ldots (1 - x_n).		
+		\] 
+	\end{enumerate}
+
 \end{proof}
 \begin{exercise}
     Сформулируйте и докажите несимметрический случай локальной леммы Ловаса, используя алгебры событий вместо графа зависимости.
