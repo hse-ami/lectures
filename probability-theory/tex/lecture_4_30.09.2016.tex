@@ -178,18 +178,13 @@
         \end{multline*}
 
         \begin{theorem}[Муавра-Лапласа]
-           Пусть вероятность $p$ появления случайного события в каждом испытании постоянна (и находится в
-           промежутке $ (0, 1) $). Обозначим через $S_n$ количество испытаний, в которых произошло это
-           событие. Также через $ \Pr_n(a, b) $ обозначим вероятность того, что в $ n $ испытаниях данное
-           событие состоится не менее $ a $ раз и не более, чем $ b $ раз:
-            \[
-                \Pr_n(a,b)\mathop{:=} \Pr\left( a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} < b \right).
-            \]
-
-            Тогда
-            \[
-                \sup_{a<b} \left|\Pr_n(a, b) - \int\limits_a^b\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}}dx\right| \xrightarrow[n\to\infty]{} 0
-            \]
+           Пусть \(p \in (0, 1)\) и \(S_n \sim \mathrm{Bin}(n, p)\). Введём следующее обозначение:
+           \[\Pr_n(a,b)\mathop{:=} \Pr\left( a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} \leq b \right).\]
+           
+           Тогда
+           \[
+           \sup_{a<b} \left|\Pr_n(a, b) - \int\limits_a^b\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}}dx\right| \xrightarrow[n\to\infty]{} 0.
+           \]
         \end{theorem}
 
 \end{itemize}
