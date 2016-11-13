@@ -1,0 +1,276 @@
+\section{Лекция от 21.10.2016}
+
+Будем дальше двигаться в сторону непрерывных вероятностей. Наша задача состоит в определении общего вероятностного пространства.
+
+\subsection{Общее понятие вероятностного пространства}
+Совокупность объектов \(\Omega, \mathbf{F}, \Pr \) называется общим вероятностностным пространством, так называемая ``тройка Колмогорова''.
+Разберем по отдельности каждый символ из этой ``тройки''.
+\begin{itemize}
+	\item $\mathbf{\Omega}$ --- пространство элементарных событий, множество элементарных исходов.
+    
+	Например, если событие --- это выстрел в мишень, то множество элементарных исходов будет задаваться плоскостью, \(\Omega = \R^2. \)
+	
+	\item $\F$ --- совокупность подмножеств $\Omega$, называемые событиями. (В дискретном случае $\F = 2^{\Omega}$, то есть множество всех подмножеств $ \Omega $).
+    
+    Перед тем, как строго задать тебования к $ \F $, введем несколько определений.
+    
+        \begin{definition} 
+            Пусть задано некоторое множество $ \Omega $. Система $ \F $ подмножеств $ \Omega $ называется \emph{алгеброй}, если выполняются следующие требования:
+            
+            
+            \begin{enumerate}
+                \item \( \Omega \in \F \)
+                
+                \item \( \forall A \in \F \implies \overline{A} \in \F \)
+                
+                \item \( \forall A, B \in \F \implies A \cap B \in \F, A \cup B \in \F \)
+            \end{enumerate}
+            Заметим, что в третьем условии достаточно требовать лишь, чтобы либо \(A \cap B \in \F\), либо \(A \cup B\), поскольку \(A \cup B = \overline {A \cap B}\) и наоборот. 
+            
+            \textit{Пример:} Конечные объединения мнодеств вида \( (-\infty; a),\ (b; c],\ (d; \infty) \) образуют алгебру.
+           
+        \end{definition}
+    
+        \begin{definition}
+            Система $ \F $ подмножеств множества $ \Omega $ называется $ \sigma $-алгеброй, если выполняются следующие требования:
+            
+            \begin{enumerate}
+                \item $ \F $ является алгеброй      
+                
+                \item если \(A_n \in \F,\ n \in \N \), то выполнено \(\bigcup\limits_{n = 1}^{\infty}A_n \in \F, \ \bigcap\limits_{n = 1}^{\infty}A_n \in \F \)  
+            \end{enumerate}
+        
+        \end{definition}
+    
+        \begin{lemma}
+            Пусть $ M $ --- некоторая система подномжеств $ \Omega $. Тогда сущестует минимальная (по включению) $ \sigma $-алгебра, $ \sigma(M) $, содержащая в себе все подмножества из $ M $.
+        \end{lemma}
+    
+        \begin{proof}
+            На самом деле эта лемма в большей степени является логической. Констуктивного доказательства здесь не подразумевается. Обсудим на уровне идеи.
+            
+            Рассмотрим множество всех $\sigma$-алгебр, содержащих $ M $. Такое множество не является пустым, так как \(M \in 2^{\Omega}\). Тогда пересечение данных $ \sigma $-алгебр --- это тоже $ \sigma $-алгебра, содержащая $ M $ и минимальная по построению.
+        \end{proof}
+        
+    Важно, что $ \F $ \emph{должна являться алгеброй}, а для изучения предельных вероятностей $ \F $ должна также быть и \emph{$ \sigma $-алгерой}!
+    
+        \begin{definition}
+            \emph{Борелевской $ \sigma $-алгеброй} на множестве $ \R $ называется минимальная $ sigma $-алгебра, содержащая в себе любыми полуинтервалы \((a; b] \) на прямой:
+            \[
+                \mathcal{B}(\R) = \sigma\left((a; b] : a < b \mid a, b \in \R \right).
+            \]
+        \end{definition} 
+    
+        \begin{exercise}
+            В определении \(\mathcal{B}(\R)\) полуинтервалы можно заменить на отрезки, интервалы, открытые множества, замкнутые множества, лучи и т.д.
+            
+            Любители Теории Вероятностей  могут попрактиковаться, доказав, что \(\mathcal{B}(\R) \neq 2^{\R}\).
+            
+        \end{exercise}
+    
+        \begin{definition}
+            Пространство $ \Omega $ вместе с $ \sigma $-алгеброй его подмножеств $ \F $ называется \emph{измеримым пространством} и обозначается \((\Omega, \F)\).
+        \end{definition}
+    
+    \item Наконец, мы подошли к рассмотрению последнего члена ``тройки Колмогорова''. 
+        
+        \begin{definition}
+            Отображение $ \Pr $ из $ \F $ в [0; 1] \(\left( (\Pr: \F \to [0; 1]) \right)\) называется \emph{вероятностной мерой} на \( (\Omega, \F) \), если оно удовлетворяет следующим двум условиям:
+                \begin{enumerate}
+                    \item \(\Pr{\Omega} = 1  \)
+                    
+                    \item Свойство счетной аддитивности. То есть \( \forall \{A_n,\ n \in \N \},\ A_n \in \F  \) и \(A_n \cap A_n = \emptyset\  \forall n \neq m \), выполняется: \[\Pr{\bigcup\limits_{n = 1}^{\infty}A_n} = \sum\limits_{n = 1}^{\infty}\Pr{A_n}.
+                    \] В дискретных вероятностных пространствах мы это свойство доказывали. Здесь его сразу постулируем.
+                    
+                \end{enumerate} 
+        \end{definition}     
+       
+   \begin{lemma}[Свойства вероятности]
+        Вероятностные меры обладают следующими свойствами:
+        \begin{enumerate}
+            \item \(\Pr{\emptyset} = 0 \).
+            
+            \item Конечная аддитивность. Если \(A_n \in \F,\ n \in \N  \) и \(\bigcup A_n \in \F \), тогда:
+            \[
+                \Pr{\bigcup\limits_{n = 1}^{m}A_n} = \sum\limits_{n = 1}^{m}\Pr{A_n}.
+            \]
+            
+            \item Если \(A, B \in \F, \ A \subset B \), то \(\Pr{A} \leq \Pr{B} \).
+            
+            \item \(\Pr(A) + \Pr(\overline{A}) = 1\).
+            
+            \item \(\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)\).
+            \item Для любого набора событий \(A_1, A_2, \ldots, A_n\) \(\Pr\left(\bigcup\limits_{n = 1}^{m} A_n\right) \leq \sum\limits_{n = 1}^{m} \Pr(A_n)\).
+        \end{enumerate}               
+   \end{lemma} 
+ 
+    \begin{proof} 
+        Докажем только первые два свойства, так как остальные доказываеются ровно так же, как и в дискретном случае. За этими доказательствами можно обратиться к первой лекции.
+        
+        \begin{enumerate}
+            \item \( \forall n,\ A_n = \emptyset\).
+            \[
+                \Pr{\bigcup\limits_{n = 1}^{\infty}A_n} = \sum\limits_{n = 1}^{m}\Pr{A_n} = \sum\limits_{n = 1}^{m}\Pr{\emptyset} \implies \Pr{\emptyset} = 0.
+            \]
+            
+            \item Положим \(A_n = \emptyset \) при \(n > m \). Тогда:
+            \[
+                \Pr{\bigcup\limits_{n = 1}^{\infty}A_n} = \sum\limits_{n = 1}^{\infty}\Pr{A_n} = \sum\limits_{n = 1}^{m}\Pr{A_n}.
+            \]
+        \end{enumerate}
+    \end{proof}
+    
+\end{itemize}
+
+\begin{theorem}[О непрерывности вероятностной меры]
+    Пусть $ \Pr $ --- конечно-аддитивная функция на $ \sigma $-алгебре событий $ \F $, \(\Pr: \F \to [0; 1],\ \Pr(\Omega) = 1 \). Тогда следующие четыре условия эквивалентны:
+        \begin{enumerate}[label = (\alph*)]
+            \item $ \Pr $ является счетно-аддитивной функцией.
+            
+            \item $ \Pr $ непрерывна в ``нуле'', то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n + 1} \subset A_n,\ \bigcup\limits_{n = 1}^{\infty}A_n = \emptyset \), выполняется:
+            \[
+                \lim\limits_{n}\Pr{A_n} = 0.
+            \]  
+            
+            \item $ \Pr $ непрерывна сверху, то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n + 1} \subset A_n,\ \bigcup\limits_{n = 1}^{\infty}A_n = A \in \F,\  (A_n \downarrow A) \), выполняется:
+            \[
+            \lim\limits_{n}\Pr{A_n} = \Pr{A}.
+            \]  
+            
+            \item $ \Pr $ непрерывна снизу, то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n} \subset A_{n + 1},\ \bigcap\limits_{n = 1}^{\infty}A_n = A \in \F,\  (A_n \uparrow A) \), выполняется:
+            \[
+            \lim\limits_{n}\Pr{A_n} = \Pr{A}.
+            \]  
+            
+        \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Докажем эквивалентность всех этих утверждений в несколько шагов:
+
+    \begin{itemize}
+        \item \textbf{a $\Rightarrow$ c} (счётная аддитивность означает непрерывность сверху)
+
+            Заметим, что так как
+            \[
+                \bigcup\limits_{n = 1}^{\infty} A_n = A_1 \cup (A_2\setminus A_1) \cup (A_3\setminus A_2)\ldots,
+            \]
+            то
+            \begin{multline*}
+                \Pr{\bigcup\limits_{n = 1}^{\infty} A_n} =
+                \Pr{A_1} + \Pr{A_2\setminus A_1} + \Pr{A_3\setminus A_2}\ldots =\\=
+                \Pr{A_1} + \Pr{A_2} - \Pr{A_1} + \Pr{A_3} -\Pr{A_2}\ldots =
+                \lim\limits_{n \to \infty} \Pr{A_n}.
+            \end{multline*}
+
+        \item \textbf{c $\Rightarrow$ d} (непрерывность сверху означает непрерывность снизу)
+
+            Пусть $n \geq 1$, тогда
+
+            \[
+                \Pr{A_n} = \Pr{A_1 \setminus(A_1\setminus A_n)} = \Pr{A_1} - \Pr{A_1\setminus A_n}.
+            \]
+
+            Тогда, согласно пункту \textbf{б},
+            \[
+                \lim\limits_{n \to \infty}\Pr{A_1\setminus A_n} =
+                \Pr{\bigcup\limits_{n=1}^{\infty}(A_1\setminus A_n)}.
+            \]
+
+            А это означает, что
+
+            \begin{multline*}
+                \lim\limits_{n \to \infty} \Pr{A_n} =
+                \Pr{A_1} - \lim\limits_{n \to \infty}\Pr{A_1\setminus A_n} =
+                \Pr{A_1} - \Pr{\bigcup\limits_{n=1}^{\infty}(A_1\setminus A_n)} =\\=
+                \Pr{A_1} - \Pr{A_1 \setminus \bigcap\limits_{n=1}^{\infty}(A_n)} =
+                \Pr{A_1} - \Pr{A_1} + \Pr{\bigcap\limits_{n=1}^{\infty}(A_n)} =
+                \Pr{\bigcap\limits_{n=1}^{\infty}(A_n)}
+            \end{multline*}
+
+        \item \textbf{d $\Rightarrow$ b} (непрерывность снизу означает непрерывность в нуле)
+
+            Тривиально.
+
+        \item \textbf{b $\Rightarrow$ a} (непрерывность в нуле означает счётную аддитивность)
+
+            Пусть множества $A_1, \ldots, A_n$ попарно не пересекаются и $\bigsqcup\limits_{n=1}^{\infty}A_n
+            \in \mathcal{A}$. Тогда можно заметить, что
+            \[
+                \Pr{\bigsqcup\limits_{n=1}^{\infty}A_n} =
+                \Pr{\bigsqcup\limits_{i=1}^{n}A_i} +
+                \Pr{\bigsqcup\limits_{i=n+1}^{\infty}A_i}.
+            \]
+
+            Осталось только заметить, что $n\to\infty \implies \bigsqcup\limits_{i=n+1}^{\infty}A_i
+            \downarrow \emptyset$ и, пользуясь этим, доказать последний переход:
+
+            \begin{multline*}
+                \sum\limits_{i = 1}^{\infty}\Pr{A_i} =
+                \lim\limits_{n\to\infty} \sum\limits_{i = 1}^{n}\Pr{A_i} =
+                \lim\limits_{n\to\infty} \Pr{\bigsqcup\limits_{i = 1}^{n}A_i} =
+                \lim\limits_{n\to\infty} \left(
+                    \Pr{\bigsqcup\limits_{i = 1}^{\infty}A_i} -
+                    \Pr{\bigsqcup\limits_{i = n+1}^{\infty}A_i}
+                \right) =\\=
+                \Pr{\bigsqcup\limits_{i = 1}^{\infty}A_i} -
+                \lim\limits_{n\to\infty} \Pr{\bigsqcup\limits_{i = n+1}^{\infty}A_i} =
+                \Pr{\bigsqcup\limits_{i = 1}^{\infty}A_i}
+            \end{multline*}
+    \end{itemize}
+\end{proof}
+
+
+\subsection{Вероятностные меры на $\left( \R, \mathcal{B}(\R) \right)$.}
+    Пусть $\Pr$ --- некоторая вероятностная мера.
+
+    \begin{definition}
+        \emph{Функцией распределения} вероятностной меры $\Pr$ называют функцию $F: \R \to [0, 1]$ такую, что
+        $F(x) = \Pr{(\infty, x]}$.
+    \end{definition}
+
+    \begin{lemma}[Свойства функции распределения]
+        \ 
+        \begin{enumerate}
+            \item
+                $F(x)$ неубывающая;
+            \item
+                \(\lim\limits_{x\to +\infty} F(x)= 1;\)
+            \item
+                \(\lim\limits_{x\to -\infty} F(x)= 0;\)
+            \item
+                $F(x)$ непрерывна справа.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        \ 
+        \begin{enumerate}
+            \item Если $y > x$, то в силу аддитивности $\Pr$, $F(y) - F(x) = \Pr{(x, y]}$
+            \item Пусть $x_n \uparrow +\infty$; тогда $(-\infty, x] \uparrow \R$. Значит,
+                \(
+                    \lim\limits_{x_n\to +infty} F(x_n) =
+                    \lim\limits_{x_n\to +infty} \Pr{(-\infty, x_n]} =
+                    \Pr{\R} =
+                    1
+                \)
+            \item Аналогично.
+            \item Пусть $x_n \downarrow x$; тогда, в силу непрерывности вероятностной меры, $F(x_n) \to
+                F(x)$.
+        \end{enumerate}
+    \end{proof}
+
+    \textbf{Примеры:}
+    \begin{itemize}
+        \item $F(x) = \begin{cases}
+                1, x\geq c;\\
+                0, x < c
+            \end{cases}$
+        \item $F(x) = \begin{cases}
+                1, x > 1;\\
+                x, x\in [0, 1];\\
+                0, x < 0
+            \end{cases}$
+
+            Такой функции распределения соответствует вероятностная мера $\Pr$ такая, что $\forall a < b \in
+            [0, 1],\ \Pr{(a, b]} = b - a$ \footnote{говоря простым языком, вероятность попадания в полуинтервал
+            пропорциональна его длине.} Такая мера называется \emph{мерой Лебега}.
+    \end{itemize}
