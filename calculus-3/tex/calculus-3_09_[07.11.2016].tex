@@ -1,0 +1,181 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{header}
+
+\begin{document}
+\newcommand{\B}{\mathcal{B}}
+
+\pagestyle{fancy}
+\section{Лекция 09 от 07.11.2016 \\ Предел по базе}
+Все пределы, которые раньше возникали в нашем курсе --- это наследники предела по базе.
+
+\subsection{Что это такое?}
+
+Пусть $X$ --- произвольное непустое множество.
+
+\begin{Def}
+Система подмножеств $\B$ множества $X$ называется базой, если
+\begin{enumerate}
+\item $\varnothing \not\in \B$;
+\item $\forall B_1,\ B_2 \in \B\ \exists B_3 \in \B :\ B_3 \subset B_1 \cap B_2$.
+\end{enumerate}
+\end{Def}
+
+\begin{Comment}
+В классическом понимании символ $\subset$ означает строгое включение, однако в современной математике это также может означать равенство множеств, и мы будем пользоваться именно этим значением. Если хотят подчеркнуть, что множества не равны, то пишут $\varsubsetneq$.
+\end{Comment}
+
+Пусть функция $f$ определена на $X$ или части $X$ и принимает действительные значения
+(впрочем, действительность не принципиальна).
+\begin{Def}
+Число $A$ называют пределом функции $f$ по базе $\B$, если
+\begin{itemize}
+\item[0.] $\exists B \in \B: f$ определена на $B$;
+\item[1.] $\forall \eps > 0\ \exists B \in \B: \forall x \in B\ |f(x) - A| < \eps$.
+\end{itemize}
+\end{Def}
+Вообще говоря, нулевое условие можно опустить, так как оно следует из первого, но исторически сложилось, что его все-таки пишут --- на практике гораздо удобней сначала проверить, определена ли функция хоть где-то.
+
+\begin{Examples}\ 
+\begin{itemize}
+\item $X = \N$, $\B = \{B_n\}_{n=1}^{\infty}$, $B_n = \{n, n+1, n+2, \ldots  \}$. Тогда $B_n \cap B_m = B_{\max(n, m)}$. Такая база задает предел числовой последовательности.
+\item $X = \R$, $\B = \{B_\delta\}_{\delta>0}$, $B_\delta = (-\delta, \delta)\setminus \{0\}$. Такая база задает двусторонний предел функции при $x\to 0$. Аналогично можно задать односторонние пределы.
+\item Пусть зафиксирован отрезок $[a, b]$ и $f:[a, b] \to \R$.
+
+Пусть $X$ --- множество всех отмеченных разбиений $[a, b]$ (то есть это разбиения с зафиксированной точкой на каждом отрезке). Тогда базой Римана называется база\\ $\B = \{B_\delta\}_{\delta>0}$, где $B_\delta$ это совокупность всех отмеченных разбиений с диаметром меньше $\delta$. Соответственно, интегралом Римана называется предел по 
+этой базе интегральных сумм Римана, рассматриваемых как функция от отмеченных разбиений при фиксированном $f$:
+$$
+\sigma(f, (\tau, \xi)) = \sum\limits_{j=1}^{n}f(\xi_j)|\Delta_j|.
+$$
+\end{itemize}
+\end{Examples}
+
+\subsection{Ключевые свойства}
+Пусть $\B$ --- база $X$.
+
+\begin{Statement}
+Если $\lim\limits_{\B} f = A_1$ и $\lim\limits_{\B} f = A_2$, то $A_1 = A_2$.
+\end{Statement}
+\begin{proof}
+Пусть $A_1 \neq A_2$. Положим $\eps = \frac{|A_1 - A_2|}{2}$. Тогда:
+\begin{align*}
+& \exists B_1 \in \B: \forall x \in B_1\ |f(x) - A_1| < \eps; \\
+& \exists B_2 \in \B: \forall x \in B_2\ |f(x) - A_2| < \eps.
+\end{align*}
+Тогда существует $B_3 \in \B$ такой, что $B_2 \subset B_1 \cap B_2$. Для него будет верно, что
+$$
+\forall x \in B_3:\ |A_1 - A_2| = |A_1 - f(x) + f(x) - A_2| \leq |A_1 - f(x)| + |A_2 - f(x)| < 2\eps = |A_1 - A_2|.
+$$
+Получили противоречие.
+\end{proof}
+
+Давно знакомое всем доказательство, но зато оно показывает, почему база определена именно так.
+
+\begin{Statement}
+Пусть $\lim\limits_{\B} f(x) = A$, $\lim\limits_{\B}g(x) = B$ и $\alpha \in \R$. Тогда:
+\begin{enumerate}
+\item $\lim\limits_{\B}(f + g) = A + B$;
+\item $\lim\limits_{\B}(fg) = AB$;
+\item $\lim\limits_{\B}(\alpha f) = \alpha A$;
+\item $\lim\limits_{\B}\dfrac{f}{g} = \dfrac{A}{B}$, если $B \neq 0$.
+\end{enumerate} 
+\end{Statement}
+
+\begin{proof}
+Это тоже почти школьный материал, так что докажем только один пункт. Пусть это будет последний.
+
+Немного преобразуем:
+$$
+\frac{f}{g} - \frac{A}{B} = \frac{Bf - fg}{gB} = \frac{Bf - BA + BA - fg}{gB} = \frac{B(f - A) + A(B - g)}{gB}.
+$$
+Возьмем произвольное $\eps > 0$. Положим $\eps_1 = \min\left( \dfrac{\eps B^2}{100(|A| + |B|) + 1}; \dfrac{|B|}{2} \right)$. Найдем такие $B_1,\ B_2 \in \B$, что:
+\begin{gather}
+\forall x \in B_1: |f(x) - A| < \eps_1;\\
+\forall x \in B_2: |g(x) - B| < \eps_1.
+\end{gather}
+Найдем такое $B_3 \in \B$, что $B_3 \subset B_1 \cap B_2$. Тогда для всех $x \in B_3$ верно, что:
+$$
+\left| \frac{f(x)}{g(x)} - \frac{A}{B} \right| \leq \frac{|B|\eps_1 + |A|\eps_1}{B^2 / 2} = \eps_1 \frac{2(|A| + |B|)}{B^2} < \eps.
+$$
+\end{proof}
+
+\begin{Statement}
+Если существует предел $\lim\limits_{\B}f$ и функция $f$ неотрицательна хотя бы на одном элементе $B$ базы $\B$, то $\lim\limits_{\B}f \geq 0$.
+\end{Statement}
+\begin{proof}
+Пусть $\lim\limits_{\B}f = A < 0$. Тогда для $\eps = \frac{|A|}{2}$ существует такой $\widetilde{B} \in \B$, что $\forall x \in \widetilde{B}:\ |f(x) - A| < \eps.$
+
+Но существует $x \in B \cap \widetilde{B}$, и тогда для него одновременно будет верно, что $f(x) \geq 0$ и\\ $f(x) \leq \frac{A}{2} < 0$. Противоречие.
+\end{proof}
+
+\begin{Consequence}
+Пусть $f \geq g$ на некотором элементе $B \in \B$ и существуют пределы $\lim\limits_{\B}f = A$ и $\lim\limits_{\B}g = \widetilde{A}$. Тогда $A \geq \widetilde{A}$.
+\end{Consequence}
+\begin{proof}
+$\lim\limits_{\B}(f - g) = A - \widetilde{A}$ и одновременно, $\lim\limits_{\B}(f - g) \geq 0$.
+\end{proof}
+
+Пусть $\B$ и $\widetilde{\B}$ --- базы на $X$.
+\begin{Statement}
+Пусть $\lim\limits_{\B}f = A$ и для каждого элемента $B \in \B$ существует элемент $\widetilde{B} \in \widetilde{\B}$ такой, что $\widetilde{B} \subset B$. Тогда $\lim\limits_{\widetilde{\B}}f = A$.
+\end{Statement}
+
+\begin{proof}
+Зафиксируем произвольное $\eps > 0$. Найдем $B \in \B$ такое, что $\forall x \in B: |f(x) - A| < \eps$.
+Теперь найдем $\widetilde{B} \in \widetilde{\B}$ такое, что $\widetilde{B} \subset B$. Тогда $\forall x \in \widetilde{B}: |f(x) - A| < \eps$. Получили определение предела $\lim\limits_{\widetilde{\B}}f = A$.
+\end{proof}
+
+Фактически это обобщение утверждения, что любая подпоследовательность сходится туда же, куда и вся последовательность, и что если есть предел, то есть и оба односторонних предела, и они все равны.
+
+Ну а где есть предел, там есть и критерий Коши!
+
+\subsection{Критерий Коши}
+
+\begin{Def}
+Функция $f$ удовлетворяет условию Коши по базе $\B$, если:
+\begin{itemize}
+\item[0.] $\exists B_0 \in \B: f$ определена на $B_0$;
+\item[1.] $\forall \eps > 0: \exists B \in \B: \forall x, \widetilde{x} \in B\ |f(x) - f(\widetilde{x})| < \eps$.
+\end{itemize}
+\end{Def}
+
+\begin{Theorem}[Критерий Коши]
+Следующие условия эквивалентны:
+\begin{enumerate}
+\item существует предел $\lim\limits_\B f$;
+\item функция $f$ удовлетворяет условию Коши по базе $\B$.
+\end{enumerate}
+\begin{proof}
+Напоминаем, что мы пока определили только конечные пределы по базе.
+
+$(1) \Rightarrow (2)$. Доказываем как обычно, через $\eps/2$ и прочее.
+
+$(2) \Rightarrow (1)$. Построим последовательность $B_1 \supset B_2 \supset B_3 \supset \ldots$ такую, что:
+\begin{align}
+\eps = 1, &\ \exists B_1 \in \B: \forall x, \widetilde{x} \in B_1\ |f(x) - f(\widetilde{x})| < 1;\\
+\eps = 1/2,&\ \exists \widetilde{B_2} \in \B: \forall x, \widetilde{x} \in \widetilde{B_2}\ |f(x) - f(\widetilde{x})| < 1/2,\\
+&\ \exists B_2 \subset B_1 \cap \widetilde{B_2}: \forall x, \widetilde{x} \in B_2\ |f(x) - f(\widetilde{x})| < 1/2;\\ 
+\eps = 1/3,&\ \exists \widetilde{B_3} \in \B: \forall x, \widetilde{x} \in \widetilde{B_3}\ |f(x) - f(\widetilde{x})| < 1/3, \\
+&\ \exists B_3 \subset B_2 \cap \widetilde{B_3}: \forall x, \widetilde{x} \in B_3\ |f(x) - f(\widetilde{x})| < 1/3;\\ 
+\ldots
+\end{align}
+
+Для каждого элемента $B_n$ выберем точку $x_n \in B_n$. Заметим, что $\{ f(x_n) \}_{n=1}^\infty$ --- функциональная последовательность, то есть
+\begin{align}
+&\forall \eps > 0\ \exists N \in \N,\ \frac{1}{N} < \eps: \forall n, m > N \ |f(x_n) - f(x_m)| < \frac{1}{N} < \eps.
+\end{align}
+Это верно, так как $x_n \in B_n \subset B_N$ и аналогично для $x_m$.
+
+Значит, существует предел $\lim\limits_{n\to \inf}f(x_n) = A$. Покажем, что $\lim\limits_{\B}f = A$.
+
+Зафиксируем произвольное $\eps > 0$.  Тогда
+$$
+\exists N \in \N: \forall n > N\ |f(x_n) - A) < \eps.
+$$
+При этом, существует такое $n>N$, что $\dfrac{1}{n} < \dfrac{\eps}{2}$. Значит,
+$$
+\forall x \in B_n \in \B: |f(x) - A| \leq |f(x) - f(x_n)| + |f(x_n) - A| < \frac{1}{n} + \frac{\eps}{2} < \eps.
+$$
+\end{proof}
+\end{Theorem}
+
+\end{document}
