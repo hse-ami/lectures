@@ -74,7 +74,7 @@
 	$$
 		f_n(x) = \cfrac{1}{0!} + \cfrac{x}{1!} + \cfrac{x^2}{2!} + \ldots + \cfrac{x^n}{n!}
 	$$
-	Понятно, что в любой точке значение $\lim\limits_{n \to \infty} f_n(x) = e^x$, то есть 	$f_n(x) \overset{\R}{\underset{n\to\infty}{\longrightarrow}} e^x$, но $f_n(x) \overset{\R}{\underset{n\to\infty}{\not\rightrightarrows}} e^x$. Однако, как легко понять, $f_n(x) \overset{(-C;C)}{\underset{n\to\infty}{\not\rightrightarrows}} e^x$ для всякого $C>0$. Эта последовательность ещё всплывёт в нашем курсе.
+	В любой точке значение $\lim\limits_{n \to \infty} f_n(x) = e^x$, то есть 	$f_n(x) \overset{\R}{\underset{n\to\infty}{\longrightarrow}} e^x$, но $f_n(x) \overset{\R}{\underset{n\to\infty}{\not\rightrightarrows}} e^x$. Однако, как легко понять, $f_n(x) \overset{(-C;C)}{\underset{n\to\infty}{\rightrightarrows}} e^x$ для всякого $C>0$. Эта последовательность ещё всплывёт в нашем курсе.
 	\begin{Statement}
 		Если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$ и $g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} g(x)$, $\alpha \in \R$, то 
 		\begin{enumerate}
@@ -115,17 +115,17 @@
 	\begin{Theorem}[Критерий Коши равнoмерной сходимости]
 		Следующие условия эквивалентны:
 		\begin{enumerate}
-			\item $f_n(x)$ $\overset{X}{\underset{n\to\infty}{\rightrightarrows}} ???$ (равномерно сходится куда-то)
+			\item $f_n(x)$ $\overset{X}{\underset{n\to\infty}{\rightrightarrows}} ???$ (равномерно сходится куда-то);
 			\item $\{f_n(x)\}_{n=1}^\infty$ удовлетворяет условию Коши равномерной сходимости на $X$:
 			$$
-			\forall \varepsilon > 0\; \exists N\in\N\colon \; \forall n,m>N\; \forall x\in X\; |f_n(x) - f_m(x)| < \varepsilon
+			\forall \varepsilon > 0\; \exists N\in\N\colon \; \forall n,m>N\; \forall x\in X\; |f_n(x) - f_m(x)| < \varepsilon.
 			$$
 		\end{enumerate}
 	\end{Theorem}
 	\begin{proof}
 		\par \textbf{1 $\Leftarrow$ 2}. Заметим, что для всякого $x\in X$ числовая последовательность $\{f_n(x)\}_{n=1}^\infty$ является фундаментальной. Тогда $\forall x\in X\; \exists \lim\limits_{n\to \infty} f_n(x) = f(x)$. Зафиксируем произвольное $\varepsilon > 0,\; \varepsilon_1 = \varepsilon / 2$. Найдём такое $N \in \N$, что 
 		$$
-			\forall n,m>N\; \forall x\in X\; |f_n(x) - f_m(x)| < \varepsilon_1
+			\forall n,m>N\; \forall x\in X\; |f_n(x) - f_m(x)| < \varepsilon_1.
 		$$
 		Зафиксировав $n$ перейдём к пределу при $m \to \infty$, получим $|f_n(x) - f(x)| \leqslant \varepsilon_1 < \varepsilon$. Получили требуемое.
 		\par \textbf{1 $\Rightarrow$ 2}. Пусть $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$.

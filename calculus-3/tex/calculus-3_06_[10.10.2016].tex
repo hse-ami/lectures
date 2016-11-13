@@ -66,7 +66,7 @@
 \begin{proof}
 Если $\alpha_n$ не стремится к нулю, то и $1 + \alpha_n$ не стремится к единице. Тогда и ряд, и бесконечное произведение расходятся, так как не выполняется необходимое условие сходимости.
 
-Теперь пусть $\alpha_n \to 0$. Тогда сходимость бесконечного произведения $\infprod (1 + \alpha_n)$ равносильна сходимости ряда $\series{1}{\infty}\ln(1 + \alpha_n)$. И так как он знакопостоянный, то по соответствующему признаку сравнения этот ряд сходится тогда и только тогда, когда сходится ряд $\series{1}{\infty}\alpha_n$.
+Теперь пусть $\alpha_n \to 0$. Тогда сходимость бесконечного произведения $\infprod (1 + \alpha_n)$ равносильна сходимости ряда $\series{1}{\infty}\ln(1 + \alpha_n)$. И так как он знакопостоянный, то по соответствующему признаку сравнения этот ряд сходится тогда и только тогда, когда сходится ряд из эквивалентных членов $\series{1}{\infty}\alpha_n$.
 \end{proof}
 
 \begin{Statement}
@@ -104,9 +104,9 @@ $$
 Пусть $a_n > 0$, $\series{1}{\infty}a_n = +\infty$ и $S_n = a_1 + \ldots a_n$. Тогда ряд $\series{1}{\infty}\dfrac{a_n}{S_n}$ расходится.
 \end{Statement}
 \begin{proof}
-Достаточно доказать расходимость бесконечного произведения $\infprod \left( 1 - \dfrac{a_n}{S_n}\right)$:
+Достаточно доказать расходимость бесконечного произведения $\prod\limits_{n=2}^{\infty} \left( 1 - \dfrac{a_n}{S_n}\right)$:
 \begin{gather*}
-\infprod\left(1 - \dfrac{a_n}{S_n} \right) = \infprod \dfrac{S_n - a_n}{S_n} = \infprod \dfrac{S_{n-1}}{S_n}, \\
+\prod\limits_{n=2}^{\infty}\left(1 - \dfrac{a_n}{S_n} \right) = \prod\limits_{n=2}^{\infty} \dfrac{S_n - a_n}{S_n} = \prod\limits_{n=2}^{\infty} \dfrac{S_{n-1}}{S_n}, \\
 P_n = \dfrac{S_1}{S_2}\cdot \dfrac{S_2}{S_3} \ldots \dfrac{S_{n-1}}{S_n} = \frac{S_1}{S_n} \to 0.
 \end{gather*}
 \end{proof}
@@ -121,7 +121,7 @@ P_n = \dfrac{S_1}{S_2}\cdot \dfrac{S_2}{S_3} \ldots \dfrac{S_{n-1}}{S_n} = \frac
 \begin{proof}
 Представим элемент $a_n$ в следующем виде:
 $$
-a_n = a_1 \cdot \frac{a_2}{a_1}\cdot\frac{a_3}{a_2} \ldots \frac{a_n}{a_{n-1}} = a_1 / \prod\limits_{k=1}^{n} \frac{a_k}{a_{k+1}}.
+a_n = a_1 \cdot \frac{a_2}{a_1}\cdot\frac{a_3}{a_2} \ldots \frac{a_n}{a_{n-1}} = a_1 / \prod\limits_{k=1}^{n-1} \frac{a_k}{a_{k+1}}.
 $$
 
 Тогда сходимость к положительной константе последовательности $\{a_n\}$ равносильна сходимости бесконечного произведения $\infprod \dfrac{a_n}{a_{n+1}}$.
