@@ -1,0 +1,12 @@
+# Fdb version 3
+["pdflatex"] 1479065722 "lecture_1.tex" "lecture_1.pdf" "lecture_1" 1479065723
+  "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
+  "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1136768653 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
+  "/usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf" 1428852030 31983 18aeec08f48baa3cf3508d538dd5f459 ""
+  "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
+  "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
+  "lecture_1.aux" 1478816046 8 a94a2480d3289e625eea47cd1b285758 ""
+  "lecture_1.tex" 1479063997 3398 916a71c67213e67f2423636534b91c0d ""
+  (generated)
+  "lecture_1.pdf"
+  "lecture_1.log"
