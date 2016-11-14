@@ -40,7 +40,6 @@
 \usepackage{enumitem}       % Для выравнивания itemize (\begin{itemize}[align=left])
 \usepackage{ifthen}
 \usepackage{indentfirst}
-\usepackage{listings}
 
 
 % Номера формул
@@ -201,6 +200,10 @@
 \renewcommand{\D}{\Variance}
 \renewcommand{\P}{\Prob}
 
+\newcommand{\note}[1]{
+\#\#\# \\
+#1 \\
+\#\#\# \\}
 
 \newcommand{\vvector}[1]{\begin{pmatrix}{#1}_1 \\\vdots\\{#1}_n\end{pmatrix}}
 \renewcommand{\vector}[1]{({#1}_1, \ldots, {#1}_n)}

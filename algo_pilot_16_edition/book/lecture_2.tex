@@ -17,7 +17,7 @@ $$\E\xi=\sum_{\omega\in\Omega}\xi(\omega) \P(\omega)$$
     \]
     Если все исходы равновероятны, то:
     \[
-        \E\xi = 100 \cdot 0,25 + 50 \cdot 0,25 + 10 \cdot 0,25 + 1 \cdot 0,25 = 50\$
+        \E\xi = 100 \cdot 0.25 + 50 \cdot 0.25 + 10 \cdot 0.25 + 1 \cdot 0.25 = 50\$
     \]
 \end{example}
 
@@ -67,6 +67,9 @@ $$\E\xi=\sum_{\omega\in\Omega}\xi(\omega) \P(\omega)$$
 \end{definition}
 
 Докажем, что эти определения эквивалентны.
+
+\note{Я вообще не верю в то, что логика доказательства верна. Когда доказывается эквивалентность двух утверждений $A \Rightarrow B$ и $C \Rightarrow D$, то доказывается $A \Leftrightarrow C$.}
+
 \begin{proof}
     Пусть $A_1 \ldots A_n$, где $n$ - число элементов в $r_1$. $A_i = (\xi = x_i), x_i \in r_1$. \par
     \begin{align*}
@@ -89,38 +92,44 @@ $$\E\xi=\sum_{\omega\in\Omega}\xi(\omega) \P(\omega)$$
 \end{theorem}
 
 \begin{proof}
-    $\E(\alpha\xi + \beta\psi) = \sum_{\omega \in \Omega}(\alpha\xi(\omega) + \beta\psi(\omega))\P(\omega)
-    = \alpha \sum \xi(\omega)\P(\omega) + \beta \sum \psi(\omega)\P(\omega)
-    = \alpha E\xi + \beta E\psi$
+    \begin{align*}
+        \E(\alpha\xi + \beta\psi) = & \sum_{\omega \in \Omega}(\alpha\xi(\omega) + \beta\psi(\omega))\P(\omega) = \\
+        = & \alpha \sum \xi(\omega)\P(\omega) + \beta \sum \psi(\omega)\P(\omega) = \\
+        = & \alpha \E\xi + \beta \E\psi
+    \end{align*}
 \end{proof}
 
 \begin{example}
-    Найти математическое ожидание количества статичных точек($p_i = i$) в перестановке из $n$ элементов.\\
-    $\E\xi = \E(I_1 + ... I_n) = \sum_{i=1}^{n}\E I_i = \sum_{i=1}^{n}\P(I_i) = \sum_{i=1}^{n}\frac{1}{n}= 1$\\
+    Найти математическое ожидание количества статичных точек($p_i = i$) в перестановке из $n$ элементов.
+    \[
+        \E\xi = \E(I_1 + ... I_n) = \sum_{i=1}^{n}\E I_i = \sum_{i=1}^{n}\P(I_i) = \sum_{i=1}^{n}\frac{1}{n}= 1
+    \]
 \end{example}
 
 Мы теперь знаем, что $\E(\xi + \psi) = \E\xi + \E\psi$. Верно ли, что $\E(\xi \psi) = \E(\xi)\E(\psi)$? \par
-Теорема. Если $\xi$ и $\psi$ - независимые, то $\E(\xi \psi) = \E(\xi) \E(\psi)$.\\
+
+\begin{theorem}
+    Если $\xi$ и $\psi$ - независимые величины, то $\E(\xi \psi) = \E(\xi) \E(\psi)$.
+\end{theorem}
+
 \begin{proof}
-    \[
-        \E\xi=\sum_{\omega \in \Omega} \xi(\omega)\P(\omega)=\sum_{x\in N(\xi)}x\P(\xi = x)
-    \]
-    \[
-        \E(\xi \psi) = \sum z(\xi \psi = z) = \sum_{x \in N(\xi)}\sum_{y \in N(\psi)} \P((\xi = x) \cap (\psi = y)) =
-    \]
-    \[
-        =\sum_{x}\sum_{y}xy\P(\xi = x)\P(\psi = y) =
-        \sum_{x}x\P(\xi = x) \sum_{y}y\P(\psi = y) = \E(\xi) \E(\psi)
-    \]
+    \begin{align*}
+        \E\xi = & \sum_{\omega \in \Omega} \xi(\omega)\P(\omega)=\sum_{x\in N(\xi)}x\P(\xi = x) \\
+        \E(\xi \psi) = & \sum z(\xi \psi = z) = \sum_{x \in N(\xi)}\sum_{y \in N(\psi)} \P((\xi = x)\cap (\psi = y)) = \\
+        = & \sum_{x}\sum_{y}xy\P(\xi = x)\P(\psi = y) = \sum_{x}x\P(\xi = x) \sum_{y}y\P(\psi = y) = \E(\xi) \E(\psi)
+    \end{align*}
 \end{proof}
 
 \begin{definition}
-    Дисперсией $\xi$ называют такую величину $\D \xi$, что $\D\xi=\E(\xi - \E\xi)^2 = \E \xi^2 - (\E \xi)^2$
+    Дисперсией величины $\xi$ называют такую величину $\D \xi$, что 
+    \[
+        \D\xi=\E(\xi - \E\xi)^2 = \E \xi^2 - (\E \xi)^2
+    \]
 \end{definition}
 
 \begin{theorem}{\rm Неравенство Маркова (без док-ва)}
     \[
-        \xi > 0, \P(\xi \geqslant{a}) \leqslant{\frac{\E\xi}{a}}
+        \xi > 0, \ \P(\xi \geqslant{a}) \leqslant{\frac{\E\xi}{a}}
     \]
 \end{theorem}
 
@@ -130,7 +139,6 @@ $$\E\xi=\sum_{\omega\in\Omega}\xi(\omega) \P(\omega)$$
     \]
 \end{theorem}
 
-\newpage
 \begin{example}
     
     Найти максимальную возрастающую подпоследовательность в случайной перестановке $a_1...a_n$, то есть найти $j_1,,j_k$ такие, что $a_{j_1} < a_{j_2} < ... < a_{j_k}$.
@@ -148,16 +156,21 @@ $$\E\xi=\sum_{\omega\in\Omega}\xi(\omega) \P(\omega)$$
 
 \end{example}
 
+\note{Что такое $A_k$?}
+
+Пусть величина $\xi$ -- длина максимальной возрастающей последовательности. Тогда
 \[
-    \E\xi = \E(I_1 +...+ I_n) = \sum \E I_k = \sum \P(A_k) = \sum_{k=1}^{n} \frac{1}{k} = \log n
+    \E\xi = \E(I_1 +...+ I_n) = \sum \E I_k = \sum \P(A_k) = \sum_{k=1}^{n} \frac{1}{k} = \log n.
 \]
 
-\begin{example}
-    Дан взвешенный граф $G(V,E), w(e) \geq 0$. Найти максимальный разрез. (разрез в графе -- нетривиальное подмножество $A \subset V$ его вершин, величина разреза - сумма весов ребер, один конец которых лежит в $A$, другой - в $\overline{A}$). \par
-    
-    Тогда величина разреза $w(A)=\sum_{u \in A \\ v \in \not{A}} s(uv)$. \par
 
-    $U_A$ - множество ребер, лежащих на разрезе, индуцированном множеством $A$. \par
+\begin{example}
+    Дан взвешенный граф $G(V,E), w(e) \geq 0$. Найти максимальный разрез. (разрез в графе -- нетривиальное подмножество $A \subset V$ его вершин, величина разреза - сумма весов ребер, один конец которых лежит в $A$, другой - в $\overline{A}$). Тогда величина разреза это
+    \[
+        w(A)=\sum \limits_{u \in A \\ v \in \not{A}} s(uv),
+    \]
+
+    где $U_A$ - множество ребер, лежащих на разрезе, индуцированном множеством $A$. \par
     
     Решим задачу таким алгоримом: переберем все вершины, будем добавлять каждую из них в $A$ с
     вероятностью $\frac{1}{2}$. Докажем, что математическое ожидание величины $w(A)$ это хотя бы половина оптимального ответа. \par
