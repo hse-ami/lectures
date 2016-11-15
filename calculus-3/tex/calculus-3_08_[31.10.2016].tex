@@ -1,0 +1,78 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{header}
+\begin{document}
+\pagestyle{fancy}
+\section{Лекция 08 от 31.10.2016 \\ Функциональные ряды. Признаки сходимости}
+	
+	Довольно естественно желание понимать, когда ряд сходится, а когда нет. Для числовых рядов мы рассмотрели большое количество разнообразных признаков сходимости. Аналогично, изучим несколько признаков сходимости функциональных рядов.
+	
+	\begin{Test}[Признак Вейерштрасса]
+		
+		Пусть существует последовательность $a_n$ такая, что для любого $x\in X$ выполняется неравенство $|f_n(x)|<a_n$, кроме того, ряд $\sum_{n=1}\limits^{\infty}a_n$ сходится. Тогда ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится на множестве $X$, и $\forall x \in X$ числовой ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится абсолютно.
+	\end{Test}
+	
+	\begin{proof}
+		
+		Возьмём произвольное $\varepsilon>0$. Из критерия Коши для числовых рядов следует, что $\exists N\in \mathbb{N}: \ \forall n>N, \ \forall p\in \mathbb{N}, \ \sum_{n+1}\limits^{n+p}a_n < \varepsilon$.
+		
+		Тогда $\forall m>N, \forall p\in \mathbb{N}, \forall x \in X:$
+		\[
+		\left| \sum_{m+1}\limits^{m+p}f(x)_m\right|  < \sum_{m}\limits^{m+p} |f(x)_m| <  \sum_{m+1}\limits^{m+p}a_m < \varepsilon.
+		\]
+		То есть по критерию Коши для функциональных рядов наш ряд сходится.
+	\end{proof}
+	
+	\begin{Test}[Признак Дирихле]
+		Для равномерной сходимости на $X$ ряда $\sum\limits_{n = 1}^\infty a_n(x) b_n(x)$  и достаточно, чтобы выполнялась пара условий:
+		\begin{enumerate}
+			\item  Последовательность частичных сумм $ S_k(x)= \sum\limits_{n = 1}^k a_n(x) $  ряда $\sum\limits_{n = 1}^\infty a_n(x) $ равномерно ограничена на $X$, то есть $\exists C>0 : \forall N\in \mathbb{N} \ \forall x \in X \  \left| \sum\limits_{n = 1}^N a_n(x)\right|  <C$;
+			
+			\item  Последовательность функций $b_n(x)$ монотонна и сходится к нулю на $X$.
+		\end{enumerate}
+	\end{Test}
+	
+	\begin{proof}
+		Возьмём произвольное $\varepsilon>0$. Положим $\varepsilon_1 := \varepsilon\frac{\varepsilon}{4C}$. Найдём такое $N\in \mathbb{N}$, что $\forall n > N, \forall x \in X: \  \left| b_n(x) \right| < \varepsilon_1.$
+		Тогда $\forall m>N, \forall p \in \mathbb{N}, \ \forall x \in X:$
+		\begin{multline}
+		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left| A_{m+p}(x)b_{m+p}(x) - A_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} A_n(x)( b_n(x)-b_{n+1}(x)) \right| \leq\\
+		\leq C\varepsilon_1+C\varepsilon_1+C\sum\limits_{n = m+1}^{m+p-1} ( b_n(x)-b_{n+1}(x))=\frac{\varepsilon}{2} + C\left|b_{n+1}(x) - b_{m+p}(x) \right| \leq \varepsilon.
+		\end{multline}
+	\end{proof}
+	
+	\begin{Test}[Признак Абеля]
+		Ряд $\sum_{k=1}\limits^\infty {{a_k}(x)}{{b_k}(x)}$ сходится равномерно, если выполнены следующие условия:
+		\begin{enumerate}
+			\item  Последовательность функций ${a_k}(x)$ равномерно ограничена и монотонна $\forall x\in E$.
+			\item  Ряд $\sum\limits_{k=1}^{\infty} {b_k}(x)$ равномерно сходится.
+		\end{enumerate}
+	\end{Test}
+	
+	\begin{proof}
+		Доказательство, естественно,очень похоже на доказательство предыдущего признака. 
+		
+		
+		$\exists C>0, \forall n \in \mathbb{N}, \forall x\in X:\ |b_n(x)| < C.$
+		
+		Возьмём произвольное $\varepsilon>0$. Положим $\varepsilon_1 := \varepsilon\frac{\varepsilon}{4C}$. Найдём такое $N\in \mathbb{N}$, что $\forall n > N, \forall p \in \mathbb{N}, \forall x \in X: \  \left| \sum\limits_{n = m+1}^{m+p} (a_{n}(x) \right| < \varepsilon_1.$
+		
+		Положим для $n>N:$ $\tilde{A}_n(x)=a_{N+1}(x)+\dots+a_{n}(x)$, $\tilde{A}_N(x) = 0.$
+		Очевидно, что $\forall n>n, \forall x \in X: |\tilde{A}_n(x)|<\varepsilon_1.$
+		
+		Тогда $\forall m>N, \forall p \in \mathbb{N}, \ \forall x \in X:$
+		\begin{multline}
+		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left| (\tilde{A}_n(x)-\tilde{A}_{n-1}(x)) b_n(x)\right|=\\ = \left| \tilde{A}_{m+p}(x)b_{m+p}(x) - \tilde{A}_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} \tilde{A}_n(x)( b_n(x)-b_{n+1}(x)) \right| \leq\\
+		\leq C\varepsilon_1+C\varepsilon_1+C\sum\limits_{n = m+1}^{m+p-1} ( b_n(x)-b_{n+1}(x))=\frac{\varepsilon}{2} + C\left|b_{n+1}(x) - b_{m+p}(x) \right| \leq \varepsilon.
+		\end{multline}
+	\end{proof}
+	
+	
+	Приведём пример использования.
+	\begin{Examples}
+		$\sum\limits_{n = 1}^\infty \frac{\sin nx}{n}$ сходится на $X=(\alpha, 2\pi-\alpha), \alpha>0$ по признаку Дирихле.
+	\end{Examples}
+	
+	\begin{flushright}
+		\textit{To be continued and supplemented...}
+	\end{flushright}
+\end{document}
