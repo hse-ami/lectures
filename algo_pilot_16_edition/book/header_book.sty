@@ -40,6 +40,9 @@
 \usepackage{enumitem}       % Для выравнивания itemize (\begin{itemize}[align=left])
 \usepackage{ifthen}
 \usepackage{indentfirst}
+\usepackage{epigraph}
+\renewcommand{\epigraphsize}{\small}
+\setlength{\epigraphwidth}{0.6\textwidth}
 
 
 % Номера формул
@@ -177,7 +180,7 @@
 \newcommand{\ort}{\mathrm{ort}}
 \newcommand{\pr}{\mathrm{pr}}
 \newcommand{\vol}{\mathrm{vol\:}}
-\def\limref#1#2{{#1}\negmedspace\mid_{#2}}
+\newcommand{\limref}[2]{{#1}\negmedspace\mid_{#2}}
 \newcommand{\eps}{\varepsilon}
 
 \renewcommand{\phi}{\varphi} % плохо, так как есть \phi в англ раскладке.
@@ -199,14 +202,24 @@
 \renewcommand{\E}{\mathsf{E}}
 \renewcommand{\D}{\Variance}
 \renewcommand{\P}{\Prob}
-
 \newcommand{\note}[1]{
 \#\#\# \\
 #1 \\
 \#\#\# \\}
-
 \newcommand{\vvector}[1]{\begin{pmatrix}{#1}_1 \\\vdots\\{#1}_n\end{pmatrix}}
 \renewcommand{\vector}[1]{({#1}_1, \ldots, {#1}_n)}
+\newcommand{\textbox}[1]{
+  \noindent\fbox{
+    \parbox{\textwidth}{
+        #1
+    }
+  }
+}
+
+\renewcommand{\textflush}{flushright} \renewcommand{\sourceflush}{flushright}
+
+\let\originalepigraph\epigraph 
+\renewcommand\epigraph[2]{\originalepigraph{\textit{#1}}{\textsc{#2}}}
 
 \newcommand{\Mod}{\ \text{mod} \ }
 
