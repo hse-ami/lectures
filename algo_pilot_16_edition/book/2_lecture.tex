@@ -193,12 +193,12 @@ $$\E\xi=\sum_{\omega\in\Omega}\xi(\omega) \P(\omega)$$
       \EndFor
     \end{algorithmic}
   \end{algorithm}
-  
+
     Докажем, что $\forall u,v \ \E g(v,u)=O(\log n)$.
     \begin{align*}
-        & \E g(v,u) \leqslant \E(d(v) + d(u) = \E d(v) + \E d(u) \\
+        & \E g(v,u) \leqslant \E(d(v) + d(u)) = \E d(v) + \E d(u) \\
         & \E d(i)=\log i (i \geqslant{2},d(1)=0) \\
-        & \E d(i)=1+\sum_{j=1..i-1} \E d(i) \frac{1}{i-1} \\
+        & \E d(i)=1+\sum_{j=1..i-1} \E d(j) \frac{1}{i-1} \\
         & \exists c: Ed(i) \leqslant{c \log n} \\
         & \E d(i) \leqslant{ 1+ \frac{1}{i-1} \sum c \log i} = \\
         & = 1 + \frac{\sum_{j=1}^{\frac{i}{2}} c \log j}{i-1} + \frac{\sum_{j=\frac{i}{2}+1}^{i} c \log j}{i-1} \\
