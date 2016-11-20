@@ -1,4 +1,4 @@
-PWD /Users/glebnovikov/Google Drive/HSE AMI/2016-2017/lecture_notes/algo_pilot/book
+PWD /Users/glebnovikov/Google Drive/HSE AMI/2016-2017/lectures/algo_pilot_16_edition/book
 INPUT /usr/local/texlive/2015/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -120,12 +120,6 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/indentfirst.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/indentfirst.sty
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
-INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
@@ -334,8 +328,8 @@ INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/labx
 INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/larm1440.tfm
 INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/larm1728.tfm
 INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/lacc1728.tfm
-INPUT lecture_1.tex
-INPUT lecture_1.tex
+INPUT 1_lecture.tex
+INPUT 1_lecture.tex
 INPUT /usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/larm2074.tfm
 INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/labx2074.tfm
@@ -392,8 +386,14 @@ INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/larm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
-INPUT lecture_2.tex
-INPUT lecture_2.tex
+INPUT 2_lecture.tex
+INPUT 2_lecture.tex
+INPUT 3_lecture.tex
+INPUT 3_lecture.tex
+INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/lacc1095.tfm
+INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm
+INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/labx1728.tfm
+INPUT /Users/glebnovikov/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/lacc1200.tfm
 INPUT book.aux
 INPUT ./book.out
 INPUT ./book.out
@@ -411,8 +411,12 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb
