@@ -1,0 +1,16 @@
+\section{Сортируем двоичные последовательности длины $m$}
+
+Обозначим $2^m = U$.
+
+\subsection{Сортировка подсчётом}
+Пусть есть набор элементов $a_1, \ldots, a_n$. Пусть имеются два массива размера $U$: $cnt$ и $sum$.
+
+\begin{algorithm}
+    \caption{Counting sort}
+    \begin{algorithmic}
+        \For{$i: 1 \to n$}
+            \Let{$cnt_{a_i}$}{$cnt_{a_i} + 1$}
+            \Let{$cur\_sum$}{$cur\_sum + cnt_{a_i}$}
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
