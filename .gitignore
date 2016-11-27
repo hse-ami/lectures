@@ -3,7 +3,8 @@
 *.out
 *.toc
 *.synctex.gz
-
+*.fdb_latexmk
+*.fls
 algorithms/.ropeproject/
 
 *.bcf
