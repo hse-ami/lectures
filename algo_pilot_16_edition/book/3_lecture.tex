@@ -1,4 +1,4 @@
-\section{Методы анализа сортировок за квадратное время}
+\section{Методы анализа сортировок за квадратное (и не очень) время}
 \epigraph{Если мы скажем, что проходим на лекции бабл сорт, то нас засмеют, поэтому назовем нашу лекцию так.}
 {Г.О. Евстропов}
 
@@ -134,8 +134,77 @@
         Очевидно, что на $n + 1$ шаге весь префикс будет отсортирован, а функция $insert$ вставит элемент $a_{n+1}$ на своё порядковое место внутри этого префикса.
     \end{proof_cor}
 
-    \begin{proof_time}
-        Всего выполняется $n$ внешних итераций. Функция $insert$ в худшем случае (при вставке элемента в самое начало) работает за $i$ итераций, где $i$ -- длина префикса. Таким образом получается $\frac{n(n+1)}{2}$ итераций, а значит $t(n) = O(n^2)$. 
-    \end{proof_time}
+    \begin{time}
+        Всего выполняется $n$ внешних итераций. Функция \textsc{insert} в худшем случае (при вставке элемента в самое начало) работает за $i$ итераци
+        й, где $i$ -- длина префикса. Таким образом получается $\frac{n(n+1)}{2}$ итераций, а значит $t(n) = O(n^2)$. 
+    \end{time}
 
-\subsection{Типы сортировок}
+\subsection{Свойства сортировок}
+    \begin{enumerate}
+        \item \textit{Stable sort} -- сортировка, сохраняющая порядок равных элементов;
+        \item \textit{Inplace sort} -- сортировка (применимо и к другим алгоритмам), использующая $O(\log n)$ (или в редких случаях какую-то другую $o(n)$) памяти.
+    \end{enumerate}
+
+\subsection{Сортировка слиянием}
+    \begin{algorithm}
+        \caption{Merge sort}
+        \begin{algorithmic}
+            \Function{merge\_sort}{$a, begin, end$}
+                \Let{$middle$}{$\frac{begin + end}{2}$}
+                \State \Call{merge\_sort}{$a, begin, middle$}
+                \State \Call{merge\_sort}{$a, middle, end$}
+                \State \Call{merge}{$a, begin, middle, middle, end$} 
+                \State \Comment{\textsc{merge} creates sorted array from elements $a_{begin}, \ldots, a_{middle}, \ldots, a_{end}$}
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{proof_cor}
+        База очевидна. В начале последнего шага предполагается, что промежутки $begin-middle$ и $middle-end$ отсортированы, а на самом шаге функция \textsc{merge} сливает эти промежутки в один отсортированный массив.
+    \end{proof_cor}
+
+    \begin{time}
+        На каждом шаге размер массива делится пополам, то есть глубина дерева рекурсии будет равна $\log_2n$. Кроме того, на каждом шаге выполняется $n$ опе
+        раций с памятью (запись в новый массив). Таким образом $t(n) = O(n \log n)$.
+    \end{time}
+
+\subsection{Быстрая сортировка}
+    Выберем с
+    лучайным образом элемент в массиве. Пусть это будет $a_k$. Тогда переместим все элементы больше $a_k$ в правую часть массива, а меньше или равные $a_k$ в левую часть и отсортируем каждую часть. 
+
+    \begin{algorithm}
+        \caption{Quick sort}
+        \begin{algorithmic}
+            \Function{quick\_sort}{$a, begin, end$}
+                \Let{$k$}{\Call{rand}{$begin, end$}}
+                \Let {$m$}{$a_k$}
+                \Let {$l$}{$begin$}
+                \Let {$r$}{$end$}
+                \While{$l \leq r$}
+                    \While{$a_l < m$}
+                        \Let{$l$}{$l + 1$}
+                    \EndWhile
+                    \While{$a_r > m$}
+                        \Let{$r$}{$r - 1$}
+                    \EndWhile
+                    \Call{swap}{$a_l, a_r$}
+                    \Let{$l$}{$l + 1$}
+                    \Let{$r$}{$r - 1$}
+                \EndWhile
+                \Call{quick\_sort}{$a, begin, l$}
+                \State \Call{quick\_sort}{$a, l+1, end$}
+                \State \Call{merge}{$a, begin, l, l+1, end$} \Comment{does the same as \textsc{merge} from \textsc{merge\_sort}}
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{time}
+        Доказываем, что $t(n) \leq c_2 n \log n$.
+        \note{Надо исправить}
+        \begin{align*}
+            t(n) = & c_1 n + \frac{1}{n}\sum_{i = 1}^{n}(t(i-1) + t(n-i)) = \\
+                 = & c_1 n + \frac{1}{n}\sum_{i = 1}^{n-1}(c_2(i-1) \log (i - 1)    + c_2(n - i) \log(n - i)) = \\
+                 = & c_1 n + \frac{2c_2}{n} \sum_{i = 1}^{n-1} i \log i \leq c_1 n + 2c_2 \sum_{i = 1}^{n - 1} \log i = \\
+                 = & c_1 n + 2c_2 (n-1) \log (n-1)
+        \end{align*}
+    \end{time}
