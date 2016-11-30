@@ -1,0 +1,180 @@
+\section{Лекция от 08.11.2016}
+
+\subsection{Канторова лестница. Продолжение.}
+
+Заметим, что канторова лестница --- неубывающая непрерывная функция; при этом она возрастает от 0 до 1.
+Давайте рассмотрим множество её точек роста:
+
+Легко понять, что точками роста могут быть только точки, не попавшие ни в один заполняемый интервал. Давайте
+оценим меру Лебега множества точек роста, пользуясь аддитивностью меры и тем, что мера $[0, 1]$ --- 1.
+
+Сумма длин интервалов на $i$-ом шаге --- $\frac{1}{3}\cdot\left(\frac{2}{3}\right)^i$; тогда всего
+эти интервалы заполняют множество меры
+$\sum\limits_{i = 0}^{\infty}\frac{1}{3}\cdot\left(\frac{2}{3}\right)^i = 1$. Значит, мера множества точек
+роста равна $1-1 = 0$, значит, канторова лестница является сингулярной функцией распределения.
+
+\begin{theorem}[Лебег]
+    Пусть $F(x)$ --- функция распределения на $\R$. Тогда имеет место представление
+    $F(x) = \alpha_1 F_1(x) + \alpha_2 F_2(x) + \alpha_3 F_3(x)$, где
+    \begin{itemize}
+        \item $F_1$ --- дискретная;
+        \item $F_2$ --- абсолютно непрерывная;
+        \item $F_3$ --- сингулярная.
+    \end{itemize}
+
+    При этом $a_i \geq 0,\ \alpha_1 + \alpha_2 + \alpha_3 = 1$.
+\end{theorem}
+
+\begin{proof}
+    Это хорошая теорема. Доказывать её мы, конечно, не будем.
+\end{proof}
+
+\subsection{Случайные величины и векторы}
+
+В дискретном случае всё просто: случайная величина $\xi$ --- отображение из $\Omega$ в $\R$. А какими
+свойствами обладает случайная величина в общем случае? Ведь хочется, например, уметь вычислять вероятности
+$\left\{ \xi = x \right\},\ \left\{ \xi \in [a, b] \right\},\ \{\xi > y\}$ для некоторой случайной величины,
+заданной на колмогоровской тройке $(\Omega, \mathcal{F}, \Pr)$.
+
+\begin{definition}
+    Отображение $\xi: \Omega \mapsto \R$ называется \emph{случайной величиной} на вероятностном пространстве
+    $(\Omega, \mathcal{F}, \Pr)$, если она обладает свойством \emph{измеримости}:
+    \[
+        \forall x \in \R, \left\{ \xi \leq x \right\} = \left\{ \omega: \xi(\omega) \leq x \right\}
+        \in \mathcal{F}
+    \]
+\end{definition}
+
+\begin{definition}
+    Случайный вектор --- вектор, состоящий из случайных величин.
+\end{definition}
+
+Сформулируем и докажем полезную лемму, но сначала определение:
+
+\begin{definition}
+    Борелевской $\sigma$-алгеброй в $\R^n$ называют минимальную $\sigma$-алгебру сожержащую все $(a_1; b_1)
+    \times (a_2; b_2) \times \ldots \times (a_n; b_n)$.
+\end{definition}
+
+В $\mathcal{B}(\R^n)$ лежат:
+
+\begin{itemize}
+    \item все прямоугольники $[a_1; b_1] \times [a_2; b_2] \times \ldots \times [a_n; b_n]$;
+    \item открытые множества;
+    \item замкнутые множества;
+    \item и много других вещей
+\end{itemize}
+
+\begin{lemma}
+    \ \\
+    \begin{enumerate}
+        \item
+            Следующие два утверждения эквивалентны:
+            \begin{itemize}
+                \item Отображение $\xi: \Omega \mapsto \R$ является случайной величиной;
+                \item $\forall B \in \mathcal{B}(\R), \xi^{-1}(B) = \left\{ \xi \in B \right\} = \left\{ \omega:
+                        \xi(\omega) \in B \right\} \in \mathcal{F}$
+            \end{itemize}
+        \item
+            Следующие два утверждения эквивалентны:
+            \begin{itemize}
+                \item Отображение $\xi: \Omega \mapsto \R^n$ является случайным вектором;
+                \item $\forall B \in \mathcal{B}(\R^n), \xi^{-1}(B) = \left\{ \xi \in B \right\} = \left\{ \omega:
+                        \xi(\omega) \in B \right\} \in \mathcal{F}$
+            \end{itemize}
+    \end{enumerate}
+\end{lemma}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\begin{proof}
+    \ \\
+    \begin{itemize}
+        \item[\circled{$\Leftarrow$}]
+            $(-\infty, x] \in \mathcal{B}(\R) \implies \left\{ \xi \leq x \right\} = \xi^{-1}\left( (-\infty;
+                x] \right)\in \mathcal{F}$
+
+        \item[\circled{$\Rightarrow$}]
+            Рассмотрим $\mathcal{D} = \left\{ D \in \mathcal{B}(\R): \xi^{-1}(D) \in \mathcal{F} \right\}$.
+            Покажем, что $\mathcal{D}$ --- $\sigma$-алгебра:
+    \end{itemize}
+
+    Аналогично для \textbf{2)}
+\end{proof}
+
+\subsection{Действия над случайными величинами}
+
+Пусть у нас есть некоторая $f(x_1, \ldots, x_n)$. Пусть $\xi_1, \ldots, \xi_n$ --- случайные величины.
+
+\textbf{Вопрос:} при каких условиях $f(\xi_1, \ldots, \xi_n)$ --- тоже случайная величина?
+
+\begin{definition}
+    \emph{Борелевскими функциями} называют такие функции $\phi(x)$, что
+    \[
+        \forall B \in \mathcal{B}(\R^n), \phi^{-1}(B) = \left\{ x: \phi(x) \in B \right\} \in
+        \mathcal{B}(\R^n).
+    \]
+\end{definition}
+
+\textbf{Утверждение:} непрерывные и кусочно непрерывные функции --- борелевские.
+\begin{proof}
+    Пусть $F: \R^n \mapsto \R^k$ --- непрерывная функция. Тогда очевидно, что для любого открытого множества
+    $X \in \R^k$, $F^{-1}(X)$ --- тоже открытое множество.
+\end{proof}
+
+\textbf{Утверждение 2:} пусть $\xi_1, \ldots, \xi_n$ --- случайные величины, $f$ --- борелевская; тогда
+$f(\xi_1, \ldots, \xi_n)$ --- тоже случайная величина.
+
+\begin{proof}
+    Пусть $B \in \mathcal{B}(\R)$; тогда
+
+    \[
+        \left\{ \phi(\xi_1,\ldots,\xi_n) \right\} =
+        \left\{ (\xi_1, \ldots, \xi_n) \in \phi^{-1}(B) \right\} \]
+\end{proof}
+
+\textbf{Тривиальные следствия:} $\xi + \eta,\ \alpha\xi,\ \xi\eta,\ \frac{\xi}{\eta}$ --- случайные
+величины.
+
+\subsection{Матожидание в общем случае}
+
+\begin{definition}
+    Пусть $A\in \mathcal{F}$ --- событие. Тогда $I_A = \begin{cases}
+        0, \omega \not \in A;\\
+        1, \omega \in A;\\
+    \end{cases}$ --- индикатор.
+\end{definition}
+
+\textbf{Утверждение:} индикатор --- случайная величина:
+
+\[
+    \left\{ I_a \leq x \right\} = \begin{cases}
+        \emptyset, x < 0;\\
+        \overline{A}, x \in [0, 1);\\
+        \Omega, x \geq 1;\\
+    \end{cases}
+\]
+
+\begin{definition}
+    Простая случайная величина --- случайная величина, принимающая конечное число значений. Такую величину
+    можно представить в виде суммы индикаторов: $\xi = \sum\limits_{i}^{n}x_i I_{A_i}$, где $\left\{ A_i
+    \right\}$ --- разбиение.
+\end{definition}
+
+Теперь о самом матожидании:
+
+\begin{itemize}
+    \item \textbf{Простая случайная величина:}
+
+        Пусть $\xi$ --- простая случайная величина. Тогда её математическое ожидание можно представить в
+        виде:
+        \[
+            \E{\xi} = \sum\limits_{i}^{n} x_i \Pr{\xi = x_i}
+        \]
+
+    \item \textbf{Неотрицательная случайная величина:}
+
+        Пусть $\xi \leq 0$; $\{\xi_n\}$ --- последовательность случайных величин, сходящихся к $\xi$ снизу.
+        Тогда $\E{\xi} = \lim\limits_{i \to \infty} \E{\xi_i}$.
+\end{itemize}
