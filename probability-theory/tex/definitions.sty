@@ -27,10 +27,12 @@
 \newcommand{\eqdist}{\overset{d}{=}}    % Одинаково распределённые величины
 \newcommand{\prto}{\xrightarrow{\Pr}}	% Сходимость по вероятности (probably to)
 \newcommand{\asto}{\xrightarrow{\text{п.н.}}}	% Сходимость почти наверное (almost surely to)
+\newcommand{\as}{_{\textit{п.н.}}}		% почти наверное (almost sure)
 \newcommand{\N}{\mathbb{N}}             % Натуральные числа
 \newcommand{\Z}{\mathbb{Z}}             % Целые числа
 \newcommand{\R}{\mathbb{R}}             % Действительные числа
-\newcommand{\F}{\mathcal{F}}            % 			
+\newcommand{\F}{\mathcal{F}}            % 	
+\newcommand{\A}{\mathcal{A}}	
 \renewcommand{\leq}{\leqslant}          % Меньше или равно
 \renewcommand{\geq}{\geqslant}          % Больше или равно
 \renewcommand{\phi}{\varphi}            % Фи
@@ -48,6 +50,7 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Примечание}
 \newtheorem*{exercise}{Упражнение}
+\newtheorem*{example}{Пример}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Определение}
@@ -60,3 +63,31 @@
 \newtheorem{problem}{Задача}
 \newtheorem*{hypothesis}{Гипотеза}
 \newtheorem*{consequence}{Следствие}
+
+\tikzset{
+	if/.code n args=3{\pgfmathparse{#1}\ifnum\pgfmathresult=0
+		\pgfkeysalso{#3}\else\pgfkeysalso{#2}\fi},
+	lower cantor/.initial=.3333, upper cantor/.initial=.6667, y cantor/.initial=.5,
+	declare function={
+		cantor_l(\lowerBound,\upperBound)=
+		(\pgfkeysvalueof{/tikz/lower\space cantor})*(\upperBound-\lowerBound)+\lowerBound;
+		cantor_u(\lowerBound,\upperBound)=
+		(\pgfkeysvalueof{/tikz/upper\space cantor})*(\upperBound-\lowerBound)+\lowerBound;
+		cantor(\lowerBound,\upperBound)=% fun definition
+		(\pgfkeysvalueof{/tikz/y\space cantor})*(\upperBound-\lowerBound)+\lowerBound;},
+	cantor start/.style n args=5{%
+		insert path={(#1,#3)},
+		cantor={#1}{#2}{#3}{#4}{#5}{0},
+		insert path={to[every cantor edge/.try, cantor 1 edge/.try] (#2,#4)}},
+	cantor/.style n args=6{%
+		/utils/exec=%
+		\pgfmathsetmacro\lBx{cantor_l(#1,#2)}%
+		\pgfmathsetmacro\uBx{cantor_u(#1,#2)}%
+		%      \pgfmathsetmacro\y{.5*(#3+#4)},% proper definition
+		\pgfmathsetmacro\y{cantor(#3,#4)},% fun
+		style/.expanded={
+			if={#6<#5}{cantor={#1}{\lBx}{#3}{\y}{#5}{#6+1}}{},
+			insert path={
+				to[every cantor edge/.try, cantor 1 edge/.try] (\lBx,\y)
+				to[every cantor edge/.try, cantor 2 edge/.try] (\uBx,\y)},
+			if={#6<#5}{cantor={\uBx}{#2}{\y}{#4}{#5}{#6+1}}{}}}}
