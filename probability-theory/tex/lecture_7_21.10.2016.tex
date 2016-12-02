@@ -25,7 +25,7 @@
                 
                 \item \( \forall A, B \in \F \implies A \cap B \in \F, A \cup B \in \F \)
             \end{enumerate}
-            Заметим, что в третьем условии достаточно требовать лишь, чтобы либо \(A \cap B \in \F\), либо \(A \cup B\), поскольку \(A \cup B = \overline {A \cap B}\) и наоборот. 
+            Заметим, что в третьем условии достаточно требовать лишь, чтобы либо \(A \cap B \in \F\), либо \(A \cup B \in \F\), поскольку \(A \cup B = \overline {\overline{A} \cap \overline{B}}\) и наоборот. 
             
             \textit{Пример:} Конечные объединения мнодеств вида \( (-\infty; a),\ (b; c],\ (d; \infty) \) образуют алгебру.
            
@@ -52,12 +52,12 @@
             Рассмотрим множество всех $\sigma$-алгебр, содержащих $ M $. Такое множество не является пустым, так как \(M \in 2^{\Omega}\). Тогда пересечение данных $ \sigma $-алгебр --- это тоже $ \sigma $-алгебра, содержащая $ M $ и минимальная по построению.
         \end{proof}
         
-    Важно, что $ \F $ \emph{должна являться алгеброй}, а для изучения предельных вероятностей $ \F $ должна также быть и \emph{$ \sigma $-алгерой}!
+    Важно, что $ \F $ должна являться \emph{$ \sigma $-алгеброй}!
     
         \begin{definition}
-            \emph{Борелевской $ \sigma $-алгеброй} на множестве $ \R $ называется минимальная $ sigma $-алгебра, содержащая в себе любыми полуинтервалы \((a; b] \) на прямой:
+            \emph{Борелевской $ \sigma $-алгеброй} на множестве $ \R $ называется минимальная $ \sigma $-алгебра, содержащая в себе любыми полуинтервалы \((a; b] \) на прямой:
             \[
-                \mathcal{B}(\R) = \sigma\left((a; b] : a < b \mid a, b \in \R \right).
+                \mathcal{B}(\R) = \sigma\left\{(a; b] : a < b \mid a, b \in \R \right\}.
             \]
         \end{definition} 
     
@@ -79,7 +79,7 @@
                 \begin{enumerate}
                     \item \(\Pr{\Omega} = 1  \)
                     
-                    \item Свойство счетной аддитивности. То есть \( \forall \{A_n,\ n \in \N \},\ A_n \in \F  \) и \(A_n \cap A_n = \emptyset\  \forall n \neq m \), выполняется: \[\Pr{\bigcup\limits_{n = 1}^{\infty}A_n} = \sum\limits_{n = 1}^{\infty}\Pr{A_n}.
+                    \item Свойство счетной аддитивности. То есть \( \forall \{A_n,\ n \in \N \},\ A_n \in \F  \) и \(A_n \cap A_m = \emptyset\  \forall n \neq m \), выполняется: \[\Pr{\bigcup\limits_{n = 1}^{\infty}A_n} = \sum\limits_{n = 1}^{\infty}\Pr{A_n}.
                     \] В дискретных вероятностных пространствах мы это свойство доказывали. Здесь его сразу постулируем.
                     
                 \end{enumerate} 
@@ -127,19 +127,19 @@
         \begin{enumerate}[label = (\alph*)]
             \item $ \Pr $ является счетно-аддитивной функцией.
             
-            \item $ \Pr $ непрерывна в ``нуле'', то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n + 1} \subset A_n,\ \bigcup\limits_{n = 1}^{\infty}A_n = \emptyset \), выполняется:
+            \item $ \Pr $ непрерывна в ``нуле'', то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n + 1} \subset A_n,\ \bigcap\limits_{n = 1}^{\infty}A_n = \emptyset \), выполняется:
             \[
                 \lim\limits_{n}\Pr{A_n} = 0.
             \]  
             
-            \item $ \Pr $ непрерывна сверху, то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n + 1} \subset A_n,\ \bigcup\limits_{n = 1}^{\infty}A_n = A \in \F,\  (A_n \downarrow A) \), выполняется:
+            \item $ \Pr $ непрерывна сверху, то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n} \subset A_{n_1},\ \bigcup\limits_{n = 1}^{\infty}A_n = A \in \F,\  (A_n \downarrow A) \), выполняется:
             \[
-            \lim\limits_{n}\Pr{A_n} = \Pr{A}.
+            \lim\limits_{n}\Pr{A_n} = \Pr{\bigcup\limits_{n = 1}^{\infty}A}.
             \]  
             
-            \item $ \Pr $ непрерывна снизу, то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n} \subset A_{n + 1},\ \bigcap\limits_{n = 1}^{\infty}A_n = A \in \F,\  (A_n \uparrow A) \), выполняется:
+            \item $ \Pr $ непрерывна снизу, то есть для любых множеств \(A_1, A_2, \ldots \in \F \) таких, что \(A_{n + 1} \subset A_{n},\ \bigcap\limits_{n = 1}^{\infty}A_n = A \in \F,\  (A_n \uparrow A) \), выполняется:
             \[
-            \lim\limits_{n}\Pr{A_n} = \Pr{A}.
+            \lim\limits_{n}\Pr{A_n} = \Pr{\bigcap\limits_{n = 1}^{\infty}A_n}.
             \]  
             
         \end{enumerate}
@@ -225,7 +225,7 @@
 
     \begin{definition}
         \emph{Функцией распределения} вероятностной меры $\Pr$ называют функцию $F: \R \to [0, 1]$ такую, что
-        $F(x) = \Pr{(\infty, x]}$.
+        $F(x) = \Pr{(-\infty, x]}$.
     \end{definition}
 
     \begin{lemma}[Свойства функции распределения]
@@ -244,11 +244,11 @@
     \begin{proof}
         \ 
         \begin{enumerate}
-            \item Если $y > x$, то в силу аддитивности $\Pr$, $F(y) - F(x) = \Pr{(x, y]}$
+            \item Если $y > x$, то в силу аддитивности $\Pr$, $F(y) - F(x) = \Pr{(x, y]} \geq 0.$
             \item Пусть $x_n \uparrow +\infty$; тогда $(-\infty, x] \uparrow \R$. Значит,
                 \(
-                    \lim\limits_{x_n\to +infty} F(x_n) =
-                    \lim\limits_{x_n\to +infty} \Pr{(-\infty, x_n]} =
+                    \lim\limits_{x_n\to +\infty} F(x_n) =
+                    \lim\limits_{x_n\to +\infty} \Pr{(-\infty, x_n]} =
                     \Pr{\R} =
                     1
                 \)
@@ -271,6 +271,6 @@
             \end{cases}$
 
             Такой функции распределения соответствует вероятностная мера $\Pr$ такая, что $\forall a < b \in
-            [0, 1],\ \Pr{(a, b]} = b - a$ \footnote{говоря простым языком, вероятность попадания в полуинтервал
+            [0, 1],\ \Pr{(a, b]} = b - a.$ \footnote{говоря простым языком, вероятность попадания в полуинтервал
             пропорциональна его длине.} Такая мера называется \emph{мерой Лебега}.
     \end{itemize}
