@@ -36,7 +36,7 @@
 \begin{proof}
 	Рассмотрим алгебру $ \A $, состоящую из конечных объединений непересекающихся полуинтервалов вида \((a; b],\ \forall A \in \A \) имеет вид 
 	\[
-	\A = \bigcup\limits_{k=1}^{n}(a_k; b_k],\  -\infty \leq a_1 < b_1 < a_2 < b_2 < \ldots < b_n < +\infty.
+	\A = \bigcup\limits_{k=1}^{n}(a_k; b_k],\  -\infty \leq a_1 < b_1 < a_2 < b_2 < \ldots < b_n \leq +\infty.
 	\]    
 	Зададим на $ \A $ меру $ \Pr_0 $ по правилу 
 	\[
@@ -66,6 +66,7 @@
 	\[
 	\forall A_n \exists B_n \in \A, такое что \Pr_0(A_n) - \Pr_0(B_n) \leq \epsilon2^{-n},\ B_n \in A_n \textbf{ и } [B_n] \in A_n, \text { где } [B_n] \text { есть замыкание } B_n. 
 	\]
+    То есть если $ B_n $ имеет вид $ (a, b] $, то $ [B_n] $, являющееся замыканием $ B_n $, имеет вид $ [a, b] $. Мы добавили в множество $ B_n $ его граничные точки.
 	
 	Пусть сначала все $ A_n $ лежат внутри $ [-N; N] $ для некоторого $ N \in \N $. Мы знаем, что \(\bigcap\limits_{n=1}^{\infty}A_n = \emptyset. \) Следовательно, \(\bigcap\limits_{n=1}^{\infty}[B_n] = \emptyset. \) 
 	
@@ -186,14 +187,17 @@
         \item Экспоненциальное распределение: $\mathrm{Exp}(\alpha)$.
 
             \[
-                p(x) = e^{\alpha x}
+                p(x) = \begin{cases}
+                    \alpha e^{-\alpha x}, &x > 0 \\
+                    0, & otherwise
+                    \end{cases}
             \]
 
             \includegraphics[width=12cm]{Lec_8_6.pdf}
 
             \[
                 F(x) = \begin{cases}
-                    1-e^{\alpha x}, &x > 0\\
+                    1-e^{-\alpha x}, &x > 0\\
                     0, &x \leq 0
                 \end{cases}
             \]
