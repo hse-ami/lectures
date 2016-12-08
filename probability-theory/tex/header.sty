@@ -6,7 +6,7 @@
 \usepackage[english,russian]{babel} % Подключение поддержки языков
 
 %% Настройка размеров полей
-\usepackage[top=1in, bottom=1in, left=0.8in, right=0.8in]{geometry}
+\usepackage[top=1in, bottom=1in, left=0.8in, right=0.8in, headheight=110pt]{geometry}
 
 \usepackage{xparse}
 
@@ -35,6 +35,7 @@
 \graphicspath{{images/}}            % Стандартный путь к картинкам
 \usepackage{tikz}                   % Рисование всего
 \usepackage{pgfplots}               % Графики
+\pgfplotsset{compat=1.12}
 \usepackage{circuitikz}             % Электрические цепи
 \usepackage{wrapfig}                % Обволакивание изображений текстом
 \usetikzlibrary{patterns}
