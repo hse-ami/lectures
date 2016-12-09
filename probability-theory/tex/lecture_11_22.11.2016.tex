@@ -154,18 +154,15 @@
 \begin{definition}
 	Пусть \(\xi\)~--- некоторая случайная величина, про которую известно, что
 	\[
-	p_{\xi}(x) = \begin{cases}
-	\frac{x^{\lambda - 1}e^{-x}}{\Gamma(\lambda)},& x \geq 0 \\
-	0,& x < 0
-	\end{cases}
+	p_{\xi}(x) = \dfrac{\beta^{\alpha}x^{\alpha - 1}e^{-\beta x}}{\Gamma(\alpha)} \text{ при } x \geq 0, \alpha, \beta > 0.
 	\]
 	
-	В таком случае говорят, что \(\xi\) подчиняется \emph{гамма-распределению} с параметром \(\lambda\). Обозначается \(\xi \sim \mathrm{Gamma}(\lambda)\).
+	В таком случае говорят, что \(\xi\) подчиняется \emph{гамма-распределению} с параметрами \(\alpha\) и \(\beta\). Обозначается \(\xi \sim \mathrm{Gamma}(\alpha, \beta)\).
 \end{definition}
 
-Пусть у нас есть случайная величина \(\xi \sim \mathrm{Gamma}(\lambda)\). Найдём \(\E{\xi}\):
+Пусть у нас есть случайная величина \(\xi \sim \mathrm{Gamma}(\alpha, \beta)\). Найдём \(\E{\xi}\):
 \[
-\E{\xi} = \int\limits_{0}^{+\infty} \frac{x^{\lambda}e^{-x}}{\Gamma(\lambda)}\,\mathrm{d}x = \frac{\Gamma(\lambda + 1)}{\Gamma(\lambda)} = \lambda.
+\E{\xi} = \int\limits_{0}^{+\infty} \dfrac{\beta^{\alpha}x^{\alpha}e^{-\beta x}}{\Gamma(\alpha)}\diff x = \left\{u = x\beta, \diff x = \frac{\diff u}{\beta}\right\} = \frac{\Gamma(\alpha + 1)}{\beta\Gamma(\alpha)} = \frac{\alpha}{\beta}.
 \]
 
 \subsection{Независимость случайных величин и векторов}
