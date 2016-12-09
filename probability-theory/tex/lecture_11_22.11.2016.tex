@@ -53,13 +53,13 @@
 	
 	Предположим, что \(f(x)\) неотрицательна. Тогда введём последовательность случайных величин \(\{\eta_n\}_{n = 1}^{\infty}\), устроенную следующим образом:
 	\[
-	\eta_n = \sum_{i = 1}^{n} f(x)I\{\xi = x_k\}.
+	\eta_n = \sum_{i = 1}^{n} f(x_i)I\{\xi = x_i\}.
 	\]
 	
 	Тогда \(\eta_n \uparrow f(\xi)\). Следовательно, \(\E{\eta_n}\) монотонно возрастает и сходится к \(\E{f(\xi)}\). Однако, в силу линейности математического ожидания простой случайной величины получаем, что
 	\begin{align}
-		\E{f(x)} &= \lim\limits_{n \to \infty} \E{\eta_n} = \lim\limits_{n \to \infty} \left(\sum_{i = 1}^{n} f(x)\E{I\{\xi = x_k\}}\right) \\
-		&= \lim\limits_{n \to \infty} \left(\sum_{i = 1}^{n} f(x)\Pr{\xi = x_k}\right) = \sum_{i = 1}^{\infty} f(x)\Pr{\xi = x_k}.
+		\E{f(\xi)} &= \lim\limits_{n \to \infty} \E{\eta_n} = \lim\limits_{n \to \infty} \left(\sum_{i = 1}^{n} f(x_i)\E{I\{\xi = x_i\}}\right) \\
+		&= \lim\limits_{n \to \infty} \left(\sum_{i = 1}^{n} f(x_i)\Pr{\xi = x_i}\right) = \sum_{i = 1}^{\infty} f(x)\Pr{\xi = x_i}.
 	\end{align}
 	
 	В общем случае же представим \(f(x)\) в виде \(f^{+}(x) - f^{-}(x)\) и пользуемся доказанным ранее.
@@ -88,7 +88,7 @@
 	\int\limits_{\frac{k - 1}{2^n}}^{\frac{k}{2^n}} \left(x - \frac{1}{2^n}\right) p_{\xi}(x)\,\mathrm{d}x \leq \frac{k - 1}{2^n}\int\limits_{\frac{k - 1}{2^n}}^{\frac{k}{2^n}} p_{\xi}(x)\,\mathrm{d}x \leq \int\limits_{\frac{k - 1}{2^n}}^{\frac{k}{2^n}} xp_{\xi}(x)\,\mathrm{d}x.
 	\]
 	
-	Тогда
+	Тогда, суммируя все такие элементы и вынося константу в ограничени снизу, получаем, что
 	\[
 	\int\limits_{0}^{n} xp_{\xi}(x)\,\mathrm{d}x - \frac{1}{2^n} \leq \int\limits_{0}^{n} \left(x - \frac{1}{2^n}\right) p_{\xi}(x)\,\mathrm{d}x \leq \E{\xi_n} \leq \int\limits_{0}^{n} xp_{\xi}(x)\,\mathrm{d}x \leq \int\limits_{0}^{\infty} xp_{\xi}(x)\,\mathrm{d}x.
 	\]
