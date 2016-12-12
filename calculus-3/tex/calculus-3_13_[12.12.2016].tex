@@ -1,0 +1,115 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{header}
+
+\begin{document}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+
+\pagestyle{fancy}
+\section{Лекция 13 от 12.12.2016 \\ Критерий Гордона}
+
+В предыдущей лекции мы говорили о таком понятии, как степенные ряды. Продолжим.
+\par Рассмотрим степенной ряд $\sum\limits_{n = 0}^{\infty}c_n (x-x_0)^n$, но для удобства сдвинем его центр, точку $x_0$, в нуль, получив тем самым ряд $\sum\limits_{n = 0}^{\infty}c_n x^n$. Рассмотрим к этому ряду другой ряд, составленный из производных исходного ряда (впредь будем его именовать <<новым>> рядом). Он будет иметь вид
+\[
+    \sum\limits_{n = 1}^{\infty}nc_n x^{n - 1} = \sum\limits_{n = 0}^{\infty}(n+1)c_{n + 1} x^n
+\]
+\begin{Statement}
+    Радиус сходимости нового ряда и исходного совпадают
+\end{Statement}
+\begin{proof}
+    Очевидно, что проверка исходного условия ничем не отличается от проверки на ряд $\sum\limits_{n = 1}^{\infty}c_n n x^n$. Тогда по формуле Коши-Адамара:
+    \[ 
+        R = \cfrac{1}{\overline{\lim\limits_{n\to\infty}}\sqrt[n]{|c_n|n}} = \cfrac{1}{\overline{\lim\limits_{n\to\infty}}\sqrt[n]{|c_n|}\underbrace{\lim\limits_{n\to\infty}\sqrt[n]{n}}_{\to 1}} = \cfrac{1}{\overline{\lim\limits_{n\to\infty}}\sqrt[n]{|c_n|}}
+    \]
+    А это и есть исходный радиус.
+\end{proof}
+Выведем отсюда следствие, которое назовём теоремой.
+\begin{Theorem}
+    Внутри интервала сходимости сумма степенного ряда $\sum\limits_{n=0}^{\infty}c_nx_n$ дифференцируема и её производная равна $\sum\limits_{n=0}^{\infty}c_n n x^{n-1}$.
+\end{Theorem}
+\begin{proof}
+    Возьмём произвольную точку $x$ из интервала сходимости. Найдём такое $\delta > 0$, такое, что $[x-\delta, x + \delta]$ лежит в интервале сходимости и используем теорему о почленном дифференцировании функциональных рядов.
+\end{proof}
+\begin{Consequence}
+    Внутри интервала сходимости сумма степенного ряда бесконечно дифференцируема, и её $k$-я производная совпадает с суммой ряда из $k$-х производных.
+\end{Consequence}
+\begin{Consequence}
+    Сумма ряда $\sum\limits_{n=0}^{\infty}c_n \cfrac{x^{n+1}}{n + 1}$ имеет тот же радиус сходимости, что и исходный ряд, и внутри интервала сходимости является первообразной суммы исходного ряда.
+\end{Consequence}
+\begin{Consequence}
+    Пусть $[a,b]$ лежит в интервале сходимости степенного ряда $\sum\limits_{n = 0}^{\infty}c_n x^n$. Тогда $\int\limits_a^b\left(\sum\limits_{n = 0}^{\infty}c_n x^n\right)dx = \sum\limits_{n= 1}^{\infty} \int\limits_a^bc_n x^ndx$.
+\end{Consequence}
+Далее будем рассматривать такие функции, которые представимы как сумма степенного ряда.
+\begin{Statement}
+    Пусть $I$ --- невырожденный промежуток. Если функция $f$ представима в виде суммы степенного ряда, то она бесконечно дифференцируема.
+\end{Statement}
+\begin{proof}
+    Действительно, будем поочерёдно дифференцировать левую и правую части нашего равенства функции и её степенног ряда:
+    \begin{gather*}
+        S(x) = \sum\limits_{n = 0}^{\infty}\\
+        S'(0) = c_1\\
+        S''(0) = c_2\cdot 2!\\
+        \ldots\\
+        S^{(n)}(0) = c_n \cdot n!
+    \end{gather*}
+\end{proof}.
+\par Отсюда же сразу следует, что \textbf{если функция представима в виде степенного ряла на некотором множестве, то этот ряд совпадает с её рядом Тейлора}.
+Вспомним пример Коши, функции, которая представима в ряд Тейлора лишь в точке 0:
+\[
+    f(x) = 
+    \begin{cases*}
+        e^{-1/x^2}, \; x \neq 0\\
+        0, x = 0
+    \end{cases*}
+\]
+\begin{Consequence}
+    Если суммы степенных рядов $\sum\limits_{n=0}^{\infty}c_n x^n$ и $\sum\limits_{n=0}^{\infty}\widetilde{c_n} x^n$ совпадают в некоторой окрестности нуля, то эти ряды совпадают  
+\end{Consequence}
+\begin{proof}
+    \[
+        f(x) = \sum\limits_{n=1}^{\infty} c_n x^n = \sum\limits_{n=1}^{\infty} \widetilde{c_n} x^n
+    \]
+    А в силу единственности разложения на невырожденном промежутке получим требуемое.
+\end{proof}
+\begin{Comment}
+    Совпадение в окрестности нуля тут можно заменить на совпадение в точках $x_n \neq 0$, $\lim\limits_{n\to \infty} x_n = 0$:
+    \[
+        c_0 = S(0) = \lim\limits_{n \to \infty} S(x_n) = \lim\limits_{n \to \infty} \widetilde{S}(x_n) = \widetilde{S}(0) = \widetilde{c_0}
+    \]
+\end{Comment}
+Сформулируем и докажем важную теорему:
+\begin{Theorem}
+    Пусть $I$ --- невырожденный промежуток и $f \in C^{\infty}(I),\; x_0 \in I$. Также пусть известно, что $\exists A, B>0,\; \forall n\in \N,\; \forall x\in I,\; |f^{(n)}| < A\cdot B^n$. Тогда 
+    \[
+        \sum\limits_{n = 0}^{\infty} \cfrac{f^{(n)}(x_0)}{n!}(x-x_0)^n = f(x)
+    \]
+    на промежутке $I$.
+\end{Theorem}
+Перед доказательством заметим, что ряд $\sum\limits_{n=0}^{\infty}\cfrac{C^n}{n!}$ сходится по произнаку Д'Аламбера для всякого положительного $C$. 
+\begin{proof}
+    Запишем разность частичной суммы ряда и значения функции:
+    \begin{gather*}
+        \left| f(x) - \sum\limits_{n=0}^{N} \cfrac{f^{(n)}(x_0)}{n!} (x-x_0)^n\right| = 
+        \left| \cfrac{f^{(N+1)}(\xi) (x-x_0)^{N+1}}{(N+1)!} \right| \leqslant \cfrac{AB^{N+1}|x-x_0|^{N+1}}{(N+1)!}
+    \end{gather*}
+    Эта разность в свою очередь стремится к нулю.
+\end{proof}
+\begin{Examples}
+    \begin{enumerate}
+        \item $\sin(x)$ и $\cos(x)$. Ограничивая производные константой 1, получим требуемое:
+        \begin{gather*}
+            \sin(x) = \sum\limits_{n=0}^{\infty} \cfrac{(-1)^n x^{2n+1}}{(2n+1)!}\\
+            \cos(x) = \sum\limits_{n=0}^{\infty} \cfrac{(-1)^n x^{2n}}{(2n)!}
+        \end{gather*}
+        \item $e^x$. Пусть $A>0$ --- произвольное число. Тогда на промежутке $(-A, A)$ ряд сходится, если мы применим ограничение производных как $e^A$.
+        \item $\ln(1+x)$. <<С ним всё грустно>>\copyright Лектор. Можно воспрользоваться вспомогательным рядом:
+        \[
+            \cfrac{1}{x+1} = 1 - x + x^2 - \ldots\\
+        \]
+        который сходмтся на $(-1, 1)$ как геометрическя прогрессия, а затем почленно поинтегрировать, получим
+        \[
+            \ln(1+x) = x - \cfrac{x^2}{2} + \cfrac{x^3}{3} - \ldots
+        \]
+    \end{enumerate}
+\end{Examples}
+\end{document}
