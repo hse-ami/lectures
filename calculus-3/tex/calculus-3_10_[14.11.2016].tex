@@ -71,6 +71,9 @@
     \begin{gather*}
         \exists D_{x_1} \in \D\colon \; \forall y\in D_{x_1}\colon \; |h(x_1,y) - g(y)|<\eps_1\\
         \exists D_{x_2}\in \D\colon \; \forall y \in D_{x_2}\colon \; |h(x_2, y) - g(y)| < \eps_1\\
+    \end{gather*}
+    По определению функции $ f(x) = \lim\limits_\D h(x, y) $: 
+    \begin{gather*}
         \exists \widetilde{D}_{x_1}\in \D\colon \; \forall y\in \widetilde{D}_{x_1}\colon \; |h(x_1,y) - f(x_1)| < \eps_1\\
         \exists \widetilde{D}_{x_2} \in \D\colon \; \forall y\in \widetilde{D}_{x_2}\colon \; |h(x_2,y) - f(x_2)| < \eps_1\\
     \end{gather*}
@@ -85,7 +88,7 @@
     $$
     Зафиксируем $x\in B_0\cap B_{\eps/3}$. Заметим, что 
     \begin{gather}
-        \exists D_x \in \D\colon;\forall y\in D_x \; |h(x,y) - g(y)| <\eps/3\\
+        \exists D_x \in \D\colon \; \forall y\in D_x \; |h(x,y) - g(y)| <\eps/3\\
         \exists \widetilde{D}_x\in \D\colon \; \forall y\in \widetilde{D}_x\; |h(x,y) - f(x)| < \eps/3\\
         \ \\
         \exists D\in \D,\; D \subset D_x \cap \widetilde{D}_x\colon \; \forall y\in D\\
