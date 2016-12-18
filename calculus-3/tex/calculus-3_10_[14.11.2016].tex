@@ -3,11 +3,14 @@
 
 \begin{document}
 \pagestyle{fancy}
-\section{Лекция 10 от 07.11.2016 \\ Критерий Гордона}
+\section{Лекция 10 от 14.11.2016 \\ Предел по базе. Перестановка пределов}
 В прошлый раз мы узнали, что такое база множества и понятие предела по базе, и теперь будем продолжать работать с этим.
-\par Рассмотрим такую задачу
+
+\subsection{Проблема равенства двойного предела}
+
+Рассмотрим такую задачу
 \begin{Problem}
-    Пусть $X$ и $Y$ --- непустые множества с базами $\B$ и $\D$ соответственно. Тогда Рассмотрим некоторую функцию $h\colon \;X\times Y \to \mathbb{R}$. Пусть про неё известно, что
+    Пусть $X$ и $Y$ --- непустые множества с базами $\B$ и $\D$ соответственно. Рассмотрим некоторую функцию $h\colon \;X\times Y \to \mathbb{R}$. Пусть про неё известно, что
     \begin{gather*}
         \forall x \in X\; \exists \lim\limits_{\D}h(x,y) = f(x) \\
         \forall y \in Y\; \exists \lim\limits_{\B} h(x,y) = g(y)
@@ -21,90 +24,100 @@
 \begin{gather*}
     h(x,y) =
     \begin{cases*}
-        \cfrac{x^2-y^2}{x^2+y^2},\; \text{Если $(x,y) \neq 0$}\\
-        0,\; \text{иначе}
+        \cfrac{x^2-y^2}{x^2+y^2},& \text{если $(x,y) \neq (0, 0)$;}\\
+        0, & \text{иначе.}
     \end{cases*}
 \end{gather*}
 Для неё легко посчитать повторные пределы в нуле и показать, что они не равны. Действительно,
 \begin{gather}
     \lim\limits_{y\to 0} h(x,y) =
     \begin{cases*}
-        1,\; \text{если $x\neq 0$}\\
-        -1,\; \text{иначе}
+        1, & \text{если $x\neq 0$;}\\
+        -1,& \text{иначе.}
     \end{cases*}
 \end{gather}
-Тогда легко понять, что $\lim\limits_{x\to 0}\lim\limits_{y\to 0} h(x,y) = 1$. Аналогично показывается и что $\lim\limits_{y\to 0}\lim\limits_{x\to 0}h(x,y) = -1$.
-\par Что же поможет нам идентифицировать такие ситуации? Поможет следующая теорема
+Тогда легко понять, что $\lim\limits_{x\to 0}\lim\limits_{y\to 0} h(x,y) = 1$. Аналогично показывается, что $\lim\limits_{y\to 0}\lim\limits_{x\to 0}h(x,y) = -1$.
+
+Что же поможет нам идентифицировать такие ситуации?
+
+\subsection{Критерий Гордона}
+
 \begin{Theorem}[Критерий Гордона]
     Следующие утверждения эквивалентны (внимание: здесь используются обозначения, аналогичные введённым ранее):
     \begin{enumerate}
-        \item Повторные пределы $\lim\limits_{\B}f(x)$ и $\lim\limits_{\D} g(y)$ существуют и равны.
-        \item $\forall \eps>0\; \exists B_\eps \in \B\colon\; \forall x\in B_\eps\; \exists D\in\D\colon \; \forall y \in D\; |h(x,y) -g(y)|<\eps$
+        \item повторные пределы $\lim\limits_{\B}f(x)$ и $\lim\limits_{\D} g(y)$ существуют и равны;
+        \item $\forall \eps>0\; \exists B_\eps \in \B\colon\; \forall x\in B_\eps\; \exists D\in\D\colon \; \forall y \in D\; |h(x,y) -g(y)|<\eps$.
     \end{enumerate}
 \end{Theorem}
-\begin{proof}[Доказательство]
+\begin{proof}\ 
+
     [(1) $\Rightarrow$ (2)] Пусть $\lim\limits_\B f(x) = \lim\limits_\D g(y) = A$. 
-    \par Зафиксируем произвольное $\eps > 0$, $\eps_1 = \eps/3$.
+    \par Зафиксируем произвольное $\eps > 0$, $\eps_1 = \eps/3$. Тогда:
     \begin{itemize}
-        \item $\exists B_0\in \B\colon\; \forall x\in B_0\; |f(x) - A| <\eps_1$
-        \item $\exists D_0\in \D\colon\; \forall y\in D_0\; |g(y) - A| <\eps_1$
+        \item $\exists B_0\in \B\colon\; \forall x\in B_0\; |f(x) - A| <\eps_1$;
+        \item $\exists D_0\in \D\colon\; \forall y\in D_0\; |g(y) - A| <\eps_1$.
     \end{itemize}
     В качестве $B_\eps$ возьмём $B_0$. Тогда
-    $$
-        \forall x\in B_0\; \exists \widetilde{D}_x \in \D\colon \forall y \in \widetilde{D}_x\; |h(x,y) -f(x)| < \eps_1
-    $$
-    $$
-        \exists D_x \in \widetilde{D}_x\cap D_0
-    $$
+    \begin{gather*}
+        \forall x\in B_0\; \exists \widetilde{D}_x \in \D\colon \forall y \in \widetilde{D}_x\; |h(x,y) -f(x)| < \eps_1,\\
+        \exists D_x \in \widetilde{D}_x\cap D_0.
+    \end{gather*}
     Тогда $$
-    \forall y\in D_x\; |h(x,y) - g(y)| \leqslant |h(x,y) - f(x)| + |f(x) - A| + |A- g(y)| < \eps_1 + \eps_1 + \eps_1 = \eps
+    \forall y\in D_x\; |h(x,y) - g(y)| \leqslant |h(x,y) - f(x)| + |f(x) - A| + |A- g(y)| < \eps_1 + \eps_1 + \eps_1 = \eps.
     $$
     Получили требуемое.
-    \par [$(2) \Rightarrow (1)$] Докажем для начала, что пределы есть. Зафиксируем произвольное $\eps > 0$, $\eps_1 = \eps/4$. Перепишем про ещё раз второй пункт
+    \par [$(2) \Rightarrow (1)$] Докажем для начала, что пределы есть. Зафиксируем произвольное $\eps > 0$, $\eps_1 = \eps/4$. Перепишем условие второго пункта:
     $$
-        \exists B_{\eps_1} \in \B\; \forall x\in B_{\eps_1}\; \exists D_x \in \D\colon\;  \forall y \in \D_x \; |h(x,y) - g(y)| < \eps_1
+        \exists B_{\eps_1} \in \B\; \forall x\in B_{\eps_1}\; \exists D_x \in \D\colon\;  \forall y \in \D_x \; |h(x,y) - g(y)| < \eps_1.
     $$
-    Пусть $x_1, x_2 \in B_{\eps_1}$ --- произвольные.
+    Пусть $x_1, x_2 \in B_{\eps_1}$ --- произвольные. Рассмотрим следующие элементы:
     \begin{gather*}
-        \exists D_{x_1} \in \D\colon \; \forall y\in D_{x_1}\colon \; |h(x_1,y) - g(y)|<\eps_1\\
-        \exists D_{x_2}\in \D\colon \; \forall y \in D_{x_2}\colon \; |h(x_2, y) - g(y)| < \eps_1\\
-        \exists \widetilde{D}_{x_1}\in \D\colon \; \forall y\in \widetilde{D}_{x_1}\colon \; |h(x_1,y) - f(x_1)| < \eps_1\\
-        \exists \widetilde{D}_{x_2} \in \D\colon \; \forall y\in \widetilde{D}_{x_2}\colon \; |h(x_2,y) - f(x_2)| < \eps_1\\
+        \exists D_{x_1} \in \D\colon \; \forall y\in D_{x_1}\colon \; |h(x_1,y) - g(y)|<\eps_1;\\
+        \exists D_{x_2}\in \D\colon \; \forall y \in D_{x_2}\colon \; |h(x_2, y) - g(y)| < \eps_1;\\
+        \exists \widetilde{D}_{x_1}\in \D\colon \; \forall y\in \widetilde{D}_{x_1}\colon \; |h(x_1,y) - f(x_1)| < \eps_1;\\
+        \exists \widetilde{D}_{x_2} \in \D\colon \; \forall y\in \widetilde{D}_{x_2}\colon \; |h(x_2,y) - f(x_2)| < \eps_1.\\
     \end{gather*}
-    Возьмём произвольное $y\in D_{x_1} \cap D_{x_2} \cap \widetilde{D}_{x_1}\cap \widetilde{D}_{x_2}$. Тогда
+    Возьмём произвольное $y\in D_{x_1} \cap D_{x_2} \cap \widetilde{D}_{x_1}\cap \widetilde{D}_{x_2}$. Тогда:
     \begin{gather}
-        |f(x_1) - f(x_2)| \leqslant |f(x_1) - h(x_1, y)| + |h(x_1, y) - g(y)| + |g(y) - h(x_2, y)| + |h(x_2, y) - f(x_2)|<\\ < \eps_1 + \eps_1 + \eps_1 + \eps_1 = \eps
+        |f(x_1) - f(x_2)| \leqslant |f(x_1) - h(x_1, y)| + |h(x_1, y) - g(y)| + |g(y) - h(x_2, y)| + |h(x_2, y) - f(x_2)|<\\ < \eps_1 + \eps_1 + \eps_1 + \eps_1 = \eps.
     \end{gather}
-    Следовательно, по критерию Коши $\exists \lim\limits_{\B} f(x) = A$. Докажем, что $\exists \lim \limits_{\D} g(y) = A$. Зафиксируем произвольное $\eps > 0$.
-    \par Найдём  $B_0 \in \B$ такое, что $\forall x\in B_0\; |f(x) - A| < \eps/3$. Найдём такое $B_{\eps/3} \in \B$ что 
+    Следовательно, по критерию Коши $\exists \lim\limits_{\B} f(x) = A$. Докажем, что $\exists \lim \limits_{\D} g(y) = A$. 
+    
+    Зафиксируем произвольное $\eps > 0$. Найдём  $B_0 \in \B$ такое, что $\forall x\in B_0\; |f(x) - A| < \eps/3$. Найдём такое $B_{\eps/3} \in \B$, что: 
     $$
-        \forall x\in B_{\eps/3}\; \exists D_x\in \D\colon \; \forall y\in D_x\; |h(x,y) - g(y)| < \eps/3 
+        \forall x\in B_{\eps/3}\; \exists D_x\in \D\colon \; \forall y\in D_x\; |h(x,y) - g(y)| < \eps/3.
     $$
-    Зафиксируем $x\in B_0\cap B_{\eps/3}$. Заметим, что 
+    Зафиксируем $x\in B_0\cap B_{\eps/3}$. Рассмотрим следующие элементы:
     \begin{gather}
-        \exists D_x \in \D\colon;\forall y\in D_x \; |h(x,y) - g(y)| <\eps/3\\
-        \exists \widetilde{D}_x\in \D\colon \; \forall y\in \widetilde{D}_x\; |h(x,y) - f(x)| < \eps/3\\
-        \ \\
-        \exists D\in \D,\; D \subset D_x \cap \widetilde{D}_x\colon \; \forall y\in D\\
-        |g(y) - A| \leqslant |g(y) - h(x,y)| + |h(x,y) - f(x)| + |f(x) - A| < \eps/3 + \eps/3 + \eps/3 = \eps
+        \exists D_x \in \D\colon\;\forall y\in D_x \; |h(x,y) - g(y)| <\eps/3;\\
+        \exists \widetilde{D}_x\in \D\colon \; \forall y\in \widetilde{D}_x\; |h(x,y) - f(x)| < \eps/3.
+    \end{gather}
+    
+    Тогда:    
+    \begin{gather}
+        \exists D\in \D,\; D \subset D_x \cap \widetilde{D}_x\colon \; \forall y\in D;\\
+        |g(y) - A| \leqslant |g(y) - h(x,y)| + |h(x,y) - f(x)| + |f(x) - A| < \eps/3 + \eps/3 + \eps/3 = \eps.
     \end{gather}
     Получили требуемое.
 \end{proof}
+
+\subsection{Следствия}
+
 \begin{Theorem}
-    Пусть $X\subset \R$. $x_0$ --- его предельная точка (конечная или бесконечная). Пусть 
+    Пусть $X\subset \R$, $x_0$ --- его предельная точка (конечная или бесконечная). Пусть 
     $$
-        \forall n \in \N\; \exists \lim\limits_{X\owns x \to x_0} f_n(x) = a_n
+        \forall n \in \N\; \exists \lim\limits_{X\owns x \to x_0} f_n(x) = a_n,
     $$
-    а также $f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$. Тогда  существуют и равны пределы $\lim\limits_{n \to \infty}a_n$ и $\lim\limits_{X \owns x\to x_0} f(x)$
+    а также $f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$. Тогда  существуют и равны пределы $\lim\limits_{n \to \infty}a_n$ и $\lim\limits_{X \owns x\to x_0} f(x)$.
 \end{Theorem}
 \begin{proof}
     Так как $f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то
     $$
-        \forall \eps >0\; \exists N\in \N\; \forall n>N\; \forall x \in X\; |f_n(x) - f(x)| < \eps
+        \forall \eps >0\; \exists N\in \N\; \forall n>N\; \forall x \in X\; |f_n(x) - f(x)| < \eps.
     $$
     Для существования предела необходимо и достаточно, чтобы
     $$
-        \forall \eps > 0\; \exists N \in \N\; \forall n>N\; \exists \delta >0\; \forall x\in \delta(x_0)\cap X\; |f_n(x) - f(x)| < \eps
+        \forall \eps > 0\; \exists N \in \N\; \forall n>N\; \exists \delta >0\; \forall x\in \delta(x_0)\cap X\; |f_n(x) - f(x)| < \eps.
     $$
     Применяя критерий Гордона, получаем требуемое
 \end{proof}
