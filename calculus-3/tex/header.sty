@@ -147,6 +147,10 @@
 \def\gen{\par\smallskip\refstepcounter{gen}\textbf{\arabic{gen}}}
 \newtheorem*{Generalization}{Обобщение \gen}
 
+\newcounter{prob}\setcounter{prob}{0}
+\def\gen{\par\smallskip\refstepcounter{prob}\textbf{\arabic{prob}}}
+\newtheorem*{Problem}{Задача \gen}
+
 \newcounter{dream}\setcounter{dream}{0}
 \def\dream{\par\smallskip\refstepcounter{dream}\textbf{\arabic{dream}}}
 \newtheorem*{Thedream}{Предел мечтаний \dream}
@@ -190,6 +194,9 @@
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+
 
 \newcommand{\vvector}[1]{\begin{pmatrix}{#1}_1 \\\vdots\\{#1}_n\end{pmatrix}}
 \renewcommand{\vector}[1]{({#1}_1, \ldots, {#1}_n)}
@@ -201,6 +208,7 @@
 \renewcommand{\ge}{\geqslant}
 
 \newcommand{\series}[2]{\sum\limits_{n=#1}^{#2}}
+\newcommand{\sseries}{\sum\limits_{n=1}^{\infty}}
 \newcommand{\infprod}{\prod\limits_{n=1}^{\infty}}
 
 
