@@ -2,12 +2,12 @@
 \usepackage{header}
 \begin{document}
 \pagestyle{fancy}
-\section{Лекция 07 от 17.09.2016 \\ Функциональные последовательности и ряды}
+\section{Лекция 07 от 17.10.2016 \\ Функциональные последовательности и ряды}
 	\subsection{Поточечная и равномерная сходимость}
 	Начиная с этой лекции, будем говорить о функциональных последовательностях и рядах.
-	\par Пусть $X$ --- произвольное множество точек, а $\{f(x)\}_n^\infty$ --- последовательность функций, определённых на $X$ или на его подмножествах.
+	\par Пусть $X$ --- произвольное множество точек, а $\{f(x)\}_n^\infty$ --- последовательность функций, определённых на $X$ или на его подмножестве.
 	\begin{Def}
-		Будем говорить, что $f_n(x)$ сходится поточечно к $f(x)$, если
+		Будем говорить, что $f_n(x)$ сходится поточечно к $f(x)$ на $X$, если
 		$$
 		\forall x \in X\; \forall \varepsilon>0\; \exists N\in \N\colon \; \forall n>N\; |f_n(x) - f(x)| < \varepsilon.
 		$$
@@ -42,7 +42,7 @@
 		Если $f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то $f_n(x) \overset{X}{\underset{n\to\infty}{\longrightarrow}} f(x)$.
 	\end{Statement}
 	
-	А что, если нам даны последовательность $f_n(x)$, функция $f(x)$ и множество $X$, то как нам понять, сходится ли $f_n(x)$ к $f(x)$?
+	А что, если нам даны последовательность $f_n(x)$, функция $f(x)$ и множество $X$, то как нам понять, сходится ли $f_n(x)$ к $f(x)$ равномерно?
 	
 	Существует мощный способ. Обозначим $r_n(x) =\underset{x \in X}{\sup}\;|f_n(x) - f(x)|$.
 	\begin{Statement}
@@ -68,13 +68,13 @@
 		\end{enumerate}
 	\end{Statement}
 	\begin{proof}
-		$r_n = \underset{x\in(0;1)}{\sup}\;|x^n - 1| = 1 \not\to 0$.
+		$r_n = \underset{x\in[0;1)}{\sup}\;|x^n - 0| = 1 \not\to 0$.
 	\end{proof}
 	Есть ещё одна подобного рода последовательность.
 	$$
 		f_n(x) = \cfrac{1}{0!} + \cfrac{x}{1!} + \cfrac{x^2}{2!} + \ldots + \cfrac{x^n}{n!}
 	$$
-	В любой точке значение $\lim\limits_{n \to \infty} f_n(x) = e^x$, то есть 	$f_n(x) \overset{\R}{\underset{n\to\infty}{\longrightarrow}} e^x$, но $f_n(x) \overset{\R}{\underset{n\to\infty}{\not\rightrightarrows}} e^x$. Однако, как легко понять, $f_n(x) \overset{(-C;C)}{\underset{n\to\infty}{\rightrightarrows}} e^x$ для всякого $C>0$. Эта последовательность ещё всплывёт в нашем курсе.
+	В любой точке значение $\lim\limits_{n \to \infty} f_n(x) = e^x$, то есть 	$f_n(x) \overset{\R}{\underset{n\to\infty}{\longrightarrow}} e^x$, но $f_n(x) \overset{\R}{\underset{n\to\infty}{\not\rightrightarrows}} e^x$. Однако, как легко показать, $f_n(x) \overset{(-C;C)}{\underset{n\to\infty}{\rightrightarrows}} e^x$ для всякого $C>0$. Эта последовательность ещё всплывёт в нашем курсе.
 	\begin{Statement}
 		Если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$ и $g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} g(x)$, $\alpha \in \R$, то 
 		\begin{enumerate}
@@ -83,12 +83,12 @@
 		\end{enumerate}
 	\end{Statement}
 	\begin{proof}
-		Докажем пункт 1, второй доказывается аналогичною. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon / 2$. Тогда
+		Докажем пункт 1, второй доказывается аналогично. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon / 2$. Тогда
 		\begin{gather*}
 			\exists N_1 \in \N\colon \; \forall x\in X\; |f_n(x) - f(x) | < \varepsilon_1,\\
 			\exists N_2 \in \N\colon \; \forall x\in X\; |g_n(x) - g(x) | < \varepsilon_1.\\
 		\end{gather*}
-		Положим $N = \max\{N_1, N_2\}$. Тогда
+		Положим $N = \max\{N_1, N_2\}$. Тогда $\forall n > N\ \forall x \in X$:
 		$$
 			|(f_n(x) + g_n(x)) - (f(x) + g(x))| \leqslant |f_n(x) - f(x)| + |g_n(x) - g(x)| < \varepsilon_1 + \varepsilon_1 = \varepsilon.
 		$$
@@ -99,7 +99,7 @@
 	\end{Statement}
 	\begin{proof}
 		$\exists C>0\colon\; \forall x\in X\; |g(x)| < C$. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon/C$. Найдём такое $N\in \N$, что 
-		$\forall n>N,\; \forall x\in X\; |f_n(x) - f(x)| < \varepsilon_1$. Тогда \\$\forall n >N\colon \forall x\in X\; |f_n(x)g(x) - f(x)g(x)| < C\varepsilon_1 = \varepsilon$. 
+		$\forall n>N,\; \forall x\in X\; |f_n(x) - f(x)| < \varepsilon_1$. Тогда \\$\forall n >N\  \forall x\in X\; |f_n(x)g(x) - f(x)g(x)| < C\varepsilon_1 = \varepsilon$. 
 	\end{proof}
 	\begin{Comment}
 		Если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, $g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} g(x)$ и $f(x),\; g(x)$ ограничены на множестве $X$, то $f_n(x)g_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)g(x)$.
@@ -110,12 +110,12 @@
 	Доказательство этих фактов остаётся в качестве управжнения. \textbf{Указание}. Рассмотреть \\$\cfrac{1}{f_n} - \cfrac{1}{f} = (f-f_n)\cfrac{1}{f_n\cdot f}$.
 
 	\subsection{Геометрический смысл равномерной сходимости}
-	Несложно понять, что если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то для всякого $\varepsilon > 0$, начиная с какого-то $N\in \N$ для всех $n>N$ все графики функций $f_n(x)$ окажется в $\varepsilon$-коридоре функции $f(x)$.
+	Несложно понять, что если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то для всякого $\varepsilon > 0$, начиная с какого-то $N\in \N$ для всех $n>N$ все графики функций $f_n(x)$ окажется в $\varepsilon$-коридоре графика функции $f(x)$.
 	\subsection{Критерий Коши равномерной сходимости}
 	\begin{Theorem}[Критерий Коши равнoмерной сходимости]
 		Следующие условия эквивалентны:
 		\begin{enumerate}
-			\item $f_n(x)$ $\overset{X}{\underset{n\to\infty}{\rightrightarrows}} ???$ (равномерно сходится куда-то);
+			\item $f_n(x)$ $\overset{X}{\underset{n\to\infty}{\rightrightarrows}}$ (равномерно сходится куда-то);
 			\item $\{f_n(x)\}_{n=1}^\infty$ удовлетворяет условию Коши равномерной сходимости на $X$:
 			$$
 			\forall \varepsilon > 0\; \exists N\in\N\colon \; \forall n,m>N\; \forall x\in X\; |f_n(x) - f_m(x)| < \varepsilon.
@@ -127,9 +127,9 @@
 		$$
 			\forall n,m>N\; \forall x\in X\; |f_n(x) - f_m(x)| < \varepsilon_1.
 		$$
-		Зафиксировав $n$ перейдём к пределу при $m \to \infty$, получим $|f_n(x) - f(x)| \leqslant \varepsilon_1 < \varepsilon$. Получили требуемое.
+		Зафиксировав $n$ перейдём к пределу при $m \to \infty$, получим, что $\forall x \in X:$ $|f_n(x) - f(x)| \leqslant \varepsilon_1 < \varepsilon$. Получили требуемое.
 		\par \textbf{1 $\Rightarrow$ 2}. Пусть $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$.
-		\par Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon / 2$. Найдём такое $N\in \N\; \forall n>N\; \forall x\in X$ верно $ |f_n(x) - f(x)| < \varepsilon_1$. Тогда $\forall n,m > N\; \forall x \in X$ выполнено
+		\par Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon / 2$. Найдём такое $N\in \N$ , что $\forall n>N\; \forall x\in X$ верно $ |f_n(x) - f(x)| < \varepsilon_1$. Тогда $\forall n,m > N\; \forall x \in X$ выполнено
 		$$
 			|f_n(x) - f_m(x)| \leqslant |f_n(x) - f(x)| + |f(x) - f_m(x)| < \varepsilon_1 + \varepsilon_1 = \varepsilon.
 		$$
@@ -141,8 +141,8 @@
 	\end{Def}
 	Отсюда же можно сформулировать ряд утверждений, которые по сути мы уже доказали.
 	\begin{Statement}
-		Пусть $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_1(x)$, 
-		$\sum\limits_{n=1}^\infty g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_2(x)$. Тогда их почленная сумма $\sum\limits_{n=1}^\infty  (f_n(x) + g_n(x) ) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S_1(x) + S_2(x)$.
+		Пусть $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S(x)$, 
+		$\sum\limits_{n=1}^\infty g_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} \tilde{S}(x)$. Тогда их почленная сумма $\sum\limits_{n=1}^\infty  (f_n(x) + g_n(x) ) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S(x) + \tilde{S}(x)$.
 	\end{Statement}
 	\begin{Statement}
 		Если $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} S(x)$, $\alpha \in \R$, то
@@ -160,7 +160,7 @@
 	\begin{Statement}[Критерий Коши равномерной сходимости функционального ряда]
 		Следующие утверждения эквивалентны.
 		\begin{enumerate}
-			\item $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} ???$ (опять же, сходится куда-то).
+			\item $\sum\limits_{n=1}^\infty f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}}$ (опять же, сходится куда-то).
 			\item Выполняется условие Коши 
 			$$\forall \varepsilon >0\; \exists N \in \N\colon \; \forall m>N,\; \forall p \in \N,\; \forall x\in X\; \left|\sum_{n=m+1}^{m+p} f_n(x)\right| < \varepsilon.
 			$$
