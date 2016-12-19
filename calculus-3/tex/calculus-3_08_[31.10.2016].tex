@@ -5,13 +5,13 @@
 \pagestyle{fancy}
 \section{Лекция 08 от 31.10.2016 \\ Функциональные ряды. Признаки сходимости}
 	
-	Довольно естественно желание понимать, когда ряд сходится, а когда нет. Для числовых рядов мы рассмотрели большое количество разнообразных признаков сходимости. Аналогично, изучим несколько признаков сходимости функциональных рядов.
+	Довольно естественно желание понимать, когда ряд сходится, а когда нет. Для числовых рядов мы рассмотрели большое количество разнообразных признаков сходимости. Аналогично, изучим несколько признаков равномерной сходимости функциональных рядов.
 	
 	\subsection{Признак Вейерштрасса}
 	
 	\begin{Test}[Признак Вейерштрасса]
 		
-		Пусть существует последовательность $\{a_n\}_{n=0}^\infty$ такая, что для любого $x\in X$ выполняется неравенство $|f_n(x)|<a_n$, и кроме того, ряд $\sum_{n=1}\limits^{\infty}a_n$ сходится. Тогда ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится равномерно на множестве $X$, и $\forall x \in X$ числовой ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится абсолютно.
+		Пусть существует последовательность $\{a_n\}_{n=0}^\infty$ такая, что $\forall n \in N$ и для любого $x\in X$ выполняется неравенство $|f_n(x)|<a_n$, и кроме того, ряд $\sum_{n=1}\limits^{\infty}a_n$ сходится. Тогда ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится равномерно на множестве $X$, и $\forall x \in X$ числовой ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится абсолютно.
 	\end{Test}
 	
 	\begin{proof}
@@ -21,7 +21,7 @@
 		
 		Тогда $\forall m>N, \forall p\in \mathbb{N}, \forall x \in X:$
 		\[
-		\left| \sum_{m+1}\limits^{m+p}f_n(x)\right|  < \sum_{m}\limits^{m+p} |f_n(x)| <  \sum_{m+1}\limits^{m+p}a_m < \varepsilon.
+		\left| \sum_{m+1}\limits^{m+p}f_n(x)\right|  \leq \sum_{m+1}\limits^{m+p} |f_n(x)| \leq  \sum_{m+1}\limits^{m+p}a_m < \varepsilon.
 		\]
 		То есть по критерию Коши для функциональных рядов наш ряд равномерно сходится.
 	\end{proof}
@@ -55,7 +55,7 @@
 		\begin{enumerate}
 			\item  последовательность частичных сумм $\sum\limits_{n = 1}^k a_n(x) $ равномерно ограничена на $X$, то есть $\exists C>0 : \forall N\in \mathbb{N} \ \forall x \in X: \  \left| \sum\limits_{n = 1}^N a_n(x)\right|  <C$;
 			
-			\item  последовательность функций $\{b_n(x)\}$ монотонна для любого $x \in X$ и равномерно сходится к нулю на $X$.
+			\item  последовательность функций $\{b_n(x)\}$ монотонна для любого $x \in X$ и равномерно сходится к нулю на $X$ при $n \to \infty$.
 		\end{enumerate}
 	\end{Test}
 	
@@ -64,7 +64,7 @@
 		Тогда $\forall m>N, \forall p \in \mathbb{N}, \ \forall x \in X:$
 		\begin{multline}
 		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left| A_{m+p}(x)b_{m+p}(x) - A_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} A_n(x)( b_n(x)-b_{n+1}(x)) \right| \leq\\
-		\leq C\varepsilon_1+C\varepsilon_1+C\sum\limits_{n = m+1}^{m+p-1} | b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + C\left|b_{n+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 \leq \varepsilon.
+		\leq C\varepsilon_1+C\varepsilon_1+C\sum\limits_{n = m+1}^{m+p-1} | b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + C\left|b_{m+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 \leq \varepsilon.
 		\end{multline}
 		Здесь мы воспользовались преобразованием Абеля (см. лекцию 4), а также тем, что последовательность $b_n(x)$ монотонна, поэтому в последней сумме все знаки раскроются с одинаковым знаком.
 	\end{proof}
@@ -74,7 +74,7 @@
 	\begin{Test}[Признак Абеля]
 		Ряд $\sum_{n=1}\limits^\infty {{a_n}(x)}{{b_n}(x)}$ сходится равномерно, если выполнены следующие условия:
 		\begin{enumerate}
-			\item  ряд $\sum\limits_{n=1}^{\infty} {a_n}(x)$ равномерно сходится;
+			\item  ряд $\sum\limits_{n=1}^{\infty} {a_n}(x)$ равномерно сходится на $X$;
 			\item  последовательность функций $\{b_n(x)\}$ равномерно ограничена и монотонна $\forall x\in X$.
 		\end{enumerate}
 	\end{Test}
@@ -84,7 +84,7 @@
 		
 		Доказательство, естественно, очень похоже на доказательство предыдущего признака. 	
 		
-		Так как $\{b_n(x)\}$ равномерно ограничена, то $\exists C>0, \forall n \in \mathbb{N}, \forall x\in X:\ |b_n(x)| < C.$
+		Так как $\{b_n(x)\}$ равномерно ограничена, то $\exists C>0:\ \forall n \in \mathbb{N}, \forall x\in X\ |b_n(x)| < C.$
 		
 		Возьмём произвольное $\varepsilon>0$. Положим $\varepsilon_1 := \frac{\varepsilon}{4C}$. Найдём такое $N\in \mathbb{N}$, что $\forall n > N, \forall p \in \mathbb{N}, \forall x \in X: \  \left| \sum\limits_{n = m+1}^{m+p} a_{n}(x) \right| < \varepsilon_1.$
 		
@@ -92,8 +92,8 @@
 		
 		Очевидно, что $\forall n\geq N, \forall x \in X: |\tilde{A}_n(x)|<\varepsilon_1.$ Тогда $\forall m>N, \forall p \in \mathbb{N}, \ \forall x \in X:$
 		\begin{multline}
-		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left| (\tilde{A}_n(x)-\tilde{A}_{n-1}(x)) b_n(x)\right|=\\ = \left| \tilde{A}_{m+p}(x)b_{m+p}(x) - \tilde{A}_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} \tilde{A}_n(x)( b_n(x)-b_{n+1}(x)) \right| \leq\\
-		\leq C\varepsilon_1+C\varepsilon_1+\eps_1\sum\limits_{n = m+1}^{m+p-1} |b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + \eps_1\left|b_{n+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 {знаменатель} \leq \varepsilon.
+		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left|\sum\limits_{n = m+1}^{m+p} (\tilde{A}_n(x)-\tilde{A}_{n-1}(x)) b_n(x)\right|=\\ = \left| \tilde{A}_{m+p}(x)b_{m+p}(x) - \tilde{A}_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} \tilde{A}_n(x)( b_n(x)-b_{n+1}(x)) \right| \leq\\
+		\leq C\varepsilon_1+C\varepsilon_1+\eps_1\sum\limits_{n = m+1}^{m+p-1} |b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + \eps_1\left|b_{m+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 {знаменатель} \leq \varepsilon.
 		\end{multline}
 	\end{proof}
 	
