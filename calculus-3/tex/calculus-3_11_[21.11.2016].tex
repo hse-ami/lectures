@@ -103,7 +103,7 @@ $$
 \end{proof}
 
 \begin{Consequence}
-Пусть $\forall n \in N$: $f_n(x) \in R[a, b]$ и $\sseries f_n(x) \uconv{[a, b]}{} S(x)$. Тогда $S(x) \in R[a, b]$ и 
+Пусть $\forall n \in \mathbb{N}$: $f_n(x) \in R[a, b]$ и $\sseries f_n(x) \uconv{[a, b]}{} S(x)$. Тогда $S(x) \in R[a, b]$ и 
 $$
 \int\limits_a^bS(x) \dx = \int\limits_a^b \left(\sseries f_n(x)\right) \dx = \sseries \int\limits_a^b f_n(x)\dx.
 $$
@@ -123,7 +123,7 @@ $$
 \begin{proof}
 Вообще говоря, это сразу следует из прошлого утверждения и формулы Ньютона--Лейбница. Но распишем.
 
-Заметим, что $\forall x \in I$: $f_n(x) = f_n(x_0) + \int\limits_{x_0}^x f'_n(t) \d t$. При этом $f_n(x_0) \uconv{}{n \to \infty} \alpha$ (так как вообще не зависит от $x$), а $f'_n(t) \uconv{I}{} g(x)$.
+Заметим, что $\forall x \in I$: $f_n(x) = f_n(x_0) + \int\limits_{x_0}^x f'_n(t) \d t$. При этом $f_n(x_0) \uconv{}{n \to \infty} \alpha$ (так как вообще не зависит от $x$), а $f'_n(t) \uconv{I}{} g(t)$.
 
 Получается, что $f_n(x)$ поточечно на $I$ сходится к $\alpha + \int\limits_{x_0}^x g(t)\d t = f(x)$. При этом очевидно $f(x) \in D(I)$ (т.е. дифференцируема) и $f'(x) = g(x)$. Итого, $f(x) \in C^1(I)$.
 
