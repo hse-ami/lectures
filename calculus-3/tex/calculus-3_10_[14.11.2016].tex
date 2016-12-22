@@ -81,7 +81,7 @@
     \begin{gather}
         |f(x_1) - f(x_2)| \leqslant |f(x_1) - h(x_1, y)| + |h(x_1, y) - g(y)| + |g(y) - h(x_2, y)| + |h(x_2, y) - f(x_2)|<\\ < \eps_1 + \eps_1 + \eps_1 + \eps_1 = \eps.
     \end{gather}
-    Следовательно, по критерию Коши $\exists \lim\limits_{\B} f(x) = A$. Докажем, что $\exists \lim \limits_{\D} g(y) = A$. 
+    Следовательно, по критерию Коши $\exists \lim\limits_{\B} f(x) =: A$. Докажем, что $\exists \lim \limits_{\D} g(y) = A$. 
     
     Зафиксируем произвольное $\eps > 0$. Найдём  $B_0 \in \B$ такое, что $\forall x\in B_0\; |f(x) - A| < \eps/3$. Найдём такое $B_{\eps/3} \in \B$, что: 
     $$
@@ -93,9 +93,8 @@
         \exists \widetilde{D}_x\in \D\colon \; \forall y\in \widetilde{D}_x\; |h(x,y) - f(x)| < \eps/3.
     \end{gather}
     
-    Тогда:    
+    Тогда $\exists D\in \D:\; D \subset D_x \cap \widetilde{D}_x$ и $\forall y \in D$:    
     \begin{gather}
-        \exists D\in \D,\; D \subset D_x \cap \widetilde{D}_x\colon \; \forall y\in D;\\
         |g(y) - A| \leqslant |g(y) - h(x,y)| + |h(x,y) - f(x)| + |f(x) - A| < \eps/3 + \eps/3 + \eps/3 = \eps.
     \end{gather}
     Получили требуемое.
@@ -115,11 +114,11 @@
     $$
         \forall \eps >0\; \exists N\in \N\; \forall n>N\; \forall x \in X\; |f_n(x) - f(x)| < \eps.
     $$
-    Для существования предела необходимо и достаточно, чтобы
+    Для существования и равенства пределов необходимо и достаточно, чтобы
     $$
         \forall \eps > 0\; \exists N \in \N\; \forall n>N\; \exists \delta >0\; \forall x\in \delta(x_0)\cap X\; |f_n(x) - f(x)| < \eps.
     $$
-    Применяя критерий Гордона, получаем требуемое
+    Применяя критерий Гордона, получаем требуемое.
 \end{proof}
 \begin{Consequence}
     Пусть $I$ --- невырожденный промежуток на $\R$ и для последовательности функций $f_n(x)$ известно, что $f_n(x) \in C(I)$ и $f_n(x)\overset{I}{\underset{n\to\infty}{\rightrightarrows}} f(x)$

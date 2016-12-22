@@ -44,8 +44,8 @@
 	
 	А что, если нам даны последовательность $f_n(x)$, функция $f(x)$ и множество $X$, то как нам понять, сходится ли $f_n(x)$ к $f(x)$ равномерно?
 	
-	Существует мощный способ. Обозначим $r_n(x) =\underset{x \in X}{\sup}\;|f_n(x) - f(x)|$.
-	\begin{Statement}
+	Существует мощный способ. Обозначим $r_n =\underset{x \in X}{\sup}\;|f_n(x) - f(x)|$.
+	\begin{Statement}[Супремум-критерий]
 		$f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) \Leftrightarrow r_n\to 0$.
 	\end{Statement}
 	\begin{proof}\ \\
@@ -60,7 +60,7 @@
 		\forall \varepsilon > 0\; \exists N \in \N\colon \; \forall n>N\; r_n < \varepsilon \Rightarrow \forall x \in X\; |f_n(x) - f(x)| < \varepsilon.
 		$$
 	\end{proof}
-	Часто это утверждение называют \textbf{супремум-критерием}. Для приведённого выше примера $f_n(x) = x^n$.
+	Для приведённого выше примера $f_n(x) = x^n$:
 	\begin{Statement}\ \\		
 		\begin{enumerate}
 			\item $x^n \overset{[0;1]}{\underset{n\to\infty}{\longrightarrow}} 0$.
@@ -110,7 +110,7 @@
 	Доказательство этих фактов остаётся в качестве управжнения. \textbf{Указание}. Рассмотреть \\$\cfrac{1}{f_n} - \cfrac{1}{f} = (f-f_n)\cfrac{1}{f_n\cdot f}$.
 
 	\subsection{Геометрический смысл равномерной сходимости}
-	Несложно понять, что если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то для всякого $\varepsilon > 0$, начиная с какого-то $N\in \N$ для всех $n>N$ все графики функций $f_n(x)$ окажется в $\varepsilon$-коридоре графика функции $f(x)$.
+	Несложно понять, что если $f_n(x) \overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x)$, то для всякого $\varepsilon > 0$, начиная с какого-то $N\in \N$ для всех $n>N$ все графики функций $f_n(x)$ окажутся в $\varepsilon$-коридоре графика функции $f(x)$.
 	\subsection{Критерий Коши равномерной сходимости}
 	\begin{Theorem}[Критерий Коши равнoмерной сходимости]
 		Следующие условия эквивалентны:
