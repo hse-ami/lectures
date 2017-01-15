@@ -235,7 +235,7 @@
 							\State \textbf{break}
 						\EndIf
 					\EndFor
-					\State $A[j+1] = k$
+					\State $A[j] = k$
 				\EndFor
 				\State \Return $A$
 			\EndFunction
@@ -265,7 +265,7 @@
 		
 		\item Худший случай: массив отсортирован в обратном порядке. Тогда на каждой итерации число шагов внутреннего цикла будет уменьшаться на 1. Значит 
 		\[
-		\Theta(n) = \sum_{i = 1}^{n - 1}i = \Theta(n^2)
+		T(n) = \sum_{i = 1}^{n - 1}i = \Theta(n^2)
 		\]
 	\end{enumerate}
 	
