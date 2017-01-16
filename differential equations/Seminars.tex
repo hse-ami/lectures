@@ -211,13 +211,7 @@ in
 После многих таких шагов мы получим ломаную линию, приближающую график нашей кривой $x(t)$. Эта ломаная называется \textbf{Ломаной Эйлера}.
 
 \begin{center}
-	\begin{tikzpicture}
-	
-	%\draw (0, -2) node[draw,circle,fill=white,minimum size=6pt,inner sep=0pt] (0) [label=below:$0$] {$A$};
-	%\draw (0, 2) node[draw,circle,fill=white,minimum size=6pt,inner sep=0pt] (pi) [label=above:$\pi$] {};
-	%\draw (1.4, 1.4) node[draw,circle,fill=white,minimum size=6pt,inner sep=0pt] (B) [label=45:$b$] {$B$};
-	%\draw (-2, 0) node[draw,circle,fill=white,minimum size=6pt,inner sep=0pt] (C) [label=180:$c$] {$C$};
-	
+	\begin{tikzpicture}	
 	
 	\draw (5, 0) node[draw,circle,fill=black,minimum size=6pt,inner sep=2pt] (C) {};
 	
@@ -227,12 +221,6 @@ in
 	
 	\draw[dashed, very thick, ->] (5, 0) -- (7, 1);
 	\node [above] at (7, 1) {$(\d t,\ \d x)$};
-	%\draw[very thick] (4, 0) -- (8, 0);
-	%\draw[very thick] (6, -2) -- (8, 0);
-	%\draw[very thick] (6, -2) -- (6, 2);
-	
-	%\fill [pattern = crosshatch] (4, 0) -- (6, 2) -- (6, 0) -- cycle;
-	%\fill [pattern = crosshatch] (6, -2) -- (8, 0) -- (6, 0) -- cycle;
 	
 	\node [left] at (4, 0) {$x_0$};
 	\node [below] at (5, -2) {$t_0$};
@@ -270,15 +258,143 @@ in
 	\item \dotfill
 \end{enumerate}
 
+\subsection{Изоклины}
+
 \begin{definition}
 	Пусть у нас есть диффур $\dx = f(t,\ x)$.
 	
-	\textbf{Изоклина} -- геометрическое место точек плоскости, в которых одно и то же направление движения, то есть, угол наклона вектора $(\d t,\ \d x)$ один и тот же для любой точки $(t,\ x)$ изоклины. Стоит отметить, что это определение работает только для диффуров 1 порядка.
+	\textbf{Интегральная кривая} --- график функции $x(t)$ -- решения диффура. Тогда $\dx$ --- это угловой коэффициент интегральной кривой в точке $\big(t,\ x(t)\big)$, то бишь тангенс угла наклона касательной к $x(t)$ в данной точке.
 	
-	\textbf{Изолиния поля} -- подмножество точек изоклины (являющееся линией), в которых вектор $(\d t,\ \d x)$ один и тот же для любой точки  $(t,\ x)$ изолинии. То есть, вектор $(\d t, \d x) \sim \big(1, f(t,\ x)\big) = const$, откуда тут же следует $f(t,\ x) = const$. Для каждой изолинии константа своя.
+	\textbf{Изоклина} -- геометрическое место точек плоскости, в которых одно и то же направление движения (направление касательных), то есть, угол наклона вектора $(\d t,\ \d x)$ один и тот же для любой точки $(t,\ x)$ изоклины. Иными словами, $\dx = const$.
+	
+	\textbf{Изолиния поля} -- подмножество точек изоклины (являющееся линией), в которых вектор $(\d t,\ \d x)$ один и тот же для любой точки  $(t,\ x)$ изолинии. То есть, вектор $(\d t, \d x) \sim \big(1, f(t,\ x)\big) = const$. Для каждой изолинии константа своя.
 \end{definition}
 
-Для примера выше изоклиной будет являться множество $\left\{xt = k \iff x = \dfrac{k}{t},\ k \in \R\right\}$ --- гиперболы.
+Семейство изоклин определяется уравнением
+\[\dx = k = f(t,\ x)\] где $k$ -- параметр. Придавая параметру $k$ близкие значения, получаем достаточно густую сеть изоклин, с помощью которых можно приближенно построить интегральные кривые дифференциального yравнения.
+
+Для примера выше изоклинами будут являться множества $\left\{xt = k \iff x = \dfrac{k}{t},\ k \in \R\right\}$ --- гиперболы.
+
+Научимся находить приближённые решения диффура, строя интегральную кривую при помощи изоклин. Стоит отметить сразу же, что \textbf{нулевая изоклина} $f(t,\ x) = 0$ даёт уравнение линий, на которых могут находиться точки максимума и минимума интегральных кривых.
+
+Для большей точности построения интегральных кривых хорошо находить ГМТ точек перегиба, исследуя вторую производную $\ddx$ при помощи уравнения:
+\[\ddx = \dfrac{\d f}{\d t} + \dfrac{\d f}{\d x}\cdot \dx = \dfrac{\d f}{\d t} + f(t,\ x) \cdot \dfrac{\d f}{\d x} = 0\]
+Линия, определяемая данным уравнением, и есть возможное ГМТ точек перегиба.
+
+\textbf{Пример №1}
+
+Изоклинами найти приближённое решение диффура
+\[\dx = 2t - x\]
+
+Для получения изоклин положим $\dx = const = k$, откуда:
+\[2t - x = k \iff x = 2t - k\] --- параллельные прямые.
+
+Пусть $k = 0$, тогда получим изоклину $x = 2t$ --- эта прямая делит плоскость на две части, в каждой из которых производная $\dx$ имеет один и тот же знак --- интегральные кривые, пересекая $x = 2t$, из области убывания $x(t)$ переходят в область возрастания. Отсюда получаем, что на данной прямой лежат точки минимума.
+
+Возьмём ещё две изоклины: $x = 2t + 1,\ k = -1$ и $x = 2t - 1,\ k = 1$. Изобразим их на графике. Касательные, проведённые к интегральным кривым в точках пересечения с изоклинами $k = -1,\ k = 0$ и $k = 1$ образуют с осью абсцисс углы в $135,\ 0$ и $45$ градусов соответственно. На графике направление показано чёрточками.
+
+\begin{center}
+	\begin{tikzpicture}
+	
+	
+	
+	\draw[very thick,->] (-8,0) -- (8,0) node[anchor=north] (t) {$t$};
+	\draw[very thick,->] (0,-8) -- (0,8) node[anchor=east](x) {$x$};
+	
+	\draw[very thick] (4, 8) -- (-2, -4) node[anchor=east]  {$x = 2t$};
+	\draw[very thick] (3, 8) -- (-2, -2) node[anchor=east]  {$x = 2t + 1$};
+	\draw[very thick] (5, 8) -- (-2, -6) node[anchor=east]  {$x = 2t - 1$};
+	\draw[very thick] (6.5, 9) -- (-2, -8) node[anchor=east]  {$x = 2t - 2$};
+	
+	\draw[very thick] (-1, -8) -- (7, 8) node[anchor=west]  {$x = 2t - 4$};
+	
+	\foreach \x in {-7,...,16}
+		\draw [very thick] (6pt + 0.25*\x cm, 0.5*\x cm) -- (-6pt + 0.25*\x cm, 0.5*\x cm);
+		
+	\foreach \x in {-7,...,12}
+		\draw [very thick] (5pt + 0.25*\x cm, 0.5*\x cm + 60 -6pt) -- (-4pt + 0.25*\x cm, 0.5*\x cm + 60 +6pt);
+		
+	\foreach \x in {-7,...,20}
+		\draw [very thick] (4pt + 0.25*\x cm, 0.5*\x cm - 60 +3pt) -- (-7pt + 0.25*\x cm, 0.5*\x cm - 60 -3pt);
+		
+	\foreach \x in {-1,...,27}
+	\draw [very thick] (-1pt + 0.25*\x cm, 0.5*\x cm - 180-4pt) -- (1pt+ 0.25*\x cm, 0.5*\x cm - 180 +20pt);
+	
+	\node [below right] at (0, 0) (O) {$0$};
+	
+	\draw[very thick, color=red] (-1, 6) to [out=-90,in=120] (0, 2.75);
+	\draw[very thick, color=red] (0, 2.75) to [out=-60,in=170] (1, 2);
+	\draw[very thick, color=red] (1, 2) to [out=0,in=-120] (5, 6);
+	
+	\draw[very thick, color=red] (-1, 6) to [out=-90,in=120] (0, 2.75);
+	\draw[very thick, color=red] (0, 2.75) to [out=-60,in=170] (1, 2);
+	\draw[very thick, color=red] (1, 2) to [out=0,in=-120] (5, 6);
+	
+	
+	\draw[very thick, color=red] (0, 8) to [out=-90,in=120] (1, 4.75);
+	\draw[very thick, color=red] (1, 4.75) to [out=-60,in=170] (2, 4);
+	\draw[very thick, color=red] (2, 4) to [out=0,in=-120] (6, 8);
+	
+	\draw[very thick, color=red] (0, 8) to [out=-90,in=120] (1, 4.75);
+	\draw[very thick, color=red] (1, 4.75) to [out=-60,in=170] (2, 4);
+	\draw[very thick, color=red] (2, 4) to [out=0,in=-120] (6, 8);
+	
+	\draw[very thick, color=red] (-2, 4) to [out=-90,in=120] (-1, 0.75);
+	\draw[very thick, color=red] (-1, 0.75) to [out=-60,in=170] (0, 0);
+	\draw[very thick, color=red] (0, 0) to [out=0,in=-120] (4, 4);
+	
+	\draw[very thick, color=red] (-2, 4) to [out=-90,in=120] (-1, 0.75);
+	\draw[very thick, color=red] (-1, 0.75) to [out=-60,in=170] (0, 0);
+	\draw[very thick, color=red] (0, 0) to [out=0,in=-120] (4, 4);
+	
+	\draw[very thick, color=red] (-3, 2) to [out=-90,in=120] (-2, -1.25);
+	\draw[very thick, color=red] (-2, -1.25) to [out=-60,in=170] (-1, -2);
+	\draw[very thick, color=red] (-1, -2) to [out=0,in=-120] (3, 2);
+	
+	\draw[very thick, color=red] (-3, 2) to [out=-90,in=120] (-2, -1.25);
+	\draw[very thick, color=red] (-2, -1.25) to [out=-60,in=170] (-1, -2);
+	\draw[very thick, color=red] (-1, -2) to [out=0,in=-120] (3, 2);
+	
+	\draw[very thick, color=blue] (2, -2) to [out=75,in=-120] (5, 6);
+	\draw[very thick, color=blue] (1.5, -8) to [out=87,in=-100] (2, -2);
+	
+	\draw[very thick, color=blue] (2, -2) to [out=75,in=-120] (5, 6);
+	\draw[very thick, color=blue] (1.5, -8) to [out=87,in=-100] (2, -2);
+	
+	\draw[very thick, color=blue] (2, -2) to [out=75,in=-120] (5, 6);
+	\draw[very thick, color=blue] (1.5, -8) to [out=87,in=-100] (2, -2);
+	
+	\draw[very thick, color=blue] (3, 0) to [out=75,in=-120] (6, 8);
+	\draw[very thick, color=blue] (2.5, -6) to [out=87,in=-100] (3, 0);
+	
+	\draw[very thick, color=blue] (3, 0) to [out=75,in=-120] (6, 8);
+	\draw[very thick, color=blue] (2.5, -6) to [out=87,in=-100] (3, 0);
+	
+	\draw[very thick, color=blue] (1.5, -3) to [out=75,in=-120] (4.5, 5);
+	\draw[very thick, color=blue] (1, -9) to [out=87,in=-100] (1.5, -3);
+	
+	\draw[very thick, color=blue] (1.5, -3) to [out=75,in=-120] (4.5, 5);
+	\draw[very thick, color=blue] (1, -9) to [out=87,in=-100] (1.5, -3);
+	
+	\draw[very thick, color=blue] (3.5, 1) to [out=75,in=-120] (6.5, 9);
+	\draw[very thick, color=blue] (3, -5) to [out=87,in=-100] (3.5, 1);
+	
+	\draw[very thick, color=blue] (3.5, 1) to [out=75,in=-120] (6.5, 9);
+	\draw[very thick, color=blue] (3, -5) to [out=87,in=-100] (3.5, 1);
+	
+	\end{tikzpicture}
+\end{center}
+
+Вторая производная: $\ddx = 2 - \dx = 2 - 2t + x$.
+
+Рассмотрим прямую $x = 2t - 2$, на которой $\ddx = 0$. Это изоклина при $k = 2$. Заметим, что в таком случае угол наклона касательной равен углу наклона самой изоклины. Значит, ни одна интегральная кривая не будет пересекать эту изоклину, но при этом они будут к ней стремиться на бесконечности.
+
+Прямая $x = 2t - 2$ делит плоскость на две части, в одной из которых (над прямой) $\ddx > 0$, а значит, интегральные кривые выпуклы вниз, а в другой $\ddx < 0$, и интегральные кривые выпуклы вверх. Кроме того, поскольку точки минимума расположены над этой прямой, то интегральные кривые, проходящие ниже изоклины $x = 2t - 2$ не имеют точек экстремума. 
+
+Рассмотрим также изоклину $x = 2t - 4$, $ k = 4$. В данном случае угол наклона касательной будет равен 75 градусов. При этом интегральные кривые будут также стремиться к $x = 2t - 2$, но являясь выпуклыми вверх. Тем самым мы получили другое семейство решений диффура.
+
+На графике выше изображены интегральные кривые, приближающие $x(t)$, полученные в соответствии с проведённым исследованием. Как видим, в точках пересечения с изоклинами кривые параллельны направлению касательных в точках пересечения.
+
 
 \subsection{Диффуры с разделяющимися переменными}
 
@@ -291,7 +407,7 @@ in
 	B(x) = A(t) + C \text{ --- это и будет решением диффура}
 \end{gather*}
 
-\textbf{Пример №1}
+\textbf{Пример №2}
 \begin{gather*}
 	\dx = tx \\
 	\dx= tx = \dfrac{\d x}{\d t} \Longrightarrow \dfrac{\d x}{x} = t \cdot \d t \Longrightarrow \ds \int\dfrac{\d x}{x}=\int t \cdot \d t \\
@@ -299,7 +415,7 @@ in
 \end{gather*}
 В последних двух действиях мы взяли экспоненту от обеих частей и избавились от модуля.
 
-\textbf{Пример №2}
+\textbf{Пример №3}
 
 Найдите кривую $x(t)$, такую, что для любой $t_0 \in \R$ отрезки, соединяющую точку касания $\big(t_0,\ x(t_0)\big)$ с точками пересечения касательной в данной точке с осями координат, будут равны.
 
@@ -341,7 +457,7 @@ in
 	 -\ln |x| = \ln |t| + C \Longrightarrow \dfrac{1}{|x|} = |t| \cdot \lambda,\ \lambda > 0 \Longrightarrow x = \dfrac{\lambda}{t},\ \lambda \in \R
 \end{gather*}
 
-\textbf{Пример №3}
+\textbf{Пример №4}
 
 \begin{gather*}
 	xt + (t + 1) \cdot \dx = 0\\
@@ -353,7 +469,7 @@ in
 \end{gather*}
 Тогда:
 \begin{gather*}
-	 -\ln|x| = t - \ln |t + 1| + C \Longrightarrow \dfrac{1}{|x|} = \lambda \cdot e^{\frac{t}{t + 1}},\ \lambda > 0 \Longrightarrow x = \lambda \cdot e^{-\frac{t}{t + 1}},\ \lambda \in \R
+	 -\ln|x| = t - \ln |t + 1| + C \Longrightarrow \dfrac{1}{|x|} = \lambda \cdot \dfrac{e^{t}}{t + 1},\ \lambda > 0 \Longrightarrow x = \lambda \cdot e^{-t} \cdot (t + 1),\ \lambda \in \R
 \end{gather*}
 
 \subsection{$n$-параметрическое семейство кривых}
@@ -369,7 +485,7 @@ in
 Метод решения таков: сначала мы выражаем константы $c_1,\ \ldots,\ c_n$ через $t,\ x(t),\ \dx(t), \ldots,\ x^{(n)}(t)$, и потом подставляем всё в одно уравнение, тем самым получая диффур вида:
 \[\G\big(t,\ x(t),\ \dx(t),\ \ldots,\ x^{(n)}(t)\big) = 0\] который мы умеем решать.
 
-\textbf{Пример №4}
+\textbf{Пример №5}
 
 Необходимо найти диффур, задающий множество окружностей, касающихся оси абсцисс.
 
@@ -399,15 +515,15 @@ in
 \[\dx = f(at + bx)\]
 Можно сделать замену $u = at + bx$, получив уравнение $\dx = f(u)$. Решим этот диффур относительно переменной $u$, получив функцию $x(u)$, после чего, сделав обратную замену, выразить искомую $x(t)$.
 \begin{gather*}
-	u = at + bx\\
-	\d u = a\cdot \d t + b \cdot \d x \Longrightarrow \d t = \dfrac{\d u - b\cdot \d x}{a}\\
-	\dx = \dfrac{\d x}{\d t} = \dfrac{a \cdot \d x}{\d u - b \cdot \d x} = f(u)\\
-	a \cdot \d x = f(u)\d u - b\cdot f(u)\d x \Longrightarrow \big(a + b\cdot f(u)\big)\d x = f(u)\d u\\
+	u = at + bx                                                                                        \\
+	\d u = a\cdot \d t + b \cdot \d x \Longrightarrow \d t = \dfrac{\d u - b\cdot \d x}{a}             \\
+	\dx = \dfrac{\d x}{\d t} = \dfrac{a \cdot \d x}{\d u - b \cdot \d x} = f(u)                        \\
+	a \cdot \d x = f(u)\d u - b\cdot f(u)\d x \Longrightarrow \big(a + b\cdot f(u)\big)\d x = f(u)\d u \\
 	\d x = \dfrac{f(u)}{a + b \cdot f(u)} \d u
 \end{gather*}
 После этих махинаций всё легко решается как уравнение с разделяющими переменными.
 
-\textbf{Пример №5}
+\textbf{Пример №6}
 \[\dx \cos (x - t)\]
 Ну тут совсем толсто: $u = x - t$. В данном случае $a = -1,\ b = 1$. По формуле выше:
 \[\d x = \dfrac{\cos u}{\cos u - 1}\d u\]
@@ -419,7 +535,7 @@ in
 \[\dx = f(t,\ x)\]
 Можно сделать замену $u = \varphi(t,\ x)$, получив новое уравнение (весьма удачно, если получится диффур вида $\du = f(t,\ u)$, но такое бывает далеко не всегда). Решаем его и делаем обратную замену, получая $x(t)$.
 
-\textbf{Пример №6}
+\textbf{Пример №7}
 
 \[\dx \cdot t = 2x^2 \cdot t^3 - x\]
 
@@ -461,11 +577,11 @@ in
 
 \begin{task4}
 	Изоклинами найти приближённое решение: 	\[\dot{x} = \dfrac{x}{t + x}\]
-	Также изобразите изоклины на графике и покажите все различные (с точностью до топологии и асимптотики) решения.
+	Также изобразите изоклины на графике и покажите все различные (с точностью до топологии и асимптотики) решения (то есть, как рассмотрено выше в примере).
 \end{task4}
-%\begin{proof}[Подсказки к решению]
-%	
-%\end{proof}
+\begin{proof}[Подсказки к решению]
+	Проведите исследование, аналогичное \textbf{Примеру №1}. Нарисуйте изоклины и посмотрите направление касательных, проверьте выпуклость, взяв вторую производную. После этого постройте приближение кривой $x(t)$ так, чтобы ваша кривая была параллельна <<чёрточкам>>, соответствующим той изоклине, которую вы пересекли.
+\end{proof}
 
 \begin{task5}
 	Придумайте (вообще говоря, найдите) диффур 1 порядка, задающий множество прямых, являющихся касательными к единичной окружности с центром в нуле.
