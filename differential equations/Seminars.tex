@@ -172,6 +172,8 @@ in
 
 \renewcommand{\G}{\mathsf{G}}
 \renewcommand{\d}{\mathsf{d}}
+
+\newcommand{\dy}{\dot{y}}
 \newcommand{\du}{\dot{u}}
 \newcommand{\dx}{\dot{x}}
 \newcommand{\ddx}{\ddot{x}}
@@ -555,50 +557,145 @@ in
 \begin{task1}
 	Найти все кривые $x(t)$, такие, что длина отрезка, соединяющего точку касания и точку пересечения касательной в данной точке с одной из осей, была постоянной.
 \end{task1}
-\begin{proof}[Подсказки к решению]
-	В зависимости от того, какую ось вы выберете, получится либо $x(t)$, либо $t(x)$, оба варианта правильные.
+\begin{proof}[Решение]
 	
-	Изобразите ситуацию на графике. Затем вспомните, что $\dot{x} = \dfrac{\d x}{\d t} = \tan \alpha$, где $\alpha$ -- угол наклона касательной. Также вам понадобится Теорема Пифагора.
 \end{proof}
 
 \begin{task2}
 	Придумать диффур 1 порядка, не обладающий решением на всей прямой. То бишь, не для всех $t$ решение $\dot{x} = f(t,\ x)$ должно существовать. 
 \end{task2}
-\begin{proof}[Подсказки к решению]
-	Подумайте о не всюду определённых функциях.
+\begin{proof}[Решение]
+	
 \end{proof}
 
 \begin{task3}
 	Решите диффур: 	\[(t^2 - 1) \cdot \dot{x} + 2tx^2 = 0, \text{начальное условие: }x(0) = 1\]
+\end{task3}
+\begin{proof}[Решение]
+	
+\end{proof}
+
+\begin{task4}
+	Изоклинами найти приближённое решение: 	\[\dot{x} = \dfrac{x}{t + x}\]
+	Также изобразите изоклины на графике и покажите все различные (с точностью до топологии и асимптотики) решения (то есть, как рассмотрено выше в примере).
+\end{task4}
+\begin{proof}[Решение]
+	
+\end{proof}
+
+\begin{task5}
+	Придумайте (вообще говоря, найдите) диффур 1 порядка, задающий множество прямых, являющихся касательными к единичной окружности с центром в нуле.
+\end{task5}
+\begin{proof}[Решение]
+	
+\end{proof}
+
+
+\newpage
+\section{Семинар 2, 17 января}
+
+\subsection{Однородные уравнения: $y = \dfrac{x}{t}$}
+
+
+\subsection{Однородные уравнения: дробно-линейная замена}
+
+
+\subsection{Однородные уравнения: $x = y^m$}
+
+
+\subsection{Домашнее задание №2}
+
+
+\begin{task1}
+	Решить диффур:
+	\[\dx = 2 \cdot \left(\dfrac{x + 2}{x + t - 1}\right)^2\]
+\end{task1}
+%\begin{proof}[Подсказки к решению]
+%
+%\end{proof}
+
+\begin{task2}
+	Решить диффур:
+	\[\dx = \dfrac{x + 2}{t + 1} + \tan(\dfrac{x - 2t}{t + 1})\]	 
+\end{task2}
+%\begin{proof}[Подсказки к решению]
+%%	
+%\end{proof}
+
+\begin{task3}
+	Решить диффур:
+	\[2x + (xt^2 + 1)\cdot t\dx\]
 \end{task3}
 %\begin{proof}[Подсказки к решению]
 %	
 %\end{proof}
 
 \begin{task4}
-	Изоклинами найти приближённое решение: 	\[\dot{x} = \dfrac{x}{t + x}\]
-	Также изобразите изоклины на графике и покажите все различные (с точностью до топологии и асимптотики) решения (то есть, как рассмотрено выше в примере).
+	Найти все такие $\alpha,\ \beta,\ a,\ b \in \R$, такие, что дифференциальное уравнение
+	\[\dx = at^\alpha + bx^\beta\] \textbf{сводится} к линейному.
 \end{task4}
-\begin{proof}[Подсказки к решению]
-	Проведите исследование, аналогичное \textbf{Примеру №1}. Нарисуйте изоклины и посмотрите направление касательных, проверьте выпуклость, взяв вторую производную. После этого постройте приближение кривой $x(t)$ так, чтобы ваша кривая была параллельна <<чёрточкам>>, соответствующим той изоклине, которую вы пересекли.
-\end{proof}
+%\begin{proof}[Подсказки к решению]
+%
+%\end{proof}
 
 \begin{task5}
-	Придумайте (вообще говоря, найдите) диффур 1 порядка, задающий множество прямых, являющихся касательными к единичной окружности с центром в нуле.
+	Найдите все кривые $x(t)$, такие, что расстояние от начала координат до касательной к $x(t)$ в любой точке $\big(t_0,\ x(t_0)\big)$ совпадает с абсциссой данной точки (равно $t_0$):
+	\begin{center}
+		\begin{tikzpicture}
+		
+		
+		\draw (8, -0.3) node[draw,circle,fill=black,minimum size=5pt,inner sep=1pt][label=45:$M$] (M) {};
+		\draw (4, -2) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (o) {};
+		\draw (11, -2) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (t) {};
+		\draw (8, -1) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (c) {};
+		\draw (5.87, 0.92) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (p) {};
+		\draw (8, -2) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (t0) {};
+		
+		\draw[step=1cm,gray,very thin] (4,-2) grid (12,3);
+		\draw[very thick,->] (4,-2) -- (12,-2) node[anchor=north] {$t$};
+		\draw[very thick,->] (4,-2) -- (4,3) node[anchor=east](x) {$x$};
+		
+		\draw[very thick] (11, -2) -- (4, 2);
+		\draw[very thick] (4, -2) -- (5.87, 0.92);
+		
+		\draw[very thick, dashed] (8, -2) -- (M);
+		\draw[very thick, dashed] (4, -0.3) -- (M);
+		
+		\draw [right angle symbol={o}{p}{M}];
+		
+		\draw [right angle symbol={o}{t}{M}];
+		
+		\node [left] at (4, -0.3) {$x_0$};
+		\node [below] at (8, -2) {$t_0$};
+		\node [left] at (4, -2) (O) {$O$};
+		
+		\node [above left] at (5.25, 0) {$t_0$};
+		
+		\pic[draw=red, <->, angle eccentricity=2, angle radius=1.75cm]	{angle=M--t--o};
+		
+		\draw[very thick, dashed, color=violet] (M) to [out=140,in=-80] (5, 3);
+		\draw[very thick, dashed, color=violet] (M) to [out=-25,in=180] (12, -1.3);
+		
+		\end{tikzpicture}
+	\end{center}
 \end{task5}
-\begin{proof}[Подсказки к решению]
-	Пускай вы касаетесь в точке $(t_0, x_0)$. Однако, координата $x_0$ зависит от $t_0$. Используйте уравнение окружности, чтобы ликвидировать эту зависимость. Ну а дальше придётся малость подумать и чутка посчитать.
-\end{proof}
+%\begin{proof}[Подсказки к решению]
+%	
+%\end{proof}
+
 
 
 \newpage
 \section{Common Tasks}
 
 \begin{enumerate}
-	\item Найти такую кривую $x(t)$, что для любой $t_0 \in \R$ касательная к $x(t)$ в точке $(t_0,\ x(t_0))$ пересекает ось абсцисс в точке $\dfrac{t_0}{2}$.
+	\item Найти такую кривую $x(t)$, что для любой $t_0 \in \R$ касательная к $x(t)$ в точке $\big(t_0,\ x(t_0)\big)$ пересекает ось абсцисс в точке $\dfrac{t_0}{2}$.
 	\item Найти дифференциальное уравнение первого порядка, задающее на плоскости семейство парабол
 	$x = at^2 + bt + c$, проходящих через 
 	точку $(0,1)$ и касающихся прямой $x = t$. 
+	\item Решить диффур: \[\dfrac{t}{x}\dx = \ln x - \ln t + 1\]
+	\item Решить задачу Коши:
+	\[	\dx = \dfrac{1}{2x}\cdot \exp(\frac{x^2}{t}) + \dfrac{x}{2t},\ \ 	\text{начальное условие: }x(1) = 1\]
 \end{enumerate}
 
 \end{document}
