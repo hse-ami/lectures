@@ -450,7 +450,7 @@ in
 	\node [below] at (5.5, -2) (t0) {$t_0$};
 	\node [left] at (4, -2) (O) {$O$};
 	
-	\pic[draw=red, <->, angle eccentricity=1, angle radius=1.1cm]	{angle=M--p--o};
+	\pic[draw=red, <->, angle eccentricity=1, angle radius=1.1cm, very thick]	{angle=M--p--o};
 	
 	\draw[very thick, dashed, color=violet] (M) to [out=120,in=-80] (4.5, 2);
 	\draw[very thick, dashed, color=violet] (M) to [out=-30,in=180] (8, -1.5);
@@ -564,21 +564,112 @@ in
 	Найти все кривые $x(t)$, такие, что длина отрезка, соединяющего точку касания и точку пересечения касательной в данной точке с одной из осей, была постоянной.
 \end{task1}
 \begin{proof}[Решение]
+	\begin{center}
+		\begin{tikzpicture}
+		
+		
+		\draw (9.5, 1) node[draw,circle,fill=black,minimum size=5pt,inner sep=1pt][label=135:$M$] (M) {};
+		\draw (4, -2) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (o) {};
+		\draw (11, -2) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (t) {};
+		\draw (4, -1) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] [label=135:$P$] (c) {};
+		\draw (5.87, 0.92) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (p) {};
+		\draw (8, -1) node[draw,circle,fill=black,minimum size=0pt,inner sep=0pt] (t0) {};
+		
+		\draw[step=1cm,gray,very thin] (4,-2) grid (12,3);
+		\draw[very thick,->] (4,-2) -- (12,-2) node[anchor=north] {$t$};
+		\draw[very thick,->] (4,-2) -- (4,3) node[anchor=east](x) {$x$};
+		
+		\draw[very thick] (12, 2) -- (4, -1);
+		
+		
+		\draw[very thick, dashed] (9.5, -2) -- (M);
+		\draw[very thick, dashed] (4, 1) -- (M);
+		\draw[very thick, dashed] (c) -- (12, -1);
+				
+		\node [left] at (4, 1) {$x_0$};
+		\node [below] at (9.5, -2) {$t_0$};
+		\node [left] at (4, -2) (O) {$O$};
+		
+		\node [above right] at (9.5, -1) {$Q$};
+		
+		\pic[draw=red, <->, angle eccentricity=2, angle radius=4cm, very thick]	{angle=t0--c--M};
+		
+		\draw[very thick, dashed, color=violet] (M) to [out=40,in=-90] (11.5, 3);
+		\draw[very thick, dashed, color=violet] (M) to [out=190,in=0] (4, -0.35);
+		
+		\end{tikzpicture}
+	\end{center}
 	
+	Пусть длина отрезка $MP = l$. Рассмотрим треугольник $MPQ$ -- на рисунке выше. Мы знаем, что $PQ = t_0$. Известно, что $\tan \angle MPQ = \dx = \dfrac{MQ}{PQ}$, откуда получаем, что 
+	\[MQ = PQ\tan \angle MPQ = t_0\dx\]. По условию, равенство можно продлить на всю числовую прямую, получая:
+	\[PQ = t \Longrightarrow MQ = t\dx\]
+	Теперь применим Теорему Пифагора, чтобы получить дифференциальное уравнение на искомую кривую:
+	\begin{gather*}
+		MP^2 = PQ^2 + MQ^2\\
+		l^2 = t^2 + t^2(\dx)^2 \Longrightarrow l^2 - t^2 = t^2(\dx)^2\\
+		(\dx)^2 = \dfrac{l^2 - t^2}{t^2} \Longrightarrow \dx = \ds \pm \dfrac{\sqrt{l^2 - t^2}}{t}
+	\end{gather*}
+	Получили диффур (вообще говоря, два диффура). Будем рассматривать случай со знаком $+$, так как знак $-$ приведёт нас к почти аналогичному результату (это обговорится далее).
+	
+	Итак, имеем диффур с разделяющимися переменными:
+	\begin{gather*}
+		\dfrac{\d x}{\d t} = \dfrac{\sqrt{l^2 - t^2}}{t} \Longrightarrow \d x = \dfrac{\sqrt{l^2 - t^2}}{t}\d t \Longrightarrow \ds\int \d x = \ds \int \dfrac{\sqrt{l^2 - t^2}}{t} \d t
+	\end{gather*}
+	Возьмём правый интеграл, сделав замену переменных.
+	\begin{gather*}
+		\ds \int \dfrac{\sqrt{l^2 - t^2}}{t} \d t = \Big\{t = l \cdot \sin \beta,\ \d t = l\cdot \cos \beta \d \beta\Big\} = \ds\int \dfrac{\sqrt{l^2(1 - \sin^2 \beta)}}{l \cdot \sin \beta} \cdot l\cdot \cos \beta \d \beta =\\
+		= \ds\int\dfrac{l \cdot \cos \beta \cdot \cos \beta}{\sin \beta}\d \beta = l \cdot \ds\int \dfrac{1 - \sin^2 \beta}{\sin \beta}\d \beta = l \left(\ds\int \dfrac{\d \beta}{\sin\beta} - \ds\int \sin\beta \d \beta\right) = \\
+		=\Big\{\ds\int\dfrac{\d \beta}{\sin\beta} = \ds\int\dfrac{\d \beta}{2\sin(\frac{\beta}{2})\cos(\frac{\beta}{2})} = \ds\int\dfrac{\cos(\frac{\beta}{2})\d\beta}{2\sin(\frac{\beta}{2})\cos[2](\frac{\beta}{2})} = \ds\int\dfrac{\d \tan(\frac{\beta}{2})}{\tan(\frac{\beta}{2})} = \ln\left|\tan(\frac{\beta}{2})\right| + C\Big\} = \\
+		l\cdot \ln\left|\tan(\frac{\beta}{2})\right| + l \cdot \cos(\beta) + C
+	\end{gather*}
+	Теперь сделаем обратную замену:
+	\begin{gather*}
+		t = l\cdot \sin\beta \Longrightarrow \sin\beta = \dfrac{t}{l} \Longrightarrow \cos\beta = \ds\pm\sqrt{1 - \dfrac{t^2}{l^2}}\\
+		\ln\left|\tan(\frac{\beta}{2})\right| = \ln\left|\dfrac{\sin(\frac{\beta}{2})}{\cos(\frac{\beta}{2})}\right| = \ln\left|\dfrac{2\cdot \sin(\frac{\beta}{2})\cdot\cos(\frac{\beta}{2})}{2\cdot \cos[2](\frac{\beta}{2})}\right| = \ln\left|\dfrac{l\cdot \sin\beta}{\left(1 + \cos\beta\right)\cdot l}\right| = \ln\left|\dfrac{t}{l \pm \sqrt{l^2 - t^2}}\right|
+	\end{gather*}
+	Теперь запишем полный результат интегрирования обеих частей, помня, что $\ds\int \d x = x + C$:
+	\[x = \ds\pm \sqrt{l^2 - t^2} + l\cdot \ln\left|\dfrac{t}{l \pm \sqrt{l^2 - t^2}}\right| + C\]
+	У нас тут есть модуль, что не очень хорошо. Кроме того, мы не рассмотрели случай с минусом. Убьём двух зайцев одним ударом, немного преобразовав ответ:
+	\begin{gather*}
+		\ds\pm \sqrt{l^2 - t^2} + l\cdot \ln\left|\dfrac{t}{l \pm \sqrt{l^2 - t^2}}\right| = \ds\pm \sqrt{l^2 - t^2} + \dfrac{l}{2}\cdot \ln\left|\dfrac{t}{l \pm \sqrt{l^2 - t^2}}\right|^2 =\\
+		= \ds\pm \sqrt{l^2 - t^2} + \dfrac{l}{2}\cdot \ln\left(\dfrac{t^2}{(l \pm \sqrt{l^2 - t^2})\cdot(l \pm \sqrt{l^2 - t^2})}\right) = \\
+		= \ds\pm \sqrt{l^2 - t^2} + \dfrac{l}{2}\cdot \ln\left(\dfrac{t^2\cdot (l \mp \sqrt{l^2 - t^2})}{(l \pm \sqrt{l^2 - t^2})\cdot(l \pm \sqrt{l^2 - t^2})\cdot (l \mp \sqrt{l^2 - t^2})}\right) = \\
+		= \ds\pm \sqrt{l^2 - t^2} + \dfrac{l}{2}\cdot \ln\left(\dfrac{t^2\cdot (l \mp \sqrt{l^2 - t^2})}{(l \pm \sqrt{l^2 - t^2})\cdot\big(l^2 - (l^2 - t^2)\big)}\right) = \\
+		= \ds\pm \sqrt{l^2 - t^2} + \dfrac{l}{2}\cdot \ln\left(\dfrac{l \mp \sqrt{l^2 - t^2}}{(l \pm \sqrt{l^2 - t^2})}\right)
+	\end{gather*}
+	Заметим, что если бы мы взяли случай с минусом, то тогда перед слагаемым с логарифмом стоял бы знак минус. Тогда, домножив на $-\dfrac{1}{2}$, мы бы возводили подлогарифменное выражение не в 2 степень, а в -2, соответственно абсолютно аналогичными преобразованиями получив под логарифмом такую же, но перевёрнутую дробь. Однако, и в числителе, и в знаменателе, у нас возникает по $\pm$ или $\mp$ -- следовательно, рассмотрев случай с плюсом, мы уже получили все возможные варианты ответа.
+	
+	Итоговый полный ответ:
+	\[x = \ds\pm \sqrt{l^2 - t^2} + \dfrac{l}{2}\cdot \ln\left(\dfrac{l \mp \sqrt{l^2 - t^2}}{(l \pm \sqrt{l^2 - t^2})}\right) + C\]
+	
+	Осталось лишь указать, что $t \in [-l,\ l]$, и $x(\pm l) = C$. 
 \end{proof}
 
 \begin{task2}
 	Придумать диффур 1 порядка, не обладающий решением на всей прямой. То бишь, не для всех $t$ решение $\dot{x} = f(t,\ x)$ должно существовать. 
 \end{task2}
 \begin{proof}[Решение]
+	$f(t, x)$  должна быть всюду определённой функцией. Поэтому достаточно взять такую $x = x(t)$ в качестве решения диффура, чтобы она не была всюду определена, при выполнении условия выше.
 	
+	Пример: $\dx = -x^2$. Проверим, что подходит:
+	\begin{gather*}
+		\dx = -x^2 \Longrightarrow \dfrac{\d x}{x^2} = -\d t \Longrightarrow \ds\int = \int\\
+		\dfrac{1}{x} = t \Longrightarrow x = \dfrac{1}{t}
+	\end{gather*}
 \end{proof}
 
 \begin{task3}
 	Решите диффур: 	\[(t^2 - 1) \cdot \dot{x} + 2tx^2 = 0, \text{начальное условие: }x(0) = 1\]
 \end{task3}
 \begin{proof}[Решение]
-	
+	\begin{gather*}
+		(t^2 - 1)\cdot \dx + 2tx^2 = 0 \Longrightarrow (t^2 - 1)\cdot \d x + 2tx^2\d t = 0\\
+		\dfrac{\d x}{x^2} = \dfrac{2t \cdot \d t}{1 - t^2}\Longrightarrow \ds\int = \int\\
+		\dfrac{1}{x} = \ln|1-t^2| + C
+	\end{gather*}
+	Найдём константу: \[x(0) = 1 \Longrightarrow 1 = \ln 1 + C \Longrightarrow C = 1\]
+	Итоговая кривая:
+	\[\dfrac{1}{x} = \ln|1 - t^2| + 1 \Longrightarrow x = \dfrac{1}{\ln|1 - t^2| + 1}\]
 \end{proof}
 
 \begin{task4}
@@ -586,14 +677,48 @@ in
 	Также изобразите изоклины на графике и покажите все различные (с точностью до топологии и асимптотики) решения (то есть, как рассмотрено выше в примере).
 \end{task4}
 \begin{proof}[Решение]
-	
+	Уравнения изоклин:
+	\[\dx = \dfrac{x}{t + x} = k \Longrightarrow x = t \cdot \dfrac{k}{1 - k}\] Получим прямые изменения характера роста и выпуклости, исследовав первые две производные:
+	\begin{gather*}
+		\dx = 0 = \dfrac{x}{t + x} \Longrightarrow x = 0\\
+		\ddx = \dfrac{\dx(t + x) - x(1 + \dx)}{(t + x)^2} = \dfrac{\dx t - x}{(t + x)^2} = 0 \Longrightarrow \dfrac{\frac{x}{t + x} \cdot t - x}{(t + x)^2} = 0 \Longrightarrow \\
+		\Longrightarrow \dfrac{-x^2}{(t + x)^3} = 0 \Longrightarrow x = 0\\
+		\ddx > 0 \Longrightarrow t + x < 0 \Longrightarrow x < -t\\
+		\ddx < 0 \Longrightarrow t + x > 0 \Longrightarrow x > -t
+	\end{gather*}
+	Таким образом, характер роста функции меняется в нуле, а выпуклость изменяется, проходя через прямые $x = 0,\ x = -t$. На основании этого и нескольких изоклин можно построить приблизительный график кривой $x(t)$.
 \end{proof}
 
 \begin{task5}
 	Придумайте (вообще говоря, найдите) диффур 1 порядка, задающий множество прямых, являющихся касательными к единичной окружности с центром в нуле.
 \end{task5}
 \begin{proof}[Решение]
-	
+	Уравнение касательной к окружности в точке $(t_0,\ x_0)$ --- $x \cdot x_0 + t \cdot t_0 = 1$. Таким образом, у нас есть два уравнения:
+	\[\left\{\begin{gathered}
+		x_0^2 + t_0^2 = 1\hfill\\
+		x \cdot x_0 + t \cdot t_0 = 1\hfill
+	\end{gathered}\right.\]
+	Будем выражать из них $t_0$ и $x_0$, чтобы остались только переменные $t$ и $x$. Для этого продифференцируем второе уравнение и попреобразуем:
+	\begin{gather*}
+		x \cdot x_0 + t \cdot t_0 = 1 \Longrightarrow \dx x_0 + t_0 = 0\\
+		\dx x_0 = -t_0 \text{ --- здесь возведём в квадрат, запоминая знак минус --- } (\dx)^2x_0^2 = t_0^2
+	\end{gather*}
+	Из уравнения окружности мы  получаем выражение на квадрат $t_0$:
+	\[x_0^2 + t_0^2 = 1 \Longrightarrow t_0^2 = 1 - x_0^2\] --- теперь подставим $t_0^2$ в уравнение выше:
+	\begin{gather*}
+		(\dx)^2x_0^2 = 1 - x_0^2 \Longrightarrow x_0^2\big(1 + (\dx)^2\big) = 1\\
+		x_0^2 = \dfrac{1}{1 + (\dx)^2} \Longrightarrow t_0^2 = 1 - x_0^2 = \dfrac{(\dx)^2}{1 + (\dx)^2}\\
+		x_0 = \ds\pm\dfrac{1}{\sqrt{1 + (\dx)^2}},\ \ \ t_0 = \ds\pm\dfrac{\dx}{\sqrt{1 + (\dx)^2}}
+	\end{gather*}
+	Осталось подставить выраженные константы в уравнение касательной и получить некоторыми преобразованиями искомый диффур:
+	\begin{gather*}
+		\ds\pm\dfrac{x}{\sqrt{1 + (\dx)^2}} \ds\pm\dfrac{\dx t}{\sqrt{1 + (\dx)^2}} = 1\\
+		\ds\pm x \ds\pm \dx t = \sqrt{1 + (\dx)^2}\\
+		x^2 \ds\pm 2\dx x t + (\dx)^2t^2 = 1 + (\dx)^2\\
+		(\dx)^2(t^2 - 1) \ds\pm (2xt)\dx + (x^2 - 1) = 0 \text{ --- квадратное уравнение }\\
+		\dx = \dfrac{\pm 2xt \pm \sqrt{4x^2t^2 - 4(t^2 - 1)(x^2 - 1)}}{2(t^2 - 1)}\\
+		\dx = \dfrac{\pm xt \pm \sqrt{x^2 + t^2 - 1}}{t^2 - 1}
+	\end{gather*}
 \end{proof}
 
 
@@ -723,7 +848,7 @@ t = 1\hfill
 \wx = x - 2\hfill\\
 \wt = t - 1\hfill
 \end{gathered}\right. \Longrightarrow \dfrac{\d \wx}{\d\wt} = \dfrac{5\wt - \wx}{3\wt + 2\wx}\]
-Поделим числитель и знаменатель правой части уравнения на $\wt$	и положим $y = \dfrac{\wt}{\wx}$. Получаем уравнение с разделяющимися переменными:
+Поделим числитель и знаменатель правой части уравнения на $\wt$	и положим $y = \dfrac{\wx}{\wt}$. Получаем уравнение с разделяющимися переменными:
 \[\wt \cdot \dfrac{\d y}{\d \wt} = \dfrac{5 - 4y - 2y^2}{3 + 2y}\]
 
 \subsection{Однородные уравнения: $x = y^m$}
@@ -841,7 +966,7 @@ t = 1\hfill
 		
 		\node [above left] at (5.25, 0) {$t_0$};
 		
-		\pic[draw=red, <->, angle eccentricity=2, angle radius=1.75cm]	{angle=M--t--o};
+		\pic[draw=red, <->, angle eccentricity=2, angle radius=1.75cm, very thick]	{angle=M--t--o};
 		
 		\draw[very thick, dashed, color=violet] (M) to [out=140,in=-80] (5, 3);
 		\draw[very thick, dashed, color=violet] (M) to [out=-25,in=180] (12, -1.3);
