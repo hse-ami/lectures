@@ -2,7 +2,179 @@
 
 
 \begin{document}
-	\section*{Лекция 2. Алгоритмы сортировки, реккурентные соотношения}
+	\section{Лекция 2. Merge sort, Binary search, рекуррентные соотношения}
+	
+	Поговорим еще немного про сортировки. Сортировка вставками имеет квадратичную сложность, что не оптимально. Есть более быстрые алгоритмы, один из них называется \textit{сортировкой слиянием}.
+	
+	\textbf{Сортировка слиянием}
+	
+	Суть сортировки достаточно проста: если у нас есть две отсортированные последовательности, мы можем их объединить в одну отсортированную, а последовательность длины один уже отсортирована, а значит мы можем разбить наш массив на блоки одинаковой длины, и рекурсивно отсортировать.
+	
+	
+	Опишем функцию слияния двух массивов разной длины.
+	\begin{algorithm}[H]
+		\caption{Функция слияния отсортированных массивов}
+		\begin{algorithmic}[1]
+			\Require Отсортированные массивы $A, B$.
+			\Ensure Отсортированный массив $C$
+			\Function{merge}{$A, B$}
+				\State $ i := 0 $
+				\State $ j := 0 $
+				\State vector $C$
+				\While{$ i < len(A) $ \textbf{and} $ j < len(B)$}		
+					\If{$ A[i] \leqslant B[i]$}
+						\State $C.push\_back(A[i])$
+						\State $i := i + 1$
+					\Else
+						\State $C.push\_back(B[i])$
+						\State $j := j + 1$
+					\EndIf
+				\EndWhile
+				\State $ C := C + A[i:len(A)] + B[j:len(B)]$
+				\State \Return $C$
+			\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+
+		
+	\begin{proof_cor}
+		На входе отсортированные массивы. На каждой итерации цикла выбирается наименьший из еще не выбранных элементов.
+	\end{proof_cor}
+	\begin{time}
+		Алгоритм как минимум смотрит на каждый элемент каждого массива, тогда его сложность получается $\Theta(len(A) + len(B))$.
+	\end{time}	
+
+	Теперь сам алгоритм сортировки слиянием:
+	\begin{algorithm}[H]
+		\caption{Merge Sort}
+		\begin{algorithmic}[1]
+			\Require Массив $A$
+			\Ensure Отсортированный массив $C$
+			\Function{merge\_sort}{$A$}
+				\If{$ len(A) < 2$}
+					\State \Return A
+				\Else
+					\State $n := len(A)$
+					\State $A_1 := merge\_sort(A[0: n/2])$
+					\State $A_2 := merge\_sort(A[n/2: n])$
+					\State \Return $merge(A_1, A_2)$
+				\EndIf
+		
+			\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{remark}
+		Сортировку слиянием можно написать разными способами. Например, изначально разбить массив на куски длиной 10, каждую из них отсортировать вставками, а потом уже последовательно слить в один отсортированный массив.
+	\end{remark}
+	\begin{proof_cor}
+		Пока корректна функция \textit{merge}, весь алгоритм корректен, так как вся задача разбивается на меньшие подзадачи, а рекурсия остановится на массивах размера 1.
+	\end{proof_cor}
+	\begin{time}
+		Время работы данного алгоритма $T(n) = \Theta(n\cdot log(n))$: У нас $log(n)$ - глубина рекурсии, а на каждом шаге мы пройдемся в сумме по всему массиву.
+	\end{time} 
+	
+	
+	Время работы сортировки слиянием можно записать и по-другому, с помощью \textit{рекуррентной форумулы}. В нашем случае она будет иметь вид
+	\[
+	T(n) = 
+	\begin{cases}
+		c, & n = 2; \\
+		2T(\frac{n}{2}) + c \cdot O(n), & n > 2;
+	\end{cases}
+	\]
+	где $2T(\frac{n}{2})$ - сложность рекурсивных вызовов, $c \cdot O(n)$ - сложность слияния. Для таких соотношений хочется получить правило их раскрытия в явную формулу. О таком преоборазовании говорит \textit{основная теорема о рекуррентных соотношениях}.
+	
+	\begin{theorem}
+		Пусть у нас есть реккурентное соотношение, записанное в виде
+		\[
+		T(n) = 
+		\begin{cases}
+		c, & n = 2\\
+		aT(\frac{n}{b}) + cn^d, & n > 2
+		\end{cases}
+		\]
+		Тогда его можно представить в следующем виде:
+		\[
+		T(n) = 
+		\begin{cases}
+		O(n^d \log(n)), & a = b^d \\
+		O(n^d), & a < b^d \\
+		O(n^{\log_b(a)}), & a > b^d
+		\end{cases}
+		\]
+	\end{theorem}
+	
+	Эта теорема может раскрыть не все рекуррентные соотношения, поэтому покажем еще несколько способов решения.
+	
+	
+	
+	Теперь давайте разберем другой рекурсивный алгоритм - \textit{бинарный поиск}. Это алгоритм ищет в отсортированном элементе некоторый элемент и возвращает его индекс.
+		
+	\begin{algorithm}[H]
+		\caption{Binary Search}
+		\begin{algorithmic}[1]
+			\Require Отсортированный массив $A$, элемент $e$
+			\Ensure Индекс элемента $e$ если он есть в массиве, -1 в противном случае.
+			\Function{binary\_search}{$A$, $e$}
+				\State $n := len(A) / 2$
+				\If{$A[n] == e$}
+					\State \Return $n$
+				\ElsIf{$A[n] < e$}
+					\State \Return binary\_search($A[n + 1: \ ], e$)
+				\Else
+					\State \Return binary\_search($A[ \ :n], e$)
+				\EndIf
+			\EndFunction
+		\end{algorithmic}
+	\end{algorithm}
+	Словами: смотрим в середину, сравниваем, идем в ту сторону, где элемент заведомо будет, повторяем до нахождения.
+	
+	
+	\begin{time}
+		Формула времени нашего алгоритма:
+		\[
+		T(n) = 
+		\begin{cases}
+			c, & n = 2 \\
+			T(\frac{n}{2}) + c, & n > 2
+		\end{cases}
+		\]
+		По основной теореме 
+		\[
+		a = 1, \ b = 2, \ d = 0
+		\]
+		\[
+		T(n) = O(log(n))
+		\]
+	\end{time}
+	
+	
+	\begin{comment}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{scope}[every node/.style={circle,thick,draw}]
+				\node[label=\large$ cn^d $] (top) at (10, 10) {};
+				
+				\node[label=left:\Large $ \frac{cn^d}{b^a}$] (mid-left) at (7, 8) {};
+				\node (mid-right) at (13, 8) {};
+				
+				\node (bot-left) at (5, 6) {};
+				\node[label=right:\Large $ \frac{cn^d}{b^{2a}} $] (bot-right) at (9, 6) {};
+			\end{scope}
+
+			\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black,very thick}]
+				\path [->] (top) edge (mid-left);
+				\path [->] (top) edge (mid-right);
+				
+				\path [->] (mid-left) edge (bot-left);
+				\path [->] (mid-left) edge (bot-right);
+				
+				\draw[dashed] (mid-left) -- node[above] {$a$} (mid-right);
+				\draw[dashed] (bot-left) -- node[above] {$a$} (bot-right);
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+	\end{comment}
 	
 	
 \end{document}
