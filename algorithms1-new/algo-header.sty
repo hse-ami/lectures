@@ -32,7 +32,7 @@
 
 %% Алгоритмические пакеты и их настройки
 \usepackage{algcompatible}
-\usepackage{algorithm}              % Шапка алгоритма
+\usepackage{algorithm}             % Шапка алгоритма
 \usepackage{algorithmicx}           % Написание алгоритмов
 \usepackage[noend]{algpseudocode}   % Написание псевдокода; убраны end
 \usepackage{listings}               % Для кода на каком-либо языке программиования
@@ -53,6 +53,7 @@
 \usepackage[pdftex]{graphicx}       % Вставка картинок
 \graphicspath{{images/}}            % Стандартный путь к картинкам
 \usepackage{tikz}                   % Рисование всего
+\usetikzlibrary{arrows.meta}
 \usepackage{pgfplots}               % Графики
 \usetikzlibrary{calc,matrix, intersections}
 
@@ -60,8 +61,11 @@
 \usepackage{indentfirst}                    % Красная строка в начале текста
 \usepackage{epigraph}                       % Эпиграфы
 \usepackage{fancybox,fancyhdr}              % Колонтитулы
-\usepackage[colorlinks=true, urlcolor=blue]{hyperref}   % Ссылки
+\usepackage[
+colorlinks = false, hidelinks
+]{hyperref}   % Ссылки
 \usepackage{titlesec}                       % Изменение формата заголовков
+\usepackage{tocloft}						% Изменение формата содержания
 \usepackage[normalem]{ulem}                 % Для зачёркиваний
 \usepackage[makeroom]{cancel}               % И снова зачёркивание (на этот раз косое)
 \usepackage{subfiles}						% \subfile
@@ -189,18 +193,11 @@
 
 \newenvironment{proof_cor}
   {\textit{Доказательство корректности.}}
-  {\par}
+  {\qed \par}
 
 \renewenvironment{time}
   {\textit{Время работы.}}
-  {\par}
-
-\newenvironment{lecture}[1]
-	{
-	\subflie{#1}
-	}{
-	\newpage
-	}
+  {\qed \par}
 
 
 \renewcommand{\titlepage}{\begingroup
@@ -209,17 +206,28 @@
           \rule{1pt}{\textheight}
           \hspace*{0.05\textwidth}
           \parbox[b]{0.775\textwidth}{
-              %{\includegraphics[width=\linewidth]{../images/velosiped.jpg}}\\[2\baselineskip]
+              {\includegraphics[scale=1.35]{../images/aist.jpg}}
+              \\[2\baselineskip]
               {\noindent\Huge\bfseries Алгоритмы и
-              структуры данных}\\[\baselineskip]
-              {\large\textrm{Конспекты лекций основного потока}}\\[3\baselineskip]
-              {\Large\textsc{Лектор: С. А. Объедков}}\\[\baselineskip]
-              {Орлов Никита, Евсеев Борис, Рубачев Иван}\\[6\baselineskip]
-              {\noindent НИУ ВШЭ, 2017}\\[\baselineskip]
+              структуры данных}
+              \\[\baselineskip]
+              {\large\textrm{Конспекты лекций основного потока}}
+              \\[3\baselineskip]
+              {\Large\textsc{Лектор: С. А. Объедков}}
+              \\[\baselineskip]
+              {Орлов Никита, Евсеев Борис, Рубачев Иван}
+              \\[6\baselineskip]
+              {\noindent НИУ ВШЭ, 2017}
+              \\[\baselineskip]
           }
     }
     \endgroup
 }
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} 			% точки в содержании
+\renewcommand{\cftsecpresnum}{\begin{lrbox}{0}}					% убираем цифру
+	\renewcommand{\cftsecaftersnum}{\end{lrbox}}
+\setlength{\cftsecnumwidth}{22pt}								% отступ от края страницы
 
 \newcommand*{\ShowIntersection}[3]{
 	\fill 
