@@ -1,0 +1,42 @@
+% Формат документа и размер шрифта
+\documentclass[a4paper,12pt]{article}
+\usepackage{lectures}
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+  
+    {\HugeАлгоритмы и Структуры Данных}
+  \\ \
+  \\ \
+  \\ \
+  {\Huge \textbf{Мини-Кормен}}
+    \\ \
+    \\ \
+    
+    \begin{figure}[h]
+    \begin{center}
+        \begin{minipage}[h]{0.8\linewidth}
+        \includegraphics[height=18cm, width=\linewidth]{mini-kormen.jpg}
+        \end{minipage}
+    \end{center}
+    \end{figure}
+    \ \\
+    
+    {\Large Вадим Гринберг} \\ 
+    \ \\ 
+    {\Large Алексей Хачиянц} \\ 
+   
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\include{hanoi}
+\newpage
+\include{asymptotic}
+\newpage
+
+\end{document}
