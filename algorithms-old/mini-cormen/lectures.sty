@@ -1,0 +1,88 @@
+
+\usepackage[T1,T2A]{fontenc}            % Кодировки шрифтов
+\usepackage[utf8]{inputenc}            % Кодировка текста
+\usepackage[english,russian]{babel}     % Поддержка языков
+\usepackage{cmap}                       % Поддержка поиска в тексте
+
+% Изменение границ страницы
+\usepackage[margin=2cm]{geometry}
+
+\usepackage{indentfirst}                % Красная строка в начале текста
+
+% Различные математические пакеты
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{icomma}
+\usepackage{units}
+\usepackage{array}
+\usepackage{stackrel}
+
+% Пакеты для алгоритмов
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{listings}
+
+\renewcommand{\algorithmicrequire}{\textbf{Вход:}}
+\renewcommand{\algorithmicensure}{\textbf{Выход:}}
+\renewcommand{\algorithmiccomment}[1]{\hspace*{\fill}\{#1\}}
+\floatname{algorithm}{Алгоритм}
+\newcommand{\algname}[1]{\textsc{#1}}
+
+% Пакеты для работы с графикой
+% \usepackage{esvect}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc,matrix}
+% \usepackage{qtree}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepackage{forest}
+
+%% Прочие пакеты
+\usepackage{titlesec}                       % Изменение формата заголовков
+\usepackage[normalem]{ulem}                 % Для зачёркиваний
+% \usepackage[autocite=footnote]{biblatex}    % Кавычки для цитат и прочее
+\usepackage[makeroom]{cancel}               % И снова зачёркивание (на этот раз косое)
+
+% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$\mathsurround=0pt #1$}}{}}
+
+\newtheorem*{on1n}{Задача}
+\newtheorem*{fulllemma}{Лемма}
+\newtheorem*{sl1}{Следствие 1}
+\newtheorem*{sl2}{Следствие 2}
+\newtheorem*{scheme}{Утверждение 1}
+\newtheorem*{n2}{Утверждение 2}
+\newtheorem*{theorem}{Теорема}
+\newtheorem*{proposal}{Предложение}
+\newtheorem*{notice}{Замечание}
+\newtheorem*{example}{Пример}
+\newtheorem*{statement}{Утверждение}
+\newtheorem*{definition}{Определение}
+\newtheorem*{consequence}{Следствие}
+\newtheorem*{lemma}{Лемма}
+\newtheorem*{pumping-lemma}{Лемма о накачке}
+
+\newcommand{\definitions}{\underline{Определения:} }
+\newcommand{\definitionone}{\underline{Определение 1:} }
+\newcommand{\definitiontwo}{\underline{Определение 2:} }
+
+\newcommand{\note}{\underline{Замечание:} }
+\newcommand{\sign}{\underline{Обозначения:} }
+\newcommand{\statements}{\underline{Утверждения:} }
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+
+% Ссылки
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+
+\title{\Huge{Алгоритмы и Структуры Данных \\ Мини-Кормен}}
+\author{Вадим Гринберг \\ Алексей Хачиянц}
+\date{}

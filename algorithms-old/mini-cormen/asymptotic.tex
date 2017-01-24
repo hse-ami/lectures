@@ -1,0 +1,48 @@
+\section{$O$-, $o$-, $\Omega$-, $\omega$-, $\Theta$- обозначения. Оценка сложности алгоритмов.}
+\subsection{Асимптотические обозначения}
+
+Введем следующие обозначения:
+
+\[
+  \Theta(g(n)) = \left\{ f(n)\mid \exists c_1>0, c_2>0 \exists n_0: \forall n 
+  \geqslant n_0 \implies 0\leqslant c_1g(n)\leqslant f(n) \leqslant c_2g(n) \right\},
+\]
+
+$\Theta$ --- \emph{асимптотическое} $\mathcal{=}$. Например, $2n = \Theta(n)$. 
+По определению, $c_1n \leqslant 2n \leqslant c_2n$. Тогда $c_1 = 1, c_2 = 2$.
+
+\[
+  O(g(n)) = \left\{ f(n)\mid \exists  c_2>0 \exists n_0: \forall n \geqslant n_0
+  \implies 0\leqslant f(n) \leqslant c_2g(n) \right\}
+\]
+
+$O$ --- \emph{асимптотическое} $\leqslant$. Например, по этому определению 
+$n = O(n \log{n})$, так как при достаточно больших $n_0$ следует, что
+$\log n_0 > 1$. Тогда $c_2 = 1$.
+
+\[
+\Omega(g(n)) = \left\{ f(n)\mid \exists c_1>0 \exists n_0: \forall n \geqslant
+ n_0 \implies 0\leqslant c_1g(n)\leqslant f(n) \right\}
+\]
+
+$\Omega$ --- \emph{асимптотическое} $\geqslant$. Например, $n \log n = \Omega(n 
+\log n)$ и $n \log n = \Omega(n)$. В обоих случаях подходит $c_1 = 1$.
+
+\[
+  o(g(n)) = \left\{ f(n)\mid \forall  c_2>0 \exists n_0: \forall n \geqslant n_0
+  \implies 0\leqslant f(n) \leqslant c_2g(n) \right\}
+ \]
+
+$o$ --- \emph{асимптотическое} $<$. Например, $n = o(n \log n)$. Покажем это. 
+Пусть $n < c_2 n \log n \iff 1 < c_2 \log n \iff n > 2^{1/c_2}$. Тогда $n_0 = [2^{1/c_2} + 1]$
+
+\[
+  \omega(g(n)) = \left\{ f(n)\mid \forall c_1>0 \exists n_0: \forall n \geqslant
+  n_0 \implies 0\leqslant c_1g(n)\leqslant f(n) \right\}
+\]
+
+$\omega$ --- \emph{асимптотическое} $>$. Например, нельзя сказать, что $n \log n
+ = \omega(n \log n)$. Но можно сказать, что  $n \log n = \omega(n)$.
+
+Заметим, что в логарифмах можно свободно менять основание: $\log_c n = \frac 
+{\log_2 n}{\log_2 c}$. Именно поэтому не пишут основание логарифма.
