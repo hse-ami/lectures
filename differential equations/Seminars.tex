@@ -905,33 +905,33 @@ t = 1\hfill
 	Решить диффур:
 	\[\dx = 2 \cdot \left(\dfrac{x + 2}{x + t - 1}\right)^2\]
 \end{task1}
-%\begin{proof}[Подсказки к решению]
-%
-%\end{proof}
+\begin{proof}[Решение]
+
+\end{proof}
 
 \begin{task2}
 	Решить диффур:
 	\[\dx = \dfrac{x + 2}{t + 1} + \tan(\dfrac{x - 2t}{t + 1})\]	 
 \end{task2}
-%\begin{proof}[Подсказки к решению]
-%%	
-%\end{proof}
+\begin{proof}[Решение]
+	
+\end{proof}
 
 \begin{task3}
 	Решить диффур:
 	\[2x + (xt^2 + 1)\cdot t\dx = 0\]
 \end{task3}
-%\begin{proof}[Подсказки к решению]
-%	
-%\end{proof}
+\begin{proof}[Решение]
+	
+\end{proof}
 
 \begin{task4}
 	Найти все такие $\alpha,\ \beta,\ a,\ b \in \R$, такие, что дифференциальное уравнение
-	\[\dx = at^\alpha + bx^\beta\] \textbf{сводится} к линейному.
+	\[\dx = at^\alpha + bx^\beta\] \textbf{сводится} к однородному.
 \end{task4}
-%\begin{proof}[Подсказки к решению]
-%
-%\end{proof}
+\begin{proof}[Решение]
+
+\end{proof}
 
 \begin{task5}
 	Найдите все кривые $x(t)$, такие, что расстояние от начала координат до касательной к $x(t)$ в любой точке $\big(t_0,\ x(t_0)\big)$ совпадает с абсциссой данной точки (равно $t_0$):
@@ -974,23 +974,77 @@ t = 1\hfill
 		\end{tikzpicture}
 	\end{center}
 \end{task5}
-%\begin{proof}[Подсказки к решению]
+\begin{proof}[Решение]
+	
+\end{proof}
+
+\newpage
+\section{Семинар 3, 24 января}
+
+\subsection{Линейные уравнения. Базовый случай}
+
+\subsection{<<Обратное>> решение: $t = t(x)$}
+
+\subsection{Уравнение Бернулли}
+
+\subsection{Уравнение Рикатти}
+
+\subsection{Домашнее задание №3}
+
+\begin{task1}
+Решить диффур:
+\[(tx + e^t)\d t - t\d x = 0\]
+\end{task1}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task2}
+Решить диффур:
+\[t\dx = x - t\cdot \exp(\dfrac{x}{t})\]
+\end{task2}
+%\begin{proof}[Решение]
+%%	
+%\end{proof}
+
+\begin{task3}
+Решить диффур:
+\[t\dx - 2t^2\cdot \sqrt{x} = 4x\]
+\end{task3}
+%\begin{proof}[Решение]
 %	
 %\end{proof}
 
+\begin{task4}
+Решить диффур:
+\[t^2\dx + tx + t^2x^2 = 4\]
+\end{task4}
+%\begin{proof}[Решение]
+%
+%\end{proof}
 
+\begin{task5}
+Пусть $x_1,\ x_2$ -- независимые  частные решения линейного диффура 1 порядка:
+\[\dx + a(t)x = b(t)\]
+Найти общее решение.
+\end{task5}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
 
 \newpage
 \section{Common Tasks}
 
 \begin{enumerate}
-	\item Найти такую кривую $x(t)$, что для любой $t_0 \in \R$ касательная к $x(t)$ в точке $\big(t_0,\ x(t_0)\big)$ пересекает ось абсцисс в точке $\dfrac{t_0}{2}$.
+	\item Найти все гладкие функции $x(t)$ такие, что для любой точки $t_0 \in \R$ касательная к $x(t)$ в точке $\big(t_0,\ x(t_0)\big)$ пересекает ось абсцисс в точке $\dfrac{t_0}{2}$.
 	\item Найти дифференциальное уравнение первого порядка, задающее на плоскости семейство парабол
 	$x = at^2 + bt + c$, проходящих через 
 	точку $(0,1)$ и касающихся прямой $x = t$. 
 	\item Решить диффур: \[\dfrac{t}{x}\dx = \ln x - \ln t + 1\]
 	\item Решить задачу Коши:
 	\[	\dx = \dfrac{1}{2x}\cdot \exp(\frac{x^2}{t}) + \dfrac{x}{2t},\ \ 	\text{начальное условие: }x(1) = 1\]
+	\item Решить диффур: \[(t + 1)(x\dx - 1) = x^2\]
+	\item Решить задачу Коши: \[\dx - 2tx + x^2 = 5 - t^2,\ \ \text{ начальное условие: }x(0) = 0\]
 \end{enumerate}
 
 \end{document}
