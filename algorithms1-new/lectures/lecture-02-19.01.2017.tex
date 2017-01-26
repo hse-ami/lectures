@@ -4,6 +4,8 @@
 \begin{document}
 	\section{Лекция 2. Merge sort, Binary search, рекуррентные соотношения}
 	
+	\textit{Лекция будет дополнена примерами решения рекуррентных соотношений без основной теоремы, а так же доказательством теоремы. Текущая версия вычитана лектором.}
+
 	Поговорим еще немного про сортировки. Сортировка вставками имеет квадратичную сложность, что не оптимально. Есть более быстрые алгоритмы, один из них называется \textit{сортировкой слиянием}.
 	
 	\textbf{Сортировка слиянием}
@@ -22,7 +24,7 @@
 				\State $ j := 0 $
 				\State vector $C$
 				\While{$ i < len(A) $ \textbf{and} $ j < len(B)$}		
-					\If{$ A[i] \leqslant B[i]$}
+					\If{$ A[i] \leqslant B[j]$}
 						\State $C.push\_back(A[i])$
 						\State $i := i + 1$
 					\Else
@@ -41,7 +43,7 @@
 		На входе отсортированные массивы. На каждой итерации цикла выбирается наименьший из еще не выбранных элементов.
 	\end{proof_cor}
 	\begin{time}
-		Алгоритм как минимум смотрит на каждый элемент каждого массива, тогда его сложность получается $\Theta(len(A) + len(B))$.
+		Алгоритм смотрит на каждый элемент каждого массива, тогда его сложность получается $\Theta(len(A) + len(B))$.
 	\end{time}	
 
 	Теперь сам алгоритм сортировки слиянием:
@@ -70,24 +72,26 @@
 		Пока корректна функция \textit{merge}, весь алгоритм корректен, так как вся задача разбивается на меньшие подзадачи, а рекурсия остановится на массивах размера 1.
 	\end{proof_cor}
 	\begin{time}
-		Время работы данного алгоритма $T(n) = \Theta(n\cdot log(n))$: У нас $log(n)$ - глубина рекурсии, а на каждом шаге мы пройдемся в сумме по всему массиву.
+		Время работы данного алгоритма $T(n) = \Theta(n\cdot log(n))$: У нас $log(n)$ - глубина рекурсии, а на каждом шаге мы пройдемся в сумме по всему массиву. 
+		
+		%время работы описывается реккурентным соотношением. через теорему
 	\end{time} 
 	
 	
-	Время работы сортировки слиянием можно записать и по-другому, с помощью \textit{рекуррентной форумулы}. В нашем случае она будет иметь вид
+	Время работы сортировки слиянием можно записать и по-другому, с помощью \textit{рекуррентной формулы}. В нашем случае она будет иметь вид
 	\[
 	T(n) = 
 	\begin{cases}
-		c, & n = 2; \\
-		2T(\frac{n}{2}) + c \cdot O(n), & n > 2;
+		c, & n = 1; \\
+		2T(\frac{n}{2}) + O(n), & n > 1;
 	\end{cases}
 	\]
-	где $2T(\frac{n}{2})$ - сложность рекурсивных вызовов, $c \cdot O(n)$ - сложность слияния. Для таких соотношений хочется получить правило их раскрытия в явную формулу. О таком преоборазовании говорит \textit{основная теорема о рекуррентных соотношениях}.
+	где $2T(\frac{n}{2})$ - сложность рекурсивных вызовов, $O(n)$ - сложность слияния. Для таких соотношений хочется получить правило их раскрытия в явную формулу. О таком преобразовании говорит \textit{основная теорема о рекуррентных соотношениях}.
 	
 	\begin{theorem}
-		Пусть у нас есть реккурентное соотношение, записанное в виде
+		Пусть у нас есть рекуррентное соотношение, записанное в виде
 		\[
-		T(n) = 
+		T(n) \leqslant
 		\begin{cases}
 		c, & n = 2\\
 		aT(\frac{n}{b}) + cn^d, & n > 2
@@ -104,30 +108,70 @@
 		\]
 	\end{theorem}
 	
-	Эта теорема может раскрыть не все рекуррентные соотношения, поэтому покажем еще несколько способов решения.
+	\begin{proof}
+		\begin{comment}
+		\begin{center}
+			\begin{tikzpicture}
+				\begin{scope}[every node/.style={circle,thick,draw}]
+					\node[label=\large$ cn^d $] (top) at (10, 10) {};
+					
+					\node[label=left:\Large $ \frac{cn^d}{b^d}$] (mid-left) at (7, 8) {};
+					\node (mid-right) at (13, 8) {};
+					
+					\node (bot-left) at (5, 6) {};
+					\node[label=right:\Large $ \frac{cn^d}{b^{2d}} $] (bot-right) at (9, 6) {};
+				\end{scope}
+				
+				\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black,very thick}]
+					\path [->] (top) edge (mid-left);
+					\path [->] (top) edge (mid-right);
+					
+					\path [->] (mid-left) edge (bot-left);
+					\path [->] (mid-left) edge (bot-right);
+					
+					\draw[dashed] (mid-left) -- node[above] {$a$} (mid-right);
+					\draw[dashed] (bot-left) -- node[above] {$a$} (bot-right);
+				\end{scope}
+			\end{tikzpicture}
+		\end{center}
+		На каждом уровне мы делим задачу на a подзадач, размер каждой отличается от другого уровня в b раз.  
+		
+		на i уровне, n/b^i -- размер подзадачи
+		всего на каждом уровне a^i подзадач.
+		на каждом уровне a_i * (n/b^i)^d * c
+		отсюда основная теорема.
+		\end{comment}
+	\end{proof}
+	%Эта теорема может раскрыть не все рекуррентные соотношения, поэтому покажем еще несколько способов решения.
 	
 	
 	
-	Теперь давайте разберем другой рекурсивный алгоритм - \textit{бинарный поиск}. Это алгоритм ищет в отсортированном элементе некоторый элемент и возвращает его индекс.
+	Теперь давайте разберем другой рекуррентный алгоритм - \textit{бинарный поиск}. Это алгоритм ищет в отсортированном элементе некоторый элемент и возвращает его индекс.
 		
 	\begin{algorithm}[H]
 		\caption{Binary Search}
 		\begin{algorithmic}[1]
-			\Require Отсортированный массив $A$, элемент $e$
+			\Require Отсортированный массив $A$, элемент $x$
 			\Ensure Индекс элемента $e$ если он есть в массиве, -1 в противном случае.
-			\Function{binary\_search}{$A$, $e$}
-				\State $n := len(A) / 2$
-				\If{$A[n] == e$}
-					\State \Return $n$
-				\ElsIf{$A[n] < e$}
-					\State \Return binary\_search($A[n + 1: \ ], e$)
-				\Else
-					\State \Return binary\_search($A[ \ :n], e$)
-				\EndIf
+			\Function{binary\_search}{$A$, $x$}
+				\State $b := 0$
+				\State $e := len(A)$
+				\While {$b < e$}
+					\State $m = round(\frac{b + e}{2})$
+					\If {$A[m] == x$}
+						\State \Return m
+					\ElsIf {$A[m] < x$}
+						\State $b := m + 1$
+					\Else
+						\State $e := m$
+					\EndIf
+				\EndWhile
+				\State \Return -1
 			\EndFunction
 		\end{algorithmic}
 	\end{algorithm}
-	Словами: смотрим в середину, сравниваем, идем в ту сторону, где элемент заведомо будет, повторяем до нахождения.
+	
+	Словами: смотрим в середину, сравниваем, сдвигаем границы поиска в сторону, где элемент может быть, повторяем пока не нашли или пока $b != e$.
 	
 	
 	\begin{time}
@@ -149,32 +193,7 @@
 	\end{time}
 	
 	
-	\begin{comment}
-	\begin{center}
-		\begin{tikzpicture}
-			\begin{scope}[every node/.style={circle,thick,draw}]
-				\node[label=\large$ cn^d $] (top) at (10, 10) {};
-				
-				\node[label=left:\Large $ \frac{cn^d}{b^a}$] (mid-left) at (7, 8) {};
-				\node (mid-right) at (13, 8) {};
-				
-				\node (bot-left) at (5, 6) {};
-				\node[label=right:\Large $ \frac{cn^d}{b^{2a}} $] (bot-right) at (9, 6) {};
-			\end{scope}
-
-			\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black,very thick}]
-				\path [->] (top) edge (mid-left);
-				\path [->] (top) edge (mid-right);
-				
-				\path [->] (mid-left) edge (bot-left);
-				\path [->] (mid-left) edge (bot-right);
-				
-				\draw[dashed] (mid-left) -- node[above] {$a$} (mid-right);
-				\draw[dashed] (bot-left) -- node[above] {$a$} (bot-right);
-			\end{scope}
-		\end{tikzpicture}
-	\end{center}
-	\end{comment}
 	
+	\pagebreak
 	
 \end{document}
