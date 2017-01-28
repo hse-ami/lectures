@@ -174,7 +174,15 @@ in
 \renewcommand{\d}{\mathsf{d}}
 
 \newcommand{\dy}{\dot{y}}
+\newcommand{\ddy}{\ddot{y}}
+\newcommand{\dt}{\dot{t}}
+\newcommand{\ddt}{\ddot{t}}
+\newcommand{\dw}{\dot{w}}
+\newcommand{\ddw}{\ddot{w}}
 \newcommand{\du}{\dot{u}}
+\newcommand{\ddu}{\ddot{u}}
+\renewcommand{\dv}{\dot{v}}
+\newcommand{\ddv}{\ddot{v}}
 \newcommand{\dx}{\dot{x}}
 \newcommand{\ddx}{\ddot{x}}
 
@@ -983,11 +991,229 @@ t = 1\hfill
 
 \subsection{Линейные уравнения. Базовый случай}
 
+Линейные диффуры первого порядка имеют следующий общий вид: \[\dx + a(t)x = b(t)\]
+
+Опишем 2 метода решения таких уравнений в общем виде.
+
+\subsubsection{Метод замены}
+
+Имеем диффур: $\dx + a(t)x = b(t)$. Делаем следующую замену: $x = uv$, где $u = u(t),\ v = v(t)$ -- функции от $t$. Естественным образом изменяется и дифференциал:
+\[\left\{\begin{gathered}
+x = uv\hfill\\
+\dx = \du v + u\dv\hfill
+\end{gathered}\right.\]
+Тогда уравнение примет вид:
+\[\du v + u\dv + a(t)uv = b(t)\]
+Сгруппируем слагаемые в левой части по $u$:
+\[\du v + u\big(\dv + a(t)v\big) = b(t)\]
+Теперь приравниваем выражение в скобках к нулю, получая систему:
+\[\left\{\begin{gathered}
+\dv + a(t)v = 0\hfill\\
+\du v = b(t)\hfill
+\end{gathered}\right.\]
+Решим первое уравнение системы -- это уравнение с разделяющимися переменными:
+\begin{gather*}
+\dfrac{\d v}{\d t} + a(t)v = 0\\
+\dfrac{\d v}{v} = -a(t)\d t \Longrightarrow \ds\int = \int\\
+\ln|v| = -\ds\int a(t) \d t \Longrightarrow v = \exp(-\ds\int a(t)\d t)
+\end{gather*}
+Прошу заметить, что в данном случае константа $C = 0$ -- это важно. Теперь подставляем данное выражение во второе уравнение.
+\begin{gather*}
+\du\exp(-\ds\int a(t)\d t) = b(t)\\
+\d u = b(t) \cdot \exp(\ds\int a(t)\d t)\d t \Longrightarrow \ds\int = \int\\
+u = \ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C
+\end{gather*}
+Осталось подставить полученные $u$ и $v$, получив $x = x(t) = u \cdot v$:
+\begin{gather*}
+x = u \cdot v = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C\right] \cdot \exp(-\ds\int a(t) \d t)
+\end{gather*}
+\ \\
+
+\textbf{Пример №1}
+
+\[\dx +2tx = t\cdot \exp(-t^2)\]
+Будем действовать по алгоритму.
+
+\begin{gather*}
+	\left\{\begin{gathered}
+	x = uv\hfill\\
+	\dx = \du v + u\dv\hfill
+	\end{gathered}\right.\\
+	\du v + u\dv + 2tuv = t\cdot \exp(-t^2) \iff \du v + u\big(\dv + 2tv\big) = t\cdot \exp(-t^2)\\
+	\left\{\begin{gathered}
+	\dv + 2tv = 0\hfill\\
+	\du v = t\cdot \exp(-t^2)\hfill
+	\end{gathered}\right. \Longrightarrow
+	\left\{\begin{gathered}
+	v = \exp(-t^2)\hfill\\
+	\du \exp(-t^2) = t\cdot \exp(-t^2)\hfill
+	\end{gathered}\right. \\
+	\du = t \Longrightarrow u = \dfrac{t^2}{2} + C
+	x = uv = \left(\dfrac{t^2}{2} + C\right)\cdot \exp(-t^2)
+\end{gather*}
+
+\subsubsection{Метод вариации произвольной постоянной}
+
+Имеем диффур: $\dx + a(t)x = b(t)$. Если $b(t) := 0$, то у нас имеется однородный диффур $\dx + a(t)x = 0$. Ясно, что каждое решение линейного диффура является решением однородного диффура с нулевой правой частью, смещённого на $b(t)$ -- по аналогии с СЛУ из Линала, мы сначала решаем однородную СЛУ, получая общее решение, а затем смещаем на вектор значений (столбец правых частей из расширенной СЛУ). Таким образом, получаем метод:
+\begin{gather*}
+\dx + a(t)x = 0\\
+\d x + a(t)x\d t = 0\\
+\dfrac{\d x}{x} = -a(t)\d t \Longrightarrow \ds\int = \int \\
+\ln|x| = -\ds\int a(t)\d t + C \Longrightarrow x = u \cdot \exp(-\ds\int a(t) \d t),\ u \in \R
+\end{gather*}
+Теперь сделаем вариацию постоянной (тем самым получая все возможные <<сдвиги>> решения однородного уравнения). Полагаем теперь, что $u$ -- не константа, а тоже некоторая функция от $t$: $u = u(t)$. 
+Тогда можно сделать замену $x = x(t,\ u)$ и подставить в исходное уравнение:
+\begin{gather*}
+\dot{\left[u \cdot \exp(-\ds\int a(t)\d t)\right]} + a(t) \cdot u \cdot \exp(-\ds\int a(t) \d t) = b(t)\\
+\du\exp(-\ds\int a(t) \d t) - u \cdot a(t) \cdot \exp(-\ds\int a(t)\d t) + a(t) \cdot u \cdot \exp(-\ds\int a(t)\d t) = b(t)
+\end{gather*}
+Заметим, что последние два слагаемых в левой части равны по модулю и противоположны по знаку, следовательно, их можно попросту сократить, получая диффур:
+\begin{gather*}
+\du\exp(-\ds\int a(t)\d t) = b(t)\\
+\d u = b(t) \cdot \exp(\ds\int a(t) \d t) \d t \Longrightarrow \ds\int = \int\\
+u = \ds\int b(t) \cdot \exp(\ds\int a(t) \d t) \d t + C
+\end{gather*}
+Осталось подставить полученное решение $u$ в выражение для $x$, чтобы получить общее решение диффура:
+\begin{gather*}
+x = u \cdot \exp(-\ds\int a(t)\d t) = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C\right] \cdot \exp(-\ds\int a(t) \d t)
+\end{gather*}
+
+Внимательный читатель может заметить, что оба метода являются по факту одним и тем же. Однако, в зависимости от ситуации, пользоваться можно любым подходом.
+\ \\
+
+\textbf{Пример №2}
+
+\[t\dx - 2x = 2t^4\]
+
+Сначала решим однородное.
+\begin{gather*}
+	t\dx = 2x\\
+	t\d x = 2x \d t \Longrightarrow \dfrac{\d x}{x} = 2\dfrac{\d t}{t} \Longrightarrow \ds\int=\int\\
+	\ln|x| = 2\ln|t| \Longrightarrow x = u\cdot t^2,\ u \in \R
+\end{gather*}
+Теперь сделаем вариацию постоянной $u = u(t)$:
+\begin{gather*}
+	\left\{\begin{gathered}
+	x = ut^2\hfill\\
+	\d x = \du t^2 + 2ut\hfill
+	\end{gathered}\right.\\
+	t\left(\du t^2 + 2ut\right) - 2ut^2 = 2t^4\\
+	\du t^3 +2ut^2 - 2ut^2 = 2t^4\\
+	\du t^3 = 2t^4 \Longrightarrow \du = 2t \Longrightarrow u = t^2 + C\\
+	x = ut^2 = (t^2 + C)t^2 = t^4 + Ct^2
+\end{gather*}
+Получили общее решение.
+\ \\
+
+\textbf{Пример №3}
+
+\[x = t(\dx - t\cdot\cos t)\]
+Приведём к <<классическому>> виду:
+\[\dx t - x = t^2\cdot \cos t\]
+Однородное:
+\begin{gather*}
+\dx t = x\\
+\d x t \cdot t = x\d t\\
+\dfrac{\d x}{x} = \dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+\ln|x| = \ln|t| + C \Longrightarrow x = ut,\ u \in \R
+\end{gather*}
+Сделаем вариацию постоянной $u = u(t)$:\
+\begin{gather*}
+\left\{\begin{gathered}
+x = ut\hfill\\
+\d x = \du t + u\hfill
+\end{gathered}\right.\\
+(\du t + u)t - ut = t^2\cos t \Longrightarrow \du t^2 = t^2\cos t\\
+\du = \cos t \Longrightarrow u = \sin t + C
+\end{gather*}
+Подставляем в выражение для $x$, чтобы получить итоговый ответ:
+\[x = ut = (\sin t + C)t = t\sin t + Ct\]
+
+\subsubsection{Функция от $x$, сведение к линейному}
+
+Пускай у нас есть уравнение вида: \[a'(x)\dx + b(t)\cdot a(x) = c(t)\] где $a = a(x)$ -- функция от \underline{$x$}. Его можно свести к линейному ввиду свойств дифференциала:
+\[a'(x)\dx = \dfrac{\d a}{\d x} \cdot \dfrac{\d x}{\d t} = \dfrac{\d a}{\d t}\]
+Подставляем в исходное уравнение, получая диффур, линейный по \underline{$a$}:
+\[\dfrac{\d a}{\d t} + b(t) \cdot a = c(t)\]
+
+Его уже можно решить приведёнными выше методами, получив решение $a = f(t)$, после чего выразить $x$ через $a(x) = f(t)$.
+
 \subsection{<<Обратное>> решение: $t = t(x)$}
+
+Ранее мы рассматривали уравнения, линейные относительно переменной $x$ и её производной. То есть мы считали, что $t$ является независимой переменной, а $x$ является зависимой переменной. Однако, всегда стоит иметь в виду, что возможен противоположный подход. То есть можно считать переменную $x$ независимой переменной, а $t$ – зависимой переменной. На практике часто встречаются задачи, в которых уравнение линейно относительно переменной $t$ и её производной, а не $x$. В общем виде такое уравнение можно записать так:
+
+\[\big(a(x)t + b(x)\big)\dx = c(x)\]
+Преобразуем его:
+\begin{gather*}
+	\big(a(x)t + b(x)\big)\dfrac{\d x}{\d t} = c(x)\\
+	a(x)t + b(x) = c(x)\dfrac{\d t}{\d x}\\
+	c(x)\dfrac{\d t}{\d x} - a(x)t = b(x)\\
+	\dt - \dfrac{a(x)}{c(x)}\cdot t = \dfrac{b(x)}{c(x)}
+\end{gather*}
+Теперь решаем его любым из рассмотренных выше методов, но для функции $t = t(x)$.
+\ \\
+
+\textbf{Пример №4}
+
+\[(2t + x^3)\dx = x\]
+
+Преобразуем его к диффуру от $t$, подставив нужные выражения в формулу выше.
+\[\dt - \dfrac{2}{x} \cdot t = x^2\]
+Теперь решим методом вариации постоянной:
+\begin{gather*}
+\dt = \dfrac{2}{x} \cdot t\\
+\dfrac{\d t}{t} = 2\dfrac{\d x}{x} \Longrightarrow \ds\int = \int\\
+\ln|t| = 2\ln|x| \Longrightarrow t = ux^2,\ u \in \R
+\end{gather*}
+Теперь положим $u = u(x)$:
+\begin{gather*}
+\left\{\begin{gathered}
+t = ux^2\hfill\\
+\d t = \du x^2 + 2ux\hfill
+\end{gathered}\right.\\
+\du x^2 + 2ux - 2ux = x^2 \Longrightarrow \du x^2 = x^2\\
+\du = 1 \Longrightarrow u = x + C
+\end{gather*}
+Получаем общее решение $t = t(x)$:
+\[t = ux^2 = (x + C)x^2 = x^3 + Cx\]
 
 \subsection{Уравнение Бернулли}
 
+Это дифференциальное уравнение имеет следующий вид:
+\[\dx + a(t)x = b(t)\cdot x^m\]
+
+Характерный признак -- степень $m$ в правой части. Стоит отметить, что при $m = 0,\ 1$ это обычное линейное уравнение, которое мы умеем решать. Более того, степень $m$ может быть какой угодно -- положительной ли, отрицательной или вообще дробью.
+
+Как и линейное неоднородное уравнение первого порядка, уравнение Бернулли может приходить на новогодний утренник в разных костюмах:
+\begin{itemize}
+	\item Волком:
+		\[a(t)\dx +  b(t)x = c(t) \cdot x^m\]
+	\item Зайчиком:
+		\[\dx + x = c(t) \cdot x^m\]
+	\item Или белочкой:
+		\[\dx + a(t)x = x^m\]
+\end{itemize}
+Важно, чтобы всегда присутствовала Ёлочка -- $x^m$, которая иногда может маскироваться под корень. Вокруг неё и будем водить хороводы.
+
+Стоит также обратить внимание, что у данных уравнений при $m > 0$ всегда есть очевидное частное решение $x = 0$. Понятно, что когда просят найти частное решение диффура, на этот факт можно забить, но при нахождении общего решения терять данный случай нельзя.
+
+Теперь обговорим метод решения. Пусть мы имеем диффур в <<классическом>> виде:
+\[\dx + a(t)x = b(t)\cdot x^m\]
+Избавимся от $x$ в правой части уравнения, поделив всё на его степень:
+\[\dfrac{\dx}{x^m} + \dfrac{a(t)}{x^{m - 1}} = b(t)\]
+Теперь делаем хитрую (нет) замену:
+\[\left\{\begin{gathered}
+w = \dfrac{1}{x^{m - 1}}\hfill\\
+\dw = \dfrac{(1 - m)\dx}{x^m} \Longrightarrow \dfrac{\dx}{x^m} = \dfrac{\dw}{1 - m}\hfill
+\end{gathered}\right.\]
+Тогда диффур примет вид:
+\[\dfrac{\dw}{1 - m} + a(t)w = b(t) \Longrightarrow \dw + (1 - m)\cdot a(t)w = (1 - m)\cdot b(t)\] --- получили обычный линейный диффур, который только что научились решать.
+
+
 \subsection{Уравнение Рикатти}
+
+
+%3\dx + x^2 + \dfrac{2}{t^2} = 0
 
 \subsection{Домашнее задание №3}
 
@@ -1026,7 +1252,7 @@ t = 1\hfill
 \begin{task5}
 Пусть $x_1,\ x_2$ -- независимые  частные решения линейного диффура 1 порядка:
 \[\dx + a(t)x = b(t)\]
-Найти общее решение.
+Найти общее решение (выразить через $x_1$ и $x_2$).
 \end{task5}
 %\begin{proof}[Решение]
 %	
