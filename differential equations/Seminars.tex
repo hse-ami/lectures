@@ -175,16 +175,24 @@ in
 
 \newcommand{\dy}{\dot{y}}
 \newcommand{\ddy}{\ddot{y}}
+
 \newcommand{\dt}{\dot{t}}
 \newcommand{\ddt}{\ddot{t}}
+
 \newcommand{\dw}{\dot{w}}
 \newcommand{\ddw}{\ddot{w}}
+
 \newcommand{\du}{\dot{u}}
 \newcommand{\ddu}{\ddot{u}}
+
 \renewcommand{\dv}{\dot{v}}
 \newcommand{\ddv}{\ddot{v}}
+
 \newcommand{\dx}{\dot{x}}
 \newcommand{\ddx}{\ddot{x}}
+
+\newcommand{\dz}{\dot{z}}
+\newcommand{\ddz}{\ddot{z}}
 
 \newcommand{\wx}{\widetilde{x}}
 \newcommand{\wt}{\widetilde{t}}
@@ -765,7 +773,7 @@ in
 
 Данное уравнение уже является однородным. Преобразуем его и сделаем вышеуказанную замену (предварительно рассмотрев вырожденные случаи):
 \begin{gather*}
-	t \d x = (x + t) \d t \iff \d x = \dfrac{x}{t} + \d t,\ y = \dfrac{x}{t}\\
+	t \d x = (x + t) \d t \iff \d x = \dfrac{x}{t}\d t + \d t,\ y = \dfrac{x}{t}\\
 	(y\d t + t \d y) = (y + 1)\d t\\
 	t\d y = \d t \Longrightarrow \d y = \dfrac{\d t}{t} \Longrightarrow \ds\int=\int
 \end{gather*}
@@ -1150,7 +1158,7 @@ x = ut\hfill\\
 	c(x)\dfrac{\d t}{\d x} - a(x)t = b(x)\\
 	\dt - \dfrac{a(x)}{c(x)}\cdot t = \dfrac{b(x)}{c(x)}
 \end{gather*}
-Теперь решаем его любым из рассмотренных выше методов, но для функции $t = t(x)$.
+Теперь решаем диффур любым из рассмотренных выше методов, но для функции $t = t(x)$.
 \ \\
 
 \textbf{Пример №4}
@@ -1163,7 +1171,7 @@ x = ut\hfill\\
 \begin{gather*}
 \dt = \dfrac{2}{x} \cdot t\\
 \dfrac{\d t}{t} = 2\dfrac{\d x}{x} \Longrightarrow \ds\int = \int\\
-\ln|t| = 2\ln|x| \Longrightarrow t = ux^2,\ u \in \R
+\ln|t| = 2\ln|x| + C \Longrightarrow t = ux^2,\ u \in \R
 \end{gather*}
 Теперь положим $u = u(x)$:
 \begin{gather*}
@@ -1208,12 +1216,261 @@ w = \dfrac{1}{x^{m - 1}}\hfill\\
 \end{gathered}\right.\]
 Тогда диффур примет вид:
 \[\dfrac{\dw}{1 - m} + a(t)w = b(t) \Longrightarrow \dw + (1 - m)\cdot a(t)w = (1 - m)\cdot b(t)\] --- получили обычный линейный диффур, который только что научились решать.
+\ \\
 
+\textbf{Пример №5}
 
-\subsection{Уравнение Рикатти}
+\[\dx = x^4\cdot \cos t + x \cdot \tan t\]
+Запомним, что $x = 0$ -- решение, далее полагаем $x \neq 0$. Перепишем в <<классическом>> виде:
+\[\dx - x \cdot \tan t = x^4 \cdot \cos t\]
+Поделим на $x^4$:
+\[\dfrac{\dx}{x^4} - \dfrac{\tan t}{x^3} = \cos t\]
+Замена:
+\begin{gather*}
+\left\{\begin{gathered}
+w = \dfrac{1}{x^3}\hfill\\
+\dw = \dfrac{(1 - 4)\dx}{x^4} \Longrightarrow \dfrac{\dx}{x^4} = -\dfrac{\dw}{3}\hfill
+\end{gathered}\right.\\
+-\dfrac{\dw}{3} - w \cdot \tan t = \cos t \iff \dw + 3w \cdot \tan t = -3\cos t
+\end{gather*}
+Теперь решаем такой линейный диффур.
+\begin{gather*}
+\dw = -3w\tan t \Longrightarrow \dfrac{\d w}{w} = -3 \tan t \d t \Longrightarrow \ds\int = \int \\
+\ln|w| = 3\ln|\cos t| + C \Longrightarrow w = u \cdot \cos^3t,\ u \in \R\\
+\end{gather*}
+Делаем вариацию постоянной $u = u(t)$:
+\begin{gather*}
+\left\{\begin{gathered}
+w = u \cdot \cos^3t\hfill\\
+\dw = \du\cos^3t - 3u \cdot \sin t \cdot \cos^2 t\hfill
+\end{gathered}\right.\\
+\du\cos^3t - 3u \cdot \sin t \cdot \cos^2 t + 3u \cdot \cos^3t \cdot \tan t = -3\cos t \iff\\
+\iff  \du\cos^3t - 3u \cdot \sin t \cdot \cos^2 t + 3u \cdot \cos^3t \cdot \dfrac{\sin t}{\cos t}= -3\cos t\\
+\du \cos^3 t = -3\cos t \iff \d u = -\dfrac{3\d t}{\cos^2 t} \Longrightarrow \ds\int = \int \\
+u = -3 \tan t + C
+\end{gather*}
+Подставляем в выражение для $w$ и делаем обратную замену.
+\begin{gather*}
+w = u \cdot \cos^3t = \left(-3 \tan t + C\right)\cdot \cos^3t\\
+w = \dfrac{1}{x^3} \Longrightarrow x^3 = \dfrac{1}{\left(-3\tan t + C\right)\cdot \cos^3 t}
+\end{gather*}
 
+\textbf{Пример №6}
 
-%3\dx + x^2 + \dfrac{2}{t^2} = 0
+Решить задачу Коши:
+\[\dx - \dfrac{2x}{t} = 2t\cdot \sqrt{x},\ \ \ \ \text{ начальное условие: } x(1) = 1\]
+Так как нужно решить задачу Коши, то $x \neq 0$. Решаем стандартным для Бернулли способом:
+\begin{gather*}
+\dfrac{\dx}{\sqrt{x}} - \dfrac{2\sqrt{x}}{t} = 2t\\
+\left\{\begin{gathered}
+w = \sqrt{x}\hfill\\
+\dw = \dfrac{\dx}{2\sqrt{x}} \Longrightarrow \dfrac{\dx}{\sqrt{x}} = 2\dw\hfill
+\end{gathered}\right.\\
+2\dw - \dfrac{2w}{t} = 2t \iff \dw - \dfrac{w}{t} = t
+\end{gather*}
+Решим заменой $w = uv$:
+\begin{gather*}
+	\left\{\begin{gathered}
+	w = uv\hfill\\
+	\dw = \du v + u\dv\hfill
+	\end{gathered}\right.\\
+	\du v + u\dv - \dfrac{uv}{t} = t \iff \du v + u\left(\dv - \dfrac{v}{t}\right) = t\\
+	\left\{\begin{gathered}
+	\dv - \dfrac{v}{t} = 0\hfill\\
+	\du v = t\hfill
+	\end{gathered}\right.\\
+	\dv = \dfrac{v}{t} \iff \dfrac{\d v}{v} = \dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+	\ln|v| = \ln|t| \iff v = t\\
+	\du t = t \iff \du = 1 \Longrightarrow u = t + C
+\end{gather*}
+Получаем общее решение диффура от $w$
+\[w = (t + C)\cdot t\]
+Делаем обратную замену $w = \sqrt{x} \iff x = w^2$:
+\[x = w^2 = \big[(t + C)\cdot t\big]^2 = (t + C)^2 \cdot t^2\]
+Теперь найдём частное решение:
+\[x(1) = 1 \Longrightarrow 1 = (1 + C)^2\] --- внезапно, уравнение имеет 2 корня: $C = 0$ и $C = -2$, откуда получается 2 частных решения:
+\[x = t^4,\ \ \ \ \ x = (t - 2)^2 \cdot t^2\]
+Каждое из них удовлетворяет начальному условию. Это объясняется тем, что задача Коши имеет единственное решение только при выполнении определённых условий (функция $f$ в диффуре $\dx = f(t, x)$ должна быть Липшицевой). В данном случае условие единственности нарушено, и в точке $(1,\ 1)$ \textbf{пересекаются} графики кривых $x = t^4$ и $x = (t - 2)^2 \cdot t^2$.
+
+\subsection{Уравнение Риккати}
+
+Это дифференциальное уравнение вида:
+\[\dx + a(t)x^2 + b(t)x + c(t) = 0\]
+Сразу отметим, что если $a,\ b,\ c$ -- константы, то это обычное уравнение с разделяющимися переменными, решение которого можно записать в виде функции $t = t(x)$:
+\[t = C - \ds\int\dfrac{\d x}{ax^2 + bx + c}\]
+
+Методы решения данного уравнения весьма и весьма интересны.
+
+\subsubsection{Одно частное решение}
+
+Пускай у нас есть одно \textbf{частное} решение $x_1 = x_1(t)$ этого диффура. Тогда мы можем представить общее решение -- функцию $x = x(t)$ -- как сумму функций:
+\[x = x_1 + z\] где $z = z(t)$ -- новая неизвестная функция. Подставим выражение для $x$ в исходное уравнение:
+\begin{gather*}
+	\left\{\begin{gathered}
+	x = x_1 + z\hfill\\
+	\dx = \dx_1 + \dz\hfill
+	\end{gathered}\right.\\
+	\dx_1 + \dz + a(t)\big(x_1^2  + 2x_1z + z^2\big) + b(t)(x_1 + z) + c(t) = 0\\
+\end{gather*}
+Поскольку $x_1$ -- решение диффура, то выполнено:
+\[\dx_1 + a(t)x_1^2 + b(t)x_1 + c(t) = 0\]
+Таким образом, раскрыв скобки, мы можем убрать обнулившуюся часть, получая диффур:
+\begin{gather*}
+\dz + a(t)\big(2x_1z + z^2\big) + b(t)z = 0\\
+\dz + a(t)z^2 + \big(2a(t)x_1 + b(t)\big) \cdot z = 0\\
+\dz + \big(2a(t)x_1 + b(t)\big) \cdot z = -a(t)z^2
+\end{gather*}
+--- а это уже знакомое нам уравнение Бернулли. Помним про корень $z = 0$, стреляем в уравнение стандартной заменой:
+\begin{gather*}
+\dz + \big(2a(t)x_1 + b(t)\big) \cdot z = -a(t)z^2\\
+\dfrac{\dz}{z^2} + \dfrac{2a(t)x_1 + b(t)}{z} = -a(t)\\
+\left\{\begin{gathered}
+w = \dfrac{1}{z}\hfill\\
+\dw = -\dfrac{\dx}{x^2} \Longrightarrow \dfrac{\dx}{x^m} = -\dw\hfill
+\end{gathered}\right.\\
+-\dw + \big(2a(t)x_1 + b(t)\big) \cdot w = -a(t) \iff \dw - \big(2a(t)x_1 + b(t)\big) \cdot w = a(t)
+\end{gather*}
+и добиваем каким-нибудь методом решения линейных диффуров.
+
+Стоит отметить, что часто бывает более выгодна немного иная замена $x$:
+\[x = x_1 + \dfrac{1}{z}\] --- это сразу же приводит наше уравнение к линейному виду:
+\[\dz - \big(2a(t)x_1 + b(t)\big) \cdot z = a(t)\] Однако, в данном случае нужно дополнительно помнить про нулевое решение (так как вот таким способом мы найдём все \underline{ненулевые} решения).
+\ \\
+
+\textbf{Пример №7}
+
+\[\dx + x^2 = t^2 - 2t\]
+Частное решение находится тривиально -- достаточно прибавить 1 к обеим частям уравнения, чтобы его увидеть:
+
+\begin{gather*}
+\dx_1 + x_1^2 + 1 = t^2 - 2t + 1 \iff (1 - t)^2 = x_1^2 + \dx_1 + 1 \Longrightarrow x_1 = 1 - t
+\end{gather*}
+Делаем представление через сумму (тут удобнее инвертировать $z$, помня про нулевое решение):
+\[\left\{\begin{gathered}
+x = 1 - t + \dfrac{1}{z}\hfill\\
+\dx = -1 -\dfrac{\dz}{z^2}\hfill
+\end{gathered}\right.\]
+Тогда мы сразу получаем линейный диффур:
+\begin{gather*}
+\dz - \big(2 - 2t + 0\big) \cdot z = 1\\
+\dz + 2(t - 1)z = 1\\
+\end{gather*}
+Решаем однородное:
+\begin{gather*}
+\dz = 2(1 - t)z \iff \dfrac{\d z}{z} = 2(1 - t)\d t \Longrightarrow \ds\int = \int\\
+\ln|z| = -2\dfrac{(1 - t)^2}{2} + C \iff z = u \cdot \exp(-(1 - t)^2),\ u \in \R
+\end{gather*}
+Вариация постоянной:
+\begin{gather*}
+\left\{\begin{gathered}
+z = u \cdot \exp(-(1 - t)^2)\hfill\\
+\dz = \du\exp(-(1 - t)^2) + 2u \cdot (1 - t) \cdot \exp(-(1 - t)^2) \hfill
+\end{gathered}\right.\\
+\du\exp(-(1 - t)^2) + 2u \cdot (1 - t) \cdot \exp(-(1 - t)^2) + 2(t - 1) \cdot u \cdot \exp(-(1 - t)^2) = 1\\
+\du\exp(-(1 - t)^2) = 1 \iff \du = \exp((1 - t)^2) \iff u = \ds\int \exp((1 - t)^2)
+\end{gather*}
+Осталось подставить выражение для $z$ и получить общее решение:
+\begin{gather*}
+z = u \cdot \exp(-(1 - t)^2) = \exp(-(1 - t)^2) \cdot \ds\int \exp((1 - t)^2)\\
+x = 1 - t + \dfrac{\exp((1 - t)^2)}{\ds\int \exp((1 - t)^2)}
+\end{gather*}
+
+\textbf{Пример №8}
+
+\[3\dx + x^2 + \dfrac{2}{t^2} = 0\]
+
+Здесь частное решение находится также весьма просто:
+\[-3\dx_1 = x_1^2 + \dfrac{2}{t^2} \Longrightarrow x_1 = \dfrac{1}{t}\]
+В сумму (опять инвертируем, помня про нулевое решение):
+\[\left\{\begin{gathered}
+x = \dfrac{1}{t} + \dfrac{1}{z}\hfill\\
+\dx = -\dfrac{1}{t^2} - \dfrac{\dz}{z^2}\hfill
+\end{gathered}\right.\]
+Теперь подставим всё в диффур от $z$, заменив нужные функции от $t$:
+\begin{gather*}
+3\dx + x^2 + \dfrac{2}{t^2} = 0 \iff \dx + \dfrac{1}{3}x^2 + 0 \cdot x + \dfrac{2}{t^2} = 0\\
+\dz - \dfrac{2}{3t}\cdot z = \dfrac{1}{3}
+\end{gather*}
+Решаем как однородное:
+\begin{gather*}
+\dz = \dfrac{2}{3t}z \iff \dfrac{\d z}{z} = \dfrac{2}{3} \cdot \dfrac{\d t}{t} \Longrightarrow\ds\int = \int\\
+\ln|z| = \dfrac{2}{3} \cdot \ln|t| + C \iff z = u \cdot t^{\frac{2}{3}},\ u \in \R
+\end{gather*}
+Варьируем:
+\begin{gather*}
+\left\{\begin{gathered}
+z = u \cdot t^{\frac{2}{3}}\hfill\\
+\dz = \du t^{\frac{2}{3}} + \dfrac{2}{3} \cdot t^{-\frac{1}{3}} \hfill
+\end{gathered}\right.\\
+\du t^{\frac{2}{3}} + \dfrac{2}{3} \cdot u\cdot t^{-\frac{1}{3}} - \dfrac{2}{3t}\cdot u \cdot t^{\frac{2}{3}} = \dfrac{1}{3}\\
+\du t^{\frac{2}{3}} = \dfrac{1}{3} \iff \du = \dfrac{1}{3} \cdot t^{-\frac{2}{3}} \iff u = t^{\frac{1}{3}} + C
+\end{gather*}
+Теперь можем получить общее решение:
+\begin{gather*}
+z = u \cdot t^{\frac{2}{3}} = \left(t^{\frac{1}{3}} + C\right) \cdot t^{\frac{2}{3}} = t + Ct^{\frac{2}{3}}\\
+x = \dfrac{1}{t} + \dfrac{1}{z} = \dfrac{1}{t} + \dfrac{1}{t + Ct^{\frac{2}{3}}}
+\end{gather*}
+
+\subsubsection{Два частных решения}
+
+Пусть теперь известны два частных решения уравнения Риккати: $x_1 = x_1(t)$ и $x_2 = x_2(t)$.
+
+Мы знаем, что для первого решения выполнено тождество:
+\[\dx_1 + a(t)x_1^2 + b(t)x_1 + c(t) = 0\]
+Проделаем то же представление:
+\begin{gather*}
+\left\{\begin{gathered}
+x = x_1 + z\hfill\\
+\dx = \dx_1 + \dz\hfill
+\end{gathered}\right.\\
+\dx_1 + \dz + a(t)\big(x_1^2  + 2x_1z + z^2\big) + b(t)(x_1 + z) + c(t) = 0\\
+\dz + \big(2a(t)x_1 + b(t)\big) \cdot z = -a(t)z^2
+\end{gather*}
+Теперь же сделаем хитрость: поделим на $z$ и подставим вместо него $x - x_1$:
+\begin{gather*}
+\dfrac{\dz}{z} + 2a(t)x_1 + b(t) = -a(t)z\\
+\dfrac{1}{x - x_1}\cdot\dfrac{\d (x - x_1)}{\d t} + 2a(t)x_1 + b(t) = -a(t)x + a(t)x_1\\
+\dfrac{1}{x - x_1}\cdot\dfrac{\d (x - x_1)}{\d t} = -a(t)\cdot \big(x + x_1\big) - b(t)
+\end{gather*}
+Теперь делаем грязь: заносим дробь в левой части уравнения под дифференциал:
+\[\dfrac{1}{x - x_1}\d (x - x_1) = \d \ln\big(x - x_1\big)\]\newpage
+Тогда:
+\[
+\dfrac{\d \ln\big(x - x_1\big)}{\d t} = -a(t)\cdot \big(x + x_1\big) - b(t)
+\]
+Для второго частного решения также выполнено тождество:
+\[\dx_2 + a(t)x_2^2 + b(t)x_2 + c(t) = 0\]
+Откуда мы аналогичным (грязным) способом получаем:
+\[\dfrac{\d \ln\big(x - x_2\big)}{\d t} = -a(t)\cdot \big(x + x_2\big) - b(t)\]
+А теперь совсем отвратительно поступим: вычтем из первого уравнения второе:
+\[\left\{\begin{gathered}
+\dfrac{\d \ln\big(x - x_1\big)}{\d t} = -a(t)\cdot \big(x + x_1\big) - b(t)\hfill\\
+\dfrac{\d \ln\big(x - x_2\big)}{\d t} = -a(t)\cdot \big(x + x_2\big) - b(t) \hfill
+\end{gathered}\right. \Longrightarrow \dfrac{\d \ln\frac{x - x_1}{x - x_2}}{\d t} = a(t)\cdot (x_2 - x_1)\] --- но ведь это диффур с разделяющимися переменными! Из него получаем уравнение, задающее $x = x(t)$ неявно через частные решения:
+\begin{gather*}
+\dfrac{\d \ln\frac{x - x_1}{x - x_2}}{\d t} = a(t)\cdot (x_2 - x_1) \\
+\d \ln\dfrac{x - x_1}{x - x_2} = a(t)\cdot (x_2 - x_1)\d t \Longrightarrow \ds\int = \int\\
+\ln\dfrac{x - x_1}{x - x_2} + C = \ds\int a(t)\cdot (x_2 - x_1)\d t\\
+\dfrac{x - x_1}{x - x_2} = \lambda \cdot \exp(\ds\int a(t)\cdot (x_2 - x_1)\d t),\ \lambda \in \R
+\end{gather*}
+Конечно, не всегда бывает возможно угадать сразу два частных решения, однако если вам так повезло, то можно захотеть выпендриться и задать ответ формулой выше.
+\ \\
+
+\textbf{Пример № 9}
+
+\[\dx = \dfrac{k^2}{t^2} - x^2,\ k \in \R\]
+
+Частные решения:
+\[\left\{\begin{gathered}
+x_1 = \dfrac{1}{t} + \dfrac{k}{t^2}\hfill\\
+x_2 = \dfrac{1}{t} - \dfrac{k}{t^2}\hfill
+\end{gathered}\right.\]
+Тогда можем сразу получить общее решение:
+\begin{gather*}
+\dfrac{x - \frac{1}{t} - \frac{k}{t^2}}{x - \frac{1}{t} + \frac{k}{t^2}} = \lambda \cdot \exp(\ds\int -\dfrac{2k}{t^2}\d t)\\
+\dfrac{xt^2 - x - k}{xt^2 - x + k} = \lambda \cdot \exp(\dfrac{2k}{x})
+\end{gather*}
+Кому интересно, может попробовать решить этот диффур по-старинке. Авось что покрасивше выйдет. Или нет.
 
 \subsection{Домашнее задание №3}
 
