@@ -171,7 +171,7 @@ in
 \newcommand{\D}{\mathsf{D}}
 
 \renewcommand{\G}{\mathsf{G}}
-\renewcommand{\d}{\mathsf{d}}
+\renewcommand*\d{\mathop{}\!\mathrm{d}}
 
 \newcommand{\dy}{\dot{y}}
 \newcommand{\ddy}{\ddot{y}}
@@ -1029,11 +1029,11 @@ x = uv\hfill\\
 \begin{gather*}
 \du\exp(-\ds\int a(t)\d t) = b(t)\\
 \d u = b(t) \cdot \exp(\ds\int a(t)\d t)\d t \Longrightarrow \ds\int = \int\\
-u = \ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C
+u = \ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t
 \end{gather*}
 Осталось подставить полученные $u$ и $v$, получив $x = x(t) = u \cdot v$:
 \begin{gather*}
-x = u \cdot v = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C\right] \cdot \exp(-\ds\int a(t) \d t)
+x = u \cdot v = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t\right] \cdot \exp(-\ds\int a(t) \d t)
 \end{gather*}
 \ \\
 
@@ -1056,7 +1056,7 @@ x = u \cdot v = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C\right] 
 	v = \exp(-t^2)\hfill\\
 	\du \exp(-t^2) = t\cdot \exp(-t^2)\hfill
 	\end{gathered}\right. \\
-	\du = t \Longrightarrow u = \dfrac{t^2}{2} + C
+	\du = t \Longrightarrow u = \dfrac{t^2}{2} + C\\
 	x = uv = \left(\dfrac{t^2}{2} + C\right)\cdot \exp(-t^2)
 \end{gather*}
 
@@ -1079,11 +1079,11 @@ x = u \cdot v = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C\right] 
 \begin{gather*}
 \du\exp(-\ds\int a(t)\d t) = b(t)\\
 \d u = b(t) \cdot \exp(\ds\int a(t) \d t) \d t \Longrightarrow \ds\int = \int\\
-u = \ds\int b(t) \cdot \exp(\ds\int a(t) \d t) \d t + C
+u = \ds\int b(t) \cdot \exp(\ds\int a(t) \d t) \d t
 \end{gather*}
 Осталось подставить полученное решение $u$ в выражение для $x$, чтобы получить общее решение диффура:
 \begin{gather*}
-x = u \cdot \exp(-\ds\int a(t)\d t) = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t + C\right] \cdot \exp(-\ds\int a(t) \d t)
+x = u \cdot \exp(-\ds\int a(t)\d t) = \left[\ds\int b(t) \cdot \exp(\ds\int a(t) \d t)\d t\right] \cdot \exp(-\ds\int a(t) \d t)
 \end{gather*}
 
 Внимательный читатель может заметить, что оба метода являются по факту одним и тем же. Однако, в зависимости от ситуации, пользоваться можно любым подходом.
@@ -1326,7 +1326,7 @@ w = \sqrt{x}\hfill\\
 \dfrac{\dz}{z^2} + \dfrac{2a(t)x_1 + b(t)}{z} = -a(t)\\
 \left\{\begin{gathered}
 w = \dfrac{1}{z}\hfill\\
-\dw = -\dfrac{\dx}{x^2} \Longrightarrow \dfrac{\dx}{x^m} = -\dw\hfill
+\dw = -\dfrac{\dx}{x^2} \Longrightarrow \dfrac{\dx}{x^2} = -\dw\hfill
 \end{gathered}\right.\\
 -\dw + \big(2a(t)x_1 + b(t)\big) \cdot w = -a(t) \iff \dw - \big(2a(t)x_1 + b(t)\big) \cdot w = a(t)
 \end{gather*}
@@ -1432,7 +1432,7 @@ x = x_1 + z\hfill\\
 \dfrac{1}{x - x_1}\cdot\dfrac{\d (x - x_1)}{\d t} + 2a(t)x_1 + b(t) = -a(t)x + a(t)x_1\\
 \dfrac{1}{x - x_1}\cdot\dfrac{\d (x - x_1)}{\d t} = -a(t)\cdot \big(x + x_1\big) - b(t)
 \end{gather*}
-А сейчас творим грязь: заносим дробь в левой части уравнения под дифференциал:
+А сейчас начинаем колдовать: заносим дробь в левой части уравнения под дифференциал:
 \[\dfrac{1}{x - x_1}\d (x - x_1) = \d \ln\big(x - x_1\big)\]\newpage
 Тогда:
 \[
@@ -1440,9 +1440,9 @@ x = x_1 + z\hfill\\
 \]
 Для второго частного решения также выполнено тождество:
 \[\dx_2 + a(t)x_2^2 + b(t)x_2 + c(t) = 0\]
-Откуда мы аналогичным (грязным) способом получаем:
+Откуда мы аналогичным (матемагическим) способом получаем:
 \[\dfrac{\d \ln\big(x - x_2\big)}{\d t} = -a(t)\cdot \big(x + x_2\big) - b(t)\]
-А теперь совсем отвратительно поступим: вычтем из первого уравнения второе:
+А теперь совсем сакрально поступим: вычтем из первого уравнения второе:
 \[\left\{\begin{gathered}
 \dfrac{\d \ln\big(x - x_1\big)}{\d t} = -a(t)\cdot \big(x + x_1\big) - b(t)\hfill\\
 \dfrac{\d \ln\big(x - x_2\big)}{\d t} = -a(t)\cdot \big(x + x_2\big) - b(t) \hfill
