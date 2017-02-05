@@ -197,6 +197,10 @@ in
 \newcommand{\wx}{\widetilde{x}}
 \newcommand{\wt}{\widetilde{t}}
 
+\newcommand{\fe}{\varphi}
+\newcommand{\e}{\varepsilon}
+\newcommand{\ind}{\perp\!\!\!\perp}
+
 \newcommand{\cov}{\mathsf{cov}}
 
 \renewcommand{\l}{\mathcal{L}}
@@ -922,7 +926,45 @@ t = 1\hfill
 	\[\dx = 2 \cdot \left(\dfrac{x + 2}{x + t - 1}\right)^2\]
 \end{task1}
 \begin{proof}[Решение]
-
+	Решим систему:
+	\[\left\{\begin{gathered}
+	x + 2 = 0\hfill\\
+	x + t - 1 = 0\hfill
+	\end{gathered}\right. \Longrightarrow \left\{\begin{gathered}
+	x = -2\hfill\\
+	t = 3\hfill
+	\end{gathered}\right.\]
+	Делаем замену, получая однородное уравнение:
+	\begin{gather*}\left\{\begin{gathered}
+	\wx = x + 2\hfill\\
+	\wt = t - 3\hfill
+	\end{gathered}\right. \Longrightarrow \dfrac{\d x}{\d t} = \dfrac{\d \wx}{\d\wt} = 2\left(\dfrac{\wx}{\wx + \wt}\right)^2\\
+	\dfrac{\d\wx}{\d\wt} = 2 \cdot \left(1 - \dfrac{1}{\frac{\wx}{\wt} + 1}\right)^2\ y = \dfrac{\wx}{\wt}\\
+	\dfrac{y\d \wt + \wt\d y}{\d \wt} = 2\cdot\left(1 - \dfrac{1}{y + 1}\right)^2 \iff y + \dfrac{\wt\d y}{\d\wt} = \dfrac{2y^2}{y^2 + 2y + 1}\\
+	\dfrac{\wt\d y}{\d\wt} = \dfrac{2y^2 - y^3 - 2y^2 - y}{y^2 + 2y + 1}\\
+	\dfrac{(y^2 + 2y + 1)\d y}{y(y^2 + 1)} = \dfrac{\d\wt}{t} \Longrightarrow \ds\int = \int
+	\end{gather*}
+	Возьмём правый интеграл, разбив его в сумму:
+	\begin{gather*}
+		\ds\int\dfrac{(y^2 + 2y + 1)\d y}{y(y^2 + 1)} = \ds\int \dfrac{y\d y}{y^2 + 1} + \ds\int\dfrac{2\d y}{y^2 + 1} + \ds\int \dfrac{\d y}{y(y^2 + 1)}\\
+		\ds\int\dfrac{y\d y}{y^2 + 1} = \dfrac{1}{2}\cdot\ds\int\dfrac{\d(y^2 + 1)}{y^2 + 1} = \dfrac{1}{2}\cdot \ln|y^2 + 1| + C\\
+		\ds\int\dfrac{2\d y}{y^2 + 1} = 2\arctan y + C\\
+		\ds\int\dfrac{\d y}{y(y^2 + 1)} = \left|\left|\begin{gathered}
+			u = y^2\hfill\\
+			\d u = 2y\d y\hfill
+		\end{gathered}\right|\right| = \dfrac{1}{2}\ds\int\dfrac{\d u}{u(u + 1)} = \dfrac{1}{2}\left(\ds\int \dfrac{a\d u}{u} + \ds\int \dfrac{b\d u}{u + 1}\right) = \\
+		= \left|\left|\begin{gathered}
+			a = 1\hfill\\
+			b = -1\hfill
+		\end{gathered}\right|\right| = \dfrac{1}{2}\left(\ds\int\dfrac{\d u}{u} - \ds\int\dfrac{\d u}{u + 1}\right) = \dfrac{1}{2}\ln|u| - \dfrac{1}{2}\ln|u + 1| = \left|\left|u = y^2\right|\right| = \ln|y| - \dfrac{1}{2}\ln|y^2 + 1| + C\\
+		\ds\int\dfrac{(y^2 + 2y + 1)\d y}{y(y^2 + 1)} = \dfrac{1}{2}\ln|y^2 + 1| + 2\arctan y + \ln|y| - \dfrac{1}{2}\ln|y^2 + 1| + C = 2\arctan y + \ln|y| + C
+	\end{gather*}
+	Итого:
+	\begin{gather*}
+		2\arctan y + \ln|y| + C = \ln|\wt| \iff \wt = \lambda y\cdot \exp(2\arctan y),\ \lambda \in \R\\
+		\left|\left|y = \dfrac{\wx}{\wt}\right|\right| \Longrightarrow \wt^2 = \lambda\wx\cdot\exp(2\arctan(\dfrac{\wx}{\wt})),\ \lambda \in \R\\
+		\left|\left|\wx = x + 2,\ \wt = t - 3\right|\right| \Longrightarrow (t - 3)^2 = \lambda\cdot(x+2)\cdot \exp(2\arctan(\dfrac{x + 2}{t - 3})),\ \lambda \in \R
+	\end{gather*}
 \end{proof}
 
 \begin{task2}
@@ -930,15 +972,49 @@ t = 1\hfill
 	\[\dx = \dfrac{x + 2}{t + 1} + \tan(\dfrac{x - 2t}{t + 1})\]	 
 \end{task2}
 \begin{proof}[Решение]
-	
+	Решим систему:
+	\[\left\{\begin{gathered}
+	x + 2 = 0\hfill\\
+	t + 1 = 0\hfill
+	\end{gathered}\right. \Longrightarrow \left\{\begin{gathered}
+	x = -2\hfill\\
+	t = -1\hfill
+	\end{gathered}\right.\]
+	Делаем замену, получая однородное уравнение:
+	\begin{gather*}\left\{\begin{gathered}
+	\wx = x + 2\hfill\\
+	\wt = t + 1\hfill
+	\end{gathered}\right. \Longrightarrow \dfrac{\d x}{\d t} = \dfrac{\d \wx}{\d\wt} = \dfrac{\wx}{\wt} + \tan(\dfrac{\wx - 2\wt}{\wt}) \iff \dfrac{\d \wx}{\d\wt} = \dfrac{\wx}{\wt} + \tan(\dfrac{\wx}{\wt} - 2),\ y = \dfrac{\wx}{\wt}\\
+	\dfrac{y\d \wt + \wt\d y}{\d \wt} = y + \tan(y - 2) \iff \dfrac{\wt\d y}{\d\wt} = \tan(y - 2) \\
+	\cot(y - 2)\d y = \dfrac{\d \wt}{\wt} \Longrightarrow \ds\int = \int\\
+	\ln|\sin(y - 2)| = \ln|\wt| + C \iff \sin(y - 2) = \lambda\cdot \wt,\ \lambda \in \R\\
+	y = 2 + \arcsin(\lambda \wt) \iff \wx = 2\wt + \wt\arcsin(\lambda\wt)\\
+	x = 2t + (t + 1)\arcsin(\lambda(t + 1))
+	\end{gather*}
 \end{proof}
 
 \begin{task3}
 	Решить диффур:
-	\[2x + (xt^2 + 1)\cdot t\dx = 0\]
+	\[2x + (xt^2 + 1)t\dx = 0\]
 \end{task3}
 \begin{proof}[Решение]
-	
+	Перепишем с дифференциалами и сделаем замену $x = y^m$:
+	\begin{gather*}
+		2x\d t + (xt^2 + 1)\cdot t \d x = 0 \iff 2x\d t + xt^3\d x + t\d x = 0\\
+		\left|\left|\begin{gathered}
+			x = y^m\hfill\\
+			\dx = m\cdot y^{m - 1}\d y\hfill
+		\end{gathered}\right|\right| \Longrightarrow
+		2y^m\d t + y^m \cdot t^3 \cdot m\cdot y^{m - 1}\d y + t\cdot m\cdot y^{m - 1}\d y = 0\\
+		\left|\left|\begin{gathered}m = m + 2 + 1 + m - 1 = m \iff m = -2\hfill\\ x = \dfrac{1}{y^2}\hfill\end{gathered}\right|\right| \Longrightarrow \dfrac{2\d t}{y^2} + \left(\dfrac{t^2}{y^2} + 1\right)t \cdot (-2) \cdot \dfrac{\d y}{y^3} = 0\\
+		\dfrac{\d t}{y} = \left(\dfrac{t^2}{y^2} + 1\right)\dfrac{t\d y}{y^3},\ z = \dfrac{y}{t}\\
+		\dfrac{\d t}{z^2} = \left(\dfrac{1}{z^2} + 1\right) \cdot \dfrac{1}{z^3}\cdot(z\d t + t\d z) \iff
+		\d t = \left(\dfrac{1}{z^2} + 1\right)\d t + \left(\dfrac{1}{z^2} + 1\right)\cdot \dfrac{t\d z}{z}\\
+		\left(1 - 1 - \dfrac{1}{z^2}\right)\d t = \left(\dfrac{1}{z^2} + 1\right)\cdot \dfrac{t\d z}{z}\\
+		-\dfrac{\d t}{t} = \left(\dfrac{1}{z} + z\right)\d z \Longrightarrow \ds\int= \int\\
+		-\log|t| + C = \log|z| + \dfrac{z^2}{2} \iff \left|\left|\ln|z| = \ln|y| - \ln|t|,\ \dfrac{z^2}{2} = \dfrac{y^2}{2t^2}\right|\right| \iff \ln|y| \dfrac{y^2}{2t^2} + C = 0\\
+		\left|\left|x = \dfrac{1}{y^2} \iff y = \dfrac{1}{\sqrt{x}}\right|\right| \Longrightarrow \ln|\sqrt{x}| + \dfrac{1}{2t^2x} + C = 0 \iff \dfrac{1}{xt^2} = \ln|x| + C
+	\end{gather*}
 \end{proof}
 
 \begin{task4}
@@ -1478,42 +1554,240 @@ x_2 = \dfrac{1}{t} - \dfrac{k}{t^2}\hfill
 Решить диффур:
 \[(tx + e^t)\d t - t\d x = 0\]
 \end{task1}
-%\begin{proof}[Решение]
-%
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		tx + e^t - t\dx = 0\\
+		\dx - x = \dfrac{e^t}{t}\\
+		\dx = x \iff \dfrac{\d x}{x} = \d t \Longrightarrow \ds\int = \int\\
+		\ln|x| = t + C \iff x = u \cdot e^t,\ u \in \R \Longrightarrow u = u(t)\\
+		\left\{\begin{gathered}
+		x = ue^t\hfill\\
+		\dx = \du e^t + ue^t\hfill
+		\end{gathered}\right.\\
+		\du e^t + ue^t - ue^t = \dfrac{e^t}{t} \Longrightarrow \du e^t = \dfrac{e^t}{t}\\
+		\du = \dfrac{1}{t} \Longrightarrow u = \ln|t| + C\\
+		x = (\ln|t| + C) \cdot e^t
+	\end{gather*}
+\end{proof}
 
 \begin{task2}
 Решить диффур:
 \[t\dx = x - t\cdot \exp(\dfrac{x}{t})\]
 \end{task2}
-%\begin{proof}[Решение]
-%%	
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		\dx = \dfrac{x}{t} - \exp(\dfrac{x}{t})\\
+		\left\{\begin{gathered}
+		y = \dfrac{x}{t} \Longrightarrow x = yt\hfill\\
+		\dx = \dy t + y\hfill
+		\end{gathered}\right.\\
+		\dy t + y = y - e^y \iff \dy t = -e^y \\
+		-e^{-y}\dy = \dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+		e^{-y} = \ln|t| + C \iff t = \lambda \cdot \exp(e^{-y}),\ \lambda \in \R
+	\end{gather*}
+	Далее обратная замена.
+\end{proof}
 
 \begin{task3}
 Решить диффур:
 \[t\dx - 2t^2\cdot \sqrt{x} = 4x\]
 \end{task3}
-%\begin{proof}[Решение]
-%	
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		\dx - \dfrac{4}{t} \cdot x = 2t^2 \cdot \sqrt{x} \Longrightarrow m = \dfrac{1}{2}\\
+		\dfrac{\dx}{\sqrt{x}} - \dfrac{4}{t} \cdot \sqrt{x} = 2t^2\\
+		\left\{\begin{gathered}
+		w = \sqrt{x}\hfill\\
+		\dw = \dfrac{\dx}{2\sqrt{x}} \Longrightarrow \dfrac{\dx}{\sqrt{x}} = 2\dw\hfill
+		\end{gathered}\right.\\
+		\dw - 2\dfrac{w}{t} = t^2
+	\end{gather*}
+	\begin{gather*}
+		\dw = 2\dfrac{w}{t}\\
+		\dfrac{\d w}{w} = 2\dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+		\ln|w| = 2\ln|t| + C \iff w = ut^2,\ u \in \R \Longrightarrow u = u(t)\\
+		\left\{\begin{gathered}
+		w = ut^2\hfill\\
+		\dw = \du t^2 + 2ut\hfill
+		\end{gathered}\right.\\
+		\du t^2 + 2ut - 2ut = t^2 \iff \du t^2 = t^2\\
+		\du = 1 \iff u = t + C\\
+		w = (t + C) \cdot t^2 = \sqrt{x}\\
+		x = w^2 = (t + C)^2 \cdot t^4
+	\end{gather*}
+\end{proof}
 
 \begin{task4}
 Решить диффур:
 \[t^2\dx + tx + t^2x^2 = 4\]
 \end{task4}
-%\begin{proof}[Решение]
-%
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		\dx + x^2 + \dfrac{x}{t} - \dfrac{4}{t^2} = 0\\
+		\left\{\begin{gathered}
+		x_1 = \dfrac{2}{t}\hfill\\
+		\dx_1 = -\dfrac{2}{t^2}\hfill
+		\end{gathered}\right. \Longrightarrow -\dfrac{2}{t^2} + \dfrac{4}{t^2} + \dfrac{2}{t^2} = 0 \\
+		\left\{\begin{gathered}
+		x = \dfrac{1}{t} + \dfrac{1}{z}\hfill\\
+		\dx = -\dfrac{1}{t^2} - \dfrac{\dz}{z^2}\hfill
+		\end{gathered}\right. \Longrightarrow \dz - \dfrac{5}{t} \cdot z = 1\\
+		\dz = \dfrac{5}{t} \cdot z\\
+		\dfrac{\d z}{z} = 5\dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+		\ln|z| = 5\ln|t| + C \iff z = u\cdot t^5,\ u \in \R \Longrightarrow u = u(t)\\
+		\left\{\begin{gathered}
+		z = ut^5\hfill\\
+		\dz = \du t^5 + 5ut^4\hfill
+		\end{gathered}\right.\\
+		\du t^5 + 5ut^4 - \dfrac{5ut^5}{t} = 1\iff \du t^5 = 1\\
+		\d u = \dfrac{\d t}{t^5} \Longrightarrow \ds\int = \int\\
+		u = -\dfrac{1}{4t^4} + C\\
+		z = t^5 \cdot \left(-\dfrac{1}{4t^4} + C\right) = -\dfrac{t}{4} + Ct^5\\
+		x = x_1 + \dfrac{1}{z} = \dfrac{2}{t} + \dfrac{4}{4\cdot Ct^5 - t}
+	\end{gather*}
+\end{proof}
 
 \begin{task5}
 Пусть $x_1,\ x_2$ -- независимые  частные решения линейного диффура 1 порядка:
 \[\dx + a(t)x = b(t)\]
 Найти общее решение (выразить через $x_1$ и $x_2$).
 \end{task5}
+\begin{proof}[Решение]
+	Проводя манипуляции, аналогичные указанным выше для уравнения Риккати (а это оно и есть, просто многочлен при $x^2$ --- тождественный нуль), мы получаем:
+	\[\dfrac{x - x_1}{x - x_2} = C\]
+	Тут стоит отметить, что $C \neq 1$, ибо иначе $x_1$ и $x_2$ были бы зависимы. 
+	
+	Альтернативное решение: мы знаем, что $x_1$ и $x_2$ -- оба решения данного диффура. Тогда выполнены соотношения:
+	\begin{gather*}
+		\dx_1 + a(t)x_1 = b(t)\\
+		\dx_2 + a(t)x_2 = b(t)
+	\end{gather*}
+	Вычтем из первого уравнения второе:
+	\[\dot{(x_1 - x_2)} + a(t)(x_1 - x_2) = 0\]
+	Следовательно, $x_1 - x_2$ (и любой подобная подобная данной функция) есть решение однородного диффура $\dx + a(t) = 0$. Тогда можем воспользоваться методом вариации постоянной:
+	\begin{gather*}
+		x = u \cdot (x_1 - x_2),\ u \in \R \Longrightarrow u = u(t) \\
+		\dx = \du(x_1 - x_2) + u \dot{(x_1 - x_2)}\\
+		\du(x_1 - x_2) + \underbrace{u \dot{(x_1 - x_2)} + a(t)\cdot u \cdot (x_1 - x_2)}_{= 0} = b(t)\\
+		\du = \dfrac{b(t)}{x_1 - x_2}
+	\end{gather*}
+	Можно заметить, что любое иное решение будет получаться из решения однородного уравнения сдвигом. Тогда решением будет являться многочлен:
+	\[C \cdot (x_1 - x_2) + x_1\]
+	Прямая проверка показывает, что оно совпадает с ответом выше.
+\end{proof}
+
+
+\newpage
+\section{Семинар 4, 31 января}
+
+\subsection{Уравнения в полных дифференциалах}
+
+Пускай есть функция $U(t,\ x)$ -- от двух переменных. Она являет собой некую кривую. Пускай она непрерывна в точке $(t_0,\ x_0)$. Сдвинемся на $(\bigtriangleup t,\ \bigtriangleup x)$ вдоль кривой. Новое значение функции можно записать так:
+\[U(t_0 + \bigtriangleup t,\ x_0 + \bigtriangleup x) = U(t_0,\ x_0) + U'_{t_0,\ x_0} \cdot (\bigtriangleup t,\ \bigtriangleup x) + \overline{o}(\bigtriangleup t,\ \bigtriangleup x)\] где \[U'_{t_0,\ x_0} = \left(\dfrac{\partial U}{\partial t},\ \dfrac{\partial U}{\partial x}\right)\] --- вектор частных производных (по факту, это вектор в сопряжённом пространстве к нашему в базисе $\big(\d t,\ \d x\big)$).
+
+Можно записать полный дифференциал функции $U$:
+\[\d U = \dfrac{\partial U}{\partial t}\cdot \d t + \dfrac{\partial U}{\partial x}\cdot \d x\]
+
+Предположим теперь, что на каком-то промежутке наша функция принимает константное значение: $U(t,\ x) = C$. Ясно, что в таком случае производная будет равна нулю на данном промежутке, что равносильно:
+\[\dfrac{\partial U}{\partial t}\cdot \d t + \dfrac{\partial U}{\partial x}\cdot \d x = 0\]
+
+Обозначим $\dfrac{\partial U}{\partial t} = M(t,\ x)$,\ $\dfrac{\partial U}{\partial x} = N(t,\ x)$ --- функции от $(t,\ x)$. 
+\begin{definition}
+	Тождество
+	\[M(t,\ x)\d t + N(t,\ x)\d x = 0\] где $M,\ N$ -- функции от $(t,\ x)$, называется \textbf{уравнением в полных дифференциалах}.
+\end{definition}
+
+Соответственно, решить уравнение в полных дифференциалах --- это найти такую функцию $U(t,\ x)$, что $\d U = M(t,\ x)\d t + N(t,\ x)\d x$.
+
+Нужно отметить, что из того, что нам на вход подали диффур вышеуказанного вида (или сводящегося к нему), ещё не следует, что это уравнение в полных дифференциалах. Для этого нужно нечто большее, чем такая запись.
+\begin{statement}
+	Для того, чтобы уравнение \[M(t,\ x)\d t + N(t,\ x)\d x = 0\] было уравнением в полных дифференциалах, необходимо и достаточно, чтобы смешанные производные были равны, то есть:
+	\[\dfrac{\partial M}{\partial x} = \dfrac{\partial^2 U}{\partial x\partial t} = \dfrac{\partial^2 U}{\partial t\partial x} = \dfrac{\partial N}{\partial t}\]
+\end{statement}
+Именно поэтому, перед тем, как решать диффур, подозреваемый в бытии уравнением в полных дифференциалах, нужно сначала проверить на равенство смешанные производные.
+
+Теперь поговорим о самом процессе решения. Существует два его варианта -- теоретический и прикладной.
+
+Суть теоретического в том, что, как нам известно, $M$ -- это частная производная функции по $t$, $N$ -- частная производная по $x$. Логично, что, так как они обе суть производные одной и той же функции, то их \textbf{первообразные} должны совпадать. Следовательно:
+\[\left\{\begin{gathered}
+\ds\int M\d t = \widetilde{M}(t,\ x) + \varphi(x)\hfill\\
+\ds\int N\d x = \widetilde{N}(t,\ x) + \psi(t)\hfill
+\end{gathered}\right.\]
+где $\varphi(x)$ -- функция от $x$, $\psi(t)$ -- функция от $t$. Суть в том, что $\fe(x)$ <<зашита>> в $\widetilde{N}(t,\ x)$, как и $\psi(t)$ уже находится в $\widetilde{M}(t,\ x)$. Поэтому, вычислив оба интеграла, легко заметить, какие части соответствуют данным функциям.
+
+Практически же мы будем действовать несколько иначе.
+
+Имеем уравнение: 
+\[M(t,\ x)\d t + N(t,\ x)\d x = 0\]
+Первым делом берём частную производную $M$  и интегрируем её по $t$ (для $N$ и $x$ аналогично, выбор функции зависит от удобства интегрирования):
+\[U = \ds\int M(t,\ x)\d t + \fe(x)\] --- заметим, что вместо константы мы пишем функцию от $x$, которая при взятии производной по $t$  обнуляется.
+Теперь дифференцируем полученную функцию по $x$:
+\[\dfrac{\partial U}{\partial x} = \dfrac{\partial}{\partial x}\left[ds\int M(t,\ x)\d t\right] + \fe'(x) =  N(t,\ x)\]
+Отсюда получаем выражение для производной $\fe(x)$:
+\[\fe'(x) = N(t,\ x) - \dfrac{\partial}{\partial x}\left[ds\int M(t,\ x)\d t\right]\]
+Стоит отметить, что части с одновременно $t$ и $x$ в выражении выше сократятся. Теперь находим функцию $\fe(x)$, интегрируя полученное равенство:
+\[\fe(x) = \ds\int\left(N(t,\ x) - \dfrac{\partial}{\partial x}\left[\ds\int M(t,\ x)\d t\right]\right)\d x\]
+Осталось лишь подставить в выражение для $U$, что мы получили в самом начале:
+\[U = \ds\int M(t,\ x)\d t + \fe(x) = \ds\int M(t,\ x)\d t + \ds\int\left(N(t,\ x) - \dfrac{\partial}{\partial x}\left[\ds\int M(t,\ x)\d t\right]\right)\d x\]
+Получили итоговый ответ. Формально, должна появляться ещё константа, но ввиду того, что мы на промежутке, где функция постоянна, то в качестве $C$ можно просто записывать левую часть уравения выше. Тогда уравнение искомой кривой имеет вид:
+\[C =  \ds\int M(t,\ x)\d t + \ds\int\left(N(t,\ x) - \dfrac{\partial}{\partial x}\left[\ds\int M(t,\ x)\d t\right]\right)\d x\]
+
+Немного про интегрирование. Когда мы интегрируем частную производную, мы делаем эдакое \textit{частное интегрирование}, считая ту переменную, по которой НЕ интегрируем, константой. Кроме того, прямая проверка показывает, что продифференцировав полученную функцию, мы действительно приходим к диффуру из условия. Разберём несколько примеров.
+
+\subsection{Метод интегрального множителя}
+
+
+\subsubsection{Линейный случай}
+
+
+\subsubsection{Произвольный случай}
+
+
+\subsubsection{Группировка}
+
+
+\subsection{Домашнее задание №4}
+
+\begin{task1}
+	Решить диффур:
+	\[(2 - 9x^2t) \cdot t\d t + (4x^2 - 6t^3)\cdot x \d x = 0\]
+\end{task1}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task2}
+	Решить диффур:
+	\[\dfrac{x}{t}\d t + (x^3 + \ln t)\d x = 0\]
+\end{task2}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task3}
+	Решить диффур:
+	\[tx^2\big(t\dx + x\big) = 1\]
+\end{task3}
 %\begin{proof}[Решение]
 %	
 %\end{proof}
+
+\begin{task4}
+	Решить диффур:
+	\[x\d x = (t \d x + x \d t) \sqrt{1 + x^2}\]
+\end{task4}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task5}
+	Решить диффур:
+	\[(t^2 + 2xt)\d x + (xt + 1)\d t = 0\]
+\end{task5}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
 
 \newpage
 \section{Common Tasks}
