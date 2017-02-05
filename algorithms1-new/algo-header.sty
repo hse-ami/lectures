@@ -9,7 +9,7 @@
 \usepackage[english,russian]{babel} % Подключение поддержки языков
 
 %% Отступы между абзацами и в начале абзаца
-\setlength{\parindent}{0pt}
+\setlength{\parindent}{15pt}
 \setlength{\parskip}{\medskipamount}
 
 %% Настройка размеров полей
@@ -55,7 +55,7 @@
 \usepackage{tikz}                   % Рисование всего
 \usetikzlibrary{arrows.meta}
 \usepackage{pgfplots}               % Графики
-\usetikzlibrary{calc,matrix, intersections}
+\usetikzlibrary{calc, matrix, intersections, fit}
 
 %% Прочие пакеты
 \usepackage{indentfirst}                    % Красная строка в начале текста
@@ -235,4 +235,14 @@ colorlinks = false, hidelinks
 	[red, opacity=1, every node/.style={above left, black, opacity=1}] 
 	\foreach \s in {1,...,\t}{(i-\s) circle (2pt)
 		node [above left] {\s}};
+}
+
+
+\def\leftbracket{[}
+\def\rightbracket{]}
+
+\tikzset{my arrow/.style={
+		blue!60!black,
+		-latex
+	}
 }
