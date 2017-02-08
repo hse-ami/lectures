@@ -1,4 +1,4 @@
-\documentclass[../main.tex]{subfiles}
+\documentclass[../book.tex]{subfiles}
 
 %Sample lecture
 
@@ -79,8 +79,8 @@
 				\State $i := l$
 				\For{$j := l + 1$ \textbf{to} $r$}
 					\If{$A[j] \leqslant A[l]$}
-						\State swap($A[i], A[j]$)
 						\State $i$ += 1
+						\State swap($A[i], A[j]$)
 					\Else
 						\State \textbf{continue}
 					\EndIf
