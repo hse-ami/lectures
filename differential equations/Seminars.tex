@@ -197,6 +197,10 @@ in
 \newcommand{\wx}{\widetilde{x}}
 \newcommand{\wt}{\widetilde{t}}
 
+\newcommand{\fe}{\varphi}
+\newcommand{\e}{\varepsilon}
+\newcommand{\ind}{\perp\!\!\!\perp}
+
 \newcommand{\cov}{\mathsf{cov}}
 
 \renewcommand{\l}{\mathcal{L}}
@@ -922,7 +926,45 @@ t = 1\hfill
 	\[\dx = 2 \cdot \left(\dfrac{x + 2}{x + t - 1}\right)^2\]
 \end{task1}
 \begin{proof}[Решение]
-
+	Решим систему:
+	\[\left\{\begin{gathered}
+	x + 2 = 0\hfill\\
+	x + t - 1 = 0\hfill
+	\end{gathered}\right. \Longrightarrow \left\{\begin{gathered}
+	x = -2\hfill\\
+	t = 3\hfill
+	\end{gathered}\right.\]
+	Делаем замену, получая однородное уравнение:
+	\begin{gather*}\left\{\begin{gathered}
+	\wx = x + 2\hfill\\
+	\wt = t - 3\hfill
+	\end{gathered}\right. \Longrightarrow \dfrac{\d x}{\d t} = \dfrac{\d \wx}{\d\wt} = 2\left(\dfrac{\wx}{\wx + \wt}\right)^2\\
+	\dfrac{\d\wx}{\d\wt} = 2 \cdot \left(1 - \dfrac{1}{\frac{\wx}{\wt} + 1}\right)^2\ y = \dfrac{\wx}{\wt}\\
+	\dfrac{y\d \wt + \wt\d y}{\d \wt} = 2\cdot\left(1 - \dfrac{1}{y + 1}\right)^2 \iff y + \dfrac{\wt\d y}{\d\wt} = \dfrac{2y^2}{y^2 + 2y + 1}\\
+	\dfrac{\wt\d y}{\d\wt} = \dfrac{2y^2 - y^3 - 2y^2 - y}{y^2 + 2y + 1}\\
+	\dfrac{(y^2 + 2y + 1)\d y}{y(y^2 + 1)} = \dfrac{\d\wt}{t} \Longrightarrow \ds\int = \int
+	\end{gather*}
+	Возьмём правый интеграл, разбив его в сумму:
+	\begin{gather*}
+		\ds\int\dfrac{(y^2 + 2y + 1)\d y}{y(y^2 + 1)} = \ds\int \dfrac{y\d y}{y^2 + 1} + \ds\int\dfrac{2\d y}{y^2 + 1} + \ds\int \dfrac{\d y}{y(y^2 + 1)}\\
+		\ds\int\dfrac{y\d y}{y^2 + 1} = \dfrac{1}{2}\cdot\ds\int\dfrac{\d(y^2 + 1)}{y^2 + 1} = \dfrac{1}{2}\cdot \ln|y^2 + 1| + C\\
+		\ds\int\dfrac{2\d y}{y^2 + 1} = 2\arctan y + C\\
+		\ds\int\dfrac{\d y}{y(y^2 + 1)} = \left|\left|\begin{gathered}
+			u = y^2\hfill\\
+			\d u = 2y\d y\hfill
+		\end{gathered}\right|\right| = \dfrac{1}{2}\ds\int\dfrac{\d u}{u(u + 1)} = \dfrac{1}{2}\left(\ds\int \dfrac{a\d u}{u} + \ds\int \dfrac{b\d u}{u + 1}\right) = \\
+		= \left|\left|\begin{gathered}
+			a = 1\hfill\\
+			b = -1\hfill
+		\end{gathered}\right|\right| = \dfrac{1}{2}\left(\ds\int\dfrac{\d u}{u} - \ds\int\dfrac{\d u}{u + 1}\right) = \dfrac{1}{2}\ln|u| - \dfrac{1}{2}\ln|u + 1| = \left|\left|u = y^2\right|\right| = \ln|y| - \dfrac{1}{2}\ln|y^2 + 1| + C\\
+		\ds\int\dfrac{(y^2 + 2y + 1)\d y}{y(y^2 + 1)} = \dfrac{1}{2}\ln|y^2 + 1| + 2\arctan y + \ln|y| - \dfrac{1}{2}\ln|y^2 + 1| + C = 2\arctan y + \ln|y| + C
+	\end{gather*}
+	Итого:
+	\begin{gather*}
+		2\arctan y + \ln|y| + C = \ln|\wt| \iff \wt = \lambda y\cdot \exp(2\arctan y),\ \lambda \in \R\\
+		\left|\left|y = \dfrac{\wx}{\wt}\right|\right| \Longrightarrow \wt^2 = \lambda\wx\cdot\exp(2\arctan(\dfrac{\wx}{\wt})),\ \lambda \in \R\\
+		\left|\left|\wx = x + 2,\ \wt = t - 3\right|\right| \Longrightarrow (t - 3)^2 = \lambda\cdot(x+2)\cdot \exp(2\arctan(\dfrac{x + 2}{t - 3})),\ \lambda \in \R
+	\end{gather*}
 \end{proof}
 
 \begin{task2}
@@ -930,15 +972,49 @@ t = 1\hfill
 	\[\dx = \dfrac{x + 2}{t + 1} + \tan(\dfrac{x - 2t}{t + 1})\]	 
 \end{task2}
 \begin{proof}[Решение]
-	
+	Решим систему:
+	\[\left\{\begin{gathered}
+	x + 2 = 0\hfill\\
+	t + 1 = 0\hfill
+	\end{gathered}\right. \Longrightarrow \left\{\begin{gathered}
+	x = -2\hfill\\
+	t = -1\hfill
+	\end{gathered}\right.\]
+	Делаем замену, получая однородное уравнение:
+	\begin{gather*}\left\{\begin{gathered}
+	\wx = x + 2\hfill\\
+	\wt = t + 1\hfill
+	\end{gathered}\right. \Longrightarrow \dfrac{\d x}{\d t} = \dfrac{\d \wx}{\d\wt} = \dfrac{\wx}{\wt} + \tan(\dfrac{\wx - 2\wt}{\wt}) \iff \dfrac{\d \wx}{\d\wt} = \dfrac{\wx}{\wt} + \tan(\dfrac{\wx}{\wt} - 2),\ y = \dfrac{\wx}{\wt}\\
+	\dfrac{y\d \wt + \wt\d y}{\d \wt} = y + \tan(y - 2) \iff \dfrac{\wt\d y}{\d\wt} = \tan(y - 2) \\
+	\cot(y - 2)\d y = \dfrac{\d \wt}{\wt} \Longrightarrow \ds\int = \int\\
+	\ln|\sin(y - 2)| = \ln|\wt| + C \iff \sin(y - 2) = \lambda\cdot \wt,\ \lambda \in \R\\
+	y = 2 + \arcsin(\lambda \wt) \iff \wx = 2\wt + \wt\arcsin(\lambda\wt)\\
+	x = 2t + (t + 1)\arcsin(\lambda(t + 1))
+	\end{gather*}
 \end{proof}
 
 \begin{task3}
 	Решить диффур:
-	\[2x + (xt^2 + 1)\cdot t\dx = 0\]
+	\[2x + (xt^2 + 1)t\dx = 0\]
 \end{task3}
 \begin{proof}[Решение]
-	
+	Перепишем с дифференциалами и сделаем замену $x = y^m$:
+	\begin{gather*}
+		2x\d t + (xt^2 + 1)\cdot t \d x = 0 \iff 2x\d t + xt^3\d x + t\d x = 0\\
+		\left|\left|\begin{gathered}
+			x = y^m\hfill\\
+			\dx = m\cdot y^{m - 1}\d y\hfill
+		\end{gathered}\right|\right| \Longrightarrow
+		2y^m\d t + y^m \cdot t^3 \cdot m\cdot y^{m - 1}\d y + t\cdot m\cdot y^{m - 1}\d y = 0\\
+		\left|\left|\begin{gathered}m = m + 2 + 1 + m - 1 = m \iff m = -2\hfill\\ x = \dfrac{1}{y^2}\hfill\end{gathered}\right|\right| \Longrightarrow \dfrac{2\d t}{y^2} + \left(\dfrac{t^2}{y^2} + 1\right)t \cdot (-2) \cdot \dfrac{\d y}{y^3} = 0\\
+		\dfrac{\d t}{y} = \left(\dfrac{t^2}{y^2} + 1\right)\dfrac{t\d y}{y^3},\ z = \dfrac{y}{t}\\
+		\dfrac{\d t}{z^2} = \left(\dfrac{1}{z^2} + 1\right) \cdot \dfrac{1}{z^3}\cdot(z\d t + t\d z) \iff
+		\d t = \left(\dfrac{1}{z^2} + 1\right)\d t + \left(\dfrac{1}{z^2} + 1\right)\cdot \dfrac{t\d z}{z}\\
+		\left(1 - 1 - \dfrac{1}{z^2}\right)\d t = \left(\dfrac{1}{z^2} + 1\right)\cdot \dfrac{t\d z}{z}\\
+		-\dfrac{\d t}{t} = \left(\dfrac{1}{z} + z\right)\d z \Longrightarrow \ds\int= \int\\
+		-\log|t| + C = \log|z| + \dfrac{z^2}{2} \iff \left|\left|\ln|z| = \ln|y| - \ln|t|,\ \dfrac{z^2}{2} = \dfrac{y^2}{2t^2}\right|\right| \iff \ln|y| \dfrac{y^2}{2t^2} + C = 0\\
+		\left|\left|x = \dfrac{1}{y^2} \iff y = \dfrac{1}{\sqrt{x}}\right|\right| \Longrightarrow \ln|\sqrt{x}| + \dfrac{1}{2t^2x} + C = 0 \iff \dfrac{1}{xt^2} = \ln|x| + C
+	\end{gather*}
 \end{proof}
 
 \begin{task4}
@@ -1478,42 +1554,587 @@ x_2 = \dfrac{1}{t} - \dfrac{k}{t^2}\hfill
 Решить диффур:
 \[(tx + e^t)\d t - t\d x = 0\]
 \end{task1}
-%\begin{proof}[Решение]
-%
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		tx + e^t - t\dx = 0\\
+		\dx - x = \dfrac{e^t}{t}\\
+		\dx = x \iff \dfrac{\d x}{x} = \d t \Longrightarrow \ds\int = \int\\
+		\ln|x| = t + C \iff x = u \cdot e^t,\ u \in \R \Longrightarrow u = u(t)\\
+		\left\{\begin{gathered}
+		x = ue^t\hfill\\
+		\dx = \du e^t + ue^t\hfill
+		\end{gathered}\right.\\
+		\du e^t + ue^t - ue^t = \dfrac{e^t}{t} \Longrightarrow \du e^t = \dfrac{e^t}{t}\\
+		\du = \dfrac{1}{t} \Longrightarrow u = \ln|t| + C\\
+		x = (\ln|t| + C) \cdot e^t
+	\end{gather*}
+\end{proof}
 
 \begin{task2}
 Решить диффур:
 \[t\dx = x - t\cdot \exp(\dfrac{x}{t})\]
 \end{task2}
-%\begin{proof}[Решение]
-%%	
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		\dx = \dfrac{x}{t} - \exp(\dfrac{x}{t})\\
+		\left\{\begin{gathered}
+		y = \dfrac{x}{t} \Longrightarrow x = yt\hfill\\
+		\dx = \dy t + y\hfill
+		\end{gathered}\right.\\
+		\dy t + y = y - e^y \iff \dy t = -e^y \\
+		-e^{-y}\dy = \dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+		e^{-y} = \ln|t| + C \iff t = \lambda \cdot \exp(e^{-y}),\ \lambda \in \R
+	\end{gather*}
+	Далее обратная замена.
+\end{proof}
 
 \begin{task3}
 Решить диффур:
 \[t\dx - 2t^2\cdot \sqrt{x} = 4x\]
 \end{task3}
-%\begin{proof}[Решение]
-%	
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		\dx - \dfrac{4}{t} \cdot x = 2t^2 \cdot \sqrt{x} \Longrightarrow m = \dfrac{1}{2}\\
+		\dfrac{\dx}{\sqrt{x}} - \dfrac{4}{t} \cdot \sqrt{x} = 2t^2\\
+		\left\{\begin{gathered}
+		w = \sqrt{x}\hfill\\
+		\dw = \dfrac{\dx}{2\sqrt{x}} \Longrightarrow \dfrac{\dx}{\sqrt{x}} = 2\dw\hfill
+		\end{gathered}\right.\\
+		\dw - 2\dfrac{w}{t} = t^2
+	\end{gather*}
+	\begin{gather*}
+		\dw = 2\dfrac{w}{t}\\
+		\dfrac{\d w}{w} = 2\dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+		\ln|w| = 2\ln|t| + C \iff w = ut^2,\ u \in \R \Longrightarrow u = u(t)\\
+		\left\{\begin{gathered}
+		w = ut^2\hfill\\
+		\dw = \du t^2 + 2ut\hfill
+		\end{gathered}\right.\\
+		\du t^2 + 2ut - 2ut = t^2 \iff \du t^2 = t^2\\
+		\du = 1 \iff u = t + C\\
+		w = (t + C) \cdot t^2 = \sqrt{x}\\
+		x = w^2 = (t + C)^2 \cdot t^4
+	\end{gather*}
+\end{proof}
 
 \begin{task4}
 Решить диффур:
 \[t^2\dx + tx + t^2x^2 = 4\]
 \end{task4}
-%\begin{proof}[Решение]
-%
-%\end{proof}
+\begin{proof}[Решение]
+	\begin{gather*}
+		\dx + x^2 + \dfrac{x}{t} - \dfrac{4}{t^2} = 0\\
+		\left\{\begin{gathered}
+		x_1 = \dfrac{2}{t}\hfill\\
+		\dx_1 = -\dfrac{2}{t^2}\hfill
+		\end{gathered}\right. \Longrightarrow -\dfrac{2}{t^2} + \dfrac{4}{t^2} + \dfrac{2}{t^2} = 0 \\
+		\left\{\begin{gathered}
+		x = \dfrac{1}{t} + \dfrac{1}{z}\hfill\\
+		\dx = -\dfrac{1}{t^2} - \dfrac{\dz}{z^2}\hfill
+		\end{gathered}\right. \Longrightarrow \dz - \dfrac{5}{t} \cdot z = 1\\
+		\dz = \dfrac{5}{t} \cdot z\\
+		\dfrac{\d z}{z} = 5\dfrac{\d t}{t} \Longrightarrow \ds\int = \int\\
+		\ln|z| = 5\ln|t| + C \iff z = u\cdot t^5,\ u \in \R \Longrightarrow u = u(t)\\
+		\left\{\begin{gathered}
+		z = ut^5\hfill\\
+		\dz = \du t^5 + 5ut^4\hfill
+		\end{gathered}\right.\\
+		\du t^5 + 5ut^4 - \dfrac{5ut^5}{t} = 1\iff \du t^5 = 1\\
+		\d u = \dfrac{\d t}{t^5} \Longrightarrow \ds\int = \int\\
+		u = -\dfrac{1}{4t^4} + C\\
+		z = t^5 \cdot \left(-\dfrac{1}{4t^4} + C\right) = -\dfrac{t}{4} + Ct^5\\
+		x = x_1 + \dfrac{1}{z} = \dfrac{2}{t} + \dfrac{4}{4\cdot Ct^5 - t}
+	\end{gather*}
+\end{proof}
 
 \begin{task5}
 Пусть $x_1,\ x_2$ -- независимые  частные решения линейного диффура 1 порядка:
 \[\dx + a(t)x = b(t)\]
 Найти общее решение (выразить через $x_1$ и $x_2$).
 \end{task5}
+\begin{proof}[Решение]
+	Проводя манипуляции, аналогичные указанным выше для уравнения Риккати (а это оно и есть, просто многочлен при $x^2$ --- тождественный нуль), мы получаем:
+	\[\dfrac{x - x_1}{x - x_2} = C\]
+	Тут стоит отметить, что $C \neq 1$, ибо иначе $x_1$ и $x_2$ были бы зависимы. 
+	
+	Альтернативное решение: мы знаем, что $x_1$ и $x_2$ -- оба решения данного диффура. Тогда выполнены соотношения:
+	\begin{gather*}
+		\dx_1 + a(t)x_1 = b(t)\\
+		\dx_2 + a(t)x_2 = b(t)
+	\end{gather*}
+	Вычтем из первого уравнения второе:
+	\[\dot{(x_1 - x_2)} + a(t)(x_1 - x_2) = 0\]
+	Следовательно, $x_1 - x_2$ (и любой подобная подобная данной функция) есть решение однородного диффура $\dx + a(t) = 0$. Тогда можем воспользоваться методом вариации постоянной:
+	\begin{gather*}
+		x = u \cdot (x_1 - x_2),\ u \in \R \Longrightarrow u = u(t) \\
+		\dx = \du(x_1 - x_2) + u \dot{(x_1 - x_2)}\\
+		\du(x_1 - x_2) + \underbrace{u \dot{(x_1 - x_2)} + a(t)\cdot u \cdot (x_1 - x_2)}_{= 0} = b(t)\\
+		\du = \dfrac{b(t)}{x_1 - x_2}
+	\end{gather*}
+	Можно заметить, что любое иное решение будет получаться из решения однородного уравнения сдвигом. Тогда решением будет являться многочлен:
+	\[C \cdot (x_1 - x_2) + x_1\]
+	Прямая проверка показывает, что оно совпадает с ответом выше.
+\end{proof}
+
+
+\newpage
+\section{Семинар 4, 31 января}
+
+\subsection{Уравнения в полных дифференциалах}
+
+Пускай есть функция $U(t,\ x)$ -- от двух переменных. Она являет собой некую кривую. Пускай она непрерывна в точке $(t_0,\ x_0)$. Сдвинемся на $(\bigtriangleup t,\ \bigtriangleup x)$ вдоль кривой. Новое значение функции можно записать так:
+\[U(t_0 + \bigtriangleup t,\ x_0 + \bigtriangleup x) = U(t_0,\ x_0) + U'_{t_0,\ x_0} \cdot (\bigtriangleup t,\ \bigtriangleup x) + \overline{o}(\bigtriangleup t,\ \bigtriangleup x)\] где \[U'_{t_0,\ x_0} = \left(\dfrac{\partial U}{\partial t},\ \dfrac{\partial U}{\partial x}\right)\] --- вектор частных производных (по факту, это вектор в сопряжённом пространстве к нашему в базисе $\big(\d t,\ \d x\big)$).
+
+Можно записать полный дифференциал функции $U$:
+\[\d U = \dfrac{\partial U}{\partial t}\cdot \d t + \dfrac{\partial U}{\partial x}\cdot \d x\]
+
+Предположим теперь, что на каком-то промежутке наша функция принимает константное значение: $U(t,\ x) = C$. Ясно, что в таком случае производная будет равна нулю на данном промежутке, что равносильно:
+\[\dfrac{\partial U}{\partial t}\cdot \d t + \dfrac{\partial U}{\partial x}\cdot \d x = 0\]
+
+Обозначим $\dfrac{\partial U}{\partial t} = M(t,\ x)$,\ $\dfrac{\partial U}{\partial x} = N(t,\ x)$ --- функции от $(t,\ x)$. 
+\begin{definition}
+	Тождество
+	\[M(t,\ x)\d t + N(t,\ x)\d x = 0\] где $M,\ N$ -- функции от $(t,\ x)$, называется \textbf{уравнением в полных дифференциалах}.
+\end{definition}
+
+Соответственно, решить уравнение в полных дифференциалах --- это найти такую функцию $U(t,\ x)$, что $\d U = M(t,\ x)\d t + N(t,\ x)\d x$.
+
+Нужно отметить, что из того, что нам на вход подали диффур вышеуказанного вида (или сводящегося к нему), ещё не следует, что это уравнение в полных дифференциалах. Для этого нужно нечто большее, чем такая запись.
+\begin{statement}
+	Для того, чтобы уравнение \[M(t,\ x)\d t + N(t,\ x)\d x = 0\] было уравнением в полных дифференциалах, необходимо и достаточно, чтобы смешанные производные были равны, то есть:
+	\[\dfrac{\partial M}{\partial x} = \dfrac{\partial^2 U}{\partial x\partial t} = \dfrac{\partial^2 U}{\partial t\partial x} = \dfrac{\partial N}{\partial t}\]
+\end{statement}
+Именно поэтому, перед тем, как решать диффур, подозреваемый в бытии уравнением в полных дифференциалах, нужно сначала проверить на равенство смешанные производные.
+
+Теперь поговорим о самом процессе решения. Существует два его варианта -- теоретический и прикладной.
+
+Суть теоретического в том, что, как нам известно, $M$ -- это частная производная функции по $t$, $N$ -- частная производная по $x$. Логично, что, так как они обе суть производные одной и той же функции, то их \textbf{первообразные} должны совпадать. Следовательно:
+\[\left\{\begin{gathered}
+\ds\int M\d t = \widetilde{M}(t,\ x) + \varphi(x)\hfill\\
+\ds\int N\d x = \widetilde{N}(t,\ x) + \psi(t)\hfill
+\end{gathered}\right.\]
+где $\varphi(x)$ -- функция от $x$, $\psi(t)$ -- функция от $t$. Суть в том, что $\fe(x)$ <<зашита>> в $\widetilde{N}(t,\ x)$, как и $\psi(t)$ уже находится в $\widetilde{M}(t,\ x)$. Поэтому, вычислив оба интеграла, легко заметить, какие части соответствуют данным функциям.
+
+Практически же мы будем действовать несколько иначе.
+
+Имеем уравнение: 
+\[M(t,\ x)\d t + N(t,\ x)\d x = 0\]
+Первым делом берём частную производную $M$  и интегрируем её по $t$ (для $N$ и $x$ аналогично, выбор функции зависит от удобства интегрирования):
+\[U = \ds\int M(t,\ x)\d t + \fe(x)\] --- заметим, что вместо константы мы пишем функцию от $x$, которая при взятии производной по $t$  обнуляется.
+Теперь дифференцируем полученную функцию по $x$:
+\[\dfrac{\partial U}{\partial x} = \dfrac{\partial}{\partial x}\left[ds\int M(t,\ x)\d t\right] + \fe'(x) =  N(t,\ x)\]
+Отсюда получаем выражение для производной $\fe(x)$:
+\[\fe'(x) = N(t,\ x) - \dfrac{\partial}{\partial x}\left[ds\int M(t,\ x)\d t\right]\]
+Стоит отметить, что части с одновременно $t$ и $x$ в выражении выше сократятся. Теперь находим функцию $\fe(x)$, интегрируя полученное равенство:
+\[\fe(x) = \ds\int\left(N(t,\ x) - \dfrac{\partial}{\partial x}\left[\ds\int M(t,\ x)\d t\right]\right)\d x\]
+Осталось лишь подставить в выражение для $U$, что мы получили в самом начале:
+\[U = \ds\int M(t,\ x)\d t + \fe(x) = \ds\int M(t,\ x)\d t + \ds\int\left(N(t,\ x) - \dfrac{\partial}{\partial x}\left[\ds\int M(t,\ x)\d t\right]\right)\d x\]
+Получили итоговый ответ. Формально, должна появляться ещё константа, но ввиду того, что мы на промежутке, где функция постоянна, то в качестве $C$ можно просто записывать левую часть уравения выше. Тогда уравнение искомой кривой имеет вид:
+\[C =  \ds\int M(t,\ x)\d t + \ds\int\left(N(t,\ x) - \dfrac{\partial}{\partial x}\left[\ds\int M(t,\ x)\d t\right]\right)\d x\]
+
+Немного про интегрирование. Когда мы интегрируем частную производную, мы делаем эдакое \textit{частное интегрирование}, считая ту переменную, по которой НЕ интегрируем, константой. Кроме того, несмотря на то, что мы берём первообразную, константа также не записывается -- все константы перейдут в левую часть уравнения, составляя значение функции.
+\ \\
+
+\textbf{Пример №1}
+
+\[2tx\d t + (t^2 - x^2)\d x = 0\]
+Проверим, действительно ли это УПД:
+\[\left\{\begin{gathered}
+(2tx)'_x = 2t\hfill\\
+(t^2 - x^2)'_t = 2t\hfill
+\end{gathered}\right.\]
+И правда, оно. Действуем практическим методом:
+\begin{gather*}
+	U = \ds\int 2xt\d t = xt^2 + \fe(x)\\
+	U'_x = t^2 + \fe'(x) = t^2 - x^2 \iff \fe'(x) = -x^2 \Longrightarrow \fe(x) = -\dfrac{x^3}{3}\\
+	U = xt^2 + \fe(x) = xt^2 - \dfrac{x^3}{3} = C
+\end{gather*}
+Теперь посмотрим, как решать теоретическим:
+\begin{gather*}
+\left\{\begin{gathered}
+\ds\int 2tx\d t = xt^2 + \fe(x)\hfill\\
+\ds\int (t^2 - x^2)\d x = xt^2 - \dfrac{x^3}{3} + \psi(t)\hfill
+\end{gathered}\right. \Longrightarrow \left\{\begin{gathered}
+\fe(x) = -\dfrac{x^3}{3}\hfill\\ \psi(t) = 0\hfill
+\end{gathered}\right.
+\end{gather*}
+Обе функции $\fe$ и $\psi$ мгновенно находятся после взятия интегралов. Конечно, этот метод существенно быстрее и изящнее (в практическом мы делаем много лишних действий), но во многих уравнениях увидеть эти составляющие может быть не так легко.
+\ \\
+
+\textbf{Пример №2}
+\[3t^2(1 + \log x)\d t - \left(2x - \dfrac{t^3}{x}\right)\d x = 0\]
+Проверка:
+\[\left\{\begin{gathered}
+\left[3t^2(1 + \log x)\right]'_x  = \dfrac{3t^2}{x}\hfill\\
+-\left(2x - \dfrac{t^3}{x}\right)'_t = \dfrac{3t^2}{x}\hfill
+\end{gathered}\right.\]
+Решаем:
+\begin{gather*}
+	U = \ds\int \left(3t^2 + 3t^2\log x\right)\d t = t^3 + t^3 \cdot \log x + \fe(x)\\
+	U'_x = \dfrac{t^3}{x} + \fe'(x) = -2x + \dfrac{t^3}{x} \iff \fe'(x) = -2x \Longrightarrow \fe(x) = -x^2\\
+	U = t^3 + t^3 \cdot \log x + \fe(x) = t^3 + t^3 \cdot \log x - x^2 = C
+\end{gather*}
+
+Банальный факт, но не стоит рассчитывать, что диффур, являющийся УПД, будет записан в стандартном для УПД виде.
+\ \\
+
+\textbf{Пример №3}
+Решить задачу Коши:
+\[\dfrac{1}{x^2} - \dfrac{2}{t} = \dfrac{2t\dx}{x^3},\ \text{ начальное условие: }x(1) = 1\]
+Перед проверкой, разумно преобразовать к классическому виду УПД:
+\[\dfrac{1}{x^2} - \dfrac{2}{t} = \dfrac{2t\d x}{x^3\d t} \iff \left(\dfrac{1}{x^2} - \dfrac{2}{t}\right)\d t =  \dfrac{2t}{x^3}\d x \iff \left(\dfrac{1}{x^2} - \dfrac{2}{t}\right)\d t - \dfrac{2t}{x^3}\d x = 0\]
+Проверка:
+\[\left\{\begin{gathered}
+\left(\dfrac{1}{x^2} - \dfrac{2}{t}\right)'_x  = -\dfrac{2}{x^3}\hfill\\
+\left(- \dfrac{2t}{x^3}\right)'_t = -\dfrac{2}{x^3}\hfill
+\end{gathered}\right.\]
+Частные производные равны, значит, это УПД. Будем решать. В данном случае удобнее проинтегрировать по $x$:
+\begin{gather*}
+	U = \ds\int -\dfrac{2}{x^3}\d x = \dfrac{t}{x^2} + \psi(t)\\
+	U'_t = \dfrac{1}{x^2} + \psi'(t) = \dfrac{1}{x^2} - \dfrac{2}{t}\iff \psi'(t) = -\dfrac{2}{t} \Longrightarrow \psi(t) = \log(\dfrac{1}{t^2})\\
+	U =  \dfrac{t}{x^2} + \psi(t) = \dfrac{t}{x^2} + \log(\dfrac{1}{t^2}) = C
+\end{gather*}
+Начальное условие:
+\[x(1) = 1 + \log 1 = C  = 1\]
+Итоговый ответ:
+\[\dfrac{t}{x^2} + \log(\dfrac{1}{t^2}) = 1\]
+
+\subsection{Группировка}
+
+Этот приём относится скорее к общим методам решения диффуров, нежели конкретно к УПД. Однако, часто именно здесь он хорошо выстреливает. 
+
+Пускай имеем уравнение
+\[M(t,\ x)\d t + N(t,\ x)\d x = 0\]
+Допустим, что функция $N$ представима в виде суммы: $N = P + Q$. Тогда дифференциал распишется по линейности:
+\[M\d t + P\d x + Q\d x\]
+Пускай нам повезло, и существует такая функция $K = K(t,\ x)$, что:
+\[\d K = M\d t + P\d x\]
+Тогда исходный диффур мы можем переписать так:
+\begin{gather*}
+\d K + Q\d x = 0
+\end{gather*}
+Понятно, что аналогичные действия можно проделать и для функции $M$, также перегруппировав её по частям с $N$ в один дифференциал. Конечно, мы рассмотрели весьма идеалистичный случай, так как зачастую вот прям в таком виде функции редко можно перегруппировать. Часто требуется дополнительно применить функцию ко всему уравнению, чтобы получился дифференциал (то бишь умножить обе части на что-то, поделить и так далее).
+
+Этот приём бывает очень полезен, так как позволяет массу диффуров решать быстро и изящно. Стоит отметить, что по факту $\d K = -Q\d x$ -- это какой-то новый диффур, который можно решить просто интегрированием обеих частей. Но законно это делать если и только если функция справа -- от одного переменного. Иначе опять придётся париться с остаточной частью $\fe$ или $\psi$, как выше.
+\ \\
+
+\textbf{Пример №4}
+\[x\d t - (xt^3 + t)\d x = 0\]
+Раскроем скобки и переставим пару слагаемых:
+\[x\d t - t\d x - xt^3\d x = 0\]
+Два левых слагаемых так и просятся в одну функцию. Чтобы её увидеть, поделим уравнение на $t^2$:
+\[\dfrac{x\d t - t\d x}{t^2} - tx\d x = 0\]
+Заметим, что $\dfrac{x\d t - t\d x}{t^2}$ -- это производная функции $-\dfrac{x}{t}$. Тогда:
+\begin{gather*}
+-\d \dfrac{x}{t} - tx\d x = 0,\ y = \dfrac{x}{t} \Longrightarrow t = \dfrac{x}{y}\\
+\dy = -\dfrac{x^2}{y}\d x \iff y\d y = -x^2\d x \Longrightarrow \ds\int = \int \\
+\dfrac{y^2}{2} = -\dfrac{x^3}{3} + C\\
+\dfrac{x^2}{2t^2} = -\dfrac{x^3}{3} + C \iff x^2 = -\dfrac{2}{3} \cdot t^2x^3 + C
+\end{gather*}
+
+\textbf{Пример №5}
+\[(t^2 + x^2 + x)\d t - t\d x = 0\]
+Этот пример весьма похож на предыдущий:
+\begin{gather*}
+	(t^2 + x^2)\d t + (x\d t - t\d x) = 0\\
+	\left(1 + \dfrac{x^2}{t^2}\right)\d t = \d \dfrac{x}{t},\ y = \dfrac{x}{t}\\
+	(1 + y^2)\d t = \d y\iff \d t = \dfrac{\d y}{1 + y^2}\Longrightarrow\ds\int = \int\\
+	t = \arctan(y) + C \iff t  = \arctan(\dfrac{x}{t}) + C
+\end{gather*}
+Ниже будут приведены гораздо более интересные применения группировки.
+
+\subsection{Метод интегрирующего множителя}
+
+Всё бы хорошо, да случаются ситуации, когда смешанные производные могут не совпасть. Интересно, но в таких ситуациях иногда можно подобрать так называемый <<интегрирующий множитель>>. Пусть у нас есть уравнение:
+\[M(t,\ x)\d t + N(t,\ x)\d x = 0\] не являющееся УПД, то есть $M'_x \neq N'_t$. Тогда, если $M$ и $N$ таковы, что ни в какой точке рассматриваемого промежутка не обращаются в ноль одновременно:
+\[\nexists\ (t_0,\ x_0) \mid M^2(t_0,\ x_0) + N^2(t,\ x) = 0\] то существует такая функция $\mu(t,\ x)$, что тождество:
+\[\mu(t,\ x) \cdot M(t,\ x) \d t + \mu(t,\ x) \cdot N(t,\ x) \d x = 0\]
+является уравнением в полных дифференциалах (смешанные производные соответствующих частей будут совпадать). Эта функция, $\mu(t,\ x)$ и называется \textbf{интегрирующим множителем}.
+
+Поанализируем немного эту функцию. Из определения имеем:
+\[\dfrac{\partial}{\partial x}(\mu M) = \dfrac{\partial}{\partial y}(\mu N) \iff N\cdot\dfrac{\partial \mu}{\partial t} - M \cdot \dfrac{\partial \mu}{\partial x} = \left(\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\right)\cdot \mu\]
+Откуда:
+\[N\cdot\dfrac{\partial \log\mu}{\partial t} - M \cdot \dfrac{\partial \log\mu}{\partial x} = \dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\]
+Такая вот штука называется \textbf{уравнением в частных производных}. 
+
+Сразу же отмечу: решить уравнение на интегрирующий множитель часто есть задача \textbf{гораздо сложнее}, нежели решить сам диффур. Поэтому, как говорят великие математики, <<Решать его мы конечно не будем>>. 
+
+Вместо этого мы будем \textit{угадывать} интегрирующий множитель. Благо в некоторых частных случаях это сделать относительно легко. Однако, иногда его-таки возможно найти напрямую.	
+
+\subsubsection{Общая идея}
+
+Пускай имеем тождество
+\[M(t,\ x)\d t + N(t,\ x)\d x = 0\] и уравнение на интегрирующий множитель:
+\[N\cdot\dfrac{\partial \log\mu}{\partial t} - M \cdot \dfrac{\partial \log\mu}{\partial x} = \dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\]
+
+Предположим, что интегрирующий множитель $\mu = \mu(t)$ -- функция только от $t$. Тогда $\dfrac{\partial \mu}{\partial x} = 0$ и уравнение примет вид:
+\[\dfrac{1}{\mu} \cdot \dfrac{\partial \mu}{\partial t} = \dfrac{\partial \log\mu}{\partial t} = \dfrac{1}{N}\left(\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\right)\]
+В таком случае для существования интегрирующего множителя $\mu = \mu(t)$, зависящего только от $t$, необходимо и достаточно, чтобы правая часть уравнения выше была функцией только от $t$. Тогда легко найти саму $\mu$, решив обычный диффур с разделяющимися переменными.
+
+Аналогично, если предположить, что интегрирующий множитель $\mu = \mu(x)$ -- функция только от $x$, то  $\dfrac{\partial \mu}{\partial t} = 0$ и уравнение примет вид:
+\[\dfrac{1}{\mu} \cdot \dfrac{\partial \mu}{\partial x} = \dfrac{\partial \log\mu}{\partial x} = \dfrac{1}{M}\left(\dfrac{\partial N}{\partial t} - \dfrac{\partial M}{\partial x}\right)\]
+В таком случае для существования интегрирующего множителя $\mu = \mu(x)$, зависящего только от $x$, необходимо и достаточно, чтобы правая часть уравнения выше была функцией только от $x$.
+
+Как видите, решить уравнение на интегрирующий множитель не так уж и сложно, если попался хороший диффур. Часто в УПД нужны именно однопеременные функции. Существует ещё один интересный случай, который немногим сложнее вышеуказанных.
+
+Имеем уравнение:
+\[N\cdot\dfrac{\partial \log\mu}{\partial t} - M \cdot \dfrac{\partial \log\mu}{\partial x} = \dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\]
+Пускай интегрирующий множитель $\mu = \mu\big(\nu(t,\ x)\big)$ --- функция от одного переменного $\nu = \nu(t,\ x)$, который в свою очередь является функцией от $t$ и $x$. Новая функция может быть, к примеру:
+\[\nu = \dfrac{t}{x},\ \nu = tx,\ \nu = t^2 + x^2,\ \nu = t + x\]
+Так как интегрирующий множитель -- функция от одной переменной $\nu$, то он может быть также найден из диффура:
+\[\dfrac{1}{\mu} \cdot \dfrac{\partial \mu}{\partial \nu} =  \dfrac{\partial \log\mu}{\partial \nu} =  \dfrac{\frac{\partial M}{\partial t} - \frac{\partial N}{\partial t}}{N \frac{\partial\nu}{\partial t} - M\frac{\partial \nu}{\partial x}}\]
+где правая часть, как бы то странно ни было, зависит только от $\nu$. Так мы сможем найти множитель напрямую! Разберём несколько примеров, где сначала просто поугадываем.
+\ \\
+
+\textbf{Пример №6}
+\[x\d t + \big(x + \tan(t + x)\big)\d x = 0\]
+Проверим смешанные производные:
+\[\left\{\begin{gathered}
+(x)'_x = 1\hfill\\
+\big(x + \tan(t + x)\big)'_t = \dfrac{1}{\cos[2](t + x)}\hfill
+\end{gathered}\right.\]
+Давайте подумаем, какой может быть интегрирующий множитель. Внимательный читатель может заметить, что $\mu = \cos(t + x)$ нам подходит. Проверим:
+\begin{gather*}
+	x\cos(t + x)\d t + \big(x\cos(t + x) + \sin(t + x)\big)\d x = 0\\	\left\{\begin{gathered}\big[x\cos(t + x)\big]'_x = \cos(t + x) - x\sin(t + x)\hfill\\
+	\big[x\cos(t + x) + \sin(t + x)\big]'_t = -x\sin(t + x) + \cos(t + x)\hfill
+	\end{gathered}\right.
+\end{gather*}
+Отлично! Теперь смешанные производные совпадают. Значит, можно решать традиционными методами. Будем интегрировать производную по $t$, так как она проще:
+\begin{gather*}
+	U = \ds\int x\cos(t + x)\d t = x\sin(t + x) + \fe(x)\\
+	U'_x = \sin(t + x) + x\cos(t + x) + \fe'(x) = x\cos(t + x) + \sin(t + x) \iff \fe'(x) = 0 \iff \fe(x) = 0\\
+	U = x\sin(t + x) + \fe(x) = x\sin(t + x) = C
+\end{gather*}
+Я специально написал, что функция $\fe(x) = 0$, уже складировав её значение в итоговый ответ.
+\ \\
+
+\textbf{Пример №7}
+\[(t + x^2)\d t - 2tx\d x = 0\]
+Проверим смешанные производные:
+\[\left\{\begin{gathered}
+(t + x^2)'_x = 2x\hfill\\
+(- 2tx)'_t = -2x\hfill
+\end{gathered}\right.\]
+Вообще говоря, в данном случае можно и угадать интегрирующий множитель. Но для примера, выведем его при помощи решения диффура. Будем искать функцию только от $t$:
+\begin{gather*}
+	M = t + x^2,\ N = -2tx\\
+	\dfrac{\partial \log\mu}{\partial t} = \dfrac{1}{N}\left(\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\right) = \dfrac{2x + 2x}{-2tx} = -\dfrac{2}{t}\\
+	\log\mu = -2\log|t| \iff \mu = \dfrac{1}{t^2}
+\end{gather*}
+Легко и непринуждённо, почти без всякой интуиции (но вообще повезло, что тут и вправду только от $t$ зависит). Теперь решаем УПД:
+\begin{gather*}
+\dfrac{t + x^2}{t^2}\d t - 2\dfrac{tx}{t^2}\d x= 0 \\
+\dfrac{\d t}{t} + \dfrac{x^2 \d t}{t^2} - \dfrac{2tx\d x}{t^2} = 0
+\end{gather*}
+Здесь мы воспользуемся приёмом группировки, объединив два последних слагаемых левой части:
+\begin{gather*}
+	\dfrac{\d t}{t} - \dfrac{2tx\d x - x^2\d t}{t^2} = 0 \iff \dfrac{\d t}{t} - \d\left(\dfrac{x^2}{t}\right) = 0 \iff \d\left(\log t - \dfrac{x^2}{t}\right) = 0\\
+	\log t = \dfrac{x^2}{t} + C \iff t = \lambda \cdot \exp(\dfrac{x^2}{t}),\ \lambda \in \R
+\end{gather*}
+В последних действиях было удобнее занести функцию под дифференциал по линейности, чтобы долго не считать диффур с разделяющимися переменными, а сразу получить ответ.
+\ \\
+
+\textbf{Пример №8}
+\[2tx\log x\d t + \left(t^2 + x^2\sqrt{x^2 + 1}\right)\d x = 0\]
+Проверим смешанные производные:
+\[\left\{\begin{gathered}
+(2tx\log x)'_x = 2t\log x + 2t\hfill\\
+\left(t^2 + x^2\sqrt{x^2 + 1}\right)'_t = 2t\hfill
+\end{gathered}\right.\]
+Здесь так сходу его и не назовёшь. Будем опять действовать методом научного тыка, но обоснованного -- положим $\mu = \mu(x)$. Тогда рассмотрим выражение, отвечающее данной функции:
+\begin{gather*}
+	M = 2tx\log x,\ N = t^2 + x^2\sqrt{x^2 + 1}\\
+	\dfrac{\partial \log\mu}{\partial x} = \dfrac{1}{M}\left(\dfrac{\partial N}{\partial t} - \dfrac{\partial M}{\partial x}\right) = \dfrac{2t - 2t(\log x + 1)}{2tx\log x} = -\dfrac{1}{x} \\
+	\log\mu = -\log x \iff \mu = \dfrac{1}{x}
+\end{gather*}
+Теперь решаем уравнение в полных дифференциалах:
+\begin{gather*}
+	\dfrac{2tx\log x}{x}\d t + \dfrac{t^2 + x^2\sqrt{x^2 + 1}}{x}\d x = 0\\
+	2t\log x\d t \dfrac{t^2}{x}\d x + x\sqrt{x^2 + 1} = 0
+\end{gather*}
+Здесь опять удобно применить группировку, объединив первое и второе слагаемое под один дифференциал.
+\begin{gather*}
+	\d(t^2\log x) + x\sqrt{x^2 + 1}\d x = 0 \iff \d(t^2\log x) = -x\sqrt{x^2 + 1}\d x\\
+	t^2\log x = -\ds\int x\sqrt{x^2 + 1}\d x = -\dfrac{1}{2}\ds\int\sqrt{x^2 + 1}\d x^2 = -\dfrac{1}{2} \cdot \dfrac{2}{3}\cdot \left(x^2 + 1\right)^{\frac{3}{2}}\\
+	t^2\log x + \dfrac{1}{3}\cdot \left(x^2 + 1\right)^{\frac{3}{2}} = C
+\end{gather*}
+Здесь опять проще схитрить, сразу же взяв интеграл от правой части, так как слева получаем чистый дифференциал. Стоит отметить, что делать так законно тогда и только тогда, когда в другой части уравнения у нас функция от \textbf{одного} переменного, поэтому и можем спокойно интегрировать. Как видим, вывести интегрирующий множитель в частных случаях довольно-таки просто. 
+
+Всё же замечу, что у нас так хорошо всё получилось лишь потому, что наше предположение оправдалось -- выражения с $M$ и $N$  в правых частях уравнений получались от одной переменной -- той, на которую мы делали ставку. Если вдруг получится опять функция от нескольких переменных, то значит, интегрирующий множитель имеет иную природу.
+
+\subsubsection{Алгоритм решения}
+
+Обобщим алгоритм действий на проверку диффура и поиск интегрирующего множителя:
+\begin{enumerate}
+	\item Вычисляем смешанные производные $\dfrac{\partial M}{\partial x}$ и $\dfrac{\partial N}{\partial t}$, проверяем на равенство.
+	\item Если они не равны, то смотрим на разность: 
+	\[\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\]
+	\item Пробуем делить её на $N$ и на $M$. Если в каком-то из случаев получилась функция только от $t$ или только $x$ соответственно, то значит, всё хорошо, и мы нашли интегрирующий множитель (аккуратнее со знаками!).
+	\item Если не сработало, то пробуем применить интегрирующий множитель $\nu = \nu(t,\ x)$, поделив разность на $N \dfrac{\partial\nu}{\partial t} - M\dfrac{\partial \nu}{\partial x}$. Если получилась функция только от $\nu$ -- успех.
+	\item Если не сработал ни один из вариантов выше -- закрываем глаза и ждём провидения.
+\end{enumerate}
+
+Разберём ещё несколько примеров, чтобы закрепить методу.
+\ \\
+
+\textbf{Пример №9}
+\[(t - \cos x)\d t - \sin x\d x = 0\]
+Работаем по алгоритму:
+\[\left\{\begin{gathered}
+(t - \cos x)'_x = \sin x\hfill\\
+\left(- \sin x\right)'_t = 0\hfill
+\end{gathered}\right.\]
+Увы, но это не УПД. Теперь рассмотрим разность:
+\[\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t} = \sin x\]
+Хочется на что-то поделить, к примеру, на $N$:
+\[\dfrac{1}{N}\left(\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\right) = -\dfrac{\sin x}{\sin x} = -1\] -- успех, ведь выражение зависит только от $t$ (фактически, вообще ни от чего не зависит, но так как мы делили на $N$, то нам важна именно независимость от $x$ -- можем повыражать через $t$ с нулевыми коэффициентами). Таким образом, мы можем найти интегрирующий множитель $\mu = \mu(t)$:
+\[\dfrac{\partial \log\mu}{\partial t} = -1 \iff \log\mu = -t \Longrightarrow \mu = \exp(-t)\]
+Теперь решаем исходный диффур:
+\begin{gather*}
+\exp(-t)\cdot (t - \cos x)\d t - \exp( -t)\cdot \sin x\d x = 0\\
+U = -\ds\int \exp( -t)\cdot \sin x\d x = \exp(-t)\cdot \cos x + \psi(t)\\
+U'_t = -\exp(-t)\cdot \cos x + \psi'(t) = \exp(-t)\cdot t - \exp(-t)\cdot\cos x\\
+\psi'(t) = \exp(-t)\cdot t \iff \psi(t) = \ds\int \exp(-t)\cdot t \d t = -t\exp(-t) + \ds\int\exp(-t)\d t = -t\exp(-t) - \exp(-t)\\
+U = \exp(-t)\cdot \cos x + \psi(t) = \exp(-t)\cdot \cos x - t\exp(-t) - \exp(-t)\\
+\exp(-t)\cdot (\cos x - t - 1) = C
+\end{gather*}
+
+\textbf{Пример №10}
+\[(tx^2 - 2x^3)\d t + (3 - 2tx^2)\d x = 0\]
+Шаг первый:
+\[\left\{\begin{gathered}
+(tx^2 - 2x^3)'_x = -2xt - 6x^2\hfill\\
+\left(3 - 2tx^2\right)'_t = -2x^2\hfill
+\end{gathered}\right.\]
+Теперь вычислим разность:
+\[\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t} = 2tx - 4x^2\]
+Поделим-ка выражение на $M$:
+\[\dfrac{1}{M}\left(\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t}\right) = \dfrac{2tx - 4x^2}{tx^2 - 2x^3} = \dfrac{2(tx - 2x^2)}{x(tx - 2x^2)} = \dfrac{2}{x}\] --- зависит только от $x$, поэтому интегрирующий множитель $\mu$ будет также функцией только от $x$. Находим его:
+\begin{gather*}
+\dfrac{\partial \log\mu}{\partial x} = \dfrac{1}{M}\left(\dfrac{\partial N}{\partial t} - \dfrac{\partial M}{\partial x}\right) = -\dfrac{2}{x}\\
+\log\mu = -2\log|x| \Longrightarrow \mu = \pm \dfrac{1}{x^2}
+\end{gather*}
+Знак не имеет значения, так как обе частных производных меняют знак одновременно. Осталось умножить обе части уравнения на интегрирующий множитель. Здесь стоит сделать оговорку, ибо мы теряем таким образом решение $x = 0$ (проверьте!). Запоминаем его и решаем исходный диффур:
+\begin{gather*}
+(t - 2x)\d t + \left(\dfrac{3}{x^2} - 2t\right)\d x= 0\\
+U = \ds\int (t - 2x)\d t = \dfrac{t^2}{2} - 2tx + \fe(x)\\
+U'_x = -2t + \fe'(x) = \dfrac{3}{x^2} - 2t \iff \fe'(x) = \dfrac{3}{x^2} \Longrightarrow \fe(x) = -\dfrac{3}{x}\\
+U = \dfrac{t^2}{2} - 2tx + \fe(x) = \dfrac{t^2}{2} - 2tx -\dfrac{3}{x} = C
+\end{gather*}
+
+\textbf{Пример №11}
+\[(tx + 1)\d t + t^2 \d x = 0\]
+Проверяем:
+\[\left\{\begin{gathered}
+(tx + 1)'_x = t\hfill\\
+\left(t^2 \right)'_t = 2t\hfill
+\end{gathered}\right.\]
+Далее:
+\[\dfrac{\partial M}{\partial x} - \dfrac{\partial N}{\partial t} = -t\]
+Заметим, что деление на $M$ и $N$ не даст соответствующих нужных результатов. Придётся пробовать искать интегрирующий множитель как сложную функцию. Для этого нужно, чтобы для некоторой функции $\nu$ выражение $N \dfrac{\partial\nu}{\partial t} - M\dfrac{\partial \nu}{\partial x}$ было функцией желательно того же порядка, что и разность смешанных производных. Всё это нужно для того, чтобы итоговое частное двух разностей было функцией только от $\nu$ -- в идеале вообще константой. Пускай мы хотим получить знаменатель такой же, как числитель -- $-x$. Но тогда можно увидеть, что функция $\nu = tx$ прекрасно подходит:
+\begin{gather*}
+\dfrac{\partial \nu}{\partial t} = x,\ \dfrac{\partial \nu}{\partial x} = t\\
+N \dfrac{\partial\nu}{\partial t} - M\dfrac{\partial \nu}{\partial x} = t^2 \cdot x - (tx + 1)\cdot t  = t^2x  - t^2 x - x = -x
+\end{gather*}
+Тогда получаем:
+\[\dfrac{\frac{\partial M}{\partial t} - \frac{\partial N}{\partial t}}{N \frac{\partial\nu}{\partial t} - M\frac{\partial \nu}{\partial x}} = \dfrac{-x}{-x} = 1\] --- функция зависит только от $\nu$ (так как не зависит ни от чего). Следовательно, функция $\nu = tx$ подходит. Тогда можем найти и сам интегрирующий множитель:
+\[\dfrac{\partial \log\mu}{\partial \nu} =  \dfrac{\frac{\partial M}{\partial t} - \frac{\partial N}{\partial t}}{N \frac{\partial\nu}{\partial t} - M\frac{\partial \nu}{\partial x}} = 1 \iff \log\mu = \nu \Longrightarrow \mu = \exp(tx)\]
+Теперь можно решать и сам диффур:
+\begin{gather*}
+(tx + 1)\exp(tx)\d t + t^2\exp(tx)\d x = 0\\
+U = \ds\int t^2\exp(tx)\d x = t^2\ds\int\exp(tx)\d x = t^2 \cdot \dfrac{1}{t}\cdot \exp(tx) + \psi(t) = t\exp(tx) + \psi(t)\\
+U'_t = 1\cdot \exp(tx) + xt\cdot\exp(tx) + \psi'(t) = tx\exp(tx) + \exp(tx) \iff \psi'(t) = 0 \Longrightarrow \psi(t) = 0\\
+U = t\exp(tx) + \psi(t) = t\exp(tx) = C
+\end{gather*}
+
+\subsubsection{Группировка в смысле поиска интегрирующего множителя}
+
+Если сразу найти интегрирующий множитель не удается, то можно попытаться сгруппировать члены уравнения, находя интегрирующие множители по частям. Пусть мы имеем уравнение:
+\[M(t,\ x)\d t + N(t,\ x)\d x = 0\]
+Разобьём его на сумму слагаемых:
+\[M(t,\ x)\d t + N(t,\ x)\d x = M_1\d t + N_1\d x + M_2\d t + N_2\d x + M_3\d t + N_3\d x + \ldots\]
+Пусть мы нашли интегрирующий множитель $\mu_1$ для \textbf{первого} слагаемого:
+\[\mu_1M_1\d t + \mu_1N_1\d x = \d U_1\]
+Умножим тогда на $\mu_1$ всё уравнение:
+\begin{gather*}
+\mu_1\big(M(t,\ x)\d t + N(t,\ x)\d x\big) = \mu_1\big(M_1\d t + N_1\d x\big) + \mu_1\big(M_2\d t + N_2\d x\big) + \mu_1\big(M_3\d t + N_3\d x\big) + \ldots = \\
+= \d U_1 + \mu_1\big(M_2\d t + N_2\d x\big) + \mu_1\big(M_3\d t + N_3\d x\big) + \ldots = 0
+\end{gather*}
+
+Далее следует найти (будем честны: подобрать) такую функцию $\chi_1 = \chi_1(U_1)$, чтобы при умножении на неё \textbf{второе} слагаемое новой суммы стало полным дифференциалом:
+\[\mu_1\chi_1(U_1)\cdot\big(M_2\d t + N_2\d x\big) = \d U_2\]
+Домножим теперь всё уравнение на этот интегрирующий множитель (да-да, это именно он!). Стоит отметить, что первое слагаемое при этом останется полным дифференциалом:
+\[\chi_1(U_1)\d U_1 = \d\left(\ds\int \chi_1(U_1)\d U_1\right) = \d W_1\]
+Тогда:
+\begin{gather*}
+\mu_1\chi_1(U_1)\cdot \big(M(t,\ x)\d t + N(t,\ x)\d x\big) = \d W_1 + \d U_2 + \mu_1\chi_1(U_1)\cdot \big(M_3\d t + N_3\d x\big) + \ldots = \\
+= \d(W_1 + U_2) + \mu_1\chi_1(U_1)\cdot \big(M_3\d t + N_3\d x\big) + \ldots = 0
+\end{gather*}
+Далее опять подбираем такой множитель $\chi_2 = \chi_2(W_1 + U_2)$, что при умножении на него следующее слагаемое станет полным дифференциалом. И так далее, пока все выражение не превратится в один огромный полный дифференциал!
+
+Замечание: на практике вообще не факт, что реально получится, но в теории вполне возможно так сделать.
+\ \\
+
+\textbf{Пример №12}
+
+\[2t\d x + x\d t + tx^2(t\d x + x\d t) = 0\]
+
+Раскроем скобки, переупорядочим и поделим на $tx^2$:
+\[t\d x + x\d t + \dfrac{\d t}{tx} + \dfrac{2\d x}{x^2} = 0\]
+Заметим, что первые два члена составляют полный дифференциал: $t\d x + x\d t = \d(tx)$. Подставляем:
+\[\d(tx) + \dfrac{\d t}{tx} + \dfrac{2\d x}{x^2} = 0\]
+Теперь нужно подобрать такую функцию от $tx$, чтобы оставшееся выражение стало полным дифференциалом. Принеся в жертву ягнёнка, мы получаем указание: поделить уравнение на $tx$. Конечно, мы теряем решения $x = 0$ и $t = 0$ -- жертвы ягнёнка оказалось недостаточно. Уравнение принимает вид:
+\begin{gather*}
+\dfrac{\d(tx)}{tx} + \dfrac{\d t}{t^2x^2} + \dfrac{2\d x}{tx^3} = 0\\
+\dfrac{\d(tx)}{tx} - \dfrac{1}{x^2}\d\left(\dfrac{1}{t}\right) - \dfrac{1}{t}\d\left(\dfrac{1}{x^2}\right) = 0\\
+\d(\log|tx|) - \d\left(\dfrac{1}{t} \cdot \dfrac{1}{x^2}\right) = 0 \ \ \ \ \ \ \ \ \ \ \textit{ угар }\\
+\d\left(\log|tx| - \dfrac{1}{tx^2}\right) = 0\\
+\log|tx| - \dfrac{1}{tx^2} = C
+\end{gather*}
+Красота, не правда ли?) Осталось записать итоговый ответ -- полученная кривая и два мученика -- $x = 0$ и $t = 0$. Замечу, что для успешного применения данного метода нужна железная воля и нерушимая вера в светлое будущее.
+
+\subsection{Домашнее задание №4}
+
+\begin{task1}
+	Решить диффур:
+	\[(2 - 9x^2t) \cdot t\d t + (4x^2 - 6t^3)\cdot x \d x = 0\]
+\end{task1}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task2}
+	Решить диффур:
+	\[\dfrac{x}{t}\d t + (x^3 + \ln t)\d x = 0\]
+\end{task2}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task3}
+	Решить диффур:
+	\[tx^2\big(t\dx + x\big) = 1\]
+\end{task3}
 %\begin{proof}[Решение]
 %	
 %\end{proof}
+
+\begin{task4}
+	Решить диффур:
+	\[x\d x = (t \d x + x \d t) \sqrt{1 + x^2}\]
+\end{task4}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task5}
+	Решить диффур:
+	\[(t^2 + 2xt)\d x + (xt + 1)\d t = 0\]
+\end{task5}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
 
 \newpage
 \section{Common Tasks}
@@ -1528,6 +2149,10 @@ x_2 = \dfrac{1}{t} - \dfrac{k}{t^2}\hfill
 	\[	\dx = \dfrac{1}{2x}\cdot \exp(\frac{x^2}{t}) + \dfrac{x}{2t},\ \ 	\text{начальное условие: }x(1) = 1\]
 	\item Решить диффур: \[(t + 1)(x\dx - 1) = x^2\]
 	\item Решить задачу Коши: \[\dx - 2tx + x^2 = 5 - t^2,\ \ \text{ начальное условие: }x(0) = 0\]
+	\item Решить задачу Коши:
+	\[\dx = \dfrac{1 + x - x^2e^t}{2xe^t - t},\ \ \text{ начальное условие } x(0) = -1\]
+	\item Решить диффур:
+	\[(\sin t + x\cot t)\d t + \left(\dfrac{x^2}{\sin t} + 1\right)\d x\]
 \end{enumerate}
 
 \end{document}
