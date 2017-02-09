@@ -1,0 +1,223 @@
+\section{Лекция от 27.01.2017}
+\subsection{Сходимость случайных векторов}
+Ранее мы изучали сходимость для случайных величин. Обобщим это для случайных векторов, введя те же типы сходимости.
+\begin{definition}
+	Пусть \(\{\xi_n \mid n \in \N\}, \xi\)~--- случайные векторы из \(\R^m\). Тогда
+	\begin{enumerate}
+		\item Будем говорить, что последовательность \(\{\xi_n\}\) сходится к \(\xi\) \emph{почти наверное} (или с вероятностью 1), если
+		\[
+		\Pr{\lim\limits_{n \to \infty}\xi_n = \xi} = 1.
+		\]
+		\item Будем говорить, что последовательность \(\{\xi_n\}\) сходится к \(\xi\) \emph{по вероятности}, если для любого \(\epsilon > 0\)
+		\[
+		\lim\limits_{n \to \infty} \Pr{\left\|\xi_n - \xi\right\|_2 \geq \epsilon} = 0
+		\]
+		В данном случае \(\left\|x\right\|_2 = \sqrt{x_1^2 + \dots + x_m^2}\).
+		\item Будем говорить, что последовательность \(\{\xi_n\}\) сходится к \(\xi\) \emph{по распределению}, если для любой непрерывной ограниченной функции \(h : \R^m \mapsto \R\) выполнено, что
+		\[
+		\lim\limits_{n \to \infty} \E{h(\xi_n)} = \E{h(\xi)}.
+		\]
+	\end{enumerate}
+\end{definition}
+
+Так, стоп. Первые два похожи на определения в одномерном случае, но третье кардинально отличается от одномерного случая~--- ведь там была сходимость функций распределения. Сразу возникает вопрос: а совпадают ли эти определения для одномерного случая? Ведь случайная величина тоже является случайным вектором. Оказывается, что всё хорошо. Это утверждает следующая
+\begin{theorem}[об эквивалентности определений сходимости по распределению]
+	Пусть \(\{\xi_n \mid n \in \N\}, \xi\)~--- случайные векторы из \(\R^m\).
+	\begin{enumerate}
+		\item Пусть \(m = 1\). Тогда \(\xi_n \xrightarrow{d} \xi\) (в смысле случайных величин), тогда и только тогда, когда для любой непрерывной ограниченной функции \(h : \R^m \mapsto \R\) выполнено, что \(\lim\limits_{n \to \infty} \E{h(\xi_n)} = \E{h(\xi)}\).
+		\item Если \(m > 1\) и \(F_{\xi}\) непрерывна в \(\R^m\), то \(\xi_n \xrightarrow{d} \xi\) равносильно тому, что для любого \(x \in \R^m\) \(\lim\limits_{n \to \infty} F_{\xi_n}(x) = F_{\xi}(x)\).
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Как обычно, принимаем без доказательства.
+\end{proof}
+Следующиее упражнение может быть весьма полезно для доказательства некоторых фактов.
+\begin{exercise}
+	Пусть \(\{\xi_n \mid n \in \N\}, \xi\)~--- случайные векторы в \(\R^m\) и \(\xi_n = (\xi_n^{(1)}, \xi_n^{(2)}, \dots, \xi_n^{(m)})\). Тогда
+	\begin{enumerate}
+		\item \(\xi_n \asto \xi \iff \forall i \in \{1, 2, \dots, m\}\ \xi_n^{(i)} \asto \xi^{(i)}\)
+		\item \(\xi_n \prto \xi \iff \forall i \in \{1, 2, \dots, m\}\ \xi_n^{(i)} \prto \xi^{(i)}\)
+		\item \(\xi_n \dto \xi \implies \forall i \in \{1, 2, \dots, m\}\ \xi_n^{(i)} \dto \xi^{(i)}\), причём в обратную сторону это неверно.
+	\end{enumerate}
+\end{exercise}
+
+Вспомним, что в одномерном случае существовала <<иерархия>> сходимостей: почти наверное \(\Rightarrow\) по вероятности \(\Rightarrow\) по распределению. Оказывается, что она остаётся верна и в многомерном случае.
+\begin{lemma}[о взаимосвязи видов сходимости]
+	Пусть \(\{\xi_n \mid n \in \N\}\), \(\xi\)~--- случайные векторы в \(\R^m\). Тогда
+	\begin{enumerate}
+		\item \(\xi_n \asto \xi \implies \xi_n \prto \xi\)
+		\item \(\xi_n \prto \xi \implies \xi_n \dto \xi\)
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	Вообще говоря, тут и доказывать нечего. Первый пункт автоматически следует из утверждения о равносильности общей и покоординатной сходимости для сходимостей почти наверное и по вероятности. Доказательство второго пункта аналогично одномерному случаю.
+\end{proof}
+
+\subsection{Теорема о наследовании сходимости, лемма Слуцкого и их применения}
+Сформулируем и докажем две важные теоремы.
+\begin{theorem}[о наследовании сходимости]
+	Пусть \(\{\xi_n \mid n \in \N\}\), \(\xi\)~--- случайные векторы в \(\R^m\), а \(h : \R^m \mapsto \R^n\)~--- это некоторая функция.
+	\begin{enumerate}
+		\item Если \(\xi_n \asto \xi\) и \(h\) непрерывна почти всюду относительно распределения \(\xi\) (то есть существует \(B \in \B(\R^m)\) такое, что \(h\) непрерывна на \(B\) и \(\Pr{\xi \in B} = 1\)), то \(h(\xi_n) \asto h(\xi)\).
+		
+		\item Аналогично, если \(\xi_n \prto \xi\) и \(h\) непрерывна почти всюду относительно распределения \(\xi\), то \(h(\xi_n) \prto h(\xi)\).
+		
+		\item Если \(\xi_n \dto \xi\) и \(h\) непрерывна, то \(h(\xi_n) \dto h(\xi)\).
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Вообще говоря, первый и третий пункт по сложности сравнимы с проверкой определений. Самое сложное~--- это второй пункт.
+	\begin{enumerate}
+		\item Для начала докажем утверждение для сходимости почти наверное. Рассмотрим вероятность
+		\[
+			\Pr{\lim\limits_{n \to \infty} h(\xi_n) = h(\xi)}
+		\]
+		Заметим, что для любого \(\xi \in B\) это равносильно тому, что \(\xi_n \asto \xi\) (по непрерывности \(h\)). Тогда эту вероятность можно ограничить снизу:
+		\begin{multline*}
+			\Pr{\lim\limits_{n \to \infty} h(\xi_n) = h(\xi)} \geq \Pr{\lim\limits_{n \to \infty} \xi_n = \xi, \xi \in B} \\
+			\geq \Pr{\lim\limits_{n \to \infty} \xi_n = \xi}\Pr{\xi \in B} = 1.
+		\end{multline*}
+		Это и означает, что \(h(\xi_n) \asto h(\xi)\).
+		
+		\item Теперь докажем утверждение для сходимости по вероятности от противного. Допустим, что \(h(\xi_n) \not\prto h(\xi)\). Тогда существуют положительные \(\epsilon_0\) и \(\delta_0\) и подпоследовательность \(\{\xi_{n_k} \mid k \in \N\}\) такие, что
+		\[
+			\Pr{\left\|h(\xi_{n_k}) - h(\xi))\right\| \geq \epsilon_0} \geq \delta_0
+		\]
+		Однако \(\xi_{n_k} \prto \xi\). Тогда есть ещё одна подпоследовательность \(\{\xi_{n_{k_s}} \mid s \in \N\}\) такая, что \(\xi_{n_{k_s}} \asto \xi\). Тогда согласно первому пункту \(h(\xi_{n_{k_s}}) \asto h(\xi)\). Но по лемме о взаимосвязи сходимостей \(h(\xi_{n_{k_s}}) \prto h(\xi)\). Получаем противоречие. Следовательно, \(h(\xi_{n}) \prto h(\xi)\).
+		
+		\item Предположим, что \(\xi_{n} \dto \xi\) и \(h: \R^n \mapsto \R^k\)~--- непрерывная функция. Возьмём произвольную ограниченную и непрерывную функцию \(f: \R^k \mapsto \R\). Тогда композиция \(f \circ h : \R^n \mapsto \R\)~--- ограниченная и непрерывная функция. Следовательно, так как \(\xi_{n} \dto \xi\), то
+		\[
+		\E{f(h(\xi_n))} \to \E{f(h(\xi))}.
+		\]
+		Но это означает, что \(h(\xi_{n}) \dto h(\xi)\).
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+	Предположим, что некоторый случайный вектор \(\xi\) сходится к константе по распределению. Докажите, что он сходится к ней же по вероятности.
+\end{exercise}
+
+\begin{lemma}[Слуцкий]
+	Пусть \(\{\xi_{n} \mid n \in \N\}\) и \(\{\eta_{n} \mid n \in \N\}\)~--- две последовательности случайных величин. Далее, пусть существуют константа \(С\) и случайная величина \(\xi\) такие, что \(\xi_{n} \dto \xi\) и \(\eta_{n} \dto C\). Тогда
+	\begin{enumerate}
+		\item \(\xi_{n} + \eta_{n} \dto \xi + C\),
+		\item \(\xi_{n}\eta_{n} \dto C\xi\)
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	Докажем это утверждение только для суммы, ибо для произведения всё аналогично.
+	
+	Пусть \(t\)~--- это точка непрерывности \(F_{\xi + C}\). Выберем сколь угодно малый \(\epsilon\) такой, что \(t \pm \epsilon\) тоже являются точками непрерывности \(F_{\xi + C}\). Теперь рассмотрим \(F_{\xi_{n} + \eta_{n}}(t)  = \Pr{\xi_{n} + \eta_{n} \leq t}\). По формуле полной вероятности:
+	\[
+		F_{\xi_{n} + \eta_{n}}(t) = \Pr{\xi_{n} + \eta_{n} \leq t, \eta_{n} > t - \epsilon} + \Pr{\xi_{n} + \eta_{n} \leq t, \eta_{n} \leq t - \epsilon}.
+	\]
+	Увеличим вторую вероятность следующим образом: забудем про первое условие, а второе заменим на \(|\eta_{n} - t| \geq \epsilon\). Тогда
+	\[
+		F_{\xi_{n} + \eta_{n}}(t) \leq \Pr{\xi_{n} + \eta_{n} \leq t, \eta_{n} > t - \epsilon} + \Pr{|\eta_{n} - t| \geq \epsilon}.
+	\]
+	Теперь увеличим первую вероятность. Из условий следует, что \(\xi_{n} + C \leq t + \varepsilon\). Тогда заменим оба условия на это. Следовательно,
+	\[
+		F_{\xi_{n} + \eta_{n}}(t) \leq \Pr{\xi_{n} + C \leq t + \epsilon} + \Pr{|\eta_{n} - t| \geq \epsilon}.
+	\]
+	Осталось понять, куда стремятся полученные вероятности. Так как \(\xi_{n} \dto \xi\), то \(\xi_{n} + C \dto \xi + C\). Учитывая то, что \(t + \epsilon\) есть точка непрерывности, то первая вероятность стремится к \(F_{\xi + C}(t + \epsilon)\). Вторяя же вероятность стремится к нулю, так как \(\eta_{n} \dto C\) (и, следовательно, \(\eta_{n} \prto C\)).
+	
+	Отсюда получаем, что
+	\[
+		\varlimsup_{n \to \infty} F_{\xi_{n} + \eta_{n}}(t) \leq F_{\xi + C}(t + \epsilon).
+	\]
+	
+	Аналогичными рассуждениями получаем, что
+	\[
+		\Pr{\xi_{n} + \eta_{n} \geq t} \geq \Pr{\xi_{n} + C \geq t + \epsilon} + \Pr{|\eta_{n} - t| \geq \epsilon}.
+	\]
+	Тогда
+	\[
+		\varlimsup_{n \to \infty} (1 - F_{\xi_{n} + \eta_{n}}(t)) \geq 1 - F_{\xi + C}(t + \epsilon) \text{ и } \varliminf_{n \to \infty} F_{\xi_{n} + \eta_{n}}(t) \geq F_{\xi + C}(t - \epsilon).
+	\]
+	
+	Получаем следующую цепочку ограничений:
+	\[
+		F_{\xi + C}(t - \epsilon) \leq \varliminf_{n \to \infty} F_{\xi_{n} + \eta_{n}}(t) \leq \varlimsup_{n \to \infty} F_{\xi_{n} + \eta_{n}}(t) \leq F_{\xi + C}(t + \epsilon).
+	\]
+	Устремляя \(\epsilon\) к нулю и пользуясь тем, что \(t\)~--- это точка непрерывности \(F_{\xi + C}\), получаем, что
+	\[
+		\lim\limits_{n \to \infty} F_{\xi_{n} + \eta_{n}}(t) = F_{\xi + C}(t).\qedhere
+	\]
+\end{proof}
+Теперь посмотрим, как применять их на практике.
+\begin{problem}
+	Пусть \(\{\xi_{n} \mid n \in \N\}\)~--- последовательность независимых и одинаково распределённых случайных величин, про которые известно, что \(a = \E\xi_1 < \infty\) и \(0 < \sigma^2 = \D\xi_1 < +\infty\). Введём обозначение \(S_n = \xi_{1} + \dots + \xi_{n}\). Найдите предел по распределению
+	\[
+		\sqrt{n}\left(\frac{n}{S_n} - \frac{1}{a}\right)
+	\]
+\end{problem}
+\begin{proof}[Решение]
+	Преобразуем это выражение следующим образом:
+	\[
+		\sqrt{n}\left(\frac{n}{S_n} - \frac{1}{a}\right) = -\frac{\sigma}{a}\cdot\frac{n}{S_n}\cdot\sqrt{n}\left(\frac{S_n}{n} - a\right)\frac{1}{\sigma}
+	\]
+	Осталось заметить следующее:
+	\begin{gather*}
+		\text{По теореме о наследовании сходимости и уЗБЧ }\frac{S_n}{n} \asto
+		a \implies \frac{n}{S_n} \dto \frac{1}{a} \\
+		\text{По ЦПТ } \sqrt{n}\left(\frac{S_n}{n} - a\right)\frac{1}{\sigma} \dto \mathcal{N}(0, 1)
+	\end{gather*}
+	Следовательно, по лемме Слуцкого
+	\[
+		\sqrt{n}\left(\frac{n}{S_n} - \frac{1}{a}\right) \dto -\frac{\sigma}{a^2}\mathcal{N}(0, 1) = \mathcal{N}\left(0, \frac{\sigma^2}{a^4}\right).\qedhere
+	\]
+\end{proof}
+
+Теперь обобщим закон больших чисел:
+\begin{theorem}[усиленный ЗБЧ для векторов]
+	Пусть \(\{\xi_{n} \mid n \in \N\}\)~--- последовательность независимых и одинаково распределённых случайных \(m\)-мерных векторов. Далее, положим \(a = \E\xi_{1} \in \R^{m}\). Тогда
+	\[
+		\frac{\xi_{1} + \dots + \xi_{n}}{n} \asto a.
+	\]
+\end{theorem}
+\begin{proof}
+	Автоматически следует из равносильности покомпонентной и общей сходимости и усиленного ЗБЧ для случайных величин.
+\end{proof}
+
+\subsection{Многомерное нормальное распределение}
+Перед тем, как приступать к статистике, нужно ввести понятие многомерного нормального распределения. 
+\begin{definition}
+	Пусть есть случайный вектор \(\xi \in \R^{m}\). Будем говорить, что он подчиняется \emph{многомерному нормлаьному распределению}, если его характеристическая функция имеет вид
+	\[
+		\phi_{\xi}(\mathbf{t}) = \E{e^{i\left\langle\mathbf{t}, \xi\right\rangle}} = \exp\left\{i\left\langle \mathbf{a}, \mathbf{t}\right\rangle - \frac{1}{2}\left\langle \mathbf{\Sigma t}, \mathbf{t}\right\rangle\right\},
+	\]
+	где \(\mathbf{a} \in \R^{m}\)~--- некоторый фиксированный вектор, а \(\mathbf{\Sigma}\)~--- некоторая симметрическая и неотрицательно определённая матрица \(m \times m\). В таком случае пишут, что \(\xi \sim \mathcal{N}(\mathbf{a}, \mathbf{\Sigma})\).
+\end{definition}
+
+Есть одна весьма полезная теорема, которая даёт три эквивалентных определения.
+\begin{theorem}[о трёх эквивалентных определениях]
+	Пусть \(\xi = (\xi_{1}, \dots, \xi_{n})\)~--- случайный вектор. Тогда следующие утверждения равносильны:
+	\begin{enumerate}
+		\item Случайный вектор \(\xi\) имеет нормальное многомерное распределение.
+		\item \(\xi = \mathbf{\Sigma}\eta + \mathbf{a}\) почти наверное, где \(\mathbf{\Sigma}\)~--- матрица размера \(n \times n\), \(\mathbf{a} \in \R^n\), а \(\eta = (\eta_{1}, \dots, \eta_{n})\), где \(\eta_{i}\) независимы в совокупности и имеют нормальное стандартное распределение.
+		\item Для любого вектора \(\mathbf{x} \in \R^n\) случайная величина \(\left\langle\mathbf{x}, \xi\right\rangle\) имеет нормальное распределение.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Докажем, что из \((2)\) следует \((3)\). Рассмотрим некоторый вектор \(\mathbf{x} \in \R^n\) и случайную величину \(\left\langle\mathbf{x}, \xi\right\rangle\):
+	\begin{align*}
+		\left\langle\mathbf{x}, \xi\right\rangle &= \left\langle\mathbf{x}, \mathbf{\Sigma}\eta + \mathbf{a}\right\rangle = \left\langle\mathbf{x}, \mathbf{a}\right\rangle + \left\langle\mathbf{x}, \mathbf{\Sigma}\eta\right\rangle \\
+		&= \left\langle\mathbf{x}, \mathbf{a}\right\rangle + \sum_{k = 1}^{n} \left(\mathbf{\Sigma^{\top} x}\right)_{k}\eta_{k}
+	\end{align*}
+	Несложно понять, что это сумма нормальных случайных величин, что есть нормальная случайная величина.
+	
+	Теперь покажем, что из \((3)\) следует \((1)\). %Взяв \(\mathbf{x}_i = (0, \dots, 1, \dots, 0)\) (стандартный базис \(\R^n\)), получаем, что \(\xi_{i}\) являются случайными величинами.
+	Пусть \(\left\langle\mathbf{x}, \xi\right\rangle \sim \mathcal{N}(a_{\mathbf{x}}, \sigma_{\mathbf{x}}^2)\). Тогда
+	\begin{gather*}
+		a_{\mathbf{x}} = \E{\left\langle\mathbf{x}, \xi\right\rangle} = \sum_{k = 1}^{n} \E{x_{k}\xi_{k}} = \sum_{k = 1}^{n} x_{k}\E{\xi_{k}} = \left\langle\mathbf{x}, \E{\xi}\right\rangle \\
+		\sigma_{\mathbf{x}}^2 = \D{\left\langle\mathbf{x}, \xi\right\rangle} =  \D{\mathbf{x}^{\top}\xi} = \mathbf{x}^{\top}\D{\xi}\mathbf{x} = \left\langle\D{\xi}\mathbf{x}, \mathbf{x}\right\rangle
+	\end{gather*}
+	Осталось посчитать характеристическую функцию \(\xi\):
+	\begin{align}
+		\phi_{\xi}(\mathbf{x}) &= \E{e^{i\left\langle\mathbf{x}, \xi\right\rangle}} = \phi_{\left\langle\mathbf{x}, \xi\right\rangle}(1) = \exp\left\{ia_{\mathbf{x}} - \frac{1}{2}\sigma_{\mathbf{x}}^2\right\} \\
+		&= \exp\left\{i\left\langle\E{\xi}, \mathbf{x}\right\rangle - \frac{1}{2}\left\langle\D{\xi}\mathbf{x}, \mathbf{x}\right\rangle\right\}.
+	\end{align}
+	А это и означает, что \(\xi\) имеет многомерное нормальное распределение.
+	
+	% TODO: доказать 1 -> 2
+\end{proof}
