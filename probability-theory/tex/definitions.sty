@@ -20,9 +20,9 @@
     #1
 }
 \let\Pr\undefined
-\NewDocumentCommand{\Pr}{g}{\mathsf{P}\IfNoValueTF{#1}{}{\brackets*{#1}}}
-\NewDocumentCommand{\E}{g}{\mathsf{E}\IfNoValueTF{#1}{}{\squarebrackets*{#1}}}
-\NewDocumentCommand{\D}{g}{\mathsf{D}\IfNoValueTF{#1}{}{\squarebrackets*{#1}}}
+\NewDocumentCommand{\Pr}{g}{\operatorname{\mathsf{P}}\IfNoValueTF{#1}{}{\brackets*{#1}}}
+\NewDocumentCommand{\E}{g}{\operatorname{\mathsf{E}}\IfNoValueTF{#1}{}{\squarebrackets*{#1}}}
+\NewDocumentCommand{\D}{g}{\operatorname{\mathsf{D}}\IfNoValueTF{#1}{}{\squarebrackets*{#1}}}
 \newcommand{\cov}{\operatorname{\mathsf{cov}}}  % Ковариация
 \newcommand{\eqdist}{\overset{d}{=}}    % Одинаково распределённые величины
 \newcommand{\prto}{\xrightarrow{\Pr}}	% Сходимость по вероятности (probably to)
@@ -35,7 +35,7 @@
 \newcommand{\F}{\mathcal{F}}            % 	
 \newcommand{\A}{\mathcal{A}}	
 \newcommand{\B}{\mathcal{B}}
-\newcommand{\I}{\mathop{\mathbf{I}}\!}
+\newcommand{\I}{\mathop{\mathbf{I}}}
 \renewcommand{\leq}{\leqslant}          % Меньше или равно
 \renewcommand{\geq}{\geqslant}          % Больше или равно
 \renewcommand{\phi}{\varphi}            % Фи
@@ -54,6 +54,7 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Примечание}
 \newtheorem*{exercise}{Упражнение}
+\newtheorem*{point}{Утверждение}
 \newtheorem*{example}{Пример}
 
 \theoremstyle{definition}
@@ -67,7 +68,15 @@
 \newtheorem{problem}{Задача}
 \newtheorem*{hypothesis}{Гипотеза}
 \newtheorem*{consequence}{Следствие}
-\newtheorem*{point}{Утверждение}
+\newtheorem{property}{Свойство}
+
+
+
+\makeatletter
+\@addtoreset{theorem}{chapter}
+\@addtoreset{problem}{section}
+\@addtoreset{property}{subsection}
+\makeatother
 
 \tikzset{
 	if/.code n args=3{\pgfmathparse{#1}\ifnum\pgfmathresult=0
