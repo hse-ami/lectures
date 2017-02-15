@@ -194,7 +194,7 @@
 	Пусть \(\xi = (\xi_{1}, \dots, \xi_{n})\)~--- случайный вектор. Тогда следующие утверждения равносильны:
 	\begin{enumerate}
 		\item Случайный вектор \(\xi\) имеет нормальное многомерное распределение.
-		\item \(\xi = \mathbf{\Sigma}\eta + \mathbf{a}\) почти наверное, где \(\mathbf{\Sigma}\)~--- матрица размера \(n \times n\), \(\mathbf{a} \in \R^n\), а \(\eta = (\eta_{1}, \dots, \eta_{n})\), где \(\eta_{i}\) независимы в совокупности и имеют нормальное стандартное распределение.
+		\item \(\xi = \mathbf{A}\eta + \mathbf{b}\) почти наверное, где \(\mathbf{A}\)~--- матрица размера \(n \times m\), \(\mathbf{b} \in \R^n\), а \(\eta = (\eta_{1}, \dots, \eta_{m})\), где \(\eta_{i}\) независимы в совокупности и имеют нормальное стандартное распределение.
 		\item Для любого вектора \(\mathbf{x} \in \R^n\) случайная величина \(\left\langle\mathbf{x}, \xi\right\rangle\) имеет нормальное распределение.
 	\end{enumerate}
 \end{theorem}
@@ -206,8 +206,7 @@
 	\end{align*}
 	Несложно понять, что это сумма нормальных случайных величин, что есть нормальная случайная величина.
 	
-	Теперь покажем, что из \((3)\) следует \((1)\). %Взяв \(\mathbf{x}_i = (0, \dots, 1, \dots, 0)\) (стандартный базис \(\R^n\)), получаем, что \(\xi_{i}\) являются случайными величинами.
-	Пусть \(\left\langle\mathbf{x}, \xi\right\rangle \sim \mathcal{N}(a_{\mathbf{x}}, \sigma_{\mathbf{x}}^2)\). Тогда
+	Теперь покажем, что из \((3)\) следует \((1)\). Пусть \(\left\langle\mathbf{x}, \xi\right\rangle \sim \mathcal{N}(a_{\mathbf{x}}, \sigma_{\mathbf{x}}^2)\). Тогда
 	\begin{gather*}
 		a_{\mathbf{x}} = \E{\left\langle\mathbf{x}, \xi\right\rangle} = \sum_{k = 1}^{n} \E{x_{k}\xi_{k}} = \sum_{k = 1}^{n} x_{k}\E{\xi_{k}} = \left\langle\mathbf{x}, \E{\xi}\right\rangle \\
 		\sigma_{\mathbf{x}}^2 = \D{\left\langle\mathbf{x}, \xi\right\rangle} =  \D{\mathbf{x}^{\top}\xi} = \mathbf{x}^{\top}\D{\xi}\mathbf{x} = \left\langle\D{\xi}\mathbf{x}, \mathbf{x}\right\rangle
@@ -219,5 +218,46 @@
 	\end{align}
 	А это и означает, что \(\xi\) имеет многомерное нормальное распределение.
 	
-	% TODO: доказать 1 -> 2
+	Теперь докажем, что из (1) следует (2). Так как \(\mathbf{\Sigma}\)~--- симметрическая и неотрицательно определённая матрица, то существует ортогональное преобразование \(\mathbf{C}\) такое, что
+	\[
+		\mathbf{C \Sigma C}^{\top} = \mathbf{D} = \operatorname{diag}(d_1, \dots, d_k, 0, \dots, 0),
+	\]
+	где \(d_1, \dots, d_k > 0\). Тогда рассмотрим случайную величину \(\xi' = \mathbf{C}(\xi - \mathbf{a})\). Найдём её характеристическую функцию:
+	\begin{align*}
+		\phi_{\xi'}(\mathbf{t}) &= \E{e^{i\left\langle \eta, \mathbf{t}\right\rangle}} = \E{e^{i\left\langle \mathbf{C}(\xi - \mathbf{a}), \mathbf{t}\right\rangle}} = \E{e^{i\left\langle (\xi - \mathbf{a}), \mathbf{C}^{\top}\mathbf{t}\right\rangle}} \\
+		&= e^{-i\left\langle \mathbf{a}, \mathbf{C}^{\top}\mathbf{t}\right\rangle}\E{e^{i\left\langle \xi, \mathbf{C}^{\top}\mathbf{t}\right\rangle}}
+	\end{align*}
+	
+	Заметим, что \(\E{e^{i\left\langle \xi, \mathbf{C}^{\top}\mathbf{t}\right\rangle}} = \phi_{\xi}(\mathbf{C^{\top}t})\). Тогда
+	\begin{align*}
+		e^{-i\left\langle \mathbf{a}, \mathbf{C}^{\top}\mathbf{t}\right\rangle}\E{e^{i\left\langle \xi, \mathbf{C}^{\top}\mathbf{t}\right\rangle}} &= \exp\left\{-i\left\langle \mathbf{a}, \mathbf{C}^{\top}\mathbf{t}\right\rangle + i\left\langle \mathbf{a}, \mathbf{C^{\top}t}\right\rangle - \frac{1}{2}\left\langle \mathbf{\Sigma}\mathbf{C^{\top}t}, \mathbf{C^{\top}t}\right\rangle\right\} \\
+		&= \exp\left\{-\frac{1}{2}\left\langle \mathbf{C \Sigma C^{\top}t}, \mathbf{t}\right\rangle\right\} = \exp\left\{-\frac{1}{2}\left\langle \mathbf{Dt}, \mathbf{t}\right\rangle\right\} \\
+		&= \exp\left\{-\frac{1}{2}\sum_{i = 1}^{k}d_i t_i^2\right\} = \prod_{i = 1}^{k} e^{-\frac{d_i t_i^2}{2}}
+	\end{align*}
+	
+	Получаем, что
+	\[
+		\begin{cases}
+			\xi'_i \sim \mathcal{N}(0, d_i),& i \in \{1, 2, \dots, k\} \\
+			\xi'_i = 0 \text{ почти наверное},& i \in \{k + 1, \dots, n\}
+		\end{cases}
+	\]
+	
+	Введём случайные величины \(\eta_i = \frac{\xi'_i}{\sqrt{d_i}}\) для всех \(i \in \{1, 2, \dots, k\}\) и построим по ним случайный вектор \(\eta = (\eta_1, \dots, \eta_k)^{\top}\). Далее, построим следующую матрицу:
+	\[
+		\mathbf{B} = 
+		\begin{pmatrix}
+			\sqrt{d_1} & \dots &0 \\
+			0 & \ddots & 0 \\
+			0 & \dots & \sqrt{d_k} \\
+			0 & \dots & 0 \\
+			\vdots & \ddots & \vdots \\
+			0 & \dots & 0
+		\end{pmatrix}_{n \times k}
+	\]
+	
+	Тогда несложно понять, что \(\mathbf{B}\eta = \xi'\) почти наверное. Отсюда получаем, что
+	\[
+		\xi = \mathbf{C^{\top}B}\eta + \mathbf{a}\qedhere
+	\]
 \end{proof}
