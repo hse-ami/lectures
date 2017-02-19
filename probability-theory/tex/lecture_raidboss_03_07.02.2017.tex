@@ -233,7 +233,7 @@ $(1 - \epsilon){\sqrt{2n\ln \ln n}}$ и $-(1 - \epsilon){\sqrt{2n\ln \ln n}}$.
   состоит в том, что произошло бесконечное число событий.
 \end{definition}
 
-\begin{theorem}[Лемма Бореля-Кантеля]
+\begin{theorem}[Лемма Бореля-Кантелли]
   Пусть $\{A_n, n \in \N\}$. 
 
   1) Если $\sum\limits_{n = 1}^{+\infty} \Pr{A_n}$ сходится,
@@ -258,7 +258,9 @@ $(1 - \epsilon){\sqrt{2n\ln \ln n}}$ и $-(1 - \epsilon){\sqrt{2n\ln \ln n}}$.
   2) Тут уже напрямую не получится, надо провести более тонкий анализ:
 
   \[
-     \Pr{\{A_n \text{ б. ч.}\}} =  \lim\limits_{n \to +\infty} \Pr{\bigcup\limits_{m \geq n} A_m} = 1 - \lim\limits_{n \to +\infty} \Pr{\bigcap\limits_{m \geq n} \overline{A_m}} = 
+     \Pr{\{A_n \text{ б. ч.}\}} =  \lim\limits_{n \to +\infty} 
+     \Pr{\bigcup\limits_{m \geq n} A_m} = 1 - \lim\limits_{n \to +\infty}
+     \Pr{\bigcap\limits_{m \geq n} \overline{A_m}} = 
   \]
 
   Хочется воспользоваться независимостью, но в данном случае надо применять один
