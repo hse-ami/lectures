@@ -7,15 +7,15 @@
 \subsection{Коэффициенты Фурье}
 Вспомним основной результат предыдущей лекции. Пусть $H$ --- пространство со скалярным произведением, $\{e_n\}_{n=1}^{N}$ --- ортогональная система, $x \in H$. Тогда если $c_1, \ldots, c_N$ --- коэффициенты из $\R$, то 
 \begin{gather*}
-    \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = ||x||^2 +\sum\limits_{n=1}^{N}\left(c_n||e_n|| - \cfrac{(x, e_n)}{(e_n, e_n)}||e_n||\right)^2 - \sum\limits_{n =1 }^{N} \left(\cfrac{(x, e_n)}{(e_n, e_n)}\right)^2(e_n, e_n)
+    \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = ||x||^2 +\sum\limits_{n=1}^{N}\left(c_n||e_n|| - \cfrac{(x, e_n)}{(e_n, e_n)}||e_n||\right)^2 - \sum\limits_{n =1 }^{N} \left(\cfrac{(x, e_n)}{(e_n, e_n)}\right)^2(e_n, e_n).
 \end{gather*}
 \begin{Def}
-    Коэффициентами Фурье, соответствующими вектору $x$ и элементу ортогональной системы $\{e_n\}_{n=1}^{N}$, называются числа $\hat{x}_n = \cfrac{(x, e_n)}{(e_n, e_n)}$
+    Коэффициентами Фурье, соответствующими вектору $x$ и элементу ортогональной системы $\{e_n\}_{n=1}^{N}$, называются числа $\hat{x}_n = \cfrac{(x, e_n)}{(e_n, e_n)}$.
 \end{Def}
-Принимая это определение во внимание,исходное равенство переписывается в более красивом виде
+Принимая это определение во внимание, исходное равенство переписывается в более красивом виде:
 \begin{gather*}
     \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = \left|\left|x\right|\right|^2 + \left|\left|e_n\right|\right|^2 \sum\limits_{n=1}^{N}(c_n - \x_n)^2 - \sum\limits_{n =1}^{N}\x_n^2 
-    \left|\left|e_n\right|\right|^2
+    \left|\left|e_n\right|\right|^2.
 \end{gather*}
 \begin{Statement}[очевидное]
     Для любых коэффициентов $c_1, \ldots, c_N$
@@ -32,22 +32,22 @@
     $$
 \end{Statement}
 \begin{Consequence}[Неравенство Бесселя]
-    $\sum\limits_{n=1}^{N} \x_n^2e_n\leqslant ||x||^2$
+    $$\sum\limits_{n=1}^{N} \x_n^2e_n\leqslant ||x||^2$$
 \end{Consequence}
 \subsection{Пространство $l^2$}
 Отступим в сторону.
 Пусть $l^2$ --- множество всех числовых последовательностей, сумма квадратов элементов которых конечна. Заметим, что это множество будет являться линейным пространством, поскольку
 \begin{align*}
     &\forall \{b_n\}_{n=1}^{\infty},\; \{a_n\}_{n=1}^{\infty} \in l^2,\; \alpha \in \R\\
-    &\sum\limits_{n=1}^{\infty} \alpha a_n^2 = \alpha \sum\limits_{n=1}^{\infty} a_n^2 < \infty \Leftrightarrow \{\alpha a_n\}_{n=1}^{\infty} \in l^2\\
-    &\sum\limits_{n=1}^{\infty} = (a_n+b_n)^2< \sum\limits_{n=1}^{\infty} (2a_n^2 + 2b_n^2) < \infty \Leftrightarrow \{a_n + b_n\}_{n=1}^{\infty} \in l^2
+    &\sum\limits_{n=1}^{\infty} \alpha^2 a_n^2 = \alpha^2 \sum\limits_{n=1}^{\infty} a_n^2 < \infty \Leftrightarrow \{\alpha a_n\}_{n=1}^{\infty} \in l^2\\
+    &\sum\limits_{n=1}^{\infty} = (a_n+b_n)^2< \sum\limits_{n=1}^{\infty} (2a_n^2 + 2b_n^2) < \infty \Leftrightarrow \{a_n + b_n\}_{n=1}^{\infty} \in l^2.
 \end{align*}
-Обозначим $\overline{a} = \{a_n\}_{n=1}^{\infty}\in \l^2$, $\overline{b} = \{b_n\}_{n=1}^{\infty}$, мы можем ввести скалярное произведение следующим образом
+Обозначив $\overline{a} = \{a_n\}_{n=1}^{\infty}\in l^2$, $\overline{b} = \{b_n\}_{n=1}^{\infty} \in l^2$, мы можем ввести скалярное произведение следующим образом:
 \begin{Def}
     Для пространства $l^2$, 
     \begin{align*}
-        &(\overline{a}, \overline{b}) = \sum\limits_{n=1}^{\infty} a_nb_n\\
-        &||\overline{a}|| = \sqrt{\sum\limits_{n=1}^{\infty}a_n^2}
+        &(\overline{a}, \overline{b}) = \sum\limits_{n=1}^{\infty} a_nb_n,\\
+        &||\overline{a}|| = \sqrt{\sum\limits_{n=1}^{\infty}a_n^2}.
     \end{align*}
 \end{Def}
 \subsection{Сходимость в номрированных пространствах}
@@ -55,22 +55,23 @@
 \begin{Def}
     Будем говорить, что последовательность $\{x_n\}_{n=1}^{\infty}$ сходится к $x$, если 
     $$
-        ||x_n - x|| \underset{n\to \infty}{\to} 0
+        ||x_n - x|| \underset{n\to \infty}{\to} 0.
     $$
 \end{Def}
 При помощи неравенства треугольника можно также установить и арифметические свойства пределов, например предел суммы.
 \begin{Statement}
-    Пусть $\{x_n\}_{n=1}^{\infty}$ сходится к $x$, $\{y_n\}_{n=1}^{\infty}$ сходится к $y$. Тогда  $\{x_n + y_n\}_{n=1}^{\infty} \underset{n\to \infty}{\to} x+y$
+    Пусть $\{x_n\}_{n=1}^{\infty}$ сходится к $x$, $\{y_n\}_{n=1}^{\infty}$ сходится к $y$. Тогда  $\{x_n + y_n\}_{n=1}^{\infty} \underset{n\to \infty}{\to} x+y$.
 \end{Statement}
 \begin{proof}
     Воспользуемся неравенством треугольника:
     \begin{gather*}
-        0\leqslant ||(x_n + y_n) - (x + y)|| \leqslant ||x_n-x|| + ||y_n - y|| \underset{n\to\infty}{\to} 0
+        0\leqslant ||(x_n + y_n) - (x + y)|| \leqslant ||x_n-x|| + ||y_n - y|| \underset{n\to\infty}{\to} 0.
     \end{gather*}
 \end{proof}
-Ряды для из элементов вводятся абсолютно так же, как и числовые ряды, рассмотренные нами ранее (абсолютная сходимость определяется как сходимость ряда из норм элементов).
+Ряды из элементов вводятся абсолютно так же, как и числовые ряды, рассмотренные нами ранее (абсолютная сходимость определяется как сходимость ряда из норм элементов).
+
 \subsection{Ряды Фурье}
-Теперь когда мы ввели понятие сходимости в нормированных пространствах, будем двигаться дальше, к рядам Фурье. Вернемся к рассмотрению исходного пространства $H$ со скалярным произведением, в котором мы уже ввели понятие коэффициентов Фурье.
+Теперь, когда мы ввели понятие сходимости в нормированных пространствах, будем двигаться дальше, к рядам Фурье. Вернемся к рассмотрению исходного пространства $H$ со скалярным произведением, в котором мы уже ввели понятие коэффициентов Фурье.
 \begin{Def}
     Ряд $\sum\limits_{n}^{\infty} \hat{x}_ne_n$ называется рядом Фурье (разложением в ряд Фурье) по ортогональной системе $\{e_n\}_{n=1}^{\infty}$.
 \end{Def}
@@ -78,7 +79,7 @@
 \begin{Statement}
     Следующие утверждения эквивалентны:
     \begin{enumerate}
-        \item $x = \sum\limits_{n=1}^{\infty} \hat{x}_ne_n$.
+        \item $x = \sum\limits_{n=1}^{\infty} \hat{x}_ne_n$;
         \item $||x||^2 = \sum\limits_{n=1}^{\infty} \hat{x}^2_n ||e_n||^2$ (\textit{равенство Парсеваля}).
     \end{enumerate}
 \end{Statement}
@@ -86,34 +87,34 @@
     Прямое следствие тождества Бесселя.
 \end{proof}
 \begin{Statement}[Единственность разложения]
-    Пусть $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система и $x = \sum\limits_{n=1}^{\infty}c_n e_n$, для некторых коэффициентов $c_i$. Тогда $\x_i = c_i\; \forall i \in \N$
+    Пусть $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система и $x = \sum\limits_{n=1}^{\infty}c_n e_n$ для некоторых коэффициентов $c_i$. Тогда $\x_i = c_i\;\ \forall i \in \N$.
 \end{Statement}
 \begin{proof}
     Зафиксируем $n_0\in \N$, пусть $N>n_0$. Тогда
     $$
-        \sum\limits_{n=1}^{\infty} c_ne_n = \sum \limits_{n=1}^{N}c_n e_n + \underbrace{r_N}_{\to 0,\; N\to \infty}
+        \sum\limits_{n=1}^{\infty} c_ne_n = \sum \limits_{n=1}^{N}c_n e_n + \underbrace{r_N}_{\to 0 \text{ при } N\to \infty}.
     $$
-    Далее запишем, чему равно $\x_{n_0}$
+    Далее запишем, чему равно $\x_{n_0}$:
     $$
-        \x_{n_0} = \cfrac{(x,e_{n_0})}{(e_{n_0}, e_{n_0})} = \cfrac{\left(\sum\limits_{n=1}^{N} c_ne_n, e_{n_0}\right) + \left(r_N, e_{n_0}\right)}{(e_{n_0}, e_{n_0})} = \cfrac{c_{n_0}(e_{n_0}, e_{n_0})}{(e_{n_0}, e_{n_0})} + \cfrac{(r_N, e_{n_0})}{(e_{n_0}, e_{n_0})} = c_{n_0} + \cfrac{(r_N, e_{n_0})}{(e_{n_0}, e_{n_0})}
+        \x_{n_0} = \cfrac{(x,e_{n_0})}{(e_{n_0}, e_{n_0})} = \cfrac{\left(\sum\limits_{n=1}^{N} c_ne_n, e_{n_0}\right) + \left(r_N, e_{n_0}\right)}{(e_{n_0}, e_{n_0})} = \cfrac{c_{n_0}(e_{n_0}, e_{n_0})}{(e_{n_0}, e_{n_0})} + \cfrac{(r_N, e_{n_0})}{(e_{n_0}, e_{n_0})} = c_{n_0} + \cfrac{(r_N, e_{n_0})}{(e_{n_0}, e_{n_0})}.
     $$
-    Второе слагаемое стремится к нулю. Устремим $N \to \infty$, получим требуемое.
+    Второе слагаемое стремится к нулю. Устремив $N \to \infty$, получим требуемое.
 \end{proof}
 Заметим, что если $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система, то ряд $\sum\limits_{n=1}^{\infty} c_n e_n$ удовлетворяет условию Коши тогда и только тогда, когда $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$ сходится.
 $$
-    \forall \eps>0\; \exists N\in \N\; \forall m>N,\; p\in \N \Rightarrow \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps
+    \forall \eps>0\; \exists N\in \N\; \forall m>N,\; p\in \N \Rightarrow \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps.
 $$
 Действительно,
 $$
-    \left(\sum\limits_{n=m+1}^{m+p}c_ne_n, \sum\limits_{n=m+1}^{m+p}c_ne_n\right) =  \sum\limits_{n=m+1}^{m+p}c_n^2 ||e_n||^2
+    \left(\sum\limits_{n=m+1}^{m+p}c_ne_n, \sum\limits_{n=m+1}^{m+p}c_ne_n\right) =  \sum\limits_{n=m+1}^{m+p}c_n^2 ||e_n||^2.
 $$
 И увидим, что искомому условию Коши удовлетворяет и желаемый ряд.
 \begin{Consequence}
-    Если пространство со скалярным произведением полно, то все ряды Фурье там сходятся.
+    Если пространство со скалярным произведением полно, то все ряды Фурье в нем сходятся.
 \end{Consequence}
 \begin{proof}
-    Из неравенства Бесселя
-    $\sum\limits_{n=1}^{\infty} \x_n^2 ||e_n||^2 < \infty$ следовательно, $ \sum\limits_{n=1}^{\infty} \x_ne_n 
+    Из неравенства Бесселя получаем, что
+    $\sum\limits_{n=1}^{\infty} \x_n^2 ||e_n||^2 < \infty$. Следовательно, $ \sum\limits_{n=1}^{\infty} \x_ne_n 
     $ удовлетворяет условию Коши, а с учетом полноты $\sum\limits_{n=1}^{\infty}\x_n e_n$ сходится.
 \end{proof}
 Итак, в полных нормированных пространствах ряды Фурье сходятся, но отнюдь не всегда они сходятся куда надо.
@@ -123,12 +124,12 @@ $$
     $$
 \end{Def}
 \begin{Statement}
-    Если ортогональая система $\{e_n\}_{n=1}^{\infty}$ замкнута, то $\forall x\in H\; x = \sum\limits_{n=1}^{\infty}\x_n e_{n}$
+    Если ортогональная система $\{e_n\}_{n=1}^{\infty}$ замкнута, то $\forall x\in H\; x = \sum\limits_{n=1}^{\infty}\x_n e_{n}$.
 \end{Statement}
 \begin{proof}
     Зафиксируем произвольное $\eps >0$, найдем такое $K_0$ и коэффициенты $c_1, \ldots, c_{K_0}$, что $\left|\left| x - \sum\limits_{n=1}^{K_0} c_ne_n \right|\right| < \eps$. Тогда
     $$
-        \forall N>K_0 \; \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|\leqslant \left|\left|x - \sum\limits_{k=1}^{K_0}c_ke_k \right|\right|
+        \forall N>K_0 \; \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|\leqslant \left|\left|x - \sum\limits_{k=1}^{K_0}c_ke_k \right|\right|.
     $$
 \end{proof}
 \end{document}
