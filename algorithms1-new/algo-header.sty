@@ -72,7 +72,7 @@ colorlinks = false, hidelinks
 % Графики
 \usepackage{pgfplots}
 %\pgfplotsset{compat=1.12}
-
+\usepackage{changepage}                     % Для изменения отсупов
 %Формат section и subsection
 \usepackage{titlesec}
 \titleformat{\section}
@@ -82,6 +82,11 @@ colorlinks = false, hidelinks
 {}                        % Как отображается префикс
 \titleformat{\subsection} % Аналогично для \subsection
 {\Large\bfseries}
+{}
+{0pt}
+{}
+\titleformat{\subsubsection} % Аналогично для \subsubsection
+{\large\bfseries}
 {}
 {0pt}
 {}
@@ -168,6 +173,11 @@ colorlinks = false, hidelinks
   {\begin{oldprop}[#1]}
   {\end{oldprop}}
 
+\newtheorem{oldsign}[oldlem]{Обозначение}
+\newenvironment{sign}[1][]
+	{\begin{oldsign}[#1]\normalfont}
+	{\end{oldsign}}
+
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -247,3 +257,15 @@ colorlinks = false, hidelinks
 }
 
 \newcommand*{\TODO}[1]{{\color{red}{TODO: \textit{#1}}}}
+
+\newenvironment{struct}[1]{
+	\begin{adjustwidth}{21pt}{}
+		\begin{algorithm}[H]
+			\textbf{struct} #1:
+			\caption{Структура #1}
+			\begin{algorithmic}
+			}{
+		\end{algorithmic}
+	\end{algorithm}
+\end{adjustwidth}
+}
