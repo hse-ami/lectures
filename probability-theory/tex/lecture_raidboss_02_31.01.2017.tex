@@ -141,9 +141,9 @@ C_n x^n$ при $|x| < \frac{1}{4}$.
 \begin{center}
   \begin{tikzpicture}
   
-  \draw[thick,->] (0,-2) -- (0,2) node[anchor=north, below left] {$y$};
+  \draw[thick,->] (0,-2) -- (0,2) node[anchor=north, below left] {$z$};
   \draw[thick,->] (-2,0) -- (2, 0) node[anchor=east, above left] {$x$};
-  \draw[thick,->] (-2,-1) -- (2, 1) node[anchor=east, above left] {$z$};
+  \draw[thick,->] (-2,-1) -- (2, 1) node[anchor=east, above left] {$y$};
 
   \draw[very thick,->,blue] (0,0) -- (0, 1) node[anchor=east, above left] {};
   \draw[very thick,->,blue] (0,0) -- (0, -1) node[anchor=west, above left] {};
@@ -216,7 +216,7 @@ C_n x^n$ при $|x| < \frac{1}{4}$.
   \binom{2n}{n}(pq)^n\frac{1}{2n - 1}$ --- распределение первого момента в нуле.
 \end{remark}
 
-\subsection{Математическое ожидание первого момента возвращения в ноль.}
+\subsection{Математическое ожидание первого момента возвращения в ноль}
 
 \begin{definition}
   $X = \min(2n : S_{2n} = 0)$.
@@ -238,7 +238,7 @@ C_n x^n$ при $|x| < \frac{1}{4}$.
 Получается, что да, в ноль мы вернемся, но очень не скоро и бесконечно долго будем
 ходить вне. Вот такой вот парадокс. Перейдём к следующему пункту.
 
-\subsection{Среднее время в нуле.}
+\subsection{Среднее время в нуле}
 
 Оказывается, что в нуле мы будем находится не так мало. За $n$ шагов примерно
 $\sqrt{n}$ раз мы будем в нуле. Это по большей мере связано с тем, что нули
@@ -247,7 +247,7 @@ $\sqrt{n}$ раз мы будем в нуле. Это по большей мер
 
 \begin{definition}
   Будем рассматривать симметричное простое случайное блуждание. Тогда 
-  $L_n = \left|k : k \in \overline{0\ldots n}, S_k = 0\right|$.
+  $L_n = \left|k : k \in \overline{0, \ldots, n}, S_k = 0\right|$.
 \end{definition}
 
 Хотим понять, какая асимптотика у $\E{L_n}$.
