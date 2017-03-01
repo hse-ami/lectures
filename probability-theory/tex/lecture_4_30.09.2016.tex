@@ -32,9 +32,9 @@
 \end{theorem}
 \begin{proof}
     Для начала заметим, что \(\E{\frac{S_n - \E{S_n}}{n}} = 0\). Тогда по неравенству Чебышёва выполнено, что:
-    \[\Pr{\left|\frac{S_n - \E{S_n}}{n}\right| \geq \epsilon} \leq \frac{\D{\frac{S_n - \E{S_n}}{n}}}{\epsilon^2}.\] 
+    \[\Pr{\left|\frac{S_n - \E{S_n}}{n}\right| \geq \epsilon} \leq \frac{\D{\frac{S_n}{n}}}{\epsilon^2}.\] 
     
-    Так как \(\D{\frac{S_n - \E{S_n}}{n}} = \frac{1}{n^2}\D{S_n}\) для фиксированного \(n\), то 
+    Так как \(\D{\frac{S_n}{n}} = \frac{1}{n^2}\D{S_n}\) для фиксированного \(n\), то 
     \[\Pr{\left|\frac{S_n - \E{S_n}}{n}\right| \geq \epsilon} \leq \frac{\D{S_n}}{n^2\epsilon^2}.\]
     
     Распишем дисперсию в виде суммы ковариаций:
