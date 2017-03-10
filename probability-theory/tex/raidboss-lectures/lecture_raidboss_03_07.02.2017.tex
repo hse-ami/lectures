@@ -25,7 +25,7 @@
   если
 
   \[
-    \lim\limits_{c \to +\infty} \sup\limits_{n \in \N} \E{|\xi_n|I\{|\xi_n| \geq c\}} = 0
+    \lim\limits_{c \to +\infty} \sup\limits_{n \in \N} \E{|\xi_n|\I\{|\xi_n| \geq c\}} = 0
   \]
 \end{definition}
 
@@ -88,10 +88,10 @@
   \]
 
   Зафиксируем произвольное $\epsilon > 0$. Первое слагаемое не больше 
-  $\E{\xi_n I\{\xi_n \geq c\}}$, так как при $\xi_n \leq c$, величины просто
+  $\E{\xi_n \I\{\xi_n \geq c\}}$, так как при $\xi_n \leq c$, величины просто
   совпадают, от $c$ до $c + 1$ будет какой-то остаток, не больший, чем $\E{\xi_n 
-  I\{c \leq \xi_n \leq c + 1\}}$, а дальше уже просто $\E{f_c(\xi_n)}$ не даёт
-  никакого вклада. Откуда $\E{\xi_n I\{\xi_n \geq c\}} \leq \frac{\epsilon}{2}$
+  \I\{c \leq \xi_n \leq c + 1\}}$, а дальше уже просто $\E{f_c(\xi_n)}$ не даёт
+  никакого вклада. Откуда $\E{\xi_n \I\{\xi_n \geq c\}} \leq \frac{\epsilon}{2}$
   при всех $c > c_0(\epsilon)$. Эта оценка работает по условию теоремы при всех $n$.
 
   Второе слагаемое для всех $c > c_1(\epsilon)$ тоже не больше, чем $\frac{\epsilon}{2}$,
@@ -126,7 +126,7 @@
   Тогда для любого $t > t_0$ и любого $n \in \N$
 
   \[
-    \E{|\xi_n|I\{|\xi_n| \geq t\}} \leq \E{\frac{\xi_n^2}{t}I\{|\xi_n| \geq t\}}
+    \E{|\xi_n|\I\{|\xi_n| \geq t\}} \leq \E{\frac{\xi_n^2}{t}\I\{|\xi_n| \geq t\}}
     \leq \frac{C}{t} \leq \frac{C}{t_0} < \epsilon
   \]
 
