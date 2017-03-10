@@ -200,6 +200,8 @@ in
 \newcommand{\fe}{\varphi}
 \newcommand{\e}{\varepsilon}
 \newcommand{\ind}{\perp\!\!\!\perp}
+\renewcommand{\to}{\longrightarrow}
+\newcommand{\bto}{\Longrightarrow}
 
 \newcommand{\cov}{\mathsf{cov}}
 
@@ -1402,7 +1404,7 @@ w = \sqrt{x}\hfill\\
 \dfrac{\dz}{z^2} + \dfrac{2a(t)x_1 + b(t)}{z} = -a(t)\\
 \left\{\begin{gathered}
 w = \dfrac{1}{z}\hfill\\
-\dw = -\dfrac{\dx}{x^2} \Longrightarrow \dfrac{\dx}{x^2} = -\dw\hfill
+\dw = -\dfrac{\dz}{z^2} \Longrightarrow \dfrac{\dz}{z^2} = -\dw\hfill
 \end{gathered}\right.\\
 -\dw + \big(2a(t)x_1 + b(t)\big) \cdot w = -a(t) \iff \dw - \big(2a(t)x_1 + b(t)\big) \cdot w = a(t)
 \end{gather*}
@@ -2135,6 +2137,393 @@ U = t\exp(tx) + \psi(t) = t\exp(tx) = C
 %	
 %\end{proof}
 
+\newpage
+\section{Семинар 5, 7 февраля}
+
+\subsection{Уравнения, не разрешённые относительно производной $\dx$}
+
+Мы уже умеем решать уравнения вида $\dx = f(t,\ x)$. Пусть теперь мы не можем выразить $\dx$ явно через $t$ и $x$. В таком случае мы получаем уравнение вида
+\[F(t,\ x,\ \dx) = 0\] где $F$ --- непрерывная функция. Это уравнение называется \textbf{уравнением первого порядка, не разрешённым относительно производной}. Стоит отметить, что о единственности решения говорить уже трудно.
+
+Основной метод решения таких уравнений --- это метод введения параметра. Он позволит нам найти общее решение диффура. Часто после подобного много чего может посокращаться, но просто зачёркивать лишние множители мы не должны. Часто существует несколько особых решений ($x = C$ и подобные), которые также необходимо учитывать. 
+
+\subsubsection{$t = f(x,\ \dx)$}
+
+В данном случае переменная $t$ выражается явно через $x$ и производную $\dx$. Введём параметр $p = \dx = \dfrac{\d x}{\d t}$ и подставим в уравнение. Продифференцируем уравнение по $x$ с обеих сторон:
+\[t = f(x,\ \dx) \bto \dfrac{\d t}{\d x} = \dfrac{\d f(x,\ p)}{\d x} = \dfrac{\partial f}{\partial x} + \dfrac{\partial f}{\partial p} \cdot \dfrac{\d p}{\d x} \]
+Так как $p = \dfrac{\d x}{\d t}$, то $\d t = \dfrac{\d x}{p}$ откуда:
+\[\dfrac{1}{p} =  \dfrac{\partial f}{\partial x} + \dfrac{\partial f}{\partial p} \cdot \dfrac{\d p}{\d x} \iff \left(\dfrac{\partial f}{\partial x} - \dfrac{1}{p}\right)\d x + \dfrac{\partial f}{\partial p} \cdot \d p = 0 \]
+Получили явное дифференциальное уравнение $G(x,\ p)$, общее решение которого можем найти. Получаем решение $x = \fe(p)$ -- какая-то функция от параметра, после чего подставляем полученный $x$ в исходное уравнение, чтобы выразить $t$ через параметр. В итоге решение определяется системой двух уравнений:
+\[\begin{cases}
+	G(x,\ p) = 0 \bto x = \fe(p)\\
+	t = f(x,\ p) = f\big(\fe(p),\ p\big)
+\end{cases}\]
+\textbf{Важно!} $p$ --- это независимый параметр, а не чья-то производная! Нельзя его ассоциировать с $\dx$ во время решения!
+
+\textbf{Пример №1}
+\[\dx = \exp(\dfrac{t\dx}{x})\]
+Как видим, здесь весьма затруднительно получить $\dx$ явно. Будем выражать $t$ через $x$ и $\dx$:
+\[\dx = \exp(\dfrac{t\dx}{x}) \iff \log \dx = \dfrac{t\dx}{x} \iff t = \dfrac{x \log \dx }{\dx}\]
+Делаем параметризацию $p = \dx = \dfrac{\d x}{\d t}$ и подставляем, после чего дифференцируем обе части уравнения.
+\begin{gather*}
+	t = \dfrac{x \log p }{p} \bto \partial = \partial\\
+	\d t = \dfrac{\d x}{p} = \dfrac{\log p}{p}\d x + x \cdot \dfrac{1 - \log p}{p^2}\d p
+\end{gather*}
+\begin{gather*}
+	\d x = \log p \d x + x\cdot \dfrac{(1 - \log p)}{p}\d p\\
+	(1 - \log p)\d x - \dfrac{x}{p} \cdot (1 - \log p)\d p = 0\\
+	(1 - \log p)\cdot \left(\d x - \dfrac{x}{p}\d p\right) = 0
+\end{gather*}
+Заметим, что особым решением будет являться решение уравнения $(1 - \log p) = 0$. Решим его, выразив параметр и подставив в исходный диффур:
+\begin{gather*}
+	\log p = 1 \iff p = e\\
+	p = \exp(\dfrac{t \cdot p}{x}) \bto e = \exp(\dfrac{t \cdot e}{x}) \iff 1 = \dfrac{t \cdot e}{x} \iff x = e \cdot t
+\end{gather*}
+Теперь получим оставшееся решение:
+\begin{gather}
+	\d x = \dfrac{x}{p}\d p\\
+	\dfrac{\d x}{x} = \dfrac{1}{p}\d p \bto \ds \int = \int\\
+	\log|x| = \log|p| + C\\
+	x = \lambda\cdot p,\ \lambda \in \R\\
+	t = \dfrac{x \log p }{p} \bto t = \dfrac{\lambda p \log p}{p} = \lambda\log p
+\end{gather}
+Таким образом, мы получили общее решение диффура и одно частное:
+\[\begin{cases}
+	x = \lambda\cdot p,\ \lambda \in \R\\
+	t = \lambda\log p
+\end{cases} \qquad x = e \cdot t\]
+
+
+\subsubsection{$x = f(t,\ \dx)$}
+
+Здесь похоже --- $x$ явно зависит от $t$ и $\dx$. Опять вводим параметр $p = \dx = \dfrac{\d x}{\d t}$, подставляем и дифференцируем теперь уже по $t$:
+\[x = f(t,\ \dx) \bto \dfrac{\d x}{\d t} = \dfrac{\d f(t,\ p)}{\d t} = \dfrac{\partial f}{\partial t} + \dfrac{\partial f}{\partial p} \cdot \dfrac{\d p}{\d t} \]
+Так как $p = \dfrac{\d x}{\d t}$, то $\d x = p\d t$ откуда:
+\[p =  \dfrac{\partial f}{\partial t} + \dfrac{\partial f}{\partial p} \cdot \dfrac{\d p}{\d t} \iff \left(\dfrac{\partial f}{\partial t} - p\right)\d t + \dfrac{\partial f}{\partial p} \cdot \d p = 0 \]
+Получили явное дифференциальное уравнение $G(t,\ p)$, общее решение которого можем найти. Получаем решение $t = \psi(p)$ -- какая-то функция от параметра, после чего подставляем полученный $t$ в исходное уравнение, чтобы выразить $x$ через параметр. В итоге решение определяется системой двух уравнений:
+\[\begin{cases}
+G(t,\ p) = 0 \bto t = \psi(p)\\
+x = f(t,\ p) = f\big(\psi(p),\ p\big)
+\end{cases}\]
+
+В некоторых случаях параметр $p$ бывает возможно исключить из системы, и общее решение будет записываться в явной форме: $x = f(t)$ или $t = f(x)$.
+\ \\
+
+\textbf{Пример № 2}
+
+\[5x + (\dx)^2 = t(t + \dx)\]
+Можем сразу выразить $x$ через $t$ и $\dx$:
+\[5x = t^2 + t\dx - (\dx)^2\]
+Делаем параметризацию $p = \dx = \dfrac{\d x}{\d t}$ и подставляем, после чего дифференцируем обе части уравнения.
+\begin{gather*}
+	5x = t^2 + tp - p^2 \bto \partial = \partial\\
+	5\dx = 5\cdot p\d t = 2t\d t + p\d t + t\d p - 2p\d p\\
+	4\cdot p\d t = 2t\d t + (t - 2p)\d p\\
+	2\big(t - 2p\big)\d t + (t - 2p)\d p = 0\\
+	\big(t - 2p\big) \cdot (2\d t + \d p) = 0
+\end{gather*}
+Опять есть особое решение, заключённое в первой скобке. Решим данное уравнение и подставим результат в исходное:
+\begin{gather*}
+	t = 2p \iff t = \dfrac{p}{2}\\
+	5x = \dfrac{p^2}{4} + \dfrac{p^2}{2} - p^2 = - \dfrac{p^2}{4} \iff x = -\dfrac{p^2}{20}
+\end{gather*}
+Теперь разберём вторую скобку:
+\begin{gather*}
+	2\d t = -\d p \bto \ds\int = \int\\
+	2t = -p + C \iff t = -\dfrac{p}{2} + 2C\\
+	5x = t^2 + tp - p^2 \bto 5x = \dfrac{p^2}{4} - 2pC + 4C^2 + 2pC - \dfrac{p^2}{2} + p^2\\
+	5x = \dfrac{3p^2}{4} + 4C^2 \iff x = \dfrac{3p^2}{20} + \dfrac{4C^2}{5},\ C \in \R
+\end{gather*}
+Таким образом, получили 2 решения --- особое и общее:
+\[\begin{cases}
+	t = \dfrac{p}{2}\\
+	x = -\dfrac{p^2}{20}
+\end{cases} \qquad \begin{cases}
+	t = -\dfrac{p}{2} + 2C\\
+	x = \dfrac{3p^2}{20} + \dfrac{4C^2}{5},\ C \in \R
+\end{cases}\]
+
+\textbf{Пример №3}
+
+\[2x = 2t^2 + 4t\dx + (\dx)^2\]
+
+В данном случае можем выразить $x$ явно. Как и раньше, делаем параметризацию $p = \dx = \dfrac{\d x}{\d t}$, подставляем и берём производную от обеих частей уравнения:
+\begin{gather*}
+	x = t^2 + 2tp + \dfrac{p^2}{2} \bto \partial = \partial\\
+	\d x = p\d t = 2t\d t + 2t\d p + 2p\d t + p\d p\\
+	2t \d t + 2t\d p + p\d t + p\d p = 0 \iff (2t + p)\d t + (2t + p)\d p = 0\\
+	(2t + p)\cdot (\d t + \d p) = 0
+\end{gather*}
+Необходимо разобрать два случая. Первое решение имеет вид:
+\begin{gather*}
+	2t + p = 0 \iff t = -\dfrac{p}{2}\\
+	x = \dfrac{p^2}{4} - p^2 + \dfrac{p^2}{2} = -\dfrac{p^2}{4}
+\end{gather*}
+В данном случае удобно исключить $p$ из решения, так как $x$ выражается через $t$:
+\[
+	t = -\dfrac{p}{2} \iff t^2 = \dfrac{p^2}{4} = -x \iff x = -t^2
+\]
+Получили особое решение. Теперь рассмотрим вторую скобку:
+\begin{gather*}
+	\d t = -\d p \bto \ds\int = \int\\
+	t = -p + C
+\end{gather*}
+Подставляем  в исходный диффур и получаем выражение для $p$:
+\begin{gather*}
+	x = (C - p)^2 + 2p \cdot (C - p) + \dfrac{p^2}{2}\\
+	x = C^2 - 2pC + p^2 + 2pC - 2p^2 + \dfrac{p^2}{2} = C^2 - \dfrac{p^2}{2}
+\end{gather*}
+Мы опять можем исключить параметр $p$ и получить явную функцию $x = x(t)$:
+\[
+	p = C - t \bto x = C^2 - \dfrac{p^2}{2} = C^2 - \dfrac{(C - t)^2}{2}
+\]
+Таким образом, имеем общее решение и особое решение, оба в явной форме:
+\[x = -t^2 \qquad x = C^2 - \dfrac{(C - t)^2}{2}\]
+
+
+\subsubsection{$t = f(\dx)$ и $x = f(\dx)$}
+
+Если нам повезло, и уравнение не содержит одну из переменных вообще, то общее решение получить совсем просто. Делаем ту же параметризацию, $p = \dx = \dfrac{\d x}{\d t}$. Тогда:
+\[\begin{gathered}
+	t = f(\dx) \bto \d t = \dfrac{\d x}{p} = \dfrac{1}{p} \cdot \dfrac{\d f}{\d p} \d p\hfill\\
+	x = f(\dx) \bto \d x = p\d t = p \cdot \dfrac{\d f}{\d p} \d p\hfill
+\end{gathered}\]
+Отсюда мы можем получить общее решение простым интегрированием:
+\[\begin{cases}
+	t = \ds\int \dfrac{1}{p} \cdot \dfrac{\d f}{\d p} \d p\\
+	x = f(p)
+\end{cases}\qquad \begin{cases}
+	x = \ds\int p \cdot \dfrac{\d f}{\d p} \d p\\
+	t = f(p)
+\end{cases}\]
+
+\textbf{Пример № 4}
+
+\[x = (\dx)^2 + 2(\dx)^3\]
+Как видим, в данном случае нет переменной $t$. Делаем параметризацию $p = \dx$ и подставляем:
+\begin{gather*}
+	p = \dx = \dfrac{\d x}{\d t} \bto x = p^2 + 2p^3 \bto \partial = \partial\\
+	\d x = p\d t = (2p + 6p^2)\d p,\ p = 0 \text{ --- решение, тогда }x = С \text{ решение}\\
+	\d t = (2 + 6p)\d p \iff t = 2p + 3p^2 + C\\
+	\begin{cases} x = p^2 + 2p^3\\ t = 2p + 3p^2 + C\end{cases}
+\end{gather*}
+Таким образом, получили общее решение через параметр, а также одно особое решение -- $x = C$.
+\ \\
+
+\textbf{Пример № 5}
+
+\[9(\dx)^2 - 4t = 0\]
+Теперь нет переменной $x$. Делаем параметризацию $p = \dx$ и подставляем:
+\begin{gather*}
+	p = \dx = \dfrac{\d x}{\d t} \bto t = \dfrac{9}{4} \cdot p^2 \bto \partial = \partial\\
+	\d t = \dfrac{\d x}{p} = \dfrac{9}{2}\cdot p\d p \iff \d x = \dfrac{9}{2} \cdot p^2\d p \bto \ds\int = \int\\
+	x = \dfrac{9}{2} \cdot \dfrac{p^3}{3} + C = \dfrac{3}{2}\cdot p^3 + C
+\end{gather*}
+Получили общее решение:
+\[\begin{cases}
+	t = \dfrac{9}{4} \cdot p^2\\
+	x = \dfrac{3}{2}\cdot p^3 + C
+\end{cases}\]
+Иногда бывает полезно исключить $p$ из системы уравнений -- в данном случае это можно проделать:
+\begin{gather*}
+	p^2 = \dfrac{4}{9}\cdot t \iff p = \pm\dfrac{2}{3}\sqrt{t}\\
+	x = \dfrac{3}{2}\cdot \left(\pm\dfrac{2}{3}\sqrt{t}\right)^3 + C = \pm\dfrac{3}{2} \cdot \dfrac{8}{27}\cdot t^{\frac 32} + C = \pm\dfrac{4}{9} \cdot t^{\frac 32} + C
+\end{gather*}
+Получили изящную кривую без параметра:
+\[x = \pm\dfrac{4}{9} \cdot t^{\frac 32} + C\]
+
+
+Замечу, что не всегда параметризация может производиться лишь $\dx = p$. Иногда бывает полезно параметризовать целую функцию $g(t,\ \dx)$ или $g(x,\ \dx)$, чтобы решить диффур. Правила игры при этом всё те же.
+\ \\
+
+\textbf{Пример № 6}
+\[x = \dfrac{\dx}{t} + \dfrac{t}{\dx}\]
+Можно конечно было бы сразу же рубануть классическую параметризацию, но гораздо лучше будет параметризовывать на $\dx$, а $\dfrac{\dx }{t}$:
+
+\begin{gather*}
+	\dfrac{\dx}{t} = \dfrac{\d x}{t\d t} = p \\
+	x = p + \dfrac{1}{p} \bto \partial = \partial\\
+	\d x = pt\d t = \d p - \dfrac{\d p}{p^2}\\
+	t\d t = \left(\dfrac{1}{p} - \dfrac{1}{p^3}\right)\d p \bto \ds\int = \int\\
+	\dfrac{t^2}{2} = \log|p| + \dfrac{1}{2p^2} + C
+\end{gather*}
+Получили итоговое решение:
+\[\begin{cases}t^2 = 2\log|p| + \dfrac{1}{p^2} + 2C\\ x = p + \dfrac{1}{p}\end{cases}\]
+
+\subsection{Уравнения Лагранжа и Клеро}
+
+\textbf{Уравнение Лагранжа} -- это дифференциальное уравнение, имеющее следующий вид:
+\[A(\dx)x + B(\dx)t + C(\dx) = 0\]
+Данные уравнения можно решить уже известным нам методом: выражаем $x$ явно, получая следующий диффур:
+\[x = t \fe(\dx) + \psi(\dx)\]
+Параметризируем $p = \dx = \dfrac{\d x}{\d t}$ и берём производные:
+\begin{gather*}
+x = t\fe(p) + \psi(p) \bto \partial = \partial\\
+\d x = p\d t = \fe(p)\d t + t\cdot \fe'(p)\d p + \psi'(p)\d p\\
+\big(\fe(p) - p\big)\d t + t \cdot \fe'(p)\d p + \psi'(p)\d p = 0\\
+\dt + t \cdot \dfrac{\fe'(p)}{\big(\fe(p) - p\big)} + \dfrac{\psi'(p)}{\big(\fe(p) - p\big)} = 0
+\end{gather*}
+Получили \textbf{линейное} дифференциальное уравнение по $t = t(p)$, которое мы уже умеем решать. Тогда, если решением будет $t = g(p)$, то итоговым общим решением будет:
+\[\begin{cases}
+	t = g(p)\\
+	x = g(p)\cdot \fe(p) + \psi(p)
+\end{cases}\]
+Всё бы хорошо, да мы сделали серьёзное допущение --- мы смогли получить линейный диффур только исходя из предположения, что $p \neq \fe(p)$. Поэтому случай $p = \fe(p)$ нужно разобрать отдельно. Тогда, если решением этого уравнения на $p$ будет $p = C$ --- какая-то константа, то получаем особое решение:
+\[x = t \cdot \fe(C) + \psi(C)\] --- прямая линия.
+\ \\
+
+\textbf{Пример №7}
+\[x = 2t\dx + \log\dx\]
+Уравнение уже в удобной форме. Полагаем $p = \dx = \dfrac{\d x}{\d t}$ и дифференцируем:
+\begin{gather*}
+	x = 2tp + \log p \bto \partial = \partial \\
+	\dx = p\d t = 2t\d p + 2p\d t + \dfrac{\d p}{p} \iff p\d t + 2t\d p + \dfrac{\d p}{p} = 0\\
+	p\dt + 2t + \dfrac{1}{p} = 0 \iff \dt + \dfrac{2}{p} \cdot t + \dfrac{1}{p^2} = 0
+\end{gather*}
+Получили линейный диффур. Решаем его классически --- методом вариации произвольной постоянной.
+Решаем однородное:
+\begin{gather*}
+\dt = -\dfrac{2}{p} \cdot t \iff \dfrac{\d t}{t} = -\dfrac{2\d p}{p} \bto \ds\int = \int\\
+\log|t| = -2\log|p| + C \iff t = u \cdot \dfrac{1}{p^2},\ u \in \R
+\end{gather*}
+Делаем вариацию постоянной:
+\begin{gather*}
+\left\{\begin{gathered}
+t = u \cdot \dfrac{1}{p^2}\hfill\\
+\dt = \du \cdot \dfrac{1}{p^2} - 2u \cdot \dfrac{1}{p^3}\hfill
+\end{gathered}\right.\\
+\du \cdot \dfrac{1}{p^2} - 2u \cdot \dfrac{1}{p^3} + \dfrac{2}{p} \cdot u \cdot \dfrac{1}{p^2} + \dfrac{1}{p^2} = 0 \iff \du \cdot \dfrac{1}{p^2} = -\dfrac{1}{p^2}\\
+\du = -1 \iff \d u = -\d p \iff u = -p + C\\
+t = u \cdot \dfrac{1}{p^2} = (C - p) \cdot \dfrac{1}{p^2} = \dfrac{C}{p^2} -\dfrac{1}{p}
+\end{gather*}
+Осталось подставить в исходный диффур и выразить $x$ через $p$:
+\begin{gather*}
+t = \dfrac{C}{p^2} -\dfrac{1}{p}\\
+x = 2tp + \log p = 2p\cdot \left(\dfrac{C}{p^2} -\dfrac{1}{p}\right) + \log p = 2 \cdot \left(\dfrac{C}{p} - 1\right) + \log p
+\end{gather*}
+Получили общее решение диффура:
+\[\begin{cases}
+	t = \dfrac{C}{p^2} -\dfrac{1}{p}\\
+	x = \log p + \dfrac{2C}{p} - 2
+\end{cases}\]
+
+Помимо Лагранжа, существую дифференциальные \textbf{уравнения Клеро}, имеющие следующий вид:
+\[x = t\dx + \psi(\dx)\]
+Метод решения абсолютно тот же, что и для уравнений Лагранжа --- параметризация и дифференцирование:
+\begin{gather*}
+	p = \dx = \dfrac{\d x}{\d t}\\
+	x = tp + \psi(p) \bto \partial = \partial\\
+	\d x = p\d t = t \d p + p\d t + \psi'(p)\d p \iff \big(t + \psi'(p)\big)\d p = 0
+\end{gather*}
+Заметим, что уравнение Клеро будет всегда иметь случай $\d p = 0$ и как следствие общее решение будет выражаться так:
+\begin{gather*}
+	\d p = 0 \iff p = C\\
+	x = tp + \psi(p) = Ct + \psi(C)
+\end{gather*}
+Причём это верно \underline{для любого} уравнения Клеро. Особым решением будет результат исключения параметра $p$ из системы уравнений:
+\[\begin{cases}
+	t = -\psi'(p)\\
+	x = tp + \psi(p) = \psi(p) - p\cdot \psi'(p)
+\end{cases}\]
+
+\textbf{Пример №8}
+
+\[x = t\dx - (\dx)^2\]
+Это уравнение Клеро. Делаем параметризацию, дифференцируем и группируем аргументы:
+\begin{gather*}
+	p = \dx = \dfrac{\d x}{\d t}\\
+	x = tp - p^2 \bto \partial = \partial\\
+	\d x = p\d t = t\d p + p\d t - 2p\d p \iff (2p - t)\d p = 0
+\end{gather*}
+Разбираем первый, общий случай:
+\begin{gather*}
+	\d p = 0 \iff p = C\\
+	x = Ct - C^2
+\end{gather*}
+Второй, особый:
+\begin{gather*}
+	t = 2p\\
+	x = tp - p^2 = 2p^2 - p^2 = p^2
+\end{gather*}
+Исключаем параметр $p$:
+\[t = 2p \iff p = \dfrac{t}{2} \bto x = \dfrac{t^2}{4}\]
+Итоговый ответ:
+\[x = Ct - C^2 \qquad x = \dfrac{t^2}{4}\]
+
+\textbf{Пример №9}
+
+\[2(\dx)^2 (x - t\dx) = 1\]
+Раскроем скоби и приведём подобные, чтобы увидеть уравнение Клеро:
+\[2(\dx)^2 x - 2(\dx)^3 t - 1 = 0 \iff x = t\dx + \dfrac{1}{2(\dx)^2}\]
+Осталось решить классической параметризацией.
+\begin{gather*}
+	p = \dx = \dfrac{\d x}{\d t} \bto x = tp + \dfrac{1}{2p^2} \bto \partial = \partial\\
+	\d x = p\d t = t\d p + p\d t - \dfrac{\d p}{p^3} \iff \left(t - \dfrac{1}{p^3}\right)\d p = 0
+\end{gather*}
+Имеем два случая. Первый:
+\[\d p = 0 \iff p = C\]
+Подставляя в исходное уравнение, получаем класс кривых:
+\begin{gather*}
+	x = tp + \dfrac{1}{2p^2}\qquad p = C\\
+	x = Ct + \dfrac{1}{2C^2}
+\end{gather*}
+Разберём второй случай:
+\begin{gather*}
+	t = \dfrac{1}{p^3}\\
+	x = tp + \dfrac{1}{2p^2} = \dfrac{1}{p^2} + \dfrac{1}{2p^2} = \dfrac{3}{2p^2}
+\end{gather*}
+Исключим параметр $p$:
+\[p^3 = \dfrac{1}{t} \iff p = t^{-\frac{1}{3}} \bto x = \dfrac{3}{2p^2} = \dfrac{3}{2} \cdot t^{\frac 23}\]
+Особое решение диффура. Итоговый ответ:
+\[x = \dfrac{3}{2} \cdot t^{\frac 23} \qquad x = Ct + \dfrac{1}{2C^2}\]
+
+
+\subsection{Домашнее задание №5}
+
+\begin{task1}
+	Решить диффур:
+	\[t = \dx\sqrt{(\dx)^2 + 1}\]
+\end{task1}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task2}
+	Решить диффур:
+	\[x = \log(1 + (\dx)^2)\]
+\end{task2}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task3}
+	Решить диффур:
+	\[x = t\dx - t^2(\dx)^3\]
+\end{task3}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
+\begin{task4}
+	Решить диффур:
+	\[2t\dx - x = \log \dx\]
+\end{task4}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task5}
+	Решить диффур:
+	\[2t\dx - x = \dx\log(x\dx)\]
+\end{task5}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
+\newpage
+\section{Семинар 6, 14 февраля}
+
+\subsection{Домашнее задание №6}
 
 \newpage
 \section{Common Tasks}
