@@ -1,0 +1,252 @@
+\section{Лекция от 20.12.2016}
+\subsection{Немного о законе больших чисел}
+Как вы помните, в том законе больших чисел, который мы доказывали, была сходимость по вероятности. Это так называемый \emph{закон больших чисел в форме Чебышёва}. Но его можно усилить в смысле вида сходимости:
+\begin{theorem}[Усиленный закон больших чисел]
+	Пусть \(\{\xi_n \mid n \in \N\}\)~--- последовательность независимых и одинаково распределённых случайных величин, причём четвёртый центральный момент \(\xi_1\) ограничен, то есть существует такая константа \(C \in (0, +\infty)\), что \(\E{(\xi_1 - \E{\xi_1})^4} \leq C\). Как обычно, обозначим через \(S_n\) сумму первых \(n\) случайных величин: \(S_n = \xi_1 + \dots + \xi_n\). Тогда
+	\[
+		\frac{S_n - \E{S_n}}{n} \asto 0
+	\]
+\end{theorem}
+\begin{proof}
+	Без ограничения общности будем считать, что \(\E{\xi_1} = 0\). Если это не так, то введём в рассмотрение случайные величины \(\eta_i = \xi_i - \E{\xi_i}\).
+	
+	Мы хотим показать, что \(\frac{S_n}{n} \asto 0\). Это равносильно тому, что для любого \(\epsilon > 0\)
+	\[
+		\sum_{n = 1}^{\infty} \Pr{\left|\frac{S_n}{n}\right| \geq \epsilon} < +\infty
+	\]
+	
+	Оценим член суммы с помощью неравенства Маркова:
+	\[
+		\Pr{\left|\frac{S_n}{n}\right| \geq \epsilon} = \Pr{\left|\frac{S_n}{n}\right|^4 \geq \epsilon^4} \leq \frac{\E{\frac{S_n^4}{n^4}}}{\epsilon^4} = \frac{\E{S_n^4}}{\epsilon^4 n^4}
+	\]
+	
+	Теперь оценим \(\E{S_n^4}\):
+	\[
+		\E{S_n^4} = \sum_{i, j, k, l = 1}^{n} \E{\xi_i \xi_j \xi_k \xi_k}
+	\]
+	
+	Заметим, что если какая-то случайная величина входит в матожидание с первой степенью, то по независимости это матожидание обернётся в ноль. Тогда
+	\[
+		\E{S_n^4} = \sum_{i = 1}^{n} \E{\xi_i^4} + 6\sum_{i, j = 1}^{n} \E{\xi_i^2} \E{\xi_j^2}
+	\]
+	
+	Осталось заметить две вещи: \(\E{\xi_i^4} \leq C\), и, так как \(\D{\xi_i^2} \geq 0\), то \(\E{\xi_i^2} \leq \sqrt{\E{\xi_i^4}} \leq \sqrt{C}\). Следовательно,
+	\[
+		\E{S_n^4} \leq Cn + 6Cn^2 \implies \frac{\E{S_n^4}}{\epsilon^4 n^4} = O\left(\frac{1}{n^2}\right)
+	\]
+	
+	Тогда по признаку сравнения ряд сходится и мы получаем желаемое.
+\end{proof}
+\begin{consequence}
+	В условиях уЗБЧ
+	\[
+		\frac{\xi_1 + \dots + \xi_n}{n} \asto \E{\xi_1}
+	\]
+\end{consequence}
+
+Впрочем, в этом усилении появляется весьма странное ограничение на четвёртый центральный момент. Можно ли от него избавиться? Можно:
+\begin{theorem}[уЗБЧ в форме Колмогорова]
+	Пусть \(\{\xi_n \mid n \in \N\}\)~--- последовательность независимых и одинаково распределённых случайных величин, причём \(\E{\xi_1} < \infty\). Тогда
+	\[
+		\frac{\xi_1 + \dots + \xi_n}{n} \asto \E{\xi_1}
+	\]
+\end{theorem}
+В дальнейшем мы будем пользоваться именно этим вариантом закона больших чисел. Смысл уЗБЧ не изменился~--- он является теоретическим обоснованием принципа устойчивости частот.
+
+\subsection{Предельный переход под знаком матожидания}
+Допустим, что у нас есть последовательность случайных величин \(\{\xi_n \mid n \in \N \}\) и случайная величина \(\xi\) такая, что \(\xi_n \asto \xi\). Можно ли сказать, что \(\E{\xi_n} \to \E{\xi}\)? Ответ на этот вопрос даёт следующая
+\begin{theorem}[о монотонной сходимости]
+	Пусть \(\{\xi_n \mid n \in \N\}, \xi\)~--- случайные величины.
+	\begin{enumerate}
+		\item Пусть \(0 \leq \xi_n \uparrow \xi\). Тогда \(\E{\xi_n} \to \E{\xi}\).
+		\item Пусть \(\xi_n \uparrow \xi\) и \(\xi_n \geq \eta\), причём \(\E{\eta}\) конечно. Тогда \(\E{\xi_n} \to \E{\xi}\).
+		\item Пусть \(\xi_n \downarrow \xi\) и \(\xi_n \leq \eta\), причём \(\E{\eta}\) конечно. Тогда \(\E{\xi_n} \to \E{\xi}\).
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Второй и третий пункт являются простыми следствиями первого, так что начнём с первого пункта.
+	
+	Для каждого \(n \in \N\) построим последовательность простых случайных величин \(\{\xi_n^{(k)} \mid k \in \N\}\) такую, что \(0 \leq \xi_n^{(k)} \uparrow \xi_n\). Далее, построим последовательность \(\{\delta_k \mid k \in \N\}\) по следующему правилу:
+	\[
+		\delta_k = \max\limits_{1 \leq n \leq k} \xi_n^{(k)}
+	\]
+	
+	Несложно заметить, что все \(\delta_{k}\)~--- это простые случайные величины и \(0 \leq \delta_k \leq \delta_{k + 1}\). Следовательно, существует случайная величина \(\delta\) такая, что \(\delta_k \uparrow \delta\). Теперь заметим две вещи:
+	\begin{enumerate}
+		\item С одной стороны, \(\delta_k = \max\limits_{1 \leq n \leq k} \xi_n^{(k)} \leq \max\limits_{1 \leq n \leq k} \xi_n \leq \xi\). Из этого следует, что \(\delta \leq \xi\).
+		\item С другой стороны, для всех \(k\) верно, что \(\delta_k \geq \xi_n^{(k)}\). Возьмём предел по \(k\): \(\delta \geq \xi_n\). Отсюда получаем, что для любого натурального \(n\) \(\delta \geq \xi_n\). Возьмём предел по \(n\): \(\delta \geq \xi\).
+	\end{enumerate}
+
+	Из этого следует, что \(\delta = \xi\) почти наверное. Осталось найти \(\E{\xi}\). Из показанного следует, что оно равно \(\E{\delta}\). По определению, \(\E{\delta_n} \to \E{\delta}\). Снова заметим две вещи:
+	\begin{enumerate}
+		\item \(\delta_k = \max\limits_{1 \leq n \leq k} \xi_n^{(k)} \leq \max\limits_{1 \leq n \leq k} \xi_n = \xi_k\). Тогда \(\E{\xi} = \E{\delta} = \lim\limits_{k \to \infty} \E{\delta_k} \leq \lim\limits_{k \to \infty} \E{\xi_k}\).
+		
+		\item Однако \(\xi_k \leq \xi\). Тогда \(\lim\limits_{k \to \infty} \E{\xi_k} \leq \E{\xi}\).
+	\end{enumerate}
+
+	Отсюда следует, что \(\E{\xi} = \lim\limits_{k \to \infty} \E{\xi_k}\).
+	
+	Теперь докажем второй пункт. Рассмотрим последовательность \(\delta_{k} = \xi_{k} - \eta\). Понятно, что \(0 \leq \delta_k \uparrow \xi - \eta\). Тогда
+	\[
+		\lim\limits_{k \to \infty} (\E{\xi_k} - \E{\eta}) = \lim\limits_{k \to \infty} \E{\delta_k} = \E{\xi - \eta} = \E{\xi} - \E{\eta}
+	\]
+	
+	Доказательство же третьего пункта абсолютно аналогично доказательству второго, только нужно изменить знак на противоположный.
+\end{proof}
+
+Вообще говоря, монотонная сходимость~--- штука весьма редкая. Но можно ли что-либо сказать про матожидания, если её нет и в помине? Уже поменьше, но всё равно можно:
+\begin{lemma}[Фату]
+	Пусть \(\{\xi_n \mid n \in \N\}, \eta\)~--- случайные величины.
+	\begin{enumerate}
+		\item Пусть для всех натуральных \(n\) \(\xi_n \geq \eta\), причём \(\E{\eta}\) конечно. Тогда 
+		\[
+			\E{\varliminf\limits_{n \to \infty} \xi_n} \leq \varliminf\limits_{n \to \infty} \E{\xi_n}
+		\]
+		
+		\item Пусть для всех натуральных \(n\) \(\xi_n \leq \eta\), причём \(\E{\eta}\) конечно. Тогда 
+		\[
+			\E{\varlimsup\limits_{n \to \infty} \xi_n} \geq \varlimsup\limits_{n \to \infty} \E{\xi_n}
+		\]
+		
+		\item Пусть для всех натуральных \(n\) \(|\xi_n| \leq \eta\), причём \(\E{\eta}\) конечно. Тогда 
+		\[
+			\E{\varliminf\limits_{n \to \infty} \xi_n} \leq \varliminf\limits_{n \to \infty} \E{\xi_n} \leq \varlimsup\limits_{n \to \infty} \E{\xi_n} \leq \E{\varlimsup\limits_{n \to \infty} \xi_n}
+		\]
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	Сразу скажем, что третий пункт~--- это просто объединение первых двух, поэтому мы его доказывать не будем. Второй же пункт абсолютно аналогичен первому с точностью до замены знака. Так что докажем только первый пункт.
+	
+	Введём последовательность случайных величин \(\{\psi_n \mid n \in \N\}\) следующим образом:
+	\[
+		\psi_n = \inf\limits_{k \geq n} \xi_k
+	\]
+	
+	Тогда \(\psi_n \uparrow \varliminf\limits_{n \to \infty} \xi_n\). Так как \(\xi_n \geq \eta\), то \(\psi_n \geq \eta\). По теореме о монотонной сходимости
+	\[
+		\E{\varliminf\limits_{n \to \infty} \xi_n} = \lim\limits_{n \to \infty} \E{\psi_n} = \varliminf\limits_{n \to \infty} \E{\psi_n} \leq \varliminf\limits_{n \to \infty} \E{\xi_n}\qedhere
+	\]
+\end{proof}
+
+Из леммы Фату можно получить один факт, который мы будем часто использовать в дальнейшем:
+\begin{theorem}[Лебега о мажорируемой сходимости]
+	Пусть \(\{\xi_n \mid n \in \N\}, \xi, \eta\)~--- случайные величины такие, что для всех натуральных \(n\) \(|\xi_n| \leq \eta\), причём \(\E{\eta}\) конечно. Тогда, если \(\xi_n \asto \xi\), то
+	\[
+		\E{\xi_n} \xrightarrow[n \to \infty]{} \E{\xi} \text{ и } \E{|\xi_n - \xi|} \xrightarrow[n \to \infty]{} 0
+	\]
+\end{theorem}
+\begin{proof}
+	По лемме Фату
+	\[
+		\E{\varliminf\limits_{n \to \infty} \xi_n} \leq \varliminf\limits_{n \to \infty} \E{\xi_n} \leq \varlimsup\limits_{n \to \infty} \E{\xi_n} \leq \E{\varlimsup\limits_{n \to \infty} \xi_n}
+	\]
+	
+	Однако \(\xi_n \asto \xi\). Из этого следует, что 
+	\[
+		\varliminf\limits_{n \to \infty} \xi_n = \xi = \varlimsup\limits_{n \to \infty} \xi_n \implies \E{\xi} = \lim\limits_{n \to \infty} \E{\xi_n}
+	\]
+	
+	Второй пункт следует из первого и того, что \(|\xi_n - \xi| \leq 2\eta\).
+\end{proof}
+
+\subsection{Характеристические функции}
+Для исследования поведения случайных величин принять вводить так называемые \emph{характеристические функции}. 
+\begin{definition}
+	\emph{Характеристической функцией} случайной величины \(\xi\) называется
+	\[
+		\phi_{\xi}(t) = \E{e^{it\xi}}
+	\]
+\end{definition}
+\begin{remark}
+	По формуле Эйлера и линейности матожидания можно записать, что
+	\[
+		\phi_{\xi}(t) = \E{\cos(t\xi)} + i\E{\sin(t\xi)}
+	\]
+\end{remark}
+
+Казалось бы, зачем её вводить именно так? Это станет несколько понятней, когда будут пройдены преобразования Фурье. А пока что рассмотрим пару примеров.
+\begin{problem}
+	Пусть \(\xi \sim \mathrm{Bin}(n, p)\), а \(\eta \sim \mathrm{Exp}(\lambda)\). Найдите их характеристические функции.
+\end{problem}
+\begin{proof}[Решение]
+	Просто посчитаем по определению:
+	\begin{align*}
+		\phi_{\xi}(t) &= \E{e^{it\xi}} = \sum_{k = 1}^{n} \binom{n}{k}p^{k}(1 - p)^{n - k}e^{itk} = (e^{it}p + 1 - p)^{n} \\
+		\phi_{\eta}(t) &= \E{e^{it\eta}} = \int_{0}^{\infty} \lambda e^{-(\lambda - it)x}\diff x = \frac{\lambda}{\lambda - it}\qedhere
+	\end{align*}
+\end{proof}
+
+Теперь опишем свойства характеристической функции. Их, как обычно, немало.
+\begin{property}
+	Для любого \(t \in \R\) \(|\phi_{\xi}(t)| \leq 1\) и \(\phi_{\xi}(0) = 1\).
+\end{property}
+\begin{proof}
+	На самом деле, \(\phi_{\eta}(0) = \E{1} = 1\) и \(\left|\E{e^{it\xi}}\right| \leq \E\left|e^{it\xi}\right| = 1\).
+\end{proof}
+
+\begin{property}
+	Пусть \(\eta = a\xi + b\). Тогда \(\phi_{\eta}(t) = e^{itb}\phi_{\xi}(at)\).
+\end{property}
+\begin{proof}
+	\(\phi_{\eta}(t) = \E{e^{it(a\xi + b)}} = e^{itb}\E{e^{iat\xi}} = e^{itb}\phi_{\xi}(at)\).
+\end{proof}
+\begin{property}
+	Характеристическая функция равномерно непрерывна на \(\R\).
+\end{property}
+\begin{proof}
+	Рассмотрим модуль разности значений функций:
+	\[
+		\left|\phi_{\xi}(t + \Delta t) - \phi_{\xi}(t)\right| = \left|\E{e^{i(t + \Delta t)\xi}} - \E{e^{it\xi}}\right| = \left|\E{e^{it\xi}\left(e^{i\Delta t\xi} - 1\right)}\right| \leq \E\left|e^{i\Delta t\xi} - 1\right|
+	\]
+	
+	Однако \(e^{i\Delta t\xi} - 1 \asto 0\) при \(\Delta t \to 0\) (просто поточечная сходимость) и \(\left|e^{i\Delta t\xi} - 1\right| \leq 2\). Тогда по теореме Лебега о мажорируемой сходимости \(\left|\phi_{\xi}(t + \Delta t) - \phi_{\xi}(t)\right| \to 0\) при \(\Delta t \to 0\). А это и означает равномерную непрерывность.
+\end{proof}
+\begin{property}
+	\(\overline{\phi_{\xi}(t)} = \phi_{\xi}(-t) = \phi_{-\xi}(t)\).
+\end{property}
+\begin{proof}
+	Очевидно.
+\end{proof}
+
+\begin{property}[Теорема единственности]
+	Если \(\phi_{\xi}(t) = \phi_{\eta}(t)\) для всех \(t \in \R\), то \(\xi \eqdist \eta\).
+\end{property}
+\begin{proof}
+	Без доказательства.
+\end{proof}
+
+\begin{property}
+	\(\phi_{\xi}(t)\) действительнозначна тогда и только тогда, когда распределение \(\xi\) симметрично, то есть \(\xi \eqdist -\xi\).
+\end{property}
+	\begin{enumerate}
+		\item[{\([\Rightarrow]\)}] \(\phi_{\xi}(t) = \overline{\phi_{\xi}(t)} \implies \phi_{\xi}(t) = \phi_{-\xi}(t)\). Тогда по теореме единственности \(\xi \eqdist -\xi\).
+		\item[{\([\Leftarrow]\)}] Так как \(\xi \eqdist -\xi\), то по теореме единственности \(\phi_{\xi}(t) = \phi_{-\xi}(t)\). Но по свойству 4 \(\phi_{\xi}(t) = \overline{\phi_{\xi}(t)}\).
+	\end{enumerate}
+
+\begin{property}
+	Пусть \(\xi\) и \(\eta\)~--- независимые случайные величины. Тогда
+	\[
+		\phi_{\xi + \eta}(t) = \phi_{\xi}(t)\phi_{\eta}(t)
+	\]
+\end{property}
+\begin{proof}
+	\(\phi_{\xi + \eta}(t) = \E{e^{it(\xi + \eta)}} = \E{e^{it\xi}e^{it\eta}} = \E{e^{it\xi}}\E{e^{it\eta}} = \phi_{\xi}(t)\phi_{\eta}(t)\).
+\end{proof}
+
+Рассмотрим пример применения этих свойств:
+\begin{problem}
+	Пусть \(\xi_1 \sim \mathrm{Pois}(\lambda_1)\), \(\xi_2 \sim \mathrm{Pois}(\lambda_2)\). Найдите распределение \(\xi_1 + \xi_2\).
+\end{problem}
+\begin{proof}[Решение]
+	Для начала найдём характеристическую функцию \(\xi \sim \mathrm{Pois}(\lambda)\):
+	\[
+		\phi_{\xi}(t) = \sum_{n = 1}^{\infty} e^{itn}\frac{\lambda^n}{n!}e^{-\lambda} = e^{-\lambda}e^{\lambda e^{it}} = \exp\left\{\lambda(e^{it} - 1)\right\}
+	\]
+	
+	Следовательно, по независимости \(\xi_1\) и \(\xi_2\)
+	\[
+		\phi_{\xi_1 + \xi_2} = \exp\left\{\lambda_1(e^{it} - 1)\right\}\exp\left\{\lambda_2(e^{it} - 1)\right\} = \exp\left\{(\lambda_1 + \lambda_2)(e^{it} - 1)\right\}
+	\]
+	
+	Отсюда получаем, что \(\xi_1 + \xi_2 \sim \mathrm{Pois}(\lambda_1 + \lambda_2)\).
+\end{proof}

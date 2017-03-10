@@ -1,0 +1,136 @@
+\documentclass[a4letter,12pt]{article}
+\usepackage{amsmath}
+\usepackage{subfiles}
+\usepackage{algo-header}
+
+\usepackage{epigraph}
+
+\newcommand{\doverline}[1]{\overline{\overline{#1}}}
+
+\begin{document}
+	\title{Разбор примерной контрольной работы по алгоритмам}
+	\author{Орлов Никита}
+	\maketitle
+	
+	\subsection*{Задача 1}	
+	Приведите примеры функций $f(n)$ и $g(n)$, таких что $f(n) = \Theta(g(n))$ и одновременно $2^{f(n)} = \doverline{o}(2^{g(n)})$, или докажите, что таких функций не существует.
+	
+	\subsubsection*{Решение}
+	Рассмотрим фукнции $f(n) = n$ и $g(n) = 10n$. Такие функции удовлетворяют условию.
+	
+	\subsection*{Задача 2}
+	
+	Решите рекуррентное соотношение в терминах $\Theta$:
+	\[
+	T(n) = T\left(\frac n3\right) + T\left(\frac n4\right) + 5n
+	\]
+	
+	\subsubsection*{Решение}
+	Оценим сумму сверху и снизу. Так как
+	\[
+	2T\left(\frac n3\right)+5n \leqslant  T\left(\frac n3\right) + T\left(\frac n4\right) + 5n \leqslant 2T\left(\frac n4\right) + 5n
+	\]
+	
+	По основной теореме о рекуррентных соотношениях,
+	\[
+	\Theta(n) \leqslant T\left(\frac n3\right) + T\left(\frac n4\right) + 5n \leqslant \Theta(n) \Rightarrow T(n) = \Theta(n)
+	\]
+	\subsection*{Задача 3}
+	Медиана упорядоченного по возрастанию множества из $k$ элементов -- это $\frac k2$-ый по порядку элемент этого множества в предположении, что $k$ -- четно. Пусть $X[1..n]$ и $Y[1..n]$ -- два отсортированных массива, каждый из которых содержит по $n$ элементов. Опишите алгоритм, в котором поиск медианы всех $2n$ элементов, содержащихся в массивах $X, \ Y$, выполнялся бы за время $O(\log n)$.
+	
+	\subsubsection*{Решение}
+	Будем поступать следующим образом. Возьмем медианы в этих массивах, пусть их индексы в массивах равны соответственно $m_1$ и $m_2$. Если $X[m_1] < Y[m_2]$, то будем искать медиану в массивах $X[:m_1]$ и $Y[m_2:]$, если $X[m_1] > Y[m_2]$, то будем искать медиану в массивах $X[m_1:]$ и $Y[:m_2]$ рекурсивно. Если же медианы равны, то выдаем одну из них. Этот алгоритм на каждом шаге уменьшает в два раза размер задачи, а значит сложность - сумма убывающей геометрической прогрессии - равна $O(\log n)$
+	
+	\subsection*{Задача 4}
+	Опишите, как реализовать структуру данных, поддерживающую два стека, используя один массив $A[1..n]$ из $n$ элементов. Опишите реализацию процедур $IsEmpty1(), \ Push1(v), \ Pop1()$ и аналогичные для второго стека. Переполнение должно происходить при попытке вставки нового элемента в один из стеков в ситуации, когда суммарное число элементов в обоих стеках равно $n$.
+	
+	\subsubsection*{Решение}
+	
+	Так как нам известен размер массива, будем заполнять один стек с начала массива, а другой с конца. Будем хранить индексы последних элементов каждого стека. Примерная реализация структуры:
+	
+	\begin{struct}{double-ended stack}[H]
+		\State array $A[1..n]$
+		\State integer $end1 = 1, \ end2 = n$
+		
+		\State 
+		
+		\Function{$Push1$}{$v$}
+			\If{$end1 + 1 == end2}$
+				\State \Return \textbf{error}
+			\EndIf
+			\State $end1 := end1 + 1$
+			\State $A[end1] = v$	
+		\EndFunction
+		
+		\State 
+		
+		\Function{$Pop1$}{$ $}
+			\If{$end1 - 1 == -1$}
+				\State \Return \textbf{error}
+			\EndIf
+			\State $res := A[end1]$
+			\State $end1 := end1 - 1$
+			\State \Return $res$
+		\EndFunction
+		
+		\State
+		
+		\Function{$IsEmpty1$}{$ $}
+			\State \Return $end1 == 0$
+		\EndFunction
+		
+		\State
+		
+		\Function{$Push2$}{$v$}
+			\If{$end2 - 1 == end2}$
+				\State \Return \textbf{error}
+			\EndIf
+			\State $end2 := end2 - 1$
+			\State $A[end2] = v$	
+		\EndFunction
+		
+		\State
+		
+		\Function{$Pop2$}{$ $}
+			\If{$end2 + 1 == n + 1$}
+				\State \Return \textbf{error}
+			\EndIf
+			\State $res := A[end2]$
+			\State $end2 := end2 + 1$
+			\State \Return $res$
+		\EndFunction
+		
+		\State
+		
+		\Function{$IsEmpty2$}{$ $}
+			\State \Return $end2 == n + 1$
+		\EndFunction
+	\end{struct}
+	
+	
+	\subsection*{Задача 5}
+	Структура данных поддерживает операцию, такую что последовательность из $n$ вызовов той операции занимает время $\Theta(n\log n)$ в худшем случае. Какова амортизированная сложность этой операции? Какой может быть сложность этой операции в худшем случае? Приведите пример структуры данных и операции, для которых достигается этот худший случай?
+	
+	\subsubsection*{Решение}
+	
+	Получить амортизированную стоимость просто: поделим время последовательности вызовов на число вызовов. Получим:
+	\[
+	\frac{n\log n}{n} = \log n
+	\]
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}

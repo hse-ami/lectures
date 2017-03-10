@@ -1,0 +1,111 @@
+\section{Лекция от 07.10.2016}
+
+\subsection{Скорость сходимости закона больших чисел}
+Ранее мы формулировали два вопроса, связанные со скоростью сходимости закона больших чисел. Ответим на них.
+
+\begin{enumerate}
+    \item В первом пункте от нас требуется найти скорость сходимости \(\frac{S_n}{n} - p\) к нулю, где \(S_n \sim \mathrm{Bin}(n, p)\). Для этого вспомним теорему Муавра-Лапласа:
+    \[\Pr{a < \frac{S_n - \E{S_n}}{\sqrt{\D{S_n}}} \leq b} \to \int_{a}^{b} \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\,\mathrm{d}x = c, c \in (0, 1).\]
+    
+    Преобразуем условие вероятности, пользуясь тем, что \(\E{S_n} = np\), а \(\D{S_n} = np(1 - p)\):
+    \[a < \frac{S_n - \E[S_n]}{\sqrt{\D[S_n]}} \leq b \implies \frac{a\sqrt{p(1 - p)}}{\sqrt{n}} < \frac{S_n}{n} - p \leq \frac{b\sqrt{p(1 - p)}}{\sqrt{n}}.\]
+    
+    Возьмём \(\delta \in (0, 1)\) такое, что \(1 - \delta < c\). Тогда при достаточно больших \(n\) выполнено (по определению предела):
+    \[\Pr{\frac{c_1}{\sqrt{n}} < \frac{S_n}{n} - p \leq \frac{c_2}{\sqrt{n}}} > 1 - \delta.\]
+    
+    Увеличивая расстояние между \(a\) и \(b\) и увеличивая \(n\), получаем следующий результат:
+    \[\lim\limits_{n, |a - b| \to \infty} \Pr{\frac{S_n}{n} - p = \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)} = 1.\]
+    
+    Отсюда получаем, что \(\frac{S_n}{n} = p + \mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\).
+    
+    \item Теперь приступим ко второму вопросу. Для него достаточно применить неравенство Чебышёва:
+    \[\Pr{\left|\frac{S_n}{n}-p\right| \geq \epsilon} \leq \frac{\D{\frac{S_n}{n}}}{\epsilon^2} =
+    \frac{np(1 - p)}{n^2\epsilon^2} = \mathcal{O}\left(\frac{1}{n}\right).\]
+\end{enumerate}
+
+\subsection{Неравенство Чернова}
+Следующая теорема показывает то, насколько вероятно отклонение случайной величины от её математического ожидания.
+\begin{theorem}[Неравенство Чернова]
+    Пусть \(S_n \sim \mathrm{Bin}(n, p)\), а \(\lambda = \E{S_n} = np\). Тогда для любого \(t > 0\) выполнено следующее:
+    \[\Pr{S_n \geq \lambda + t} \leq \exp\left( -\frac{t^2}{2(\lambda + \frac{t}{3})} \right), \qquad\Pr{S_n \leq \lambda - t} \leq \exp\left( -\frac{t^2}{2\lambda} \right).\]
+\end{theorem}
+\begin{proof}
+    Крайний случай для первого неравенства~--- \(t = n - \lambda\)~--- особого интереса не вызывает. Поэтому положим, что \(t < n - \lambda\).
+    
+    Заметим, что для любого положительного \(u\) выполнено следующее:
+    \[\Pr{S_n \geq \lambda + t} = \Pr{e^{uS_n} \geq e^{u(\lambda + t)}} \leq \left\{\text{по неравенству Маркова}\right\} \leq \frac{\E{e^{uS_n}}}{e^{u(\lambda + t)}}.\]
+    
+    Посчитаем \(\E{e^{uS_n}}\):
+    \[\E{e^{uS_n}} = \sum\limits_{k = 1}^{n} e^{uk}\binom{n}{k}p^{k}(1 - p)^{n - k} = \sum\limits_{k = 1}^{n}\binom{n}{k}(pe^u)^{k}(1 - p)^{n - k} = (1 - p + pe^u)^n.\]
+    
+    Положим \(x = e^u\). Тогда
+    \[\Pr{S_n \geq \lambda + t} \leq x^{-(\lambda + t)}(1 - p + px)^n.\]
+    
+    Минимизируем это выражение по \(x\). Для этого посчитаем производную и приравняем её к нулю:
+    \[(x^{-(\lambda + t)}(1-p+px)^n)' = -(\lambda + t)x^{-(\lambda + t + 1)}(1-p+px)^n + np
+    x^{-(\lambda+t)}(1-p+px)^{n-1} = 0.\]
+    
+    Отсюда получаем, что \(-(\lambda + t)(1 - p + px) + npx = 0\) и \(x = \frac{(\lambda + t)(1 - p)}{p(n - \lambda - t)}\). Тогда получаем следующую оценку сверху:
+    \[\begin{aligned}
+    \Pr{S_n \geq \lambda + t} &\leq \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\left(1 - p + p\frac{(\lambda + t)(1 - p)}{p(n - \lambda - t)}\right)^n \\
+    &= \left(\frac{p(n-\lambda-t)}{(\lambda+t)(1-p)}\right)^{\lambda + t}\left(\frac{n(1 - p)}{n - \lambda - t}\right)^n \\
+    &= \left(\frac{np}{\lambda + t}\right)^{\lambda + t}\left(\frac{n - np}{n - \lambda - t}\right)^{n - \lambda - t} \\
+    &= \left(\frac{\lambda}{\lambda + t}\right)^{\lambda + t}\left(\frac{n - \lambda}{n - \lambda - t}\right)^{n - \lambda - t}
+    \end{aligned}\]
+    
+    Представим эту оценку в следующем виде:
+    \[\left(\frac{\lambda}{\lambda + t}\right)^{\lambda + t}\left(\frac{n - \lambda}{n - \lambda - t}\right)^{n - \lambda - t} = \exp\left\{-(\lambda + t)\ln\left(1 + \frac{t}{\lambda}\right) - (n - \lambda - t)\ln\left(1 - \frac{t}{n - \lambda}\right)\right\}.\]
+    
+    Введём функцию \(\phi(x) = (1 + x)\ln(1 + x) - x\) для \(x > -1\). Тогда (проверьте):
+    \[\Pr{S_n \geq \lambda + t} \leq \exp\left\{-\lambda\phi\left(\frac{t}{\lambda}\right) - (n - \lambda)\phi\left(-\frac{t}{n - \lambda}\right)\right\}.\]
+    
+    Теперь заметим, что если \(x > -1\), то \(\phi(x) > 0\). Тогда будет верно следующее (вторую оценку можно получить абсолютно аналогично первой, только взяв \(-u\) вместо \(u\)):
+    \[\begin{aligned}
+    \Pr{S_n \geq \lambda + t} &\leq \exp\left\{-\lambda\phi\left(\frac{t}{\lambda}\right)\right\}, \\
+    \Pr{S_n \leq \lambda - t} &\leq \exp\left\{-\lambda\phi\left(\frac{-t}{\lambda}\right)\right\}.
+    \end{aligned}\]
+    
+    А теперь достаём бубен и начинаем оптимизировать:
+    \begin{itemize}
+        \item[{[\(\leq\)]}] Заметим, что \(\phi(0) = 0\) и \(\phi'(x) = 1 - 1 + \ln(x + 1) = \ln(x + 1) \leq x\). Тогда
+        \[-\phi(y) = \int\limits_{y}^{0} \phi'(x)\,\mathrm{d}x \leq \int\limits_{y}^{0} x\,\mathrm{d}x = -\frac{y^2}{2}.\]
+        
+        Отсюда получаем, что \(\phi(y) \geq \frac{y^2}{2}\) и \(\Pr{S_n \leq \lambda - t} \leq \exp\left\{-\frac{t^2}{2\lambda}\right\}\).
+        
+        \item[{[\(\geq\)]}] Дальше идёт полное шаманство (sic!). Заметим, что 
+        \[\phi''(x) = \frac{1}{1 + x} \geq \frac{1}{\left(1 + \frac{x}{3}\right)^3} = \left(\frac{x^2}{2\left(1 + \frac{x}{3}\right)}\right)'' \implies \phi(x) \geq \frac{x^2}{2\left(1 + \frac{x}{3}\right)}.\]
+        
+        Отсюда получаем, что \(\Pr{S_n \geq \lambda + t} \leq \exp\left\{-\dfrac{t^2}{2\left(\lambda + \frac{t}{3}\right)}\right\}\).
+    \end{itemize}
+\end{proof}
+
+К счастью, на экзамене будет достаточно понимать идею, и не требуется точное воспроизведение всех 
+вычислений.
+
+Теперь, используя неравенство Чернова, оценим скорость сходимости \(\Pr{|\frac{S_n}{n} - p| \geq \varepsilon}\) к нулю по-другому:
+\[\Pr{\left|\frac{S_n}{n} - p\right| \geq \varepsilon} = \Pr{\left|S_n - \lambda\right| \geq n\epsilon} \leq \exp\left\{-\frac{n\epsilon^2}{2p}\right\}.\]
+
+Заметим, что оценка через неравенство Чебышёва давало гораздо оценку \(\frac{1}{\text{полином}}\), а неравенство Чернова даёт оценку \(\frac{1}{\text{экспонента}}\), что сходится гораздо быстрее.
+
+\subsection{Алгебры событий}
+\begin{definition}
+    Пусть $\mathcal{A}$ --- система событий на $(\Omega, \Pr)$. Она называется \emph{алгеброй}, если
+    \begin{enumerate}
+        \item \(\Omega \in \mathcal{A}\),
+        \item Если \(A \in \mathcal{A}\), то и \(\overline{A} \in \mathcal{A}\),
+        \item Если \(A \in \mathcal{A}\) и \(B \in \mathcal{A}\), то и \(A \cap B \in \mathcal{A}\).
+    \end{enumerate}
+\end{definition}
+
+\begin{exercise}
+    Докажите, что алгебра замкнута по основным операциям: \(\cup\), \(\setminus\), \(\triangle\).
+\end{exercise}
+
+\noindent\textbf{Примеры:}
+
+\begin{itemize}
+    \item \(\left\{ \emptyset, \Omega \right\}\);
+    \item \(2^{\Omega}\);
+    \item \(\left\{ \emptyset, \Omega, A, \overline{A}\right\}\)~--- алгебра, порождённая \(A\);
+    \item \(\alpha\left( A_1, \ldots, A_n \right)\)~--- минимальная алгебра, содержащая \(A_1, \dots, A_n\).
+\end{itemize}

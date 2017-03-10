@@ -1,0 +1,382 @@
+\section{Семинар от 22.11.2016}
+Начнём с разбора домашнего задания.
+\begin{problem}
+	В треугольнике со сторонами \(3\), \(4\) и \(5\) выбирается случайная точка \(X\), после чего вычисляется случайная величина \(\xi\)~--- сумма длин высот, опущенных из \(X\) на стороны треугольника. Вычислите \(\E{\xi}\).
+\end{problem}
+\begin{proof}[Решение]
+	Для начала заметим, что данный треугольник прямоугольный.
+	
+	{\makeatletter
+	\let\par\@@par
+	\par\parshape0
+	\everypar{}\begin{wrapfigure}{r}{0.4\textwidth}
+		\begin{center}
+			\begin{tikzpicture}
+			\tkzInit[ymin=-0.5,ymax=4.5,xmin=-0.5,xmax=3.5]
+			\tkzClip 
+			\tkzDefPoints{0/0/A, 3/0/B, 0/4/C, 1/1/X};
+			\tkzDrawPolygon(A,B,C);
+			\tkzLabelPoint[below left](A){\(A\)};
+			\tkzLabelPoint[below right](B){\(B\)};
+			\tkzLabelPoint[left](C){\(C\)};
+			\tkzDrawPoint(X);
+			\tkzLabelPoint[below left](X){\(X\)};
+			\tkzDefPointBy[projection=onto A--C](X);
+			\tkzGetPoint{D};
+			\tkzDefPointBy[projection=onto B--C](X);
+			\tkzGetPoint{E};
+			\tkzDefPointBy[projection=onto A--B](X);
+			\tkzGetPoint{F};
+			\tkzDrawSegments(X,D X,E X,F);
+			\tkzMarkRightAngle(C,D,X);
+			\tkzMarkRightAngle(B,E,X);
+			\tkzMarkRightAngle(A,F,X);
+			\tkzMarkRightAngle(C,A,B);
+			\tkzLabelSegment[right](X,F){\(\scriptstyle{\xi_2}\)};
+			\tkzLabelSegment[above](X,D){\(\scriptstyle{\xi_1}\)};
+			\tkzLabelSegment[above](X,E){\(\scriptstyle{\xi_3}\)};
+			\tkzDrawSegments[color=black,very thin,dashed](X,A X,B X,C);
+			\end{tikzpicture}
+		\end{center}
+	\end{wrapfigure}
+	Пусть \(\xi_1\), \(\xi_2\) и \(\xi_3\)~--- длины опущенных высот. Тогда \(\xi = \xi_1 + \xi_2 + \xi_3\) и \(\E{\xi} = \E{\xi_1 + \xi_2 + \xi_3} = \E{\xi_1} + \E{\xi_2} + \E{\xi_3}\). Теперь заметим следующее:
+	\[\frac{1}{2}\left(4\xi_1 + 3\xi_2 + 5\xi_3\right) = 6.\]
+	
+	Отсюда получаем, что достаточно вычислить матожидание каких-то двух случайных величин~--- матожидание третьей будет выражаться через них.
+	
+	Начнём с подсчёта \(\E{\xi_1}\). Для начала необходимо посчитать плотность распределения \(\rho_{\xi_1}(x)\). Для этого посчитаем функцию распределения: \(F_{\xi_1}(x) = \Pr{\xi_1 \leq x}\).
+	\par}%
+	
+	Как посчитать такую вероятность? Представим, что у нас введена система координат, где\(AB\)~--- это ось \(oX\), а \(AC\)~--- ось \(oY\). Тогда в данном случае вертикальная координата не играет роли. Следовательно, область подходящих точек будет иметь вид прямоугольной трапеции с основанием \(AC\) и высотой \(x\). Это равносильно тому, что область неподходящих будет иметь вид треугольника, подобного \(ABC\) с коэффициентом подобия \(\frac{3 - x}{3}\). Отсюда получаем, что
+	\[\Pr{\xi_1 \leq x} = \frac{6 - 6\left(\frac{3 - x}{3}\right)^2}{6} = 1 - \left(1 - \frac{x}{3}\right)^2.\]
+	
+	Отсюда получаем, что если \(x \in [0, 3]\), то
+	\[\rho_{\xi_1}(x) = \frac{\mathrm{d}F_{\xi_1}(x)}{\mathrm{d}x} = \frac{2}{3}\left(1 - \frac{x}{3}\right) = \frac{2}{9}(3 - x).\]
+	
+	Теперь можно считать математическое ожидание \(\xi_1\):
+	\[\E{\xi_1} = \int\limits_{0}^{3} \frac{2}{9}x(3 - x)\,\mathrm{d}x = \frac{2}{9} \int\limits_{0}^{3} (3x - x^2)\,\mathrm{d}x = \frac{2}{9}\left(\frac{27}{2} - \frac{27}{3}\right) = 1.\]
+	
+	Математическое ожидание \(\xi_2\) считается аналогично. Недолго думая, выпишу ответ:
+	\[\E{\xi_1} = \int\limits_{0}^{4} \frac{1}{8}x(4 - x)\,\mathrm{d}x = \frac{1}{8} \int\limits_{0}^{4} (4x - x^2)\,\mathrm{d}x = \frac{1}{8}\left(\frac{64}{2} - \frac{64}{3}\right) = \frac{4}{3}.\]
+	
+	Теперь выразим \(\E{\xi_3}\) через \(\E{\xi_1}\) и \(\E{\xi_2}\):
+	\[4\E{\xi_1} + 3\E{\xi_2} + 5\E{\xi_3} = 12 \iff \E{\xi_3} = \frac{4}{5}.\]
+	
+	В итоге получаем, что \[\E{\xi} = \E{\xi_1} + \E{\xi_2} + \E{\xi_3} = 4\left(\frac{1}{3} + \frac{1}{4} + \frac{1}{5}\right).\]
+	
+	Заметим, что точка с координатами \(\left(1, \frac{4}{3}\right)\) есть ни что иное, как \emph{центроид} (точка пересечения медиан) треугольника.
+\end{proof}
+
+\begin{problem}
+	Случайные величины \(X\) и \(Y\) независимы, \(X\) имеет экспоненциальное распределение с параметром \(1\), а \(Y\)~--- равномерное на \([0, 1]\). Случайная величина \(Z\) равна \(Z = \max(X, Y)\). Вычислите \(\E{Z}\) и \(\D{Z}\).
+\end{problem}
+\begin{proof}[Решение]
+	Для начала вычислим функцию распределения \(F_{Z}(x)\). Так как и \(X\), и \(Y\) неотрицательны, то и \(Z\) тоже неотрицательно. СЛедовательно, если \(x < 0\), то \(F_{Z}(x) = 0\). Теперь посчитаем её для \(x \geq 0\):
+	
+	\[F_{Z}(x) = \Pr{Z \leq x} = \Pr{\max(X, Y) \leq x} = \Pr{X \leq x, Y \leq x} = \Pr{X \leq x}\Pr{Y \leq x}.\]
+	
+	Отсюда получаем, что
+	\[F_{Z}(x) = \begin{cases}
+	0,& x < 0, \\
+	x(1 - e^{-x}),& 0 \leq x \leq 1, \\
+	1 - e^{-x},& x > 1.
+	\end{cases}\]
+	
+	Теперь несложно получить плотность (в данном случае функция распределения гладкая, поэтому плотность не терпит разрывов):
+	\[\rho_{Z}(x) = \frac{\mathrm{d}F_{Z}(x)}{\mathrm{d}x} =\begin{cases}
+	0,& x < 0, \\
+	1 - e^{-x} + xe^{-x},& 0 \leq x \leq 1, \\
+	e^{-x},& x > 1.
+	\end{cases}\]
+	
+	Осталось посчитать матожидание:
+	\[\E{Z} = \int\limits_{0}^{1} x(1 - e^{-x} + xe^{-x})\,\mathrm{d}x + \int\limits_{1}^{+\infty}xe^{-x}\,\mathrm{d}x.\]
+	
+	Посчитаем каждый интеграл по отдельности:
+	\begin{enumerate}
+		\item Разобьём его в сумму трёх интегралов:
+		\[\int\limits_{0}^{1} x(1 - e^{-x} + xe^{-x})\,\mathrm{d}x = \int\limits_{0}^{1} x\,\mathrm{d}x - \int\limits_{0}^{1} xe^{-x}\,\mathrm{d}x + \int\limits_{0}^{1} x^{2}e^{-x}\,\mathrm{d}x.\]
+		
+		Теперь начнём считать их. Понятно, что первый интеграл равен 
+		
+		\[\int\limits_{0}^{1} x\,\mathrm{d}x = \left.\frac{x^2}{2}\right|_{0}^{1} = \frac{1}{2}.\]
+		
+		Второй интеграл возьмём по частям:
+		\[
+		\int\limits_{0}^{1} xe^{-x}\,\mathrm{d}x = \left.\left(-xe^{-x}\right)\right|_{0}^{1} + \int\limits_{0}^{1} e^{-x}\,\mathrm{d}x = -\frac{1}{e} + \left.\left(-e^{-x}\right)\right|_{0}^{1} = 1 - \frac{2}{e}.
+		\]
+		
+		Третий интеграл тоже возьмём по частям:
+		\[\int\limits_{0}^{1} x^{2}e^{-x}\,\mathrm{d}x = \left.\left(-x^{2}e^{-x}\right)\right|_{0}^{1} + 2\int\limits_{0}^{1} xe^{-x}\,\mathrm{d}x = -\frac{1}{e} + 2 - \frac{4}{e} = 2 - \frac{5}{e}.\]
+		
+		Отсюда получаем, что
+		\[\int\limits_{0}^{1} x(1 - e^{-x} + xe^{-x})\,\mathrm{d}x = \frac{1}{2} - 1 + \frac{2}{e} + 2 - \frac{5}{e} = \frac{3}{2} - \frac{3}{e}.\]
+		
+		\item Второй интеграл тоже возьмём по частям:
+		\[
+		\int\limits_{1}^{+\infty} xe^{-x}\,\mathrm{d}x = \left.\left(-xe^{-x}\right)\right|_{1}^{+\infty} + \int\limits_{1}^{+\infty} e^{-x}\,\mathrm{d}x = \frac{1}{e} + \left.\left(-e^{-x}\right)\right|_{1}^{+\infty} = \frac{2}{e}.
+		\]
+	\end{enumerate}
+
+	В итоге получаем, что \(\E{Z} = \frac{3}{2} - \frac{1}{e}\).
+	
+	Теперь посчитаем дисперсию. Она равна \(\D{Z} = \E{Z^2} - \left(\E{Z}\right)^2\). Тогда нам достаточно посчитать второй момент.
+	\[\E{Z^2} = \int\limits_{0}^{1} x^{2}(1 - e^{-x} + xe^{-x})\,\mathrm{d}x + \int\limits_{1}^{+\infty}x^{2}e^{-x}\,\mathrm{d}x.\]
+	
+	И снова посчитаем каждый интеграл по отдельности:
+	\begin{enumerate}
+		\item Разобъём его в сумму трёх интегралов:
+		\[\int\limits_{0}^{1} x^{2}(1 - e^{-x} + xe^{-x})\,\mathrm{d}x = \int\limits_{0}^{1} x^{2}\,\mathrm{d}x - \int\limits_{0}^{1} x^{2}e^{-x}\,\mathrm{d}x + \int\limits_{0}^{1} x^{3}e^{-x}\,\mathrm{d}x.\]
+		
+		Теперь распишем первый и третий интегралы (второй был посчитан ранее):
+		\[
+		\int\limits_{0}^{1} x^{2}\,\mathrm{d}x = \left.\frac{x^{3}}{3}\right|_{0}^{1} = \frac{1}{3}.
+		\]
+		
+		\[
+		\int\limits_{0}^{1} x^{3}e^{-x}\,\mathrm{d}x = \left.\left(-x^{3}e^{-x}\right)\right|_{0}^{1} + 3\int\limits_{0}^{1} x^{2}e^{-x}\,\mathrm{d}x = -\frac{1}{e} + 6 - \frac{15}{e} = 6 - \frac{16}{e}.
+		\]
+		
+		Тогда
+		\[\int\limits_{0}^{1} x^{2}(1 - e^{-x} + xe^{-x})\,\mathrm{d}x = \frac{1}{3} - 2 + \frac{5}{e} + 6 - \frac{16}{e} = \frac{13}{3} - \frac{11}{e}.\]
+		
+		\item Возьмём его по частям:
+		\[
+		\int\limits_{1}^{+\infty} x^{2}e^{-x}\,\mathrm{d}x = \left.\left(-x^{2}e^{-x}\right)\right|_{1}^{+\infty} + 2\int\limits_{1}^{+\infty} xe^{-x}\,\mathrm{d}x = \frac{1}{e} + \frac{4}{e} = \frac{5}{e}.
+		\]
+	\end{enumerate}
+
+	В итоге получаем, что \(\E{Z^2} = \frac{13}{3} - \frac{6}{e}\).
+	
+	Отсюда получаем, что
+	\[
+	\D{Z} = \frac{13}{3} - \frac{6}{e} - \left(\frac{3}{2} - \frac{1}{e}\right)^2 = \frac{13}{3} - \frac{6}{e} - \frac{9}{4} - \frac{1}{e^2} + \frac{3}{2e} = \frac{25}{12} - \frac{9}{2e} - \frac{1}{e^2}.\qedhere
+	\]
+\end{proof}
+
+\begin{problem}
+	Случайные величины \(X_1, X_2, \dots, X_n\) независимы и равномерно распределены на отрезке \([0, 1]\). Положим \(Y_k\)~--- \(k\)-е по порядку значение из набора \(X_1, X_2, \dots, X_n\), \(k \in \{1, 2, \dots, n\}\), (т.е. \(Y_1\)~--- это минимальное значение, а \(Y_n\)~--- максимальное). Вычислите \(\E{Y_k}\), \(k \in \{1, 2, \dots, n\}\).
+\end{problem}
+\begin{proof}[Решение]
+	По определению функции распределения \(F_{Y_k}(x) = \Pr{Y_k \leq x}\). Для начала сразу оговорим, что если \(x < 0\), то \(F_{Y_k}(x) = 0\), а если \(x > 1\), то \(F_{Y_k}(x) = 1\). В дальнейшем мы рассматриваем \(x \in [0, 1]\).
+	
+	В каком случае \(Y_k \leq x\)? В том случае, когда хотя бы \(k\) из \(n\) случайных величин \(X_1, X_2, \dots, X_n\) будут не больше \(x\). Как это записать математически? Для этого введём случайные величины \(\xi_k = I\{X_k \leq x\}\) для \(k \in \{1, 2, \dots, n\}\). Тогда \(\Pr{Y_k \leq x} = \Pr{\sum_{i = 0}^{n} \xi_i \geq k}\).
+	
+	Теперь вопрос: какое распределение у этой суммы? Для ответа на этот вопрос сперва нужно определить распределение у \(\xi_i\). По определению индикатора \(\xi_i\) принимает только два значения~--- 0 и 1, при этом 1 достигается с вероятностью \(\Pr{X_i \leq x} = x\). Тогда \(\xi_i \sim \mathrm{Bern}(x)\). Далее заметим, что из независимости \(X_1, X_2, \dots, X_n\) следует независимость \(\xi_1, \xi_2, \dots, \xi_n\). Тогда \(\sum_{i = 0}^{n} \xi_i \sim \mathrm{Bin}(n, x)\).
+	
+	Отсюда сразу же получаем значение функции распределения:
+	\[F_{Y_k}(x) = \sum_{i = k}^{n}\binom{n}{i} x^{i}(1 - x)^{n - i} = \sum_{i = k}^{n - 1}\binom{n}{i} x^{i}(1 - x)^{n - i} + x^n.\]
+	
+	Отсюда получаем плотность:
+	\[\rho_{Y_k}(x) = \sum_{i = k}^{n - 1}\binom{n}{i}\left(ix^{i - 1}(1 - x)^{n - i} -  (n - i)x^{i}(1 - x)^{n - i - 1}\right) + nx^{n  -1}.\]
+	
+	Заметим, что \(i\binom{n}{i} = n\binom{n - 1}{i - 1}\), а \((n - i)\binom{n}{i} = n\binom{n - 1}{i}\). Тогда плотность можно переписать в следующем виде:
+	\[\rho_{Y_k}(x) = n\sum_{i = k}^{n - 1}\binom{n - 1}{i - 1}x^{i - 1}(1 - x)^{n - i} - n\sum_{i = k}^{n - 1}\binom{n - 1}{i}x^{i}(1 - x)^{n - i - 1} + nx^{n - 1}.\]
+	
+	Поменяем индекс суммирования в первой сумме на \(j = i - 1\). Тогда плотность будет иметь вид:
+	\[\rho_{Y_k}(x) = n\sum_{j = k - 1}^{n - 2}\binom{n - 1}{j}x^{j}(1 - x)^{n - j - 1} - n\sum_{i = k}^{n - 1}\binom{n - 1}{i}x^{i}(1 - x)^{n - i - 1} + nx^{n - 1}.\]
+	
+	Теперь заметим, что \(nx^{n - 1} = \binom{n - 1}{n - 1}x^{n - 1}(1 - x)^{n - 1 - (n - 1)}\). Тогда
+	\[\rho_{Y_k}(x) = n\sum_{j = k - 1}^{n - 1}\binom{n - 1}{j}x^{j}(1 - x)^{n - j - 1} - n\sum_{i = k}^{n - 1}\binom{n - 1}{i}x^{i}(1 - x)^{n - i - 1}.\]
+	
+	В итоге сократятся все члены, кроме \((k - 1)\)-го. Тогда
+	\[\rho_{Y_k}(x) = n\binom{n - 1}{k - 1}x^{k - 1}(1 - x)^{n - k}.\]
+	
+	Теперь можно считать математическое ожидание:
+	\[\E{Y_k} = \int\limits_{0}^{1} n\binom{n - 1}{k - 1}x^{k}(1 - x)^{n - k}\,\mathrm{d}x.\]
+	
+	Внутри интеграла функция, очень близкая к плотности. На что нужно умножить интеграл, чтобы получить плотность?
+	\[\int\limits_{0}^{1} n\binom{n - 1}{k - 1}x^{k}(1 - x)^{n - k}\,\mathrm{d}x = c\int\limits_{0}^{1} (n + 1)\binom{n}{k}x^{k}(1 - x)^{n - k}\,\mathrm{d}x = c.\]
+	
+	Тогда
+	\[\E{Y_k} = c = \frac{n}{n + 1}\frac{\binom{n - 1}{k - 1}}{\binom{n}{k}} = \frac{k}{n + 1}.\qedhere\]
+\end{proof}
+
+\begin{problem}
+	Случайные величины \(X_1, X_2, \dots, X_n\) независимы и равномерно распределены на отрезке \([0, a]\). Пусть \(Y = \max\left(X_1, X_2, \dots, X_n\right)\). Вычислите \(\E{(Y - a)^2}\).
+\end{problem}
+\begin{proof}[Решение]
+	Воспользуемся результатом предыдущей задачи: плотность случайной величины \(\frac{Y}{a}\) будет равна \(nx^{n - 1}\). 
+	
+	Преобразуем \(\E{(Y - a)^2}\) по линейности:
+	\[
+	\E{(Y - a)^2} = \E{y^2} - 2a\E{y} + a^2.
+	\]
+	
+	Осталось посчитать два интеграла:
+	\[
+	\E{y^2} = a^2\E{\left(\frac{Y}{a}\right)^2} = a^2\int\limits_{0}^{1} nx^{n + 1}\,\mathrm{d}x = \frac{na^2}{n + 2}.
+	\]
+	
+	\[
+	\E{y} = a\E{\frac{Y}{a}} = a\int\limits_{0}^{1} nx^{n}\,\mathrm{d}x = \frac{na}{n + 1}.
+	\]
+	
+	Отсюда получаем, что
+	\begin{align}
+	\E{(Y - a)^2} &= a^2\left(\frac{n}{n + 2} - \frac{2n}{n + 1} + 1\right) \\
+	&= a^2\frac{n^2 + n - 2n^2 - 4n + n^2 + 3n + 1}{(n + 1)(n + 2)} = \frac{2a^2}{(n + 1)(n + 2)}.\qedhere
+	\end{align}
+\end{proof}
+
+Введём ещё одно определение, связанное с распределениями.
+\begin{definition}
+	Пусть \(\xi\) и \(\eta\)~--- некоторые случайные величины на вероятностном пространстве \((\Omega, \mathcal{F}, \Pr)\). Тогда \emph{совместной функцией распределения} называется следующая функция:
+	\[F_{\xi, \eta}(x, y) = \Pr{\xi \leq x, \eta \leq y}.\]
+\end{definition}
+
+Теперь расмотрим следующую задачу.
+\begin{problem}
+	Пусть есть две независимые случайные величины \(\xi\) и \(\eta\) с плотностями \(p_{\xi}(x)\) и \(p_{\eta}(x)\) соответственно. Найдите плотность случайной величины \(f(\xi, \eta)\), если \[f(\xi, \eta) = \xi + \eta.\]
+\end{problem}
+
+Ответ на эту задачу даёт \emph{формула свёртки}:
+\begin{theorem}[Формула свёртки]
+	\[p_{\xi + \eta}(x) = \int\limits_{-\infty}^{+\infty}p_{\xi}(y)p_{\eta}(x - y)\,\mathrm{d}y.\]
+\end{theorem}
+\begin{proof}\footnote{На семинаре был дан лишь набросок доказательства. Здесь я попытался дать нечто, похожее на полноценное доказательство.}
+	Для доказательства этого факта нужно ввести понятие \emph{плотности совместного распределения}:
+	\begin{definition}
+		Пусть есть две случайные величины \(\xi\) и \(\eta\). Если существует неотрицательная функция \(p_{\xi, \eta}(x_1, x_2)\) такая, что для любого \(B \in \mathcal{B}(\R^2)\) выполнено
+		\[\Pr{(\xi, \eta) \in B} = \iint\limits_{B} p_{\xi, \eta}(x_1, x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2,\]
+		
+		то говорят, что случайные величины \(\xi\) и \(\eta\) имеют \emph{абсолютно непрерывное совместное распределение}, а функцию \(p_{\xi, \eta}(x_1, x_2)\) называют \emph{плотностью совместного распределения}.
+	\end{definition}
+
+	Теперь докажем следующее утверждение:
+	\begin{theorem}
+		Если случайные величины \(\xi\) и \(\eta\) имеют абсолютно непрерывную плотность совместного распределения \(p_{\xi, \eta}(x_1, x_2)\) и независимы, то
+		\[p_{\xi, \eta}(x_1, x_2) = p_{\xi}(x_1)p_{\eta}(x_2).\]
+	\end{theorem}
+	\begin{proof}
+		По определению независимости:
+		\[F_{\xi, \eta}(x_1, x_2) = F_{\xi}(x_1)F_{\eta}(x_2).\]
+		
+		Однако:
+		\begin{align}
+			F_{\xi, \eta}(x_1, x_2) &= \iint\limits_{B} p_{\xi, \eta}(x, y)\,\mathrm{d}x\,\mathrm{d}y = \int\limits_{-\infty}^{x_1} \int\limits_{-\infty}^{x_2} p_{\xi, \eta}(x, y)\,\mathrm{d}x\,\mathrm{d}y \\
+			F_{\xi}(x_1)F_{\eta}(x_2) &= \left(\int\limits_{-\infty}^{x_1} p_{\xi}(x)\,\mathrm{d}x\right)\left(\int\limits_{-\infty}^{x_2} p_{\eta}(y)\,\mathrm{d}y \right) = \int\limits_{-\infty}^{x_1} \int\limits_{-\infty}^{x_2} p_{\xi}(x_1)p_{\eta}(x_2)\,\mathrm{d}x\,\mathrm{d}y.
+		\end{align}
+		
+		Дифференцируя, получаем желаемое.
+	\end{proof}
+
+	Теперь сформулируем один простой факт:
+	\begin{theorem}
+		Пусть \(g : \R^2 \to \R\)~--- борелевская функция, а область \(D_x \subseteq \R^2\) состоит из точек \((x_1, x_2)\) таких, что \(g(x_1, x_2) \leq x\). Далее, пусть есть две случайные величины \(\xi_1\), \(\xi_2\) с абсолютно непрерывной плотностью совместного распределения \(p_{\xi, \eta}(x_1, x_2)\). Тогда \(\eta = g(\xi_1, \xi_2)\)~--- это случайная величина, и её функция распределения имеет следующий вид:
+		\[F_{\eta}(x) = \Pr{g(\xi_1, \xi_2) \leq x} = \Pr{(\xi_1, \xi_2) \in D_x} = \iint\limits_{D_x} p_{\xi, \eta}(x_1, x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2.\]
+	\end{theorem}
+	Для доказательства этого факта достаточно вспомнить определение плотности совместного распределения и то, что борелевская функция от случайной величины есть случайная величина.	
+	
+	Теперь приступим к доказательству. Безусловно, в данном случае нужно требовать абсолютно непрерывную плотность совместного распределения. Вспомним, что \(f(x, y) = x + y\) есть борелевская функция. Тогда верна теорема выше:
+	\[
+	F_{\xi + \eta}(x) = \iint\limits_{x_1 + x_2 \leq x} p_{\xi, \eta}(x_1, x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2 = \int\limits_{-\infty}^{x} p_{\xi + \eta}(t)\,\mathrm{d}t.
+	\]
+	
+	По теореме Фубини и независимости случайных величин \(\xi\) и \(\eta\):
+	\[\iint\limits_{x_1 + x_2 \leq x} p_{\xi, \eta}(x_1, x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2 = \int\limits_{-\infty}^{+\infty} \left( \int\limits_{-\infty}^{x - x_1} p_{\xi}(x_1) p_{\eta}(x_2)\,\mathrm{d}x_2 \right)\,\mathrm{d}x_1\]
+	
+	Теперь сделаем замену \(x_2 = t - x_1\). Тогда \(t \in (-\infty, x]\) и \(\mathrm{d}x_2 = \mathrm{d}t\). Следовательно (так как мы можем просто поменять местами \(\xi\) и \(\eta\)):
+	\[\int\limits_{-\infty}^{+\infty} \left( \int\limits_{-\infty}^{x} p_{\xi}(x_1) p_{\eta}(t - x_1)\,\mathrm{d}t \right)\,\mathrm{d}x_1 = \int\limits_{-\infty}^{x} \left( \int\limits_{-\infty}^{+\infty} p_{\xi}(x_1) p_{\eta}(t - x_1)\,\mathrm{d}x_1 \right)\,\mathrm{d}t.\]
+	
+	Отсюда получаем желаемое.
+\end{proof}
+
+Теперь разберём пару задач на формулу свёртки.
+\begin{problem}
+	Пусть случайные величины \(\xi_1\) и \(\xi_2\) независимы и обе подчиняются стандартному нормальному распределению. Какова плотность случайной величины \(\xi_1 + \xi_2\)?
+\end{problem}
+\begin{proof}[Решение]
+	Воспользуемся формулой свёртки:
+	\begin{align}
+		p_{\xi + \eta}(x) &= \int\limits_{-\infty}^{+\infty} p_{\xi}(y) p_{\eta}(x - y)\,\mathrm{d}y = \int\limits_{-\infty}^{+\infty} \frac{1}{2\pi}\exp\left\{-\frac{y^2}{2} - \frac{(x - y)^2}{2}\right\}\,\mathrm{d}y \\
+		&= \int\limits_{-\infty}^{+\infty} \frac{1}{2\pi}\exp\left\{-\frac{x^2}{2} + xy - y^2\right\}\,\mathrm{d}y = \frac{e^{-\frac{x^2}{2}}}{2\pi}\int\limits_{-\infty}^{+\infty} e^{xy - y^2}\,\mathrm{d}y \\
+		&= \frac{e^{-\frac{x^2}{4}}}{2\pi}\int\limits_{-\infty}^{+\infty} e^{xy - y^2 - \frac{x^2}{4}}\,\mathrm{d}y = \frac{e^{-\frac{x^2}{4}}}{2\pi}\int\limits_{-\infty}^{+\infty} e^{-\left(y - \frac{x}{2}\right)^2}\,\mathrm{d}y.
+	\end{align}
+	
+	Сделаем замену \(t = y - \frac{x}{2}\):
+	\[
+	\frac{e^{-\frac{x^2}{4}}}{2\pi}\int\limits_{-\infty}^{+\infty} e^{-\left(y - \frac{x}{2}\right)^2}\,\mathrm{d}y = \frac{e^{-\frac{x^2}{4}}}{2\pi}\int\limits_{-\infty}^{+\infty} e^{-t^2}\,\mathrm{d}t
+	\]
+	
+	Теперь сделаем замену \(t = \frac{u}{\sqrt{2}}\). Тогда \(\mathrm{d}t = \frac{\mathrm{d}u}{\sqrt{2}}\) и
+	\[
+	\frac{e^{-\frac{x^2}{4}}}{2\pi}\int\limits_{-\infty}^{+\infty} e^{-t^2}\,\mathrm{d}t = \frac{e^{-\frac{x^2}{4}}}{2\pi\sqrt{2}}\int\limits_{-\infty}^{+\infty} e^{-\frac{u^2}{2}}\,\mathrm{d}u = \frac{\exp\left\{-\frac{x^2}{4}\right\}}{\sqrt{2\pi \cdot 2}} = p_{\xi + \eta}(x).
+	\]
+	
+	Отсюда получаем, что \(\xi + \eta \sim \mathcal{N}(0, 2)\).
+\end{proof}
+\begin{exercise}
+	Пусть теперь \(\xi \sim \mathcal{N}(0, a)\), \(\eta \sim \mathcal{N}(0, b)\). Каковы будут плотность и распределение суммы? 
+\end{exercise}
+
+\begin{problem}
+	Пусть случайные величины \(\xi_1\) и \(\xi_2\) независимы и обе подчиняются стандартному экспоненциальному распределению. Какова плотность случайной величины \(\xi_1 + \xi_2\)?
+\end{problem}
+\begin{proof}[Решение]
+	Перед тем, как начать пользоваться свёрткой, преобразуем плотности:
+	\begin{align}
+		p_{\xi}(y) &= e^{-y}I\{y \geq 0\}, \\
+		p_{\eta}(x - y) &= e^{-(x - y)}I\{x - y \geq 0\}.
+	\end{align}
+	
+	Воспользуемся формулой свёртки:
+	\begin{align}
+		p_{\xi + \eta}(x) &= \int\limits_{-\infty}^{+\infty} p_{\xi}(y) p_{\eta}(x - y)\,\mathrm{d}y = \int\limits_{-\infty}^{+\infty} e^{-y}I\{y \geq 0\}e^{-(x - y)}I\{x - y \geq 0\}\,\mathrm{d}y \\
+		&= e^{-x}\int\limits_{-\infty}^{+\infty} I\{y \geq 0\}I\{x - y \geq 0\}\,\mathrm{d}y = xe^{-x}I\{x \geq 0\}.
+	\end{align}
+	
+	В данном случае вышло так, что сумма случайных величин имеет гамма-распределение с параметрами 2 и 1.
+\end{proof}
+
+Возникает разумный вопрос: а есть ли подобные формулы для произведения и для частного? Да, есть. 
+\begin{lemma}[Формула свёртки для произведения]
+	Пусть \(\xi\) и \(\eta\)~--- независимые случайные величины. Тогда
+	\[p_{\xi\eta}(x) = \int\limits_{-\infty}^{+\infty} \frac{1}{|y|} p_{\xi}(y)p_{\eta}\left(\frac{x}{y}\right)\,\mathrm{d}y.\]
+\end{lemma}
+\begin{proof}
+	Рассуждение идейно почти не отличается от рассуждения для сложения. Опять же, воспользуемся теоремой:
+	\[\int\limits_{-\infty}^{x} p_{\xi\eta}(t)\,\mathrm{d}t = F_{\xi\eta}(x) =  \iint\limits_{x_{1}x_{2} \leq x} p_{\xi, \eta}(x_1, x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2 = \iint\limits_{x_{1}x_{2} \leq x} p_{\xi}(x_1)p_{\eta}(x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2.\]
+	
+	Сделаем замену переменных: \(u = x_1 x_2\), \(v = x_1\). Это равносильно тому, что \(x_1 = v\), \(x_2 = \frac{u}{v}\). Тогда якобиан будет иметь вид
+	\[
+	\begin{vmatrix}
+	\frac{\partial x_1}{\partial u} & \frac{\partial x_1}{\partial v} \\[0.3em]
+	\frac{\partial x_2}{\partial u} & \frac{\partial x_2}{\partial v}
+	\end{vmatrix}
+	=
+	\begin{vmatrix}
+	0 & 1 \\[0.3em]
+	\frac{1}{v} & -\frac{uv'}{v^2}
+	\end{vmatrix}
+	= -\frac{1}{v}.
+	\]
+	
+	Следовательно,
+	\[\iint\limits_{x_{1}x_{2} \leq x} p_{\xi, \eta}(x_1, x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2 = \int\limits_{-\infty}^{x} \int\limits_{-\infty}^{+\infty} \frac{1}{|v|} p_{\xi}(v)p_{\eta}\left(\frac{u}{v}\right)\,\mathrm{d}v\,\mathrm{d}u.\qedhere\]
+\end{proof}
+\begin{lemma}[Формула свёртки для частного]
+	Пусть \(\xi\) и \(\eta\)~--- независимые случайные величины. Тогда
+	\[p_{\xi/\eta}(x) = \int\limits_{-\infty}^{+\infty}p_{\xi}(xy)p_{\eta}(y)|y|\,\mathrm{d}y.\]
+\end{lemma}
+\begin{proof}
+	Опять же, воспользуемся теоремой:
+	\[\int\limits_{-\infty}^{x} p_{\xi/\eta}(t)\,\mathrm{d}t = F_{\xi/\eta}(x) =  \iint\limits_{\frac{x_{1}}{x_{2}} \leq x} p_{\xi, \eta}(x_1, x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2 = \iint\limits_{\frac{x_{1}}{x_{2}} \leq x} p_{\xi}(x_1)p_{\eta}(x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2.\]
+	
+	Сделаем замену \(u = \frac{x_1}{x_2}\), \(v = x_2\). Отсюда получаем, что \(x_1 = uv\), \(x_2 = v\) и якобиан равен
+	\[
+	\begin{vmatrix}
+	\frac{\partial x_1}{\partial u} & \frac{\partial x_1}{\partial v} \\[0.3em]
+	\frac{\partial x_2}{\partial u} & \frac{\partial x_2}{\partial v}
+	\end{vmatrix}
+	=
+	\begin{vmatrix}
+	v & u \\
+	0 & 1
+	\end{vmatrix}
+	= v.
+	\]
+	
+	Тогда по формуле замены переменных и теореме Фубини:
+	\[\iint\limits_{\frac{x_{1}}{x_{2}} \leq x} p_{\xi}(x_1)p_{\eta}(x_2)\,\mathrm{d}x_1\,\mathrm{d}x_2 = \int\limits_{-\infty}^{x} \int\limits_{-\infty}^{+\infty} |v| p_{\xi}(uv)p_{\eta}(v)\,\mathrm{d}v\,\mathrm{d}u.\qedhere\]
+\end{proof}

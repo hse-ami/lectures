@@ -1,0 +1,271 @@
+\section{Лекция от 13.12.2016}
+\subsection{Три неравенства}
+Для случайных величин в общем случае выполнены те же неравенства, что и для дискретного случая.
+\begin{theorem}[Неравенство Маркова]
+	Пусть \(\xi\)~--- неотрицательная случайная величина. Тогда для любого \(\epsilon > 0\)
+	\[
+		\Pr{\xi \geq \epsilon} \leq \frac{\E{\xi}}{\epsilon}
+	\]
+\end{theorem}
+\begin{proof}
+	\[
+		\Pr{\xi \geq \epsilon} = \E{\mathbf{1}_{\{\xi \geq \epsilon\}}} \leq \E{\frac{\xi}{\epsilon}\mathbf{1}_{\{\xi \geq \epsilon\}}} \leq \E{\frac{\xi}{\epsilon}} = \frac{\E{\xi}}{\epsilon}\qedhere
+	\]
+\end{proof}
+
+Из неравенства Маркова легко получить неравенство Чебышёва:
+\begin{theorem}[Неравенство Чебышёва]
+	Пусть \(\xi\)~---  случайная величина. Тогда для любого \(\epsilon > 0\)
+	\[
+		\Pr{\left|\xi - \E{\xi}\right| \geq \epsilon} \leq \frac{\D{\xi}}{\epsilon^2}
+	\]
+\end{theorem}
+\begin{proof}
+	Просто воспользуемся неравенством Маркова:
+	\[
+		\Pr{\left|\xi - \E{\xi}\right| \geq \epsilon} = \Pr{\left(\xi - \E{\xi}\right)^2 \geq \epsilon^2} \leq \frac{\E{\left(\xi - \E{\xi}\right)^2}}{\epsilon^2} = \frac{\D{\xi}}{\epsilon^2} \qedhere
+	\]
+\end{proof}
+
+Теперь докажем ещё одно неравенство:
+\begin{theorem}[Неравенство Йенсена]
+	Пусть \(\xi\)~--- случайная величина, а \(\phi\)~--- некоторая выпуклая вниз функция. Тогда \(\phi(\E{\xi}) \leq \E{\phi(\xi)}\).
+\end{theorem}
+\begin{proof}
+	Как известно, для выпуклых вниз функций выполнено следующее свойство: для любого \(x_0 \in \R\) существует \(\lambda(x_0)\) такое, что для любого \(x \in \R\)
+	\[
+		\phi(x) \geq \phi(x_0) + \lambda(x_0)(x - x_0)
+	\]
+	
+	По сути, это говорит, что график лежит выше касательной. Теперь подставим \(x = \xi\), \(x_0 = \E{\xi}\):
+	\[
+		\phi(\xi) \geq \phi(\E{\xi}) + \lambda(\E{\xi})(\xi - \E{\xi})
+	\]
+	
+	Осталось взять матожидание обеих частей и заметить, что \(\E{\xi - \E{\xi}} = 0\):
+	\[
+		\E{\phi(\xi)} \geq \phi(\E{\xi}) \qedhere
+	\]
+\end{proof}
+
+Если же функция \(\phi(x)\) выпукла вверх, то знак меняется на противоположный.
+
+\begin{example}
+	Если \(\xi \geq 0\), то \(\E{e^{\xi}} \geq e^{\E{\xi}}\). Далее, \(\E{\xi^3} \geq (\E{\xi})^3\).
+\end{example}
+
+\begin{remark}
+	В данном доказательстве была опущена одна весьма важная деталь: мы не требовали, чтобы \(\phi\) была борелевской, а ведь надо было. Однако любая выпуклая функция является борелевской. Это следует из того, что любую выпуклую функцию можно представить, как супремум счётного набора линейных функций, то есть существуют последовательности \(\{a_n\}\), \(\{b_n\}\) такие, что \(\phi(x) = \sup(a_{n}x + b_{n})\). Так как супремум от счётного множества измерим, то и \(\phi(x)\) измерима, а, следовательно, является борелевской.
+\end{remark}
+
+\subsection{Сходимости случайных величин}
+
+В дискретном случае мы уже вводили сходимости случайных величин. Почему бы и не обобщить этот результат? Рассмотрим некоторое вероятностное пространство \((\Omega, \F, \Pr)\) и \(\{\xi_n \mid n \in \N\}\)~--- последовательность случайных величин на этом пространстве. Далее, пусть \(\xi\)~--- это некоторая случайная величина.
+\begin{definition}
+	Будем говорить, что \(\xi_n\) сходится к \(\xi\) \emph{почти наверное} (с вероятностью 1), если
+	\[
+		\Pr{\left\{\omega \in \Omega : \lim\limits_{n \to \infty} \xi_n(\omega) = \xi(\omega)\right\}} = 1
+	\]
+	
+	Обозначение: \(\xi_n \asto \xi\).
+\end{definition}
+
+\textbf{Смысл:} сходимость почти наверное~--- это поточечная сходимость.
+
+\begin{definition}
+	Будем говорить, что \(\xi_n\) сходится к \(\xi\) \emph{по вероятности}, если для любого \(\epsilon > 0\)
+	\[
+	\lim\limits_{n \to \infty} \Pr{|\xi_n - \xi| \geq \epsilon} = 0
+	\]
+	
+	Обозначение: \(\xi_n \prto \xi\).
+\end{definition}
+
+\textbf{Смысл:} \(\xi_n\) мало отклоняются от \(\xi\).
+
+\begin{definition}
+	Будем говорить, что \(\xi_n\) сходится к \(\xi\) \emph{в среднем порядка \(p\)}, если
+	\[
+	\lim\limits_{n \to \infty} \E{|\xi_n - \xi|^p} = 0
+	\]
+	
+	Обозначение: \(\xi_n \xrightarrow{L^p} \xi\).
+\end{definition}
+
+\textbf{Смысл:} сходимость последовательности в пространстве \(L^{p} = \{\xi : \E|\xi|^p < +\infty\}\).
+
+\begin{definition}
+	Будем говорить, что \(\xi_n\) сходится к \(\xi\) \emph{по распределению}, если для всех \(x \in \R\)
+	\[
+	\lim\limits_{n \to \infty} F_{\xi_n}(x) = F_{\xi}(x)
+	\]
+	
+	Обозначение: \(\xi_n \dto \xi\).
+\end{definition}
+
+\textbf{Смысл:} аппроксимация распределения.
+
+Теперь напомню вам несколько результатов, связанных с сходимостью случайных величин. Для простоты введём следующее: если \(\xi_n \to \xi\), где \(\xi\) обладает каким-то распределением \(T\), то будем писать, что \(\xi_n \to T\).
+
+\begin{theorem}[Пуассон]
+	Пусть \(\xi_n \sim \mathrm{Bin}(n, p(n))\), где \(p(n) = \frac{\lambda}{n}\), \(\lambda > 0\). Тогда \(\xi_n \dto \mathrm{Pois}(\lambda)\). 
+\end{theorem}
+\begin{theorem}[Муавр, Лаплас]
+	Пусть \(\xi_n \sim \mathrm{Bin}(n, p)\), где \(p \in (0, 1)\)~--- фиксированное число. Тогда
+	\[
+		\lim\limits_{n \to \infty} \Pr{\frac{\xi_n - \E{\xi}}{\sqrt{\D{\xi}}} \leq x} = \Phi(x) = \int\limits_{-\infty}^{x} \frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}\diff y
+	\]
+	где \(\Phi(x)\)~--- это функция распределения \(\mathcal{N}(0, 1)\). По-другому это можно записать так:
+	\[
+		\frac{\xi_n - \E{\xi}}{\sqrt{\D{\xi}}} \dto \mathcal{N}(0, 1)
+	\]
+\end{theorem}
+\begin{theorem}[закон больших чисел в форме Чебышёва]
+	Пусть \(\{\xi_n \mid n \in \N\}\)~--- последовательность попарно независимых случайных величин таких, что все дисперсии конечны: то есть, существует константа \(C \in \R\) такая, что для любого натурального \(n\) \(\D{\xi_n} \leq C\). Теперь, введём обозначение \(S_n = \xi_1 + \dots + \xi_n\). Тогда
+	\[
+		\frac{S_n - \E{S_n}}{n} \prto 0
+	\]
+\end{theorem}
+
+Теперь вернёмся к новому материалу.
+\begin{definition}
+	Пусть \(\{A_n \mid n \in \N\}\)~--- это счётная последовательность событий. Тогда событием \(\{A_n \text{ б.ч.}\}\) (\emph{событием, происходящим бесконечное число раз}) назовём событие, устроенное следующим образом:
+	\[
+		\omega \in \{A_n \text{ б.ч.}\} \iff \exists \{A_{n_k} \mid k \in \N\} : \forall k \in \N\ \omega \in A_{n_k}
+	\]
+	
+	Формально это событие можно записать следующим образом:
+	\[
+		\{A_n \text{ б.ч.}\} = \bigcap_{n = 1}^{\infty}\bigcup_{n = m}^{\infty} A_{m}
+	\]
+\end{definition}
+
+\begin{lemma}[Критерий сходимости почти наверное]
+	Пусть \(\{\xi_n \mid n \in \N\}\), \(\xi\)~--- случайные величины. Тогда \(\xi_n \asto \xi\) тогда и только тогда, когда для любого \(\epsilon > 0\)
+	\[
+		\Pr{\{A_n^{\epsilon} \text{ б.ч.}\}} = 0,\text{ где } \{A_n^{\epsilon} \text{ б.ч.}\} = \{|\xi_n - \xi| \geq \epsilon\}
+	\]
+	Или же, что равносильно:
+	\[
+		\forall \epsilon > 0 \lim\limits_{n \to \infty} \Pr{\sup\limits_{m \geq n} |\xi_m - \xi| \geq \epsilon} = 0.
+	\]
+\end{lemma}
+\begin{proof}
+	Из определения предела последовательности следует, что \(\xi_n(\omega) \to \xi(\omega)\) равносильно тому, что для любого \(\epsilon > 0\) событий вида \(\{|\xi_n(\omega) - \xi(\omega)| \geq \epsilon\}\) лишь конечное число. Следовательно, \(\Pr{\xi_n \not\to \xi \text{ почти наверное}} = 0\) можно записать следующим образом:
+	\[
+		\Pr{\bigcup_{m = 1}^{\infty} \{A_n^{1/m} \text{ б.ч.}\}} = 0 \iff \forall m \in \N \Pr{\{A_n^{1/m} \text{ б.ч.}\}} = 0
+	\]
+	
+	Так как для любого \(\epsilon > \frac{1}{m}\) \(A_n^{\epsilon} \subseteq A_n^{1/m}\), то это равносильно тому, что
+	\[
+		\forall \epsilon > 0 \Pr{\{A_n^{\epsilon} \text{ б.ч.}\}} = 0 \iff \forall \epsilon > 0 \Pr{\bigcap_{n = 1}^{\infty}\bigcup_{n = m}^{\infty} A_{m}^{\epsilon}} = 0
+	\]
+	
+	Теперь введём события
+	\[
+		B_{n}^{\epsilon} = \bigcup_{m = n}^{\infty} A_{m}^{\epsilon}
+	\]
+	
+	Несложно заметить, что \(B_{n}^{\epsilon} \supseteq B_{n + 1}^{\epsilon}\). Тогда по непрерывности верояностной меры
+	\[
+		\lim\limits_{n \to \infty} \Pr{B_{n}^{\epsilon}} = 0 = \lim\limits_{n \to \infty} \Pr{\bigcup_{m = n}^{\infty} A_{m}^{\epsilon}}
+	\]
+	
+	Осталось заметить две вещи:
+	\begin{enumerate}
+		\item Так как \(\{\bigcup_{m = n}^{\infty} |\xi_m - \xi| \geq \epsilon\} \subseteq \{\sup_{m \geq n} |\xi_m - \xi| \geq \epsilon\}\), то
+		\[
+			\Pr{\sup_{m \geq n} |\xi_m - \xi| \geq \epsilon} = 0 \implies \Pr{\bigcup_{m = n}^{\infty} |\xi_m - \xi| \geq \epsilon} = 0
+		\]
+		
+		\item Однако:
+		\[
+			\Pr{\bigcup_{m = n}^{\infty} |\xi_m - \xi| \geq \epsilon} = 0 \implies \Pr{\sup_{m \geq n} |\xi_m - \xi| \geq 2\epsilon} = 0
+		\]
+	\end{enumerate}
+	Тем самым получаем желаемое.
+\end{proof}
+
+\begin{consequence}
+	Если для любого \(\epsilon > 0\) ряд \(\sum \Pr{|\xi_n - \xi| \geq \epsilon}\) сходится, то \(\xi_n \asto \xi\).
+\end{consequence}
+\begin{proof}
+	Как мы показывали, \(\xi_n \asto \xi\) равносильно тому, что для любого \(\epsilon > 0\) \(\lim\limits_{n \to \infty} \Pr{B_{n}^{\epsilon}} = 0\). Однако,
+	\[
+		\Pr{B_{n}^{\epsilon}} = \Pr{\bigcup_{m = n}^{\infty} |\xi_m - \xi| \geq \epsilon} \leq \sum_{m = n}^{\infty} \Pr{|\xi_m - \xi| \geq \epsilon} \xrightarrow{n \to \infty} 0\text{ (как остаток ряда)} \qedhere
+	\]
+\end{proof}
+
+Казалось бы, зачем столько видов сходимостей? Они настолько разные? Оказывается, что да.
+\begin{theorem}[о взаимоотношении сходимостей]
+	Пусть \(\{\xi_n \mid n \in \N\}, \xi\)~--- случайные величины. Тогда
+	\begin{enumerate}
+		\item \(\xi_n \asto \xi \implies \xi_n \prto \xi\)
+		\item \(\xi_n \xrightarrow{L^p} \xi \implies \xi_n \prto \xi\)
+		\item \(\xi_n \prto \xi \implies \xi_n \dto \xi\)
+	\end{enumerate}
+	В обратную сторону утверждения в общем случае не верны. Про взаимосвязь сходимости почти наверное и в среднем ничего сказать нельзя.
+\end{theorem}
+\begin{proof}
+	Сперва докажем, что из сходимости почти наверное следует сходимость по вероятности. Действительно, пусть \(\xi_n \asto \xi\). По доказанному выше критерию
+	\[
+		\forall \epsilon > 0 \lim\limits_{n \to \infty} \Pr{\sup\limits_{m \geq n} |\xi_m - \xi| \geq \epsilon} = 0.
+	\]
+	
+	Однако
+	\[
+		\Pr{|\xi_n - \xi| \geq \epsilon} \leq \Pr{\sup\limits_{m \geq n} |\xi_m - \xi| \geq \epsilon} \xrightarrow{n \to \infty} 0
+	\]
+	
+	Теперь покажем, что из сходимости в среднем порядка \(p\) следует сходимость по вероятности. На самом деле, по неравенству Маркова
+	\[
+		\Pr{|\xi_n - \xi| \geq \epsilon} = \Pr{|\xi_n - \xi|^p \geq \epsilon^p} \leq \frac{\E|\xi_n - \xi|^p}{\epsilon^p} \xrightarrow{n \to \infty} 0.
+	\]
+	
+	Теперь приступим к самому сложному: доказательству того, что из сходимости по вероятности следует сходимость по распределению. Пусть \(\xi_n \prto \xi\) и \(x\)~--- это точка непрерывности \(F_{\xi}\). Тогда
+	\begin{align*}
+		F_{\xi_n}(x) &= \Pr{\xi_n \leq x} = \Pr{\xi_n \leq x, \xi - \xi_n \leq \epsilon} + \Pr{\xi_n \leq x, \xi - \xi_n > \epsilon} \\
+		&\leq \Pr{\xi \leq x + \epsilon} + \Pr{|\xi - \xi_n| > \epsilon}
+	\end{align*}
+	
+	Так как \(\xi_n \prto \xi\), то вторая вероятность стремится к \(0\) и 
+	\[
+		\varlimsup\limits_{n \to \infty} F_{\xi_n}(x) \leq F_{\xi}(x + \epsilon)
+	\]
+	
+	Аналогичными рассуждениями получаем, что
+	\[
+		\varlimsup\limits_{n \to \infty} (1 - F_{\xi_n}(x)) = 1 - \varliminf\limits_{n \to \infty} F_{\xi_n}(x) \leq 1 - F_{\xi}(x - \epsilon) 
+	\]
+	
+	Тогда
+	\[
+		F_{\xi}(x - \epsilon) \leq \varliminf\limits_{n \to \infty} F_{\xi_n}(x) \leq \varlimsup\limits_{n \to \infty} F_{\xi_n}(x) \leq F_{\xi}(x + \epsilon)
+	\]
+	
+	Так как\(x\)~--- точка непрерывности, то, устремляя \(\epsilon\) к нулю, получаем, что
+	\[
+		\exists\lim\limits_{n \to \infty} F_{\xi_n}(x) = F_{\xi}(x)
+	\]
+	
+	На тему остальных связей можно посмотреть книжку Стоянова "Контрпримеры в теории вероятностей".
+\end{proof}
+
+Однако в некторых случаях можно перейти от более слабой к более сильной сходимости.
+\begin{point}
+	Пусть \(\{\xi_n \mid n \in \N\}, \xi\)~--- случайные величины. Если \(\xi_n \prto \xi\), то существуеть подпоследовательность \(\{\xi_{n_k} \mid k \in \N\}\) такая, что \(\xi_{n_k} \asto \xi\).
+\end{point}
+\begin{proof}
+	Для каждого \(k \in \N\) выберем \(n_{k}\) такое, что
+	\[
+		\forall n > n_{k} \Pr{|\xi_n - \xi| \geq \frac{1}{k}} \leq \frac{1}{2^k}
+	\]
+	
+	Но тогда
+	\begin{align*}
+		\sum_{k = 1}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \epsilon} &= \left|K > \frac{1}{\epsilon}\right| = O\left(\sum_{k = K}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \epsilon}\right) \\
+		&= O\left(\sum_{k = K}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \frac{1}{k}}\right) < +\infty
+	\end{align*}
+	
+	Это и означает, что \(\xi_{n_k} \asto \xi\).
+\end{proof}
