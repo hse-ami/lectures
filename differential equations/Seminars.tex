@@ -175,24 +175,39 @@ in
 
 \newcommand{\dy}{\dot{y}}
 \newcommand{\ddy}{\ddot{y}}
+\newcommand{\dddy}{\dddot{y}}
 
 \newcommand{\dt}{\dot{t}}
 \newcommand{\ddt}{\ddot{t}}
+\newcommand{\dddt}{\dddot{t}}
 
 \newcommand{\dw}{\dot{w}}
 \newcommand{\ddw}{\ddot{w}}
+\newcommand{\dddw}{\dddot{w}}
+
+\newcommand{\dpp}{\dot{p}}
+\newcommand{\ddpp}{\ddot{p}}
+\newcommand{\dddpp}{\dddot{p}}
+
+\newcommand{\dqq}{\dot{q}}
+\newcommand{\ddqq}{\ddot{q}}
+\newcommand{\dddqq}{\dddot{q}}
 
 \newcommand{\du}{\dot{u}}
 \newcommand{\ddu}{\ddot{u}}
+\newcommand{\dddu}{\dddot{u}}
 
 \renewcommand{\dv}{\dot{v}}
 \newcommand{\ddv}{\ddot{v}}
+\newcommand{\dddv}{\dddot{v}}
 
 \newcommand{\dx}{\dot{x}}
 \newcommand{\ddx}{\ddot{x}}
+\newcommand{\dddx}{\dddot{x}}
 
 \newcommand{\dz}{\dot{z}}
 \newcommand{\ddz}{\ddot{z}}
+\newcommand{\dddz}{\dddot{z}}
 
 \newcommand{\wx}{\widetilde{x}}
 \newcommand{\wt}{\widetilde{t}}
@@ -2523,7 +2538,346 @@ x = 2tp + \log p = 2p\cdot \left(\dfrac{C}{p^2} -\dfrac{1}{p}\right) + \log p = 
 \newpage
 \section{Семинар 6, 14 февраля}
 
+\subsection{Уравнения, допускающие понижение порядка}
+
+Вспомним, как в общем виде выглядит диффур $n$-го порядка:
+\[F\big(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\big) = 0\]
+Данное уравнение называется \textbf{допускающим понижение порядка}, если путём некоторых преобразований или замен его можно свести к диффуру первого порядка: $G(t,\ x,\ \dx) = 0$. Существует несколько способов работать с данными уравнениями, преимущественно они относятся к хитроумным заменам и наблюдениям.
+
+\subsection{Повторное интегрирование}
+
+Самый простой метод. Рассмотрим диффур вида
+\[x^{(n)} = f(t)\] где $x^{(n)}$ --- производная $n$-го порядка, а правая часть зависит только от $t$ (возможно, константа).
+
+Данное дифференциальное уравнение решается последовательным интегрированием правой части. Причём интегрировать придется ровно $n$ раз. Тогда получаем такое решение:
+\[x = \underbrace{\ds\int\ldots\ds\int}_{n}f(x)\underbrace{\d x \ldots\d x}_{n} + C_1\cdot \dfrac{t^{n - 1}}{(n - 1)!} + C_2\cdot \dfrac{t^{n - 2}}{(n - 2)!} + \ldots + C_{n - 1}\cdot t + C_n\]
+
+Здесь даже и разбираться нечего, простое интегрирование. Полезно бывает группировать слагаемые в диффурах и получать вот такие выражения. Часто повторное интегрирование применяется при рассмотрении нескольких случаев.
+
+\subsection{Нет $x$}
+
+Рассмотрим диффур, в котором нет в явном виде (то бишь вообще не видно даже) искомой функции $x$ и, возможно, её производных до порядка $k - 1$ включительно. То есть, имеем уравнение:
+\[F\left(t,\ x^{(k)},\ x^{(k + 1)},\ \ldots,\ x^{(n)}\right)\]
+Понижать порядок будем так: делаем замену $y = y(t) = x^{(k)}$ и соответственно изменяем все производные старших порядков, получая диффур:
+\[F\left(t,\ y,\ \dy,\ \ldots,\ y^{(n - k)}\right)\]
+Теперь жить станет (ненамного) полегче. Важно помнить, что $y$ --- это функция от $t$, и что в этом уравнении \underline{обязательно} должна быть переменная $t$.
+
+Теперь решаем полученный диффур (возможно, применяя ещё несколько методов понижения порядка, или же просто развлекаясь), получая некое решение $y = f(t,\ C_1,\ \ldots,\ C_{n - k})$. Вспоминаем, что $y = x^{(k)}$, и у нас возникает ещё один диффур:
+\[x^{(k)} = f(t,\ C_1,\ \ldots,\ C_{n - k})\]
+Ну а этот зверь берётся простым повторным интегрированием (собственно, ключевая цель повторного интегрирования именно вот в этом --- подсобить другим методам). 
+\ \\
+
+\textbf{Пример №1}
+
+\[\ddx\sqrt{t} = (\dx)^2\]
+
+В данном диффуре отсутствует функция $x$. Делаем замену $\dx = y$, тогда уравнение примет вид:
+\[\dy\sqrt{t} = y^2\]
+Простое уравнение с разделяющимися переменными. Решим его:
+\begin{gather*}
+	\dy\sqrt{t} = y^2 \iff \dfrac{\d y}{y^2} = \dfrac{\d t}{\sqrt{x}} \bto \ds\int = \int\\
+	-\dfrac{1}{y} = 2\sqrt{t} + C_1 \iff y = -\dfrac{1}{2\sqrt{t} + C_1}
+\end{gather*}
+Теперь вспомним, что $y = \dx$, и ещё раз интегрируем, чтобы получить решение:
+\begin{gather*}
+y = \dx = -\dfrac{1}{2\sqrt{t} + C_1} \iff x = -\ds\int \dfrac{1}{2\sqrt{t} + C_1}\\
+\ds\int \dfrac{1}{2\sqrt{t} + C_1} = \left|\left|\begin{gathered}
+	t = q^2\\
+	\d t = 2q\d q
+\end{gathered}\right|\right| = \ds\int\dfrac{2q\d q}{2q + C_1} = \ds\int\left(1 - \dfrac{C_1}{2q + C_1}\right)\d q = q + \dfrac{C_1}{2} \cdot \log|2q + C_1| + C_2\\
+q = \sqrt{t} \bto x = -\sqrt{t} + \dfrac{C_1}{2} \cdot \log|2\sqrt{t} + C_1| + C_2
+\end{gather*}
+Получили итоговое общее решение:
+\[x = -\sqrt{t} + \dfrac{C_1}{2} \cdot \log|2\sqrt{t} + C_1| + C_2\]
+
+\textbf{Пример №2}
+
+\[\ddx + \dfrac{\dx}{t + 1} = 9(t + 1)\]
+
+В данном уравнении второго порядка в явном виде не участвует переменная $x$. Заменим первую производную $\dx$ на функцию $y = y(t)$:
+\begin{gather*}
+	y = \dx\qquad \ddx = \dy\\
+	\dy + \dfrac{y}{t + 1} = 9(t + 1)	
+\end{gather*}
+Получили обычный линейный диффур. Решаем его методом вариации постоянной:
+\begin{gather*}
+\dy = -\dfrac{y}{t + 1} \iff \dfrac{\d y}{y} = - \dfrac{\d t}{t + 1} \bto \ds\int = \int\\
+\log|y| = - \log|t + 1| + C \iff y = \dfrac{u}{t + 1},\ u \in \R\\
+\begin{cases}
+	y = \dfrac{u}{t + 1}\\
+	\dy = \dfrac{\du}{t + 1} - \dfrac{u}{(t + 1)^2} 
+\end{cases}\\
+\dfrac{\du}{t + 1} - \dfrac{u}{(t + 1)^2}+ \dfrac{1}{t + 1} \cdot \dfrac{u}{t + 1} = 9(t + 1) \\
+\dfrac{\du}{t + 1} = 9(t + 1) \iff \d u = 9(t + 1)^2\d t \bto \ds\int = \int\\
+u = 3(t + 1)^3 + C_1\\
+y = \dfrac{u}{t + 1} = \dfrac{3(t + 1)^3 + C_1}{t + 1} = 3(t + 1)^2 + \dfrac{C_1}{t + 1}
+\end{gather*}
+Отлично! Мы нашли $y$. Вспоминаем, что $y = \dx$, делаем обратную замену и интегрируем:
+\begin{gather*}
+	\dx = 3(t + 1)^2 + \dfrac{C_1}{t + 1} \bto \ds\int = \ds\int\\
+	x = (t + 1)^3 + C_1 \cdot \log|t + 1| + C_2
+\end{gather*}
+Это и есть итоговый ответ.
+\ \\
+
+\textbf{Пример №3}
+
+\[(1 + \sin t)\dddx = \ddx \cos t\]
+
+В данном уравнении третьего порядка нет в явном виде не только функции $x$, но и её первой производной $\dx$. Поэтому заменяем на $y = y(t)$ её младшего брата -- вторую производную:
+\[\ddx = y \qquad \dddx = \dy\]
+Подставляем, получая диффур с разделяющимися переменными, который с лёгкостью решаем:
+\begin{gather*}
+	(1 + \sin t)\dy = y \cos t \iff \dfrac{\d y}{y} = \dfrac{\cos t\d t}{1 + \sin t} \bto \ds\int = \int\\
+	\log|y| = \log|1 + \sin t| + C_1 \iff y = \lambda \cdot (1 + \sin t)
+\end{gather*}
+Делаем обратную замену $y = \ddx$. Увы, но чтобы получить ответ, придётся повторно проинтегрировать аж 2 раза:
+\begin{gather*}
+	\ddx = \lambda \cdot (1 + \sin t) \bto \ds\int = \ds\int\\
+	\d x = \lambda \cdot (t - \cos t) + C_2 \bto \ds\int = \ds\int \\
+	x = \lambda \cdot \left(\dfrac{t^2}{2} - \sin t\right) + C_2\cdot t + C_3
+\end{gather*}
+Нашли искомую кривую.
+
+\subsection{Нет $t$}
+
+Существует также вид диффуров, в которых в явном виде нет переменной $t$. Вообще ни разу. То бишь выглядит уравнение так:
+\[F\left(x,\ \dx,\ \ddx,\ \ldots,\ x^{(n)}\right) = 0\]
+Здесь также можно понизить порядок, однако, замена будет более хитрой. Первую производную $\dx$ заменяем на некоторую неизвестную функцию $p = p(x)$ -- \underline{от переменной $x$}, то есть это сложная функция. В таком случае все производные старших порядков выражаются через производные новой функции $p$ по $x$:
+\begin{gather*}
+	\dx = \dfrac{\d x}{\d t} = p\\
+	\ddx = \dfrac{\d p}{\d t} = \dfrac{\d p}{\d x} \cdot \dfrac{\d x}{\d t} = p\dfrac{\d p}{\d x} = p\dpp\\
+	\dddx = \dfrac{\d}{\d t}\left(p\dfrac{\d p}{\d x}\right) = \dfrac{\d }{\d x}\left(p\dfrac{\d p}{\d x}\right)\dfrac{\d x}{\d t} = p^2\dfrac{\d^2p}{\d x^2} + p\left(\dfrac{\d p}{\d x}\right)^2 = p^2\ddpp + p(\dpp)^2
+\end{gather*}
+И так далее. Подставив все эти выражения вместо производных соответствующих порядков, получаем диффур $n - 1$-го порядка:
+\[G\left(x,\ p,\ \dpp,\ \ldots,\ p^{(n - 1)}\right) = 0\]
+Решаем его, находя функцию $p = g(x)$, после чего делаем обратную замену $p = \dx$ и решаем обычный диффур первого порядка, которые мы давно покорили.
+\ \\
+
+\textbf{Пример №4}
+
+\[2x\ddx = (\dx)^2 + 1\]
+Как видим, $t$ ни слуху, ни духу. Проворачиваем вышеуказанную замену и решаем диффур первого порядка:
+\begin{gather*}
+	\dx = p\qquad\ddx = p\ddpp \\
+	2xp\ddpp = p^2 + 1 \iff \dfrac{p\d p}{p^2 + 1} = \dfrac{\d x}{2x} \bto \ds\int = \int \\
+	\log|p^2 + 1 = \log|x| + C \iff p^2 + 1 = \lambda x \iff p^2 = \lambda x - 1
+\end{gather*}
+Теперь подставляем $p = \dx$ и находим кривую $x = x(t)$:
+\begin{gather*}
+	(\dx)^2 = \lambda x - 1 \iff \dx = \pm\sqrt{\lambda x - 1} \iff \pm\dfrac{\d x}{\sqrt{\lambda x - 1}} = \d t \bto \ds\int = \int\\
+	\pm\sqrt{\lambda x - 1} = \dfrac{\lambda}{2} \cdot t + C
+\end{gather*}
+Получили общий интеграл нашей кривой.
+\ \\
+
+\textbf{Пример №5}
+
+\[x\ddx = (\dx)^2 - (\dx)^3\]
+Понизим степень, сделав замену $\dx = p(x)$:
+\begin{gather*}
+	\dx = p\qquad\ddx = p\ddpp \\
+	xp\dpp = p^2 - p^3
+\end{gather*}
+Здесь хочется сократить на $p$. Это можно сделать, но при этом нужно обработать случай, когда $p = 0$. В таком случае $\dx = 0 \iff x = C$ --- особое решение.
+\begin{gather*}
+	x\dpp = p - p^2 \iff \dfrac{\d p}{p(1 - p)} = \dfrac{\d x}{x} \iff \left(\dfrac{1}{p} + \dfrac{1}{1 - p}\right)\d p = \dfrac{\d x}{x}\bto \ds\int = \int\\
+	\log|p| - \log|1 - p| = \log|x| + C \iff \log\left|\dfrac{p}{1 - p}\right| = \log|x| + C\\
+	\dfrac{p}{1 - p} = \lambda x
+\end{gather*}
+Обратная замена $p = \dx$:
+\begin{gather*}
+	\dfrac{\dx}{1 - \dx} = \lambda x \iff \dx = \lambda x - \lambda x\dx\\
+	\dx(1 + \lambda x) = \lambda x \iff \dfrac{1 + \lambda x}{x}\d x = \lambda \d t \bto \ds\int = \int\\
+	\log|x| + \lambda x = \lambda t + C
+\end{gather*}
+Тогда итоговым ответом будет пара решений:
+\[x = C \qquad \log|x| + \lambda x = \lambda t + C\]
+\ \\
+
+\textbf{Пример №6}
+
+\[\dddx(\dx)^2 = (\ddx)^3\]
+Выглядит устрашающе, не правда ли? Но ничего, решить этот диффур нам поможет ставшая уже классической замена $\dx = p(x)$. Понизим степень уравнения:
+\begin{gather*}
+	\dx = p\qquad\ddx = p\dpp \qquad \dddx = p^2\ddpp + p(\dpp)^2\\
+	\big(p^2\ddpp + p(\dpp)^2\big)p^2 = \big(p\dpp\big)^3 = p^3(\dpp)^3
+\end{gather*}
+Можем сократить на $p^3$, обработав случай $p = 0$. Тогда $x = C$ -- особое решение. Продолжаем решать дальше:
+\[
+	p\ddpp + (\dpp)^2 = (\dpp)^3
+\]
+Заметим, что у нас пропала переменная $x$. А $p$ --- это функция от $x$. То есть, мы опять получили диффур, допускающий понижение порядка, в котором нет независимой переменной $x$ (относительно данного уравнения). Поэтому мы ещё раз понижаем степень при помощи той же самой замены:
+\begin{gather*}
+	\dpp = q \qquad \ddpp = q\dqq\\
+	pq\dqq + q^2 = q^3
+\end{gather*}
+Можем теперь сократить на $q$. При этом нужно рассмотреть случай $q$ = 0:
+\begin{gather*}
+	q = \dpp = 0 \iff p = C_1\\
+	p = \dx = C_1 \iff x = C_1\cdot t + C_2
+\end{gather*}
+Второе особое решение. Осталось дорешать полученное уравнение с разделяющимися переменными:
+\begin{gather*}
+	p\dqq + q = q^2 \iff \dqq = \dfrac{q(q - 1)}{p} \iff \dfrac{\d q}{q(q - 1)} = \left(\dfrac{1}{q - 1} - \dfrac{1}{q}\right)\d q =  \dfrac{\d p}{p} \bto \ds\int = \int\\
+	\log|q - 1| - \log|q| = \log|p| + C \iff \log\left|\dfrac{q - 1}{q}\right| = \log|p| + C \iff \dfrac{q - 1}{q} = \lambda p
+\end{gather*}
+Начинаем разворачивать этот запутанный клубок. Первая обратная замена: $q = \dpp$.
+\begin{gather*}
+	\dfrac{\dpp - 1}{\dpp} = \lambda p \iff \dpp - 1 = \lambda p\dpp \\
+	\dpp(1 - \lambda p) = 1 \iff (1 - \lambda p)\d p = \d x \bto \ds\int = \int\\
+	p - \dfrac{\lambda p^2}{2} = x + C
+\end{gather*}
+Теперь делаем обратную замену: $p = \dx$.
+\[\dx - \dfrac{\lambda (\dx)^2}{2} = x + C\]
+И что с этим делать? $\dx$ не выражается явно через $t$ и $x$. Однако, мы ведь уже умеем работать с такими уравнениями, верно?) Нужно ввести параметр $p = \dx = \dfrac{\d x}{\d t}$. Так что, как не иронично, но мы распутали слегка больше, чем на самом деле было необходимо. Делаем параметризацию, выражаем $x$ -- тут это удобно -- и дифференцируем.
+\begin{gather*}
+	p - \dfrac{\lambda p^2}{2} = x + C_1 \iff x = p - \dfrac{\lambda p^2}{2} - С_1 \bto \partial = \partial\\
+	\d x = p\d t = \d p - \lambda p\d p \iff (1 - \lambda p)\d p = p\d t \iff \dfrac{1 - \lambda p}{p}\d p = \d t \bto \ds\int = \int\\
+	t = \log|p| - \lambda p + C_2
+\end{gather*}
+Решили-таки. Итоговым ответом будет одно общее решение и два особых:
+\[\begin{cases}
+	x = p - \dfrac{\lambda p^2}{2} - C_1\\
+	t = \log|p| - \lambda p + C_2
+\end{cases} \qquad x = C \qquad x = C_1\cdot t + C_2\]
+Отмечу, что константа $C_1$ в общем решении фиксирована для $x$, так как пришла из другого диффура, и никак не связана c $C_2$.
+
+\subsection{Кривизна траектории}
+
+Теперь применим наши методы для решения более-менее прикладных задач. Пускай у нас есть некая гладкая кривая (то есть гладкая покоординатно) $\gamma : \R \to \R^2$ -- некоторое отображение. Пускай $\gamma = \gamma(t)$ -- функция от параметра $t$. Можно ввести понятие \textbf{репараметризации} --- когда вместо $t$ мы подставляем некоторую функцию $t(\tau)$ --- грубо говоря, если до этого мы двигались по кривой с одной и той же скоростью, то теперь мы то замедляемся, то ускоряемся. Тогда $\gamma\big(\tau(t)\big) \sim \widetilde{\gamma}(\tau)$ --- уже кривая от параметра $\tau$. Пускай теперь мы хотим двигаться по кривой так, чтобы пройденное время было равно пройденному расстоянию. Для этого нужна особая параметризация, именуемая \textbf{натуральной}.
+\begin{definition}
+	\textbf{Натуральная параметризация} --- это такая параметризация $s = s(t)$ кривой $\gamma = \gamma(t)$, что для $\gamma(s)$ выполнено: $|\dot{\gamma}| = 1$.
+\end{definition}
+Пусть $s = s(t)$ --- натуральная параметризация. Тогда ввести её, исходя из определения, можно так:
+\[s(t) = \ds\int\limits_{0}^t |\dot{\gamma}|\d\tau\]
+
+Рассмотрим производную $\dot \gamma$ подробнее. Заметим, что:
+\[|\dot \gamma| = \langle\dot \gamma,\ \dot \gamma\rangle\] --- по определению модуля. Рассмотрим теперь производную скалярного произведения, которая определяется так:
+\[\big(\langle a,\ b\rangle\big)' = \langle \dot a,\ b\rangle + \langle a,\ \dot b\rangle\]
+Тогда:
+\[0 = (1)' = \big(\langle\dot \gamma,\ \dot \gamma\rangle\big)' = 2\langle \dot \gamma,\ \ddot \gamma\rangle \iff \dot \gamma \perp \ddot \gamma\]
+
+Введём ещё несколько определений.
+\begin{definition}
+	\textbf{Кривизна} кривой $\gamma(s)$, где $s$ --- натуральная параметризация, называется 
+	\[k = |\ddot \gamma(s)|\]
+	\textbf{Радиусом кривизны} при этом называется величина
+	\[R = \dfrac{1}{k}\]
+\end{definition}
+Так как $\dot \gamma \perp \ddot \gamma$, то фактически вектор скорости ($\dot \gamma$) перпендикулярен вектору ускорения ($\ddot \gamma$) --- иными словами, у нас имеется только центростремительное ускорение. Отсюда и возникает необходимость понятия кривизны траектории --- она фактически характеризует скорость вращения касательной в точке.
+
+Мы в $\R^2$. Возьмём векторы $\e_1 \parallel\dot \gamma,\ \e_2 \parallel \ddot \gamma$, $|\e_1| = 1 = |\e_2|$ --- так как $\dot \gamma \perp \ddot \gamma$, то они являются базисными. Ясно, что в таком случае первую производную кривой $\gamma$ можно выразить так:
+\[\dot\gamma = \dfrac{\d \gamma}{\d t} = \left|\dfrac{\d \gamma}{\d t}\right|\cdot \e_1 = |\dot{\gamma}|\cdot \e_1\]
+Попробуем теперь сделать также со второй производной:
+\begin{gather*}
+	\ddot{\gamma} = \dfrac{\d^2\gamma}{\d t^2} = \dfrac{\d }{\d t}\dot{\gamma} = \dfrac{\d }{\d t}\big(|\dot{\gamma}|\cdot \e_1\big) = \dfrac{\d}{\d t}\left|\dfrac{\d \gamma}{\d t}\right|\cdot \e_1 + \left|\dfrac{\d \gamma}{\d t}\right| \cdot \dfrac{\d \e_1}{\d t} = \dfrac{\d}{\d t}\left|\dfrac{\d \gamma}{\d t}\right|\cdot \e_1 + \left|\dfrac{\d \gamma}{\d t}\right| \cdot \dfrac{\d \e_1}{\d s}\cdot \dfrac{\d s}{\d t} = \\
+	= \dfrac{\d}{\d t}\left|\dfrac{\d \gamma}{\d t}\right|\cdot \e_1 + \left|\dfrac{\d \gamma}{\d t}\right| \cdot \left(k \cdot \e_2 \cdot \dfrac{\d s}{\d t}\right) = \dfrac{\d}{\d t}\left|\dfrac{\d \gamma}{\d t}\right|\cdot \e_1 + \left|\dfrac{\d \gamma}{\d t}\right|^2 \cdot k \cdot \e_2 = \ddot{\gamma}
+\end{gather*}
+Домножив всё на $\dot{\gamma}$ векторно, получаем:
+\[\big[\dot{\gamma},\ \ddot\gamma\big] = |\dot{\gamma}|^3\cdot k\]
+За валидность сего результата не отвечаю. Таким образом, мы смогли выразить $k$ через первую и вторую производные явно (при этом стоит помнить, что $k = |\ddot{\gamma}|$ только при натуральной параметризации). Отсюда получаем непростую формулу для кривизны:
+\[k = \dfrac{|\ddot{\gamma}|}{\Big[1 + \big(\dot{\gamma}\big)^2\Big]^\frac{3}{2}}\]
+
+\textbf{Пример №7}
+
+Найти все кривые $x(t)$, такие, что радиус кривизны для любой точки графика обратно пропорционален косинусу угла между касательной и осью абсцисс, то есть:
+\[R = \dfrac{1}{\cos\alpha}\]
+
+Для решения задачи понадобится немного вспомнить тригонометрию. Мы знаем, что:
+\[R^2 = \dfrac{1}{\cos^2\alpha} = \tan^2\alpha + 1 \bto R^2 = \tan^2\alpha + 1\]
+Но ведь тангент угла наклона касательной (то есть угла между касательной и осью абсцисс) это по определению производная $\dx$! Следовательно, получаем соотношение:
+\[R^2 = (\dx)^2 + 1\]
+Так как $R = \dfrac{1}{k}$, то можно подставить выражение для $k$ через первые две производные кривой, тем самым получив диффур второго порядка:
+\[\dfrac{1}{(\dx)^2 + 1} = \dfrac{(\ddx)^2}{\Big[1 + \big(\dx\big)^2\Big]^3}\]
+Будем его решать:
+\begin{gather*}
+	\dfrac{1}{(\dx)^2 + 1} = \dfrac{(\ddx)^2}{\Big[1 + \big(\dx\big)^2\Big]^3} \iff 1 = \dfrac{(\ddx)^2}{\Big[1 + \big(\dx\big)^2\Big]^2} \iff 1 = \dfrac{\ddx}{1 + (\dx)^2}
+\end{gather*}
+В уравнении в явном виде отсутствует сама функция $x = x(t)$, поэтому необходимо применить замену $p = \dx$.
+\begin{gather*}
+	\dx = p \qquad \ddx = p\dpp\\
+	1 = \dfrac{p\dpp}{1 + p^2} \iff \d x = \dfrac{p\d p}{1 + p^2} \bto \ds\int = \int\\
+	x = \dfrac{1}{2}\log|1 + p^2| + C \iff e^x = \lambda\sqrt{1 + p^2}\\
+	e^{2x} = \lambda^2\big(1 + p^2\big) \iff p = \pm\sqrt{\lambda^2e^{2x} - 1}
+\end{gather*}
+Осталось сделать обратную замену $\dx = p$ и решить диффур с разделяющимися переменными:
+\begin{gather*}
+	\dx = \pm\sqrt{\lambda^2e^{2x} - 1} \iff \dfrac{\d x}{\sqrt{\lambda^2e^{2x} - 1}} = \pm\d t \bto \ds\int = \ds\int \\
+	\ds\int \dfrac{\d x}{\sqrt{\lambda^2e^{2x} - 1}} = \left|\left|\begin{gathered}
+		u = 2x\\
+		\d u = 2\d x
+	\end{gathered}\right|\right| = \dfrac{1}{2}\ds\int \dfrac{\d u}{\sqrt{\lambda^2e^{u} - 1}}  = \left|\left|\begin{gathered}
+	v = e^u\\
+	\d v = e^u\d u = v\d u
+	\end{gathered}\right|\right| = \dfrac{1}{2}\ds\int \dfrac{\d v}{v\sqrt{\lambda^2v - 1}} = \\
+	= \left|\left|\begin{gathered}
+	w = \lambda^2v - 1\\
+	\d w = \lambda^2\d v
+	\end{gathered}\right|\right| = \dfrac{1}{2}\ds\int \dfrac{\d w}{(w + 1)\sqrt{w}} = \left|\left|\begin{gathered}
+	y = \sqrt{w}\\
+	\d y = \dfrac{1}{2\sqrt{w}}
+	\end{gathered}\right|\right| = \ds\int \dfrac{\d y}{y^2 + 1} = \arctan y + C = \\
+	= \arctan(\sqrt{w}) + 1 = \arctan(\sqrt{\lambda^2v - 1}) + 1 = \arctan(\sqrt{\lambda^2e^u - 1}) + 1 = \\ =
+	\arctan(\sqrt{\lambda^2e^{2x} - 1}) + 1 = \pm t
+\end{gather*}
+Таким образом, все возможные кривые, такие, что радиус кривизны для любой точки графика обратно пропорционален косинусу угла между касательной и осью абсцисс, задаются уравнением:
+\[\pm t = \arctan(\sqrt{\lambda^2e^{2x} - 1}) + 1 \]
+
+
 \subsection{Домашнее задание №6}
+
+\begin{task1}
+	Решить диффур:
+	\[(\ddx)^2 = (\dx)^2 + 1\]
+\end{task1}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task2}
+	Решить диффур:
+	\[\ddx = e^x\]
+\end{task2}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task3}
+	Решить диффур:
+	\[(\dx)^2 + 2x\ddx = 0\]
+\end{task3}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
+\begin{task4}
+	Решить диффур:
+	\[t\dddx = \ddx - t\ddx\]
+\end{task4}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task5}
+	Решить диффур:
+	\[x\ddx + x = (\dx)^2\]
+\end{task5}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
+
+\newpage
+\section{Семинар 7, 28 февраля}
+
+\subsection{Понижение порядка (продолжение)}
+
+\subsection{Однородные диффуры старших порядков}
+
+\subsection{Обобщённо однородные уравнения}
+
+\subsection{Домашнее задание №7}
 
 \newpage
 \section{Common Tasks}
