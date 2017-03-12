@@ -62,6 +62,8 @@
 \renewcommand{\headrulewidth}{1.8pt}    % Изменяем размер верхнего отступа колонтитула
 \renewcommand{\footrulewidth}{0.0pt}    % Изменяем размер нижнего отступа колонтитула
 
+\newcommand{\dotffill}[1]{\parbox[t]{#1}{\dotfill}}
+
 %Прочее
 \usepackage{forest} % Деревья
 
@@ -322,6 +324,7 @@ in
 Для большей точности построения интегральных кривых хорошо находить ГМТ точек перегиба, исследуя вторую производную $\ddx$ при помощи уравнения:
 \[\ddx = \dfrac{\d f}{\d t} + \dfrac{\d f}{\d x}\cdot \dx = \dfrac{\d f}{\d t} + f(t,\ x) \cdot \dfrac{\d f}{\d x} = 0\]
 Линия, определяемая данным уравнением, и есть возможное ГМТ точек перегиба.
+\ \\
 
 \textbf{Пример №1}
 
@@ -459,6 +462,7 @@ in
 	\ln |x| = \dfrac{t^2}{2} + C \Longrightarrow |x| = e^{\frac{t^2}{2}} \cdot \underbrace{e^C}_{\text{какая-то константа}} \Longrightarrow |x| = \lambda \cdot e^{\frac{t^2}{2}},\ \lambda > 0 \Longrightarrow x = \lambda \cdot e^{\frac{t^2}{2}},\ \lambda \in \R
 \end{gather*}
 В последних двух действиях мы взяли экспоненту от обеих частей и избавились от модуля.
+\ \\
 
 \textbf{Пример №3}
 
@@ -529,6 +533,7 @@ in
 
 Метод решения таков: сначала мы выражаем константы $c_1,\ \ldots,\ c_n$ через $t,\ x(t),\ \dx(t), \ldots,\ x^{(n)}(t)$, и потом подставляем всё в одно уравнение, тем самым получая диффур вида:
 \[\G\big(t,\ x(t),\ \dx(t),\ \ldots,\ x^{(n)}(t)\big) = 0\] который мы умеем решать.
+\ \\
 
 \textbf{Пример №5}
 
@@ -567,6 +572,7 @@ in
 	\d x = \dfrac{f(u)}{a + b \cdot f(u)} \d u
 \end{gather*}
 После этих махинаций всё легко решается как уравнение с разделяющими переменными.
+\ \\
 
 \textbf{Пример №6}
 \[\dx = \cos (x - t)\]
@@ -579,6 +585,7 @@ in
 Пускай у нас есть диффур:
 \[\dx = f(t,\ x)\]
 Можно сделать замену $u = \varphi(t,\ x)$, получив новое уравнение (весьма удачно, если получится диффур вида $\du = f(t,\ u)$, но такое бывает далеко не всегда). Решаем его и делаем обратную замену, получая $x(t)$.
+\ \\
 
 \textbf{Пример №7}
 
@@ -2554,7 +2561,7 @@ x = 2tp + \log p = 2p\cdot \left(\dfrac{C}{p^2} -\dfrac{1}{p}\right) + \log p = 
 
 Здесь даже и разбираться нечего, простое интегрирование. Полезно бывает группировать слагаемые в диффурах и получать вот такие выражения. Часто повторное интегрирование применяется при рассмотрении нескольких случаев.
 
-\subsection{Нет $x$}
+\subsection{Нет $x$ (искомой функции)}
 
 Рассмотрим диффур, в котором нет в явном виде (то бишь вообще не видно даже) искомой функции $x$ и, возможно, её производных до порядка $k - 1$ включительно. То есть, имеем уравнение:
 \[F\left(t,\ x^{(k)},\ x^{(k + 1)},\ \ldots,\ x^{(n)}\right)\]
@@ -2639,7 +2646,7 @@ y = \dfrac{u}{t + 1} = \dfrac{3(t + 1)^3 + C_1}{t + 1} = 3(t + 1)^2 + \dfrac{C_1
 \end{gather*}
 Нашли искомую кривую.
 
-\subsection{Нет $t$}
+\subsection{Нет $t$ (независимой переменной)}
 
 Существует также вид диффуров, в которых в явном виде нет переменной $t$. Вообще ни разу. То бишь выглядит уравнение так:
 \[F\left(x,\ \dx,\ \ddx,\ \ldots,\ x^{(n)}\right) = 0\]
@@ -2652,6 +2659,12 @@ y = \dfrac{u}{t + 1} = \dfrac{3(t + 1)^3 + C_1}{t + 1} = 3(t + 1)^2 + \dfrac{C_1
 И так далее. Подставив все эти выражения вместо производных соответствующих порядков, получаем диффур $n - 1$-го порядка:
 \[G\left(x,\ p,\ \dpp,\ \ldots,\ p^{(n - 1)}\right) = 0\]
 Решаем его, находя функцию $p = g(x)$, после чего делаем обратную замену $p = \dx$ и решаем обычный диффур первого порядка, которые мы давно покорили.
+
+Стоит сделать одно замечание. Пусть уравнение имеет вид
+\[F\left(x^{(k)},\ x^{(k + 1)},\ \ldots,\ x^{(n)}\right) = 0\]
+в нём нет И независимой переменной $t$, И искомой функции $x$. В данном случае поступаем так: делаем замену $x^{(k)} = y = y(t)$. Тогда получим диффур:
+\[F\left(y,\ \dy,\ \ldots,\ y^{(n - k)}\right) = 0\]
+А как раз он уже относится к случаю <<нет $t$>>. Выразив $y$, просто делаем обратную замену $y = x^{(k)}$ и находим $x$ повторным интегрированием.
 \ \\
 
 \textbf{Пример №4}
@@ -2873,11 +2886,323 @@ y = \dfrac{u}{t + 1} = \dfrac{3(t + 1)^3 + C_1}{t + 1} = 3(t + 1)^2 + \dfrac{C_1
 
 \subsection{Понижение порядка (продолжение)}
 
-\subsection{Однородные диффуры старших порядков}
+Мы уже умеем решать диффуры вида 
+\[F\big(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\big) = 0\] делая понижение порядка --- если нет $x$ и нескольких её первых производных, то можем сильно понизить степень, если нет $t$, то можем понизить степень на 1. Сейчас речь пойдёт о диффурах, где есть и $t$, и $x$, но которые также допускают понижение порядка. Однако, методы потребуются всё более изощрённые. Рассмотрим класс однородных диффуров. Мы с ними уже встречались в той или иной форме, но в данном случае речь пойдёт о двух видах однородных уравнений высших порядков.
 
-\subsection{Обобщённо однородные уравнения}
+\subsection{Уравнения, однородные относительно функции и её производных}
+
+\begin{definition}
+	Уравнение 
+	\[F\big(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\big) = 0\]
+	называется \textbf{однородным относительно функции и её производных}, если при замене 
+	\[x \leftarrow kx,\quad \dx \leftarrow k\dx,\quad \ldots \quad,\quad x^{(n)} \leftarrow kx^{(n)}\]
+	выполнено:
+	\[F\big(t,\ kx,\ k\dx,\ \ldots,\ kx^{(n)}\big) = k^mF\big(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\big)\]
+\end{definition}
+В таких уравнениях мы можем понизить порядок на 1, если использовать следующую замену:
+\[\dx = xz\]
+где $z = z(t)$ --- новая неизвестная функция от $t$. Производные старших порядков теперь можно выразить через $z$ и её производные, продифференцировав новое выражение:
+\begin{gather*}
+	\ddx = (xz)' = \dx z + \dz x = xz^2 + \dz x = x\left(z^2 + \dz\right)\\
+	\ddx = \big[x\left(z^2 + \dz\right)\big]' = \dx \left(z^2 + \dz\right) + x\left(2z\dz + \ddz\right) = xz^3 + xz\dz + x\left(2z\dz + \ddz\right) = x\left(z^3 + 3z\dz + \ddz\right)\\
+	\dotffill{0.75\textwidth}\\
+	x^{(n)} = x G\left(z,\ \dz,\ \ldots,\ z^{(n - 1)}\right)
+\end{gather*}
+Теперь подставляем выражения для $\dx,\ \ddx,\ \ldots,\ x^{(n)}$ в исходное уравнение:
+\[F\big(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\big) = F\left(t,\ x,\ xz,\ x\left(z^2 + \dz\right),\ \ldots,\ x G\left(z,\ \dz,\ \ldots,\ z^{(n - 1)}\right)\right) = 0\]
+Заметим, что теперь $x$ -- это общий множитель для функции $z$ и её производных. А так как уравнение является однородным относительно функции и её производных, то оно равносильно:
+\[x^mF\left(t,\ 1,\ z,\ \left(z^2 + \dz\right),\ \ldots,\ G\left(z,\ \dz,\ \ldots,\ z^{(n - 1)}\right)\right) = 0\]
+Теперь делим на $x^m$ --- потери решения $x$ = 0 не происходит --- и получаем уравнение $n - 1$-го порядка.
+\[F\left(t,\ 1,\ z,\ \left(z^2 + \dz\right),\ \ldots,\ G\left(z,\ \dz,\ \ldots,\ z^{(n - 1)}\right)\right) = 0\]
+Его уже решаем каким-либо известным нам способом, возможно, ещё понизив порядок несколько раз. Пусть мы нашли его общее решение:
+\[z = \fe\left(t,\ C_1,\ C_2,\ \ldots,\ C_{n - 1}\right)\]
+Осталось сделать обратную замену $z = \dfrac{\dx}{x}$ и решить простой диффур с разделяющимися переменными:
+\begin{gather*}
+	z = \dfrac{\dx}{x}\\
+	\dfrac{\dx}{x} = \fe\left(t,\ C_1,\ C_2,\ \ldots,\ C_{n - 1}\right) \iff \dfrac{\d x}{x} = \fe\left(t,\ C_1,\ C_2,\ \ldots,\ C_{n - 1}\right)\d t \bto \ds\int = \int\\
+	\log|x| = \ds\int \fe\left(t,\ C_1,\ C_2,\ \ldots,\ C_{n - 1}\right)\d t \\
+	x = \lambda \cdot \exp(\ds\int \fe\left(t,\ C_1,\ C_2,\ \ldots,\ C_{n - 1}\right)\d t)
+\end{gather*}
+Это и будет общим решением диффура. Как видим, решение $x = 0$ также учтено.
+\ \\
+
+\textbf{Пример №1}
+
+\[\dx\dddx = 2(\ddx)^2\]
+Первым делом заметим, что в данном уравнении нет $x$. В нём также нет и $t$, конечно, но функция приоритетнее аргумента. Поэтому делаем замену:
+\begin{gather*}
+	\dx = y \qquad \ddx = \dy \qquad \dddx = \ddy\\
+	y\ddy = 2(\dy)^2
+\end{gather*}
+Легко проверить, что данный диффур является однородным относительно функции $y$ и её производных:
+\[(ky)\big(k\ddy\big) = 2\big(k\dy\big)^2 \iff k^2\big(y\ddy\big) = 2k^2\big(\dy\big)^2\]
+Делаем замену $\dy = yz$ и подставляем соответствующие выражения для производных:
+\begin{gather*}
+	\dy = yz \qquad \ddy = y\left(z^2 + \dz\right)\\
+	y^2\left(z^2 + \dz\right) = 2y^2z^2 \iff z^2 + \dz = 2z^2 \iff \dz = z^2 \iff \dfrac{\d z}{z^2} = \d t \bto \ds\int = \int\\
+	-\dfrac{1}{z} = t + C_1 \iff z = -\dfrac{1}{t + C_1}
+\end{gather*}
+Вспоминаем, что $z = \dfrac{\dy}{y}$ и интегрируем:
+\begin{gather*}
+	\dfrac{\dy}{y} = -\dfrac{1}{t + C_1} \iff \dfrac{\d y}{y} = -\dfrac{\d t}{t + C_1 }\bto \ds\int = \int\\
+	\log|y| = -\log|t + C_1| + C_2 \iff y = \dfrac{\lambda}{t + C_1}
+\end{gather*}
+Поднимаемся ещё на ступеньку, заменяя $y$ обратно на $\dx$, и интегрируя ещё разок.
+\begin{gather*}
+	\dx = \dfrac{\lambda}{t + C_1} \iff x = \ds\int \dfrac{\lambda\d t}{t + C_1} = \lambda\log|t + C_1| + C_3
+\end{gather*}
+Итоговый ответ:
+\[x = \lambda\log|t + C_1| + C_3\]
+
+\textbf{Пример №2}
+
+\[tx\ddx - t(\dx)^2 - x\dx = 0\]
+Проверим, является ли это уравнение однородным:
+\[t(kx)(k\ddx) - t(k\dx)^2 - (kx)(k\dx) = 0 \iff k^2\big(tx\ddx - t(\dx)^2 - x\dx\big) = 0\]
+Очевидно, является. Делаем замену $\dx = xz$ и понижаем порядок:
+\begin{gather*}
+	\dx = xz \qquad \ddx = 	x\left(z^2 + \dz\right)\\
+	tx^2\left(z^2 + \dz\right) - tx^2z^2 - x^2z = 0 \iff t\left(z^2 + \dz\right) - tz^2 - z = 0\\
+	tz^2 + t\dz - t^2z - z = 0 \iff t\dz = z \iff \dfrac{\d z}{z} = \dfrac{\d t}{t} \bto \ds\int = \int\\
+	\log|z| = \log|t| + C_1 \iff z = \lambda t
+\end{gather*}
+Теперь заменяем $z$ на $\dfrac{\dx}{x}$ и интегрируем ещё раз, получая искомую кривую:
+\begin{gather*}
+	z = \dfrac{\dx}{x} = \lambda t \iff \dfrac{\d x}{x} = \lambda t \d t \bto \ds\int = \int\\
+	\log|x| = \lambda \cdot \dfrac{t^2}{2} + C_2 \\
+	x = \mu \cdot \exp(\lambda \cdot \dfrac{t^2}{2})
+\end{gather*}
+
+\textbf{Пример №3}
+
+\[x\ddx = (\dx)^2 + 15x^2\sqrt{t}\]
+Проверка на однородность:
+\[(kx)(k\ddx) = (k\dx)^2 + 5(kx)^2 \sqrt{ t } \iff k^2\big(x\ddx\big) = k^2\Big((\dx)^2 + 15x^2\sqrt{t}\Big)\]
+Уравнение однородно относительно функции и её производных. Делаем классическую замену:
+\begin{gather*}
+	\dx = xz \qquad \ddx = x\left(z^2 + \dz\right)\\
+	x^2\left(z^2 + \dz\right) = x^2z^2 + 15x^2 \sqrt{t} \iff z^2 + \dz = z^2 + 15\sqrt{t}\\
+	\dz = 15\sqrt{t} \iff \d z = 15\sqrt{t}\d t \bto \ds\int = \int\\
+	z = 15\cdot \dfrac{2}{3}\cdot t^{\frac{3}{2}} + C_1 = 10t^{\frac{3}{2}} + C_1
+\end{gather*}
+Обратная замена $z = \dfrac{\dx}{x}$:
+\begin{gather*}
+	z = \dfrac{\dx}{x} = 10t^{\frac{3}{2}} + C_1 \iff \dfrac{\d x}{x} = \left(10t^{\frac{3}{2}} + C_1\right)\d t \bto \ds\int = \int\\
+	\log|x| = 10 \cdot \dfrac{2}{5} \cdot t^{\frac{5}{2}} + 10C_1t + C_2 = 4\cdot t^{\frac{5}{2}} + 10C_1t + C_2\\
+	x = \lambda \exp(4\cdot t^{\frac{5}{2}}) \cdot \exp(10C_1t)
+\end{gather*}
+Получили искомую функцию.
+
+\subsection{Обобщённо-однородные уравнения}
+
+\begin{definition}
+	Уравнение 
+	\[F\big(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\big) = 0\]
+	называется \textbf{обобщённо-однородным}, если при замене 
+	\[t\leftarrow kt,\quad x \leftarrow k^mx,\quad \dx \leftarrow k^{m - 1}\dx,\quad \ldots \quad,\quad x^{(n)} \leftarrow k^{m - n}x^{(n)}\]
+	для некоторого чиcла $m$ выполнено:
+	\[F\left(kt,\ k^mx,\ k^{m - 1}\dx,\ \ldots,\ k^{m - n}x^{(n)}\right) = k^rF\left(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\right)\]
+\end{definition}
+Если нам попалось такое уравнение, нам в первую очередь необходимо найти число $m$, приравняв друг к другу показатели степеней, в которых число $k$ будет входить в каждый член уравнения после замены.
+
+Пусть мы нашли число $m$. Тогда делаем следующую замену:
+\[t = e^s\qquad x = ye^{ms}\]
+где $s$ --- новая независимая переменная, а $y = y(s)$ --- новая неизвестная функция. Заметим, что \[\d t = \d e^s = e^s \d s\] Тогда производные $\dx,\ \ddx,\ \ldots,\ x^{(n)}$ преобразуются следующим образом:
+\begin{gather*}
+	x = ye^{ms}\\
+	\dx = \dfrac{\d x}{\d t} = \dfrac{\d ye^{ms}}{e^s \d s} = \dfrac{e^{ms}}{e^s}\cdot \dfrac{\d y}{\d s} + \dfrac{mye^{ms}\d s}{e^s \d s} = \left(\dy + my\right)e^{(m - 1)s}\\
+	\ddx = \dfrac{\d \dx}{\d t} = \dfrac{\d}{e^s\d s}\left(\dy + my\right)e^{(m - 1)s} = \dfrac{\d}{e^s\d s}\left(\dy e^{(m - 1)s}\right) + \dfrac{\d}{e^s\d s}\left(mye^{(m - 1)s}\right) = \\
+	= \dfrac{e^{(m - 1)s}\d\dy}{e^s\d s} + \dfrac{(m - 1)e^{(m - 1)s}\dy\d s}{e^s\d s} + \dfrac{me^{(m - 1)s}\d y}{e^s\d s} + \dfrac{m(m - 1)ye^{(m - 1)s}\d s}{e^s\d s} = \\
+	= e^{(m - 2)s}\ddy + (m - 1)\dy e^{(m - 2)s} + me^{(m - 2)s}\dy + m(m - 1)ye^{(m - 2)s} = \\
+	= \big(\ddy + (2m - 1)\dy + m(m - 1)y\big)e^{(m - 2)s}\\
+	\dotffill{0.75\textwidth}\\
+	x^{(n)} = G\left(y,\  \dy,\ \ddy,\ \ldots,\ y^{(n)}\right)e^{(m - n)s}
+\end{gather*}
+Теперь подставим в исходное уравнение полученные выражения:
+\begin{gather*}
+	F\left(t,\ x,\ \dx,\ \ldots,\ x^{(n)}\right) = F\left(e^s,\ ye^{ms},\ \left(\dy + my\right)e^{(m - 1)s},\ \ldots,\ G\left(y,\  \dy,\ \ddy,\ \ldots,\ y^{(n)}\right)e^{(m - n)s}\right)
+\end{gather*}
+Заметим, что теперь $e^s$ -- это однородный множитель для функции $y$ и её производных. А так как уравнение является обобщённо-однородным, то оно равносильно:
+\[
+	e^{rs}F\left(1,\ y,\ \left(\dy + my\right),\ \ldots,\ G\left(y,\  \dy,\ \ddy,\ \ldots,\ y^{(n)}\right)\right) = 0
+\]
+Теперь делим на $e^{rs}$ --- это не равная нулю функция --- и получаем диффур, \underline{не содержащий} переменной $s$:
+\[H\left(y,\ \dy,\ \ddy,\ \ldots,\ y^{(n)}\right) = 0\]
+А это уже уравнение, допускающее понижение порядка. Делаем классическую замену $\dy = p$ и решаем то, что уже умеем.
+
+После того, как функция $y = \fe(s)$ была найдена, необходимо сделать обратную замену:
+\begin{gather*}
+	t = e^s \iff s = \log t\\
+	x = ye^{ms} \iff y = \dfrac{x}{e^{ms}} = \dfrac{x}{t^m}
+\end{gather*}
+Вот таким вот экзотическим способом решается данный тип дифференциальных уравнений. Напоследок замечу, что если в исходном уравнении $t < 0$, то делается замена $t = -e^s$, а в остальном всё абсолютно аналогично с точностью до знаков.
+\ \\
+
+\textbf{Пример №4}
+
+\[4t^2x^3\ddx = t^2 - x^4\]
+Покажем, что это уравнение --- обобщённо-однородное, найдя число $m$. Для этого делаем замену 
+\[t\leftarrow kt,\quad x \leftarrow k^mx,\quad \dx \leftarrow k^{m - 1}\dx,\quad \ddx \leftarrow k^{m - 2}\ddx\]
+и приравниваем степени при $k$ у членов уравнения:
+\[k^2\cdot k^{3m} \cdot k^{m - 2} = k^2 = k^{4m} \iff 2 = 4m \iff m = \dfrac{1}{2}\]
+Теперь делаем экзотическую замену и подставляем в исходный диффур:
+\begin{gather*}
+	t = e^s\qquad x = ye^{\frac{s}{2}} \qquad \dx = \left(\dy + \dfrac{y}{2}\right)e^{-\frac{s}{2}} \qquad \ddx = \left(\ddy - \dfrac{y}{4}\right)e^{-\frac{3s}{2}}\\
+	4e^{2s}y^3e^{\frac{3s}{2}}\left(\ddy - \dfrac{y}{4}\right)e^{-\frac{3s}{2}} = e^{2s} - y^4e^{2s} \iff 4y^3 \left(\ddy - \dfrac{y}{4}\right) = 1 - y^4\\
+	4y^3\ddy - y^4 = 1 - y^4 \iff 4y^3\ddy = 1
+\end{gather*}
+Получили уравнение, в котором отсутствует независимая переменная $s$. Для решения делаем классическую замену $\dy = p = p(y)$ и решаем получившийся диффур первого порядка:
+\begin{gather*}
+	\dy = p \qquad \ddy = p\dpp\\
+	4y^3p\dpp = 1 \iff 4p\d p = \dfrac{\d y}{y^3} \bto \ds\int = \int\\
+	2p^2 = -\dfrac{2}{y^2} + C_1 \iff p = \pm\sqrt{C_1 -\dfrac{1}{y^2}}
+\end{gather*}
+Делаем обратную замену $p = \dy$ и решаем уравнение с разделяющимися переменными:
+\begin{gather*}
+	p = \dy = \pm\sqrt{C_1 -\dfrac{1}{y^2}} \iff \dfrac{\d y}{\sqrt{C_1 -\frac{1}{y^2}} } = \pm\d s \bto \ds\int = \int\\
+	\ds\int\dfrac{\d y}{\sqrt{C_1 -\frac{1}{y^2}} } = \ds\int \dfrac{y\d y}{\sqrt{C_1y^2 - 1}} = \dfrac{1}{2C_1}\ds\int \dfrac{\d C_1y^2}{\sqrt{C_1y^2 - 1}} = \dfrac{\sqrt{C_1y^2 - 1}}{C_1} = \pm s + C_2
+\end{gather*}
+Теперь делаем обратную замену и получаем общее решение.
+\[\begin{gathered}
+	s = \log t \qquad y = \dfrac{x}{\sqrt{t}}\\
+	\dfrac{\sqrt{C_1y^2 - 1}}{C_1} = \pm s + C_2 \iff \dfrac{\sqrt{C_1\frac{x^2}{t} - 1}}{C_1} = \pm \log t + C_2
+\end{gathered}\]
+
+\textbf{Пример №5}
+
+\[t^4\ddx + (t\dx - x)^3 = 0\]
+Покажем, что это уравнение является обобщённо-однородным. Делаем замену
+\[t\leftarrow kt,\quad x \leftarrow k^mx,\quad \dx \leftarrow k^{m - 1}\dx,\quad \ddx \leftarrow k^{m - 2}\ddx\]
+и приравниваем степени при $k$ у членов уравнения:
+\[k^4\cdot k^{m - 2} = k^{3} \cdot k^{3(m - 1)} = k^{3m} \iff m + 2 = 3m \iff m = 1\]
+Далее идёт экзотическая замена с последующей подстановкой:
+\begin{gather*}
+	t = e^s\qquad x = ye^s \qquad \dx = \dy + y \qquad \ddx = \left(\ddy + \dy\right)e^{-s}\\
+	e^{4s}\big(\ddy + \dy\big)e^{-s} + \big(e^s(\dy + y) - ye^s\big)^3 = 0 \iff \ddy + \dy + (\dy)^3 = 0
+\end{gather*}
+Получили диффур без $s$. Понизим на 1 порядок уравнения, применив замену $\dy = p = p(y)$:
+\begin{gather*}
+	\dy = p \qquad \ddy = p\dpp\\
+	p\dpp + p + p^3 = 0 \iff \dpp + 1 + p^2 = 0 \iff \dfrac{\d p}{1 + p^2} = -\d y \bto \ds\int = \int\\
+	\arctan p = C_1 - y \iff p = \tan(C_1 - y)
+\end{gather*}
+Стоит отметить, что мы проигнорировали случай $p = 0$ в ходе решения. Однако, данное решение будет учтено впоследствии. Делаем обратную замену $p = \dy$ и интегрируем:
+\begin{gather*}
+	p = \dy = \tan(C_1 - y) \iff \dfrac{\d y}{\tan(C_1 - y)} = \d s \bto \ds\int = \int\\
+	\ds\int \dfrac{\d y}{\tan(C_1 - y)} = -\ds\int \cot(y - C_1)\d y = -\log\big|\sin(y - C_1)\big| = t + C_2
+\end{gather*}
+Теперь возвращаемся обратно к переменным $t$ и $x$:
+\begin{gather*}
+	s = \log t \qquad y = \dfrac{x}{t}\\
+	\log\left|\sin(\dfrac{x}{t} - C_1)\right| = -\log t + C_2 \iff \sin(\dfrac{x}{t} - C_1) = \dfrac{\lambda}{t} \iff \dfrac{x}{t} = C_1 + \arcsin(\dfrac{\lambda}{t}) 
+\end{gather*}
+Таким образом, итоговым ответом будет кривая:
+\[x = t \cdot \left(C_1 + \arcsin(\dfrac{\lambda}{t}) \right)\]
+
+\textbf{Пример №6}
+
+\[\dfrac{x^2}{t^2} + (\dx)^2 = 3t\ddx + \dfrac{2x\dx}{t}\]
+Покажем, что это уравнение --- обобщённо-однородное, найдя число $m$. Для этого делаем замену 
+\[t\leftarrow kt,\quad x \leftarrow k^mx,\quad \dx \leftarrow k^{m - 1}\dx,\quad \ddx \leftarrow k^{m - 2}\ddx\]
+и приравниваем степени при $k$ у членов уравнения:
+\[k^{2m} \cdot k^{-2} = k^{2(m - 1)} = k\cdot k^{m - 2} = k^{m} \cdot k^{m - 1}\cdot k^{-1} \iff 2m - 2 = m - 1 \iff m = 1\]
+Экзотическая замена:
+\begin{gather*}
+	t = e^s\qquad x = ye^s \qquad \dx = \dy + y \qquad \ddx = \left(\ddy + \dy\right)e^{-s}\\
+	e^{-2s}y^2e^{2s} + (\dy + y)^2 = 3e^s\left(\ddy + \dy\right)e^{-s} + 2e^{-s}ye^s(\dy + y) \iff y^2 + (\dy + y)^2 = 3(\ddy + \dy) + 2y(\dy + y)\\
+	y^2 + (\dy)^2 + 2y\dy + y^2 = 3\ddy + 3\dy + 2y\dy + 2y^2 \iff (\dy)^2 = 3\ddy + 3\dy 
+\end{gather*}
+Классическая замена:
+\begin{gather*}
+	\dy = p \qquad \ddy = p\dpp\\
+	p^2 = 3p\dpp + 3p \iff p = 3\dpp + 3 \iff 3\dpp = p - 3 \iff \dfrac{3\d p}{p - 3} = \d y \bto \ds\int = \int\\
+	3\log|p - 3| = y + C_1 \iff \log|p - 3| = \dfrac{y}{3} + C_1 \iff p - 3 = \lambda \exp(\dfrac{y}{3}) \iff p = 3 + \lambda \exp(\dfrac{y}{3})
+\end{gather*}
+Обратная замена $p = \dy$:
+\begin{gather*}
+	p = \dy = 3 + \lambda \exp(\dfrac{y}{3}) \iff \dfrac{\d y}{3 + \lambda \exp(\frac{y}{3})} = \d s \bto \ds\int = \int\\
+	\ds\int \dfrac{\d y}{3 + \lambda \exp(\frac{y}{3})} = \left|\left|\begin{gathered}
+		u = \frac{y}{3}\\
+		\d u = \frac{1}{3}\d y
+	\end{gathered}\right|\right| = 3\ds\int\dfrac{\d u}{3 + \lambda e^u} = \left|\left|\begin{gathered}
+		v = e^u\\
+		\d v = e^u\d u
+	\end{gathered}\right|\right| = 3\ds\int\dfrac{\d v}{v(3 + \lambda v)} = \\
+	= 3\ds\int \left(\dfrac{1}{3v} - \dfrac{\lambda}{3(3 + \lambda v)}\right)\d v = \log|v| - \log|3 + \lambda v|  = \log|e^u| - \log|3 + \lambda e^u|  = \\
+	= u - \log|3 + \lambda e^u|  = \dfrac{y}{3} - \log\left|3 + \lambda\exp(\frac{y}{3})\right| = s + C_2
+\end{gather*}
+Теперь вспоминаем, что мы заменяли на $s$ и $y$, и подставляем назад:
+\begin{gather*}
+	s = \log t \qquad y = \dfrac{x}{t}\\
+	\dfrac{x}{t} - \log\left|3 + \lambda\exp(\frac{x}{3t})\right| = \log t + C_2 \iff \dfrac{x}{t} = \log\left|3 + \lambda\exp(\frac{x}{3t})\right| + \log t + C_2\\
+	\exp(\dfrac{x}{t}) = \mu \cdot \left(3 + \lambda\exp(\frac{x}{3t})\right)\cdot t
+\end{gather*}
+Получили общее решение дифференциального уравнения.
 
 \subsection{Домашнее задание №7}
+
+\begin{task1}
+	Решить диффур:
+	\[\ddx x t + \dx x + \dfrac{x^2}{t} - (\dx)^2t = 0\]
+\end{task1}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task2}
+	Решить диффур:
+	\[\ddx x + \ddx - (\dx)^2 + x + 1 = 0\]
+\end{task2}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task3}
+	Решить диффур:
+	\[(t\dx - x)(t + t\dx - x) + t^3\ddx = 0\]
+\end{task3}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
+\begin{task4}
+	Решить диффур:
+	\[x^2 + (\dx)^2t^2 = 3t^3\ddx + 2x\dx t\]
+\end{task4}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task5}
+	Доказать, что любое глобальное решение уравнения \[\ddx + x^3 = 0\] --- периодическая функция.
+\end{task5}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
+\newpage
+\section{Семинар 8, 7 марта}
+
+\subsection{Повторение}
+
+\textbf{Пример №1}
+
+\textbf{Пример №2}
+
+\textbf{Пример №3}
+
+\textbf{Пример №4}
+
+\subsection{Домашнее задание №8}
+
+
+\newpage
+\section{Семинар 9, 11 марта}
+
+\subsection{Однородные уравнения высших порядков}
+
+\subsection{Домашнее задание №9}
+
 
 \newpage
 \section{Common Tasks}
