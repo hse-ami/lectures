@@ -16,7 +16,7 @@
 \begin{proof}
 	Докажем первое утверждение только для первой производной, ибо утверждение для старших степеней легко обобщается по индукции аналогичный образом. Рассмотрим производную функции \(\phi_{\xi}(t)\) в точке \(t_0\):
 	\[
-		\phi_{\xi}'(t) = \lim\limits_{\Delta t \to 0} \frac{\phi_{\xi}(t_0 + \Delta t) - \phi_{\xi}(t_0)}{\Delta t} = \lim\limits_{\Delta t \to 0} \E{e^{i\xi t_0}\left(\frac{e^{i\xi \Delta t} - 1}{\Delta t}\right)}.
+		\phi_{\xi}'(t_0) = \lim\limits_{\Delta t \to 0} \frac{\phi_{\xi}(t_0 + \Delta t) - \phi_{\xi}(t_0)}{\Delta t} = \lim\limits_{\Delta t \to 0} \E{e^{i\xi t_0}\left(\frac{e^{i\xi \Delta t} - 1}{\Delta t}\right)}.
 	\]
 	
 	Теперь заметим, что \(\frac{e^{i\xi \Delta t} - 1}{\Delta t} \asto i\xi\) (просто поточечная сходимость). Далее,
