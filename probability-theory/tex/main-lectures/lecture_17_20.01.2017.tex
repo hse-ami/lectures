@@ -2,13 +2,13 @@
 \subsection{Дифференцирование характеристических функций}
 Продолжим обсуждать характеристические функции. Вообще говоря, характеристическая функция~--- это вполне себе функция.\footnote{Да ладно?} Поэтому хотелось бы уметь, например, брать производные от характеристической функции. Но как они будут устроены? Ответ на это даёт следующая
 \begin{theorem}[о производных характеристической функции]
-	Пусть \(\xi\)~--- это некоторая случайная величина и \(\E{|\xi|^n} < +\infty\) для какого-то \(n \in \N\). Тогда для всех \(r \in \{1, 2, \dots, n\}\) существуют \(\phi_{\xi}^{(r)}(t)\), причём
+	Пусть \(\xi\)~--- это некоторая случайная величина и \(\E{|\xi|^r} < +\infty\) для всех \(r \in \overline{1,\ldots,n}\). Тогда для всех \(r \in \{1, 2, \dots, n\}\) существуют \(\phi_{\xi}^{(r)}(t)\), причём
 	\[
 		\phi_{\xi}^{(r)}(t) = \E{(i\xi)^re^{it\xi}}.
 	\]
 	Более того,
 	\begin{gather*}
-		\phi_{\xi}^{(r)}(t) = i^r\E{\xi^r} \\
+		\phi_{\xi}^{(r)}(0) = i^r\E{\xi^r} \\
 		\phi_{\xi}(t) = \sum_{k = 0}^{n} \frac{(it)^k}{k!}\E{\xi^k} + \frac{(it)^n}{n!}\mathcal{E}_n(t)
 	\end{gather*}
 	где \(\left|\mathcal{E}_n(t)\right| \leq 3\E{|\xi|^n}\) и \(\lim\limits_{t \to 0} \mathcal{E}_n(t) = 0\).
@@ -34,7 +34,7 @@
 	
 	Теперь докажем последнее утверждение. Разложим \(e^{iy}\) в ряд Тейлора-Маклорена с остаточным членом в форме Лагранжа до \((n - 1)\)-го порядка:
 	\[
-		e^{iy} = \cos(y) + i\sin(y) = \sum_{k = 0}^{n - 1} \frac{(iy)^k}{k!} + \frac{(iy)^n}{k!}(\cos(\theta_1 y) + i\sin(\theta_2 y)),
+		e^{iy} = \cos(y) + i\sin(y) = \sum_{k = 0}^{n - 1} \frac{(iy)^k}{k!} + \frac{(iy)^n}{n!}(\cos(\theta_1 y) + i\sin(\theta_2 y)),
 	\]
 	где \(\theta_1, \theta_2 \in [0, 1]\).
 	
@@ -42,11 +42,11 @@
 	
 	Теперь возьмём матожидание от этого выражения в точке \(y = t\xi\):
 	\[
-		\E{e^{it\xi}} = \sum_{k = 0}^{n - 1} \frac{(it)^k}{k!}\E{\xi^k} + \frac{(it)^n}{k!}\E{\xi^{n}(\cos(\theta_1 t\xi) + i\sin(\theta_2 t\xi))}
+		\E{e^{it\xi}} = \sum_{k = 0}^{n - 1} \frac{(it)^k}{k!}\E{\xi^k} + \frac{(it)^n}{n!}\E{\xi^{n}(\cos(\theta_1 t\xi) + i\sin(\theta_2 t\xi))}
 	\]
 	Теперь добавим и вычтем \(\frac{(it)^n}{k!}\E{\xi^{n}}\):
 	\[
-		\E{e^{it\xi}} = \sum_{k = 0}^{n} \frac{(it)^k}{k!}\E{\xi^k} + \frac{(it)^n}{k!}\E{\xi^{n}(\cos(\theta_1 t\xi) + i\sin(\theta_2 t\xi) - 1)}
+		\E{e^{it\xi}} = \sum_{k = 0}^{n} \frac{(it)^k}{k!}\E{\xi^k} + \frac{(it)^n}{n!}\E{\xi^{n}(\cos(\theta_1 t\xi) + i\sin(\theta_2 t\xi) - 1)}
 	\]
 	Осталось понять, что из себя представляет этот остаточный член. Введём обозначение
 	\[
@@ -132,7 +132,7 @@
 		\]
 		Осталось показать, что \(\phi_{\eta}(\mathbf{t}) = \phi_{\xi}(\mathbf{t})\). Действительно, согласно теореме единственности и первому пункту получаем, что
 		\[
-			\phi_{\eta}(\mathbf{t}) = \prod_{k = 1}^{n} \phi_{\eta_i}(t_i) = \prod_{k = 1}^{n} \phi_{\xi_i}(t_i) = \phi_{\eta}(\mathbf{t}).
+			\phi_{\eta}(\mathbf{t}) = \prod_{k = 1}^{n} \phi_{\eta_k}(t_k) = \prod_{k = 1}^{n} \phi_{\xi_k}(t_k) = \phi_{\xi}(\mathbf{t}).
 		\]
 		Следовательно, по теореме единственности
 		\[
@@ -210,7 +210,7 @@
 	\]
 	Теперь возьмём \(x\) такое, чтобы \(\Phi(x) - \Phi(-x) \geq 0.99\). Можно проверить, что \(x \approx 2.58\) вполне подходит. Тогда с вероятностью \(0.99\) выполнено, что
 	\[
-		|S_n| \leq x\sigma\sqrt{n} = 258 \cdot \frac{10^{-6}}{3} \approx 1.5 \cdot 10^{-4}.\qedhere
+		|S_n| \leq x\sigma\sqrt{n} = 258 \cdot \frac{10^{-6}}{\sqrt{3}} \approx 1.5 \cdot 10^{-4}.\qedhere
 	\]
 \end{proof}
 
@@ -244,7 +244,7 @@
 	\]
 	Но это верно с какой-то неизвестной погрешностю~--- у нас же конечное число измерений. Придётся воспользоваться ЦПТ для оценки погрешности:
 	\[
-		\sqrt{n}\left(\frac{\overline{\xi}_n - a}{\sigma}\right) \dto N(0, 1) \implies \Pr{\sqrt{n}\left|\frac{\overline{\xi}_n - a}{\sigma}\right| \geq y} \approx \Phi(y) - \Phi(-y).
+		\sqrt{n}\left(\frac{\overline{\xi}_n - a}{\sigma}\right) \dto N(0, 1) \implies \Pr{\sqrt{n}\left|\frac{\overline{\xi}_n - a}{\sigma}\right| \leq y} \approx \Phi(y) - \Phi(-y).
 	\]
 	Возьмём \(y \approx 2.58\). Тогда с вероятностью \(0.99\) верно, что
 	\[
