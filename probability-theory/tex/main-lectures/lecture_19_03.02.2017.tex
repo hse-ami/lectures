@@ -25,12 +25,14 @@
 	Первое слагаемое есть нормальная случайная величина (по теореме о трёх определениях), а второе~--- просто константа. Тогда \(\left\langle \mathbf{t}, \eta\right\rangle\)~--- это нормальная случайная величина. Следовательно, \(\eta\)~--- это гауссовский вектор.
 \end{proof}
 
-Теперь докажем одну простую, но достаточно полезуню лемму:
+Теперь докажем одну простую, но достаточно полезную лемму:
 \begin{lemma}[Критерий независимости компонент]
-	Пусть \(\xi = (\xi_1, \dots, \xi_n)\)~--- это гауссовский вектор. Тогда его компоненты независимы тогда и только тогда, когда они некоррелированы.
+	Пусть \(\xi = (\xi_1, \dots, \xi_n)\)~--- это гауссовский вектор. Тогда его 
+	компоненты независимы тогда и только тогда, когда они некоррелированны.
 \end{lemma}
 \begin{proof}
-	Как известно, если случайные величины независимы, то они некоррелированы. Теперь докажем, что в данном случае верно и обратное.
+	Как известно, если случайные величины независимы, то они некоррелированны. 
+	Теперь докажем, что в данном случае верно и обратное.
 	
 	Пусть \(\cov(\xi_i, \xi_j) = 0\) при \(i \neq j\). Тогда матрица ковариаций \(\mathbf{\Sigma}\) диагональна. Теперь рассмотрим характеристическую функцию \(\phi_{\xi}(\mathbf{t})\):
 	\begin{align*}
@@ -55,7 +57,10 @@
 \begin{theorem}[о плотности гауссовских векторов]
 	Пусть \(\xi \sim \mathcal{N}(\mathbf{a}, \mathbf{\Sigma})\)~--- \(n\)-мерный гауссовский вектор. Тогда, если \(\mathbf{\Sigma}\) положительно определена, то существует плотность \(p_{\xi}(\mathbf{t})\) и она равна
 	\[
-		p_{\xi}(\mathbf{t}) = \frac{1}{(2\pi)^{n/2}\sqrt{\det{\mathbf{\Sigma}}}}\exp\left\{-\frac{1}{2}\left\langle\mathbf{\Sigma}^{-1}(\mathbf{t} - \mathbf{a}), (\mathbf{t} - \mathbf{a})\right\rangle\right\}
+		p_{\xi}(\mathbf{t}) = 
+		\frac{1}{(2\pi)^{n/2}\sqrt{\det{\mathbf{\Sigma}}}} 
+		\exp\left\{-\frac{1}{2}\left\langle\mathbf{\Sigma}^{-1}(\mathbf{t}
+		 - \mathbf{a}), (\mathbf{t} - \mathbf{a})\right\rangle\right\}
 	\]
 \end{theorem}
 \begin{proof}
@@ -78,12 +83,18 @@
 	
 	Тогда
 	\[
-		\Pr{\xi \in B} = \int\limits_{B} \frac{1}{(2\pi)^{n/2}\det{\mathbf{D}}}\exp\left\{-\frac{1}{2}\left\langle\mathbf{D}^{-1}(\mathbf{y} - \mathbf{a}), \mathbf{D}^{-1}(\mathbf{y} - \mathbf{a})\right\rangle\right\}\diff y
+		\Pr{\xi \in B} = \int\limits_{B} \frac{1}{(2\pi)^{n/2}\det{\mathbf{D}}} 
+		\exp\left\{-\frac{1}{2}\left\langle\mathbf{D}^{-1}(\mathbf{y} - 
+		\mathbf{a}), \mathbf{D}^{-1}(\mathbf{y} - 
+		\mathbf{a})\right\rangle\right\}\diff\mathbf{y}
 	\]
 	
 	А это в свою очередь равно
 	\[
-		\int\limits_{B} \frac{1}{(2\pi)^{n/2}\sqrt{\det{\mathbf{\Sigma}}}}\exp\left\{-\frac{1}{2}\left\langle\mathbf{\Sigma}^{-1}(\mathbf{y} - \mathbf{a}), (\mathbf{y} - \mathbf{a})\right\rangle\right\}\diff y
+		\int\limits_{B} \frac{1}{(2\pi)^{n/2}\sqrt{\det{\mathbf{\Sigma}}}}
+		\exp\left\{-\frac{1}{2}\left\langle\mathbf{\Sigma}^{-1}(\mathbf{y} - 
+		\mathbf{a}), (\mathbf{y} - \mathbf{a})\right\rangle 
+		\right\}\diff\mathbf{y}
 	\]
 	
 	Дифференцируя, получаем желаемое.
@@ -114,7 +125,10 @@
 	\[
 		h(\mathbf{x} + \mathbf{a}) = h(\mathbf{a}) + \left\langle h'(\mathbf{a}), \mathbf{x}\right\rangle + \psi(\mathbf{x})
 	\]
-	где \(\frac{\psi(\mathbf{x})}{\|\mathbf{x}\|} \to 0\) при \(\mathbf{x} \to \mathbf{0}\). Подставим \(\mathbf{x} = S_n/n - \mathbf{a}\) и домножим обе части уравнения на \(\sqrt{n}\). Это легально, так как по ЗБЧ \(S_n/n \asto \mathbf{a}\). Тогда
+	где \(\frac{\psi(\mathbf{x})}{\|\mathbf{x}\|} \to 0\) при \(\mathbf{x} \to 
+	\mathbf{0}\). Подставим \(\mathbf{x} = S_n/n - \mathbf{a}\) и помножим обе 
+	части уравнения на \(\sqrt{n}\). Это легально, так как по ЗБЧ \(S_n/n \asto 
+	\mathbf{a}\). Тогда
 	\[
 		\sqrt{n}h\left(\frac{S_n}{n}\right) = \sqrt{n}h(\mathbf{a}) + \left\langle h'(\mathbf{a}), \sqrt{n}\left(\frac{S_n}{n} - \mathbf{a}\right)\right\rangle + \sqrt{n}\psi\left(\frac{S_n}{n} - \mathbf{a}\right)
 	\]

@@ -2,9 +2,13 @@
 \subsection{Вычисление условного математического ожидания}
 Ранее мы ввели условное математическое ожидание. Теперь хотелось бы научиться считать его. Для начала покажем, как это делается в дискретном случае.
 \begin{theorem}
-	Пусть \(\eta\) имеет дискретное распределение и \(X = (x_1, \dots, x_n, \dots)\)~--- множество значений. Тогда для любой случайной величины \(\xi\) выполнено, что
+	Пусть \(\eta\) имеет дискретное распределение и \(X = (x_1, \dots, x_n, 
+	\dots)\)~--- множество значений. Тогда для любой случайной величины \(\xi\) 
+	выполнено, что
 	\[
-		\E{\xi \given \eta} = \sum_{k = 1}^{\infty} \frac{\E{\xi\I\,\{\eta = x\}}}{\Pr{\eta = x}}\I\,\{\eta = x\}
+		\E{\xi \given \eta} = \sum_{k = 1}^{\infty} 
+		\frac{\E{\xi\mathbf{1}_{\{\eta = x_{k}\}}}}{\Pr{\eta = x_{k}}} 
+		\mathbf{1}_{\{\eta = x_{k}\}}
 	\]
 \end{theorem}
 \begin{proof}
@@ -12,17 +16,31 @@
 	
 	Теперь проверим интегральное свойство. Для начала возьмём \(B = \{x_n\}\), где \(x_n\)~--- это одно из значений \(\eta\), для которого \(\Pr{\eta = x_n} > 0\).
 	\begin{align*}
-		\E{\E{\xi \given \eta}\I\{\eta = x_n\}} &= \E{\frac{\E{\xi \I\{\eta = x_n\}}}{\Pr{\eta = x_n}} \I\,\{\eta = x_n\}} \\
-		&= \frac{\E{\xi \I\{\eta = x_n\}}}{\Pr{\eta = x_n}}\E{\I\,\{\eta = x_n\}} = \E{\xi \I\{\eta = x_n\}}
+		\E{\E{\xi \given \eta}\mathbf{1}_{\{\eta = x_{n}\}}} &= \E{\frac{\E{\xi 
+		\mathbf{1}_{\{\eta = x_{n}\}}}}{\Pr{\eta = x_n}} \mathbf{1}_{\{\eta = 
+		x_{n}\}}} \\
+		&= \frac{\E{\xi\mathbf{1}_{\{\eta = x_{n}\}}}}{\Pr{\eta = 
+		x_n}}\E{\mathbf{1}_{\{\eta = x_{k}\}}} = \E{\xi\mathbf{1}_{\{\eta = 
+		x_{k}\}}}
 	\end{align*}
-	Теперь обобщим это на произвольное \(B\). Пусть в \(B\) есть элементы \(y_{1}, \dots, y_{n}, \dots\), которые являются значениям \(\eta\). Тогда по линености матожидания получаем, что
+	Теперь обобщим это на произвольное \(B\). Пусть в \(B\) есть элементы 
+	\(y_{1}, \dots, y_{n}, \dots\), которые являются значениям \(\eta\). Тогда 
+	по линейности матожидания получаем, что
 	\begin{align*}
-		\E{\xi \I\{\eta \in B\}} &= \E{\xi\left(\sum_{i = 1}^{\infty} \I\{\eta = y_{i}\}\right)} = \sum_{i = 1}^{\infty} \E{\xi \I\{\eta = y_{i}\}} \\
-		&= \lim\limits_{n \to \infty} \sum_{i = 1}^{n} \E{\xi \I\{\eta = y_{i}\}}
+		\E{\xi\mathbf{1}_{B}(\eta)} &= \E{\xi\left(\sum_{i = 1}^{\infty} 
+		\mathbf{1}_{\{\eta = y_{i}\}}\right)} = \sum_{i = 1}^{\infty} \E{\xi 
+		\mathbf{1}_{\{\eta = y_{i}\}}} \\
+		&= \lim\limits_{n \to \infty} \sum_{i = 1}^{n} \E{\xi 
+		\mathbf{1}_{\{\eta = y_{i}\}}}
 	\end{align*}
-	Заметим, что \(|\xi \I\{\eta = y_{i}\}| \leq |\xi|\) и \(\E{\xi \I\{\eta = y_i\}} = \E{\E{\xi \given \eta}\I\{\eta = y_i\}}\). Тогда по теореме Лебега о мажорируемой сходимости
+	Заметим, что \(|\xi \mathbf{1}_{\{\eta = y_{i}\}}| \leq |\xi|\) и \(\E{\xi 
+	\mathbf{1}_{\{\eta = y_{i}\}}} = \E{\E{\xi \given \eta}\mathbf{1}_{\{\eta = 
+	y_{i}\}}}\). Тогда по теореме Лебега о мажорируемой сходимости
 	\[
-		\lim\limits_{n \to \infty} \sum_{i = 1}^{n} \E{\xi \I\{\eta = y_{i}\}} = \E{\E{\xi \given \eta} \left(\sum_{i = 1}^{\infty} \I\{\eta = y_i\}\right)} = \E{\E{\xi \given \eta} \I\{\eta \in B\}}.\qedhere
+		\lim\limits_{n \to \infty} \sum_{i = 1}^{n} \E{\xi \mathbf{1}_{\{\eta = 
+		y_{i}\}}} = \E{\E{\xi \given \eta} \left(\sum_{i = 1}^{\infty} 
+		\mathbf{1}_{\{\eta = y_{i}\}}\right)} = \E{\E{\xi \given \eta} 
+		\mathbf{1}_{B}(\eta)}.\qedhere
 	\]
 \end{proof}
 
@@ -67,13 +85,6 @@
 		\E{\xi} = \E{\xi\mathbf{1}_{B}(\eta)} = \E{\E{\xi \given \eta}\mathbf{1}_{B}(\eta)} = \E{\E{\xi \given \eta}}.\qedhere
 	\]
 \end{proof}
-\begin{remark}
-	 Название оно получило из-за того, что является обобщением формулы полной вероятности. Покажем это. Пусть \(\{B_n \mid n \in \N\}\)~--- попарно не пересекающиеся события. Построим \(\eta\) следующим образом: она будет обладать дискретным распределением и \(\Pr{\eta = n} = \Pr{B_n}\). Тогда, взяв \(\xi = \mathbf{1}_{B}(x)\), получим, что
-	\[
-		\Pr{B} = \E{\E{\mathbf{1}_{B} \given \eta}} = \E{\Pr{B \given \eta}}.
-	\]
-	А это, по сути, и есть формула полной вероятности.
-\end{remark}
 
 \begin{property}
 	Если \(\xi\) независимо с \(\eta\), то \(\E{\xi \given \eta} = \E{\xi}\).
