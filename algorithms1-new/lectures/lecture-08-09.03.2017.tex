@@ -1,0 +1,126 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+	\section{Лекция 8. Двоичные деревья поиска.}
+	
+	Пусть мы хотим реализовать структуру данных, моделирующую множество. Для этого нам надо уметь быстро \textit{вставлять, искать} и \textit{удалять} элементы из множества. В этом нам поможет такая структура, как \textit{двоичное дерево поиска}.
+	
+	\subsection{Двоичное дерево поиска}
+	
+	Будем называть двоичное дерево $T$ \textit{деревом поиска}, если для него выполняются следующие условия:
+	\begin{enumerate}
+		\item У любого узла существует не более двух детей
+		\item Если узел $y$ лежит в левом поддереве с корнем $x$, то $y.key \leqslant x.key$; если в правом, то $y.key \geqslant x.key$.
+	\end{enumerate}
+
+	\begin{remark}
+		Строгость неравенства зависит от поставленной задачи. Например, при реализации multiset'а неравенство нестрогое, а при реализиации set'а -- строгое.
+	\end{remark}
+	
+	Приведем пример двоичного дерева поиска:
+	
+	\begin{center}
+		\begin{tikzpicture}
+		\begin{scope}[every node/.style={circle,thick,draw}]
+		\node (top) at (10, 10) {$9$};
+		
+		\node (2-1) at (6, 	8) 	{$7$};
+		\node (2-2) at (14, 8) 	{$20$};
+		
+		\node (3-1) at (5,  6) 	{$2$};
+		\node (3-2) at (7,  6) 	{$8$};
+		\node (3-3) at (12, 6)  {$15$};
+		
+		\node (4-2) at (6,  4)	{$4$};
+		\node (4-3) at (11, 4)	{$12$};
+		\node (4-4) at (13, 4) 	{$17$};
+		
+		\node (5-1) at (5,  3)  {$3$};
+		\node (5-2) at (7,  3)  {$5$};
+		\end{scope}
+		
+		\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black}]
+		
+		\path [->] (top) edge (2-1);
+		\path [->] (top) edge (2-2);
+		
+		
+		\path [->] (2-1) edge (3-1);
+		\path [->] (2-1) edge (3-2);
+		\path [->] (2-2) edge (3-3);
+		
+		\path [->] (3-1) edge (4-2);
+		\path [->] (3-3) edge (4-3);
+		\path [->] (3-3) edge (4-4);
+		
+		
+		\path [->] (4-2) edge (5-1);
+		\path [->] (4-2) edge (5-2);
+		
+		\end{scope}
+		\end{tikzpicture}
+	\end{center}
+
+	\textit{Весь код в этой лекции будет написан в Python-подобном синтаксисе}	
+	
+	Для начала опишем поиск в такой структуре:
+	\begin{lstlisting}[language=python]
+def tree_search(x, k):
+    if x:
+        if k < x.key:
+            return tree_search(x.left, k)
+        elif k > x.key:
+            return tree_search(x.right, k)
+        else:
+            return x
+    return None
+	\end{lstlisting}
+	
+	Словами: на каждом шаге сравниваем с текущим и идем в нужную ветку.
+	
+	\begin{time}
+		В худшем случае время работы данного алгоритма займет $O(height(T))$, где $T$ -- дерево.
+	\end{time}
+	
+	Затем нужно научиться вставлять ноды в дерево. Основная идея: вставляем в корень, проверяем выполнение инварианта, останавливаемся, если все хорошо, и идем дальше иначе. 
+	
+	\begin{lstlisting}[language=python]
+def tree_insert(t, k): # t -- tree
+    z = Node(k)
+    x = t.root
+    while x:
+	    z.parent = x
+        if z.key > x.key:
+            x = x.right
+        else:
+            x = x.left
+
+    if z.parent:
+        if z.key > z.parent.key:
+            z.parent.right = z
+        else:
+            z.parent.left = z
+    else:
+        t.root = z
+	\end{lstlisting}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}
