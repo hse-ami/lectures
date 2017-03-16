@@ -74,10 +74,11 @@
 			\Pr{\lim\limits_{n \to \infty} h(\xi_n) = h(\xi)}
 		\]
 		Заметим, что для любого \(\xi \in B\) это равносильно тому, что \(\xi_n \asto \xi\) (по непрерывности \(h\)). Тогда эту вероятность можно ограничить снизу:
-		\begin{multline*}
-			\Pr{\lim\limits_{n \to \infty} h(\xi_n) = h(\xi)} \geq \Pr{\lim\limits_{n \to \infty} \xi_n = \xi, \xi \in B} \\
-			\geq \Pr{\lim\limits_{n \to \infty} \xi_n = \xi}\Pr{\xi \in B} = 1.
-		\end{multline*}
+		\[
+			\Pr{\lim\limits_{n \to \infty} h(\xi_n) = h(\xi)} \geq \Pr{\lim\limits_{n \to \infty} \xi_n = \xi, \xi \in B}
+		\]
+		Вероятность каждого из событий в скобках равна единице, значит вероятность того, что событие не выполнится равна нулю, как объединение двух множеств меры ноль.
+
 		Это и означает, что \(h(\xi_n) \asto h(\xi)\).
 		
 		\item Теперь докажем утверждение для сходимости по вероятности от противного. Допустим, что \(h(\xi_n) \not\prto h(\xi)\). Тогда существуют положительные \(\epsilon_0\) и \(\delta_0\) и подпоследовательность \(\{\xi_{n_k} \mid k \in \N\}\) такие, что
