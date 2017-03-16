@@ -22,7 +22,7 @@
 	
 	Теперь оценим \(\E{S_n^4}\):
 	\[
-		\E{S_n^4} = \sum_{i, j, k, l = 1}^{n} \E{\xi_i \xi_j \xi_k \xi_k}
+		\E{S_n^4} = \sum_{i, j, k, l = 1}^{n} \E{\xi_i \xi_j \xi_k \xi_l}
 	\]
 	
 	Заметим, что если какая-то случайная величина входит в матожидание с первой степенью, то по независимости это матожидание обернётся в ноль. Тогда
@@ -240,7 +240,9 @@
 \begin{proof}[Решение]
 	Для начала найдём характеристическую функцию \(\xi \sim \mathrm{Pois}(\lambda)\):
 	\[
-		\phi_{\xi}(t) = \sum_{n = 1}^{\infty} e^{itn}\frac{\lambda^n}{n!}e^{-\lambda} = e^{-\lambda}e^{\lambda e^{it}} = \exp\left\{\lambda(e^{it} - 1)\right\}
+		\phi_{\xi}(t) = \sum_{n = 0}^{\infty} 
+		e^{itn}\frac{\lambda^n}{n!}e^{-\lambda} = e^{-\lambda}e^{\lambda 
+		e^{it}} = \exp\left\{\lambda(e^{it} - 1)\right\}
 	\]
 	
 	Следовательно, по независимости \(\xi_1\) и \(\xi_2\)

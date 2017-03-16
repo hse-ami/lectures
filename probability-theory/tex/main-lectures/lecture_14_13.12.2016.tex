@@ -151,36 +151,77 @@
 	\]
 \end{lemma}
 \begin{proof}
-	Из определения предела последовательности следует, что \(\xi_n(\omega) \to \xi(\omega)\) равносильно тому, что для любого \(\epsilon > 0\) событий вида \(\{|\xi_n(\omega) - \xi(\omega)| \geq \epsilon\}\) лишь конечное число. Следовательно, \(\Pr{\xi_n \not\to \xi \text{ почти наверное}} = 0\) можно записать следующим образом:
+	Для начала вспомним определение предела и простое следствие из него: 
+	\(\xi_n(\omega) \to \xi(\omega)\) равносильно тому, что для любого 
+	\(\epsilon > 0\) существует лишь конечно число членов последовательности 
+	\(\{\xi_{n}(\omega) \mid n \in \N\}\) таких, что \(|\xi_n(\omega) - 
+	\xi(\omega)| \geq \epsilon\). 
+	
+	Тогда из чего состоит событие \(\{\xi_n \not\to \xi \text{ в смысле почти 
+		наверное}\}\)? Оно включает в себя все \(\omega\) такие, что для 
+	какого-то 
+	\(\epsilon\) существует бесконечно много членов последовательности 
+	\(\{\xi_{n}(\omega) \mid n \in \N\}\) таких, что \(|\xi_n(\omega) - 
+	\xi(\omega)| \geq \epsilon\). Для того, чтобы пробежаться по всем 
+	\(\epsilon > 0\), достаточно посмотреть \(\epsilon\) вида \(1/m\), где \(m 
+	\in \N\). Тогда
 	\[
-		\Pr{\bigcup_{m = 1}^{\infty} \{A_n^{1/m} \text{ б.ч.}\}} = 0 \iff \forall m \in \N \Pr{\{A_n^{1/m} \text{ б.ч.}\}} = 0
+	\{\xi_n \not\to \xi \text{ в смысле почти наверное}\} = \bigcup_{m = 
+		1}^{\infty} \{A_n^{1/m} \text{ б.ч.}\}
 	\]
 	
-	Так как для любого \(\epsilon > \frac{1}{m}\) \(A_n^{\epsilon} \subseteq A_n^{1/m}\), то это равносильно тому, что
+	Отсюда получаем, что условие на то, что \(\xi_n \to \xi\), можно записать в 
+	таком виде:
 	\[
-		\forall \epsilon > 0 \Pr{\{A_n^{\epsilon} \text{ б.ч.}\}} = 0 \iff \forall \epsilon > 0 \Pr{\bigcap_{n = 1}^{\infty}\bigcup_{n = m}^{\infty} A_{m}^{\epsilon}} = 0
+	\Pr{\bigcup_{m = 1}^{\infty} \{A_n^{1/m} \text{ б.ч.}\}} = 0 \iff 
+	\forall m \in \N \Pr{\{A_n^{1/m} \text{ б.ч.}\}} = 0
 	\]
 	
-	Теперь введём события
+	Теперь вернёмся к \(\epsilon\). Заметим, что если \(\epsilon > 1/m\), то 
+	\(A_n^{\epsilon} \subseteq A_n^{1/m}\). Тогда это условие можно записать в 
+	другом виде: для любого \(\epsilon > 0\) \(\Pr{\{A_n^{\epsilon} \text{ 
+			б.ч.}\}} = 0\), что и требовалось доказать.
+	
+	Теперь приступим к доказательству второй части. Зафиксируем \(\epsilon > 
+	0\) и запишем условие иным образом:
 	\[
-		B_{n}^{\epsilon} = \bigcup_{m = n}^{\infty} A_{m}^{\epsilon}
+	\Pr{\{A_n^{\epsilon} \text{ б.ч.}\}} = \Pr{\bigcap_{n = 
+			1}^{\infty}\bigcup_{n = m}^{\infty} A_{m}^{\epsilon}}
 	\]
 	
-	Несложно заметить, что \(B_{n}^{\epsilon} \supseteq B_{n + 1}^{\epsilon}\). Тогда по непрерывности верояностной меры
+	Далее, введём следующие события:
 	\[
-		\lim\limits_{n \to \infty} \Pr{B_{n}^{\epsilon}} = 0 = \lim\limits_{n \to \infty} \Pr{\bigcup_{m = n}^{\infty} A_{m}^{\epsilon}}
+	B_{n}^{\epsilon} = \bigcup_{m = n}^{\infty} A_{m}^{\epsilon}
+	\]
+	
+	Несложно заметить, что \(B_{n}^{\epsilon} \supseteq B_{n + 1}^{\epsilon}\). 
+	Тогда по непрерывности вероятностной меры
+	\[
+	\lim\limits_{n \to \infty} \Pr{B_{n}^{\epsilon}} = 0 = \lim\limits_{n 
+		\to \infty} \Pr{\bigcup_{m = n}^{\infty} A_{m}^{\epsilon}}
 	\]
 	
 	Осталось заметить две вещи:
 	\begin{enumerate}
-		\item Так как \(\{\bigcup_{m = n}^{\infty} |\xi_m - \xi| \geq \epsilon\} \subseteq \{\sup_{m \geq n} |\xi_m - \xi| \geq \epsilon\}\), то
+		\item Так как 
 		\[
-			\Pr{\sup_{m \geq n} |\xi_m - \xi| \geq \epsilon} = 0 \implies \Pr{\bigcup_{m = n}^{\infty} |\xi_m - \xi| \geq \epsilon} = 0
+		\bigcup_{m = n}^{\infty} \left\{\omega \in \Omega : |\xi_m(\omega) 
+		- \xi(\omega)| \geq \epsilon\right\} \subseteq \{\omega \in \Omega 
+		: \sup_{m \geq n} |\xi_m(\omega) - \xi(\omega)| \geq \epsilon\},
+		\]
+		
+		то верно следующее следствие:
+		\[
+		\lim\limits_{n \to \infty} \Pr{\sup_{m \geq n} |\xi_m - \xi| \geq 
+			\epsilon} = 0 \implies \lim\limits_{n \to \infty} \Pr{\bigcup_{m = 
+				n}^{\infty} |\xi_m - \xi| \geq \epsilon} = 0
 		\]
 		
 		\item Однако:
 		\[
-			\Pr{\bigcup_{m = n}^{\infty} |\xi_m - \xi| \geq \epsilon} = 0 \implies \Pr{\sup_{m \geq n} |\xi_m - \xi| \geq 2\epsilon} = 0
+		\lim\limits_{n \to \infty} \Pr{\bigcup_{m = n}^{\infty} |\xi_m - 
+			\xi| \geq \epsilon} = 0 \implies \lim\limits_{n \to \infty} 
+		\Pr{\sup_{m \geq n} |\xi_m - \xi| \geq 2\epsilon} = 0
 		\]
 	\end{enumerate}
 	Тем самым получаем желаемое.
@@ -256,16 +297,36 @@
 	Пусть \(\{\xi_n \mid n \in \N\}, \xi\)~--- случайные величины. Если \(\xi_n \prto \xi\), то существует подпоследовательность \(\{\xi_{n_k} \mid k \in \N\}\) такая, что \(\xi_{n_k} \asto \xi\).
 \end{point}
 \begin{proof}
-	Для каждого \(k \in \N\) выберем \(n_{k}\) такое, что
+		Построим последовательность \(\{n_{k} \mid k \in \N\}\) следующим 
+		образом: 
+	\(n_{k}\)~-- это число такое, что для любого \(n > n_{k}\)
 	\[
-		\forall n > n_{k} \Pr{|\xi_n - \xi| \geq \frac{1}{k}} \leq \frac{1}{2^k}
+	\Pr{|\xi_n - \xi| \geq \frac{1}{k}} \leq \frac{1}{2^k}.
 	\]
 	
-	Но тогда
-	\begin{align*}
-		\sum_{k = 1}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \epsilon} &= \left|K > \frac{1}{\epsilon}\right| = O\left(\sum_{k = K}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \epsilon}\right) \\
-		&= O\left(\sum_{k = K}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \frac{1}{k}}\right) < +\infty
-	\end{align*}
+	Теперь покажем, что выполнен достаточный критерий сходимости почти наверное 
+	для последовательности \(\{\xi_{n_k} \mid n \in \N\}\). Действительно, 
+	рассмотрим ряд
+	\[
+	\sum_{k = 1}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \epsilon}
+	\]
+	
+	Так как от выкидывания конечного числа членов из ряда его сходимость не 
+	меняется, то можно отбросить первые \(K\) элементов, где \(K\)~--- это 
+	какое-то очень большое число, причём \(\epsilon < \frac{1}{K}\). Тогда 
+	посмотрим на пару событий:
+	\begin{gather}
+		A_{n}^{\epsilon} = \{|\xi_{n} - \xi| \geq \epsilon\}, \quad A_{n}^{1/k} 
+		= \{|\xi_{n} - \xi| \geq 1/k\}
+	\end{gather}
+	
+	Если \(k > K\), то \(A_{n}^{\epsilon} \subseteq A_{n}^{1/k}\). Тогда хвост 
+	можно ограничить сверху сходящимся рядом:
+	\[
+	\sum_{k = K}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \epsilon} \leq \sum_{k 
+		= K}^{\infty} \Pr{|\xi_{n_k} - \xi| \geq \frac{1}{k}} \leq \sum_{k = 
+		K}^{\infty} 2^{-k} < +\infty.
+	\]
 	
 	Это и означает, что \(\xi_{n_k} \asto \xi\).
 \end{proof}
