@@ -167,7 +167,7 @@
 
 Так и введём. Теперь посмотрим, что мы из этого имеем. Домножим на \(\Pr{\eta = y}\). Тогда
 \begin{align*}
-	\sum_{i = 1}^{n} x_i\Pr{\xi = x_i, \eta = y} = \E{\sum_{i = 1}^{n} x_i\mathbf{1}\{\xi = x_i\}\mathbf{1}\{\eta = y\}} = \E{\xi\mathbf{1}\{\eta = y\}}
+	\sum_{y \in B} \E{\xi \given \eta = y} \Pr{\eta = y} = \sum_{y in B} \sum{i = 1}^{n} x_i \Pr{\xi = x_i \given \eta = y} \Pr{\eat = y} = \E{\sum_{y \in B} \sum_{i = 1}^{n} x_i \mathbf{1}\{\xi = x_i\} \mathbf{1}\{\eta = y\}} = \E{\xi \mathbf{1}\{\eta \in B\}}
 \end{align*}
 
 Однако, если положить \(\E{\xi \given \eta = y} = \phi(y)\), то
