@@ -28,18 +28,29 @@
 	по линейности матожидания получаем, что
 	\begin{align*}
 		\E{\xi\mathbf{1}_{B}(\eta)} &= \E{\xi\left(\sum_{i = 1}^{\infty} 
-		\mathbf{1}_{\{\eta = y_{i}\}}\right)} = \sum_{i = 1}^{\infty} \E{\xi 
+		\mathbf{1}_{\{\eta = y_{i}\}}\right)} = \E{\sum_{i = 1}^{\infty} \xi 
 		\mathbf{1}_{\{\eta = y_{i}\}}} \\
-		&= \lim\limits_{n \to \infty} \sum_{i = 1}^{n} \E{\xi 
+		&= \lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \xi 
 		\mathbf{1}_{\{\eta = y_{i}\}}}
 	\end{align*}
-	Заметим, что \(|\xi \mathbf{1}_{\{\eta = y_{i}\}}| \leq |\xi|\) и \(\E{\xi 
+	Заметим, что \(\left|\sum\limits_{i = 1}^n\xi \mathbf{1}_{\{\eta = y_{i}\}}\right| \leq 
+	|\xi|\), так как индикатор даст вклад не более одного раза. Также эти
+	частичные суммы почти наверное стремятся к \(\xi\mathbf{1}_{B}(\eta)\), поэтому можно писать 
+	пределы, которые мы писали выше.
+
+	Теперь заметим, что \(\E{\xi 
 	\mathbf{1}_{\{\eta = y_{i}\}}} = \E{\E{\xi \given \eta}\mathbf{1}_{\{\eta = 
-	y_{i}\}}}\). Тогда по теореме Лебега о мажорируемой сходимости
+	y_{i}\}}}\). И поймём также, что $\left|\sum\limits_{i = 1}^n\E{\xi \given 
+	\eta} \mathbf{1}_{\{\eta = y_{i}\}}\right| \leq 
+	|\E{\xi\given\eta}|$. А матожидание у последней величины конечно,
+	так как совпадает с $\E{\xi}$. Аналогично легко понять, что частичные суммы
+	стремятся к \(\E{\xi\given\eta}\mathbf{1}_{B}(\eta)\). Тогда по теореме Лебега о мажорируемой 
+	сходимости
 	\[
-		\lim\limits_{n \to \infty} \sum_{i = 1}^{n} \E{\xi \mathbf{1}_{\{\eta = 
-		y_{i}\}}} = \E{\E{\xi \given \eta} \left(\sum_{i = 1}^{\infty} 
-		\mathbf{1}_{\{\eta = y_{i}\}}\right)} = \E{\E{\xi \given \eta} 
+		\lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \xi \mathbf{1}_{\{\eta = 
+		y_{i}\}}} =
+		\lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \E{\xi\given\eta} \mathbf{1}_{\{\eta = 
+		y_{i}\}}} = \E{\E{\xi \given \eta} 
 		\mathbf{1}_{B}(\eta)}.\qedhere
 	\]
 \end{proof}
