@@ -116,7 +116,7 @@
 формуле замены переменных
 \[
 \Pr{f(\xi) \in B} = \idotsint\limits_{\mathbf{x}:\,f(\mathbf{x}) \in B} 
-p_{\xi}(\mathbf{x}) \diff\mathbf{t} = \idotsint\limits_{B} 
+p_{\xi}(\mathbf{x}) \diff\mathbf{x} = \idotsint\limits_{B} 
 p_{\xi}(f^{-1}(\mathbf{t}))|\det \mathbf{J}(f^{-1}_1, \dots, f^{-1}_n)| 
 \diff\mathbf{t}.
 \]
@@ -180,9 +180,9 @@ f^{-1}_n)|\) будет плотностью функции \(f(\xi)\) в точ
 	
 	Далее, по теореме Фубини
 	\[
-	\iint\limits_{(u, v):\,u \leq z} p_{\xi}(v)p_{\eta}(v - u)\diff u \diff v = 
+	\iint\limits_{(u, v):\,u \leq z} p_{\xi}(v)p_{\eta}(u - v)\diff u \diff v = 
 	\int\limits_{-\infty}^{z}\int\limits_{-\infty}^{+\infty} 
-	p_{\xi}(v)p_{\eta}(v - u)\diff v \diff u.
+	p_{\xi}(v)p_{\eta}(u - v)\diff v \diff u.
 	\]
 	
 	Отсюда (по теореме Радона-Никодима) получаем, что почти везде выполнено, что

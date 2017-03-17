@@ -3,7 +3,7 @@
 Ранее мы ввели условное математическое ожидание. Теперь хотелось бы научиться считать его. Для начала покажем, как это делается в дискретном случае.
 \begin{theorem}
 	Пусть \(\eta\) имеет дискретное распределение и \(X = (x_1, \dots, x_n, 
-	\dots)\)~--- множество значений. Тогда для любой случайной величины \(\xi\) 
+	\dots)\)~--- множество значений. Тогда для любой случайной величины \(\xi\) с конечным матожиданием
 	выполнено, что
 	\[
 		\E{\xi \given \eta} = \sum_{k = 1}^{\infty} 
@@ -12,7 +12,7 @@
 	\]
 \end{theorem}
 \begin{proof}
-	Достаточно проверить измеримость и интегральное свойство. Как известно, \(\\I\,\{\eta = x\}\) является борелевской функцией от \(\eta\) для любого \(x\). Тогда функция в правой части является борелевской функцией от \(\eta\).
+	Достаточно проверить измеримость и интегральное свойство. Как известно, \(\mathbf{1}_{\{\eta = x\}}\) является борелевской функцией от \(\eta\) для любого \(x\). Тогда функция в правой части является борелевской функцией от \(\eta\).
 	
 	Теперь проверим интегральное свойство. Для начала возьмём \(B = \{x_n\}\), где \(x_n\)~--- это одно из значений \(\eta\), для которого \(\Pr{\eta = x_n} > 0\).
 	\begin{align*}
@@ -100,7 +100,7 @@
 	Если \(\xi \leq \delta\) почти наверное, то \(\E{\xi \given \eta} \leq \E{\delta \given \eta}\) почти наверное.
 \end{property}
 \begin{proof}
-	Рассмотрим случайную величину \(\zeta = \E{\xi \given \eta} - \E{\delta \given \eta}\). Несложно понять, что она является борелевской функцией от \(\eta\). Теперь рассмотрим \(\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)}\). Заметим, что \(\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)} \geq 0\). Теперь скажем, что \(\mathbf{1}_{(0, +\infty)}(\chi) = \mathbf{1}_{B}(\eta)\) для какого-то борелевского множества \(B\).\footnote{На самом деле \(B = \chi^{-1}(0, +\infty)\).} Тогда
+	Рассмотрим случайную величину \(\chi = \E{\xi \given \eta} - \E{\delta \given \eta}\). Несложно понять, что она является борелевской функцией от \(\eta\). Теперь рассмотрим \(\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)}\). Заметим, что \(\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)} \geq 0\). Теперь скажем, что \(\mathbf{1}_{(0, +\infty)}(\chi) = \mathbf{1}_{B}(\eta)\) для какого-то борелевского множества \(B\).\footnote{На самом деле \(B = \chi^{-1}(0, +\infty)\).} Тогда
 	\[
 		\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)} = \E{(\E{\xi \given \eta} - \E{\delta \given \eta})\mathbf{1}_{B}(\eta)}.
 	\]
@@ -108,7 +108,7 @@
 	\[
 		\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)} =  \E{\xi\mathbf{1}_{B}(\eta)} - \E{\delta \mathbf{1}_{B}(\eta)} \leq 0 \text{, так как } \xi \leq \delta.
 	\]
-	Тогда получаем, что \(\chi\mathbf{1}_{(0, +\infty)}(\chi) = 0\) почти наверное и \(\xi \leq 0\).
+	Тогда получаем, что \(\chi\mathbf{1}_{(0, +\infty)}(\chi) = 0\) почти наверное и \(\xi \leq \delta\).
 \end{proof}
 
 \begin{property}[Телескопическое]
@@ -124,13 +124,14 @@
 	
 	Теперь докажем второе утверждение. Заметим, что \(\E{\xi \given \eta}\) является борелевской функцией от \(\eta\). Теперь проверим интегральное свойство. Пусть \(\delta \in \R^{m}\). Тогда по интегральному свойству:
 	\begin{align*}
-		\E{\E{\xi \given (\eta, \delta)}\mathbf{1}_{B}(\eta)} &= \E{\E{\xi \given (\eta, \delta)}\mathbf{1}_{B \times \R^{m}}(\eta, \delta)} = \E{\E{\xi \given (\eta, \delta)}\mathbf{1}_{B \times \R^{m}}(\eta, \delta)} \\
+		\E{\E{\xi \given (\eta, \delta)}\mathbf{1}_{B}(\eta)} &= \E{\E{\xi \given (\eta, \delta)}\mathbf{1}_{B \times \R^{m}}(\eta, \delta)} = \\
 		&= \E{\xi\mathbf{1}_{B \times \R^{m}}(\eta, \delta)} = \E{\xi\mathbf{1}_{B}(\eta)} = \E{\E{\xi \given \eta}\mathbf{1}_{B}(\eta)}.\qedhere
 	\end{align*}
 \end{proof}
 
 \begin{property}[Предельный переход]
-	Пусть \(\{\xi_n \mid n \in \N\}\), \(\xi\), \(\eta\), \(\delta\)~--- случайные величины.
+	Пусть \(\{\xi_n \mid n \in \N\}\), \(\xi\), \(\eta\), \(\delta\)~--- случайные величины, где $\E{|\delta|} < \infty, 
+	\E{|\xi|} < \infty, \E{|\xi_n|} < \infty$.
 	\begin{enumerate}
 		\item Если \(0 \leq \xi_n \uparrow \xi\) почти наверное, то \(\E{\xi_n \given \eta} \uparrow \E{\xi \given \eta}\) почти наверное.
 		\item Если \(\xi_n \asto \xi\) и \(|\xi_n| \leq |\delta|\) для всех натуральных \(n\), то \(\E{\xi_n \given \eta} \asto \E{\xi \given \eta}\).
@@ -194,7 +195,7 @@
 \begin{definition}
 	Если условное распределение имеет плотность \(p_{\xi \mid \eta}(x \mid y)\), то назовём его \emph{условной плотностью \(\xi\) относительно \(\eta\)}. То есть для любого \(B \in \B(\R^n)\)
 	\[
-		\Pr{\xi \in \B \given \eta = y} = \int\limits_{B} p_{\xi \mid \eta}(x \mid y)\diff x.
+		\Pr{\xi \in B \given \eta = y} = \int\limits_{B} p_{\xi \mid \eta}(x \mid y)\diff x.
 	\]
 \end{definition}
 
