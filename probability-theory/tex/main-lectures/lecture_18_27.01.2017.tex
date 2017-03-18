@@ -202,13 +202,13 @@
 	
 	Аналогичными рассуждениями получаем, что
 	\[
-		\Pr{\xi_{n} + \eta_{n} \geq t} \geq \Pr{\xi_{n} + C \geq t + \epsilon} 
+		\Pr{\xi_{n} + \eta_{n} \geq t} \geq \Pr{\xi_{n} + C \geq t - \epsilon} 
 		+ \Pr{|\eta_{n} - C| > \epsilon}.
 	\]
 	Тогда
 	\[
 		\varlimsup_{n \to \infty} (1 - F_{\xi_{n} + \eta_{n}}(t)) \geq 1 - 
-		F_{\xi + C}(t + \epsilon) \text{ и } \varliminf_{n \to \infty} 
+		F_{\xi + C}(t - \epsilon) \text{ и } \varliminf_{n \to \infty} 
 		F_{\xi_{n} + \eta_{n}}(t) \geq F_{\xi + C}(t - \epsilon).
 	\]
 	
