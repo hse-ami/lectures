@@ -1,11 +1,10 @@
 sudo: required
 dist: trusty
 before_install:
-- sudo do-release-upgrade -f DistUpgradeViewNonInteractive
 - sudo apt-get install -y texlive-fonts-recommended
     texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
     texlive-base texlive-pictures texlive-lang-cyrillic texlive-science
-    texlive-generic-recommended
+    texlive-generic-recommended texlive-full
 script:
 - mkdir _build
 - cd algebra_1course
