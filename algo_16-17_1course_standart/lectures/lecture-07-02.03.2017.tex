@@ -115,51 +115,51 @@
 	
 	Приведем пример такого дерева:
 	
-	\begin{center}
-		\begin{tikzpicture}
-		\begin{scope}
-		\node (top) at (10, 10) {$2$};
+	% \begin{center}
+	% 	\begin{tikzpicture}
+	% 	\begin{scope}
+	% 	\node (top) at (10, 10) {$2$};
 		
-		\node (2-1) at (6, 	8) 	{$4$};
-		\node (2-2) at (14, 8) 	{$5$};
+	% 	\node (2-1) at (6, 	8) 	{$4$};
+	% 	\node (2-2) at (14, 8) 	{$5$};
 		
-		\node (3-1) at (4, 	6) 	{$20$};
-		\node (3-2) at (8,  6) 	{$5$};
-		\node (3-3) at (12, 6) 	{$6$};
-		\node (3-4) at (16, 6) 	{$7$};
+	% 	\node (3-1) at (4, 	6) 	{$20$};
+	% 	\node (3-2) at (8,  6) 	{$5$};
+	% 	\node (3-3) at (12, 6) 	{$6$};
+	% 	\node (3-4) at (16, 6) 	{$7$};
 		
-		\node (4-1) at (3,  4) 	{$21$};
-		\node (4-2) at (5,  4) 	{$25$};
-		\node (4-3) at (7,  4) 	{$6$};
-		\node (4-4) at (9,  4) 	{$7$};
-		\node (4-5) at (11, 4) 	{$4$};
-		\node (4-6) at (13, 4) 	{$10$};
+	% 	\node (4-1) at (3,  4) 	{$21$};
+	% 	\node (4-2) at (5,  4) 	{$25$};
+	% 	\node (4-3) at (7,  4) 	{$6$};
+	% 	\node (4-4) at (9,  4) 	{$7$};
+	% 	\node (4-5) at (11, 4) 	{$4$};
+	% 	\node (4-6) at (13, 4) 	{$10$};
 		
-		\end{scope}
+	% 	\end{scope}
 		
-		\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black}]
+	% 	\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black}]
 		
-		\path [->] (top) edge (2-1);
-		\path [->] (top) edge (2-2);
+	% 	\path [->] (top) edge (2-1);
+	% 	\path [->] (top) edge (2-2);
 		
-		\path [->] (2-1) edge (3-1);
-		\path [->] (2-1) edge (3-2);
+	% 	\path [->] (2-1) edge (3-1);
+	% 	\path [->] (2-1) edge (3-2);
 		
-		\path [->] (2-2) edge (3-3);
-		\path [->] (2-2) edge (3-4);
+	% 	\path [->] (2-2) edge (3-3);
+	% 	\path [->] (2-2) edge (3-4);
 		
-		\path [->] (3-1) edge (4-1);
-		\path [->] (3-1) edge (4-2);
+	% 	\path [->] (3-1) edge (4-1);
+	% 	\path [->] (3-1) edge (4-2);
 		
-		\path [->] (3-2) edge (4-3);
-		\path [->] (3-2) edge (4-4);
+	% 	\path [->] (3-2) edge (4-3);
+	% 	\path [->] (3-2) edge (4-4);
 		
-		\path [->] (3-3) edge (4-5);
-		\path [->] (3-3) edge (4-6);
+	% 	\path [->] (3-3) edge (4-5);
+	% 	\path [->] (3-3) edge (4-6);
 		
-		\end{scope}
-		\end{tikzpicture}
-	\end{center}
+	% 	\end{scope}
+	% 	\end{tikzpicture}
+	% \end{center}
 
 	Дерево можно описывать в виде списка свзяности, введя структуру $node$ и поддерживая в каждом узле соответствующие ссылки:
 	

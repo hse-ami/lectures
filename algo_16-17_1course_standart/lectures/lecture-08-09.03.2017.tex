@@ -19,47 +19,47 @@
 	
 	Приведем пример двоичного дерева поиска:
 	
-	\begin{center}
-		\begin{tikzpicture}
-		\begin{scope}[every node/.style={circle,thick,draw}]
-		\node (top) at (10, 10) {$9$};
+	% \begin{center}
+	% 	\begin{tikzpicture}
+	% 	\begin{scope}[every node/.style={circle,thick,draw}]
+	% 	\node (top) at (10, 10) {$9$};
 		
-		\node (2-1) at (6, 	8) 	{$7$};
-		\node (2-2) at (14, 8) 	{$20$};
+	% 	\node (2-1) at (6, 	8) 	{$7$};
+	% 	\node (2-2) at (14, 8) 	{$20$};
 		
-		\node (3-1) at (5,  6) 	{$2$};
-		\node (3-2) at (7,  6) 	{$8$};
-		\node (3-3) at (12, 6)  {$15$};
+	% 	\node (3-1) at (5,  6) 	{$2$};
+	% 	\node (3-2) at (7,  6) 	{$8$};
+	% 	\node (3-3) at (12, 6)  {$15$};
 		
-		\node (4-2) at (6,  4)	{$4$};
-		\node (4-3) at (11, 4)	{$12$};
-		\node (4-4) at (13, 4) 	{$17$};
+	% 	\node (4-2) at (6,  4)	{$4$};
+	% 	\node (4-3) at (11, 4)	{$12$};
+	% 	\node (4-4) at (13, 4) 	{$17$};
 		
-		\node (5-1) at (5,  3)  {$3$};
-		\node (5-2) at (7,  3)  {$5$};
-		\end{scope}
+	% 	\node (5-1) at (5,  3)  {$3$};
+	% 	\node (5-2) at (7,  3)  {$5$};
+	% 	\end{scope}
 		
-		\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black}]
+	% 	\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black}]
 		
-		\path [->] (top) edge (2-1);
-		\path [->] (top) edge (2-2);
-		
-		
-		\path [->] (2-1) edge (3-1);
-		\path [->] (2-1) edge (3-2);
-		\path [->] (2-2) edge (3-3);
-		
-		\path [->] (3-1) edge (4-2);
-		\path [->] (3-3) edge (4-3);
-		\path [->] (3-3) edge (4-4);
+	% 	\path [->] (top) edge (2-1);
+	% 	\path [->] (top) edge (2-2);
 		
 		
-		\path [->] (4-2) edge (5-1);
-		\path [->] (4-2) edge (5-2);
+	% 	\path [->] (2-1) edge (3-1);
+	% 	\path [->] (2-1) edge (3-2);
+	% 	\path [->] (2-2) edge (3-3);
 		
-		\end{scope}
-		\end{tikzpicture}
-	\end{center}
+	% 	\path [->] (3-1) edge (4-2);
+	% 	\path [->] (3-3) edge (4-3);
+	% 	\path [->] (3-3) edge (4-4);
+		
+		
+	% 	\path [->] (4-2) edge (5-1);
+	% 	\path [->] (4-2) edge (5-2);
+		
+	% 	\end{scope}
+	% 	\end{tikzpicture}
+	% \end{center}
 
 	\textit{Весь код в этой лекции будет написан в Python-подобном синтаксисе}	
 	

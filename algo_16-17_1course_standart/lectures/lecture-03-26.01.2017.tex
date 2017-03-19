@@ -125,28 +125,28 @@
 	\begin{time}
 		Построим дерево исполнения алгоритма для случая, когда он разбивает задачи на подзадачи меньшие, чем $\frac{3}{4}$.
 		
-		\begin{center}
-			\begin{tikzpicture}
-				\begin{scope}[every node/.style={circle,thick,draw}]
-					\node[label=\large$ n $] (top) at (10, 10) {};
+		% \begin{center}
+		% 	\begin{tikzpicture}
+		% 		\begin{scope}[every node/.style={circle,thick,draw}]
+		% 			\node[label=\large$ n $] (top) at (10, 10) {};
 					
-					\node[label=left:\Large $ \leqslant \frac{3n}{4}$] (mid-left) at (7, 8) {};
-					\node[label=right:\Large $ \leqslant \frac{3n}{4}$] (mid-right) at (13, 8) {};
+		% 			\node[label=left:\Large $ \leqslant \frac{3n}{4}$] (mid-left) at (7, 8) {};
+		% 			\node[label=right:\Large $ \leqslant \frac{3n}{4}$] (mid-right) at (13, 8) {};
 					
-					\node (bot-left) at (5, 6) {};
-					\node[label=right:\Large $ \leqslant (\frac{3n}{4})^2$] (bot-right) at (9, 6) {};
-				\end{scope}
+		% 			\node (bot-left) at (5, 6) {};
+		% 			\node[label=right:\Large $ \leqslant (\frac{3n}{4})^2$] (bot-right) at (9, 6) {};
+		% 		\end{scope}
 				
-				\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black,very thick}]
-					\path [->] (top) edge (mid-left);
-					\path [->] (top) edge (mid-right);
+		% 		\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black,very thick}]
+		% 			\path [->] (top) edge (mid-left);
+		% 			\path [->] (top) edge (mid-right);
 					
-					\path [->] (mid-left) edge (bot-left);
-					\path [->] (mid-left) edge (bot-right);
+		% 			\path [->] (mid-left) edge (bot-left);
+		% 			\path [->] (mid-left) edge (bot-right);
 				
-				\end{scope}
-			\end{tikzpicture}
-		\end{center}
+		% 		\end{scope}
+		% 	\end{tikzpicture}
+		% \end{center}
 		
 		%\TODO{Написать о j подзадаче}
 		\begin{definition}
@@ -200,48 +200,48 @@
 		Рассмотрим \textit{дерево решений} некоторого абстрактного алгоритма сортировки. Пусть вершиной будет операция сравнения, ребром - ее исход, а листом - искомая перестановка. Такое дерево можно построить для каждого алгоритма. 
 		
 		Покажем пример такого дерева для сортировки массива длины 3:
-		\begin{center}
-			\begin{tikzpicture}
-			\begin{scope}[every node/.style={circle,thick,draw}]
-				\node (top) at (10, 10) {$1 < 3$};
+		% \begin{center}
+		% 	\begin{tikzpicture}
+		% 	\begin{scope}[every node/.style={circle,thick,draw}]
+		% 		\node (top) at (10, 10) {$1 < 3$};
 				
-				\node (2-1) at (6, 	8) 	{$1 < 2$};
-				\node (2-2) at (14, 8) 	{$1 < 2$};
+		% 		\node (2-1) at (6, 	8) 	{$1 < 2$};
+		% 		\node (2-2) at (14, 8) 	{$1 < 2$};
 				
-				\node (3-1) at (4, 	6) 	{$2 < 3$};
-				\node (3-4) at (16, 6) 	{$2 < 3$};
-			\end{scope}
+		% 		\node (3-1) at (4, 	6) 	{$2 < 3$};
+		% 		\node (3-4) at (16, 6) 	{$2 < 3$};
+		% 	\end{scope}
 			
-			\begin{scope}[every node/.style={circle,draw}]
-				\node (3-2) at (8, 6) 	{$(213)$};
-				\node (3-3) at (12, 6) 	{$(312)$};
+		% 	\begin{scope}[every node/.style={circle,draw}]
+		% 		\node (3-2) at (8, 6) 	{$(213)$};
+		% 		\node (3-3) at (12, 6) 	{$(312)$};
 				
-				\node (4-1) at (2, 4) 	{$(123)$};
-				\node (4-2) at (6, 4) 	{$(132)$};
-				\node (4-3) at (14, 4) 	{$(231)$};
-				\node (4-4) at (18, 4) 	{$(321)$};
-			\end{scope}
+		% 		\node (4-1) at (2, 4) 	{$(123)$};
+		% 		\node (4-2) at (6, 4) 	{$(132)$};
+		% 		\node (4-3) at (14, 4) 	{$(231)$};
+		% 		\node (4-4) at (18, 4) 	{$(321)$};
+		% 	\end{scope}
 			
-			\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black}]
+		% 	\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black}]
 			
-				\path [->] (top) edge node[midway, above left] 	{да} 	(2-1);
-				\path [->] (top) edge node[midway, above right] {нет} 	(2-2);
+		% 		\path [->] (top) edge node[midway, above left] 	{да} 	(2-1);
+		% 		\path [->] (top) edge node[midway, above right] {нет} 	(2-2);
 				
-				\path [->] (2-1) edge node[midway, above left] 	{да} 	(3-1);
-				\path [->] (2-1) edge node[midway, above right] {нет}	(3-2);
+		% 		\path [->] (2-1) edge node[midway, above left] 	{да} 	(3-1);
+		% 		\path [->] (2-1) edge node[midway, above right] {нет}	(3-2);
 				
-				\path [->] (2-2) edge node[midway, above left] 	{да} 	(3-3);
-				\path [->] (2-2) edge node[midway, above right] {нет} 	(3-4);
+		% 		\path [->] (2-2) edge node[midway, above left] 	{да} 	(3-3);
+		% 		\path [->] (2-2) edge node[midway, above right] {нет} 	(3-4);
 				
-				\path [->] (3-1) edge node[midway, above left] 	{да} 	(4-1);
-				\path [->] (3-1) edge node[midway, above right] {нет} 	(4-2);
+		% 		\path [->] (3-1) edge node[midway, above left] 	{да} 	(4-1);
+		% 		\path [->] (3-1) edge node[midway, above right] {нет} 	(4-2);
 				
 				
-				\path [->] (3-4) edge node[midway, above left] 	{да} 	(4-3);
-				\path [->] (3-4) edge node[midway, above right] {нет} 	(4-4);
-			\end{scope}
-			\end{tikzpicture}
-		\end{center}
+		% 		\path [->] (3-4) edge node[midway, above left] 	{да} 	(4-3);
+		% 		\path [->] (3-4) edge node[midway, above right] {нет} 	(4-4);
+		% 	\end{scope}
+		% 	\end{tikzpicture}
+		% \end{center}
 		
 		Временем работы всего алгоритма будет высота этого дерева $h$. Число листьев не меньше, чем $n!$.
 		\[
