@@ -39,8 +39,6 @@ script:
 - cd ../probability-theory_16-17_2course
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_lectures.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_lectures.tex
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_seminars.tex
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_seminars.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_raidboss.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_raidboss.tex
 - cd ..
