@@ -90,9 +90,9 @@
 		Очевидно, что $\forall n\geq N, \forall x \in X: |\tilde{A}_n(x)|<\varepsilon_1.$ Тогда $\forall m>N, \forall p \in \mathbb{N}, \ \forall x \in X:$
 		\begin{multline}
 		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left|\sum\limits_{n = m+1}^{m+p} (\tilde{A}_n(x)-\tilde{A}_{n-1}(x)) b_n(x)\right|=\\ = \left| \tilde{A}_{m+p}(x)b_{m+p}(x) - \tilde{A}_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} \tilde{A}_n(x)( b_n(x)-b_{n+1}(x)) \right| <\\
-		< C\varepsilon_1+C\varepsilon_1+\eps_1\sum\limits_{n = m+1}^{m+p-1} |b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + \eps_1\left|b_{m+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 {знаменатель} \leq \varepsilon.
+		< C\varepsilon_1+C\varepsilon_1+\eps_1\sum\limits_{n = m+1}^{m+p-1} |b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + \eps_1\left|b_{m+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 \leq \varepsilon.
 		\end{multline}
-	\end{proof}
+	\end{proof} %% Возможно тут есть чушь. Особенно в конце.
 	
 	
 	Рассмотрим один из классических примеров, который мы упоминали в начале лекции.
