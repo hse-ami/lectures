@@ -5,6 +5,5 @@
 *.synctex.gz
 *.fdb_latexmk
 *.fls
-algorithms/.ropeproject/
-
+**/.ropeproject/
 *.bcf
