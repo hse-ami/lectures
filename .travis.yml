@@ -1,10 +1,10 @@
 sudo: required
 dist: trusty
 before_install:
-- sudo apt-get install -y texlive-fonts-recommended
+- sudo apt-get install -y --no-install-recommends
     texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
     texlive-base texlive-pictures texlive-lang-cyrillic texlive-science
-    texlive-generic-recommended pgf
+    pgf
 script:
 - mkdir _build
 - cd algebra_1course
