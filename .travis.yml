@@ -1,30 +1,48 @@
 sudo: required
 dist: trusty
 before_install:
-- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended texlive-base texlive-pictures texlive-lang-cyrillic texlive-science texlive-generic-recommended
+- sudo add-apt-repository -y ppa:jonathonf/texlive
+- sudo apt-get -qq update
+- sudo apt-get install -y texlive-fonts-recommended
+    texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+    texlive-base texlive-pictures texlive-lang-cyrillic texlive-science
+    texlive-generic-recommended
 script:
 - mkdir _build
 - cd algebra_1course
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algebra_1course.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algebra_1course.tex
 - cd ../algo_15-16_1course_standart
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_15-16_1course_standart.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_15-16_1course_standart.tex
 - cd ../algo_16-17_1course_pilot
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16-17_1course_pilot.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16-17_1course_pilot.tex
 - cd ../algo_16-17_1course_standart
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16-17_1course_standart.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16-17_1course_standart.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16-17_1course_standart_control1.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16-17_1course_standart_control1.tex
 - cd ../algo_16_2course_pilot
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16_2course_pilot.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16_2course_pilot.tex
 - cd ../algo_16_2course_standart
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16_2course_standart.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build algo_16_2course_standart.tex
 - cd ../differential-equations_16-17_2course
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build differential-equations_16-17_2course_lectures.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build differential-equations_16-17_2course_lectures.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build differential-equations_16-17_2course_seminars.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build differential-equations_16-17_2course_seminars.tex
 - cd ../mathematical-statistics_17_2course
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build mathematical-statistics_17_2course.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build mathematical-statistics_17_2course.tex
 - cd ../probability-theory_16-17_2course
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_lectures.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_lectures.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_seminars.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_seminars.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_raidboss.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_raidboss.tex
 - cd ..
 - utils/upload_all.sh 
