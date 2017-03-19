@@ -4,7 +4,7 @@ before_install:
 - sudo apt-get install -y texlive-fonts-recommended
     texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
     texlive-base texlive-pictures texlive-lang-cyrillic texlive-science
-    texlive-generic-recommended texlive-full
+    texlive-generic-recommended pgf
 script:
 - mkdir _build
 - cd algebra_1course
