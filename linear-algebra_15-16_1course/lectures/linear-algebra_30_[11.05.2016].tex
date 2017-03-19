@@ -1,0 +1,203 @@
+\section{Лекция 30 от 11.05.2016}
+
+\subsection*{$N$-мерные параллелепипеды в евклидовых пространствах}
+
+Пусть $\E$ --- евклидово пространство. Вспомним, что такое расстояния в нем.
+
+Для векторов $x,\ y \in E$ расстояние это $\rho(x, y):= |x - y|$.
+
+Для подмножеств $P, Q \subseteq \E$ расстояние это $\rho(P, Q) := \inf\limits_{x \in P,\ y \in Q} \rho(x, y)$.
+
+Для подпространства $U \subseteq \E$ и вектора $x \in \E$ известны следующие вещи:
+\begin{enumerate}
+\item $\rho(x, U) = |\ort_Ux|$
+\item $\rho(x, U)^2 = \frac{\det G(e_1, \ldots, e_k, x)}{\det G(e_1, \ldots, e_k)}$, где $e_1, \ldots, e_k$ --- базис в $U$.
+\end{enumerate}
+
+Рассмотрим теперь векторы $a_1, \ldots, a_n \in \E$, причем $n$ --- необязательно размерность $\E$.
+\begin{Def}
+$N$-мерным параллелепипедом, натянутым на векторы $a_1, \ldots, a_n$ называется подмножество 
+$$
+P(a_1, \ldots, a_n) := \left\{ x = \sum_{i = 1}^n x_ia_i \mid 0 \leqslant x_i \leqslant 1 \right\}.
+$$  
+\end{Def}
+
+\begin{Examples}\
+\begin{enumerate}
+\item При $n = 2$ это обычный двухмерный параллелограмм.
+\item При $n = 3$ это трехмерный параллелепипед.
+\end{enumerate}
+\end{Examples}
+
+\begin{Def}
+Для параллелепипеда $P(a_1, \ldots, a_{n})$ основание это $P(a_1, \ldots, a_{n-1})$, а высота --- $h = \ort_{\langle a_1, \ldots, a_{n-1}\rangle}a_n$.
+\end{Def}
+
+\begin{Def}
+Объем $n$-мерного параллелепипеда $P(a_1, \ldots, a_{n})$ --- это число $\vol P(a_1, \ldots, a_{n})$, определяемое рекурсивно следующим образом:
+\begin{align*}
+n = 1 \quad& \vol P(a_1) = |a_1| \\
+n > 1 \quad& \vol P(a_1, \ldots, a_n) = \vol P(a_1, \ldots, a_{n-1})\cdot |h|
+\end{align*}
+\end{Def}
+
+\begin{Theorem}
+$\vol P\vector{a}^2 = \det G\vector{a}$.
+\end{Theorem}
+
+\begin{proof}
+Докажем это утверждение по индукции.
+
+База: при $n = 1$ имеем $\vol P(a_1)^2 = |a_1|^2 = (a_1, a_1) = \det G(a_1)$.
+
+Теперь пусть утверждение доказано для всех меньших значений. Докажем для $n$.
+\begin{gather*}
+\vol P\vector{a}^2 = \vol P(a_1, \ldots, a_{n-1})^2 \cdot |h|^2 = 
+\det G(a_1, \ldots, a_{n-1}) \cdot |\ort_{\langle a_1, \ldots, a_{n-1} \rangle}a_n|^2 = \\
+= \begin{cases}
+	0 = \det G\vector{a}, & \text{если $a_1, \ldots a_{n-1}$ линейно зависимы} \\
+	\det G(a_1, \ldots, a_n)\frac{\det G(a_1, \ldots, a_n)}{\det G(a_1, \ldots, a_{n-1})} = \det G\vector{a}, & \text{если $a_1, \ldots, a_{n-1}$ линейно независимы}
+  \end{cases}
+\end{gather*}
+\end{proof}
+
+\begin{Consequence}
+Объем параллелепипеда не зависит от выбора основания.
+\end{Consequence}
+
+\begin{Theorem}
+Пусть $\vector{e}$ --- ортогональный базис в $\E$, и $\vector{a} = \vector{e}A$ для некоторой матрицы $A \in M_n(\R)$. Тогда $\vol P\vector{a} = |\det A|$.
+\end{Theorem}
+
+\begin{Comment}
+Это --- геометрический смысл определителя!
+\end{Comment}
+
+\begin{proof}
+Вспомним, что матрица Грама ортогонального базиса равна единичной матрице:
+$$
+G\vector{a} =A^TG\vector{e}A = A^TA.
+$$
+Тогда для определителя справедливо следующее:
+$$
+\det G\vector{a} = \det(A^TA) = (\det A)^2.
+$$
+Осталось воспользоваться предыдущей теоремой:
+$$
+\vol P\vector{a} = \sqrt{\det G \vector{a}} = |\det A|.
+$$
+\end{proof}
+
+\subsection*{Изоморфизм евклидовых пространств}
+
+Теперь рассмотрим два евклидовых пространства, $\E$ и $\E'$.
+\begin{Def}
+Изоморфизм евклидовых пространств $\E$ и $\E'$  --- это биективное отображение $\phi: \E \rightarrow \E'$ такое, что
+\begin{enumerate}
+\item $\phi$ --- изоморфизм векторных пространств.
+\item $(\phi(x), \phi(y))' = (x, y)$ для любых $x \in \E$ и $y \in \E'$. Здесь через $()'$ обозначается скалярное произведение в $\E'$.
+\end{enumerate}
+\end{Def}
+
+\begin{Def}
+Евклидовы пространства $\E$ и $\E'$ называются изоморфными, если между ними существует изоморфизм. Обозначение: $\E \simeq \E'$.
+\end{Def}
+
+\begin{Theorem}
+Два конечномерных евклидовых пространства $\E$ и $\E'$ изоморфны тогда и только тогда, когда их размерности совпадают.
+\end{Theorem}
+
+\begin{proof}\ \\
+$[\Rightarrow]$ Очевидно из первого пункта определения изоморфизма евклидовых пространств.
+
+$[\Leftarrow]$ Зафиксируем ортонормированные базисы $\e = \vector{e}$ в $\E$ и $\e' = \vector{e'}$ в $\E'$, где $n = \dim \E = \dim \E'$. Зададим изоморфизм $\phi: \E \rightarrow \E'$ \textit{векторных пространств} по формуле
+$$
+\phi(e_i) = e_i'\quad \forall i = 1,\ldots, n.
+$$
+Тогда имеем следующее (напомним, что $\delta_{ij}$ это символ Кронекера):
+$$
+(\phi(e_i), \phi(e_j))' = (e_i', e_j')' = \delta_{ij} = (e_i, e_j).
+$$
+Теперь рассмотрим векторы $x = \sum_{_i = 1}^{n}x_ie_i$ и $y = \sum_{j = 1}^{n}y_je_j$ и проверим второй пункт определения изоморфизма евклидовых пространств. Будем пользоваться билинейностью скалярного произведения.
+\begin{gather*}
+(\phi(x), \phi(y))' = \left(\phi\left(\sum_{i = 1}^{n}x_ie_i\right), \phi\left(\sum_{j = 1}^{j = n}y_je_j\right)\right)' = \left(\sum_{i = 1}^{n}x_i\phi(e_i), \sum_{j = 1}^{n}y_j\phi(e_j)\right)' = \\
+= \sum_{i = 1}^{n}\sum_{j = 1}^{n}x_iy_j\phi(e_i, e_j)' = \sum_{i = 1}^{n}\sum_{j = 1}^{n}x_iy_j(e_i, e_j) = (x, y)
+\end{gather*}
+\end{proof}
+
+\subsection*{Линейные операторы в евклидовых пространствах}
+
+Пусть $\E$ --- евклидово пространство, $\phi$ --- его линейный оператор. Тогда ему можно сопоставить две билинейные функции на $\E$:
+\begin{gather*}
+\beta_\phi(x, y) = (x, \phi(y)) \\
+\beta^T_\phi(x, y) = (\phi(x), y)
+\end{gather*}
+Введем базис $\e = \vector{e}$ в $\E$, матрицу Грама $G = G\vector{e}$, матрицу оператора $A_\phi \hm= A(\phi, \e)$, а также два вектора $x = \sum_{i = 1}^{n}x_ie_i$ и $y = \sum_{j = 1}^{n}y_je_j$. Тогда имеем следующее:
+\begin{gather*}
+\phi(x) = A_\phi\vvector{x} \qquad \phi(y) = A_\phi \vvector{y} \\ 
+\beta_\phi(x, y) = \vector{x} GA_\phi \vvector{y} \qquad
+\beta^T_\phi(x, y) = \vector{x}A_\phi^TG\vvector{y}
+\end{gather*}
+Отсюда мы можем вывести матрицы данных билинейных форм:
+\begin{gather*}
+B(\beta_\phi, \e) = GA_\phi \\
+B(\beta^T_\phi, \e) = A^T_\phi G
+\end{gather*}
+
+\begin{Comment}
+Отображения $\phi \mapsto \beta_\phi$ и $\phi \mapsto \beta^T_\phi$ являются биекциями между $L(\E)$ и пространством всех билинейных форм на $\E$.
+\end{Comment}
+
+\begin{Def}
+Линейный оператор $\psi \in L(\E)$ называется сопряженным к $\phi$, если для всех векторов $x,\ y \in \E$ верно, что $(\psi(x), y)\hm = (x, \phi(y))$. Это также равносильно тому, что $\beta_\psi^T = \beta_\phi$. Обозначение: $\psi = \phi^*$.
+\end{Def}
+
+\begin{Suggestion}\ 
+\begin{enumerate}
+\item $\phi^*$ существует и единственен.
+\item $A_{\phi^*} = G^{-1}A_\phi^TG$, где $A_{\phi^*} = A(\phi^*, \e)$, а все остальные обозначения прежние. В частности, если $\e$ --- ортонормированный базис, то $A_{\phi^*} = A_{\phi}^T$.
+\end{enumerate}
+\end{Suggestion}
+
+\begin{proof}
+Снова обозначим $\phi^*$ как $\psi$. Мы уже знаем, что $B(\beta_\psi^T, \e) = A_\psi^TG$ и $B(\beta_\phi, \e) \hm= GA_\phi$. Мы хотим, чтобы эти две матрицы были равны. Транспонируем их и, воспользовавшись тем, что $G = G^T$, получаем:
+$$
+GA_\psi = A_\phi^TG.
+$$
+Выразив $A_\psi$, получаем, что такая матрица (и, соответственно, оператор) единственная: 
+$$A_\psi = G^{-1}A_\phi^TG.$$ 
+Существование же напрямую следует из того, что линейный оператор с матрицей $G^{-1}A_\phi^TG$ обладает нужными свойствами.
+\end{proof}
+
+\begin{Def}
+Линейный оператор $\phi$ называется самосопряженным (симметрическим), если $\phi^* = \phi$. Это равносильно тому, что $(\phi(x), y) = (x, \phi(y)))$ для любых векторов $x,\ y \in \E$.
+\end{Def}
+
+\begin{Comment}
+В случае, когда $\e$ --- ортонормированный базис в $\E$ и $A_\phi = A(\phi, \e)$, то самосопряженность линейного оператора $\phi$ равносильно тому, что $A_\phi = A_\phi^T$. Отсюда и второе название таких операторов --- симметрические. 
+\end{Comment}
+
+Здесь важно, что мы работаем  именно над евклидовым пространством, так как мы использовали скалярное произведение для проведения биекции с билинейными формами.
+
+\begin{Examples}
+Пусть $U \subseteq \E$ --- подпространство. Отображение $\phi : x \mapsto \pr_Ux$ является самосопряженным. 
+
+\begin{proof}\ \\
+\textbf{I способ (координатный).}
+
+Пусть $(e_1, \ldots, e_k)$ --- ортонормированный базис в $U$, а $(e_{k+1}, \ldots, e_n)$ --- ортонормированный базис в $U^T$. Тогда $\e = (e_1, \ldots, e_n)$ --- ортонормированный базис в $\E$. А значит, матрица $\phi$ будет иметь в таком базисе следующий вид:
+$$
+A(\phi, \e) = \diag(\underbrace{1, \ldots, 1}_{k},\underbrace{0, \ldots, 0}_{n - k})
+$$ 
+При транспонировании диагональная матрица не меняется, следовательно, $A(\phi, \e)^T = A(\phi, \e)$. Что и означает, что $\phi = \phi^*$.
+
+\textbf{II способ (бескоординатный).}
+
+Проверим условие $(x, \phi(y)) = (\phi(x), y)$:
+\begin{align*}
+(\phi(x), y) =& (\pr_Ux, \pr_Uy + \ort_Uy) = (\pr_Ux, \pr_Uy) + \underbrace{(\pr_Ux, \ort_Uy)}_{=0} = \\
+=& (\pr_Ux, \pr_Uy) + \underbrace{(\ort_Ux, \pr_Uy)}_{=0} = (\pr_Ux + \ort_Ux, \ort_Uy) = (x, \phi(y)).
+\end{align*}
+\end{proof}
+\end{Examples}
+

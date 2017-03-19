@@ -4,7 +4,7 @@ before_install:
 - sudo apt-get install -y --no-install-recommends
     texlive-fonts-recommended texlive-generic-recommended
     texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
-    texlive-base texlive-pictures texlive-lang-cyrillic texlive-science
+    texlive-base texlive-pictures texlive-lang-cyrillic texlive-science texlive-generic-extra
     pgf
 script:
 - mkdir _build
@@ -41,5 +41,11 @@ script:
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_lectures.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_raidboss.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build probability-theory_16-17_2course_raidboss.tex
+- cd ../calculus_16-17_2course
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build calculus_16-17_2course.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build calculus_16-17_2course.tex
+- cd ../linear-algebra_15-16_1course
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build linear-algebra_15-16_1course.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build linear-algebra_15-16_1course.tex
 - cd ..
 - utils/upload_all.sh 

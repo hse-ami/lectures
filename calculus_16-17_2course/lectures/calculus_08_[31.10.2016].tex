@@ -1,0 +1,119 @@
+\section{Лекция 08 от 31.10.2016 \\ Функциональные ряды. Признаки сходимости}
+	
+	Довольно естественно желание понимать, когда ряд сходится, а когда нет. Для числовых рядов мы рассмотрели большое количество разнообразных признаков сходимости. Аналогично, изучим несколько признаков равномерной сходимости функциональных рядов.
+	
+	\subsection{Признак Вейерштрасса}
+	
+	\begin{Test}[Признак Вейерштрасса]
+		
+		Пусть существует последовательность $\{a_n\}_{n=0}^\infty$ такая, что $\forall n \in N$ и для любого $x\in X$ выполняется неравенство $|f_n(x)|\leq a_n$, и кроме того, ряд $\sum_{n=1}\limits^{\infty}a_n$ сходится. Тогда ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится равномерно на множестве $X$, и $\forall x \in X$ числовой ряд $\sum_{n=1}\limits^{\infty}f_n(x)$ сходится абсолютно.
+	\end{Test}
+	
+	\begin{proof}
+		Вторая часть прямо следует из доказанных в самом начале семестра признаков сравнения. Осталось доказать равномерную сходимость.
+		
+		Возьмём произвольное $\varepsilon>0$. Из критерия Коши для числовых рядов следует, что $\exists N\in \mathbb{N}: \ \forall n>N, \ \forall p\in \mathbb{N}, \ \sum_{n+1}\limits^{n+p}a_n < \varepsilon$.
+		
+		Тогда $\forall m>N, \forall p\in \mathbb{N}, \forall x \in X:$
+		\[
+		\left| \sum_{m+1}\limits^{m+p}f_n(x)\right|  \leq \sum_{m+1}\limits^{m+p} |f_n(x)| \leq  \sum_{m+1}\limits^{m+p}a_m < \varepsilon.
+		\]
+		То есть по критерию Коши для функциональных рядов наш ряд равномерно сходится.
+	\end{proof}
+	
+	\subsection{Примеры рядов, которые не ловятся п. Вейерштрасса}
+	
+	А существует ли равномерно сходящийся ряд, который не ловится признаком Вейерштрасса? Конечно. Например:
+	$$
+	\sseries \frac{x^n}{n}, \qquad X = \{-1\}.
+	$$
+	Если хочется, чтобы ряд был неотрицательный, можно пойти на хитрость. Возьмем последовательность $\{f_n\}$ такую, что
+	$$
+	f_n(x) = \begin{cases}
+	1/n, & x = n; \\
+	0, & x \neq n.
+	\end{cases}
+	$$
+	Тогда ряд $\sseries f_n(x)$ будет сходиться равномерно на $(0, +\infty)$, но не будет подпадать под условие признака Вейерширасса.
+	
+	Подобный подход можно распространить на непрерывные функции $f_n(x)$ --- например, они могут задавать равнобедренные треугольники, стоящие на оси $OX$, с непересекающимися основаниями и постепенно убывающей высотой (например, то же $1/n$).
+	
+	Хотя классическими примерами, конечно же, являются следующие ряды:
+	$$
+	\sseries \frac{\sin nx}{n}, \qquad \sseries \frac{\cos nx}{n}.
+	$$
+
+	\subsection{Признак Дирихле}	
+	
+	\begin{Test}[Признак Дирихле]
+		Если выполняются следующие условия:
+		\begin{enumerate}
+			\item  последовательность частичных сумм $\sum\limits_{n = 1}^k a_n(x) $ равномерно ограничена на $X$, то есть $\exists C>0 : \forall N\in \mathbb{N} \ \forall x \in X: \  \left| \sum\limits_{n = 1}^N a_n(x)\right|  <C$;
+			
+			\item  последовательность функций $\{b_n(x)\}$ монотонна для любого $x \in X$ и равномерно сходится к нулю на $X$ при $n \to \infty$,
+		\end{enumerate}
+		то ряд $\sum\limits_{n = 1}^\infty a_n(x) b_n(x)$ сходится равномерно на $X$.
+	\end{Test}
+	
+	\begin{proof}
+		Возьмём произвольное $\varepsilon>0$. Положим $\varepsilon_1 := \frac{\varepsilon}{4C}$. Найдём такое $N\in \mathbb{N}$, что $\forall n > N, \forall x \in X: \  \left| b_n(x) \right| < \varepsilon_1.$
+		Тогда $\forall m>N, \forall p \in \mathbb{N}, \ \forall x \in X:$
+		\begin{multline}
+		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left| A_{m+p}(x)b_{m+p}(x) - A_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} A_n(x)( b_n(x)-b_{n+1}(x)) \right| <\\
+		< C\varepsilon_1+C\varepsilon_1+C\sum\limits_{n = m+1}^{m+p-1} | b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + C\left|b_{m+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 \leq \varepsilon.
+		\end{multline}
+		Здесь мы воспользовались преобразованием Абеля (см. лекцию 4), а также тем, что последовательность $b_n(x)$ монотонна, поэтому в последней сумме все модули раскроются с одинаковым знаком.
+	\end{proof}
+	
+	\subsection{Признак Абеля}
+	
+	\begin{Test}[Признак Абеля]
+		Если выполняются следующие условия:
+		\begin{enumerate}
+			\item  ряд $\sum\limits_{n=1}^{\infty} {a_n}(x)$ равномерно сходится на $X$;
+			\item  последовательность функций $\{b_n(x)\}$ равномерно ограничена на $X$ и монотонна $\forall x\in X$,
+		\end{enumerate}
+		то ряд $\sum_{n=1}\limits^\infty {{a_n}(x)}{{b_n}(x)}$ сходится равномерно на $X$.
+	\end{Test}
+	
+	\begin{proof}
+		Доказать так же, как в случае числовых рядов, не получится. Действительно, если разложить функции $b_n$ как $b_n(x) = b(x) + e_n(x)$, то последовательность $\{e_n(x)\}$ не обязательно равномерно сходится к нулю. Например, при $b_n(x) = x^n$ на множестве $X = \{0, 1\}$.
+		
+		Доказательство, естественно, очень похоже на доказательство предыдущего признака. 	
+		
+		Так как $\{b_n(x)\}$ равномерно ограничена, то $\exists C>0:\ \forall n \in \mathbb{N}, \forall x\in X\ |b_n(x)| < C.$
+		
+		Возьмём произвольное $\varepsilon>0$. Положим $\varepsilon_1 := \frac{\varepsilon}{4C}$. Найдём такое $N\in \mathbb{N}$, что $\forall n > N, \forall p \in \mathbb{N}, \forall x \in X: \  \left| \sum\limits_{n = m+1}^{m+p} a_{n}(x) \right| < \varepsilon_1.$
+		
+		Положим для $n>N:$ $\tilde{A}_n(x)=a_{N+1}(x)+\dots+a_{n}(x)$, $\tilde{A}_N(x) = 0.$
+		
+		Очевидно, что $\forall n\geq N, \forall x \in X: |\tilde{A}_n(x)|<\varepsilon_1.$ Тогда $\forall m>N, \forall p \in \mathbb{N}, \ \forall x \in X:$
+		\begin{multline}
+		\left| \sum\limits_{n = m+1}^{m+p} a_n(x) b_n(x)\right| = \left|\sum\limits_{n = m+1}^{m+p} (\tilde{A}_n(x)-\tilde{A}_{n-1}(x)) b_n(x)\right|=\\ = \left| \tilde{A}_{m+p}(x)b_{m+p}(x) - \tilde{A}_{m}(x)b_{m+1}(x)+ \sum\limits_{n = m+1}^{m+p-1} \tilde{A}_n(x)( b_n(x)-b_{n+1}(x)) \right| <\\
+		< C\varepsilon_1+C\varepsilon_1+\eps_1\sum\limits_{n = m+1}^{m+p-1} |b_n(x)-b_{n+1}(x)|=\frac{\varepsilon}{2} + \eps_1\left|b_{m+1}(x) - b_{m+p}(x) \right| \leq \frac{\eps}{2} + 2C\eps_1 {знаменатель} \leq \varepsilon.
+		\end{multline}
+	\end{proof}
+	
+	
+	Рассмотрим один из классических примеров, который мы упоминали в начале лекции.
+	\begin{Examples}
+		$\forall \alpha > 0$ ряд $\sum\limits_{n = 1}^\infty \frac{\sin nx}{n}$ равномерно сходится на $X=(\alpha, 2\pi-\alpha)$.
+	\end{Examples}
+	
+	\begin{proof} 
+	Здесь применим признак Дирихле. Действительно, пусть $a_n(x) = \sin nx$, а $b_n(x) = 1/n$. Тогда $|A_n(x)| \leq \dfrac{1}{\sin \frac{x}{2}} < \dfrac{1}{\sin \frac{\alpha}{2}}$ и можно взять $C:= \dfrac{1}{\sin \frac{\alpha}{2}}$. А с $b_n(x)$ все очевидно.
+	\end{proof}
+	
+	С другой стороны:
+	\begin{Examples}
+		Ряд $\sum\limits_{n = 1}^\infty \frac{\sin nx}{n}$ не сходится равномерно на $X=(0, 2\pi)$.
+	\end{Examples}
+	\begin{proof}
+		Здесь признак Дирихле уже не применим. Докажем отсутствие равномерной сходимости через отрицание критерия Коши.
+		
+		Возьмем $\eps = 1/100$. Тогда $\forall N \in \N$ зафиксируем $m = N+1$, $p = m$, $x = \pi/4m$. Получаем:
+		$$
+		\left| \series{m+1}{m+p} \frac{\sin nx}{n} \right| \geq \dfrac{m\sqrt{2} / 2}{2m} \geq \eps.
+		$$
+	\end{proof}
+

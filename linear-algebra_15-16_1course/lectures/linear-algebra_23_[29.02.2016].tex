@@ -1,0 +1,187 @@
+\section{Лекция 23 от 29.02.2016}
+
+\subsection*{Сумма собственных подпространств}
+
+Вспомним, чем закончилась прошлая лекция.
+
+Пусть $V$ --- векторное пространство, $U_1, \dots, U_k \subseteq V$ --- векторные подпространства.
+
+Сумма $U = U_1 + \ldots + U_k$ является прямой, если из условия $u_1 + \ldots + u_k = 0$ следует, что $u_1 = \ldots = u_k = 0$, где $u_i \in U_i$. Обозначение: $U = U_1 \oplus \ldots \oplus U_k$.
+
+\vspace{0.2cm}
+Эквивалентные условия:
+\begin{enumerate}
+\item $U = U_1 \oplus \ldots \oplus U_k$.
+\item Если $\e_i$ --- базис $U_i$, то $\e = \e_1 \cup \ldots \cup \e_k$ --- базис $U$.
+\item $\dim U = \dim U_1 + \ldots + \dim U_k$.
+\end{enumerate}
+
+Пусть $V$ --- векторное пространство над полем $F$, $\phi \in L(V)$, $\lambda_1, \ldots, \lambda_k$ --- набор собственных значений $\phi$, где $\lambda_i \neq \lambda_j$ при $i \neq j$, и $V_{\lambda_i}(\phi) \subseteq V$ --- соответствующее собственное подпространство.
+
+\begin{Suggestion}
+Сумма $V_{\lambda_1}(\phi) + \ldots + V_{\lambda_k}(\phi)$ является прямой.
+\end{Suggestion}
+
+\begin{proof}
+Докажем индукцией по $k$.
+
+База: $k = 1$. Тут все ясно.
+
+Теперь пусть утверждение доказано для всех значений, меньших $k$. Докажем для $k$.
+
+Пусть $v_i \in V_{\lambda_i}(\phi)$ и пусть $v_1 + \ldots + v_k = 0$. Тогда:
+\begin{gather*}
+\phi(v_1 + \ldots + v_k) = \phi(0) = 0 \\
+\phi(v_1) + \ldots + \phi(v_k) = 0 \\
+\lambda_1v_1 + \ldots + \lambda_kv_k = 0
+\end{gather*}
+Теперь вычтем из нижней строчки $v_1 + \ldots + v_k = 0$, домноженное на $\lambda_k$. Получим:
+\begin{gather*}
+(\lambda_1 - \lambda_k)v_1 + \ldots + (\lambda_k -\lambda_k)v_k = 0 \\
+(\lambda_1 - \lambda_k)v_1 + \ldots + (\lambda_{k-1} -\lambda_k)v_{k-1} + 0v_k= 0
+\end{gather*}
+Но из предположения индукции, а также потому что $\lambda_i \neq \lambda_j$ при $i \neq j$, следует, что $v_1 = \ldots \hm= v_{k-1} = 0$. Но тогда и $v_k = 0$. 
+
+Следовательно, сумма прямая, что нам и требовалось.
+\end{proof}
+
+\subsection*{Диагонализуемость}
+
+\begin{Consequence}
+Если характеристический многочлен имеет ровно $n$ попарно различных корней, где $n = \dim V$, то $\phi$ диагонализируем.
+\end{Consequence}
+
+\begin{proof}
+Пусть $\l_1, \ldots, \l_n$ --- корни $\chi_\phi(t)$, $\l_i \neq \l_j$. Тогда для всех $i$ выполняется, что $V_{\l_i}(\phi) \neq \{0\}$ и, следовательно, $\dim V_{\l_i}(\phi) = 1$. Но так как сумма $V_{\l_1}(\phi) + \ldots + V_{\l_k}(\phi)$ --- прямая, то $\dim (V_{\l_1}(\phi) + \ldots + V_{\l_k}(\phi)) = \dim V_{\l_1}(\phi) + \ldots + \dim V_{\l_k}(\phi) = n$. Иными словами, $V = V_{\l_1}(\phi) \oplus \ldots \oplus V_{\l_k}(\phi)$.
+
+Выберем произвольные $v_i \in V_{\l_i}\setminus\{0\}$. Тогда $(v_1, \ldots, v_n)$ будет базисом в $V$. И так как все $v_i$~--- собственные значения для $\phi$, то $\phi$ диагонализируем.
+\end{proof}
+
+\begin{Theorem}[Критерий диагонализируемости - 2]
+Линейный оператор $\phi$ диагонализируем тогда и только тогда, когда 
+\begin{enumerate}
+\item $\chi_\phi(t)$ разлагается на линейные множители;
+\item Если $\chi_\phi(t) = (t - \l_1)^{k_1}\dots(t - \l_s)^{k_s}$, где $\l_i \neq \l_j$ при $i \neq j$, то $\dim V_{\l_i}(\phi) = k_i \ \forall i$ (то есть для любого собственного значения $V$ равны геометрическая и алгебраическая кратности).
+\end{enumerate}
+\end{Theorem}
+
+\begin{proof}\
+\begin{itemize}
+\item[$\Rightarrow$] Так как $\phi$ --- диагонализируем, то существует базис $\e = (e_1, \ldots, e_n)$ такой, что:
+\begin{gather*}
+A(\phi, \e) = 
+\begin{pmatrix*}
+\mu_1 & & 0 \\
+& \ddots & \\
+0 & & \mu_n
+\end{pmatrix*} = \diag(\mu_1, \ldots, \mu_n).
+\end{gather*}
+Тогда:
+$$
+\chi_\phi(t) = (-1)^n 
+\begin{vmatrix}
+\mu_1-t & & 0 \\
+& \ddots & \\
+0 & & \mu_n-t
+\end{vmatrix} = (-1)^n(\mu_1 - t)\ldots(\mu_n - t) = (t - \mu_1)\ldots(t-\mu_n).
+$$
+Итого, первое условие выполняется.
+
+Теперь перепишем характеристический многочлен в виде $\chi_\phi(t) = (t - \l_1)^{k_1}\dots(t - \l_s)^{k_s}$, где $\l_i \neq \l_j$ при $i \neq j$ и $\{ \l_1, \ldots, \l_s \} = \{\mu_1, \ldots, \mu_n \}$. Тогда $V_{\l_i} \supseteq \langle e_j \mid \mu_j = \l_i \rangle$, следовательно, $\dim V_{\l_i}(\phi) \geqslant k_i$. Но мы знаем, что $\dim V_{\l_i} \leqslant k_i$! Значит, $\dim V_{\l_i}(\phi) = k_i$.
+
+\item[$\Leftarrow$] Так как $V_{\l_1}(\phi) + \ldots + V_{\l_s}(\phi)$ --- прямая, то $\dim (V_{\l_1}(\phi) + \ldots + V_{\l_s}(\phi)) = k_1 + \ldots + k_s = n$.
+
+Пусть $\e_i$ --- базис в $V_{\l_i}$. Тогда $\e_1 \cup \ldots \cup \e_s$ --- базис в $V$. То есть мы нашли базис из собственных векторов, следовательно, $\phi$ диагонализируем.
+\end{itemize}
+\end{proof}
+
+\subsection*{Инвариантные подпространства в $\R^n$}
+
+Пусть $V$ --- векторное пространство над полем $\C$, $\phi \in L(V)$. Тогда в $V$ есть собственный вектор (или одномерное $\phi$--инвариантное пространство).
+
+\vspace{0.2cm}
+Теперь пусть $V$ --- векторное пространство над полем $\R$, $\phi \in L(V)$.
+
+\begin{Theorem}
+Существует одномерное или двумерное $\phi$--инвариантное подпространство в $V$.
+\end{Theorem}
+
+\begin{proof}
+Пусть $\e = (e_1, \ldots, e_n)$ --- базис в $V$. Комплексифицируем $V$.
+\begin{gather*}
+V^{\C} = \{ u + iv \mid u, v \in V \} \\
+V^{\C} \supset V = \{u + i\cdot0 \mid u \in V  \}
+\end{gather*}
+Рассмотрим линейный оператор $\phi_\C \in L(V^\C)$, заданный как $\phi_\C(e_i) = \phi(e_i),\ \forall i$. Значит, $e_1, \ldots, e_n$~--- базис в $V^\C$. Следовательно, $\chi_{\phi_\C}(t) = \chi_\phi(t)$, так как $A(\phi_\C, \e) = A(\phi, \e)$.
+
+\underline{Случай 1}: $\chi_\phi(t)$ имеет хотя бы один действительный корень. Отсюда следует, что в $V$ есть собственный вектор, что равносильно существованию одномерного $\phi$--инвариантного подпространства (тогда $V^\C$ нам не нужно).
+
+\underline{Случай 2}: $\chi_\phi$ не имеет действительных корней. Пусть $\l + i\mu$ --- некоторый корень $\chi_\phi(t) $, который, напомним, равен $\chi_{\phi_\C}(t)$. Тогда у $\phi_\C$ существует собственный вектор $u+iv \in V^\C$  с собственным значением $\l + i\mu$ такой, что:
+\begin{gather*}
+\phi_\C(u+iv) = (\l + i\mu)(u+iv)\\
+\phi_\C(u + iv) = \phi_\C(u) + i\phi_\C(v) = \phi(u) + i\phi(v) \\
+(\l + i\mu)(u + iv) = \l \mu - \mu v + i(\mu u + \l v)
+\end{gather*}
+Сравнивая два последних равенства, получаем:
+\begin{gather*}
+\phi(u) =  \l u - \mu v \\
+\phi(v) = \mu u + \l v
+\end{gather*}
+Следовательно, $\langle u, v \rangle$ --- $\phi$--инвариантное подпространство в $V$, двумерное если $u$ и $v$ линейно независимы и одномерное в противном случае.
+\end{proof}
+
+\begin{Task}
+Когда нет действительных корней (второй случай), $\phi$-инвариантное подпространство в $V$ всегда двумерно.
+\end{Task}
+
+\begin{Examples}
+Поворот на $\alpha$ в $\R^2$: $
+\begin{pmatrix}
+\cos \alpha & -\sin \alpha \\
+\sin \alpha & \cos \alpha  
+\end{pmatrix}
+$. Тогда $u = e_1$, $v = e_2$, $\l + i\mu = \cos \alpha + i\sin \alpha$.
+\end{Examples}
+
+Пусть $V$ --- векторное пространство над $F$, $\dim V = n$.
+
+\vspace{0.2cm}
+\underline{Операции над $L(V)$}:
+\begin{enumerate}
+\item Сложение: $(\phi + \psi)(v) = \phi(v) + \psi(v)$.
+\item Умножение на скаляр: $(\alpha\phi)(v) = \alpha\phi(v)$.
+\item Умножение: $(\phi\psi)(v) = \phi(\psi(v))$.
+\end{enumerate}
+В частности, для любого $P(x) \in F[x]$, $P(x) = a_nx^n + \ldots + a_1x + a_0$ и для любого $\phi \in L(V)$ определен линейный оператор $P(\phi)\in L(V)$: $P(\phi) = a_n \phi^n + \ldots + a_1\phi + a_0\id$.
+
+\subsection*{Корневые векторы и корневые подпространства}
+
+\begin{Def}
+Вектор $v \in V$ называется корневым вектором линейного оператора $\phi$, отвечающим значению $\l \in F$, если существует $m \geqslant 0$ такое, что $(\phi - \l\id)^m(v) = 0$.
+
+Наименьшее такое $m$ называют высотой корневого вектора $v$.
+\end{Def}
+\ \\
+\begin{Comment}\
+\begin{enumerate}
+\item Вектор $v = 0$ для любого $\phi$ имеет высоту 0.
+\item Корневые векторы высоты 1 --- это в точности собственные векторы.
+\end{enumerate}
+\end{Comment}
+
+\begin{Examples}
+$V = F[x]_{\leqslant n}$, $\Delta: f \rightarrow f'$. Здесь $\l = 0$ --- единственное собственное значение. Все векторы --- корневые, отвечающие $\l = 0$. 
+\end{Examples}
+
+\begin{Def}
+Множество $V^\l(\phi) = \{ v \in V \mid \exists m \geqslant 0  : (\phi - \l\id)^m(v) = 0 \}$ называется корневым пространством для $\l \in F$.
+\end{Def}
+
+\begin{Task}
+$V^\l(\phi)$ --- подпространство в $V$.
+\end{Task}
+
+\begin{Comment}
+$V_\l(\phi) \subseteq V^\l(\phi) \ \forall \l \in F$.
+\end{Comment}
+

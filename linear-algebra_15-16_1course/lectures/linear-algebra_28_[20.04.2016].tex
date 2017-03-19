@@ -1,0 +1,167 @@
+\renewcommand{\f}{\mathbb{f}}
+
+\section{Лекция 28 от 19.04.2016}
+
+\subsection*{Ортогонализация}
+Пусть $V$ --- векторное пространство над полем $F$ размерности $n$, и $\mathbb{e} = (e_1, \ldots, e_n)$ --- его базис. Пусть также $Q\colon \; V \to F$ --- квадратичная форма, $\beta\colon\; V\times V \to F$ --- соответствующая билинейная функция и $B = B(\beta, \mathbb{e})$ --- ее матрица.
+$$
+B = \begin{pmatrix}
+	b_{11}& b_{12} & b_{13} & \vdots\\
+	b_{21}& b_{22} & b_{23} & \vdots\\
+	b_{31}& b_{32}& b_{33} & \vdots\\
+	\cdots& \cdots& \cdots& \ddots
+\end{pmatrix}
+$$
+
+Рассмотрим $B_i$ --- левые верхние $i\times i$-подматрицы. Например, $B_1 = (b_{11})$, $B_2 = \begin{pmatrix}
+	b_{11}& b_{12}\\
+	b_{21}& b_{22}
+\end{pmatrix}$
+и так далее.
+\par Матрица $B_i$ --- это матрица ограничения билинейной функции $\beta$ на подпространство, натянутое на векторы $(e_1, \ldots, e_i)$. Назовем \textit{верхним угловым минором} число $\delta_i = \det(B_i)$. Также будем считать, что $\delta_0 = 1$. 
+\begin{Def}
+	Базис $\mathbb{e}$ называется ортогональным (по отношению к $\beta$), если $\beta(e_i, e_j) = 0$ для любых $i \neq j$. В ортогональном базисе матрица квадратичной формы имеет канонический вид.
+\end{Def}
+\begin{Theorem}[Метод ортогонализации Грама -- Шмидта]
+		Предположим, что $\delta_i \neq 0$ для всех $i$. Тогда существует единственный  базис $\mathbb{e}' = (e_1', \ldots, e_n')$ в $V$ такой, что
+		\begin{enumerate}
+			\item $\mathbb{e}'$ --- ортогональный
+			\item $e_1' = e_1,\\ e_2' \in e_2 + \langle e_1'\rangle,\\ e_3' \in  e_3 + \langle e_1', e_2' \rangle,\\ \ldots\\ e_n' \in  e_n + \langle e_1', \ldots, e_{n-1}'\rangle$
+			\item $Q(e_i') = \cfrac{\delta_i}{\delta_{i-1}}$ для всех $i$.
+		\end{enumerate}	
+\end{Theorem}
+\begin{proof}
+	Индукция по $n$. База для $n = 1$ очевидна. 
+	\par Теперь пусть всё доказано для всех $k<n$. Докажем для $n$. По предположению индукции, существует единственный базис $(e_1', e_2', \ldots, e_n')$ с требуемыми свойствами.
+	
+	Наблюдение: $\langle e_i, \ldots, e_n\rangle = \langle e_i', \ldots, e_n'\rangle$.
+	
+	Ищем $e_n'$ в виде $e_n' = e_n + \lambda_1 e_1' + \ldots + \lambda_{n-1}e_{n-1}'$. Тогда для всех $i$:
+	\[
+ \beta(e_n', e_i') = \beta(e_n, e_i') + \sum\limits^{n-1}_{j = 1} \lambda_j\beta (e_j', e_i')
+	\]
+	Чтобы выполнялись требуемые условия, необходимо, чтобы эта сумма равнялась нулю.
+	
+	Заметим,что последнее слагаемое обращается в нуль при $i \neq j$ по свойству выбранного базиса. Тогда остается только следующее:
+	\[
+		0 = \beta(e_n, e_i') + \lambda_i \beta(e_i', e_i')= \beta(e_n, e_i') +\l_i Q(e_i') = \beta(e_n, e_i') + \l_i\underbrace{\cfrac{\delta_i}{\delta_{i - 1}}}_{\neq 0}.
+	\]
+	Выбирая $\lambda_i = -\cfrac{\beta(e_n, e_i')}{\beta(e_i', e_i')}$, получаем нужное равенство и  однозначность разложения. Таким образом, условия 1 и 2 выполнены.
+	
+	Проверим условие 3. Пусть $C$ --- матрица перехода от $\mathbb{e}$ к $\mathbb{e}'$. Тогда легко понять, что $C$ --- верхнетреугольная с единицами на главной диагонали. Значит, матрица $B' = C^{T}BC$ тоже диагональна. Заметим также, что $C_i$ (та самая верхняя $i\times i$-подматрица) является матрицей перехода от $(e_1, \ldots, e_i)$ к $(e_1', \ldots, e_i')$. Тогда:
+	\[
+		B_i' = C_i^TB_iC_i \Rightarrow \det B_i' = 1\cdot \det(B_i) \cdot 1 = \delta_i.
+	\]
+	Но поскольку $B' = \begin{pmatrix}
+		Q(e_1')& & 0 \\
+		 & \ddots&  \\
+		 0 && Q(e_n')
+	\end{pmatrix}$, то $\delta_n = Q(e_1')\cdot\ldots\cdot Q(e_n')$. Отсюда и получаем, что $\cfrac{\delta_n}{\delta_{n-1}} = Q(e_n')$.
+\end{proof}
+
+\begin{Examples}
+Пусть $V = \R^2$. Тогда $e_1' = e_1$, а $e_2'$ получается, если спроецировать вектор $e_2$ на прямую, ортогональную $e_1$. Если $V = \R^3$, то $e_3'$ является проекцией на прямую, ортогональную плоскости $(e_1', e_2')$.
+\end{Examples}
+
+\subsection*{Теорема Якоби и критерий Сильвестра}
+
+Рассмотрим следствия данной теоремы для случая, когда $F = \mathbb{R}$.
+\begin{Theorem}[Якоби]
+	Пусть $\delta_i \neq 0$ для всех $i$. Тогда $\rk Q = n$ и $i_{-}(Q)$ равен числу перемен знака последовательности $\delta_0, \delta_1, \ldots, \delta_n$ (напомним, что $\delta_0 = 1$).
+\end{Theorem}
+\begin{proof}
+	Применим процесс ортогонализации. Получим базис $(e_1', \ldots, e_n')$, в котором $ Q(y_1, \ldots, y_n) = \cfrac{\delta_1}{\delta_0}y_1^2 +\ldots + \cfrac{\delta_n}{\delta_{n-1}}y_n^2$, где $y_1, \ldots, y_n$ --- координаты некоторого вектора в данном базисе. Если для некоторого $i$ выполняется, что $\cfrac{\delta_i}{\delta_{i-1}} < 0$, то значит, $\sgn \delta_i \neq \sgn \delta_{i - 1}$. Что и означает, что отрицательный индекс равен количеству перемен знака в последовательности $\delta_0, \delta_1, \ldots, \delta_n$.
+	
+	Что касательно определителя, то условие  $\rk Q = n$ равносильно условию $\det B \neq 0$. Но $\det B = \delta_n \neq 0$, а значит, все верно.
+\end{proof}
+\begin{Theorem}[Критерий Сильвестра]
+	$Q > 0$ тогда и только тогда, когда $\delta_i > 0$  для всех $i$.
+\end{Theorem}
+\begin{proof}\ \\
+	$[\Leftarrow]$ Следует из предыдущей теоремы. \\
+	$[\Rightarrow]$ Докажем, чтo $\delta_i = \det(B_i) > 0$. Действительно, $B_i$ --- это матрица ограничения $Q\bigr|_{\langle e_1, \ldots, e_i\rangle}$. Оно так же будет строго положительным, следовательно,  существует матрица $C_i \in M_n(\mathbb{R}),\\ \det(C_i)\neq 0$, такая, что $C_i^TBC_i = E$. Но тогда
+	$\det C^T_i\det B_i \det C_i = \det E = 1$. Следовательно, $\det B_i = \cfrac{1}{(\det C_i)^2} > 0$, что и требовалось.
+\end{proof}
+\begin{Theorem}
+	 $Q < 0 \Leftrightarrow \begin{cases}
+		\delta_i < 0, & 2 \nmid i \\
+		\delta_i > 0, & 2 \mid i
+	\end{cases}$
+\end{Theorem}
+\begin{proof}
+	Применяя критерий Сильвестра для $B(Q, \mathbb{e}) = - B(-Q, \mathbb{e})$, получаем требуемое.
+\end{proof}
+
+\subsection*{Евклидовы пространства. Основные понятия}
+\begin{Def}
+	Евклидово пространство --- это векторное пространство $\mathbb{E}$ над полем $\mathbb{R}$, на котором задана положительно определённая симметрическая билинейная функция $(\cdot, \cdot)$, которую мы будем называть скалярным произведением.
+\end{Def}
+\begin{Examples}\
+\begin{enumerate}
+\item	$\mathbb{R}^n,\ x = \begin{pmatrix}x_1\\ \vdots\\ x_n\end{pmatrix}$, $y = \begin{pmatrix}y_1\\ \vdots\\ y_n\end{pmatrix}, 
+		(x,y) = \sum\limits_{i = 1}^n x_iy_i$.
+\item $\E = C[0, 1]$, $(f, g) = \int_{0}^{1}f(x)g(x)dx$, $(f, f) = \int_{0}^{1}f^2(x)dx > 0$.
+\end{enumerate}
+\end{Examples}
+\begin{Comment}
+	Важно отметить, что евклидово пространство можно определить только над полем $\mathbb{R}$.
+\end{Comment}
+
+\begin{Def}
+	Пусть $x\in \mathbb{E}$. Тогда длиной вектора называют величину $|x| = \sqrt{(x,x)}$.
+\end{Def}
+
+Очевидно, что $|x| \geqslant 0$, причем $|x| = 0$ тогда и только тогда, когда $x = 0$.
+
+\begin{Suggestion}[Неравенство Коши-Буняковского]
+	Пусть $x, y \in \E$. Тогда $|(x,y)| \leqslant |x||y|$, причём знак равенства возможен тогда и только тогда, когда $x$ и $y$ пропорциональны.
+\end{Suggestion}
+\begin{proof}\
+	\begin{enumerate}
+		\item $x,y$ пропорциональны, т.е. $x = \lambda y$ для некоторого $\lambda$. Тогда:
+		\[
+			|(x,y)| = |(x,\lambda x)| = \lambda|(x,x)| = |x|\lambda|x| = |x||y|.
+		\]
+		\item $x,y$ линейно независимы. Тогда они будут базисом своей линейной оболочки. Тогда матрица $B$ билинейной функции $(\cdot, \cdot)\bigr|_{\langle x, y\rangle}$ равна:
+		\begin{gather*}
+		B = \begin{pmatrix}
+			(x,x)& (x,y)\\
+			(y,x)& (y,y)
+		\end{pmatrix}
+		\end{gather*}
+	Так как $\det B > 0$, то $(x,x)(y,y) - (x,y)^2 > 0$. Следовательно:
+	\begin{gather*}
+			|(x,y)|^2 < |x|^2|y|^2\\
+			|(x,y)| < |x||y|
+	\end{gather*}
+	\end{enumerate}
+\end{proof}
+
+\begin{Def}
+	Углом между векторами $x$ и $y$ называют такой $\alpha$, что $ \cos \alpha = \cfrac{(x,y)}{|x||y|}$.
+\end{Def}
+
+Рассмотрим систему векторов $(v_1, \ldots, v_k)$, где $v_i \in \E$.
+\begin{Def}
+Матрица Грама системы $v_1, \ldots, v_k$ это
+	$$G(v_1,\ldots, v_k) := (g_{ij}),\quad g_{ij} = (v_i,v_j).$$
+\end{Def}
+
+\begin{Suggestion}\
+	\begin{enumerate}
+		\item $\det G(v_1, \ldots, v_k) \geqslant 0$
+		\item $\det G(v_1, \ldots, v_k) = 0$ тогда и только тогда, когда $v_1, \ldots, v_k$ линейно зависимы.
+	\end{enumerate}
+\end{Suggestion}
+
+\begin{proof}\
+	\begin{enumerate}
+		\item $v_1, \ldots, v_k$ линейно независимы. Следовательно, матрица $G(v_1, \ldots, v_k)$ является матрицей ограничения $(\cdot, \cdot)$ на $\langle v_1, \ldots, v_k\rangle$, базисом в котором является $(v_1, \ldots, v_k)$. А значит, $\det G(v_1, \ldots, v_k) > 0$.
+		\item $v_1, \ldots, v_k$  линейно зависимы. Значит, существуют коэффициенты $(\l_1, \ldots, \l_k) \neq (0,  \ldots, 0)$ такие, что $\l_1v_1 + \ldots + \l_kv_k = 0$. Если обозначить матрицу Грама $G(v_1, \ldots, v_k)$ за $G$, то тогда
+		\begin{gather*}
+		\l_1 G_{(1)} + \ldots + \l_kG_{(k)} = \\ =
+		(\l_1v_1 + \ldots + \l_kv_k, v_1) + (\l_1v_1 + \ldots + \l_kv_k, v_2) + \ldots + (\l_1v_1 + \ldots + \l_kv_k, v_k) =\\= 0 + 0 + \ldots + 0
+		\end{gather*}
+		То есть строки линейно зависимы и $\det G = 0$.
+	\end{enumerate}
+\end{proof}

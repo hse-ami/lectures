@@ -1,0 +1,180 @@
+\renewcommand{\f}{\mathbb{f}}
+
+\section{Лекция 29 от 27.04.2016}
+\subsection*{Ортогональные дополнения}
+Пусть $\mathbb{E}$ --- евклидово пространство, $\dim \E = n$.
+\begin{Def}
+	Векторы $x,y$ называются ортогональными, если $(x,y)=0$. Обозначение: \\$x\perp y$. 
+\end{Def}
+
+\begin{Def}
+	Пусть $S \subseteq \mathbb{E}$ --- произвольное подпространство. Ортогональным дополнением к $S$ называется множество $S^{\perp} = \{x\in \mathbb{E}\; |\; (x,y) = 0\;\forall y \in S\}$.
+\end{Def}
+
+\begin{Comment}\
+	\begin{enumerate}
+		\item $S^\perp$ --- подпространство в $\E$.
+		\item $S^\perp = \langle S \rangle^\perp$.
+	\end{enumerate}
+\end{Comment}
+
+\begin{Suggestion}
+Пусть $S$ --- подпространство в $\E$. Тогда:
+	\begin{enumerate}
+		\item $\dim S^\perp = n - \dim S$;
+		\item $\mathbb{E} = S \oplus S^\perp$;
+		\item $(S^\perp)^\perp = S$.
+	\end{enumerate}
+\end{Suggestion}
+
+\begin{proof}\
+	\begin{enumerate}
+	\item Выделим в $S$ базис $(e_1, \ldots, e_k)$ и дополним его векторами $(e_{k+1}, \ldots, e_n)$ до базиса $\mathbb{E}$. Рассмотрим вектор $x \in \E$ и представим его в виде $x_1e_1 + \ldots + x_ne_n$. Если $x \in S^\perp$, то это то же самое, если $(x, e_i) = 0$ для $i = 1 \ldots k$. Итого:
+	\begin{gather*}
+		(x,e_i) = (e_1, e_i)x_1 + (e_2, e_i) x_2 + \ldots, (e_n, e_i) x_n= 0, \quad i = 1 \ldots k		
+	\end{gather*}
+	Получим однородную СЛУ $G\begin{pmatrix}
+	x_1\\x_2\\ \vdots\\ x_n
+	\end{pmatrix} = 0$, где $G \in Mat_{k\times n}(\mathbb{R})$ и $g_{ij} = (e_i, e_j)$. Заметим, что $\rk G =  k$, так как это часть матрицы Грама, и ее левый верхний $k\times k$ минор больше нуля. Следовательно, размерность пространства решений $\dim S^\perp = n - \rk G = n - \dim S$.
+	\item Из предыдущего пункта получаем, что $\dim S + \dim S^\perp = n$. Вместе с тем, поскольку $(x,x) = 0$ тогда и только тогда, когда $x = 0$, то $S \cap S^\perp = \{0\}$. Следовательно, $\mathbb{E} = S \oplus S^\perp$.
+	\item $S \subset (S^\perp)^\perp$ --- всегда. Вместе с тем, $\dim (S^\perp)^\perp = n - \dim S^\perp = n - (n - k) =  k = \dim S$. И так как размерности совпадают, то $S = (S^\perp)^\perp$.
+\end{enumerate}
+\end{proof}
+
+Итак, мы теперь знаем, что $\E = S \oplus S^\perp$. Значит, для $x \in \mathbb{E}$ существует единственное представление его в виде $x = y + z$, где $y \in S,\; z \in S^\perp$.
+\begin{Def}
+	Вектор $y$ называется ортогональной проекцией вектора $x$ на подпространство $S$. Обозначение: $\pr_S x$. \\ Вектор $z$ называется ортогональной составляющей вектора $x$ вдоль подпространства $S$. Обозначение: $\ort_S x$.
+\end{Def}
+
+\subsection*{Ортогональные и ортонормированные базисы. Свойства}
+
+\begin{Def}
+	Базис $(e_1, \ldots, e_n)$ в $\mathbb{E}$ называется ортогональным, если $(e_i, e_j) = 0\; \forall i\neq j$. Это равносильно тому, что $G(e_1, \ldots, e_n)$ диагональна. \\Базис называется ортонормированным, если дополнительно $(e_i, e_i) = 1\; \forall i$. Это равносильно тому, что $G(e_1, \ldots, e_n) = E$.
+\end{Def}
+\begin{Comment}
+	Если $(e_1,\ldots, e_n)$ ортогональный базис, то $\left(\cfrac{e_1}{|e_1|}, \ldots, \cfrac{e_n}{|e_n|}\right)$ ортонормированный.
+\end{Comment}
+\begin{Theorem}
+	В любом конечномерном евклидовом пространстве существует ортонормированный базис.
+\end{Theorem}
+\begin{proof}
+	Следует из того, что всякую положительно определенную квадратичную форму можно привести к нормальному виду. 
+\end{proof}
+Пусть $(e_1, \ldots, e_n)$ --- ортонормированный базис в $\E$. Пусть также есть ещё один базис $(e_1', \ldots, e_n')$, причём $(e_1', \ldots, e_n') = (e_1, \ldots, e_n)C$. 
+\begin{Suggestion}
+	$(e_1', \ldots, e_n')$ --- ортонормированный тогда и только тогда, когда $C^TC = E$ или, что то же самое, $C^{-1} = C^T$.
+\end{Suggestion}
+\begin{proof}
+	Условие, что базис $(e_1', \ldots, e_n')$ является ортонормированным, равносильно тому, что $G(e_1', \ldots, e_n') = E$. С другой стороны, $G(e_1', \ldots, e_n') = C^TG(e_1, \ldots, e_n)C$, причем аналогично $G(e_1, \ldots, e_n) = E$. Откуда и следует, что $C^TC = E$.
+\end{proof}
+\begin{Def}
+	Матрица $C$ в таком случае называется ортогональной.
+\end{Def}
+
+\begin{Properties}\
+\begin{enumerate}
+\item $C^TC = E$, значит, $C^T = C^{-1}$, и тогда $CC^T = E$. Итого, получаем:
+$$
+\sum\limits_{k = 1}^{n}c_{ki}c_{kj} = \delta_{ij} = \sum\limits_{k = 1}^{n}c_{ik}c_{jk}
+$$
+Напомним, что $\delta_{ij}$ это символ Кронекера.
+\item $\det C = \pm 1$.
+\end{enumerate}
+\end{Properties}
+
+\begin{Examples}
+	$C = \begin{pmatrix}
+	\cos \varphi& -\sin \varphi\\
+	\sin \varphi& \cos \varphi
+	\end{pmatrix}$ --- матрица поворота на угол $\varphi$ в $\mathbb{R}^2$.
+\end{Examples}
+
+Пусть $S \subseteq \mathbb{E}$ --- подпространство, $(e_1, \ldots, e_k)$ --- его ортогональный базис, $x \in \mathbb{E}$.
+\begin{Suggestion}
+	$\pr_S x = \sum\limits_{i = 1}^{k}\cfrac{(x,e_i)}{(e_i, e_i)}e_i$. В частности, если базис ортонормированный, \\$\pr_S x = \sum\limits_{i = 1}^{k}(x,e_i)e_i$
+\end{Suggestion}
+\begin{proof}
+Представим вектор $x$ в виде суммы $x = \pr_Sx + \ort_Sx$. Тогда:
+$$
+(x, e_i) = (\pr_S x, e_i) + \underbrace{(\ort_S x, e_i)}_{=0} = (\pr_S x, e_i) \quad i = 1, \ldots, k.
+$$
+Вместе с тем, $\pr_S x = \sum\limits_{j = 1}^{k}\l_je_j$, следовательно, $(x, e_i) = \sum\limits_{j = 1}^k\l_j(e_j, e_i)$.
+Но так как базис ортогональный, все слагаемые, кроме одного, занулятся, и останется только $(x, e_i) = \l_i(e_i, e_i)$. Откуда и следует, что $\l_i = \cfrac{(x, e_i)}{(e_i, e_i)}$.
+\end{proof}
+
+Пусть есть базис $(e_1, \ldots, e_n)$ в $\mathbb{E}$. Процесс ортогонализации Грама-Шмидта даёт ортогональный базис $(f_1, \ldots, f_n)$, причем:
+\begin{align*}
+	& f_1 = e_1\\
+	& f_2 \in e_2 + \langle e_1 \rangle\\
+	& \ldots\\
+	& f_n  \in e_n + \langle e_1, \ldots, e_{n - 1} \rangle
+\end{align*}
+Точно так же можно заметить, что $\langle f_1, \ldots, f_i \rangle = \langle e_1, \ldots, e_i\rangle$ для всех $i= 1, \ldots, n$.
+\begin{Suggestion}
+	$f_i = \ort_{\langle e_1, \ldots, e_{i-1}\rangle} e_i$ для всех $i = 1, \ldots, n$.
+\end{Suggestion}
+\begin{proof}
+Воспользовавшись равенством линейных оболочек, получаем, что \\$e_i \in f_i + \langle f_1, \ldots, f_{i-1}\rangle$. Следовательно, данный базисный вектор можно представить в виде $e_i = f_i + \lambda_1f_1 + \ldots + \lambda_{i -1} f_{i -1}$. И из того, что $f_i \perp \langle e_1, \ldots, e_{i -1} \rangle = \langle f_1, \ldots, f_{i - 1}\rangle$ как раз и получаем, что $f_i = \ort_{\langle e_1, \ldots, e_{i-1}\rangle} e_i$.
+\end{proof}
+
+\begin{Examples}
+Данное рассуждение проще понять, если представить себе частный случай для $\E = \R^3$.
+
+У нас зафиксированы векторы $e_1, e_2, e_3$, и мы их ортогонализируем. Для начала, $f_1 = e_1$. Вектор $f_2$ получается как проекция вектора $e_2$ на прямую, ортогональную $f_1$. А вектор $f_3$~--- как проекция $e_3$ на прямую, ортогональную плоскости, образованной векторами $f_1$ и $f_2$. Аналогично для пространств большей размерности.
+\end{Examples}
+
+\begin{Theorem}[Пифагора]
+Если $x, y \in \E$ и $x \perp y$, то $|x+y| = |x|^2 + |y|^2$.
+\end{Theorem}
+
+\begin{proof}
+	$$|x + y|^2 = (x+y, x+y) = (x, x) + (y, y) + \underbrace{(x, y)}_{=0} + \underbrace{(y, x)}_{=0} = (x, x) + (y, y) = |x|^2 + |y|^2$$
+\end{proof}
+
+\subsection*{Расстояния в евклидовых пространствах}
+
+Рассмотрим векторы $x, y \in \E$.
+\begin{Def}
+	Расстоянием между векторами $x$ и $y$ называется число $\rho(x,y) := |x-y|$.
+\end{Def}
+
+\begin{Suggestion}[Неравенство треугольника]
+	$\rho(a,b) + \rho(b,c) \geqslant \rho(a,c)$ при $a, b, c \in \E$.
+\end{Suggestion}
+
+\begin{proof}
+	Пусть $x = a-b,\; y = b - c$. Тогда $a-c = x +y$. Теперь достаточно доказать, что $|x| + |y| \geqslant |x + y|$. Для этого рассмотрим $|x + y|^2$.
+	\begin{gather*}
+	|x+y|^2 = (x, x) + 2(x, y) + (y, y) = |x|^2 + 2(x, y) + |y|^2 \leqslant |x|^2 + 2|x||y|+ |y|^2 = (|x| + |y|)^2
+	\end{gather*}
+	Сравнивая начало и конец неравенства, получаем, что $|x+y| \leqslant |x| + |y|$.
+\end{proof}
+Пусть $P$ и $Q$ --- два произвольных подмножества $\mathbb{E}$.
+\begin{Def}
+	Расстоянием между $P$ и $Q$ называют величину 
+	$$
+	\rho (P,Q) := \inf \{\rho(x,y) \mid x\in P,\ y\in Q\}.
+	$$
+\end{Def}
+Пусть $x \in \mathbb{E}$ и $U \subseteq \mathbb{E}$ --- подпространство.
+\begin{Theorem}
+	$\rho (x,U) = |\ort_U x|$, причём $\pr_U x$ --- единственный ближайший к $x$ вектор из $U$.
+\end{Theorem}
+\begin{proof}
+	Пусть $y = \pr_U x$ и $z = \ort_U x$. Пусть также $y' \in U\backslash \{0\}$, тогда:
+	\[
+		\rho(x, y + y') = |x - y - y'| = |z - y'| = \sqrt{|z|^2 + \underbrace{|y'|^2}_{>0}} > |z| = \rho(x,y).
+	\]
+	Из того, что вектор $z$, которым мы огранили снизу, определяется однозначно, и следует, что существует единственный ближайший вектор к $x$ из $U$.
+\end{proof}
+Пусть $U \subseteq \mathbb{E}$ --- подпространство, $x \in \mathbb{E}$, $(e_1, \ldots, e_k)$ --- базис $U$.
+\begin{Theorem}
+	$(\rho(x,U))^2 = \cfrac{\det G(e_1, \ldots, e_k, x)}{\det G(e_1, \ldots, e_k)}$
+\end{Theorem}
+\begin{proof}
+	Разобьем на два случая: когда $x$ лежит в $U$ и когда не лежит.
+	\begin{enumerate}
+	\item $x \in U$. Тогда $\rho (x,U) = 0$. Но с другой стороны, $\det G(e_1, \ldots, e_k, x) = 0$, поскольку эти векторы линейно зависимы, и значит, равенство выполняется.
+	\item $x \notin U$. Тогда $\rho(x,U) = |\ort_U x| = |z|$. Ортогонализация Грама-Шмидта к $(e_1, \ldots, e_k, x)$ даст нам $(f_1, \ldots, f_k, z)$, причём $|z|^2 = (z,z) = \cfrac{\delta_{k+1}}{\delta_{k}} = \cfrac{\det G(e_1, \ldots, e_k, x)}{\det G(e_1, \ldots, e_k)}$.
+	\end{enumerate}
+\end{proof}

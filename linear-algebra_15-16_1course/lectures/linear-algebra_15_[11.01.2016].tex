@@ -1,0 +1,233 @@
+\section{Лекция 15 от 11.01.2016}
+\subsection{Скаляры. Поля}
+Для начала вспомним, что такое \textit{векторное пространство} — это множество, на котором введены операции сложения, умножения на скаляр и в котором будут выполнятся восемь аксиом (см. 1 семестр). Но что такое скаляр?
+
+\begin{Def}
+Скаляры — это элементы некоторого фиксированного поля. 
+\end{Def}
+
+\begin{Def}
+Полем называется множество $F$, на котором заданы две операции —  «сложение» $(+)$ и «умножение» $(\cdot)$,
+\[
+F \times F \rightarrow F \Rightarrow
+\begin{aligned}
++\!:\:& (a, b) \mapsto a + b \\
+\cdot:\:& (a, b) \mapsto a \cdot b
+\end{aligned}
+\]
+удовлетворяющие следующим свойствам («аксиомам поля»): $\forall a, b, c \in F$
+\begin{enumerate}
+\item $a + b = b + a$ (коммутативность по сложению);
+\item $(a + b) + c = a + (b + c)$ (ассоциативность по сложению);
+\item $\exists\: 0 \in F \colon 0 + a = a + 0 = a$ (существование нулевого элемента);
+\item $\exists\: {-a} \in F\colon a + (-a) = (-a) + a = 0$ (существование противоположного элемента);
+\item $a(b + c) = ab + ac$ (дистрибутивность; связь между сложением и умножением);
+\item $ab = ba$ (коммутативность по умножению);
+\item $(ab)c = a(bc)$ (ассоциативность по умножению);
+\item $\exists\: 1 \in F\setminus\{0\} : 1 \cdot a = a \cdot 1 = a$ (существование единицы);
+\item $a \neq 0 \Rightarrow \exists a^{-1} \in F : a \cdot a^{-1} = a ^{-1} \cdot a = 1$ (существование обратного элемента).
+\end{enumerate}
+\end{Def}
+
+\begin{Examples} \ 
+\begin{itemize}
+\item $\mathbb{Q}$ — рациональные числа; 
+\item $\mathbb{R}$ — вещественные числа;
+\item $\mathbb{C}$ — комплексные числа;
+\item $F_2 = \{0, 1\}$, при сложении и умножении по модулю 2.
+\end{itemize}
+\end{Examples}
+
+\subsection{Поле комплексных чисел}
+Поле действительных чисел $\mathbb{R}$ плохо тем, что в нем уравнение $x^2 + 1 = 0$ не имеет решения. Отсюда возникает идея определить поле, удовлетворяющее следующим требованиям:
+\begin{itemize}
+\item[(T1)] новое поле содержит $\mathbb{R}$;
+\item[(Т2)] уравнение $x^2 +1 = 0$ имеет решение.
+\end{itemize}
+Давайте формально построим такое поле.
+
+\begin{Def}
+Полем $\mathbb{C}$ комплексных чисел называется множество $\{(a, b) \mid a, b \in \mathbb{R}\}$, на котором заданы операции сложения: $(a_1, b_1) + (a_2, b_2) = (a_1 + a_2, b_1 + b_2)$ и умножения: $(a_1, b_1) \cdot (a_2, b_2) = (a_1a_2 - b_1b_2, a_1b_2 + b_1a_2)$.
+\end{Def}
+
+\begin{Suggestion}
+$\mathbb{C}$ и впрямь является полем.
+\end{Suggestion}
+
+\begin{proof}
+Операции сложения и умножения введены, осталось только проверить выполнение всех аксиом.
+\begin{enumerate}
+\item очевидно, так как сложение идет поэлементно;
+\item также очевидно;
+\item $0 = (0, 0)$;
+\item $-(a, b) = (-a, -b)$;
+\item почти очевидно (т.е. прямая проверка);
+\item ясно (тоже прямая проверка);
+\item проверим:
+\begin{gather*}
+((a_1, b_1) (a_2, b_2)) (a_3, b_3) = (a_1a_2 - b_1b_2, a_1b_2 + b_1a_2) (a_3, b_3) = \\ 
+= (a_1a_2a_3 - b_1b_2b_3 - a_1b_2b_3 - b_1a_2b_3, a_1a_2b_3 - b_1b_2b_3 + a_1b_2a_3 + b_1a_2a_3) = \\
+= (a_1, b_1)  (a_2a_3 - b_2b_3, a_2b_3 + b_2a_3) = (a_1, b_1)((a_2, b_2) (a_3, b_3));
+\end{gather*}
+\item $1 = (1, 0)$;
+\item $(a, b) \neq 0 \Leftrightarrow a^2 + b^2 \neq 0 \rightarrow (a, b)^{-1} = \left(\frac{a}{a^2 + b^2}, \frac{-b}{a^2 + b^2}\right)$.
+\end{enumerate}
+\end{proof}
+
+Осталось только проверить, правда ли введенное поле $\mathbb{C}$ удовлетворяет нашим требованиям:
+\begin{itemize}
+\item[(Т1)] Заметим, что в подмножестве $\mathbb{C}$, состоящим из элементов вида $(a, 0)$ операции сложения и умножения будут работать как в поле вещественных чисел.
+\begin{gather*}
+(a, 0) + (b, 0) = (a + b, 0) \\
+(a, 0) \cdot (b, 0) = (ab, 0)
+\end{gather*} 
+Следовательно, отображение $a \mapsto (a, 0)$ отождествляет $\mathbb{R}$ с этим подмножеством, то есть $\mathbb{R} \rightarrow \mathbb{C}$. Что нам и требуется.
+\item[(Т2)] Примем $i = (0, 1)$. Тогда $i^2 = (0, 1) \cdot (0, 1) = (-1, 0) = -1$. Итого, требование выполнено.
+\end{itemize}
+
+Однако запись комплексных чисел в виде упорядоченной пары $(a, b)$ не очень удобна и громоздка. Поэтому преобразуем запись следующим образом:
+\[
+(a, b) = (a, 0) + (0, b) = (a, 0) + (b, 0) \cdot (0, 1) = a + bi.
+\]
+
+Тем самым мы получили реализацию поля $\mathbb{C}$ комплексных чисел как множества \\ $\{a + bi \mid a, b \in \mathbb{R},\ i^2 = -1\}$, с обычным сложением и умножением.
+
+\begin{Def}
+Запись $z = a + bi$ называется алгебраической формой комплексного числа $z \in \mathbb{C}$.
+
+
+$a = \Re z$ — действительная часть числа $z$.
+
+
+$b = \Im z$ — мнимая часть числа $z$.
+\end{Def}
+
+\begin{Def}
+Числа вида $z = bi$ (т.е. $\Re z = 0$) называются чисто мнимыми.
+\end{Def}
+
+\begin{Def}
+Отображение $\mathbb{C} \rightarrow \mathbb{C} : a + bi \mapsto a - bi$ называется (комплексным) сопряжением. Само число $\overline{z} = a - bi$ называется (комплексно) сопряженным к числу $z = a + bi$. 
+\end{Def}
+
+\begin{Lemma}
+Для любых двух комплексных числе $z, w \in \mathbb{C}$ выполняется, что
+\begin{enumerate}
+\item $\overline{z + w} = \overline{z} + \overline{w}$;
+\item $\overline{zw} = \overline{z} \cdot \overline{w}$.
+\end{enumerate}
+\end{Lemma}
+
+\begin{proof}
+Пусть $z = a + bi$, а $w = c + di$. 
+\begin{enumerate}
+\item $\overline{z} + \overline{w} = a - bi + c - di = (a + c) - (b + d)i = \overline{z+ w}$
+\item $\overline{z} \cdot \overline{w} = (a - bi)(c - di) = ac - adi - bci + bdi^2 = (ac - bd) - (ad + bc)i = \overline{zw}$
+\end{enumerate}
+\end{proof}
+
+\begin{Comment}
+Равенство $z = \overline{z}$ равносильно равенству $\Im z = 0$, то есть $z \in \mathbb{R}$.
+\end{Comment}
+
+\subsection{Геометрическая модель поля $\mathbb{C}$}
+
+Заметим, что поле комплексных числе $\mathbb{C} = \{(a, b) \mid a, b \in \mathbb{R}\}$ равно $\mathbb{R}^2$. Следовательно, комплексные числа можно представить как точки на действительной плоскости $\mathbb{R}^2$, или сопоставить их векторам.
+
+\begin{center}
+%{\includegraphics{z-as-vector}}
+\begin{tikzpicture}
+\begin{axis}
+    [
+    axis lines = center,
+    xtick={0, 3},
+    xticklabels = {$0$, $a$},
+    ytick = {2},
+    yticklabels = {$b$},
+    xlabel=$\mathrm{Re}\,z$,
+    ylabel=$\mathrm{Im}\,z$,
+    ymin=-1,
+    ymax=+3,
+    xmin=-1,
+    xmax=+4
+    ]
+    \node [right, red] at (axis cs:  3, 2) {$a+bi$};
+    \addplot[->] coordinates { (0,0) (3,2) };
+    \addplot [dashed, black] coordinates { (3, 0) (3,2) };
+    \addplot [dashed, black] coordinates { (0,2) (3,2) };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+В таком представлении сложение комплексных чисел сопоставляется со сложением векторов, а сопряжение — с отражением относительно оси $Ox (\Re z)$.
+
+\begin{Def}
+Модулем комплексного числа $z = a + bi$ называется длина соответствующего вектора. Обозначение: $|z|; |a+bi| = \sqrt{a^2 + b^2}$.
+\end{Def}
+
+Свойства модуля:
+\begin{enumerate}
+\item $|z| \geqslant 0$, причем $|z| = 0$ тогда и только тогда, когда $z = 0$;
+\item $|z + w| \leqslant |z| + |w|$ — неравенство треугольника;
+\item $z\cdot\overline{z} = |z|^2$;
+\begin{proof}
+$(a + bi)(a - bi) = a^2 - (bi)^2 = a^2 + b^2 = |z|^2$.
+\end{proof}
+\item $|zw| = |z| \cdot |w|$;
+\begin{proof}
+Возведем в квадрат.
+\begin{gather*}
+|z|^2 \cdot |w|^2 = z \overline{z} w \overline{w} = (zw)\overline{z}\overline{w} = zw\overline{zw} = |zw|^2
+\end{gather*}
+\end{proof}
+\end{enumerate}
+
+\begin{Comment}
+Из свойства 3 следует, что при $z \neq 0$ выполняется: 
+\begin{gather*}
+z^{-1} = \frac{\overline{z}}{|z|^2}\\
+(a + bi)^{-1} = \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}.
+\end{gather*}
+\end{Comment}
+
+\begin{Def}
+Аргументом комплексного числа $z \neq 0$  называется всякий угол $\varphi$ такой что 
+\[
+\cos \varphi = \frac{a}{|z|} = \frac{a}{\sqrt{a^2 + b^2}}; \quad \sin \varphi = \frac{b}{|z|} = \frac{b}{\sqrt{a^2 + b^2}}.
+\]
+\end{Def}
+Неформально говоря, аргумент $z$ — это угол между осью $Ox$ и соответствующим вектором.
+
+\begin{Comment} \ 
+\begin{enumerate}
+\item Аргумент определен с точностью до $2\pi$.
+\item Аргумент $z = 0$ не определен.
+\end{enumerate}
+\end{Comment}
+Для $z \neq 0$ введем множество $\Arg z = \{\text{множество всех аргументов $z$}\}$ — \textit{большой аргумент}. Также введем \textit{малый аргумент} $\arg z$ — это такой $\varphi \in \Arg z$, который удовлетворяет условию $0 \leqslant \varphi < 2\pi$ и, следовательно, определен однозначно. 
+
+Используя аргумент, можно представить комплексное число следующим образом:
+\[
+\left.
+\begin{aligned}
+&a = |z|\cos \varphi \\
+&b = |z|\sin \varphi
+\end{aligned} 
+\right| \Rightarrow z = a + bi = |z| \cos \varphi + i |z| \sin \varphi = |z|(\cos\varphi + i\sin\varphi)
+\] 
+
+\begin{Def}
+Запись $z = |z|(\cos\varphi + i\sin\varphi)$ называется тригонометрической формой комплексного числа $z$.
+\end{Def}
+
+\begin{Comment}
+\[
+r_1(\cos\varphi_1 + i\sin\varphi_1) = r_2(\cos\varphi_2 + i\sin\varphi_2) \Leftrightarrow
+\left\{
+\begin{aligned}
+&r_1 = r_2 \\
+&\varphi_1 = \varphi_2 + 2\pi n, \quad n \in \mathbb{Z}
+\end{aligned}
+\right.
+\]
+\end{Comment}
