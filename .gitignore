@@ -7,3 +7,5 @@
 *.fls
 **/.ropeproject/
 *.bcf
+*.pdf
+_build/
