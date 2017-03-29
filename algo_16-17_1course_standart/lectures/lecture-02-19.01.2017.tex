@@ -111,42 +111,41 @@
 	\end{theorem}
 	
 	\TODO{Доказательство}
-	% \begin{proof}
-	% 	Рассмотрим алгоритм, который нашу задачу делит на каждом шаге на $b$ подзадач.
-	% 	\begin{center}
-	% 		\begin{tikzpicture}
-	% 			\begin{scope}[every node/.style={circle,thick,draw}]
-	% 				\node[label=\large$ cn^d $] (top) at (10, 10) {};
-					
-	% 				\node[label=left:\Large $ \frac{cn^d}{b^d}$] (mid-left) at (7, 8) {};
-	% 				\node (mid-right) at (13, 8) {};
-					
-	% 				\node (bot-left) at (5, 6) {};
-	% 				\node[label=right:\Large $ \frac{cn^d}{b^{2d}} $] (bot-right) at (9, 6) {};
-	% 			\end{scope}
+	\begin{proof}
+	 	Рассмотрим алгоритм, который нашу задачу делит на каждом шаге на $b$ подзадач.
+	 	\begin{center}
+	 		\begin{tikzpicture}
+	 			\begin{scope}[every node/.style={circle,thick,draw}]
+	 				\node[label=\large$ cn^d $] (top) at (10, 10) {};
 				
-	% 			\begin{scope}[>={Stealth[black]}, every edge/.style={draw=black,very thick}]
-	% 				\path [->] (top) edge (mid-left);
-	% 				\path [->] (top) edge (mid-right);
-					
-	% 				\path [->] (mid-left) edge (bot-left);
-	% 				\path [->] (mid-left) edge (bot-right);
-					
-	% 				\draw[dashed] (mid-left) -- node[above] {$a$} (mid-right);
-	% 				\draw[dashed] (bot-left) -- node[above] {$a$} (bot-right);
-	% 			\end{scope}
-	% 		\end{tikzpicture}
-	% 	\end{center}
-	% 	На каждом уровне мы делим задачу на a подзадач, размер каждой отличается от другого уровня в b раз.  
-	% 	\begin{comment}
-	% 				на i уровне, n/b^i -- размер подзадачи
-	% 				всего на каждом уровне a^i подзадач.
-	% 				на каждом уровне a_i * (n/b^i)^d * c
-	% 				отсюда основная теорема.
-	% 	\end{comment}
-
-	% \end{proof}
-	%Эта теорема может раскрыть не все рекуррентные соотношения, поэтому покажем еще несколько способов решения.
+	 				\node[label=left:\Large $ \frac{cn^d}{b^d}$] (mid-left) at (7, 8) {};
+	 				\node (mid-right) at (13, 8) {};
+				
+	 				\node (bot-left) at (5, 6) {};
+	 				\node[label=right:\Large $ \frac{cn^d}{b^{2d}} $] (bot-right) at (9, 6) {};
+	 			\end{scope}
+			
+	 			\begin{scope}
+	 				\path [->] (top) edge (mid-left);
+	 				\path [->] (top) edge (mid-right);
+				
+	 				\path [->] (mid-left) edge (bot-left);
+	 				\path [->] (mid-left) edge (bot-right);
+				
+	 				\draw[dashed] (mid-left) -- node[above] {$a$} (mid-right);
+	 				\draw[dashed] (bot-left) -- node[above] {$a$} (bot-right);
+	 			\end{scope}
+	 		\end{tikzpicture}
+	 	\end{center}
+	 	На каждом уровне мы делим задачу на a подзадач, размер каждой отличается от другого уровня в b раз.  
+	 	\begin{comment}
+	 			на i уровне, n/b^i -- размер подзадачи
+	 				всего на каждом уровне a^i подзадач.
+	 				на каждом уровне a_i * (n/b^i)^d * c
+	 				отсюда основная теорема.
+	 	\end{comment}
+	\end{proof}
+		Эта теорема может раскрыть не все рекуррентные соотношения, поэтому покажем еще несколько способов решения.
 	
 	\subsection{Binary Search}
 	
