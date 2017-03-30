@@ -127,6 +127,21 @@ in
 \newtheorem*{task3}{Задача №3}
 \newtheorem*{task4}{Задача №4}
 \newtheorem*{task5}{Задача №5}
+\newtheorem*{task6}{Задача №6}
+\newtheorem*{task7}{Задача №7}
+\newtheorem*{task8}{Задача №8}
+\newtheorem*{task9}{Задача №9}
+\newtheorem*{task10}{Задача №10}
+\newtheorem*{task11}{Задача №11}
+\newtheorem*{task12}{Задача №12}
+\newtheorem*{task13}{Задача №13}
+\newtheorem*{task14}{Задача №14}
+\newtheorem*{task15}{Задача №15}
+\newtheorem*{task16}{Задача №16}
+\newtheorem*{task17}{Задача №17}
+\newtheorem*{task18}{Задача №18}
+\newtheorem*{task19}{Задача №19}
+\newtheorem*{task20}{Задача №20}
 
 \newtheorem{fulllemma}{Лемма}
 \newtheorem*{sl1}{Следствие 1}
@@ -138,6 +153,7 @@ in
 \newtheorem{statement}{Утверждение}
 \newtheorem*{consequence}{Следствие}
 \newtheorem*{lemma}{Лемма}
+\newtheorem*{ans}{Ответ}
 
 \newcommand{\note}{\underline{Замечание:} }
 \newcommand{\fact}{\underline{\textbf{Факт}:} }
@@ -3203,7 +3219,7 @@ y = \dfrac{u}{t + 1} = \dfrac{3(t + 1)^3 + C_1}{t + 1} = 3(t + 1)^2 + \dfrac{C_1
 
 \begin{definition}
 	Дифференциальные уравнения вида
-	\[a_0x^{(n)} + a_1x^{(n - 1)} + a_2x^{(n - 2)} + \ldots + a_{n - 1}\dx + a_n x = 0\]
+	\[a_nx^{(n)} + a_{n - 1}x^{(n - 1)} + a_{n - 2}x^{(n - 2)} + \ldots + a_1\dx + a_0 x = 0\]
 	где $a_0,\ a_1,\ \ldots,\ a_n \in \R$ -- константы, называются \textbf{однородными линейными уравнениями с постоянными коэффициентами}.
 \end{definition}
 Ясно, что если уравнение имеет 2 решения, то их линейная комбинация также будет решением. Так как наше пространство решений в данном случае $n$-параметрическое, то такие уравнения всегда имеют аж целую \textbf{фундаментальную систему решений} $x_1,\ x_2,\ \ldots,\ x_n$, определённую при любых $t$ и состояющую из показательных и тригонометрических функций. Различные линейные комбинации этих решений также будут являться решениями диффура, поэтому данной системе отвечает общее решение:
@@ -3270,6 +3286,10 @@ y = \dfrac{u}{t + 1} = \dfrac{3(t + 1)^3 + C_1}{t + 1} = 3(t + 1)^2 + \dfrac{C_1
 Общим решением будет:
 \[x = C_1e^{-5t} + C_2e^{-\frac{t}{2}}\cos(\dfrac{\sqrt{3}}{2}t) + C_3e^{-\frac{t}{2}}\sin(\dfrac{\sqrt{3}}{2}t)\]
 
+\textbf{Пример №3}
+
+
+
 \subsection{Домашнее задание №9}
 
 
@@ -3313,22 +3333,764 @@ y = \dfrac{u}{t + 1} = \dfrac{3(t + 1)^3 + C_1}{t + 1} = 3(t + 1)^2 + \dfrac{C_1
 %\end{proof}
 
 \newpage
-\section{Common Tasks}
+\section{Семинар 10, 21 марта}
 
+\subsection{Линейные неоднородные диффуры}
+
+\begin{definition}
+	Дифференциальные уравнения вида
+	\[a_nx^{(n)} + a_{n - 1}x^{(n - 1)} + a_{n - 2}x^{(n - 2)} + \ldots + a_1\dx + a_0 x = f(t)\]
+	где $a_0,\ a_1,\ \ldots,\ a_n \in \R$ -- константы, называются \textbf{линейными неоднородными уравнениями}.
+\end{definition}
+Немного поговорим о решении. Делается это в 2 этапа: сначала мы находим общее решение $x_0$ соответствующего однородного диффура:
+\[a_nx^{(n)} + a_{n - 1}x^{(n - 1)} + a_{n - 2}x^{(n - 2)} + \ldots + a_1\dx + a_0 x = 0\]
+На втором этапе находится частное решение $x_1$ исходного линейного уравнения. Тогда
+\[x = x_0 + x_1\]
+есть общее решение нашего линейного неоднородного диффура. Решать однородные мы уже умеем. Рассмотрим два ключевых метода поиска частных и общих решений. 
+
+\subsection{Метод вариации постоянных}
+
+Запишем диффур в более общем виде. Возьмём вектор из первых $n - 1$ производных $x$ (включая сам $x$) и поместим вектор:
+\[X = \left(x(t),\ \dx(t),\ \ldots,\ x^{(n - 2)}(t),\ x^{(n - 1)}(t)\right)^T\]
+Тогда весь диффур представим в таком виде:
+\[\dot{X} = AX + g\] а подробнее:
+\[\underbrace{\begin{pmatrix}
+\dx\\\ddx \\ \vdots\\ x^{(n - 1)}\\ x^{(n)}
+\end{pmatrix}}_{\dot{X}} = \underbrace{\begin{pmatrix}
+0 & 1 & 0 & 0 &\cdots & 0 & 0\\
+0 & 0 & 1 & 0 & \cdots & 0 & 0\\
+\cdots & \ddots & \ddots & \ddots & \cdots & \cdots & \cdots\\
+0 & 0 & 0 & 0 & \cdots & 1 & 0\\
+0 & 0 & 0 & 0 & \cdots & 0 & 1\\
+-\frac{a_0}{a_n} & -\frac{a_1}{a_n} & \cdots &\cdots &\cdots & -\frac{a_{n - 2}}{a_n} & -\frac{a_{n - 1}}{a_n}
+\end{pmatrix}}_{A} \cdot \underbrace{\begin{pmatrix}
+x\\\dx \\ \vdots\\ x^{(n - 2)}\\x^{(n - 1)}
+\end{pmatrix}}_{X} + \underbrace{\begin{pmatrix}
+0 \\ 0 \\ \vdots \\ 0 \\ \frac{f(t)}{a_n}
+\end{pmatrix}}_{g}\]
+Пусть $x_1,\ x_2,\ \ldots,\ x_n$ --- решения однородного диффура, получаемого из исходного отбрасыванием правой части. Они образуют ФСР -- базис пространства решений. Пускай каждому решению отвечает вектор $X_1,\ X_2,\ \ldots,\ X_n$ соответственно. Тогда общему решению однородного диффура:
+\[x = \ds\sum\limits_{i = 1}^{n}C_ix_i\]
+соответствует выражение 
+\[\underbrace{\big[X_1,\ X_2,\ \ldots,\ X_n\big]}_{X}\cdot \underbrace{\begin{pmatrix}
+C_1\\C_2\\\vdots\\C_n
+\end{pmatrix}}_{C}\]
+Подставим его в матричную запись линейного диффура:
+\[\dot{\big(XC\big)} = AXC + g\iff \dot{X}C + X\dot{C}\]
+Но $X$ --- вектор-решение однородного диффура. Тогда:
+\[\dot{X} = AX \iff X\dot{C} = g\]
+Таким образом, мы получили СЛУ на производные $C_i$, решив которую, мы найдём \text{общее} решение линейного диффура.
+
+Данный метод называется \textbf{методом вариации постоянных}. Подведём итог. Сначала ищется общее решение соответствующего однородного уравнения:
+\[x = C_1x_1 + C_2x_2 + \ldots + C_nx_n\]
+Затем общее решение ищется в виде 
+\[x = C_1(t)x_1 + C_2(t)x_2 + \ldots + C_n(t)x_n\] где функции $C_i(t)$ определяются из системы:
+\[\begin{cases}
+C'_1x_1 + C'_2x_2 + \ldots + C'_nx_n = 0\\
+C'_1\dx_1 + C'_2\dx_2 + \ldots + C'_n\dx_n = 0\\
+C'_1\ddx_1 + C'_2\ddx_2 + \ldots + C'_n \ddx_n = 0\\
+\dotffill{0.33\textwidth}\\
+C'_1x_1^{(n - 2)} + C'_2x_2^{(n - 2)} + \ldots + C'_nx_n^{(n - 2)} = 0\\
+C'_1x_1^{(n - 1)} + C'_2x_2^{(n - 1)} + \ldots + C'_nx_n^{(n - 1)} = 0
+\end{cases}\]
+Находим $C'_i$ и затем интегрированием получаем сами константы (точнее -- функции от $t$).
+\ \\
+
+\textbf{Пример №}
+
+\subsection{Метод неопределённых коэффициентов}
+
+Метод вариации постоянных работает всегда и выдаёт сразу общее решение. Однако, в некоторых случаях 
+можно гораздо быстрее и удобнее найти частное решение какого-то диффура. Рассмотрим правую часть линейного уравнения -- $f(t)$.
 \begin{enumerate}
-	\item Найти все гладкие функции $x(t)$ такие, что для любой точки $t_0 \in \R$ касательная к $x(t)$ в точке $\big(t_0,\ x(t_0)\big)$ пересекает ось абсцисс в точке $\dfrac{t_0}{2}$.
-	\item Найти дифференциальное уравнение первого порядка, задающее на плоскости семейство парабол
+	\item Пусть $f(t) = P(t)$, где $P(t)$ --- полином от $t$. Данной функции поставим в соответствие некоторое число $\gamma = 0$ -- то есть, его значение равно 0. Если $\gamma = 0$ не является корнем характеристического многочлена соответствующего однородного диффура, то частное решение можно найти в виде 
+	\[x_1 = Q(t)\] где $Q(t)$ --- полином той же степени, что и $P(t)$, но с \underline{неопределёнными коэффициентами}. 
+	
+	Если же $\gamma$ является корнем кратности $k$, то частным решением будет \[x_1 = t^kQ(t)\]
+	
+	\item Пусть $f(t) = P(t)e^{at}$. Функции этого вида поставив в соответствие число $\gamma = a$. Если число $\gamma = a$ не является корнем характеристического уравнения, то
+	\[x_1 = Q(t)e^{at}\]
+	Если же $\gamma  = a$ есть корень кратности $k$, то 
+	\[x_1 = t^kQ(t)e^{at}\]
+	
+	\item Пусть теперь 
+	\[f(t) = e^{at}\big(P_1(t)\cos bt + P_2(t)\sin bt\big)\] где $P_1(t)$ и $P_2(t)$ -- полиномы от $t$. Данной функции мы поставим в соответствие два числа: $\gamma_1 = a + ib$ и $\gamma_2 = a - ib$. Пусть $m$ -- наивысшая из степеней $P_1$ и $P_2$. Если $\gamma_i$ не является корнем характеристического многочлена, то
+	\[x_1 = e^{at}\big(Q_1(t)\cos bt + Q_2(t)\sin bt\big)\] где $Q_1(t)$ и $Q_2(t)$ -- полиномы от степени $m$ с \underline{неопределёнными коэффициентами}. Если же $\gamma_i$ есть корень характеристического многочлена кратности $k$, то 
+	\[x_1 = t^ke^{at}\big(Q_1(t)\cos bt + Q_2(t)\sin bt\big)\]
+	
+	\item Если 
+	\[f(t) = f_1(t) + f_2(t) + \ldots + f_m(t)\] где $f_1(t),\ f_2(t),\ \ldots,\ f_m(t)$ -- функции видов, рассмотренных в предыдущих пунктах. Тогда, если $x_1,\ x_2,\ \ldots,\ x_m$ -- соответствующие частные решения, то функция
+	\[X_1 = x_1(t) + x_2(t) + \ldots + x_m(t)\]
+	является частным решением исходного линейного неоднородного диффура.
+\end{enumerate}
+Чтобы было проще осознать, приведу примеры, как мы находим число $\gamma$, отвечающее различным правым частям.
+\begin{gather*}
+t^2 + t - 1 \to \gamma = 0 \qquad (t^3 + t)e^{2t} \to \gamma = 2 \qquad (t + 2)\cos 3t \to \gamma_{1,2} = \pm 3i\\
+5\cos 3t - 4\sin 3t \to \gamma_{1,2} = \pm 3i \qquad e^{t}\big(5\cos 2t - 4\sin 2t\big) \to \gamma_{1,2} = 1 \pm 2i \\
+e^t + t^2 - t  \to \gamma_1 = 1,\ \gamma_2  = 0\qquad e^t + te^{-t} \to \gamma_1 = 1,\ \gamma_2 = -1\\
+e^t\sin t + e^{-t}\cos t \to \gamma_{1,2} = 1 \pm i,\ \gamma_{3,4} = -1 \pm i\qquad \sin 2t + \cos 3t \to \gamma_{1,2} = \pm 2i,\ \gamma_{3,4} = \pm 3i
+\end{gather*}
+
+\textbf{Пример №}
+
+\textbf{Пример №}
+
+При каких $\alpha \in \R$ все решения диффура
+\[\ddx + \alpha\dx + x = \cos t\] являются ограниченными на $\R_+$?
+
+\subsection{Уравнение Эйлера}
+
+\begin{definition}
+	Дифференциальное уравнение вида
+	\[a_nt^nx^{(n)} + a_{n - 1}t^{n - 1}x^{(n - 1)} + a_{n - 2}t^{n - 2}x^{(n - 2)} + \ldots + a_1t\dx + a_0 x = f(t)\]
+	где $a_0,\ a_1,\ \ldots,\ a_n \in \R$ -- константы, называется \textbf{Уравнением Эйлера}.
+\end{definition}
+Уравнение Эйлера можно свести к линейному неоднородному уравнению методом экзотической замены, знакомой нам с обобщённо-однородных диффуров: $t = e^{s}$ при $t > 0$  и $t = - e^s$ при $t < 0$. Стоит отметить, что замена в данном случае производится только для независимой переменной. То есть, мы произвели параметризацию. Обозначим новую функцию $x\left(e^s\right)$ как $y(s)$. Заметим, что \[\d t = \d e^s = e^s \d s \iff \dfrac{\d t}{\d s} = e^s\] Тогда производные $\dx,\ \ddx,\ \ldots,\ x^{(n)}$ преобразуются следующим образом:
+\begin{gather*}
+\dy = \dfrac{\d x}{\d s} = \dfrac{\d x}{\d t} \cdot \dfrac{\d t}{\d s}= \dx e^s \iff \dx = \dy e^{-s}\\
+\ddy = \dfrac{\d \dy}{\d s} = \dfrac{e^s\d \dx}{\d s} + \dfrac{\dx e^s\d s}{\d s} = e^s\cdot \dfrac{\d \dx}{\d t}\cdot \dfrac{\d t}{\d s} + e^s\dx = e^{2s}\ddx + \dy \iff \ddx = e^{-2s}(\ddy - \dy)\\
+\dddy = \dfrac{\d \ddy}{\d s} = \dfrac{\d e^{2s}\ddx}{\d s} + \dfrac{\d \dy}{\d s} = \dfrac{e^{2s}\d \ddx}{\d s} + \dfrac{2\ddx e^{2s}\d s}{\d s} + e^{2s}\ddx + \dy = \dfrac{e^{2s}\d \ddx}{\d t}\cdot \dfrac{\d t}{\d s} + 3e^{2s}\ddx + \dy = \\
+= e^{3s}\dddx + 3e^{2s}\ddx + \dy = e^{3s}\dddx + 3(\ddy - \dy) + \dy = e^{3s}\dddx + 3\ddy - 2\dy \iff \dddx = e^{-3s}\big(\dddy - 3\ddy + 2\dy\big)\\
+\dotffill{0.75\textwidth}\\
+\end{gather*}
+И далее аналогично. Получаем некоторое уравнение на $y$ и $s$. Для него характеристическим многочленом будет выражение:
+\[a_n\lambda(\lambda - 1)(\lambda - 2)\ldots(\lambda - n + 1) + \ldots + a_2\lambda(\lambda - 1) + a_1\lambda + a_n = 0\]
+То есть, каждое произведение $t^kx^{(k)}$ заменяется на произведение $k$ убывающих на 1 чисел:
+\[\lambda(\lambda - 1)(\lambda - 2)\ldots(\lambda - k + 1)\]
+Найдя общее решение полученного линейного неоднородного диффура по одной из изученных схем, делаем обратную замену:
+\[t = e^s \iff s = \log t\]
+и получаем решение уравнения Эйлера.
+\ \\
+
+\textbf{Пример №}
+
+
+\subsection{Домашнее задание №11}
+
+
+\begin{task1}
+	Решить диффур:
+	\[2\ddx + 2\dx + x = 1 + \dfrac{t^2 + 3}{(t + 1)^3}\]
+\end{task1}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task2}
+	Найти все решения уравнения:
+	\[x^{(3)} + \ddx - 3\dx + x = 0\]
+	удовлетворяющие начальным условиям:
+	\[x(0) = 1\qquad \dx(0) = 0 = \ddx(0)\]
+\end{task2}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task3}
+	Решить диффур:
+	\[\ddx + x = 2te^t + e^t\]
+\end{task3}
+%\begin{proof}[Решение]
+%	
+%\end{proof}
+
+\begin{task4}
+	Найти все $\alpha \in \R$, такие, что любое решение диффура
+	\[\ddx + 2\dx + 2x = e^{\alpha t}\cos t\] является ограниченным на $\R_+$.
+\end{task4}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\begin{task5}
+	При каких $\alpha \in \R$ все решения диффура
+	\[\ddx - \dx - 2x = \sin \alpha t\] являются периодическими?
+\end{task5}
+%\begin{proof}[Решение]
+%
+%\end{proof}
+
+\newpage
+\section{Common Tasks, часть 1}
+
+\begin{task1}
+	Найти все гладкие функции $x(t)$ такие, что для любой точки $t_0 \in \R$ касательная к $x(t)$ в точке $\big(t_0,\ x(t_0)\big)$ пересекает ось абсцисс в точке $\dfrac{t_0}{2}$.
+\end{task1}
+\begin{proof}[Решение]
+	Рассмотрим касательную к $x(t)$ в точке $\big(t_0,\ x(t_0)\big)$. Она задаётся уравнением:
+	\[x = \dx(t_0) \cdot (t - t_0) + x(t_0)\]
+	Из того, что в точке $\dfrac{t_0}{2}$ касательная пересекает ось абсцисс, следует, что:
+	\[0 = \dx(t_0) \cdot \left(-\dfrac{t_0}{2}\right) + x(t_0) \iff \dx(t_0) t_0 = 2x(t_0)\]
+	Таким образом, требуется решить дифференциальное уравнение:
+	\[\dx t = 2x\]
+	Ясно, что $x = 0$ и $t = 0$ --- решения. Далее будем полагать, что $x \neq 0 \neq t$. Решаем диффур с разделяющимися переменными:
+	\begin{gather*}
+	\dx t = 2x \iff \dfrac{\d x}{x} = 2\dfrac{\d t}{t} \bto \ds\int = \int\\
+	\log|x| = 2\log|t| + C \iff |x| = \lambda t^2,\ \lambda \in \R_+ \iff x = \lambda t^2,\ \lambda \in \R
+	\end{gather*}
+	Получили возможные решения -- параболы. Однако, стоит отметить, что когда мы заносили двойку под логарифм, превращая $|t|$ в $t^2$, мы запихнули два возможных случая -- $t < 0$ и $t > 0$ в один. Это означает, что решениями будут не только любые кривые вида $x = \lambda t^2$, но и <<куски>> парабол, гладко склеенные в нуле --- односторонние производные в этой точке совпадают. Иными словами, мы можем взять ветку одной параболы (ветвями вверх или вниз, или вообще при $\lambda = 0$ это будет $x = 0$), и соединить в $(0,\ 0)$ с веткой другой аналогично любой параболы. Математическим языком, нам подходят все гладкие функции вида:
+	\[x = \begin{cases}
+	\alpha \cdot t^2,\ t \leqslant 0\\
+	\beta \cdot t^2,\ t > 0
+	\end{cases}\text{ где }\alpha,\ \beta \in \R,\text{ а также } t = 0\]
+	
+	\begin{ans}
+		\[x = \begin{cases}
+		\alpha \cdot t^2,\ t \leqslant 0\\
+		\beta \cdot t^2,\ t > 0
+		\end{cases}\text{ где }\alpha,\ \beta \in \R,\text{ а также } t = 0\]
+	\end{ans}
+\end{proof}
+
+\begin{task2}
+	Найти дифференциальное уравнение первого порядка, задающее на плоскости семейство парабол
 	$x = at^2 + bt + c$, проходящих через 
 	точку $(0,1)$ и касающихся прямой $x = t$. 
-	\item Решить диффур: \[\dfrac{t}{x}\dx = \ln x - \ln t + 1\]
-	\item Решить задачу Коши:
+\end{task2}
+\begin{proof}[Решение]
+	Начнём с условия, что параболы проходят через $(0,\ 1)$. Это означает, что:
+	\[1 = a\cdot 0 + b \cdot 0 + c \iff c = 1\]
+	Условие, что параболы касаются $x = t$ можно также трактовать, как то, что $x = t$ касается наших парабол. То есть, тангенс угла наклона $x = t$ в какой-то точке касания $(t_0,\ x_0)$ нашей параболы будет совпадать с тангенсом угла наклона $\textbf{касательной}$ к параболе в данной точке. Следовательно, в данной точке выполнено:
+	\begin{gather*}
+	\dx = (at^2 + bt + c)' = \tan(\dfrac{\pi}{4})\\
+	2at + b = 1 \iff t = \dfrac{1 - b}{2a}
+	\end{gather*}
+	Подставим теперь выражение для $t$ в уравнение параболы в точке же касания прямой $x = t$, чтобы найти зависимость между $a$ и $b$:
+	\begin{gather*}
+	\dfrac{1 - b}{2a} = a \cdot \left(\dfrac{1 - b}{2a}\right)^2 + b\cdot \dfrac{1 - b}{2a} + 1\\
+	\dfrac{2 - 2b}{4a} = \dfrac{1 - 2b + b^2}{4a} + \dfrac{2b - 2b^2}{4a} + \dfrac{4a}{4a}\\
+	1 = -b^2 + 2b + 4a \iff (b - 1)^2 = 4a \iff a = \left(\dfrac{b - 1}{2}\right)^2
+	\end{gather*}
+	Теперь подставим полученное представление в исходную параболу и продифференцируем, чтобы выразить $b$ через $t,\ x,\ \dx$.
+	\begin{gather*}
+	x = \left(\dfrac{b - 1}{2}\right)^2 \cdot t^2 + bt + 1\\
+	\dx = \left(\dfrac{b - 1}{2}\right)^2 \cdot 2t + b\\
+	2\dx = b^2t - 2bt + t + 2b \iff b^2 \cdot t + 2b \cdot (1 - t) + (t - 2\dx) = 0
+	\end{gather*}
+	
+	Получили квадратное уравнение. Решим его относительно $b$:
+	\begin{gather*}
+	b^2 \cdot t + 2b \cdot (1 - t) + (t - 2\dx) = 0\\
+	b = \dfrac{-(1 - t) \pm \sqrt{(1 - t)^2 - t\cdot (t - 2\dx)}}{t^2} = \dfrac{t - 1 \pm \sqrt{1 - 2t + 2t\dx}}{t^2}
+	\end{gather*}
+	Теперь можем записать итоговое дифференциальное уравнение, подставив $b$ в уравнение параболы.
+	\[x = \dfrac{\left(t - 1 \pm \sqrt{1 - 2t + 2t\dx} - t^2\right)^2}{4t^2} + \dfrac{t - 1 \pm \sqrt{1 - 2t + 2t\dx}}{t} + 1\]
+	\begin{ans}
+		\[x = \dfrac{\left(t - 1 \pm \sqrt{1 - 2t + 2t\dx} - t^2\right)^2}{4t^2} + \dfrac{t - 1 \pm \sqrt{1 - 2t + 2t\dx}}{t} + 1\]
+	\end{ans}
+\end{proof}
+
+\begin{task3}
+	Решить диффур: \[\dfrac{t}{x}\dx = \log x - \log t + 1\]
+\end{task3}
+\begin{proof}[Решение]
+	Преобразуем выражение:
+	\[\dfrac{t}{x}\dx = \log x - \log t + 1 \iff \dfrac{t}{x}\dx = \log(\dfrac{x}{t}) + 1\]
+	Это однородный диффур. Мы хотим привести его к уравнению с разделяющимися переменными. Следующая замена позволит нам это сделать:
+	\begin{gather*}
+	y = \dfrac{x}{t} \Longrightarrow x = y\cdot t \Longrightarrow \dx = \dy t + y \\
+	\dfrac{t}{x}\dx = \log(\dfrac{x}{t}) + 1 \Longrightarrow \dfrac{\dy t + y}{y} = \log y + 1 \iff \dfrac{\dy t}{y} + 1 = \log y + 1\\
+	\dfrac{\dy t}{y} = \log y \iff \dfrac{\d y}{y\log y} = \dfrac{\d t}{t} \iff \dfrac{\d \log y}{\log y} = \dfrac{\d t}{t} \bto \ds\int = \int\\
+	\log|\log y| = \log|t| + C \iff \exp(\log|\log y|) = \exp(\log|t| + C) \iff |\log y| = \lambda \cdot |t|,\ \lambda \in \R_+\\
+	\log y = \lambda \cdot t,\ \lambda \in \R \iff y = \exp(\lambda\cdot t) ,\ \lambda \in \R \bto \left|\left|y = \dfrac{x}{t}\right|\right| \bto  \dfrac{x}{t} = \exp(\lambda\cdot t) ,\ \lambda \in \R\\
+	x = t\cdot \exp(\lambda\cdot t),\ \lambda \in \R
+	\end{gather*}
+	Тут мы решили диффур с разделяющимися переменными и сделали обратную замену. Стоит отметить, что так как у нас было равенство модулей, то константа была положительной, впоследствии при снятии модуля она становится произвольной.
+	\begin{ans}
+		\[x = t\cdot \exp(\lambda\cdot t),\ \lambda \in \R\]
+	\end{ans}
+\end{proof}
+
+\begin{task4}
+	Решить задачу Коши:
 	\[	\dx = \dfrac{1}{2x}\cdot \exp(\frac{x^2}{t}) + \dfrac{x}{2t},\ \ 	\text{начальное условие: }x(1) = 1\]
-	\item Решить диффур: \[(t + 1)(x\dx - 1) = x^2\]
-	\item Решить задачу Коши: \[\dx - 2tx + x^2 = 5 - t^2,\ \ \text{ начальное условие: }x(0) = 0\]
-	\item Решить задачу Коши:
+\end{task4}
+\begin{proof}[Решение]
+	Работать со степенью вида $\dfrac{x^2}{t}$ очень неудобно, поэтому сделаем замену, упрощающую выражение под экспонентой  --- $y = \dfrac{x^2}{t}$. Отсюда полезно выразить $t$.
+	\begin{gather*}
+	y = \dfrac{x^2}{t} \iff t = \dfrac{x^2}{y} \bto \d t = \dfrac{2xy\d x - x^2\d y}{y^2}\\
+	\dx = \dfrac{1}{2x}\cdot \exp(\frac{x^2}{t}) + \dfrac{x}{2t} \iff \dfrac{\d x}{\frac{2x\d x}{y} - \frac{x^2\d y}{y^2}} = \dfrac{1}{2x} \cdot \exp y + \dfrac{x}{2\cdot\frac{x^2}{y}}\\
+	\dfrac{2x\d x}{\frac{2x\d x}{y} - \frac{x^2\d y}{y^2}} = \exp y + y \iff 2x\d x = \dfrac{2x\d x}{y} \cdot \exp y - \dfrac{x^2\d y}{y^2} \cdot \exp y + 2x\d x - \dfrac{x^2 \d y}{y}
+	\end{gather*}
+	Заметим, что $2x\d x$ сокращается в обеих частях уравнения. Кроме того, исходя из условия $x \neq 0$ и соответственно $y \neq 0$, значит, можем сократить обе части уравнения на $\dfrac{x}{y}$:
+	\begin{gather*}
+	0 = 2\exp y \d x - \dfrac{x}{y}\cdot \exp y \d y - x\d y \iff 2\exp y \d x = x\cdot \left(\dfrac{\exp(y)}{y} + 1\right) \d y\\
+	\dfrac{\d x}{x} = \dfrac{1}{2} \cdot \left(\dfrac{1}{y} + \exp(-y)\right) \d y \bto \ds\int = \int\\
+	\log|x| = \dfrac{1}{2}\big[\log|y| - \exp(-y)\big] + C \iff |x| = \exp(\dfrac{1}{2}\big[\log|y| - \exp(-y)\big] + C)\\
+	|x| = \lambda \cdot \exp(\log|y|^{\frac{1}{2}}) \cdot \exp(-\frac{1}{2}\cdot \exp(-y)),\ \lambda \in \R_+ \iff x\cdot \sqrt{\exp(\exp(-y))} = \lambda \cdot \sqrt{y},\ \lambda \in\R
+	\end{gather*}
+	Сделаем теперь обратную замену:
+	\begin{gather*}
+	t = \dfrac{x^2}{y} \iff y = \dfrac{x^2}{t}\\
+	x \cdot \sqrt{\exp(\exp(-y))} = \lambda \cdot \sqrt{y},\ \lambda \in\R \iff x \cdot \sqrt{\exp(\exp(-\frac{x^2}{t}))} = \lambda \cdot \dfrac{x}{\sqrt{t}},\ \lambda \in \R\\
+	\sqrt{t \cdot \exp(\exp(-\frac{x^2}{t}))} = \lambda,\ \lambda \in \R \iff t \cdot \exp(\exp(-\frac{x^2}{t})) = \lambda,\ \lambda \in \R_+
+	\end{gather*}
+	Получили общее решение диффура в неявном виде. Найдём константу $\lambda$:
+	\begin{gather*}
+	x(1) = 1 \bto 1 \cdot \exp(\exp(-1)) = \lambda \bto \lambda = \exp(\exp(-1))
+	\end{gather*}
+	Тогда итоговым ответом будет:
+	\[t \cdot \exp(\exp(-\frac{x^2}{t})) = \exp(\exp(-1)) \iff t = \exp(\exp(-1) - \exp(-\dfrac{x^2}{t}))\]
+	\begin{ans}
+		\[t = \exp(\exp(-1) - \exp(-\dfrac{x^2}{t}))\]
+	\end{ans}
+\end{proof}
+
+\begin{task5}
+	Решить диффур: \[(t + 1)(x\dx - 1) = x^2\]
+\end{task5}
+\begin{proof}[Решение]
+	Сделаем замену $y = \dfrac{x}{t}$:
+	\begin{gather*}
+	y = \dfrac xt \bto
+	\begin{cases}
+	x = yt\\
+	\dx = \dy t + y
+	\end{cases} \bto (t + 1)(x\dx - 1) = x^2 \iff (t + 1)\big[yt(\dy t + y) - 1\big] = y^2t^2\\
+	(t + 1)t^2y\dy + (t + 1)y^2t - (t + 1) = y^2t^2 \iff (t + 1)t^2y\dy + y^2t^2 + y^2t = t + 1 + y^2t^2\\
+	(t + 1)t^2y\dy + y^2t = t + 1 \iff t^2y\dy + \dfrac{y^2t}{t + 1} = 1 \iff \dy + \dfrac{y}{t(t + 1)} = \dfrac{1}{t^2} \cdot y^{-1}
+	\end{gather*}
+	Получили уравнение Бернулли, $m = -1$. Решим его классическим методом:
+	\begin{gather*}
+	\dy + \dfrac{y}{t(t + 1)} = \dfrac{1}{t^2} \cdot y^{-1} \iff \dy y + \dfrac{y^2}{t(t + 1)} = \dfrac{1}{t^2}\\
+	\left\{\begin{gathered}
+	w = \dfrac{1}{y^{-1 -1}} = y^2\hfill\\
+	\dw = \dfrac{(1 - (-1))\dy}{y^{-1}} \iff \dw = 2y\dy \bto y\dy = \dfrac{\dw}{2} \hfill
+	\end{gathered}\right.\\
+	\dw + \dfrac{2w}{t(t + 1)} = \dfrac{1}{t^2}
+	\end{gather*}
+	Это уже обычное линейное уравнение. Будем решать методом вариации произвольной постоянной. Сначала однородный диффур:
+	\begin{gather*}
+	\dw = -\dfrac{2w}{t(t + 1)} \iff \dfrac{\d w}{w} = -\dfrac{2\d t}{t(t + 1)} \bto \ds\int = \int\\
+	\log|w| = -2\ds\int \dfrac{\d t}{t(t + 1)} = -2\left(\ds\int \dfrac{\d t}{t} - \ds\int \dfrac{\d t}{t + 1}\right) = -2\left( \log|t| - \log|t + 1| + C\right) = \log\left|\dfrac{t}{t + 1}\right|^{-2} + C\\
+	|w| = u \cdot \dfrac{(t + 1)^2}{t^2},\ u \in \R_+ \iff w = u \cdot \dfrac{(t + 1)^2}{t^2},\ u \in \R
+	\end{gather*}
+	Делаем вариацию постоянной $u = u(t)$:
+	\begin{gather*}
+	\begin{cases}
+	w = u \cdot \dfrac{(t + 1)^2}{t^2}\\
+	\dw = \du \dfrac{(t + 1)^2}{t^2} + u \cdot \dfrac{2(t + 1)t^2 - 2t(t + 1)^2}{t^4} = \du \dfrac{(t + 1)^2}{t^2} - 2u \cdot \dfrac{t + 1}{t^3}
+	\end{cases}\\
+	\du \dfrac{(t + 1)^2}{t^2} - 2u \cdot \dfrac{t + 1}{t^3} + 2 \cdot u \cdot \dfrac{(t + 1)^2}{t^2} \cdot \dfrac{1}{t(t + 1)} = \dfrac{1}{t^2} \iff \du \dfrac{(t + 1)^2}{t^2} = \dfrac{1}{t^2}\\
+	\du = \dfrac{t^2}{(t + 1)^2} \cdot \dfrac{2}{t^2} = \dfrac{2}{(t + 1)^2} \bto u = \ds\int \dfrac{2\d t}{(t + 1)^2} = -\dfrac{2}{t + 1} + C\\
+	w = u \cdot \dfrac{(t + 1)^2}{t^2} = -2\dfrac{(t + 1)}{t^2} + \dfrac{(t + 1)^2}{t^2} \cdot C = \dfrac{(t + 1) \cdot \big[Ct + C - 2\big]}{t^2}
+	\end{gather*}
+	Теперь делаем обратные замены:
+	\begin{gather*}
+	w = y^2 = \dfrac{(t + 1) \cdot \big[Ct + C - 2\big]}{t^2} \bto y = \ds\pm \dfrac{\sqrt{t + 1} \cdot \sqrt{Ct + C - 2}}{t} = \dfrac{x}{t}\\
+	x = yt = \pm \sqrt{t + 1} \cdot \sqrt{Ct + C - 2}
+	\end{gather*}
+	\begin{ans}
+		\[x = yt = \pm \sqrt{t + 1} \cdot \sqrt{Ct + C - 2}\]
+	\end{ans}
+\end{proof}
+
+\begin{task6}
+	Решить задачу Коши: \[\dx - 2tx + x^2 = 5 - t^2,\ \ \text{ начальное условие: }x(0) = 0\]
+\end{task6}
+\begin{proof}[Решение]
+	Перепишем уравнение в классическом виде:
+	\[\dx - 2tx + x^2 = 5 - t^2 \iff \dx + x^2 - 2tx + t^2 - 5 = 0\]
+	Это уравнение Риккати. Попреобразовываем его, чтобы выйти на частное решение:
+	\begin{gather*}
+	\dx + x^2 - 2tx + t^2 - 5 = 0 \iff \dx + (x - t)^2 = 5
+	\end{gather*}
+	Заметим, что $x_1 = x_1(t) = t + 2$ -- частное решение. Действительно:
+	\begin{gather*}
+	\dx_1 = 1,\ (x_1 - t) = 2 \bto \dx + (x - t)^2 = 1 + 4 = 5
+	\end{gather*}
+	Теперь представим $x$ в виде суммы частного решения и неизвестной части:
+	\begin{gather*}
+	\begin{cases}
+	x = t + 2 + z,\ z = z(t)\\
+	\dx = 1 + \dz
+	\end{cases} \bto 1 + \dz + (t + 2 + z)^2 -2t \cdot (t + 2 + z) + t^2 - 5 = 0\\
+	\dz + t^2 + 4t + 4 + 2tz + 4z + z^2 - 2t^2 - 4t -2tz + t^2 = 4\\
+	\dz + 4z = -z^2
+	\end{gather*}
+	Получили уравнение Бернулли. Заметим, что $z \equiv 0$ -- корень. Запомним его, далее полагаем $z \not\equiv 0$. В таком случае решим классическим методом:
+	\begin{gather*}
+	\dz + 4z = -z^2 \iff \dfrac{\dz}{z^2} + \dfrac{4}{z} = -1\\
+	\begin{cases}
+	w = \dfrac{1}{z}\\
+	\dw = -\dfrac{\dz}{z^2} \Longrightarrow \dfrac{\dz}{z^2} = -\dw
+	\end{cases} \bto -\dw + 4w = -1 \iff \dw  - 4w = 1\\
+	\dw = 4w \iff \dfrac{\d w}{w} = 4\d t \bto \ds\int = \int \\
+	\log|w| = 4t + C \iff |w| = u\cdot \exp(4t),\ u \in \R_+ \iff w = u \cdot \exp(4t),\ u \in \R
+	\end{gather*}
+	Вариация постоянной:
+	\begin{gather*}
+	\begin{cases}
+	w = u \cdot \exp(4t)\\
+	\dw = \du\exp(4t) + 4u\cdot \exp(4t)
+	\end{cases}\\
+	\du\exp(4t) + 4u\cdot \exp(4t) -  4u\cdot \exp(4t) = 1 \iff \du\exp(4t) = 1 \iff \du = \exp(-4t)\\
+	u = -\dfrac{1}{4}\exp(-4t) + C = C - \dfrac{\exp(-4t)}{4}\\
+	w = u \cdot \exp(4t) = \left(C - \dfrac{\exp(-4t)}{4}\right) \cdot \exp(4t) = C\exp(4t) - \dfrac{1}{4}\\
+	w = \dfrac{1}{z} \bto  z = \dfrac{1}{w} = \dfrac{4}{4C\exp(4t) - 1}
+	\end{gather*}
+	Таким образом, можем записать итоговое решение:
+	\[x = x_1 + z = t + 2 + z = \begin{cases}
+	t + 2,\ z = 0\\
+	t + 2 + \dfrac{4}{4C\exp(4t) - 1},\ z \neq 0
+	\end{cases}\]
+	Однако, у нас есть начальное условие --- $x(0) = 0$. Подставив $t = 0$, сразу же понимаем, что случай $z = 0$ не подходит. Тогда найдём константу $C$ из второго решения:
+	\begin{gather*}
+	x = t + 2 + \dfrac{4}{4C\exp(4t) - 1},\ x(0) = 0\\
+	0 = 0 + 2 + \dfrac{4}{4C - 1}\iff -1 = \dfrac{2}{4C - 1} \iff 1 - 4C = 2\\
+	4C = -1 \bto C = -\dfrac{1}{4}
+	\end{gather*}
+	Подставляем константу и получаем решение задачи Коши:
+	\[x = t + 2 - \dfrac{4}{\exp(4t) + 1}\]
+	\begin{ans}
+		\[x = t + 2 - \dfrac{4}{\exp(4t) + 1}\]
+	\end{ans}
+\end{proof}
+
+\begin{task7}
+	Решить задачу Коши:
 	\[\dx = \dfrac{1 + x - x^2e^t}{2xe^t - t},\ \ \text{ начальное условие } x(0) = -1\]
-	\item Решить диффур:
-	\[(\sin t + x\cot t)\d t + \left(\dfrac{x^2}{\sin t} + 1\right)\d x\]
+\end{task7}
+\begin{proof}[Решение]
+	Домножим обе части уравнения на $2xe^t - t$:
+	\[\dx = \dfrac{1 + x - x^2e^t}{2xe^t - t} \iff \left(2xe^t - t\right)\d x - \left(1 + x - x^2e^t\right)\d t = 0\]
+	Проверим, действительно ли это уравнение в полных дифференциалах, как нам кажется:
+	\[\left\{\begin{gathered}
+	\left(2xe^t - t\right)'_t = 2xe^t - 1\hfill\\
+	-\left(1 + x - x^2e^t\right)'_x = -1 + 2xe^t\hfill
+	\end{gathered}\right.\]
+	И правда, оно. Тогда будем искать частный интеграл и дифференцировать:
+	\begin{gather*}
+	U = \ds\int 2xe^t - t\d x = x^2e^t - tx + \psi(t)\\
+	U'_t = \left(x^2e^t - tx + \psi(t)\right)'_t = x^2e^t - x + \psi'(t) = x^2e^t - x - 1 \iff \psi'(t) = -1 \bto \psi(t) = -t + C\\
+	U = x^2e^t - tx + \psi(t) = x^2e^t - tx - t = C
+	\end{gather*}
+	Так как это задача Коши, подставим начальное условие, чтобы найти константу.
+	\[x(0) = -1 \bto 1\cdot 1 - 0 - 0 = C \iff C = 1\]
+	Таким образом, решением будет кривая:
+	\[x^2e^t - tx - t = 1\]
+	\begin{ans}
+		\[x^2e^t - tx - t = 1\]
+	\end{ans}
+\end{proof}
+
+\begin{task8}
+	Решить диффур:
+	\[(\sin t + x\cot t)\d t + \left(\dfrac{x^2}{\sin t} + 1\right)\d x = 0\]
+\end{task8}
+\begin{proof}[Решение]
+	Проверим, не является ли данный диффур уравнением в полных дифференциалах:
+	\[\left\{\begin{gathered}
+	\left(\sin t + x\cot t\right)'_x = \cot t\hfill\\
+	\left(\dfrac{x^2}{\sin t} + 1\right)'_t = -\dfrac{x^2}{\sin^2 t}\hfill
+	\end{gathered}\right.\]	
+	К сожалению, смешанные производные не совпадают. Тогда воспольуемся интегрирующим множителем $\mu = \mu(t) = \sin t$. Покажем, что он действительно подходит:
+	\begin{gather*}
+	\sin t \cdot \left[(\sin t + x\cot t)\d t + \left(\dfrac{x^2}{\sin t} + 1\right)\d x\right] = 0\\
+	\left(\sin^2 t + x\cos t\right)\d t + \left(x^2 + \sin t\right)\d x = 0\\
+	\left\{\begin{gathered}
+	\left(\sin^2 t + x\cos t\right)'_x = \cos t\hfill\\
+	\left(x^2 + \sin t\right)'_t = \cos t\hfill
+	\end{gathered}\right.
+	\end{gather*}
+	Теперь это уравнение в полных дифференциалах. Тогда можем решать его классическим методом:
+	\begin{gather*}
+	U = \ds\int x^2 + \sin t\d x = \dfrac{x^3}{3} + x\sin t + \psi(t)\\
+	U'_t = \left(\dfrac{x^3}{3} + x\sin t + \psi(t)\right)'_t = x\cos t + \psi'(t) = \sin^2 t + x\cos t \iff \psi'(t) = \sin^2 t\\
+	\psi(t) = \ds\int \sin^2 t\d t = -\dfrac{1}{2}\ds\int 1 - 2\sin^2 t - 1 \d t = -\dfrac{1}{2}\ds\int \cos(2t) - 1 \d t  = \\
+	= \dfrac{1}{2}\ds\int\d t - \dfrac{1}{4} \ds\int \cos(2t)\d 2t = \dfrac{t}{2} - \dfrac{\sin(2t)}{4} + C\\
+	U = \dfrac{x^3}{3} + x\sin t + \psi(t) = \dfrac{x^3}{3} + x\sin t + \dfrac{t}{2} - \dfrac{\sin(2t)}{4} = C
+	\end{gather*}
+	Получили итоговое общее решение.
+	\begin{ans}
+		\[\dfrac{x^3}{3} + x\sin t + \dfrac{t}{2} - \dfrac{\sin(2t)}{4} = C\]
+	\end{ans}
+\end{proof}
+
+\begin{task9}
+	Решить задачу Коши:
+	\[t\dx + (\dx)^3 - x = 0,\ \ \text{ начальное условие } x(0) = 8\]
+\end{task9}
+\begin{proof}[Решение]
+	Перепишем уравнение в немного другом виде:
+	\[t\dx + (\dx)^3 - x = 0 \iff x = t\dx + (\dx)^3\]	
+	Это уравнение, не разрешимое относительно производной $\dx$ -- уравнение Клеро. Будем решать параметризацией:
+	\[\dx = p \bto \d x = p\d t\]
+	Подставляем в исходное уравнение и дифференцируем обе части:
+	\begin{gather*}
+	x = t\cdot p + p^3 \\
+	\d x = p\d t + t\d p + 3p^2\d p = p\d t\\
+	0 = t\d p + 3p^2\d p \iff (t + 3p^2)\d p = 0
+	\end{gather*}
+	Получили два случая:
+	\[(t + 3p^2)\d p = 0 \iff \left[\begin{gathered}
+	\d p = 0\hfill\\
+	t + 3p^2 = 0 \hfill
+	\end{gathered}\right.\]
+	Сначала разберёмся с первым:
+	\begin{gather*}
+	\d p = 0 \iff p = C\\
+	x = tp + p^3 = Ct + C^3
+	\end{gather*}
+	Получили класс решений. Теперь смотрим второй случай:
+	\begin{gather*}
+	t + 3p^2 = 0 \iff t = -3p^2\\
+	x = t\cdot p + p^3 = -3p^3 + p^3 = -2p^3\\
+	\begin{cases}
+	t = -3p^2\\
+	x = -2p^3
+	\end{cases}
+	\end{gather*}
+	Здесь кривая, заданная параметрически.
+	Однако, у нас задача Коши. Разберёмся, какие решения подходят для начального условия. Заметим, что во втором решении $t = 0 \iff p = 0 \iff x = 0$, следовательно, нам они не подходят. Смотрим первый класс решений:
+	\begin{gather*}
+	x = Ct + C^3,\ x(0) = 8\\
+	8 = C \cdot 0 + C^3 \bto C = 2
+	\end{gather*}
+	Таким образом, мы нашли решение задачи Коши:
+	\[x = 2t + 8\]
+	
+	\begin{ans}
+		\[x = 2t + 8\]
+	\end{ans}
+\end{proof}
+
+\begin{task10}
+	Решить диффур:
+	\[4t^2x^2(\dx)^2 - 2tx^3\dx = 1\]
+\end{task10}
+\begin{proof}[Решение]
+	Данное уравнение трудно решить вот так сходу. Однако, сделаем хитрую замену:
+	\[\begin{cases}
+	p = x^2\\
+	\dpp = 2x\dx
+	\end{cases}\]
+	Тогда наше уравнение примет вид:
+	\[t^2(\dpp)^2 - tp\dpp = 1\]
+	Заметим, что $\dpp \not\equiv 0$, так как иначе мы бы получили $0 = 1$. Кроме того, $t \neq 0$ -- иначе мы бы опять получили $0 = 1$. Выразим из данного уравнения $p$:
+	\begin{gather*}
+	t^2(\dpp)^2 - tp\dpp = 1 \iff tp\dpp = t^2(\dpp)^2 - 1\\
+	p = t\dpp - \dfrac{1}{t\dpp}
+	\end{gather*}
+	Мы воспользовались тем, что $t\dpp \neq 0$ ни для каких $t$.  Теперь перед нами опять уравнение, не разрешимое относительно производной $\dpp$. Сделаем следующую параметризацию:
+	\[q = t\dpp = t\dfrac{\d p}{\d t} \bto \d p = \dfrac{q\d t}{t}\]
+	Подставляем в исходное уравнение и дифференцируем обе части.
+	\begin{gather*}
+	p = q - \dfrac{1}{q}\\
+	\d p = \dfrac{q\d t}{t} = \d q + \dfrac{\d q}{q^2} = \left(1 + \dfrac{1}{q^2}\right)\d q \iff \dfrac{\d t}{t} = \left(\dfrac{1}{q} + \dfrac{1}{q^3}\right)\d q \bto \ds\int = \int\\
+	\log|t| = \log|q| - \dfrac{1}{2q^2} + C \iff |t| = \lambda \cdot |q| \cdot \exp(-\dfrac{1}{2q^2}),\ \lambda \in \R_+ \\
+	t = \lambda q \cdot \exp(-\dfrac{1}{2q^2}),\ \lambda \in \R
+	\end{gather*}
+	Таким образом, мы получили $x$ и $t$ в неявном виде, параметризованные через $q$:
+	\[\begin{cases}
+	p = q - \dfrac{1}{q} = x^2\\
+	t = \lambda q \cdot \exp(-\dfrac{1}{2q^2}),\ \lambda \in \R
+	\end{cases}\]
+	\begin{ans}
+		\[\begin{cases}
+		x^2 = q - \dfrac{1}{q}\\
+		t = \lambda q \cdot \exp(-\dfrac{1}{2q^2}),\ \lambda \in \R
+		\end{cases}\]
+	\end{ans}
+\end{proof}
+
+\begin{task11}
+	Найдите хотя бы одно решение уравнения синус-Гордона:
+	\[\ddx + \sin x = 0\]
+	отличное от тождественной константы.
+\end{task11}
+\begin{proof}[Решение]
+	Заметим, что в данном уравнении нет независимой переменной $t$. Значит, это уравнение допускает понижение порядка путём классической замены $\dx = p$.
+	\begin{gather*}
+	\dx = p\qquad \ddx = p\dpp\\
+	p\dpp + \sin x = 0 \iff p\d p = -\sin x  \d x\bto \ds\int = \int\\
+	\dfrac{p^2}{2} = \cos x + C_1 \iff \cos x = \dfrac{p^2}{2} - C_1 \iff x = \arccos(\dfrac{p^2}{2} - C_1)\\
+	x = \arccos(\dfrac{(\dx)^2}{2} - C_1)
+	\end{gather*}
+	Сделали обратную замену $p = \dx$. Можно заметить, что получившееся уравнение является не разрешённым относительно производной $\dx$. При этом мы явно выразили $x$ через $\dx$. Значит, для решения этого диффура нам потребуется параметризация $p = \dx = \dfrac{\d x}{\d t}$. Параметризуем и продифференцируем.
+	\begin{gather*}
+	p = \dx = \dfrac{\d x}{\d t}\\
+	x = \arccos(\dfrac{p^2}{2} - C_1) \bto \partial = \partial\\
+	\d x = p\d t = -\dfrac{p\d p}{\sqrt{1 - \left(\frac{p^2}{2} - C_1\right)^2}}
+	\end{gather*}
+	Заметим, что $p = 0$ является решением. В таком случае $x = C$ -- решение диффура. Однако, нужно найти решения, отличные от тождественной константы. Значит, можно спокойно делить обе части на $p$ и интегрировать. При этом положим $C_1 = 1$ -- ведь нужно найти хотя бы одно решение, а так хотя бы берущийся интеграл выйдет.
+	\begin{gather*}
+	\d t = -\dfrac{\d p}{\sqrt{1 - \left(\frac{p^2}{2} - 1\right)^2}} \bto \ds\int = \int\\
+	-\ds\int \dfrac{\d p}{\sqrt{1 - \left(\frac{p^2}{2} - 1\right)^2}} = -\ds\int \dfrac{\d p}{\sqrt{p^2 - \frac{p^4}{4}}} = -\ds\int \dfrac{\d p}{p\sqrt{1 - \frac{p^2}{4}}} = -2\ds\int \dfrac{\d p}{p\sqrt{4 - p^2}} = \\
+	= -\ds\int \dfrac{2p\d p}{p^2\sqrt{4 - p^2}} = \left|\left|\begin{gathered}
+	u = p^2\\
+	\d u = 2p\d p
+	\end{gathered}\right|\right| = -\ds\int\dfrac{\d u}{u\sqrt{4 - u}} = \left|\left|\begin{gathered}
+	v = 4 - u\\
+	\d v = -\d u
+	\end{gathered}\right|\right| = \ds\int\dfrac{\d v}{(4 - v)\sqrt{v}} = \\
+	= \left|\left|\begin{gathered}
+	w = \sqrt{v}\\
+	\d w = \frac{1}{2\sqrt{v}}
+	\end{gathered}\right|\right| = 2\ds\int\dfrac{\d w}{4 - w^2} = \dfrac{1}{2}\log\left|\dfrac{2 + w}{2 - w}\right| = \dfrac{1}{2}\log\left|\dfrac{2 + \sqrt{v}}{2 - \sqrt{v}}\right| = \dfrac{1}{2}\log\left|\dfrac{2 + \sqrt{4 - u}}{2 - \sqrt{4 - u}}\right| = \\
+	= \dfrac{1}{2}\log\left|\dfrac{2 + \sqrt{4 - p^2}}{2 - \sqrt{4 - p^2}}\right| = t + C
+	%\left|\left|\begin{gathered}
+	%	p = 2\sin u\\
+	%	\d p = 2\cos u \d u
+	%\end{gathered}\right|\right| = -4\ds\int \dfrac{2\cos u\d u}{2 \sin u \cdot 2\cos u} = -2\ds\int\dfrac{\d u}{\sin u}
+	\end{gather*}
+	Выразили $t$ через параметр $p$. Теперь мы имеем параметрическое решение.
+	\begin{ans}
+		\[x = \arccos(\dfrac{p^2}{2} - 1)\qquad t = \dfrac{1}{2}\log\left|\dfrac{2 + \sqrt{4 - p^2}}{2 - \sqrt{4 - p^2}}\right| - C\]
+	\end{ans}
+	
+\end{proof}
+
+\begin{task12}
+	Найдите все функции $x(t)$, такие, что радиус кривизны графика $x(t)$ в каждой точке равен квадрату абсциссы этой точки, и при этом 
+	\[\lim\limits_{t \to \infty} |\dx| \to \infty\]
+\end{task12}
+\begin{proof}[Решение]
+	Квадрат абсциссы в точке $t$ -- это $t^2$. Следовательно, требование из условия можно переписать так:
+	\[t^2 = R = \dfrac{1}{k} = \dfrac{\Big[1 + \big(\dx\big)^2\Big]^\frac{3}{2}}{|\ddx|}\]
+	Будем решать получившееся дифференциальное уравнение второго порядка:
+	\[
+	\dfrac{\Big[1 + \big(\dx\big)^2\Big]^\frac{3}{2}}{|\ddx|} = t^2
+	\]
+	Заметим, что в данном уравнении в явном виде отсутствует сама функция $x = x(t)$. Поэтому мы можем понизить степень уравнения, применив замену $\dx = y$:
+	\begin{gather*}
+	\dx = y \qquad \ddx = \dy\\
+	\dfrac{\Big[1 + y^2\Big]^\frac{3}{2}}{|\dy|} = t^2 \iff \dfrac{\Big[1 + y^2\Big]^\frac{3}{2}}{\dy} = \pm t^2 \iff \dfrac{\d y}{\Big[1 + y^2\Big]^\frac{3}{2}} = \pm\dfrac{\d t}{t^2} \bto \ds\int = \int\\
+	\ds\int \dfrac{\d y}{\Big[1 + y^2\Big]^\frac{3}{2}} = \left|\left|\begin{gathered}
+	y = \tan u\\
+	\d y = \frac{\d u}{\cos^2 u}
+	\end{gathered}\right|\right| = \ds\int\dfrac{\d u }{\left(1 + \tan^2 u\right)^\frac{3}{2}\cdot \cos^2 u} =  \ds\int \dfrac{\cos^3 u\d u}{\cos^2 u}= \ds\int \cos u\d u =  \\
+	\sin u = \sin(\arctan(y)) = \dfrac{y}{\sqrt{1 + y^2}} =  \pm \dfrac{1}{t} + C \iff \dfrac{1}{\sqrt{1 + \frac{1}{y^2}}} = \pm \dfrac{1}{t} + C
+	\end{gather*}
+	Подставляем обратно $y = \dx$:
+	\[\dfrac{1}{\sqrt{1 + \frac{1}{(\dx)^2}}} = \pm \dfrac{1}{t} + C\]
+	По условию, 
+	\[\lim\limits_{t \to \infty} |\dx| \to \infty\]
+	Тогда перейдём к пределу по $t$ в полученном нами выражении:
+	\[
+	\lim\limits_{t \to \infty }\dfrac{1}{\sqrt{1 + \frac{1}{(\dx)^2}}} = \lim\limits_{t \to \infty }\pm \dfrac{1}{t} + C \iff 
+	1 = 0 + C \iff C = 1
+	\]
+	Теперь выразим $\dx$, зная константу:
+	\begin{gather*}
+	\dfrac{1}{\sqrt{1 + \frac{1}{(\dx)^2}}} = \pm \dfrac{1}{t} + 1 \iff \sqrt{1 + \dfrac{1}{(\dx)^2}} = \dfrac{t}{t \pm 1} \iff 1 + \dfrac{1}{(\dx)^2} = \dfrac{t^2}{(t \pm 1)^2}\\
+	\dfrac{1}{(\dx)^2} = \dfrac{t^2 - t^2 \mp 2t - 1}{(t \pm 1)^2} \iff (\dx)^2 = \dfrac{(t \pm 1)^2}{\mp 2t - 1} \iff \dx = \dfrac{t\pm 1}{\sqrt{\mp 2t - 1}}
+	\end{gather*}
+	Теперь необходимо решить диффур с разделяющимися переменными. Заметим, что справа у нас функция только от $t$, поэтому можно сразу же интегрировать $\dx$.
+	\begin{gather*}
+	\dx = \dfrac{t\pm 1}{\sqrt{\mp 2t - 1}} \bto \ds\int = \int\\
+	\ds\int \dfrac{t\pm 1}{\sqrt{\mp 2t - 1}} = \ds\int \dfrac{t\d t}{\sqrt{\mp 2t - 1}} \pm \ds\int\dfrac{\d t}{\sqrt{\mp 2t - 1}} \\
+	\ds\int \dfrac{t\d t}{\sqrt{\mp 2t - 1}} = \left|\left|\begin{gathered}
+	u = \mp 2t - 1\\
+	\d u = \mp 2\d t
+	\end{gathered}\right|\right| = \mp\dfrac{1}{4}\ds\int\dfrac{u + 1}{\sqrt{u}}\d u  = \mp\dfrac{1}{4}\left(\ds\int \sqrt{u}\d u + \ds\int \dfrac{\d u}{\sqrt{u}}\right) = \mp\dfrac{1}{4}\left(\dfrac{2}{3}\cdot u^{\frac{3}{2}} + 2\sqrt{u}\right) = \\
+	= \mp\dfrac{1}{6}\cdot (\mp 2t - 1)^\frac{3}{2} \mp \dfrac{1}{2}\cdot \sqrt{\mp 2t - 1}\\
+	\ds\int\dfrac{\d t}{\sqrt{\mp 2t - 1}} = \mp\dfrac{1}{2}\ds\int\dfrac{\d(\mp 2t) }{\sqrt{\mp 2t - 1}} = \mp\sqrt{\mp 2t - 1}\\
+	\ds\int \dfrac{t\pm 1}{\sqrt{\mp 2t - 1}} = \mp\dfrac{1}{6}\cdot (\mp 2t - 1)^\frac{3}{2} \mp \dfrac{1}{2}\cdot \sqrt{\mp 2t - 1} - \sqrt{\mp 2t - 1} = \sqrt{\mp 2t - 1}\cdot \left(\dfrac{2t \pm 1}{6} \mp \dfrac{1}{2} - 1\right) = \\
+	= \left[\begin{gathered}
+	\pm\sqrt{2t - 1}\cdot \dfrac{2 - t}{3}\\
+	\pm\sqrt{-2t - 1}\cdot \dfrac{2 + t}{3}
+	\end{gathered}\right. = x + C	
+	\end{gather*}
+	Получили 4 варианта ответа. Замечу, что $\mp$ и $\pm$ у меня фиксированы для всего выражения и не являются автономными (если в одном $\mp$ знак $-$, то во всех $\mp$ знак $-$ и аналогично c $\pm$).
+	\begin{ans}
+		\[x = \pm\sqrt{2t - 1}\cdot \dfrac{2 - t}{3} + C \qquad x = \pm\sqrt{-2t - 1}\cdot \dfrac{2 + t}{3} + C\]	
+	\end{ans}
+	
+\end{proof}
+
+\begin{task13}
+	Решить уравнение:
+	\[\dfrac{2t^3\dx + x^2}{t^2\ddx + 4x} = \dfrac{2}{3}t^2\]
+	при условии:
+	\[x(1) = 1\qquad \dx(1) = 3\]
+\end{task13}
+\begin{proof}[Решение]
+	Приведём части уравнения к общему знаменателю:
+	\[3\left(2t^3\dx + x^2\right) = 2t^2\left(t^2\ddx + 4x\right) \iff 6t^3\dx + 3x^2 = 2t^4\ddx + 8t^2x\]
+	Покажем, что это уравнение --- обобщённо-однородное, найдя число $m$. Для этого делаем замену 
+	\[t\leftarrow kt,\quad x \leftarrow k^mx,\quad \dx \leftarrow k^{m - 1}\dx,\quad \ddx \leftarrow k^{m - 2}\ddx\]
+	и приравниваем степени при $k$ у членов уравнения:
+	\[k^3\cdot k^{m - 1} = k^{2m} = k^{m - 2}\cdot k^4 = k^2\cdot k^m\iff m + 2 = 2m \iff m = 2\]
+	Теперь делаем экзотическую замену и подставляем в исходный диффур:
+	\begin{gather*}
+	t = e^s\qquad x = ye^{2s} \qquad \dx = \left(\dy + 2y\right)e^{s} \qquad \ddx = \big(\ddy + 3\dy + 2y\big)\\
+	6e^{3s}\left(\dy + 2y\right)e^{s} + 3y^2e^{4s} = 2e^{4s}\big(\ddy + 3\dy + 2\big) + 8e^{2s}ye^{2s} \iff 6\left(\dy + 2y\right) + 3y^2 = 2\big(\ddy + 3\dy + 2y\big) + 8y\\
+	6\dy + 12y + 3y^2 = 2\ddy + 6\dy + 4y + 8y \iff 3y^2 = 2\ddy
+	\end{gather*}
+	Получили уравнение, в котором отсутствует независимая переменная $s$. Для решения делаем классическую замену $\dy = p = p(y)$ и решаем получившийся диффур первого порядка:
+	\begin{gather*}
+	\dy = p \qquad \ddy = p\dpp\\
+	3y^2 = 2p\dpp \iff 2p\d p = 3y^2\d y \bto \ds\int = \int\\
+	p^2 = y^3 + C \iff \left|\left|p = \dy\right|\right| \iff (\dy)^2 = y^3 + C
+	\end{gather*}
+	По условию, нам дано, что \[x(1) = 1\qquad \dx(1) = 3\]
+	Ясно, что это равносильно:
+	\[\begin{gathered}
+	t = e^s = 1 \iff s = 0\\
+	x = ye^{2s} = 1 \iff ye^{2\cdot 0} = y(0) = 1\\
+	\dx = \left(\dy + 2y\right)e^{s} = 3 \iff \dy + 2y = 3 \iff \dy(0) = 1
+	\end{gathered}\]
+	Отсюда:
+	\[\big(\dy(0)\big)^2 = y^3(0) + C \iff 1 = 1 = C \iff C = 0\]
+	Получаем дифференциальное уравнение:
+	\[(\dy)^2 = y^3\]
+	Возьмём квадратный корень из обеих частей и решим диффур с разделяющимися переменными (стоит отметить, что знак будет $+$, так как иначе не будут выполняться начальные условия):
+	\begin{gather*}
+	(\dy)^2 = y^3 \iff \dy =  y^{\frac 32} \iff y^{-\frac 32}\d y = \d s \bto \ds\int = \int\\
+	-\dfrac{2}{\sqrt{y}} = s + C
+	\end{gather*}
+	Подставим начальные условия:
+	\[-\dfrac{2}{\sqrt{y\big(s(1)\big)}} = s(1) + C \iff -2 = C\]
+	Таким образом, делая обратную подстановку, получаем:
+	\begin{gather*}
+	-\dfrac{2}{\sqrt{y}} = s - 2 \iff \dfrac{2}{\sqrt{y}} = 2 - s \iff y = \dfrac{4}{(2 - s)^2}\\
+	s = \log t \qquad y = \dfrac{x}{t^2}\\
+	x = \dfrac{4t^2}{(2 - \log t)^2}
+	\end{gather*}
+	Это и есть искомое решение.	
+	\begin{ans}
+		\[x = \dfrac{4t^2}{(2 - \log t)^2}\]
+	\end{ans}
+	
+\end{proof}
+
+
+\begin{task14}
+	Существует ли уравнение второго порядка 
+	\[\ddx = f(t,\ x,\ \dx)\]
+	с непрерывно-дифференцируемой функцией $f$, для которого функции
+	\[x(t) = t \qquad x(t) = \sin t\] были бы решениями на всей прямой $t \in \R$?
+\end{task14}
+\begin{proof}[Решение]
+	Сделаем следующую замену:
+	$$\begin{cases} y_0 = x, \\ y_1 = \dot{x}; \end{cases} \Rightarrow \begin{cases} \dot{y_0} = y_1, \\ \dot{y_1} = f(t, y_0, y_1); \end{cases} \Rightarrow \dot{y} = g(t, y).$$
+	Получили уравнение на вектор-функцию $y$ с непрерывно-дифференцируемой правой частью.
+	Рассмотрим точку $T_0 = (t^0, y_0^0, y_1^0) = (0, 0, 1)$. Предположим, что функции $x(t) = t$ и $x(t) = \sin{t}$ являются решениями исходного уравнения. Рассмотрим соответствующие им функции $y(t) = (x, \dot{x})$.
+	Заметим, что обе функции проходят через точку $T_0$ (действительно, $t(0) = 0, t'(0) = 1; \sin{t}(0) = 0, (\sin{t})'(0) = 1$). Теперь рассмотрим какую-либо окрестность $\Omega$ точки $T_0$. Из непрерывной дифференцируемости $g$ на $\mathbb{R}$ следует, что $g$ и ее производная $g_y$ ограничены (по теореме Вейерштрасса), а значит, $g$ липшицева в ограниченной области $\Omega$. Тогда по теореме о единственности существует ровно одна интегральная кривая, проходящая через $T_0$ и удовлетворяющая исходному уравнению, что противоречит нашему предположению. Т.е. две данные функции не могут быть решениями исходного уравнения.
+	
+	\begin{ans}
+		Нет, не существует.
+	\end{ans}
+\end{proof}
+
+\newpage
+\section{Common Tasks, часть 2}
+
+\begin{enumerate}
+	\item[15.] Решить задачу Коши:
+	\[(1 - x)\dx = \dfrac{2x}{t} + t^2e^x\qquad\qquad\text{начальное условие: }x(1) = 0\]
+	\item[16.] Решить задачу Коши:
+	\[\left(2x - \dfrac{t}{x^2}\right)\dx = \left(2t + \dfrac{x^2}{t}\right)\qquad\qquad\text{начальное условие: }x(1) = 1\]
+	\item[17.] Найти все $a \in \R$, такие, что уравнение
+	\[\ddx + (a^2 - 2)\dx - ax = 0\]имеет хотя бы одно периодическое решение, отличное от тождественной константы. Чему равен период?
+	\item[18.] Найдите все решения уравнения 
+	\[\dddx + \ddx + \dx + x = 0\]возрастающие на всей числовой прямой.
+	\item[19.] Решить диффур:
+	\[\ddx - 3\dx + 2x = 5^{t + e} + e^{t + 5}\]
+	\item[20.] Найти все решения уравнения
+	\[2(1 - t)^2\ddx + (1 - t)\dx + x = t\]
+	удовлетворяющие начальным условиям:
+	\[x(2) = 3 \qquad \qquad \dx(2) = 2\]
 \end{enumerate}
 
 \end{document}
