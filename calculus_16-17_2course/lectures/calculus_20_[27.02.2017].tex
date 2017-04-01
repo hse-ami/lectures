@@ -1,0 +1,122 @@
+\pagestyle{fancy}
+\section{Лекция 20 от 27.02.2017 \\  Аппроксимативная единица. \\Почленное дифференцирование ряда Фурье}
+\subsection{Аппроксимативная единица и ее применение}
+Вспомним определение \textit{свёртки}:
+$$
+f * g = \int\limits_{-\infty}^{\infty} f(x - t)g(t)\d t = \int\limits_{-\infty}^{\infty} f(t)g(x - t)\d t.
+$$
+И аппроксимативной единицы:
+\begin{Def}
+Последовательность определенных на $\R$ функций $\{ K_n(t) \}_{n = 1}^{\infty}$ называется \textit{непрерывной неотрицательной аппроксимативной единицей}, если
+\begin{enumerate}
+\item все $K_n(t)$ --- непрерывны и неотрицательны;
+\item $\forall n \in \N\ \int\limits_{-\infty}^{\infty}K_n(t)\d t = 1$;
+\item $\forall \delta > 0\ \int\limits_{-\infty}^{-\delta}K_n(t)\d t + \int\limits_{\delta}^{\infty}K_n(t) \d t \ito 0$, то есть вся плотность сосредоточена около нуля.
+\end{enumerate}
+\end{Def}
+
+Рассмотрим теперь последовательность таких функций:
+$$
+K_n(t) = \begin{cases}
+\dfrac{(1 - t^2)^n}{c_n}, & |t| \leq 1,\\
+0, & |t| > 1,
+\end{cases}\qquad  \text{где } c_n = \int\limits_{-1}^{1}(1 - t^2)^n \d t.
+$$
+
+\begin{Lemma}\label{lemma1}
+${K_n(t)}_{n = 1}^{\infty}$ --- непрерывная неотрицательная аппроксимативная единица.
+\end{Lemma}
+\begin{proof}
+Непрерывность и неотрицательность следуют из определения, а условие про интеграл выполняется благодаря тому, как мы ввели константу $c_n$. Единственное, что осталось проверить, это сосредоточенность плотности около нуля.
+
+Зафиксируем произвольное $\delta > 0$. Оценим $c_n$:
+$$
+c_n = 2 \int\limits_{0}^{1}(1 - t^2)^n \d t \geq 2 \int\limits_{0}^{1}(1 - t)^n\d t = -2 \cdot\dfrac{(1 - t)^{n + 1}}{n+1}\Big|_{t=0}^{1} = \dfrac{2}{n + 1}.
+$$
+Введем следующее обозначение:
+$$
+q := \begin{cases}
+1 - \delta^2, & \delta \leq 1;\\
+0, & \delta > 1.
+\end{cases}
+$$
+Отметим, что в силу определения при $\delta \geq 1$ верно, что $\forall n \in \N \ \int\limits_{\delta}^{\infty}K_n(t)\d t = 0$. Посмотрим, что происходит при $\delta \in (0, 1)$:
+$$
+\int\limits_{\delta}^{\infty}K_n(t)\d t = \int\limits_{\delta}^1 K_n(t)\d t = \dfrac{1}{c_n}\int\limits_{\delta}^{1}(1 - t^2)^n \leq \dfrac{q^n}{2/(n + 1)} = \dfrac{(n + 1)q^n}{2} \ito 0.
+$$
+На предпоследнем шаге мы можем убрать интеграл из-за того, что длина отрезка интегрирования меньше единицы, и при этом мы можем ограничить сверху подинтегральную функцию.
+\end{proof}
+
+\begin{Lemma}
+Пусть $f$ --- ограниченная равномерно-непрерывная на $\R$ функция, $K_n(t)$ --- неотрицательная непрерывная аппроксимативная единица на $\R$, $g_n(x):= f * K_n(x)$. Тогда $g_n \uconv{\R}{n \to \infty} f$.
+\end{Lemma}
+\begin{proof}
+Зафиксируем произвольное $\eps > 0$. Найдем $C > 0$ такое, что $|f| < C$ на $\R$. Положим $\eps_1 = \dfrac{\eps}{2C + 2}$. Найдем $\delta > 0$ такое, что $\forall x_1, x_2 \in \R\  |x_1 - x_2| < \delta \ \colon |f(x_1) - f(x_2)| < \eps_1$. Для этого $\delta$ найдется такое $N \in \N$, что $\forall n > N\ \int\limits_{-\infty}^{-\delta}K_n(t)\d t + \int\limits_{\delta}^{\infty}K_n(t) \d t < \eps_1$.
+
+Тогда $\forall n > N\ \forall x \in \R$:
+\begin{gather*}
+|f(x) - g_n(x)| \approx \left| \int\limits_{-\infty}^{\infty}f(x)K_n(t)\d t - \int\limits_{-\infty}^{\infty}f(x - t)K_n(t)\d t \right| \leq \int\limits_{-\infty}^{\infty}|f(x) - f(x - t)|K_n(t)\d t = \\
+= \int\limits_{-\delta}^{\delta}|f(x) - f(x + t)| K_n(t)\d t + \int\limits_{-\infty}^{-\delta} |f(x) - f(x - t)|K_n(t)\d t + \int\limits_{\delta}^{\infty} |f(x) - f(x - t)|K_n(t)\d t \leq \\
+\leq \int\limits_{-\delta}^{\delta}\eps_1 K_n(t)\d t + \int\limits_{-\infty}^{-\delta}2C K_n(t) \d t + \int\limits_{\delta}^{\infty}2C K_n(t) \d t \leq \eps_1 + 2C\eps_1 = \eps_1(2C + 1) \leq \eps.
+\end{gather*}
+Итого, по определению $g_n \uconv{\R}{n \to \infty} f$.
+\end{proof}
+
+\begin{Theorem}
+Пусть $f \in C[a, b]$. Тогда $\forall \eps > 0$ существует многочлен $P(x)$ такой, что \\$\forall x \in [a, b]$ $|f(x) - P(x)| < \eps$. 
+\end{Theorem}
+\begin{proof}
+Достаточно рассмотреть только $[a, b] = [0, 1]$, потому что все остальные отрезки мы можем линейными преобразованиями свести к $[0, 1]$, а композиция многочлена и линейных функций --- все еще многочлен.
+
+Пусть $l(x)$ линейная функция такая, что $l(0) = f(0)$, а $l(1) = f(1)$. Рассмотрим тогда функцию $h(x) = f(x) - l(x)$, продолженную вне отрезка $[0, 1]$ нулем. Заметим, что $h(x)$ равномерно-непрерывная и ограниченная на $\R$ функция.
+
+Отметим, что теперь мы можем перейти от рассмотрения функции $f(x)$ к $h(x)$. Действительно, если $P(x)$ --- многочлен, то $|h(x) - P(x)| = |f(x) - (l(x) + P(x))| = |f(x) - P'(x)|$, где $P'(x)$ --- тоже многочлен. Итого, для произвольного фиксированного $\eps > 0$ нам достаточно построить многочлен $P(x)$ такой, что $|h(x) - P(x)| < \eps$.
+
+Введем функцию $g_n := h(x) * K_n(x)$, где $K_n(x)$ --- аппроксимативная единица из \ref{lemma1}. Докажем, что $g_n(x)$ --- многочлен на $[0, 1]$. 
+
+Пусть $x \in [0, 1]$ --- произвольная точка. Заметим, что если $t \in [0, 1]$, то $x - t \in [-1, 1]$, а на этом отрезке функция $K_n(x)$ является многочленом: 
+$$
+K_n(x - t) = \sum\limits_{k = 1}^{K}c_k(x - t)^k = \sum\limits_{k = 1}^K p_kx^k.
+$$
+Теперь посмотрим на функцию $g_n(x)$:
+$$
+g_n(x) = \int\limits_{-\infty}^{\infty}h(t)K_n(x - t)\d t = \int\limits_{0}^1h(t)K_n(x - t)\d t = \sum\limits_{k = 1}^K \int_0^1 h(t)p_k x^k \d t = \sum\limits_{k = 1}^K \widetilde{c}_k x^k.
+$$
+Итого, $g_n(x)$ действительно является многочленом на отрезке $[0, 1]$. Что мы и хотели получить.
+\end{proof}
+
+\begin{Theorem}
+Пусть $f \in C^N[a, b]$. тогда $\forall \eps > 0$ существует многочлен $P(x)$ такой, что $\forall x \in [a, b]$ и $\forall n \in \{0, 1, \ldots,N \}$ выполняется неравенство $|f^{(n)}(x) - p^{(n)}(x)| < \eps$.
+\end{Theorem}
+\begin{proof}
+Данное утверждение несложно доказывается по индукции. Для простоты мы рассмотрим доказательство для $N = 1$.
+
+Итак, $f' \in C[a, b]$. Зафиксируем произвольное $\eps > 0$. Положим $\eps_1 = \min\left( \eps, \dfrac{\eps}{b - a} \right)$. Найдем $\widetilde{P}(x)$ --- многочлен такой, что $\forall x \in [a, b]\ |f'(x) - \widetilde{P}(x)| < \eps_1$. 
+
+Докажем теперь, что $P(x) = f(a) + \int\limits_{a}^{x}\widetilde{P}(t)\d t$ --- требуемый многочлен. Так как $P'(x) = \widetilde{P}(x)$, то осталось доказать только для нулевой производной:
+\begin{gather*}
+|P(x) - f(x)| = \left| \left(f(a) + \int\limits_a^x \widetilde{P}(t)\d t\right) - \left( f(a) + \int\limits_{a}^xf'(t) \d t \right) \right| = \left| \int\limits_a^x \widetilde{P}(t) - f'(t) \d t \right| \leq \\ 
+\leq \int\limits_a^x |\widetilde{P}(t) - f'(t)| \d t \leq \eps_1 (b - a) \leq \eps.
+\end{gather*}
+\end{proof}
+
+\subsection{Дифференцирование в тригонометрической системе}
+Пусть $f(x)$ --- непрерывно дифференцируемая $2\pi$--периодическая функция. Тогда ее ряд Фурье в тригонометрической системе определяется следующим образом:
+\begin{gather*}
+f(x) \rightsquigarrow \dfrac{a_0(f)}{2} + \sum\limits_{n = 1}^\infty a_n(f)\cos nx + b_n(f) \sin nx,\\
+\text{где } \quad a_n(f) = \dfrac{1}{\pi} \int\limits_{-\pi}^\pi f(x) \cos nx \d x \quad \text{и} \quad 
+b_n(f) = \dfrac{1}{\pi} \int\limits_{-\pi}^\pi f(x) \sin nx \d x.
+\end{gather*}
+
+Посмотрим, чему будут равны коэффициенты Фурье для производной $f'(x)$:
+\begin{align}
+& a_0(f') = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} f'(x) \d x = \dfrac{1}{\pi} f(x) \Big|_{-\pi}^{\pi} = 0; \\
+& a_n(f') = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} f'(x) \cos nx \d x = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} \cos nx \d f(x) = \dfrac{1}{\pi}\cos nx \cdot \underbrace{f(x)\Big|_{-\pi}^\pi}_{=0} + \dfrac{n}{\pi}\int\limits_{-\pi}^\pi f(x)\sin nx = nb_n(f);\\
+& b_n(f') = \ldots = - na_n(f).
+\end{align}
+
+Итого, ряд Фурье для производной $f'(x)$:
+$$
+f'(x) \rightsquigarrow \sum\limits_{n=1}^{\infty} nb_n(f)\cos nx - n a_n(f)\sin nx.
+$$
+Как можно заметить, это тот же ряд Фурье для $f(x)$, только почленно дифференцированный.
