@@ -1,0 +1,68 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{header}
+
+\begin{document}
+\newcommand{\y}{\hat{y}}
+\newcommand{\lmao}{неотрицательная непрерывная $2\pi$-периодическая аппроксимативная единица}
+\pagestyle{fancy}
+\section{Лекция 18 от 20.02.2017 \\ Равномерная сходимость рядов Фурье. Ядро Дирихле. Признак Дини.}
+Мы уже пользовались в задачах с почленным интегрированием ряда Фурье. Сформулируем же общее утверждение
+\begin{Statement}
+	Если $f$ --- интегрируемая по Риману на отрезку $[-\pi;\pi]$  функция, и её ряд Фурье по тригонометрической системе есть
+	$$
+		\cfrac{a_0(f)}{2} + \sum\limits_{n=1}^{\infty}(a_n(f)\cos(nx) + b_n(f)\sin(nx))
+	$$
+	, тогда на любом подотрезке $[a;b] \subset [-\pi; \pi]$ интеграл по этому отрезку равен сумме числового ряда, полученного почленным интегрированием из ряда Фурье.
+\end{Statement}
+Но изначально сходимость ряда Фурье в метрике $\mathcal{R}^2[-\pi; \pi]$ не гарантирует нам ни поточечной, ни равномерной сходимости ряда (а нам всё-таки знать про такую сходимость хотелось бы). Помогает следующая теорема
+\begin{Theorem}
+	Пусть $f(x)$ --- непрерывно-дифференцируемая на $\R$ $2\pi$-периодическая функция. Тогда её ряд Фурье сходится к ней равномерно.
+\end{Theorem}
+\begin{proof}
+	Заметим, что ряд $\sum\limits_{n=1}^{\infty} |a_n(f)| + |b_n(f)|$ сходится. Действительно,
+	$$
+		|a_n(f)| = \left|\cfrac{b_n(f')}{n}\right| \leqslant \cfrac{1}{2} |b_n^2(f)| + \cfrac{1}{n^2}
+	$$
+	Но
+	\begin{enumerate}
+		\item $\sum\limits_{n=1}^{\infty} b_n^2(f')$ сходится по неравенству Бесселя.
+		\item $\sum\limits_{n=1}^{\infty} \cfrac{1}{n^2}$ тоже сходится.
+	\end{enumerate}
+	Следовательно, сходится и $\sum\limits_{n=1}^{\infty}\left(b_n^2(f') + \cfrac{1}{n^2}\right)$, потому сходится и $\sum \limits_{n=1}^{\infty}|a_n(f)|$. Аналогично сходится и ряд $\sum \limits_{n=1}^{\infty}|b_n(f)|$. Таким образом, ряд 
+	$$
+		\cfrac{a_0(f)}{2} + \sum\limits_{n=1}^{\infty}(a_n(f)\cos(nx)+ b_n(f)\sin(nx)) \overset{\R}{\rightrightarrows} g(x)
+	$$
+	для некоторой функции $g$ по признаку Вейерштрасса. Поэтому мы можем утверждать, что
+	$$
+		\cfrac{a_0(f)}{2} + \sum\limits_{n=1}^{\infty}(a_n(f)\cos(nx)+ b_n(f)\sin(nx)) \overset{\mathcal{R}^2}{=} g
+	$$
+	По теореме единственности для ортогональной системы получаем, что коэффициенты Фурье функций $f$ и $g$ по тригонометрической системе совпадают.
+	\par Таким образом, $f-g$ ортогональна всем элементам тригонометрической системы. Но тригонометрическая система замкнута, а, следовательно, полна. Следовательно, $f-g \overset{\mathcal{R}^2}{=} 0$. А в силу непрерывности $f \equiv g$
+\end{proof}
+Посмотрим, чему будет равна частичная сумма тригонометрического ряда Фурье функции $f$ в точке $x$.
+\begin{gather}
+	S_N(x,f) = \cfrac{a_0}{2} + \sum\limits_{n=1}^{N}(a_n(f) \cos(nx) + b_n(f) \sin(nx)) = \cfrac{1}{2\pi}\int\limits_{-\pi}^{\pi} f(t)dt +\\
+	+\sum\limits_{n=1}^{N}\left(\left( \cfrac{1}{\pi}\int\limits_{-\pi}^{\pi}f(t)\cos(nt) dt\right)\cos(nx) +
+	\left( \cfrac{1}{\pi}\int\limits_{-\pi}^{\pi}f(t)\sin(nt) dt\right)\sin(nx) \right) = \\
+	= [\cos(nt)\cos(nx) - \sin(nt)\sin(nx) = \cos(n(x-t))] 
+	=\cfrac{1}{\pi}\left( \int\limits_{-\pi}^{\pi}f(t) \cdot \left( \cfrac{1}{2} + \sum \limits_{n=1}^{N}\cos(n(x-t))\right)dt\right)
+\end{gather}
+Ведём вспомогательное обозначение:
+$$
+	D_N(u) = \cfrac{1}{2} + \sum\limits_{n=1}^{N}\cos(nu)
+$$
+\begin{Def}
+	$D_N(u)$ называется $N$-м ядром Дирихле. 
+\end{Def}
+Тогда мы можем переписать нашу частичную сумму как свёртку с ядром Дирихле:
+$$
+	S_N(x, f) = f*D_N(x)
+$$
+Но определение ядра через сумму не очень удобно само по себе. Попробуем выписать её в более удобном виде. Пусть $\sin(u/2) \neq 0$. Тогда мы вправе умножить и разделить на него.
+\begin{gather}
+	D_N(u) = \cfrac{1}{2} + \sum\limits_{n=1}^{N}\cos(nu) = \cfrac{\sin(u/2)}{2\sin(u/2)} + \sum\limits_{n=1}^{\infty} \cfrac{\cos(nu)\sin(u/2)}{2\sin(u/2)} =\\
+	= \left[\cos(nu)\sin(u/2) = \cfrac{\sin((n + 1/2)u) + \sin((n-1/2)u)}{2}\right]=\\
+	= \cfrac{\sin(u/2) - \sin(u/2) + \sin(3u/2) - \sin(3u/2) + \ldots + \sin((N + 1/2)u)}{2\sin(u/2)} = \cfrac{\sin((N + 1/2)u)}{2\sin(u/2)}
+\end{gather}
+Сразу видно, что $D_N(u)$ --- непрерывная $2\pi$-периодическая функция и $\int\limits_{-\pi}^{\pi}D_N(t) = \pi$
+\end{document}
