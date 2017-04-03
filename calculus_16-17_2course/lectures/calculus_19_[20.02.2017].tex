@@ -15,16 +15,16 @@
 \begin{Lemma}
 	Пусть $\{K_n(t)\}_{n=1}^{\infty}$ --- \lmao, $f(x)$ --- непрерывная $2\pi$-периодическая непрерывная функция, $g_n(x) = f(x)*K_n(x)$. Тогда 
 	$$
-		\forall \eps>0 \exists N\in \N\; \forall n>N\; \forall x\in\R\; |f(x) - g(x)| < \eps
+		\forall \eps>0\ \exists N\in \N\; \forall n>N\; \forall x\in\R\; |f(x) - g(x)| < \eps.
 	$$
-	Или, что то же самое, $g_n(x)$ сходятся к $f(x)$ равномерно.
+	Или, что то же самое, $g_n(x)$ сходятся к $f(x)$ равномерно на $\R$.
 	\begin{proof}
 		Зафиксируем произвольное $\eps > 0$. Так как $f$ --- периодическая и непрерывная на $\R$, она равномерно непрерывная на $\R$. Найдём такое $C>0$, что $|f(x)| <C\; \forall x$. Для $\eps_1 = \eps/2$ найдём такое $\delta > 0$, что
 		$$
 			\forall x_1, x_2\in  \R\; |x_1-x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps_1 
 		$$
 		Не ограничивая общности, считаем, что $\delta \in (0; \pi)$.
-		Для $\eps_2 = \frac{\eps}{5C\pi}$ найдём такое $N\in \N$, что
+		Для $\eps_2 = \frac{\eps}{5C}$ найдём такое $N\in \N$, что
 		$$
 			\forall n>N\; \int\limits_{-\pi}^{-\delta}  K_n(t)dt+ \int\limits_{\delta}^{\pi} K_n(t)dt < \eps_2
 		$$
@@ -40,7 +40,7 @@
 \end{Lemma}
 \begin{proof}
 	\begin{align*}
-	f*T(x) = \int \limits_{-\pi}^{\pi}f(x)T(x - t)dt = \int \limits_{-\pi}^{\pi}f(t)\frac{\alpha_0}{2}dt +\sum\limits_{n=1}^{N} \int \limits_{-\pi}^{\pi}f(t)(\alpha_n(\cos(nx)\cos(nt) - \sin(nt)\sin(nx)) +\\+ \beta_n(\sin(nx)\cos(nt) + \cos(nx)\sin(nt)))dt = \frac{\widetilde{\alpha}_0}{2} + \sum \limits_{n=1}^{N}\left(\widetilde{\alpha}_n\cos(nx) + \widetilde{\beta}_n\sin(nx)\right)
+	f*T(x) = \int \limits_{-\pi}^{\pi}f(x)T(x - t)dt = \int \limits_{-\pi}^{\pi}f(t)\frac{\alpha_0}{2}dt +\sum\limits_{n=1}^{N} \int \limits_{-\pi}^{\pi}f(t)(\alpha_n(\cos(nx)\cos(nt) + \sin(nt)\sin(nx)) +\\+ \beta_n(\sin(nx)\cos(nt) - \cos(nx)\sin(nt)))dt = \frac{\widetilde{\alpha}_0}{2} + \sum \limits_{n=1}^{N}\left(\widetilde{\alpha}_n\cos(nx) + \widetilde{\beta}_n\sin(nx)\right)
 	\end{align*}
 	Здесь мы вынесли за знак интеграла выражения, не зависящие от $t$, а сами интегралы посчитали и обозначили их как константы $\widetilde{\alpha}_n$ и $\widetilde{\beta}_n$.
 \end{proof}
@@ -52,7 +52,7 @@
 	Тогда эта последовательность является неотрицательной $2\pi$-периодической непрерывной аппроксимативной единицей, каждая функция которой --- тригонометрический многочлен. 
 \end{Lemma}
 \begin{proof}
-	Все свойства этой последовательности как аппроксимативной единицы выглядят очевидно, но нужно проверить только, что для всякого $\delta > 0$
+    Почти все свойства этой последовательности как аппроксимативной единицы выглядят очевидно, нужно проверить только, что для всякого $\delta > 0$
 	$$
 		\int\limits_{-\pi}^{-\delta}K_n(t) dt + \int\limits_{\delta}^{\pi}K_n(t) dt \underset{n\to \infty}{\longrightarrow} 0.
 	$$
@@ -66,9 +66,9 @@ $$
 $$
 Перейдём к знаменателю
 \begin{align*}
-	\int\limits_{-\pi}^{\pi} \left(\cfrac{1 + \cos(u)}{2}\right)^n du = 2\int\limits_{0}^{\pi} \left(\cfrac{1 + \cos(u)}{2}\right)^n du = 4 \int\limits_{0}^{\pi} \left(\cos\left(\frac{u}{2}\right)\right)^{2n} d\frac{u}{2} = \\ =
-	4 \int\limits_{0}^{\pi} \left(\cos\left(y\right)\right)^{2n} dy = \begin{bmatrix}
-		\cos(y) = z\\
+	\int\limits_{-\pi}^{\pi} \left(\cfrac{1 + \cos u}{2}\right)^n du = 2\int\limits_{0}^{\pi} \left(\cfrac{1 + \cos u}{2}\right)^n du = 4 \int\limits_{0}^{\pi} \left(\cos\frac{u}{2}\right)^{2n} d\frac{u}{2} = \\ =
+	4 \int\limits_{0}^{\frac{\pi}{2}} \left(\cos y\right)^{2n} dy = \begin{bmatrix}
+		\cos y = z\\
 		dy = \cfrac{-dz}{\sqrt{1 - z^2}}
 		\end{bmatrix} = 4 \int\limits_{0}^{1} z^{2n} \cfrac{1}{\sqrt{1-z^2}}dz \geqslant 4\int\limits_{0}^{1} z^{2n}dz = \cfrac{4}{2n+1}.
 \end{align*}
@@ -79,39 +79,42 @@ $$
 \end{proof}
 Из этих трёх лемм получаем сразу же теорему Вейерштрасса. Из неё же сразу несколько следствий.
 \begin{Consequence}
-	Тригонометрическая система --- замкнутая ОГС в $\mathcal{R}^2[-\pi;\pi]$
+	Тригонометрическая система --- замкнутая ОГС в $\mathcal{R}^2[-\pi;\pi].$
 \end{Consequence}
 \begin{Consequence}
-	Для всякой функции $f \in \mathcal{R}^2[-\pi;\pi]$ тригонометрический ряд Фурье сходится к $f$ в $\mathcal{R}^2[-\pi; \pi]$ (то есть $|| f - S_N||_2\underset{N \to \infty}{\longrightarrow} 0$)
+	Для всякой функции $f \in \mathcal{R}^2[-\pi;\pi]$ тригонометрический ряд Фурье сходится к $f$ в $\mathcal{R}^2[-\pi; \pi]$ (то есть $|| f - S_N||_2\underset{N \to \infty}{\longrightarrow} 0$).
 \end{Consequence}
 \subsection{Несколько слов о равенстве Парсеваля}
 Вспомним формулировку равенства Парсеваля:
 $$
-	||x||^2 = \sum\limits_{n=1}^{\infty} \x_n^2 ||e_n||^2
+	||x||^2 = \sum\limits_{n=1}^{\infty} \x_n^2 ||e_n||^2.
 $$
 Как же будет оно выглядеть в случае тригонометрической системы? 
 $$\int\limits_{-\pi}^{\pi} f^2(x)dx =2\pi\left( \frac{a_0}{2}\right)^2 + \sum\limits_{n=1}^{\infty}(a_n^2\pi + b_n^2\pi)
 $$
 \begin{Consequence}
 	$$
-	\forall f \in \mathcal{R}^2[-\pi;\pi]\; \frac{1}{\pi}f^2(x)dx = \frac{a_0^2}{2} + \sum\limits_{n=1}^{\infty}(a_n^2 + b_n^2)
-	$$, где $a_n, b_n$ --- коэффициенты разложения в ряд Фурье по тригонометрической системе.
+	\forall f \in \mathcal{R}^2[-\pi;\pi]\; \frac{1}{\pi} \int\limits_{-\pi}^{\pi} f^2(x)dx = \frac{a_0^2}{2} + \sum\limits_{n=1}^{\infty}(a_n^2 + b_n^2),
+	$$ где $a_n, b_n$ --- коэффициенты разложения в ряд Фурье по тригонометрической системе.
 \end{Consequence}
 \begin{Examples}
 	Выведем формулу для суммы ряда обратных квадратов. Пусть $f(x) = x$. Тогда $a_n = 0$, ибо функция нечётная. Вычислим $b_n$:
 	\begin{gather*}
-		\frac{1}{\pi} \int \limits_{-\pi}^{\pi} x \sin(nx)dx = \frac{-2}{\pi n} \int \limits_{0}^{\pi}x d\cos(nx) = \frac{-2}{\pi}\left(x \cos(nx)\right)\biggr|_0^{\pi} - \int \limits_{0}^{\pi}\cos(nx) dx = \frac{2\cdot(-1)^{n+1}}{n}
+		\frac{1}{\pi} \int \limits_{-\pi}^{\pi} x \sin(nx)dx = \frac{-2}{\pi n} \int \limits_{0}^{\pi}x d\cos(nx) = \frac{-2}{\pi}\left(x \cos(nx)\right)\biggr|_0^{\pi} - \int \limits_{0}^{\pi}\cos(nx) dx = \frac{2\cdot(-1)^{n+1}}{n}.
 	\end{gather*}
 	Интеграл $x^2$ по отрезку $[-\pi;\pi]$ фукнции $x^2$ равен $\cfrac{x^3}{3}\biggr|_{-\pi}^{\pi} = \cfrac{2\pi^3}{3}$. Отсюда получаем по равенству Парсеваля:
-	\begin{gather*}
-		\cfrac{2\pi^2}{3} = \sum\limits_{n=1}^{\infty} \cfrac{4}{n^2}\\
-		\sum\limits_{n=1}^{\infty} \cfrac{1}{n^2} = \cfrac{\pi^2}{6}
-	\end{gather*}
+    $$
+		\cfrac{2\pi^2}{3} = \sum\limits_{n=1}^{\infty} \cfrac{4}{n^2}.
+    $$
+    Следовательно,
+    $$
+		\sum\limits_{n=1}^{\infty} \cfrac{1}{n^2} = \cfrac{\pi^2}{6}.
+	$$
 \end{Examples}
 \subsection{От тригонометрических многочленов к алгебраическим}
-Пусть функция $f(x)$ непрерывна на отрезке $[a;b]$. Можно ли её так же эффективно приблизить не тригонометрическим, а просто алгебраическим многочленом? Ответ на этот вопрос положителен, и даёт его теорема ещё одна теорема названная именем Вейерштрасса:
+Пусть функция $f(x)$ непрерывна на отрезке $[a;b]$. Можно ли её так же эффективно приблизить не тригонометрическим, а просто алгебраическим многочленом? Ответ на этот вопрос положителен, и даёт его ещё одна теорема, названная именем Вейерштрасса:
 \begin{Theorem}[Вейерштрасс]
-	Для всякой непрерывной на отрезке функции $f(x)$ для любого $\eps > 0$ существует такой многочлен $P(x)$, что $|P(x) - f(x)| < \eps$
+	Для всякой непрерывной на отрезке функции $f(x)$ для любого $\eps > 0$ существует такой многочлен $P(x)$, что $|P(x) - f(x)| < \eps$ во всех точках этого отрезка.
 \end{Theorem}
 Введём ещё пару определений
 \begin{Def}
