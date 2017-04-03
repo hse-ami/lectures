@@ -91,7 +91,7 @@
     \sum\limits_{\substack{i_1, \ldots, i_k,\\v(G_{i_1} \cup \ldots \cup G_{i_k}) = t}}
     p^{e(G_{i_1} \cup \ldots \cup G_{i_k})} \leq 
     \sum\limits_{t = v}^{kv - 1} p^{q(t)} \mathcal{O}(n^t) =
-    \sum\limits_{t = v}^{kv - 1} p^{q(t) - t\cdot m(G)} \mathcal{O}(\left(np^{m(G)}\right)^t) \to\\\to
+    \sum\limits_{t = v}^{kv - 1} p^{q(t) - t\cdot m(G)} \mathcal{O}\left(\left(np^{m(G)}\right)^t\right) \to\\\to
     \sum\limits_{t = v}^{kv - 1} 0 \cdot \mathcal{O}(c^t) \to 0
   \end{multline}
 
@@ -181,7 +181,7 @@
     \]
 
     Получаем такой парадокс. Граф устроен очень просто, а вероятность того, что
-    копии нет имеет уже двойную экспоненту.
+    копии нет, имеет уже двойную экспоненту.
   \end{itemize}
 \end{example}
 
