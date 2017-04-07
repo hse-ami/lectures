@@ -68,6 +68,23 @@
 {0pt}
 {}
 
+%% Титульный лист
+\renewcommand{\maketitle}{\begingroup
+    \hbox{
+        \hspace*{0.12\textwidth}
+        \rule{1pt}{\textheight}
+        \hspace*{0.05\textwidth}
+        \parbox[b]{0.775\textwidth}{
+            {\includegraphics[width=\linewidth]{images/Title}}\\[2\baselineskip]
+            {\noindent\Huge\bfseries Математический анализ}\\[\baselineskip]
+            {\large\textrm{Конспекты лекций}}\\[3\baselineskip]
+            {\Large\textsc{Лектор: В.В. Галатенко}}\\[\baselineskip]
+            {Конспекты вели Дискин Михаил, Анастасия Иовлева и Руслан Хайдуров}\\[6\baselineskip]
+            {\noindent НИУ ВШЭ, 2016-2017}\\[\baselineskip]
+        }
+    }
+    \endgroup
+}
 
 %% Информация об авторах
 \author{Группа лектория ФКН ПМИ 2016-2017 \\
