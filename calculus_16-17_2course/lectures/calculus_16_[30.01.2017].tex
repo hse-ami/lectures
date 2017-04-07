@@ -1,33 +1,34 @@
 \section{Лекция 16 от 30.01.2017 \\ Метрические и нормированные пространства (продолжение), ряды Фурье}
 \subsection{Коэффициенты Фурье}
-Вспомним основной результат предыдущей лекции. Пусть $H$ --- пространство со скалярным произведением, $\{e_n\}_{n=1}^{N}$ --- ортогональная система, $x \in H$. Тогда если $c_1, \ldots, c_N$ --- коэффициенты из $\R$, то 
+Вспомним последний результат предыдущей лекции. Пусть $H$ --- пространство со скалярным произведением, $\{e_n\}_{n=1}^{N}$ --- ортогональная система, $x \in H$. Тогда если $c_1, \ldots, c_N$ --- коэффициенты из $\R$, то 
 \begin{gather*}
     \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = ||x||^2 +\sum\limits_{n=1}^{N}\left(c_n||e_n|| - \cfrac{(x, e_n)}{(e_n, e_n)}||e_n||\right)^2 - \sum\limits_{n =1 }^{N} \left(\cfrac{(x, e_n)}{(e_n, e_n)}\right)^2(e_n, e_n).
 \end{gather*}
 \begin{Def}
-    Коэффициентами Фурье, соответствующими вектору $x$ и элементу ортогональной системы $\{e_n\}_{n=1}^{N}$, называются числа $\hat{x}_n = \cfrac{(x, e_n)}{(e_n, e_n)}$.
+    Коэффициентами Фурье, соответствующими вектору $x$ и элементам ортогональной системы $\{e_n\}_{n=1}^{N}$, называются числа $\hat{x}_n = \cfrac{(x, e_n)}{(e_n, e_n)}$.
 \end{Def}
 Принимая это определение во внимание, исходное равенство переписывается в более красивом виде:
-\begin{gather*}
+\[
     \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = \left|\left|x\right|\right|^2 + \left|\left|e_n\right|\right|^2 \sum\limits_{n=1}^{N}(c_n - \x_n)^2 - \sum\limits_{n =1}^{N}\x_n^2 
-    \left|\left|e_n\right|\right|^2.
-\end{gather*}
+    \left|\left|e_n\right|\right|^2. \tag{*}\label{aster}
+\]
 \begin{Statement}[очевидное]
     Для любых коэффициентов $c_1, \ldots, c_N$
     $$
-        \left|\left| x - \sum\limits_{n=1}^{N}c_n e_n\right|\right|\geqslant \left|\left|x -  \sum\limits_{n=1}^{N}\x_n e_n\right|\right|
+        \left|\left| x - \sum\limits_{n=1}^{N}c_n e_n\right|\right|\geqslant \left|\left|x -  \sum\limits_{n=1}^{N}\x_n e_n\right|\right|,
     $$
-    причем равенство достигается тогда и только тогда, когда $c_n = \x_n$.
+    причем равенство достигается тогда и только тогда, когда $c_n = \x_n$ при всех $n\in \{1\dots N\}.$
 \end{Statement}
-Это равенство действительно очевидно, учитывая, что в переписанном выражении (которое, кстати, неотрицательно) у нас лишь второе (также неотрицательное) слагаемое правой части зависит от $c_n$. Минимум достигается, если оно равно нулю.
-Отметим важное свойство: \textit{коэффициент $c_n$ не зависит от $c_i$ для $i \neq n$}.
+Это равенство действительно очевидно, учитывая, что в выражении~\eqref{aster}, которое, кстати, неотрицательно, у нас лишь второе (также неотрицательное) слагаемое правой части зависит от~$c_n$. Минимум достигается, если оно равно нулю.
+
+Отметим важное свойство: \textit{коэффициент $\x_n$ не зависит от $e_i$ для $i \neq n$}.
 \begin{Statement}[Тождество Бесселя]
     $$
-        \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right| = \left|\left|x\right|\right| - \sum\limits_{n=1}^{N} \x_n^2 \left|\left|e_n\right|\right|
+        \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|^2 = \left|\left|x\right|\right|^2 - \sum\limits_{n=1}^{N} \x_n^2 \left|\left|e_n\right|\right|^2.
     $$
 \end{Statement}
 \begin{Consequence}[Неравенство Бесселя]
-    $$\sum\limits_{n=1}^{N} \x_n^2e_n\leqslant ||x||^2$$
+    $$\sum\limits_{n=1}^{N} \x_n^2||e_n||^2\leqslant ||x||^2$$
 \end{Consequence}
 \subsection{Пространство $l^2$}
 Отступим в сторону.
