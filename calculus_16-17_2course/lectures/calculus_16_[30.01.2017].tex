@@ -36,7 +36,7 @@
 \begin{align*}
     &\forall \{b_n\}_{n=1}^{\infty},\; \{a_n\}_{n=1}^{\infty} \in l^2,\; \alpha \in \R\\
     &\sum\limits_{n=1}^{\infty} \alpha^2 a_n^2 = \alpha^2 \sum\limits_{n=1}^{\infty} a_n^2 < \infty \Leftrightarrow \{\alpha a_n\}_{n=1}^{\infty} \in l^2\\
-    &\sum\limits_{n=1}^{\infty} = (a_n+b_n)^2< \sum\limits_{n=1}^{\infty} (2a_n^2 + 2b_n^2) < \infty \Leftrightarrow \{a_n + b_n\}_{n=1}^{\infty} \in l^2.
+    &\sum\limits_{n=1}^{\infty} (a_n+b_n)^2 \leq \sum\limits_{n=1}^{\infty} (2a_n^2 + 2b_n^2) < \infty \Leftrightarrow \{a_n + b_n\}_{n=1}^{\infty} \in l^2.
 \end{align*}
 Обозначив $\overline{a} = \{a_n\}_{n=1}^{\infty}\in l^2$, $\overline{b} = \{b_n\}_{n=1}^{\infty} \in l^2$, мы можем ввести скалярное произведение следующим образом:
 \begin{Def}
@@ -47,7 +47,7 @@
     \end{align*}
 \end{Def}
 \subsection{Сходимость в номрированных пространствах}
-Отойдем еще на шаг в сторону. Пусть $(L, ||\cdot||)$ --- нормированное пространство, $\{x_n\}_{n=1}^{\infty}$ --- последовательность ее элементов. В таком случае, говоря о сходимости таких последовательностей, можно ввести те же формулировки, что и в случае числовых последовательностей.
+Отойдем еще на шаг в сторону. Пусть $(L, ||\cdot||)$ --- нормированное пространство, $\{x_n\}_{n=1}^{\infty}$ --- последовательность его элементов. В таком случае, говоря о сходимости таких последовательностей, можно ввести те же формулировки, что и в случае последовательностей элементов метрических пространств.
 \begin{Def}
     Будем говорить, что последовательность $\{x_n\}_{n=1}^{\infty}$ сходится к $x$, если 
     $$
@@ -69,7 +69,7 @@
 \subsection{Ряды Фурье}
 Теперь, когда мы ввели понятие сходимости в нормированных пространствах, будем двигаться дальше, к рядам Фурье. Вернемся к рассмотрению исходного пространства $H$ со скалярным произведением, в котором мы уже ввели понятие коэффициентов Фурье.
 \begin{Def}
-    Ряд $\sum\limits_{n}^{\infty} \hat{x}_ne_n$ называется рядом Фурье (разложением в ряд Фурье) по ортогональной системе $\{e_n\}_{n=1}^{\infty}$.
+    Ряд $\sum\limits_{n}^{\infty} \hat{x}_ne_n$ называется рядом Фурье (разложением в ряд Фурье) элемента $x$ по ортогональной системе $\{e_n\}_{n=1}^{\infty}$.
 \end{Def}
 Из этого определения не следует, что ряд Фурье вообще сходится.
 \begin{Statement}
@@ -83,28 +83,28 @@
     Прямое следствие тождества Бесселя.
 \end{proof}
 \begin{Statement}[Единственность разложения]
-    Пусть $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система и $x = \sum\limits_{n=1}^{\infty}c_n e_n$ для некоторых коэффициентов $c_i$. Тогда $\x_i = c_i\;\ \forall i \in \N$.
+    Пусть $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система и $x = \sum\limits_{n=1}^{\infty}c_n e_n$ для некоторых коэффициентов $c_n$. Тогда $\x_i = c_i\;\ \forall i \in \N$.
 \end{Statement}
 \begin{proof}
     Зафиксируем $n_0\in \N$, пусть $N>n_0$. Тогда
     $$
         \sum\limits_{n=1}^{\infty} c_ne_n = \sum \limits_{n=1}^{N}c_n e_n + \underbrace{r_N}_{\to 0 \text{ при } N\to \infty}.
     $$
-    Далее запишем, чему равно $\x_{n_0}$:
+    Далее запишем, чему равен $\x_{n_0}$:
     $$
         \x_{n_0} = \cfrac{(x,e_{n_0})}{(e_{n_0}, e_{n_0})} = \cfrac{\left(\sum\limits_{n=1}^{N} c_ne_n, e_{n_0}\right) + \left(r_N, e_{n_0}\right)}{(e_{n_0}, e_{n_0})} = \cfrac{c_{n_0}(e_{n_0}, e_{n_0})}{(e_{n_0}, e_{n_0})} + \cfrac{(r_N, e_{n_0})}{(e_{n_0}, e_{n_0})} = c_{n_0} + \cfrac{(r_N, e_{n_0})}{(e_{n_0}, e_{n_0})}.
     $$
-    Второе слагаемое стремится к нулю. Устремив $N \to \infty$, получим требуемое.
+    Второе слагаемое стремится к нулю в силу неравенства КБШ. Устремив $N \to \infty$, получим требуемое.
 \end{proof}
-Заметим, что если $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система, то ряд $\sum\limits_{n=1}^{\infty} c_n e_n$ удовлетворяет условию Коши тогда и только тогда, когда $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$ сходится.
+Заметим, что если $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система, то ряд $\sum\limits_{n=1}^{\infty} c_n e_n$ удовлетворяет условию Коши тогда и только тогда, когда $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$ сходится. Напомним, что условие Коши для ряда $\sum\limits_{n=m+1}^{m+p}c_ne_n$ имеет вид:
 $$
-    \forall \eps>0\; \exists N\in \N\; \forall m>N,\; p\in \N \Rightarrow \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps.
+    \forall \eps>0\; \exists N\in \N\; \forall m>N,\; p\in \N \  \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps.
 $$
 Действительно,
 $$
     \left(\sum\limits_{n=m+1}^{m+p}c_ne_n, \sum\limits_{n=m+1}^{m+p}c_ne_n\right) =  \sum\limits_{n=m+1}^{m+p}c_n^2 ||e_n||^2.
 $$
-И увидим, что искомому условию Коши удовлетворяет и желаемый ряд.
+И увидим, что искомому условию Коши удовлетворяет и числовой ряд $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$.
 \begin{Consequence}
     Если пространство со скалярным произведением полно, то все ряды Фурье в нем сходятся.
 \end{Consequence}
@@ -113,18 +113,21 @@ $$
     $\sum\limits_{n=1}^{\infty} \x_n^2 ||e_n||^2 < \infty$. Следовательно, $ \sum\limits_{n=1}^{\infty} \x_ne_n 
     $ удовлетворяет условию Коши, а с учетом полноты $\sum\limits_{n=1}^{\infty}\x_n e_n$ сходится.
 \end{proof}
-Итак, в полных нормированных пространствах ряды Фурье сходятся, но отнюдь не всегда они сходятся куда надо.
+Итак, в полных пространствах со скалярным произведением ряды Фурье сходятся, но отнюдь не всегда они сходятся куда надо.
 \begin{Def}
     Ортогональная система $\{e_n\}_{n=1}^{\infty}$ замкнута, если 
     $$\forall x\in H, \forall \eps >0\; \exists e_{n_1}, e_{n_2}, \ldots, e_{n_K},\; c_1, c_2, \ldots, c_K \Rightarrow \left|\left|x - \sum\limits_{k=1}^{K} c_k e_{n_k}\right|\right|<\eps
     $$
 \end{Def}
+\begin{Comment}
+    Дополняя набор коэффициентов нулями, всегда можно добиться того, что $ e_{n_1}, \ldots, e_{n_K}$ первыми элементами системы.
+\end{Comment}
 \begin{Statement}
     Если ортогональная система $\{e_n\}_{n=1}^{\infty}$ замкнута, то $\forall x\in H\; x = \sum\limits_{n=1}^{\infty}\x_n e_{n}$.
 \end{Statement}
 \begin{proof}
     Зафиксируем произвольное $\eps >0$, найдем такое $K_0$ и коэффициенты $c_1, \ldots, c_{K_0}$, что $\left|\left| x - \sum\limits_{n=1}^{K_0} c_ne_n \right|\right| < \eps$. Тогда
     $$
-        \forall N>K_0 \; \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|\leqslant \left|\left|x - \sum\limits_{k=1}^{K_0}c_ke_k \right|\right|.
+        \forall N>K_0 \; \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|\leqslant \left|\left|x - \sum\limits_{k=1}^{K_0}c_ke_k \right|\right| < \eps.
     $$
 \end{proof}

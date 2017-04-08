@@ -119,69 +119,29 @@
 
 %% Определение счётчика + переопределение команд
 
-\newcounter{Def}\setcounter{Def}{0}
-\def\df{\par\smallskip\refstepcounter{Def}\textbf{\arabic{Def}}}
-\newtheorem*{Def}{Определение \df}
 
-\newcounter{Lem}\setcounter{Lem}{0}
-\def\lm{\par\smallskip\refstepcounter{Lem}\textbf{\arabic{Lem}}}
-\newtheorem*{Lemma}{Лемма \lm}
+%% Теоремы и иже с ними
+\theoremstyle{remark}
+\newtheorem*{Comment}{Примечание}
+\newtheorem*{Task}{Упражнение}
+\newtheorem*{Examples}{Пример}
+\newtheorem*{Designation}{Обозначение}
 
-\newcounter{Sug}\setcounter{Sug}{0}
-\def\sug{\par\smallskip\refstepcounter{Sug}\textbf{\arabic{Sug}}}
-\newtheorem*{Suggestion}{Предложение \sug}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
 
-\newcounter{eg}\setcounter{eg}{0}
-\def\eg{\par\smallskip\refstepcounter{eg}\textbf{\arabic{eg}}}
-\newtheorem*{Examples}{Пример \eg}
+\theoremstyle{plain}
+\newtheorem*{Lemma}{Лемма}
+\newtheorem{Theorem}{Теорема}
+\newtheorem{Test}{Признак}
+\newtheorem*{Statement}{Утверждение}
+\newtheorem{Problem}{Задача}
+\newtheorem*{Hypothesis}{Гипотеза}
+\newtheorem*{Consequence}{Следствие}
+\newtheorem{Properties}{Свойство}
 
-\newcounter{Cmt}\setcounter{Cmt}{0}
-\def\cmt{\par\smallskip\refstepcounter{Cmt}\textbf{\arabic{Cmt}}}
-\newtheorem*{Comment}{Замечание \cmt}
 
-\newcounter{cnsqnc}\setcounter{cnsqnc}{0}
-\def\cnsqnc{\par\smallskip\refstepcounter{cnsqnc}\textbf{\arabic{cnsqnc}}}
-\newtheorem*{Consequence}{Следствие \cnsqnc}
 
-\newcounter{th}\setcounter{th}{0}
-\def\th{\par\smallskip\refstepcounter{th}\textbf{\arabic{th}}}
-\newtheorem*{Theorem}{Теорема \th}
-
-\newcounter{stnmt}\setcounter{stnmt}{0}
-\def\st{\par\smallskip\refstepcounter{stnmt}\textbf{\arabic{stnmt}}}
-\newtheorem*{Statement}{Утверждение \st}
-
-\newcounter{task}\setcounter{task}{0}
-\def\task{\par\smallskip\refstepcounter{task}\textbf{\arabic{task}}}
-\newtheorem*{Task}{Упражнение \task}
-
-\newcounter{dsg}\setcounter{dsg}{0}
-\def\dsg{\par\smallskip\refstepcounter{dsg}\textbf{\arabic{dsg}}}
-\newtheorem*{Designation}{Обозначение \dsg}
-
-\newcounter{gen}\setcounter{gen}{0}
-\def\gen{\par\smallskip\refstepcounter{gen}\textbf{\arabic{gen}}}
-\newtheorem*{Generalization}{Обобщение \gen}
-
-\newcounter{prob}\setcounter{prob}{0}
-\def\gen{\par\smallskip\refstepcounter{prob}\textbf{\arabic{prob}}}
-\newtheorem*{Problem}{Задача \gen}
-
-\newcounter{dream}\setcounter{dream}{0}
-\def\dream{\par\smallskip\refstepcounter{dream}\textbf{\arabic{dream}}}
-\newtheorem*{Thedream}{Предел мечтаний \dream}
-
-\newcounter{prop}\setcounter{prop}{0}
-\def\prop{\par\smallskip\refstepcounter{prop}\textbf{\arabic{prop}}}
-\newtheorem*{Properties}{Свойства \prop}
-
-\newcounter{test}\setcounter{test}{0}
-\def\test{\par\smallskip\refstepcounter{test}\textbf{\arabic{test}}}
-\newtheorem*{Test}{Признак \test}
-
-\newcounter{comptest}\setcounter{comptest}{0}
-\def\comptest{\par\smallskip\refstepcounter{comptest}\textbf{\arabic{comptest}}}
-\newtheorem*{CompTest}{Признак сравнения \comptest}
 \newcommand{\0}{\vec{0}}
 \renewcommand{\Re}{\mathrm{Re\:}}
 \renewcommand{\Im}{\mathrm{Im\:}}

@@ -4,15 +4,15 @@
 	\begin{Def}
 		Средними Чезаро (иногда называемые средними Фейера) порядка $N$ функции $f$ в точке $x$ будем называть:
 		$$
-			\sigma_N(x) = \cfrac{1}{N} \sum\limits_{n =1}^{N -1}S_n(x,f)
+			\sigma_N(x) = \cfrac{1}{N} \sum\limits_{n =1}^{N -1}S_n(x,f),
 		$$
-		, где $S_n(x,f)$ есть $n$-ая частичная сумма ряда Фурье по тригонометрической системе.
+		 где $S_n(x,f)$ есть $n$-ая частичная сумма ряда Фурье по тригонометрической системе.
 	\end{Def}
 	Вспоминая материал предыдущего раза, можем переписать $S_n$ как
 	$$
-		S_n(x,f) = \cfrac{1}{\pi} f*D_n(x)
+		S_n(x,f) = \cfrac{1}{\pi} f*D_n(x),
 	$$
-	, то есть как свёртку с ядром Дини.
+	 то есть как свёртку с ядром Дини.
 	\begin{Theorem}
 		Пусть $f$ --- непрерывная на $\R$ $2\pi$ периодическая функция. Тогда её средние Фейера сходятся к ней равномерно на $\R$. 
 	\end{Theorem}
@@ -78,9 +78,9 @@
 		\par Пусть для всех $n \leqslant k$ уже все доказано. Докажем для $n = k + 1$. 
 		\par Вспомним, что для произвольных множеств $A, B, C, D$ верно
 		$$
-			(A\times B) \setminus (C \times D) = (A \setminus C) \times B \sqcup (A\cap C)\times (B \setminus D)
+			(A\times B) \setminus (C \times D) = (A \setminus C) \times B \sqcup (A\cap C)\times (B \setminus D),
 		$$
-		, где значок $\sqcup$ означает объединение непересекающихся множеств.
+		где значок $\sqcup$ означает объединение непересекающихся множеств.
 		Обозначим за $\Pi' = I_1 \times \ldots \times I_k$, $\widetilde{\Pi}' = \I_1 \times \ldots \times \I_k$. Тогда
 		$$
 			\Pi \setminus \widetilde{\Pi} = (\Pi' \times I_{k+1}) \setminus (\widetilde{\Pi}' \times \I_{k + 1}) = (\Pi' \setminus \widetilde{\Pi}')\times I_{k + 1} \sqcup (\Pi' \cap \widetilde{\Pi}')\times (I_{k + 1} \setminus \I_{k + 1})
