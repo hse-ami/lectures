@@ -13,25 +13,25 @@
 	$$
 	Теперь сформулируем и докажем три леммы
 \begin{Lemma}
-	Пусть $\{K_n(t)\}_{n=1}^{\infty}$ --- \lmao, $f(x)$ --- непрерывная $2\pi$-периодическая непрерывная функция, $g_n(x) = f(x)*K_n(x)$. Тогда 
+	Пусть $\{K_n(t)\}_{n=1}^{\infty}$ --- \lmao, $f(x)$ --- непрерывная $2\pi$-периодическая функция, $g_n(x) = f(x)*K_n(x)$. Тогда 
 	$$
 		\forall \eps>0\ \exists N\in \N\; \forall n>N\; \forall x\in\R\; |f(x) - g(x)| < \eps.
 	$$
 	Или, что то же самое, $g_n(x)$ сходятся к $f(x)$ равномерно на $\R$.
 	\begin{proof}
-		Зафиксируем произвольное $\eps > 0$. Так как $f$ --- периодическая и непрерывная на $\R$, она равномерно непрерывная на $\R$. Найдём такое $C>0$, что $|f(x)| <C\; \forall x$. Для $\eps_1 = \eps/2$ найдём такое $\delta > 0$, что
+		Зафиксируем произвольное $\eps > 0$. Так как $f$ --- периодическая и непрерывная на $\R$, она равномерно непрерывна на $\R$. Найдём такое $C>0$, что $|f(x)| <C\; \forall x$. Для $\eps_1 = \eps/2$ найдём такое $\delta > 0$, что
 		$$
-			\forall x_1, x_2\in  \R\; |x_1-x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps_1 
+			\forall x_1, x_2\in  \R\; |x_1-x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps_1.
 		$$
 		Не ограничивая общности, считаем, что $\delta \in (0; \pi)$.
 		Для $\eps_2 = \frac{\eps}{5C}$ найдём такое $N\in \N$, что
 		$$
-			\forall n>N\; \int\limits_{-\pi}^{-\delta}  K_n(t)dt+ \int\limits_{\delta}^{\pi} K_n(t)dt < \eps_2
+			\forall n>N\; \int\limits_{-\pi}^{-\delta}  K_n(t)dt+ \int\limits_{\delta}^{\pi} K_n(t)dt < \eps_2.
 		$$
 		Для произвольного $x\in \R$ и $n >N$ оценим
 		\begin{align*}
 			&|g_n(x) - f(x)|= \left| \int \limits_{-\pi}^{\pi}f(x-t)K_n(t)dt - \int \limits_{-\pi}^{\pi}f(x)K_n(t)dt\right| \leqslant \int \limits_{-\pi}^{\pi}|f(x-t) -f(x)|K_n(t) dt =\\&= \int \limits_{-\delta}^{\delta}|f(x-t) - f(x)|K_n(t)dt + \int \limits_{-\pi}^{-\delta}|f(x-t) - f(t)|K_n(t)dt + \int \limits_{\delta}^{\pi}|f(x-t) - f(x)|K_n(t)dt \leqslant \\ &\leqslant
-			\eps_1 \int \limits_{-\delta}^{\delta}K_n(t)dt + 2C\eps_2 < \eps/2 + \eps/2 = \eps
+			\eps_1 \int \limits_{-\delta}^{\delta}K_n(t)dt + 2C\eps_2 < \eps/2 + \eps/2 = \eps.
 		\end{align*}
 	\end{proof}
 \end{Lemma}
