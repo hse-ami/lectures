@@ -10,7 +10,7 @@
 Принимая это определение во внимание, исходное равенство переписывается в более красивом виде:
 \[
     \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = \left|\left|x\right|\right|^2 + \left|\left|e_n\right|\right|^2 \sum\limits_{n=1}^{N}(c_n - \x_n)^2 - \sum\limits_{n =1}^{N}\x_n^2 
-    \left|\left|e_n\right|\right|^2. \tag{*}\label{aster}
+    \left|\left|e_n\right|\right|^2. \tag{*}\label{16aster}
 \]
 \begin{Statement}[очевидное]
     Для любых коэффициентов $c_1, \ldots, c_N$
@@ -19,7 +19,7 @@
     $$
     причем равенство достигается тогда и только тогда, когда $c_n = \x_n$ при всех $n\in \{1\dots N\}.$
 \end{Statement}
-Это равенство действительно очевидно, учитывая, что в выражении~\eqref{aster}, которое, кстати, неотрицательно, у нас лишь второе (также неотрицательное) слагаемое правой части зависит от~$c_n$. Минимум достигается, если оно равно нулю.
+Это равенство действительно очевидно, учитывая, что в выражении~\eqref{16aster}, которое, кстати, неотрицательно, у нас лишь второе (также неотрицательное) слагаемое правой части зависит от~$c_n$. Минимум достигается, если оно равно нулю.
 
 Отметим важное свойство: \textit{коэффициент $\x_n$ не зависит от $e_i$ для $i \neq n$}.
 \begin{Statement}[Тождество Бесселя]
@@ -28,8 +28,10 @@
     $$
 \end{Statement}
 \begin{Consequence}[Неравенство Бесселя]
-    $$\sum\limits_{n=1}^{N} \x_n^2||e_n||^2\leqslant ||x||^2$$
+    $$\sum\limits_{n=1}^{N} \x_n^2||e_n||^2\leqslant ||x||^2.$$
 \end{Consequence}
+
+Тождество Бесселя сразу следует из равенства~\eqref{16aster} (при $c_n = \x_n$), а неравенство Бесселя --- из тождества Бесселя.
 \subsection{Пространство $l^2$}
 Отступим в сторону.
 Пусть $l^2$ --- множество всех числовых последовательностей, сумма квадратов элементов которых конечна. Заметим, что это множество будет являться линейным пространством, поскольку
@@ -96,15 +98,21 @@
     $$
     Второе слагаемое стремится к нулю в силу неравенства КБШ. Устремив $N \to \infty$, получим требуемое.
 \end{proof}
-Заметим, что если $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система, то ряд $\sum\limits_{n=1}^{\infty} c_n e_n$ удовлетворяет условию Коши тогда и только тогда, когда $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$ сходится. Напомним, что условие Коши для ряда $\sum\limits_{n=m+1}^{m+p}c_ne_n$ имеет вид:
+\begin{Statement}
+Заметим, что если $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система, то ряд $\sum\limits_{n=1}^{\infty} c_n e_n$ удовлетворяет условию Коши 
 $$
-    \forall \eps>0\; \exists N\in \N\; \forall m>N,\; p\in \N \  \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps.
+    \forall \eps>0\; \exists N\in \N\; \forall m>N,\; p\in \N \  \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps
 $$
+тогда и только тогда, когда $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$ сходится.
+\end{Statement}
+\begin{proof}
+
 Действительно,
 $$
-    \left(\sum\limits_{n=m+1}^{m+p}c_ne_n, \sum\limits_{n=m+1}^{m+p}c_ne_n\right) =  \sum\limits_{n=m+1}^{m+p}c_n^2 ||e_n||^2.
+\left(\sum\limits_{n=m+1}^{m+p}c_ne_n, \sum\limits_{n=m+1}^{m+p}c_ne_n\right) =  \sum\limits_{n=m+1}^{m+p}c_n^2 ||e_n||^2.
 $$
-И увидим, что искомому условию Коши удовлетворяет и числовой ряд $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$.
+И увидим, что вместе с рядом $\sum\limits_{n=1}^{\infty} c_n e_n$  условию Коши удовлетворяет и числовой ряд $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$ (для которого выполнение условия Коши эквивалентно сходимости).
+\end{proof}
 \begin{Consequence}
     Если пространство со скалярным произведением полно, то все ряды Фурье в нем сходятся.
 \end{Consequence}
@@ -119,15 +127,14 @@ $$
     $$\forall x\in H, \forall \eps >0\; \exists e_{n_1}, e_{n_2}, \ldots, e_{n_K},\; c_1, c_2, \ldots, c_K \Rightarrow \left|\left|x - \sum\limits_{k=1}^{K} c_k e_{n_k}\right|\right|<\eps
     $$
 \end{Def}
-\begin{Comment}
-    Дополняя набор коэффициентов нулями, всегда можно добиться того, что $ e_{n_1}, \ldots, e_{n_K}$ первыми элементами системы.
-\end{Comment}
+
 \begin{Statement}
     Если ортогональная система $\{e_n\}_{n=1}^{\infty}$ замкнута, то $\forall x\in H\; x = \sum\limits_{n=1}^{\infty}\x_n e_{n}$.
 \end{Statement}
 \begin{proof}
-    Зафиксируем произвольное $\eps >0$, найдем такое $K_0$ и коэффициенты $c_1, \ldots, c_{K_0}$, что $\left|\left| x - \sum\limits_{n=1}^{K_0} c_ne_n \right|\right| < \eps$. Тогда
+    Зафиксируем произвольное $\eps >0$, найдем такое $K_0$ и такие коэффициенты $c_1, \ldots, c_{K_0}$, что $\left|\left| x - \sum\limits_{n=1}^{K_0} c_ne_n \right|\right| < \eps$ (коэффициенты при $e_n$ не вошедших в список $ e_{n_1}, \ldots, e_{n_K}$ из определения замкнутости просто положим равными нулю). Тогда
     $$
-        \forall N>K_0 \; \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|\leqslant \left|\left|x - \sum\limits_{k=1}^{K_0}c_ke_k \right|\right| < \eps.
+        \forall N>K_0 \; \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|\leqslant \left|\left|x - \sum\limits_{k=1}^{K_0}c_ke_k \right|\right| < \eps,
     $$
+    то есть ряд $\sum\limits_{n=1}^{N}\x_ne_n$ сходится к $x$.
 \end{proof}

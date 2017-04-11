@@ -4,9 +4,9 @@
 \begin{Statement}
 	Если $f$ --- интегрируемая по Риману на отрезку $[-\pi;\pi]$  функция, и её ряд Фурье по тригонометрической системе есть
 	$$
-		\cfrac{a_0(f)}{2} + \sum\limits_{n=1}^{\infty}(a_n(f)\cos(nx) + b_n(f)\sin(nx))
+		\cfrac{a_0(f)}{2} + \sum\limits_{n=1}^{\infty}(a_n(f)\cos(nx) + b_n(f)\sin(nx)),
 	$$
-	, тогда на любом подотрезке $[a;b] \subset [-\pi; \pi]$ интеграл по этому отрезку равен сумме числового ряда, полученного почленным интегрированием из ряда Фурье.
+	 тогда на любом подотрезке $[a;b] \subset [-\pi; \pi]$ интеграл по этому отрезку равен сумме числового ряда, полученного почленным интегрированием из ряда Фурье.
 \end{Statement}
 Но изначально сходимость ряда Фурье в метрике $\mathcal{R}^2[-\pi; \pi]$ не гарантирует нам ни поточечной, ни равномерной сходимости ряда (а нам всё-таки знать про такую сходимость хотелось бы). Помогает следующая теорема
 \begin{Theorem}
@@ -39,23 +39,24 @@
 	+\sum\limits_{n=1}^{N}\left(\left( \cfrac{1}{\pi}\int\limits_{-\pi}^{\pi}f(t)\cos(nt) dt\right)\cos(nx) +
 	\left( \cfrac{1}{\pi}\int\limits_{-\pi}^{\pi}f(t)\sin(nt) dt\right)\sin(nx) \right) = \\
 	= [\cos(nt)\cos(nx) - \sin(nt)\sin(nx) = \cos(n(x-t))] 
-	=\cfrac{1}{\pi}\left( \int\limits_{-\pi}^{\pi}f(t) \cdot \left( \cfrac{1}{2} + \sum \limits_{n=1}^{N}\cos(n(x-t))\right)dt\right)
+	=\cfrac{1}{\pi}\left( \int\limits_{-\pi}^{\pi}f(t) \cdot \left( \cfrac{1}{2} + \sum \limits_{n=1}^{N}\cos(n(x-t))\right)dt\right).
 \end{gather}
-Ведём вспомогательное обозначение:
+Ведём обозначение:
 $$
-	D_N(u) = \cfrac{1}{2} + \sum\limits_{n=1}^{N}\cos(nu)
+	D_N(u) = \cfrac{1}{2} + \sum\limits_{n=1}^{N}\cos (nu).
 $$
 \begin{Def}
 	$D_N(u)$ называется $N$-м ядром Дирихле. 
 \end{Def}
 Тогда мы можем переписать нашу частичную сумму как свёртку с ядром Дирихле:
 $$
-	S_N(x, f) = f*D_N(x)
+	S_N(x, f) = f*D_N(x).
+    \label{21aster}
 $$
 Но определение ядра через сумму не очень удобно само по себе. Попробуем выписать её в более удобном виде. Пусть $\sin(u/2) \neq 0$. Тогда мы вправе умножить и разделить на него.
 \begin{gather}
 	D_N(u) = \cfrac{1}{2} + \sum\limits_{n=1}^{N}\cos(nu) = \cfrac{\sin(u/2)}{2\sin(u/2)} + \sum\limits_{n=1}^{\infty} \cfrac{\cos(nu)\sin(u/2)}{2\sin(u/2)} =\\
-	= \left[\cos(nu)\sin(u/2) = \cfrac{\sin((n + 1/2)u) + \sin((n-1/2)u)}{2}\right]=\\
-	= \cfrac{\sin(u/2) - \sin(u/2) + \sin(3u/2) - \sin(3u/2) + \ldots + \sin((N + 1/2)u)}{2\sin(u/2)} = \cfrac{\sin((N + 1/2)u)}{2\sin(u/2)}
+	= \left[\cos(nu)\sin(u/2) = \cfrac{\sin((n + 1/2)u) - \sin((n-1/2)u)}{2}\right]=\\
+	= \cfrac{\sin(u/2) - \sin(u/2) + \sin(3u/2) - \sin(3u/2) + \ldots + \sin((N + 1/2)u)}{2\sin(u/2)} = \cfrac{\sin((N + 1/2)u)}{2\sin(u/2)}.
 \end{gather}
-Сразу видно, что $D_N(u)$ --- непрерывная $2\pi$-периодическая функция и $\int\limits_{-\pi}^{\pi}D_N(t) = \pi$
+Из равенства \eqref{21aster} сразу следует, что $D_N(u)$ --- непрерывная четная $2\pi$-периодическая функция и $\int\limits_{-\pi}^{\pi}D_N(t) = \pi$

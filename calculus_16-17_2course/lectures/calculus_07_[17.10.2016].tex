@@ -44,14 +44,13 @@
 	\begin{Statement}[Супремум-критерий]
 		$f_n(x)\overset{X}{\underset{n\to\infty}{\rightrightarrows}} f(x) \Leftrightarrow r_n\to 0$.
 	\end{Statement}
-	\begin{proof}\ \\
-		\textbf{Необходимость}. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon/2$. Тогда
+	\begin{proof} Докажем необходимость. Зафиксируем произвольное $\varepsilon > 0$, положим $\varepsilon_1 = \varepsilon/2$. Тогда
 		\begin{gather*}
 			\exists N\in \N \colon\; \forall n>N\; \forall x \in X\; |f_n(x) - f(x)| < \varepsilon_1,\\
 			\Rightarrow r_n =  \underset{x \in X}{\sup}\; |f_n(x) - f(x)| \leqslant \varepsilon_1 < \varepsilon.
 		\end{gather*}
-		То есть $r_n \to 0$ при $n\to \infty$.
-		\par \textbf{Достаточность}.
+		То есть $r_n \to 0$ при $n\to \infty$.\\
+		И с той же лёгкостью докажем достаточность:
 		$$
 		\forall \varepsilon > 0\; \exists N \in \N\colon \; \forall n>N\; r_n < \varepsilon \Rightarrow \forall x \in X\; |f_n(x) - f(x)| < \varepsilon.
 		$$

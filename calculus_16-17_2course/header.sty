@@ -6,7 +6,8 @@
 \usepackage[english,russian]{babel} % локализация и переносы
 \usepackage{epigraph}               % делать эпичные эпиграфы
 \usepackage{fancybox,fancyhdr}      % для колонтитулов
-
+\usepackage{multicol}
+\usepackage{float}
 %% Отступы между абзацами и в начале абзаца 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{\medskipamount}
@@ -86,38 +87,20 @@
     \endgroup
 }
 
-%% Информация об авторах
-\author{Группа лектория ФКН ПМИ 2016-2017 \\
-  Михаил Дискин, Анастасия Иовлева, Руслан Хайдуров.}
-\title{Лекции по предмету \\
-  \textbf{Математический анализ-3}}
-\date{2016/2017 учебный год}
-
-
 \usepackage{mathdots}
 \usepackage{floatflt}
 \setlength{\headheight}{15pt}
 %% Для колонтитула
 \def\head{
-{\it \small НИУ ВШЭ $\bullet$ Факультет компьютерных наук $\bullet$
-Прикладная математика и информатика}}
+{\it \small НИУ ВШЭ $\bullet$ Факультет компьютерных наук $\bullet$ Прикладная математика и информатика}}
 
 %% Делаем верхний и нижний колонтитулы
 \fancyhf{}
 \fancyhead[R]{\head}
-\fancyfoot[R]{{\small {\it М. Дискин, А. Иовлева, Р. Хайдуров. Математический анализ-3}}}
+\fancyfoot[L]{{\small {\it М. Дискин, А. Иовлева, Р. Хайдуров. Математический анализ-3}}}
 \fancyhead[L]{\thepage}
+\fancyfoot[R]{{\small {\it Лекция \thesection }}}
 
-%% Функция для обнуление конкретного счётчика
-\def\ob#1{\setcounter{#1}{0}}
-
-%% Функция для обнуления всего. Обязательно вызывать в конце файла!
-\def\oball{\setcounter{Def}{0}\setcounter{Lem}{0}\setcounter{Sug}{0}
-\setcounter{eg}{0}\setcounter{Cmt}{0}\setcounter{cnsqnc}{0}\setcounter{th}{0}
-\setcounter{stnmt}{0}\setcounter{task}{0}\setcounter{dsg}{0}\setcounter{gen}{0} 
-\setcounter{dream}{0}\setcounter{prop}{0}}
-
-%% Определение счётчика + переопределение команд
 
 
 %% Теоремы и иже с ними
@@ -195,5 +178,8 @@
 
 \newcommand{\lmao}{неотрицательная непрерывная $2\pi$-периодическая аппроксимативная единица}
 \newcommand{\I}{\widetilde{I}}
+
 \setlist[itemize]{itemsep=0pt, topsep=0pt}
 \setlist[enumerate]{itemsep=0pt, topsep=0pt}
+
+\pgfplotsset{compat=1.13}

@@ -42,7 +42,7 @@ q := \begin{cases}
 $$
 Отметим, что в силу определения при $\delta \geq 1$ верно, что $\forall n \in \N \ \int\limits_{\delta}^{\infty}K_n(t)\d t = 0$. Посмотрим, что происходит при $\delta \in (0, 1)$:
 $$
-\int\limits_{\delta}^{\infty}K_n(t)\d t = \int\limits_{\delta}^1 K_n(t)\d t = \dfrac{1}{c_n}\int\limits_{\delta}^{1}(1 - t^2)^n \leq \dfrac{q^n}{2/(n + 1)} = \dfrac{(n + 1)q^n}{2} \ito 0.
+\int\limits_{\delta}^{\infty}K_n(t)\d t = \int\limits_{\delta}^1 K_n(t)\d t = \dfrac{1}{c_n}\int\limits_{\delta}^{1}(1 - t^2)^n \d t \leq \dfrac{q^n}{2/(n + 1)} = \dfrac{(n + 1)q^n}{2} \ito 0.
 $$
 На предпоследнем шаге мы можем убрать интеграл из-за того, что длина отрезка интегрирования меньше единицы, и при этом мы можем ограничить сверху подинтегральную функцию.
 \end{proof}
@@ -55,7 +55,7 @@ $$
 
 Тогда $\forall n > N\ \forall x \in \R$:
 \begin{gather*}
-|f(x) - g_n(x)| \approx \left| \int\limits_{-\infty}^{\infty}f(x)K_n(t)\d t - \int\limits_{-\infty}^{\infty}f(x - t)K_n(t)\d t \right| \leq \int\limits_{-\infty}^{\infty}|f(x) - f(x - t)|K_n(t)\d t = \\
+|f(x) - g_n(x)| = \left| \int\limits_{-\infty}^{\infty}f(x)K_n(t)\d t - \int\limits_{-\infty}^{\infty}f(x - t)K_n(t)\d t \right| \leq \int\limits_{-\infty}^{\infty}|f(x) - f(x - t)|K_n(t)\d t = \\
 = \int\limits_{-\delta}^{\delta}|f(x) - f(x + t)| K_n(t)\d t + \int\limits_{-\infty}^{-\delta} |f(x) - f(x - t)|K_n(t)\d t + \int\limits_{\delta}^{\infty} |f(x) - f(x - t)|K_n(t)\d t \leq \\
 \leq \int\limits_{-\delta}^{\delta}\eps_1 K_n(t)\d t + \int\limits_{-\infty}^{-\delta}2C K_n(t) \d t + \int\limits_{\delta}^{\infty}2C K_n(t) \d t \leq \eps_1 + 2C\eps_1 = \eps_1(2C + 1) \leq \eps.
 \end{gather*}
@@ -72,21 +72,21 @@ $$
 
 Отметим, что теперь мы можем перейти от рассмотрения функции $f(x)$ к $h(x)$. Действительно, если $P(x)$ --- многочлен, то $|h(x) - P(x)| = |f(x) - (l(x) + P(x))| = |f(x) - P'(x)|$, где $P'(x)$ --- тоже многочлен. Итого, для произвольного фиксированного $\eps > 0$ нам достаточно построить многочлен $P(x)$ такой, что $|h(x) - P(x)| < \eps$.
 
-Введем функцию $g_n := h(x) * K_n(x)$, где $K_n(x)$ --- аппроксимативная единица из \ref{lemma1}. Докажем, что $g_n(x)$ --- многочлен на $[0, 1]$. 
+Введем функцию $g_n := h(x) * K_n(x)$, где $K_n(x)$ --- аппроксимативная единица из леммы \ref{lemma1}. Докажем, что $g_n(x)$ --- многочлен на $[0, 1]$. 
 
 Пусть $x \in [0, 1]$ --- произвольная точка. Заметим, что если $t \in [0, 1]$, то $x - t \in [-1, 1]$, а на этом отрезке функция $K_n(x)$ является многочленом: 
 $$
-K_n(x - t) = \sum\limits_{k = 1}^{K}c_k(x - t)^k = \sum\limits_{k = 1}^K p_kx^k.
+K_n(x - t) = \sum\limits_{k = 0}^{K}c_k(x - t)^k = \sum\limits_{k = 0}^K p_k(t)x^k.
 $$
-Теперь посмотрим на функцию $g_n(x)$:
+Теперь посмотрим на функцию $g_n(x)$ на $[0, 1]$:
 $$
-g_n(x) = \int\limits_{-\infty}^{\infty}h(t)K_n(x - t)\d t = \int\limits_{0}^1h(t)K_n(x - t)\d t = \sum\limits_{k = 1}^K \int_0^1 h(t)p_k x^k \d t = \sum\limits_{k = 1}^K \widetilde{c}_k x^k.
+g_n(x) = \int\limits_{-\infty}^{\infty}h(t)K_n(x - t)\d t = \int\limits_{0}^1h(t)K_n(x - t)\d t = \sum\limits_{k = 0}^K \int_0^1 h(t)p_k (t) x^k \d t = \sum\limits_{k = 10}^K \widetilde{c}_k x^k.
 $$
 Итого, $g_n(x)$ действительно является многочленом на отрезке $[0, 1]$. Что мы и хотели получить.
 \end{proof}
 
 \begin{Theorem}
-Пусть $f \in C^N[a, b]$. тогда $\forall \eps > 0$ существует многочлен $P(x)$ такой, что $\forall x \in [a, b]$ и $\forall n \in \{0, 1, \ldots,N \}$ выполняется неравенство $|f^{(n)}(x) - p^{(n)}(x)| < \eps$.
+Пусть $f \in C^N[a, b]$. тогда $\forall \eps > 0$ существует многочлен $P(x)$ такой, что $\forall x \in [a, b]$ и $\forall n \in \{0, 1, \ldots,N \}$ выполняется неравенство $|f^{(n)}(x) - P^{(n)}(x)| < \eps$.
 \end{Theorem}
 \begin{proof}
 Данное утверждение несложно доказывается по индукции. Для простоты мы рассмотрим доказательство для $N = 1$.
