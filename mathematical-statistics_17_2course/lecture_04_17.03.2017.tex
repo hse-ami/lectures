@@ -1,0 +1,387 @@
+\section{Лекция 4 от 17.03.2017}
+\subsection{Минимизация дисперсии оценки. Информация Фишера}
+Как обычно, положим, что у нас есть выборка \((X_{1}, \dots, X_{n})\) из 
+распределения \(\mathcal{L}(x) \in \{\Pr_{\theta} \mid \theta \in \Theta\}\), 
+где \(\Theta \subseteq \R^{d}\). Теперь у нас есть задача: по выборке построить 
+несмещённую оценку \(\theta^{*} = \theta^{*}(X_{1}, \dots, X_{n})\) такую, что 
+её дисперсия минимальна. Интуитивно смысл такого ограничения можно понять так: 
+при малой дисперсии вычисленное значение будет не слишком сильно отклоняться от 
+теоретического значения. Но можно ли найти какое-либо неравенство, которое 
+будет ограничивать дисперсию снизу?
+
+Ответ на этот вопрос: и да, и нет. С одной стороны, так называемое 
+\emph{неравенство Рао-Крамера} даёт неулучшаемую оценку снизу. С другой 
+стороны, оно верно не всегда~--- для него требуется так называемая 
+\emph{регулярность} модели. Что понимается под регулярной моделью? Нестрого 
+говоря, в таких моделях функция правдоподобия дважды непрерывно 
+дифференцируема, то есть существуют моменты от производных. Вообще, это нужно 
+для того, чтобы мы могли переносить оператор дифференцирования в интеграл и 
+назад.
+
+Теперь докажем одну лемму, которая понадобится для доказательства неравенства 
+Рао-Крамера. Но для её формулировки нужно ввести понятие информации Фишера:
+\begin{definition}
+	Пусть \((X_{1}, \dots, X_{n})\)~--- выборка из распределения 
+	\(\mathcal{L}(X) \in \{\Pr_{\theta} \mid \theta \in \Theta\}\), и \(\Theta 
+	\subseteq \R\). Тогда \emph{информацией Фишера} называется
+	\[
+		I_{n}(\theta) = \E{\left(\frac{\partial \ln p_{n}(X_{1}, \dots, X_{n}; 
+		\theta)}{\partial \theta}\right)^{2}}
+	\]
+\end{definition}
+\begin{lemma}
+	Пусть \((X_{1}, \dots, X_{n})\)~--- выборка из распределения 
+	\(\mathcal{L}(X) \in \{\Pr_{\theta} \mid \theta \in \Theta\}\), и \(\Theta 
+	\subseteq \R\). Далее, предположим, что существуют непрерывные производные
+	\[
+		\frac{\partial p_{n}(X_{1}, \dots, X_{n}; \theta)}{\partial \theta} 
+		\text{ и } \frac{\partial^{2} p_{n}(X_{1}, \dots, X_{n}; 
+		\theta)}{\partial \theta^{2}}
+	\]
+	и при этом информация Фишера конечна. Тогда
+	\[
+		\E{\frac{\partial \ln p_{n}(X_{1}, \dots, X_{n}; \theta)}{\partial 
+		\theta}} = 0 \text{ и } I_{n}(\theta) = -\E{\frac{\partial^{2} 
+		\ln p_{n}(X_{1}, \dots, X_{n}; \theta)}{\partial \theta^{2}}}
+	\]
+\end{lemma}
+\begin{remark}
+	Так как по определению функции правдоподобия
+	\[
+		p_{n}(X_{1}, \dots, X_{n}; \theta) = \prod_{k = 1}^{n} p_{X}(X_{i}) 
+		\implies \ln p_{n}(X_{1}, \dots, X_{n}; \theta) = \sum_{k = 1}^{n} \ln 
+		p_{X}(X_{i}),
+	\]
+	то из этой леммы следует, что
+	\[
+		I_{n}(\theta) = -\E{\frac{\partial^{2} p_{n}(X_{1}, \dots, X_{n}; 
+		\theta)}{\partial \theta^{2}}} = -\sum_{k = 1}^{n} 
+		\E{\frac{\partial^{2} \ln p (X_{i}; \theta)}{\partial \theta^{2}}} = 
+		-n\E{\frac{\partial^{2} \ln p (X_{1}; \theta)}{\partial \theta^{2}}}.
+	\]
+	
+	Последнее равенство означает, что \(I_{n}(\theta) = nI_{1}(\theta)\).
+\end{remark}
+
+Теперь приступим к доказательству.
+
+\begin{proof}
+	Вспомним, что интегрирование плотности по всему пространству даёт единицу:
+	\[
+		\int\limits_{\R^{n}} p_{n}(\mathbf{x}; \theta)\diff \mathbf{x} = 1.
+	\]
+	
+	Продифференцируем по \(\theta\) и занесём оператор дифференцирования внутрь 
+	(это возможно из-за непрерывной дифференцируемости):
+	\[
+		0 = \frac{\partial}{\partial \theta} \int\limits_{\R^{n}} 
+		p_{n}(\mathbf{x}; \theta)\diff \mathbf{x} = \int\limits_{\R^{n}} 
+		\frac{\partial p_{n}(\mathbf{x}; \theta)}{\partial \theta}\diff 
+		\mathbf{x}.
+	\]
+	
+	Теперь помножим и поделим частную производную на \(p_{n}(\mathbf{x}; 
+	\theta)\) и преобразуем выражение:
+	\[
+		0 = \int\limits_{\R^{n}} \frac{1}{p_{n}(\mathbf{x}; 
+		\theta)}\frac{\partial p_{n}(\mathbf{x}; \theta)}{\partial \theta} 
+		p_{n}(\mathbf{x}; \theta)\diff \mathbf{x} = \int\limits_{\R^{n}} 
+		\frac{\partial \ln p_{n}(\mathbf{x}; \theta)}{\partial \theta} 
+		p_{n}(\mathbf{x}; \theta)\diff \mathbf{x}.
+	\]
+	
+	Осталось заметить, что полученное равенство есть ни что иное, как первый 
+	пункт леммы. Теперь перейдём ко второму пункту.
+	
+	Для него мы распишем вторую производную, как производную от производной:
+	\begin{align*}
+		\frac{\partial^{2} \ln p_{n}(\mathbf{x}; \theta)}{\partial \theta^{2}} 
+		&= \frac{\partial}{\partial \theta}\left(\frac{1}{p_{n}(\mathbf{x};  
+		\theta)}\frac{\partial p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta}\right) \\
+		&= \frac{1}{(p_{n}(\mathbf{x}; \theta))^{2}}\left(p_{n}(\mathbf{x}; 
+		\theta)\frac{\partial^{2} p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta^{2}} - \left(\frac{\partial p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta}\right)^{2}\right).
+	\end{align*}
+	
+	Теперь распишем матожидание этого выражения:
+	\[
+		\E{\frac{\partial^{2} \ln p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta^{2}}} = \int\limits_{\R^{n}} \frac{1}{(p_{n}(\mathbf{x}; 
+		\theta))^{2}}\left(p_{n}(\mathbf{x}; \theta)\frac{\partial^{2} 
+		p_{n}(\mathbf{x}; \theta)}{\partial \theta^{2}} - \left(\frac{\partial 
+		p_{n}(\mathbf{x}; \theta)}{\partial \theta}\right)^{2}\right)p_{n} 
+		(\mathbf{x}; \theta) \diff \mathbf{x}.
+	\]
+	
+	Разложим его по линейности:
+	\[
+		\E{\frac{\partial^{2} \ln p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta^{2}}} = \int\limits_{\R^{n}} \frac{\partial^{2} 
+		p_{n}(\mathbf{x}; \theta)}{\partial \theta^{2}}\diff \mathbf{x} - 
+		\int\limits_{\R^{n}} \left(\frac{1}{p_{n}(\mathbf{x}; 
+		\theta)}\frac{\partial p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta}\right)^{2}p_{n} (\mathbf{x}; \theta) \diff \mathbf{x}.
+	\]
+	
+	Теперь воспользуемся непрерывностью второй производной и вынесем вторую 
+	производную из первого интеграла:
+	\[
+		\E{\frac{\partial^{2} \ln p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta^{2}}} = \frac{\partial^{2}}{\partial \theta^{2}} 
+		\int\limits_{\R^{n}} p_{n}(\mathbf{x}; \theta)\diff 
+		\mathbf{x} - \int\limits_{\R^{n}} \left(\frac{\partial \ln 
+		p_{n}(\mathbf{x}; \theta)}{\partial \theta}\right)^{2}p_{n} 
+		(\mathbf{x}; \theta) \diff \mathbf{x}.
+	\]
+	
+	Осталось вспомнить, что первый интеграл равен единице. Тогда
+	\[
+		\E{\frac{\partial^{2} \ln p_{n}(\mathbf{x}; \theta)}{\partial 
+		\theta^{2}}} = -\E{\left(\frac{\partial \ln p_{n}(X_{1}, \dots, X_{n}; 
+		\theta)}{\partial \theta}\right)^{2}}. \qedhere
+	\]
+\end{proof}
+
+\subsection{Неравенство Рао-Крамера}
+
+Великолепно. Теперь приступим к доказательству самого неравенства Рао-Крамера.
+\begin{theorem}[Рао, Крамер]
+	Пусть \((X_{1}, \dots, X_{n})\)~--- выборка из распределения 
+	\(\mathcal{L}(X) \in \{\Pr_{\theta} \mid \theta \in \Theta\}\), и \(\Theta 
+	\subseteq \R\). Далее, пусть \(\tau(\theta)\)~--- непрерывно 
+	дифференцируемая функция параметра. Теперь предположим, что выполнены 
+	следующие условия:
+	\begin{enumerate}
+		\item Cуществуют непрерывные производные
+		\[
+			\frac{\partial p_{n}(X_{1}, \dots, X_{n}; \theta)}{\partial \theta} 
+			\text{ и } \frac{\partial^{2} p_{n}(X_{1}, \dots, X_{n}; 
+			\theta)}{\partial \theta^{2}}.
+		\]
+		
+		\item Информация Фишера \(I_{n}(\theta)\) конечна.
+		
+		\item Существует несмещённая оценка \(T(X_{1}, \dots, X_{n})\) 
+		параметра \(\tau(\theta)\) такая, что её дисперсия конечна и 
+		\[
+			\int\limits_{\R^{n}} \left|T(\mathbf{x})\frac{\partial 
+			p_{n}(\mathbf{x}; \theta)}{\partial \theta}\right|\diff \mathbf{x} 
+			< +\infty.
+		\]
+	\end{enumerate}
+	
+	Тогда
+	\[
+		\D{T(X_{1}, \dots, X_{n})} \geq 
+		\frac{(\tau'(\theta))^{2}}{I_{n}(\theta)},
+	\]
+	причём равенство достигается тогда и только тогда, когда
+	\[
+		\dlnpn{X_{1}, \dots, X_{n}} \overset{\text{п.н.}}{=} c(\theta)(T(X_{1}, 
+		\dots, X_{n}) -\tau(\theta)),
+	\]
+	где \(c(\theta)\)~--- ограниченная функция от \(\theta\), не зависящая от 
+	выборки.
+\end{theorem}
+\begin{remark}
+	Можно ввести так называемый \emph{коэффициент эффективности}, который 
+	определяется следующим образом:
+	\[
+		\eff(\theta) = \frac{(\tau'(\theta))^{2}}{I_{n}(\theta)\D{T(X_{1}, 
+		\dots, X_{n})}}.
+	\]
+\end{remark}
+\begin{definition}
+	Пусть выполнены условия неравенства Рао-Крамера. Тогда будем называть 
+	оценку \(T(X_{1}, \dots, X_{n})\) \emph{эффективной}, если в неравенстве 
+	достигается равенство, или, что то же самое, коэффициент эффективности 
+	равен 1.
+\end{definition}
+
+Ранее у нас вводились оптимальные оценки. Но стоит понимать, что эффективность 
+и оптимальность~--- это разные вещи. Можно показать, что если модель регулярна, 
+то из оптимальности следует эффективность.
+\begin{remark}
+	Если для \(\tau(\theta)\) существует эффективная оценка, то она существует 
+	и для любого линейного преобразования \(\tau(\theta)\).
+\end{remark}
+
+Теперь приступим к самому доказательству.
+
+\begin{proof}
+	Так как \(T(X_{1}, \dots, X_{n})\) является несмещённой оценкой для 
+	\(\tau(\theta)\), то
+	\[
+		\tau(\theta) = \E{T(X_{1}, \dots, X_{n})} = \int\limits_{\R^{n}} 
+		T(\mathbf{x})p_{n}(\mathbf{x}; \theta) \diff \mathbf{x}.
+	\]
+	
+	Распишем \(\tau'(\theta)\):
+	\begin{align*}
+		\tau'(\theta) = \frac{\partial}{\partial 
+		\theta}\int\limits_{\R^{n}} T(\mathbf{x})p_{n}(\mathbf{x}; \theta) 
+		\diff \mathbf{x}.
+	\end{align*}
+	
+	Воспользуемся непрерывной дифференцируемостью \(\tau(\theta)\) и занесём 
+	производную внутрь интеграла:
+	\[
+		\tau'(\theta) = \int\limits_{\R^{n}} T(\mathbf{x}) \frac{\partial 
+		p_{n}(\mathbf{x}; \theta)}{\partial \theta} \diff \mathbf{x} = 
+		\int\limits_{\R^{n}} T(\mathbf{x}) \dlnpn{\mathbf{x}} p_{n}(\mathbf{x}; 
+		\theta) \diff \mathbf{x}.
+	\]
+	
+	Заметим, что это есть матожидание от некоторой функции, а точнее:
+	\[
+		\tau'(\theta) = \E{T(X_{1}, \dots, X_{n}) \dlnpn{X_{1}, \dots, X_{n}}}.
+	\]
+	
+	Теперь вспомним, что матожидание частной производной логарифма функции 
+	правдоподобия равно нулю. Тогда
+	\[
+		\tau'(\theta) = \E{T(X_{1}, \dots, X_{n}) \dlnpn{X_{1}, \dots, X_{n}}} 
+		- \E{\tau(\theta) \dlnpn{X_{1}, \dots, X_{n}}}.
+	\]
+	
+	Следовательно,
+	\[
+		\tau'(\theta) = \E{(T(X_{1}, \dots, X_{n}) - \tau(\theta))\dlnpn{X_{1}, 
+		\dots, X_{n}}}
+	\]
+	
+	Но это есть ни что иное, как ковариация:
+	\[
+		\tau'(\theta) = \cov\left(T(X_{1}, \dots, X_{n}), \dlnpn{X_{1}, \dots, 
+		X_{n}}\right).
+	\]
+	
+	Согласно неравенству Коши-Буняковского
+	\[
+		|\tau'(\theta)| \leq \sqrt{\D{T(X_{1}, \dots, X_{n})}\D{\dlnpn{X_{1}, 
+		\dots, X_{n}}}}.
+	\]
+	
+	Теперь заменим дисперию частной производной на второй момент, так как 
+	матожидание нулевое:
+	\[
+		|\tau'(\theta)| \leq \sqrt{\D{T(X_{1}, \dots, 
+		X_{n})}\E{\left(\dlnpn{X_{1}, \dots, X_{n}}\right)^{2}}}.
+	\]
+	
+	Возведём в квадрат:
+	\[
+		(\tau'(\theta))^{2} \leq \D{T(X_{1}, \dots, X_{n})}I_{n}(\theta).
+	\]
+	
+	А это и есть ровно то, что нам нужно.
+	
+	Теперь посмотрим, что происходит, когда дисперсия минимальна. В таком 
+	случае коэффициент корреляции равен по модулю единице:
+	\[
+		\left|\rho\left(T(X_{1}, \dots, X_{n}), \dlnpn{X_{1}, \dots, 
+		X_{n}}\right)\right| = 1.
+	\]
+	
+	Как известно, это выполнено тогда и только тогда, когда между случайными 
+	величинами есть линейная зависимость:
+	\[
+		\dlnpn{X_{1}, \dots, X_{n}} \overset{\text{п.н.}}{=} aT(X_{1}, \dots, 
+		X_{n}) + b.
+	\]
+	
+	Надо понять, как устроены \(a\) и \(b\). Возьмём матожидание:
+	\[
+		0 = \E{\dlnpn{X_{1}, \dots, X_{n}}} = a\E{T(X_{1}, \dots, 
+		X_{n})} + b = a\tau(\theta) + b.
+	\]
+	
+	Отсюда видно, что \(\tau(\theta) = -b/a\) и
+	\[
+		\dlnpn{X_{1}, \dots, X_{n}} \overset{\text{п.н.}}{=} a(T(X_{1}, \dots, 
+		X_{n}) - \tau(\theta)).
+	\]
+	
+	Так как на константу нет ограничений, кроме конечности, то можно сказать, 
+	что она есть функция от \(\theta\).
+\end{proof}
+
+Теперь покажем одно свойство, которое может позволить считать минимальную 
+дисперсию.
+\begin{lemma}
+	Пусть \(T(X_{1}, \dots, X_{n})\)~--- оценка такая, что в условиях 
+	неравенства Рао-Крамера
+	\[
+		\dlnpn{X_{1}, \dots, X_{n}} \overset{\text{п.н.}}{=} c(\theta)(T(X_{1}, 
+		\dots, X_{n}) - \tau(\theta)).
+	\]
+	
+	Тогда \(\D{T(X_{1}, \dots, X_{n})} = \tau'(\theta)/c(\theta)\).
+\end{lemma}
+\begin{proof}
+	Продифференцируем данное равенство по \(\theta\):
+	\[
+		\frac{\partial^{2} \ln p_{n}(X_{1}, \dots, X_{n}; \theta)}{\partial 
+		\theta^{2}} = c'(\theta)T(X_{1}, \dots, X_{n}) - c'(\theta)\tau(\theta) 
+		- c(\theta)\tau'(\theta).
+	\]
+	
+	Теперь возьмём матожидание от обеих сторон:
+	\[
+		\E{\frac{\partial^{2} \ln p_{n}(X_{1}, \dots, X_{n}; \theta)}{\partial 
+		\theta^{2}}} = c'(\theta)\E{T(X_{1}, \dots, X_{n}) - \tau(\theta)} - 
+		\E{c(\theta)\tau'(\theta)}.
+	\]
+	
+	Согласно результату леммы об информации Фишера
+	\[
+		I_{n}(\theta) = -\E{\frac{\partial^{2} \ln p_{n}(X_{1}, \dots, X_{n}; 
+		\theta)}{\partial \theta^{2}}} = c(\theta)\tau'(\theta).
+	\]
+	
+	Тогда
+	\[
+		\D{T(X_{1}, \dots, X_{n})} = \frac{(\tau'(\theta))^2}{I_{n}(\theta)} = 
+		\frac{\tau'(\theta)}{c(\theta)}. \qedhere
+	\]
+\end{proof}
+
+Из неравенства Рао-Крамера можно сделать одно полезное следствие. Допустим, что 
+есть некое событие \(A\) и мы хотим посчитать вероятность этого события \(p\). 
+Для этого мы провели \(n\) наблюдений, и из них в \(n_{A}\) экспериментах 
+наблюдалось событие \(A\). Тогда верно следующее:
+\begin{theorem}
+	Схема Бернулли \(p_{n}^{*} = n_{A}/n\) является эффективной оценкой для 
+	параметра \(\theta = \Pr{A}\).
+\end{theorem}
+\begin{proof}
+	Пусть \(Z_{i} = \mathrm{I}\{X_{i} \in A\}\). Тогда \(p_{n}^{*} = 
+	\overline{Z}\). Запишем её функцию правдоподобия:
+	\[
+		p_{n}(Z_{1}, \dots, Z_{n}; \theta) = \theta^{Z_{1} + \dots + Z_{n}}(1 - 
+		\theta)^{n - Z_{1} - \dots - Z_{n}} = \theta^{n\overline{Z}}(1 
+		- \theta)^{n - n\overline{Z}}.
+	\]
+	
+	Теперь прологарифмируем её:
+	\[
+		\ln p_{n}(Z_{1}, \dots, Z_{n}; \theta) = n\overline{Z}\ln{\theta} + (n 
+		- n\overline{Z})\ln(1 - \theta).
+	\]
+	
+	Далее, дифференцируем по \(\theta\):
+	\[
+		\dlnpn{Z_{1}, \dots, Z_{n}} = \frac{n\overline{Z}}{\theta} - \frac{n - 
+		n\overline{Z}}{1 - \theta} = \frac{n}{\theta(1 - \theta)}(\overline{Z} 
+		- \theta).
+	\]
+	
+	Тогда по критерию равенства в неравенстве Рао-Крамера получаем, что 
+	\(\overline{Z}\) действительно является эффективной оценкой.
+\end{proof}
+\begin{consequence}
+	Эмпирическая функция распределения является эффективной оценкой 
+	теоретической функции распределения.
+\end{consequence}
