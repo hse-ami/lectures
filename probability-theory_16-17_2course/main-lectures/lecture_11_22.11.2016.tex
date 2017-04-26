@@ -53,12 +53,12 @@
 	
 	Предположим, что \(f(x)\) неотрицательна. Тогда введём последовательность случайных величин \(\{\eta_n\}_{n = 1}^{\infty}\), устроенную следующим образом:
 	\[
-	\eta_n = \sum_{i = 1}^{n} f(x_i)I\{\xi = x_i\}.
+	\eta_n = \sum_{i = 1}^{n} f(x_i)\I\{\xi = x_i\}.
 	\]
 	
 	Тогда \(\eta_n \uparrow f(\xi)\). Следовательно, \(\E{\eta_n}\) монотонно возрастает и сходится к \(\E{f(\xi)}\). Однако, в силу линейности математического ожидания простой случайной величины получаем, что
 	\begin{align}
-		\E{f(\xi)} &= \lim\limits_{n \to \infty} \E{\eta_n} = \lim\limits_{n \to \infty} \left(\sum_{i = 1}^{n} f(x_i)\E{I\{\xi = x_i\}}\right) \\
+		\E{f(\xi)} &= \lim\limits_{n \to \infty} \E{\eta_n} = \lim\limits_{n \to \infty} \left(\sum_{i = 1}^{n} f(x_i)\E{\I\{\xi = x_i\}}\right) \\
 		&= \lim\limits_{n \to \infty} \left(\sum_{i = 1}^{n} f(x_i)\Pr{\xi = x_i}\right) = \sum_{i = 1}^{\infty} f(x)\Pr{\xi = x_i}.
 	\end{align}
 	
@@ -217,13 +217,13 @@
 \begin{proof}
 	Для начала рассмотрим случай простых случайных величин. Тогда их можно представить в следующем виде:
 	\begin{align}
-		\xi = \sum\limits_{i = 1}^{n} x_{i}I\{\xi = x_{i}\} \\
-		\eta = \sum\limits_{j = 1}^{m} y_{j}I\{\eta = y_{j}\}
+		\xi = \sum\limits_{i = 1}^{n} x_{i}\I\{\xi = x_{i}\} \\
+		\eta = \sum\limits_{j = 1}^{m} y_{j}\I\{\eta = y_{j}\}
 	\end{align}
 	
 	Теперь распишем матожидание произведения:
 	\begin{align}
-		\E{\xi\eta} &= \sum_{i = 1}^{n}\sum_{j = 1}^{m} x_{i}y_{j}\E{I\{\xi = x_{i}\}I\{\eta = y_{j}\}} = \sum_{i = 1}^{n}\sum_{j = 1}^{m} x_{i}y_{j}\Pr{\xi = x_{i}, \eta = y_{j}} \\
+		\E{\xi\eta} &= \sum_{i = 1}^{n}\sum_{j = 1}^{m} x_{i}y_{j}\E{\I\{\xi = x_{i}\}\I\{\eta = y_{j}\}} = \sum_{i = 1}^{n}\sum_{j = 1}^{m} x_{i}y_{j}\Pr{\xi = x_{i}, \eta = y_{j}} \\
 		&= \sum_{i = 1}^{n}\sum_{j = 1}^{m} x_{i}y_{j}\Pr{\xi = x_{i}}\Pr{\eta = y_{j}} = \left(\sum_{i = 1}^{n} x_{i}\Pr{\xi = x_{i}}\right)\left(\sum_{j = 1}^{m} y_{j}\Pr{\eta = y_{j}}\right) \\
 		&= \E{\xi}\E{\eta}.
 	\end{align}

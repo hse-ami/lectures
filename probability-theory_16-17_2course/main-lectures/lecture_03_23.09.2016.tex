@@ -78,7 +78,7 @@
         \item Для любой функции \(\phi(x)\) выполняется \(\E[\phi(\xi)] = \sum\limits_{a \in \xi(\Omega)} \phi(a)\Pr(\xi = a)\);
         \item Если \(\Pr(\xi = c) = 1\) для некоторой константы \(c\), то \(\E[\xi] = c\);
         \item Если \(\xi \geq 0\), то \(\E[\xi] \geq 0\); 
-        \item Если \(E[\xi] = 0\) и \(\xi \geq 0\), то \(\Pr(\xi = 0) = 1\);
+        \item Если \(\E[\xi] = 0\) и \(\xi \geq 0\), то \(\Pr(\xi = 0) = 1\);
         \item Если \(\xi\) и \(\eta\) независимы, то \(\E[\xi\eta] = \E[\xi]\E[\eta]\).
     \end{enumerate}
 \end{theorem}
@@ -202,7 +202,7 @@
         
         \item Для произведения \(\D[c\xi] = \cov(c\xi, c\xi) = c^2\cov(\xi, \xi) = c^2\D[\xi]\). Для суммы \(\D[\xi + c] = \E[((\xi + c) - \E[\xi + c])^2] = \E[(\xi + c - \E[\xi] - c)^2] = \E[(\xi - \E[\xi])^2] = \D[\xi]\).
         
-        \item По определению дисперсии, \(D[\xi] = \E[(\xi-\E[\xi])^2]\), а \((\xi-\E[\xi])^2 \geq 0\). Тогда \(\E[(\xi-\E[\xi])^2] \geq 0\).
+        \item По определению дисперсии, \(\D[\xi] = \E[(\xi-\E[\xi])^2]\), а \((\xi-\E[\xi])^2 \geq 0\). Тогда \(\E[(\xi-\E[\xi])^2] \geq 0\).
         
         \item Воспользуемся выражением дисперсии через ковариацию и билинейностью ковариации:
         \(\D[\xi + \eta] = \cov(\xi + \eta, \xi + \eta) = \cov(\xi, \xi) + \cov(\eta, \eta) + 2\cov(\xi, \eta)\). Так как \(\xi\) и \(\eta\) некоррелированные, то \(\cov(\xi, \eta) = 0\) и \(\D[\xi + \eta] = \cov(\xi, \xi) + \cov(\eta, \eta) = \D[\xi] + \D[\eta]\).
@@ -228,9 +228,9 @@
     Как было доказано ранее, матожидание индикатора события равно вероятности события. Тогда \(\Pr(\xi \geq a) = \E[I_{\xi \geq a}]\). Далее, заметим, что \(I_{\xi \geq a} \leq \frac{\xi}{a}I_{\xi \geq a}\). Тогда \[\Pr(\xi \geq a) \leq \E\left[\frac{\xi}{a}I_{\xi \geq a}\right] \leq \E\left[\frac{\xi}{a}\right] = \frac{\E[\xi]}{a}.\qedhere\]
 \end{proof}
 \begin{theorem}[Неравенство Чебышёва]
-    Пусть \(\xi\)~--- случайная величина на \((\Omega, \Pr)\) такая, что \(\D[\xi] < \infty\). Тогда для любого положительного \(a\) \[\Pr\left(|\xi - E[\xi]| \geq a\right) \leq \frac{\D[\xi]}{a^2}.\]
+    Пусть \(\xi\)~--- случайная величина на \((\Omega, \Pr)\) такая, что \(\D[\xi] < \infty\). Тогда для любого положительного \(a\) \[\Pr\left(|\xi - \E[\xi]| \geq a\right) \leq \frac{\D[\xi]}{a^2}.\]
 \end{theorem}
 \begin{proof}
-    \(\Pr(|\xi - \E[\xi]| \geq a) = \Pr\left((\xi - E[\xi])^2 \geq a^2\right)\). По неравенству Маркова
-    \[\Pr\left((\xi - E[\xi])^2 \geq a^2\right) \leq \frac{\E[(\xi - E[\xi])^2]}{a^2} = \frac{\D[\xi]}{a^2}.\qedhere\]
+    \(\Pr(|\xi - \E[\xi]| \geq a) = \Pr\left((\xi - \E[\xi])^2 \geq a^2\right)\). По неравенству Маркова
+    \[\Pr\left((\xi - \E[\xi])^2 \geq a^2\right) \leq \frac{\E[(\xi - \E[\xi])^2]}{a^2} = \frac{\D[\xi]}{a^2}.\qedhere\]
 \end{proof}
