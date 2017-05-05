@@ -167,24 +167,24 @@
 
 Так и введём. Теперь посмотрим, что мы из этого имеем. Домножим на \(\Pr{\eta = y}\). Тогда
 \begin{align*}
-	\sum_{i = 1}^{n} x_i\Pr{\xi = x_i, \eta = y} = \E{\sum_{i = 1}^{n} x_i\mathbf{1}\{\xi = x_i\}\mathbf{1}\{\eta = y\}} = \E{\xi\mathbf{1}\{\eta = y\}}
+	\sum_{i = 1}^{n} x_i\Pr{\xi = x_i, \eta = y} = \E{\sum_{i = 1}^{n} x_i\I\{\xi = x_i\}\I\{\eta = y\}} = \E{\xi\I\{\eta = y\}}
 \end{align*}
 
 Однако, если положить \(\E{\xi \given \eta = y} = \phi(y)\), то
 \[
-	\phi(y)\Pr{\eta = y} = \E{\phi(y)\mathbf{1}\{\eta = y\}} = \begin{cases}
-	\E{\xi\mathbf{1}\{\eta = y\}} \\
-	\E{\phi(\eta)\mathbf{1}\{\eta = y\}}
+	\phi(y)\Pr{\eta = y} = \E{\phi(y)\I\{\eta = y\}} = \begin{cases}
+	\E{\xi\I\{\eta = y\}} \\
+	\E{\phi(\eta)\I\{\eta = y\}}
 	\end{cases}
 \]
 
-Как видно, выполнено следующее свойство: \(\E{\xi\mathbf{1}\{\eta = y\}} = \E{\E{\xi \given \eta}\mathbf{1}\{\eta = y\}}\). Теперь можно ввести определение для общего случая:
+Как видно, выполнено следующее свойство: \(\E{\xi\I\{\eta = y\}} = \E{\E{\xi \given \eta}\I\{\eta = y\}}\). Теперь можно ввести определение для общего случая:
 
 \begin{definition}
 	Пусть \(\xi\)~--- это случайная величина, а \(\eta\)~--- это случайный вектор из \(\R^{m}\). Тогда \emph{условным математическим ожиданием} \(\xi\) относительно \(\eta\) называется случайная величина \(\E{\xi \given \eta}\), удовлетворяющая двум условиям:
 	\begin{enumerate}
 		\item \(\E{\xi \given \eta} = \phi(\eta)\), где \(\phi : \R^m \mapsto \R\)~--- некоторая борелевская функция (свойство измеримости).
-		\item Для любого \(B \in \B(\R^m)\) \(\E{\xi\mathbf{1}_{B}(\eta)} = \E{\E{\xi \given \eta}\mathbf{1}_{B}(\eta)}\) (интегральное свойство)
+		\item Для любого \(B \in \B(\R^m)\) \(\E{\xi\I\{\eta \in B\}} = \E{\E{\xi \given \eta}\I\{\eta \in B\}}\) (интегральное свойство)
 	\end{enumerate}
 \end{definition}
 

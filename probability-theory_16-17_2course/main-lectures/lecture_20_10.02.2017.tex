@@ -7,51 +7,51 @@
 	выполнено, что
 	\[
 		\E{\xi \given \eta} = \sum_{k = 1}^{\infty} 
-		\frac{\E{\xi\mathbf{1}_{\{\eta = x_{k}\}}}}{\Pr{\eta = x_{k}}} 
-		\mathbf{1}_{\{\eta = x_{k}\}}
+		\frac{\E{\xi\I\{\eta = x_{k}\}}}{\Pr{\eta = x_{k}}} 
+		\I\{\eta = x_{k}\}
 	\]
 \end{theorem}
 \begin{proof}
-	Достаточно проверить измеримость и интегральное свойство. Как известно, \(\mathbf{1}_{\{\eta = x\}}\) является борелевской функцией от \(\eta\) для любого \(x\). Тогда функция в правой части является борелевской функцией от \(\eta\).
+	Достаточно проверить измеримость и интегральное свойство. Как известно, \(\I\{\eta = x\}\) является борелевской функцией от \(\eta\) для любого \(x\). Тогда функция в правой части является борелевской функцией от \(\eta\).
 	
 	Теперь проверим интегральное свойство. Для начала возьмём \(B = \{x_n\}\), где \(x_n\)~--- это одно из значений \(\eta\), для которого \(\Pr{\eta = x_n} > 0\).
 	\begin{align*}
-		\E{\E{\xi \given \eta}\mathbf{1}_{\{\eta = x_{n}\}}} &= \E{\frac{\E{\xi 
-		\mathbf{1}_{\{\eta = x_{n}\}}}}{\Pr{\eta = x_n}} \mathbf{1}_{\{\eta = 
-		x_{n}\}}} \\
-		&= \frac{\E{\xi\mathbf{1}_{\{\eta = x_{n}\}}}}{\Pr{\eta = 
-		x_n}}\E{\mathbf{1}_{\{\eta = x_{k}\}}} = \E{\xi\mathbf{1}_{\{\eta = 
-		x_{k}\}}}
+		\E{\E{\xi \given \eta}\I\{\eta = x_{n}\}} &= \E{\frac{\E{\xi 
+		\I\{\eta = x_{n}\}}}{\Pr{\eta = x_n}} \I\{\eta = 
+		x_{n}\}} \\
+		&= \frac{\E{\xi\I\{\eta = x_{n}\}}}{\Pr{\eta = 
+		x_n}}\E{\I\{\eta = x_{k}\}} = \E{\xi\I\{\eta = 
+		x_{k}\}}
 	\end{align*}
 	Теперь обобщим это на произвольное \(B\). Пусть в \(B\) есть элементы 
 	\(y_{1}, \dots, y_{n}, \dots\), которые являются значениям \(\eta\). Тогда 
 	по линейности матожидания получаем, что
 	\begin{align*}
-		\E{\xi\mathbf{1}_{B}(\eta)} &= \E{\xi\left(\sum_{i = 1}^{\infty} 
-		\mathbf{1}_{\{\eta = y_{i}\}}\right)} = \E{\sum_{i = 1}^{\infty} \xi 
-		\mathbf{1}_{\{\eta = y_{i}\}}} \\
+		\E{\xi\I\{\eta \in B\}} &= \E{\xi\left(\sum_{i = 1}^{\infty} 
+		\I\{\eta = y_{i}\}\right)} = \E{\sum_{i = 1}^{\infty} \xi 
+		\I\{\eta = y_{i}\}} \\
 		&= \lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \xi 
-		\mathbf{1}_{\{\eta = y_{i}\}}}
+		\I\{\eta = y_{i}\}}
 	\end{align*}
-	Заметим, что \(\left|\sum\limits_{i = 1}^n\xi \mathbf{1}_{\{\eta = y_{i}\}}\right| \leq 
+	Заметим, что \(\left|\sum\limits_{i = 1}^n\xi \I\{\eta = y_{i}\}\right| \leq 
 	|\xi|\), так как индикатор даст вклад не более одного раза. Также эти
-	частичные суммы почти наверное стремятся к \(\xi\mathbf{1}_{B}(\eta)\), поэтому можно писать 
+	частичные суммы почти наверное стремятся к \(\xi\I\{\eta \in B\}\), поэтому можно писать 
 	пределы, которые мы писали выше.
 
 	Теперь заметим, что \(\E{\xi 
-	\mathbf{1}_{\{\eta = y_{i}\}}} = \E{\E{\xi \given \eta}\mathbf{1}_{\{\eta = 
-	y_{i}\}}}\). И поймём также, что $\left|\sum\limits_{i = 1}^n\E{\xi \given 
-	\eta} \mathbf{1}_{\{\eta = y_{i}\}}\right| \leq 
+	\I\{\eta = y_{i}\}} = \E{\E{\xi \given \eta}\I\{\eta = 
+	y_{i}\}}\). И поймём также, что $\left|\sum\limits_{i = 1}^n\E{\xi \given 
+	\eta} \I\{\eta = y_{i}\}\right| \leq 
 	|\E{\xi\given\eta}|$. А матожидание у последней величины конечно,
 	так как совпадает с $\E{\xi}$. Аналогично легко понять, что частичные суммы
-	стремятся к \(\E{\xi\given\eta}\mathbf{1}_{B}(\eta)\). Тогда по теореме Лебега о мажорируемой 
+	стремятся к \(\E{\xi\given\eta}\I\{\eta \in B\}\). Тогда по теореме Лебега о мажорируемой 
 	сходимости
 	\[
-		\lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \xi \mathbf{1}_{\{\eta = 
-		y_{i}\}}} =
-		\lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \E{\xi\given\eta} \mathbf{1}_{\{\eta = 
-		y_{i}\}}} = \E{\E{\xi \given \eta} 
-		\mathbf{1}_{B}(\eta)}.\qedhere
+		\lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \xi \I\{\eta = 
+		y_{i}\}} =
+		\lim\limits_{n \to \infty} \E{\sum_{i = 1}^{n} \E{\xi\given\eta} \I\{\eta = 
+		y_{i}\}} = \E{\E{\xi \given \eta} 
+		\I\{\eta \in B\}}.\qedhere
 	\]
 \end{proof}
 
@@ -74,15 +74,15 @@
 	
 	Осталось проверить интегральное свойство. По линейности матожидания
 	\[
-		\E{(a\xi + b\delta)\mathbf{1}_{B}(\eta)} = a\E{\xi\mathbf{1}_{B}(\eta)} + b\E{\delta\mathbf{1}_{B}(\eta)}.
+		\E{(a\xi + b\delta)\I\{\eta \in B\}} = a\E{\xi\I\{\eta \in B\}} + b\E{\delta\I\{\eta \in B\}}.
 	\]
 	Согласно интегральному свойству:
 	\[
-		a\E{\xi\mathbf{1}_{B}(\eta)} + b\E{\delta\mathbf{1}_{B}(\eta)} = a\E{\E{\xi \given \eta}\mathbf{1}_{B}(\eta)} + b\E{\E{\delta \given \eta}\mathbf{1}_{B}(\eta)}.
+		a\E{\xi\I\{\eta \in B\}} + b\E{\delta\I\{\eta \in B\}} = a\E{\E{\xi \given \eta}\I\{\eta \in B\}} + b\E{\E{\delta \given \eta}\I\{\eta \in B\}}.
 	\]
 	Свернём сумму назад:
 	\[
-		a\E{\E{\xi \given \eta}\mathbf{1}_{B}(\eta)} + b\E{\E{\delta \given \eta}\mathbf{1}_{B}(\eta)} = \E{(a\E{\xi \given \eta} + b\E{\delta \given \eta})\mathbf{1}_{B}(\eta)}.
+		a\E{\E{\xi \given \eta}\I\{\eta \in B\}} + b\E{\E{\delta \given \eta}\I\{\eta \in B\}} = \E{(a\E{\xi \given \eta} + b\E{\delta \given \eta})\I\{\eta \in B\}}.
 	\]
 	Тем самым получаем желаемое.
 \end{proof}
@@ -93,7 +93,7 @@
 \begin{proof}
 	Пусть \(\eta \in \R^n\). Воспользуемся интегральным свойством, положив \(B = \R^n\):
 	\[
-		\E{\xi} = \E{\xi\mathbf{1}_{B}(\eta)} = \E{\E{\xi \given \eta}\mathbf{1}_{B}(\eta)} = \E{\E{\xi \given \eta}}.\qedhere
+		\E{\xi} = \E{\xi\I\{\eta \in B\}} = \E{\E{\xi \given \eta}\I\{\eta \in B\}} = \E{\E{\xi \given \eta}}.\qedhere
 	\]
 \end{proof}
 
@@ -103,7 +103,7 @@
 \begin{proof}
 	Заметим, что \(\E{\xi}\)~--- константа. Тогда можно считать, что \(\E{\xi}\) есть борелевская функция от \(\eta\). Проверим интегральное свойство:
 	\[
-		\E{\xi\mathbf{1}_{B}(\eta)} = \left|\text{по независимости}\right| = \E{\xi}\E{\mathbf{1}_{B}(\eta)} = \E{\E{\xi}\mathbf{1}_{B}(\eta)}.\qedhere
+		\E{\xi\I\{\eta \in B\}} = \left|\text{по независимости}\right| = \E{\xi}\E{\I\{\eta \in B\}} = \E{\E{\xi}\I\{\eta \in B\}}.\qedhere
 	\]
 \end{proof}
 
@@ -111,15 +111,15 @@
 	Если \(\xi \leq \delta\) почти наверное, то \(\E{\xi \given \eta} \leq \E{\delta \given \eta}\) почти наверное.
 \end{property}
 \begin{proof}
-	Рассмотрим случайную величину \(\chi = \E{\xi \given \eta} - \E{\delta \given \eta}\). Несложно понять, что она является борелевской функцией от \(\eta\). Теперь рассмотрим \(\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)}\). Заметим, что \(\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)} \geq 0\). Теперь скажем, что \(\mathbf{1}_{(0, +\infty)}(\chi) = \mathbf{1}_{B}(\eta)\) для какого-то борелевского множества \(B\).\footnote{На самом деле \(B = \chi^{-1}(0, +\infty)\).} Тогда
+	Рассмотрим случайную величину \(\chi = \E{\xi \given \eta} - \E{\delta \given \eta}\). Несложно понять, что она является борелевской функцией от \(\eta\). Теперь рассмотрим \(\E{\chi\I\{\chi \in (0, +\infty)\}}\). Заметим, что \(\E{\chi\I\{\chi \in (0, +\infty)\}} \geq 0\). Теперь скажем, что \(\I\{\chi \in (0, +\infty)\} = \I\{\eta \in B\}\) для какого-то борелевского множества \(B\).\footnote{На самом деле \(B = \chi^{-1}(0, +\infty)\).} Тогда
 	\[
-		\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)} = \E{(\E{\xi \given \eta} - \E{\delta \given \eta})\mathbf{1}_{B}(\eta)}.
+		\E{\chi\I\{\chi \in (0, +\infty)\}} = \E{(\E{\xi \given \eta} - \E{\delta \given \eta})\I\{\eta \in B\}}.
 	\]
 	Пользуясь линейностью матожидания и интегральным свойством, получаем, что
 	\[
-		\E{\chi\mathbf{1}_{(0, +\infty)}(\chi)} =  \E{\xi\mathbf{1}_{B}(\eta)} - \E{\delta \mathbf{1}_{B}(\eta)} \leq 0 \text{, так как } \xi \leq \delta.
+		\E{\chi\I\{\chi \in (0, +\infty)\}} =  \E{\xi\I\{\eta \in B\}} - \E{\delta \I\{\eta \in B\}} \leq 0 \text{, так как } \xi \leq \delta.
 	\]
-	Тогда получаем, что \(\chi\mathbf{1}_{(0, +\infty)}(\chi) = 0\) почти наверное и \(\xi \leq \delta\).
+	Тогда получаем, что \(\chi\I\{\chi \in (0, +\infty)\} = 0\) почти наверное и \(\xi \leq \delta\).
 \end{proof}
 
 \begin{property}[Телескопическое]
@@ -135,8 +135,8 @@
 	
 	Теперь докажем второе утверждение. Заметим, что \(\E{\xi \given \eta}\) является борелевской функцией от \(\eta\). Теперь проверим интегральное свойство. Пусть \(\delta \in \R^{m}\). Тогда по интегральному свойству:
 	\begin{align*}
-		\E{\E{\xi \given (\eta, \delta)}\mathbf{1}_{B}(\eta)} &= \E{\E{\xi \given (\eta, \delta)}\mathbf{1}_{B \times \R^{m}}(\eta, \delta)} = \\
-		&= \E{\xi\mathbf{1}_{B \times \R^{m}}(\eta, \delta)} = \E{\xi\mathbf{1}_{B}(\eta)} = \E{\E{\xi \given \eta}\mathbf{1}_{B}(\eta)}.\qedhere
+		\E{\E{\xi \given (\eta, \delta)}\I\{\eta \in B\}} &= \E{\E{\xi \given (\eta, \delta)}\I\{\eta, \delta \in B \times \R^{m}\}} = \\
+		&= \E{\xi\I\{\eta, \delta \in B \times \R^{m}\}} = \E{\xi\I\{\eta \in B\}} = \E{\E{\xi \given \eta}\I\{\eta \in B\}}.\qedhere
 	\end{align*}
 \end{proof}
 
@@ -153,11 +153,11 @@
 	
 	Теперь возьмём произвольное борелевское множество \(B\) и воспользуемся интегральным свойством:
 	\[
-		\E{\xi_n \mathbf{1}_{B}(\eta)} = \E{\E{\xi_n \given \eta}\mathbf{1}_{B}(\eta)}.
+		\E{\xi_n \I\{\eta \in B\}} = \E{\E{\xi_n \given \eta}\I\{\eta \in B\}}.
 	\]
-	Теперь заметим, что \(\xi_n \mathbf{1}_{B}(\eta) \uparrow \xi \mathbf{1}_{B}(\eta)\) и \(\E{\xi_n \given \eta}\mathbf{1}_{B}(\eta) \uparrow h(\eta)\mathbf{1}_{B}(\eta)\). Тогда по теореме о монотонной сходимости
+	Теперь заметим, что \(\xi_n \I\{\eta \in B\} \uparrow \xi \I\{\eta \in B\}\) и \(\E{\xi_n \given \eta}\I\{\eta \in B\} \uparrow h(\eta)\I\{\eta \in B\}\). Тогда по теореме о монотонной сходимости
 	\[
-	\E{\xi\mathbf{1}_{B}(\eta)} = \E{h(\eta)\mathbf{1}_{B}(\eta)}.
+	\E{\xi\I\{\eta \in B\}} = \E{h(\eta)\I\{\eta \in B\}}.
 	\]
 	А это и означает, что \(\E{\xi_n \given \eta} \uparrow \E{\xi \given \eta}\).
 	
@@ -168,12 +168,13 @@
 	Если \(\delta\)~--- это борелевская функция от \(\eta\), то \(\E{\xi\delta \given \eta} = \delta\E{\xi \given \eta}\).
 \end{property}
 \begin{proof}
-	Пусть \(\delta = \mathbf{1}_{A}(\eta)\), где \(A\)~--- некоторое борелевское множество. Заметим, что \(\delta\E{\xi \given \eta}\)~--- это борелевская функция от \(\eta\). Проверим интегральное свойство:
+	Пусть \(\delta = \I\{\eta \in A\}\), где \(A\)~--- некоторое борелевское множество. Заметим, что \(\delta\E{\xi \given \eta}\)~--- это борелевская функция от \(\eta\). Проверим интегральное свойство:
 	\begin{align*}
-		\E{\delta\xi\mathbf{1}_{B}(\eta)} &= \E{\xi\mathbf{1}_{A}(\eta)\mathbf{1}_{B}(\eta)} = \E{\xi\mathbf{1}_{A \cap B}(\eta)} = \E{\E{\xi \given \eta}\mathbf{1}_{A \cap B}(\eta)} \\
-		&= \E{\E{\xi \given \eta}\mathbf{1}_{A}(\eta)\mathbf{1}_{B}(\eta)} = \E{\delta\E{\xi \given \eta}\mathbf{1}_{B}(\eta)}.
+		\E{\delta\xi\I\{\eta \in B\}} &= \E{\xi\I\{\eta \in A\}\I\{\eta \in B\}} = \E{\xi\I\{\eta \in A \cap B\}} = \E{\E{\xi \given \eta}
+		\I\{\eta \in A \cap B\}} \\
+		&= \E{\E{\xi \given \eta}\I\{\eta \in A\}\I\{\eta \in B\}} = \E{\delta\E{\xi \given \eta}\I\{\eta \in B\}}.
 	\end{align*}
-	Пользуясь линейностью матожидания, интегральное свойство будет выполнено и для простых функций вида \(\delta = \sum c_k\mathbf{1}_{A_k}(\eta)\).
+	Пользуясь линейностью матожидания, интегральное свойство будет выполнено и для простых функций вида \(\delta = \sum c_k\I\{\eta \in A_k\}\).
 	
 	В общем случае для любой \(\delta = f(\eta)\) построим последовательность простых функций \(\delta_n = f_{n}(\eta)\) такую, что \(\delta_n \asto \delta\) и \(|\delta_n| \leq |\delta|\). Тогда по свойству 7 получаем, что \(\E{\delta_n\xi \given \eta} \asto \E{\delta\xi \given \eta}\). Однако
 	\[
@@ -188,7 +189,7 @@
 \end{definition}
 Вообще говоря, \(\E{\xi \given \eta = y}\)~--- это борелевская функция \(\phi(y)\) такая, что для любого \(B \in \B(\R^n)\)
 \[
-	\E{\xi\mathbf{1}_{B}(\eta)} = \E{\phi(\eta)\mathbf{1}_{B}(\eta)}.	
+	\E{\xi\I\{\eta \in B\}} = \E{\phi(\eta)\I\{\eta \in B\}}.	
 \]
 Отсюда можно сделать простой вывод: \(\E{\xi \given \eta = y} = \phi(y) \iff \E{\xi \given \eta} = \phi(\eta)\).
 
@@ -196,7 +197,7 @@
 
 Впрочем, мы не имеем представления о том, как его вычислять. Для этого введём условные распределение и плотность.
 \begin{definition}
-	\emph{Условным распределением} случайной величины \(\xi\) при условии, что \(\eta = y\) назовём функцию \(\Pr{\xi \in B \given \eta = y} \equiv \E{\mathbf{1}_{B}(\xi) \given \eta = y}\), рассматриваемую, как функцию от \(B \in \B(\R^n)\) при фиксированном \(y \in \R^k\).
+	\emph{Условным распределением} случайной величины \(\xi\) при условии, что \(\eta = y\) назовём функцию \(\Pr{\xi \in B \given \eta = y} \equiv \E{\I\{\xi \in B\} \given \eta = y}\), рассматриваемую, как функцию от \(B \in \B(\R^n)\) при фиксированном \(y \in \R^k\).
 \end{definition}
 
 \begin{point}
@@ -234,13 +235,13 @@
 \begin{proof}[Решение]
 	Для начала найдём плотность \(\xi + \eta\). По формуле свёртки:
 	\begin{align*}
-		p_{\xi + \eta}(x) &= \int_{-\infty}^{+\infty} e^{-(x - y)}e^{-y}\mathbf{1}_{(0, +\infty)}(x - y)\mathbf{1}_{(0, +\infty)}(y)\diff y \\
-		&= \mathbf{1}_{(0, +\infty)}(x) \int_{0}^{x} e^{-x}\diff y = xe^{-x}\mathbf{1}_{(0, +\infty)}(x).
+		p_{\xi + \eta}(x) &= \int_{-\infty}^{+\infty} e^{-(x - y)}e^{-y}\I\{x - y \in (0, +\infty)\}\I\{y \in (0, +\infty)\}\diff y \\
+		&= \I\{x \in (0, +\infty)\} \int_{0}^{x} e^{-x}\diff y = xe^{-x}\I\{x \in (0, +\infty)\}.
 	\end{align*}
 	
 	Теперь найдём совместную плотность распределения \(\xi\) и \(\xi + \eta\). Для этого распишем вероятностную меру:
 	\[
-		\Pr{(\xi, \xi + \eta) \in B} = \iint\limits_{(x, x + y) \in B} e^{-x}e^{-y}\mathbf{1}_{(0, +\infty)}(x)\mathbf{1}_{(0, +\infty)}(y)\diff x \diff y
+		\Pr{(\xi, \xi + \eta) \in B} = \iint\limits_{(x, x + y) \in B} e^{-x}e^{-y}\I\{x \in (0, +\infty)\}\I\{y \in (0, +\infty)\}\diff x \diff y
 	\]
 	Сделаем замену переменной:
 	\[
@@ -262,11 +263,11 @@
 	\]
 	Тогда \(|\det\mathbf{J}(u, v)| = 1\) и
 	\[
-		\Pr{(\xi, \xi + \eta) \in B} = \iint\limits_{(u, v) \in B} e^{-v}\mathbf{1}_{\{0 < u < v\}}\diff u \diff v.
+		\Pr{(\xi, \xi + \eta) \in B} = \iint\limits_{(u, v) \in B} e^{-v}\I\{0 < u < v\}\diff u \diff v.
 	\]
-	Следовательно, \(p_{\xi, \xi + \eta}(x, y) = e^{-y}\mathbf{1}_{\{0 < x < y\}}\). Теперь посчитаем \(p_{\xi \mid \eta}(x \mid y)\). Так как \(\xi + \eta > 0\) с вероятностью 1, то:
+	Следовательно, \(p_{\xi, \xi + \eta}(x, y) = e^{-y}\I\{0 < x < y\}\). Теперь посчитаем \(p_{\xi \mid \eta}(x \mid y)\). Так как \(\xi + \eta > 0\) с вероятностью 1, то:
 	\[
-		p_{\xi \mid \eta}(x \mid y) = \dfrac{e^{-y}\mathbf{1}_{\{0 < x < y\}}}{ye^{-y}\mathbf{1}_{(0, +\infty)}(y)} = \frac{1}{y}\mathbf{1}_{\{0 < x < y\}}.
+		p_{\xi \mid \eta}(x \mid y) = \dfrac{e^{-y}\I\{0 < x < y\}}{ye^{-y}\I\{y \in (0, +\infty)\}} = \frac{1}{y}\I\{0 < x < y\}.
 	\]
 	Недолго думая, считаем условное матожидание по формуле:
 	\[
