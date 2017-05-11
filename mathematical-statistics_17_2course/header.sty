@@ -1,70 +1,70 @@
-%% Настройка поддержки русского языка
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ПАКЕТЫ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Языки %%
 \usepackage{cmap}                   % Поиск по кириллице
-\usepackage{mathtext}               % Кириллица в формулах
 \usepackage[T1,T2A]{fontenc}        % Кодировки шрифтов
 \usepackage[utf8]{inputenc}         % Кодировка текста
 \usepackage[english,russian]{babel} % Подключение поддержки языков
 
-%% Настройка размеров полей
-\usepackage[top=1in, bottom=1in, left=0.8in, right=0.8in, headheight=110pt]{geometry}
+%% Поля %%
+\usepackage[top=0.8in,bottom=0.8in,left=0.8in,right=0.8in,headheight=110pt]{geometry}
 
-\usepackage{xparse}
-
-%% Математические пакеты
-\usepackage{mathtools}              % Тот же amsmath, только с некоторыми поправками
+%% Математика %%
+\usepackage{amsfonts}               % Математические шрифты
+\usepackage{amstext}                % Текстовые вставки в формулы
 \usepackage{amssymb}                % Математические символы
 \usepackage{amsthm}                 % Оформление теорем
-\usepackage{amstext}                % Текстовые вставки в формулы
-\usepackage{amsfonts}               % Математические шрифты
-\usepackage{icomma}                 % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
-\usepackage{enumitem}               % Для выравнивания itemize (\begin{itemize}[align=left])
 \usepackage{array}                  % Таблицы и матрицы
+\usepackage{enumitem}               % Выравнивание itemize
+\usepackage{icomma}                 % "Умная" запятая
+\usepackage{mathtext}               % Кириллица в формулах
+\usepackage{mathtools}              % Тот же amsmath, только с некоторыми поправками
 
-% Пакеты для алгоритмов
-\usepackage{algorithm}
-\usepackage{algorithmicx}
-\usepackage[noend]{algpseudocode}
-\usepackage{listings}
+%% Алгоритмы %%
+\usepackage{algorithm}              % Убирает перенос + другие мелочи
+\usepackage{algorithmicx}           % Окружение для кода
+\usepackage[noend]{algpseudocode}   % Псевдокод
+\usepackage{listings}               % Отрывки кода на настоящих ЯП
 
-%% Шрифты
-%\usepackage{euscript}               % Шрифт Евклид
-%\usepackage{mathrsfs}               % \mathscr{}
-
-%% Графика
+%% Графика %%
 \usepackage[pdftex]{graphicx}       % Вставка картинок
 \graphicspath{{images/}}            % Стандартный путь к картинкам
 \usepackage{tikz}                   % Рисование всего
 \usepackage{pgfplots}               % Графики
-%\pgfplotsset{compat=1.12}
 \usepackage{circuitikz}             % Электрические цепи
 \usepackage{wrapfig}                % Обволакивание изображений текстом
-\usetikzlibrary{patterns}
-\usetikzlibrary{calc,intersections,through,backgrounds}
-\usepackage{tkz-euclide}
+\usepackage{tkz-euclide}            % Планиметрия
+\usepackage{fancybox}               % Различные рамки и обводки
+
+%% Библиотеки Tikz %%
+\usetikzlibrary{patterns,calc,intersections,through,backgrounds}
 \usetkzobj{all}
-\usepackage{blindtext}
 
-%% Прочие пакеты
-\usepackage{indentfirst}                                % Красная строка в начале текста
-\usepackage{epigraph}                                   % Эпиграфы
-\setlength\epigraphrule{0pt}
-\usepackage{fancybox,fancyhdr}                          % Колонтитулы
+%% Оформление текста %%
+\usepackage{indentfirst}            % Красная строка в начале текста
+\usepackage{epigraph}               % Эпиграфы
+\usepackage{fancyhdr}               % Колонтитулы
 \usepackage[colorlinks=true, urlcolor=blue]{hyperref}   % Ссылки
-\usepackage{titlesec}                                   % Изменение формата заголовков
-\usepackage[normalem]{ulem}                             % Для зачёркиваний
-\usepackage[makeroom]{cancel}                           % И снова зачёркивание (на этот раз косое)
-\usepackage{makecell}                                   % Разбиение клетки по диагонали
-\usepackage{xifthen}                                    % if-else в 
-%определениях комманд
-\usepackage{dsfont}
+\usepackage[normalem]{ulem}         % Прямое зачёркивание
+\usepackage[makeroom]{cancel}       % Косое зачёркивание
+\usepackage{titlesec}               % Изменение формата заголовков
+\usepackage{makecell}               % Разбиение клетки по диагонали
 
-%% Прочее
-\mathtoolsset{showonlyrefs=true}        % Показывать номера только у тех формул,
-                                        % на которые есть \eqref{} в тексте.
-\renewcommand{\headrulewidth}{1.8pt}    % Изменяем размер верхнего отступа колонтитула
-\renewcommand{\footrulewidth}{0.0pt}    % Изменяем размер нижнего отступа колонтитула
+%% Команды %%
+\usepackage{xparse}                 % Интерфейс для создания новых команд  
+\usepackage{xifthen}                % if-else в определениях комманд
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ПАРАМЕТРЫ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mathtoolsset{showonlyrefs=true}    % Показывать номера только у тех формул,
+                                    % на которые есть \eqref{} в тексте.
+%% Сброс счётчиков 
+\makeatletter
+\@addtoreset{theorem}{chapter}      % Счётчик теорем          
+\@addtoreset{problem}{section}      % Счётчик задач
+\@addtoreset{property}{subsection}  % Счётчик свойств
+\makeatother
+                                        
 %% Замена цвета гиперссылки на заметку на синий
 \makeatletter
 \def\@footnotecolor{red}
@@ -86,29 +86,145 @@
     \relax
 }%
 \makeatother
-
+                                        
 %% Параметры колонтитулов
-\hypersetup{footnotecolor=blue}
-\fancyfoot{}
-\fancyhead[RO,LE]{\thepage}
-\fancyhead[LO]{\leftmark}
-\fancyhead[RE]{\rightmark}
+\renewcommand{\headrulewidth}{1.8pt}    % Изменяем размер верхнего отступа колонтитула
+\renewcommand{\footrulewidth}{0.0pt}    % Изменяем размер нижнего отступа колонтитула
+\hypersetup{footnotecolor=blue}         % Цвет ссылок на заметку
+\fancyfoot{}                            % Сброс параметров нижнего колонтитула
+\fancyhead[RO,LE]{\thepage}             % Номер страницы
+\fancyhead[LO]{\leftmark}               % Левая пометка (глава)
+\fancyhead[RE]{\rightmark}              % Правая пометка (секция)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Титульный лист
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ОПРЕДЕЛЕНИЯ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Символы
+% Независимость
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}    
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+% Круглые и квадратные скобки
+\providecommand\given{}
+\DeclarePairedDelimiterX\brackets[1]
+{(}{)}{
+    \renewcommand\given{  \nonscript\:
+        \delimsize\vert
+        \nonscript\:
+        \mathopen{}
+        \allowbreak}
+    #1
+}
+\DeclarePairedDelimiterX\sqbrackets[1]{[}{]}{
+    \renewcommand\given{  \nonscript\:
+        \delimsize\vert
+        \nonscript\:
+        \mathopen{}
+        \allowbreak}
+    #1
+}
+% Вероятность
+\let\Pr\undefined
+\NewDocumentCommand{\Pr}{g}{\operatorname{\mathsf{P}}\IfNoValueTF{#1}{}{\brackets*{#1}}}
+% Математическое ожидание
+\NewDocumentCommand{\E}{g}{\operatorname{\mathsf{E}}\IfNoValueTF{#1}{}{\sqbrackets*{#1}}}
+% Дисперсия
+\NewDocumentCommand{\D}{g}{\operatorname{\mathsf{D}}\IfNoValueTF{#1}{}{\sqbrackets*{#1}}}
+\newcommand{\cov}{\operatorname{\mathsf{cov}}}  % Ковариация
+\newcommand{\eqdist}{\overset{d}{=}}            % Равенство по распределению
+\newcommand{\dto}{\xrightarrow{\mathrm{d}}}     % Сходимость по распределению
+\newcommand{\prto}{\xrightarrow{\Pr}}           % Сходимость по вероятности
+\newcommand{\asto}{\xrightarrow{\text{п.н.}}}	% Сходимость почти наверное
+\newcommand{\N}{\mathbb{N}}                     % Натуральные числа
+\newcommand{\Z}{\mathbb{Z}}                     % Целые числа
+\newcommand{\R}{\mathbb{R}}                     % Действительные числа
+\newcommand{\F}{\mathcal{F}}                    % Сигма-алгебра
+\newcommand{\B}{\mathcal{B}}                    % Борелевская сигма-алгебра
+\newcommand{\A}{\mathcal{A}}                    % Алгебра
+\newcommand{\I}{\operatorname{\mathrm{I}}}      % Индикатор
+\newcommand{\X}{\mathfrak{X}}                   % Выборочное пространство
+\renewcommand{\leq}{\leqslant}                  % Меньше или равно
+\renewcommand{\geq}{\geqslant}                  % Больше или равно
+\renewcommand{\phi}{\varphi}                    % Фи
+\renewcommand{\epsilon}{\varepsilon}            % Эпсилон
+\renewcommand{\emptyset}{\varnothing}           % Пустое множество
+\newcommand{\diff}{\mathop{}\!d}                % Дифференциал
+\newcommand{\eff}{\operatorname{eff}}           % Эффективность оценки
+% Частная производная логарифма функции правдоподобия по параметру
+\newcommand{\dlnpn}[1]{\frac{\partial\ln p_n(#1; \theta)}{\partial \theta}}
+
+%% Канторова лестница
+\tikzset{
+    if/.code n args=3{\pgfmathparse{#1}\ifnum\pgfmathresult=0
+        \pgfkeysalso{#3}\else\pgfkeysalso{#2}\fi},
+    lower cantor/.initial=.3333, upper cantor/.initial=.6667, y cantor/.initial=.5,
+    declare function={
+        cantor_l(\lowerBound,\upperBound)=
+        (\pgfkeysvalueof{/tikz/lower\space cantor})*(\upperBound-\lowerBound)+\lowerBound;
+        cantor_u(\lowerBound,\upperBound)=
+        (\pgfkeysvalueof{/tikz/upper\space cantor})*(\upperBound-\lowerBound)+\lowerBound;
+        cantor(\lowerBound,\upperBound)=% fun definition
+        (\pgfkeysvalueof{/tikz/y\space cantor})*(\upperBound-\lowerBound)+\lowerBound;},
+    cantor start/.style n args=5{%
+        insert path={(#1,#3)},
+        cantor={#1}{#2}{#3}{#4}{#5}{0},
+        insert path={to[every cantor edge/.try, cantor 1 edge/.try] (#2,#4)}},
+    cantor/.style n args=6{%
+        /utils/exec=%
+        \pgfmathsetmacro\lBx{cantor_l(#1,#2)}%
+        \pgfmathsetmacro\uBx{cantor_u(#1,#2)}%
+        %      \pgfmathsetmacro\y{.5*(#3+#4)},% proper definition
+        \pgfmathsetmacro\y{cantor(#3,#4)},% fun
+        style/.expanded={
+            if={#6<#5}{cantor={#1}{\lBx}{#3}{\y}{#5}{#6+1}}{},
+            insert path={
+                to[every cantor edge/.try, cantor 1 edge/.try] (\lBx,\y)
+                to[every cantor edge/.try, cantor 2 edge/.try] (\uBx,\y)},
+            if={#6<#5}{cantor={\uBx}{#2}{\y}{#4}{#5}{#6+1}}{}}}}
+        
+%% Алгоритмы
+\renewcommand{\algorithmicrequire}{\textbf{Вход:}}              % Входные данные
+\renewcommand{\algorithmicensure}{\textbf{Выход:}}              % Результат работы
+\renewcommand{\algorithmiccomment}[1]{\hspace*{\fill}\{#1\}}    % Комментарий справа
+\floatname{algorithm}{Алгоритм}                                 % Русификация Algorithm
+\newcommand{\algname}[1]{\textsc{#1}}                           % Стилизация названия
+
+%% Окружения для теорем и иже с ними
+\theoremstyle{remark}
+\newtheorem*{remark}{Примечание}
+\newtheorem*{exercise}{Упражнение}
+\newtheorem*{point}{Утверждение}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem*{example}{Пример}
+
+\theoremstyle{plain}
+\newtheorem*{frequency-stability}{Принцип устойчивости частоты}
+\newtheorem*{law-of-total-probability}{Формула полной вероятности}
+\newtheorem*{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{problem}{Задача}
+\newtheorem*{hypothesis}{Гипотеза}
+\newtheorem*{consequence}{Следствие}
+\newtheorem{property}{Свойство}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ТИТУЛЬНЫЙ ЛИСТ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\titlepage}{\begingroup
     \hbox{
-          \hspace*{0.12\textwidth}
-          \rule{1pt}{\textheight}
-          \hspace*{0.05\textwidth}
-          \parbox[b]{0.775\textwidth}{
-              {\includegraphics[width=\linewidth]{image}}\\[2\baselineskip]
-              {\noindent\Huge\bfseries Математическая 
-              статистика}\\[\baselineskip]
-              {\large\textrm{Конспекты лекций}}\\[3\baselineskip]
-              {\Large\textsc{Лектор: В.В. Ульянов}}\\[\baselineskip]
-              %{Конспекты вел Алексей Хачиянц}\\[6\baselineskip]
-              {\noindent НИУ ВШЭ, 2016-2017}\\[\baselineskip]
-          }
+        \hspace*{0.12\textwidth}
+        \rule{1pt}{\textheight}
+        \hspace*{0.05\textwidth}
+        \parbox[b]{0.775\textwidth}{
+            {\includegraphics[width=\linewidth]{image}}\\[2\baselineskip]
+            {\noindent\Huge\bfseries Математическая 
+                статистика}\\[\baselineskip]
+            {\large\textrm{Конспекты лекций}}\\[3\baselineskip]
+            {\Large\textsc{Лектор: В.В. Ульянов}}\\[\baselineskip]
+            %{Конспекты вел Алексей Хачиянц}\\[6\baselineskip]
+            {\noindent НИУ ВШЭ, 2016-2017}\\[\baselineskip]
+        }
     }
     \endgroup
 }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
