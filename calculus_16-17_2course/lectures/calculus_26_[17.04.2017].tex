@@ -1,0 +1,119 @@
+\pagestyle{fancy}
+\section{Лекция 26 от 17.04.2017 \\ Разбиения множества, интегрируемость по Риману}
+
+\subsection{Разбиение множества}
+
+\begin{Statement}
+Пусть $A_1, \ldots, A_K$ --- измеримые попарно не перекрывающиеся множества. Тогда $\mu (\bigcup A_k) = \sum \mu A_k$.
+\end{Statement}
+\begin{proof}
+По индукции. Для $K = 1$ верно. Да и для $K = 2$ тоже уже все доказано.
+
+Пусть для $K$ верно. Тогда
+\begin{gather*}
+\mu\left(\bigcup\limits^{K+1} A_k\right) = \mu\left(\bigcup\limits^K A_k\right) + \mu A_{K+1} - \mu\left(A_{K+1} \cap \left( \bigcup\limits^K A_k \right)\right) = \\ = \sum\limits^K\mu A_k + \mu A_{K+1} - \mu \left( \bigcup\limits^K\left(\underbrace{A_{K+1} \cap A_k}_{\text{мн-во меры ноль}} \right) \right) = \sum\limits^{K+1}\mu A_k.
+\end{gather*}
+\end{proof}
+
+\begin{Statement}
+Пусть $A_1, \ldots, A_K$ --- измеримые множества. Тогда $\mu\left( \bigcup\limits^K A_k \right) \leq \sum\limits^K \mu A_k$.
+\end{Statement}
+\begin{proof}
+По индукции, очевидно.
+\end{proof}
+
+Пусть $A$ --- непустое измеримое подмножество $\R^n$.
+
+\begin{Def}
+$\{ A_k \}_{k=1}^K$ называется \textit{разбиением} $A$, если все $A_k$ непустые, измеримые, попарно не перекрывающиеся множества и $\bigcup\limits^K A_k = A$.
+\end{Def}
+
+Можно было бы потребовать и не пересекающиеся множества, но вспомним, что при определении обычного интеграла Римана мы разбивали отрезок на \textit{подотрезки}, которые таки перекрываются. А хочется, чтобы он был частным случаем многомерного интеграла Римана.
+
+\begin{Def}
+$\pi = (T, \xi)$ называется \textit{отмеченным разбиением} $A$, если $T = \{ A_k \}^K$ -- разбиение $A$ и $\xi = \{\xi_k \}^K$, $\xi_k \in A_k$ --- набор отмеченных точек.
+\end{Def}
+
+Тут следует понимать, что одна точка может принадлежать сразу куче элементов разбиения.
+
+\subsection{Интегрируемость по Риману}
+
+Пусть теперь у нас есть еще и функция $f: A \to \R$.
+
+\begin{Def}
+\textit{Интегральная сумма Римана} это $\sigma(f, \pi) = \sigma(f, T, \xi) = \sum\limits^K f(\xi_k)\mu A_k$.
+\end{Def}
+
+\textbf{Свойства:}
+\begin{itemize}
+\item $\sigma(f_1 + f_2, \pi) = \sigma(f_1, \pi) + \sigma(f_2, \pi)$;
+\item $\sigma(\alpha f, \pi) = \alpha \sigma(f, \pi)$.
+\end{itemize}
+
+\begin{Def}\ \\
+\textit{Диаметр множества}: $\diam B = \sup \{ \rho(x_1, x_2) \mid x_1, x_2 \in B \}$.
+
+\textit{Диаметр разбиения}: $\diam T = \max \{ \diam A_1, \ldots, \diam A_K \}$.
+\end{Def}
+
+\begin{Def}
+Функция $f$ \textit{интегрируема по Риману} на множестве $A$ и число $I$ --- ее \textit{интеграл}, если
+$\forall \eps > 0\ \exists\ \delta > 0\ \forall \pi = (T, \xi)$ --- отмеченного разбиения $A$ с $\diam T < \delta $ верно, что $|\sigma(f, \pi) - I| < \eps$. 
+\end{Def}
+
+Пусть $X$ --- множество всех отмеченных разбиений $A$, $B_\delta$ --- множество всех отмеченных разбиений $A$ с диаметром меньше $\delta$. Тогда $\B = \{ B_\delta \}_{\delta > 0}$ --- база на множестве $X$.
+
+Если $f$ --- зафиксирована, то интегральную сумму Римана можно понимать как функцию от разбиения: $\sigma(f, \pi): X \to \R$. Тогда можно рассмотреть ее предел по базе $\B$: $\lim\limits_{\B}\sigma(f, \pi) \hm= \int\limits_{A} f(x) \d x$.
+
+\begin{Consequence}
+Если $f, g \in R(A)$, то
+\begin{enumerate}
+\item $f + g \in R(A)$ и $\int\limits_A(f + g)\d x = \int\limits_A f \d x + \int\limits_Ag \d x$;
+\item $\forall \alpha, \alpha f \in R(A)$ и $\int\limits_A\alpha f \d x = \alpha \int\limits_A f \d x$;
+\item если $f \leq g$ на $A$, то $\int\limits_A f \d x \leq \int\limits_A g \d x$.
+\end{enumerate}
+\end{Consequence}
+
+Вспомним, что у предела по базе есть еще свойство произведения, однако $\int\limits_A fg \d x \neq\\\neq \int\limits_A f\d x \cdot \int\limits_A g \d x$. Все дело в том, что раньше мы использовали линейность интегральных сумм, но свойства произведения у них нет: $\sigma(fg, \pi) \neq \sigma(f, \pi)\sigma(g, \pi)$.
+
+Отметим, что аппарат Дарбу здесь не работает. Например, пусть $A$ это <<солнышко>> --- окружность с лучами, и пусть функция внутри тождественно равна нулю, а на лучах убегает на бесконечность. На интеграл это не влияет (потому что у лучей мера ноль), а вот Дарбу ломается. Хочется это как-то исправить.
+
+Пусть $\delta > 0$ и $A_\delta = \{ x \in A \mid \exists y \in \mathrm{int}A:\ \rho(x, y) \leq \delta \}$. Для нашего <<солнышка>> это будет окружность и $\delta$--куски лучей.
+
+\begin{Statement}
+Если $f \in R(A)$, то $\exists \delta > 0$ такое, что $f$ ограничена на $A_\delta$.
+\end{Statement}
+\begin{proof}
+Для $\eps = 1$ найдем такое $\delta_0 > 0$, что $\forall \pi = (T, \xi)$ --- отмеченного разбиения $A$ с диаметром меньше $\delta_0$ верно, что $|\sigma(f, \pi) - I | < \eps$, где $I := \int\limits_A f(x) \d x$.
+
+Положим $\delta = \delta_0 / 10\sqrt{n}$, где $n$ --- размерность нашего пространства.
+
+Покажем, что $f$ ограничена на $A_\delta$. Найдем $K_0$ --- куб со стороной, кратной $\delta$, содержащий все $A$. Порежем $K_0$ на попарно не перекрывающиеся кубики со стороной $\delta$. Осталось показать, что для каждого такого кубика $K$, пересекающегося с $A_\delta$, $f$ ограничена на $K \cap A_\delta$.
+
+Пусть $K \cap A_\delta \neq \varnothing$, то есть $\exists x_0 \in K \cap A_\delta$. Следовательно, $\exists y \in \mathrm{int}A: \rho(x, y) \leq \delta$. Через $\widetilde{K}$ обозначим раздутие куба $K$ в 5 раз (с сохранением центра). Тогда $y \in \mathrm{int}\widetilde{K}$ и, следовательно, $\mu(\widetilde{K} \cap A) > 0$, так как есть внутренние точки.
+
+Пусть $A_1 := \widetilde{K} \cap A$. Ясно, что $\diam A_1 \leq \diam \widetilde{K} = 5\delta \sqrt{n} < \delta_0$.
+
+Для множества $A \setminus A_1$ найдем какое-нибудь разбиение $A_2, \ldots, A_K$ с диаметром меньше $\delta_0$. Зафиксируем точки $\xi_2 \in A_2, \ldots, \xi_K \in A_K$. Пусть $\xi_1 \in A_1$ --- нефиксированная точка.
+
+Так как $T = \{ A_1, \ldots, A_K \}$ --- разбиение $A$ с диаметром меньше $\delta_0$, то $\left| \sum\limits_{k=1}^K f(\xi_k)\mu A_k - I\right| < 1$. Перепишем это в виде двойного неравенства:
+\begin{gather*}
+I - 1 < \sum\limits^K f(\xi_k)\mu A_k < I + 1,\\
+\dfrac{I - 1 - \sum\limits_{k = 2}^Kf(\xi_k) \mu A_k }{\mu A_1} < f(\xi_1) < \dfrac{I + 1 + \sum\limits_{k = 2}^Kf(\xi_k) \mu A_k }{\mu A_1}.
+\end{gather*}
+Получили, что $\forall \xi_1 \in A_1\ f(\xi_1)$ ограничена. Соответственно, $f$ ограничена на $A_1 = \widetilde{K} \cap A \supset A \supset K \cap A_\delta$. Следовательно, она ограничена и на $K \cap A_\delta$. Что мы и хотели получить. 
+\end{proof}
+
+
+\begin{Statement}
+Если для некоторого $\delta > 0$ $f \equiv g$ на $A_\delta$, то $f$ и $g$ одновременно интегрируемы или не интегрируемы по Риману, и если интегрируемы, то их интегралы равны.
+\end{Statement}
+\begin{proof}
+Докажем, что $\forall \pi = (T, \xi)$ --- отмеченного разбиения $A$ с диаметром меньше $\delta$ верно, что $\sigma(f, \pi) = \sigma(g, \pi)$:
+\begin{gather*}
+\sigma(f, \pi) = \sum\limits^Kf(\xi_k)\mu A_k = \sum\limits_{k: \xi_k \in A_\delta} f(\xi_k)\mu A_k + \sum\limits_{k: \xi_k \not\in A_\delta}f(\xi_k) \underbrace{\mu A_k}_{\in \delta A \Rightarrow \mu A_k = 0} = \\= \sum\limits_{k: \xi_k \in A_\delta} g(\xi_k)\mu A_k + \underbrace{\sum\limits_{k: \xi_k \not\in A_\delta}g(\xi_k) \mu A_k}_{= 0} = \sigma(g, \pi).
+\end{gather*}
+
+Теперь, пусть $f \in R(A)$ и $I := \int\limits_A f \d x\ \forall \eps > 0$. Тогда $\exists \delta_0:\ \forall \pi$ --- отмеченного разбиения $A$ с диаметром меньше $\delta_0$ верно, что $|\sigma(f, \pi) - I| < \eps$. Взяв $\delta_1 = \min(\delta, \delta_1)$, получим, что $\forall \pi$ --- отмеченного разбиения с диаметром меньше $\delta_1$ верно, что $| \sigma(g, \pi) - I | = |\sigma(f, \pi) - I| < \eps$, то есть $g \in R(A)$ и $\int\limits_A g \d x = I$.
+
+\end{proof}
