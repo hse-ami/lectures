@@ -1,0 +1,133 @@
+\pagestyle{fancy}
+\section{Лекции 27-28 от 15.05.2017 \\ Критерий Дарбу}
+Пусть $A$ --- непустое измеримое множество, и функция $f\colon A \to \R$, $T = \{A_k\}_{k =1}^{K}$ --- разбиение множества $A$. Обозначим за $m_i = \inf_{A_i} f, M_i = \sup_{A_i} f$.
+\begin{Def}
+    Верхней и нижней суммами Дарбу называются соответственно $S^*$ и $s_*$, определённые следующим образом:
+\begin{gather}
+    S^*(f, T) = \sum\limits_{i =1}^{K} M_i \mu A_i\\
+    s_*(f, T) = \sum\limits_{i =1}^{K} m_i \mu A_i\\
+\end{gather}
+\end{Def}
+
+\begin{Def}
+    Разбиение $T_1 = \{B_j\}_{j =1}^{J}$ называется измельчением разбиения $T = \{A_k\}_{k=1}^{K}$ если для всякого множества $B_i$ из разбиения $T_1$ существует такое множество $A_k$ из разбиения $T$, что $B_i \subset A_k$. 
+\end{Def}
+Заметим, что если $B_j \subset A_{k_1}$ и $B_j \subset A_{k_2}$ при $k_1 \neq k_2$, то $\mu B_j = 0$. Далее будем подразумевать под $B_i$ множества, составляющие измельчение разбиения $A$ на множества $A_k$. 
+\begin{Statement}
+    $\sum \limits_{j\colon B_j \subset A_k}\mu B_j = \mu A_k$.
+\end{Statement}
+\begin{proof}
+    Обозначим за $\widetilde{A}_k = \bigcup\limits_{j\colon B_j \subset A_k}B_j$. Очевидно, что $\widetilde{A}_k \subset A_k$. Рассуждаем от противного: пусть $\mu \widetilde{A}_k < \mu A_k$, или, что то же самое $ \mu(A_k\setminus \widetilde{A}_k ) > 0$. Тогда найдётся такое $l$, что $\mu (B_l \cap (A_k \setminus \widetilde{A}_k)) > 0$. Тогда $A_k \setminus \widetilde{A}_k = \bigcap\limits_{l}((A_k \setminus \widetilde{A}_k)\cap B_l)$, и если бы $\mu((A_k \setminus \widetilde{A}_k)\cap B_l) = 0$ для всех $l$, то получили бы, что $\mu(A_k \setminus \widetilde{A}_k) = 0$. Значит, найдётся такой $k_1 \neq k$, что $B_l \subset A_k$ и $\mu(A_k \cap A_{k_1}) \geqslant \mu(A_k \cap B_l) > 0$. Противоречие.
+\end{proof}
+Если $T_1 = \{A_k\}_{k =1}^{K}$ и $T_2 = \{\widetilde{A}_j)\}_{j=1}^{J}$ --- два разбиения множества $A$. Тогда существует разбиение множества измельчение $\widetilde{T}$ для обоих разбиений, определённое следующим образом:
+$$
+    \widetilde{T} =  \{A_k \cap \widetilde{A}_j\}_{k, j}
+$$
+\begin{Lemma}
+    Если $T_1 = \{B_k\}_{k=1}^{K}$ --- измельчение $T = \{A_j\}_{j =1}^{J}$, то 
+    $$
+        s_* (f, T) \leqslant S^*(f, T_1)
+    $$
+\end{Lemma}
+\begin{proof}
+    Введём обозначения
+    \begin{gather}
+        M_k = \sup_{A_k}(f)\\
+        \widetilde{M}_k = \sup_{\widetilde{A}_k}(f)
+    \end{gather}
+    Тогда искомое неравенство есть следствие следующей цепочки неравенств:
+    \begin{gather}
+        S^*(f, T_1) = \sum\limits_{k = 1}^{K}\widetilde{M}_k\mu B_k =  \sum\limits_{j = 1}^{J} \sum\limits_{k\colon B_k \subset A_j} \widetilde{M}_k \mu B_k \leqslant \sum\limits_{j=1}^J  \sum\limits_{k\colon B_k \subset A_j} M_j \mu B_k = \sum\limits_{j=1}^J M_j \mu A_j = S^*(f, T)
+    \end{gather}
+\end{proof}
+\begin{Statement}
+    Для любых разбиений $T_1$ и $T_2$, $s_*(f, T_1) \leqslant S^*(f, T_2)$.
+\end{Statement}
+\begin{proof}
+    Пусть $\widetilde{T}$ --- изьмельчение $T_1$ и $T_2$. Тогдa,
+    $$
+        s_*(f, T_1) \leqslant s_*(f, \widetilde{T}) \leqslant S^*(f, \widetilde{T}) \leqslant S^*(f, T_2)
+    $$
+\end{proof}
+\begin{Def}
+    Нижним и верхним интегралами Дарбу ($I_*$ и $I^*$ соответственно) называются величины
+    \begin{gather}
+        I_* = I_*(f, A) = \sup_{T} s_*(f,T)\\
+        I^* = I^*(f, A) = \sup_{T} S^*(f, T)
+    \end{gather}
+    по всем разбиениям $T$.
+\end{Def}
+Сразу очевидное утверждениe
+\begin{Statement}
+    $I_* \leqslant I^*$
+\end{Statement}
+\begin{proof}
+    Сразу следует из того, что для всяких $T_1, T_2$ --- разбиений $A$, $s_*(f, T_1) \leqslant S^*(f, T_2)$ и $I_* \leqslant S^*(f, T_2)$.
+\end{proof}
+\begin{Theorem}[Критерий Дарбу]
+Следующие утверждения эквивалентны:
+\begin{enumerate}
+    \item $f \in \mathcal{R}(A)$
+    \item $I_* = I^*$.
+\end{enumerate}
+Причём если утверждение выполнено, то $I_* = I^* = \int\limits_{A}f(x) dx$.
+\end{Theorem}
+\begin{proof}
+    $(1) \Rightarrow (2)$. Обозначим за $I = \int\limits_A fdx$. Зафиксируем произвольное $\eps > 0$. Существует такое $\delta > 0$, что для любого отмеченного разбиения $(T, \xi)$ диаметром, меньшим, чем $\delta$ выполнено $|\sigma(f, T, \xi) - I| < \eps$. Перепишем это как
+    \begin{gather}
+        I - \eps \leqslant \sigma(f, T, \xi) \leqslant 1 + \eps\\
+        I - \eps \leqslant S_*(f, T) = \inf_\xi \sigma(f, T, \xi) \leqslant \sup_\xi \sigma(f, T, \xi) = S^*(f, T) \leqslant I +\eps\\
+        I - \eps \leqslant S_*(f, T) \leqslant I_* < I^* \leqslant S^*(f, T) \leqslant I + \eps
+    \end{gather}
+    То есть мы получили, что с одной стороны $|I - I_*| < \eps$, с другой --- $|I - I^*| < \eps$. Это возможно лишь когда $I^* = I = I_*$.\\
+    $(2) \Rightarrow (1)$. Обозначим за $C = \sup_A |f|$. Зафиксируем произвольное $\eps > 0$ и положим $\eps_1 = \frac{\eps}{100(1 + C\cdot\mu A)}$.
+
+    Найдём такие разбиения $T_1$ и $T_2$, что 
+    \begin{gather}
+        S_*(f, T_1) > I_* - \eps_1\\
+        S^*(f, T_2) < I^* + \eps_1
+    \end{gather}
+    Найдём $T = \{A_k\}_{k =1}^{K}$ --- измельчение одновременно разбиений $T_1$ и $T_2$.
+    $$
+        I - \eps_1 < S_*(f, T) < S^*(f, T) < 1 + \eps
+    $$
+    Положим $D = \bigcup\limits_{k=1}^K \delta A_k$, причём в силу измеримости множеств $\mu D =0$. Найдётся простое множество $P_1$ такое, что $P_1 \supset D$ и $\mu P_1 < \frac{\eps_1}{5^n}$ (напомним, что $n$ --- размерность нашего пространства). Это множество представить в виде дизъюнктного объединения множеств, а именно
+    \[
+        P_1 = \bigsqcup\limits_{j=1}^J \Pi_j 
+    \]
+    Если среди этих брусов есть вырожденные, то заменим их на невырожденные с сохранением неравенства (в силу строгости неравенства мы можем так сделать). Пусть $\delta > 0$ --- минимальная длина ребра полученных брусов. Через $\Pi_j^*$ обозначим раздутие бруса $\Pi_j$ в 5 раз (брус, полученный гомотетией относительно центра с коэффициентом 5), положим также $P = \bigcup\limits_{j=1}^J \Pi_j^*$. Заметим, что $\mu P < \eps_1$.\\
+    Далее нам потребуется одна лемма.
+    \begin{Lemma}
+        Пусть $B$ --- измеримое множество, причём $B \cap A \neq \varnothing$. Тогда либо $B \subset A$ либо $B \cap \partial A \neq \varnothing$.
+    \end{Lemma}
+    \begin{proof}
+    Будем считать, что $B$ не является подмножеством $A$, так как в противном случае всё очевидно. Тогда найдём $x \in A$ и $y \in \R^n\setminus A$, лежащие в брусе. Соединим их отрезком. Будем делить отрезок пополам, на каждой итерации выбирая тот, который пересекает границу. Получим последовательность вложенных отрезков, которые имеют одну точку. Эта точка будет искомой.
+    \end{proof}
+    Пусть $\widetilde{T} = \{B_j\}_{j=1}^{J}$ --- разбиение $A$ с $\mathrm{diam}\; \widetilde T < \delta$. Тогда про множество $B_j$ известно, что
+    \begin{enumerate}
+        \item Либо $B_j \subset A_i$ для некоторого $i$
+        \item Лиюо $B_j$ пересекает $\delta A_i$ для некоторого $i$.
+    \end{enumerate}
+    Легко понять, что во втором случае $B_j \subset P$, поскольку содержит точку границы и имеет диаметр не больше $\delta$. Тогда
+    \begin{gather}
+        \sigma(f, \widetilde{T}) = \sum\limits_{j =1}^{J} f(\xi_j)\mu B_j = \sum\limits_{k=1}^{K} \sum\limits_{j\colon B_j \subset A_k} f(\xi_j)\mu B_j + \sum\limits_{j \colon\not\subset A_i\forall i} f(\xi_j)\mu B_j\leqslant\\ \leqslant \sum\limits_{k=1}^K \sum\limits_{j\colon B_j\subset A_k}\sup_{B_j} f \mu B_j + \sum\limits_{j \colon\not\subset A_i\forall i} \sup_{A}|f| \mu B_j \leqslant \sum\limits_{k=1}^K \sum\limits_{j\colon B_j\subset A_k}\sup_{B_j} f \mu B_j + С\mu P \leqslant\\ \leqslant \sum\limits_{k = 1}^{K} \sup_{A_k}f\cdot\left(\mu A_k - \mu \left(A_k \setminus \bigcup_{B_j \in A_k} B_j\right)\right) + C\eps_1 \leqslant S^*(f, T) + 2C\eps_1 < I + \eps_1(1 + 2C) < I + \eps/2
+    \end{gather}
+    Аналогично докажем, что $s_* > I- \eps/2$.
+\end{proof}
+\begin{Statement}
+    Если $f\in \mathcal{R}(A)$ и $f$ ограничена на $A$, то
+    $$
+        \forall \eps > 0 \exists \delta > 0\colon \; \forall T \text{ --- разбиения } A,\; \mathrm{diam}(T)< \delta\; S^*(f,T) - s_*(f, T) < \eps
+    $$
+\end{Statement}
+\begin{Statement}
+Если $f$ ограничена на $A$ и $\forall \eps > 0\; \exists T_1, T_2 \text{ --- разбиения } A\colon S^*(f, T_1) - s_*(f, T_2) < \eps$, то $f \in \mathcal{R}(A)$. 
+\end{Statement}
+\begin{Consequence}
+    Если $f$ ограничена и равномерно непрерывна на $A$, то $f \in \mathcal{R}(A)$. 
+\end{Consequence}
+\begin{Consequence}
+    Если $f$ ограничена на $A$ и $B$ ($A \cap B = \varnothing$) и интегрируема нa $A$ и $B$, то $f \in \mathcal{R}(A \cup B)$.
+\end{Consequence}
+
+

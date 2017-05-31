@@ -1,0 +1,99 @@
+\pagestyle{fancy}
+\section{Лекция 25 от 10.04.2017 \\ Критерий измеримости по Жордану и иже с ним}
+
+Вспомним утверждение
+\begin{Statement}[Критерий измеримости]
+Пусть $A$ --- ограниченное подмножество $\R^n$. Тогда следующие утверждения эквивалентны:
+\begin{enumerate}
+    \item $A$ --- измеримо по Жордану;
+    \item $\mu^* \delta A = 0$, где $\delta A$ --- граница множества.
+\end{enumerate}
+\end{Statement}
+Для доказательства $(2) \Rightarrow (1)$ нам потребуется лемма:
+\begin{Lemma}
+Пусть есть брус $\Pi$ такой, что
+\begin{enumerate}
+    \item $\Pi \cap \mathrm{int} A \neq \varnothing$
+    \item $\Pi \cap \mathrm{ext} A \neq \varnothing$
+\end{enumerate}
+Тогда $\Pi \cap \delta A \neq \varnothing$.
+\end{Lemma}
+И вначале ещё одно вспомогательное определение:
+\begin{Def}
+Отрезком в $\R^n$ с концами $a$ и $b$ назовём множество точек $\{x = a + t(b-a)\;|\; t\in[0;1], a,b \in \R^n\}$
+\end{Def}
+\begin{proof} [Первый способ доказательства леммы]
+    Пусть $a \in \Pi\cap \mathrm{int}A$, $b \in \Pi \cap \mathrm{ext}A$. Отрезок с концами $a$ и $b$ полностью лежит в брусе. Будем делить его пополам и выбирать ту половину, у которой один конец в $A$, а другой --- нет. Полученная последовательность есть последовательность вложенных сегментов. У такой последовательности есть общая точка. Она и будет искомой.
+\end{proof}
+\begin{proof}[Второй способ доказательства леммы]
+Введём функцию $f\colon \Pi \to \R$ такую, что:
+$$
+    f(x) = \begin{cases}
+        0,\; x\notin A\\
+        1,\; x \in A
+    \end{cases}
+$$
+, то есть, иначе говоря, индикатор множества $A$. Эта функция непрерывна во всех внутренних и внешних точках $A$, а значит, в нашем предположении, и на всём брусе. Рассмотрим другую функцию $\varphi(t) = f(a + t(b-a))$. Она непрерывна на отрезке $[0;1]$, при этом принимает на нём ровно два значения. Противоречие.
+\end{proof}
+\begin{proof}[Доказательство критерия измеримости]
+Найдём открытый брус $\Pi_0$, содержащий $A$. Зафиксируем произвольное $\eps >0$. Существует такое простое множество $P_0\supset \delta A$ и $\mu P_0 < \eps$. Будем считать $P_0 \subset \Pi_0$ (иначе возьмём вместо $P_0$ множество $P_0\cap \Pi_0$). Заметим, что $\Pi_0 \setminus P_0$). Заметим, что $\Pi_0 \setminus P_0$ --- простое множество. Представим его как пересечение попарно непересекающихся брусов.
+\begin{gather}
+    \Pi_0 \setminus P_0 = \pi_1 \sqcup \ldots \sqcup \pi_K\\
+    \pi_k \cap \delta A = \varnothing
+\end{gather}
+То есть либо $\pi_k \subset \mathrm{int}A$ либо $\pi_k \subset \mathrm{ext}A$. Положим $p = \bigsqcup\limits_{k\colon \pi_k \subset \mathrm{int}A} \pi_k$, $P = p \sqcup P_0 = \Pi_0 \setminus \bigsqcup\limits_{k\colon \pi_k \subset \mathrm{ext}A}\pi_k$.
+Заметим, что $p \subset A$, $P\supset A$. Тогда $\mu P \mu p = \mu(P \setminus p) = \mu(P_0) < \eps$. В силу произвольности $\eps$, получаем то, что нужно.
+\end{proof}
+\begin{Consequence}
+Пусть множества $A$ и $B$ измеримы по Жордану. Тогда $A \cap B$, $A \cap B$, $A \setminus B$ измеримы по Жордану.
+\end{Consequence}
+\begin{Comment}
+\begin{enumerate}
+    \item Подмножество меры 0 по Жордану имеет меру 0 по Жордану.
+    \item Объединение конечного числа множеств меры 0 по Жордану --- также множество меры 0 Жордану.
+\end{enumerate}
+\end{Comment}
+\begin{Statement}
+Если $A$ и $B$ измеримые подмножества $\R^n$, то $\mu(A \sqcup B) = \mu A + \mu B$.
+\end{Statement}
+\begin{proof}
+Мы докажем лишь половину утверждения, так как вторая отличается лишь разворотом знака. Зафиксируем произвольное $\eps > 0$. Найдём такие простые множества $P_A$ и $P_B$, что
+\begin{gather}
+    P_A \supset A\\
+    P_B \supset B\\
+    \mu P_A > \mu_*A - \eps/2\\
+    \mu P_A > \mu_*B - \eps/2
+\end{gather}
+$P_A \cup P_B$ --- простое множество, причём
+$$
+    P_A \sqcup P_B \subset A \cup B
+$$
+Тогда $\mu(P_A \sqcup P_B) = \mu P_A + \mu P_B > \mu A + \mu B - \eps$. Следовательно $\mu_*(A \sqcup B)\geqslant \mu A + \mu B$. Аналогично для верхней меры. Итого получаем
+\begin{gather}
+    \mu_*(A \sqcup B)\geqslant \mu A + \mu B\\
+    \mu^*(A \sqcup B)\leqslant \mu A + \mu B
+\end{gather}
+\end{proof}
+\begin{Consequence}
+    Если $A$ и $B$ измеримы по Жордану, то $\mu (A \cup B) = \mu A + \mu B - \mu(A \cap B)$.
+\end{Consequence}
+\begin{proof}
+Можно и без слов:
+\begin{gather}    
+    A \cup B = A \sqcup (B\setminus A)\\
+    \mu (A \cup B) = \mu A + \mu(B \setminus A)\\
+    B = (B \cap A) \sqcup (B \setminus A)\\
+    \mu(B) = \mu(A \cap B) + \mu(B \setminus A)\\
+    \mu(B \setminus A) = \mu(B) - \mu(A \cap B)\\
+    \mu(A \cup B) = \mu(A) + \mu(B) - \mu(A \cap B)
+\end{gather}
+\end{proof}
+\begin{Def}
+    $A$ и $B$ будем называть неперекрывающимися, если их пересечение лежит в объединении границ: $A\cap B \subset \delta A \cup \delta B$.
+\end{Def}
+\begin{Comment}
+    Если $A$ и $B$ неперекрывающиеся и измеримы, то $\mu(A \cap B) = 0$.
+\end{Comment}
+\begin{proof}
+    От противного: пусть $A$ и $B$ перекрываются. Тогда $\exists x \in \mathrm{int} A \cap \mathrm{int}B$. Следовательно, существует такое множество $\delta > 0$, что $B_\delta \subset A \cap B$, отсюда следует $\mu(A \cap B) > \mu(B_\delta) > 0$. 
+\end{proof}
