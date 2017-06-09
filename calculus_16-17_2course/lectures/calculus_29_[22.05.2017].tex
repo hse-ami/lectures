@@ -1,0 +1,146 @@
+\section{Лекция 29 от 22.05.2017 \\ Следствия критерия Дарбу, многомерный интеграл}
+
+\subsection{Следствия из критерия Дарбу}
+
+\begin{Statement}
+Если $f \in \Ri(F)$, $B$ --- непустое подмножество $A$, то $f \in \Ri(B)$.
+\end{Statement}
+\begin{proof}
+Достаточно доказать для случая $B \neq A$.
+
+Сделаем $f$ ограниченной функцией. Для этого воспользуемся доказанным ранее утверждением: если $f \in \Ri(A)$, то $\exists \gamma:\ f$ ограниченна на $A_\gamma$. Переопределим $f$ на $A \setminus A_\gamma$ нулем. Это не повлияет на интегрируемость и интеграл $f$ по $A$, и, соответственно, по $B$, так как $B_\gamma \subset A_\gamma$.
+
+Зафиксируем произвольное $\eps > 0$. Найдем $\delta$ такое, что для любого разбиения $T$ множества $A$ с диаметром меньшим $\delta$ выполняется, что $S^*(f, T) - S_*(f, T) < \eps$.
+
+Найдем $T_1 = \{ A_1, \ldots, A_K \}$ --- разбиение $B$ c диаметром меньшим $\delta$. Дополним его до разбиения $T = \{ A_1, \ldots, A_K, A_{K+1}, \ldots, A_M \}$ множества $A$ с диаметром меньшим $\delta$. Тогда:
+\begin{gather*}
+S^*(f, T_1) - S_*(f, T_1) = \sum\limits_{j = 1}^K\left( \sup\limits_{A_j}f - \inf\limits_{A_j}f \right)\mu A_j \leq \sum\limits_{j = 1}^M\left( \sup\limits_{A_j}f - \inf\limits_{A_j}f \right)\mu A_j = S^*(f, T) - S_*(f, T) < \eps.
+\end{gather*}
+Значит, $f \in \Ri(B)$.
+\end{proof}
+
+\begin{Statement}
+Пусть $f$ ограничена на $A$ и $B$, $A$ и $B$ измеримые, непустые не пересекающиеся множества, $f \in \Ri(A)$ и $f \in \Ri(B)$. Тогда $f \in \Ri(A \cup B)$ и $\int\limits_{A \sqcup B}f \d x = \int\limits_A f \d x + \int\limits_B f \d x$.
+\end{Statement}
+\begin{proof}
+Вообще говоря, первая часть утверждения уже доказывалась, а вторая слишком очевидна.
+\end{proof}
+
+\begin{Statement}
+Пусть $A$ и $B$ измеримые, непустые не пересекающиеся множества и \\$f \in \Ri(A \sqcup B)$. Тогда $\int\limits_{A \sqcup B}f \d x = \int\limits_A f \d x + \int\limits_B f \d x$.
+\end{Statement}
+\begin{proof}
+Это не то же самое утверждение, что и предыдущее! Здесь мы не требуем ограниченности $f$ на множествах $A$ и $B$.
+
+Пусть $I = \int\limits_{A \sqcup B}f \d x$, $I_A = \int\limits_A f \d x$ и $I_B =\int\limits_B f \d x$.
+
+Зафиксируем произвольное $\eps > 0$. Для $\eps_1 = \eps / 3$ найдем $\delta_1$ такое, что для любого отмеченного разбиения $(T, \xi)$ множества $A \sqcup B$ с диаметром меньшим $\delta_1$ выполняется $|\sigma(f, T, \xi) - I| < \eps_1$
+
+Аналогично, найдем такое $\delta_2$, что для любого отмеченного разбиения $(T_1, \xi_1)$ множества $A$ с диаметром меньшим $\delta_1$ выполняется $|\sigma(f, T_1, \xi_1) - I_A| < \eps_1$.
+
+И, конечно, найдем такое $\delta_3$, что для любого отмеченного разбиения $(T_2, \xi_2)$ множества $B$ с диаметром меньшим $\delta_1$ выполняется $|\sigma(f, T_2, \xi_2) - I_B| < \eps_1$.
+
+Определим $\delta$ следующим образом: $\delta := \min(\delta_1, \delta_2, \delta_3)$. А в качестве отмеченного разбиения множества $A \sqcup B$ возьмем разбиение $(T, \xi) = (T_1 \sqcup T_2, \xi_1 \sqcup \xi_2)$. Очевидно, что его диаметр будет меньше $\delta$. Тогда:
+\begin{gather}
+|I - (I_A + I_B)| = \left| (I - \sigma(f, T, \xi)) + (\sigma(f, T_1, \xi_1) - I_A) + (\sigma(f, T_2, \xi_2) - I_B) \right| < \eps_1 + \eps_1 + \eps_1 = \eps.
+\end{gather}
+Итого, в силу произвольности $\eps$, $I = I_A + I_B$.
+\end{proof}
+
+\begin{Statement}
+Пусть функция $f$ интегрируема и ограничена на $A$ и на $B$. Тогда \\$f \in \Ri(A \cup B)$ и $\int\limits_{A \cup B} f\dx = \int\limits_A f \dx + \int\limits_B f \dx - \int\limits_{A \cap B} f\dx$.
+\end{Statement}
+\begin{proof}
+Очевидно, особенно если вспомнить, что $A \cup B = A \sqcup (A \setminus B)$.
+\end{proof}
+
+\begin{Statement}
+Пусть $f \in \Ri(A)$. Тогда $|f| \in \Ri(A)$ и $\left|\int\limits_A f\dx \right| \leq \int\limits_A |f|\dx$.
+\end{Statement}
+\begin{proof}
+Самое интересное здесь --- интегрируемость модуля. Докажем это.
+
+Снова сводим $f$ к ограниченной на $A$. Зафиксируем произвольное $\eps > 0$ и найдем такое разбиение $T$ множества $A$, что $S^*(f, T) - S_*(f, T) < \eps$. Перепишем это в другом виде:
+\begin{gather*}
+S^*(f, T) - S_*(f, T) =  \sum\left( \sup\limits_{A_j}f - \inf\limits_{A_j}f \right)\mu A_j = \sum\sup\limits_{\widetilde{x}, \widetilde{y} \in A_j}(f(\widetilde{x}) - f(\widetilde{y})) \mu A_j = \sum\osc(f, A_j)\mu A_j.
+\end{gather*}
+$\osc(f, A) = \sup\limits_{\widetilde{x}, \widetilde{y} \in A}(f(\widetilde{x}) - f(\widetilde{y}))$ называется \textit{осцилляцией} или \textit{колебанием} функции $f$ на  множестве $A$. Несложно понять, что $\osc(|f|, A) \leq \osc(f, A)$. Действительно, если функция везде положительна или везде отрицательна, то колебания равны, а если функция проходит через ноль, то колебание модуля будет меньше.
+
+Отсюда уже не сложно получить, что $|f| \in \Ri(A)$:
+\begin{gather*}
+S^*(|f|, T) - S_*(|f|, T) =  \sum\osc(|f|, A_j)\mu A_j < \sum\osc(f, A_j)\mu A_j = S^*(f, T) - S_*(f, T) < \eps.
+\end{gather*}
+
+Ну а неравенство $\left|\int\limits_A f\dx \right| \leq \int\limits_A |f|\dx$ берется из интерегирования по $A$ неравенства $-|f| \leq f\hm\leq|f|$.
+\end{proof}
+
+\begin{Statement}
+Пусть $f \in \Ri(A)$. Тогда $f^2 \in \Ri(A)$.
+\end{Statement}
+\begin{proof}
+Доказательство аналогично.
+
+Сведем $f$ к ограниченной на $A$. Найдем такое $C$ что $\forall x\ f(x) < C$. Зафиксируем произвольное $\eps > 0$ и найдем такое разбиение $T$ множества $A$, что $S^*(f, T) - S_*(f, T) < \eps / 2C$. Тогда:
+\begin{gather*}
+S^*(f^2, T) - S_*(f^2, T) = \sum\left( \sup\limits_{A_j}f^2 - \inf\limits_{A_j}f^2 \right)\mu A_j \leq \sum 2C\sup\limits_{\widetilde{x}, \widetilde{y} \in A_j}(f(\widetilde{x}) - f(\widetilde{y})) =\\= 2C (S^*(f, T) - S_*(f, T)) < \eps.
+\end{gather*}
+Здесь мы воспользовались тем, что $f^2(x) - f^2(y) = (f(x) - f(y))(f(x) + f(y))$, причем\\$f(x) + f(y) \hm\leq 2C$.
+\end{proof}
+
+\begin{Statement}
+Пусть $f, g \in \Ri(A)$. Тогда $fg \in \Ri(A)$.
+\end{Statement}
+\begin{proof}
+Следует из предыдущего утверждения и того, что $fg = \dfrac{(f + g)^2 - f^2 - g^2}{2}$.
+\end{proof}
+
+\subsection{Многомерный интеграл Римана}
+Пусть $\Pi_1$ --- брус в $R^n$, $\Pi_2$ --- брус в $\R^m$. Тогда $\Pi_1 \times \Pi_2$ --- брус в $\R^{n + m}$. Соответственно, можно рассматривать инегрируемые функции как $f(\overline{x}, \overline{y}) \in \Ri(\Pi_1 \times \Pi_2)$, где $\overline{x} \in \Pi_1$ и $\overline{y} \in \Pi_2$.
+
+
+Для фиксированного $\overline{y} \in \Pi_2$ рассмотрим $f(\overline{x}, \overline{y})$ как функцию от $\overline{x}$ на $\Pi_1$. Обозначим верхний и нижний интеграл Дарбу как $I^*(\overline{y})$ и $I_*(\overline{y})$ соответственно.
+
+\begin{Theorem}[Фубини]
+$I_*(\overline y), I^*(\overline{y}) \in \Ri(\Pi_2)$ и $\int\limits_{\Pi_1 \times \Pi_2}f\dx\d y = \int\limits_{\Pi_2} I_*(\overline{y})\dx = \int\limits_{\Pi_2} I^*(\overline{y})\dx$.
+\end{Theorem}
+Например, если $\Pi_1$ и $\Pi_2$ --- замкнутые брусья, $f \in C(\Pi_1 \times \Pi_2)$, то по теореме Фубини $\int\limits_{\Pi_1 \times \Pi_2}f\dx \d y = \int\limits_{\Pi_2}\int\limits_{\Pi_1}f(x, y)\dx \d y$.
+
+\begin{proof}
+Достаточно доказать для прямоугольников.
+
+Пусть $\{ A_j \}_{j=1}^{J}, \{ B_k \}_{k=1}^K$ --- разбиение на подбрусья брусьев $\Pi_1$ и $\Pi_2$ соответственно. Тогда $\{ A_j \times B_k\}$ --- разбиение $\Pi_1 \times \Pi_1$.
+
+Пусть $m_{jk} = \inf\limits_{A_j \times B_k} f, M_{jk} = \sup\limits_{A_j \times B_k} f$. Тогда для фиксированного $y \in \Pi_2$ имеем, что $m_j(y) = \inf\limits_{x \in A_j} f(x, y), M_j(y) = \sup\limits_{x \in A_j} f(x, y)$.
+
+Пусть $\xi_k$ --- произвольная точка из $B_k$. Тогда, в силу определений:
+\begin{gather*}
+m_{jk} \leq m_j(\xi_k) \leq M_j(\xi_k) \leq M_{jk}. 
+\end{gather*}
+Домножим на $\mu A_j$ и просуммируем по $j$:
+\begin{gather*}
+\sum_J m_{jk} \mu A_j \leq S_*(f, (., \xi_k) \{A_j \}) \leq I_*(\xi_k) \leq I^*(\xi_k) \leq S^*(f, (., \xi_k) \{A_j \}) \leq \sum_J M_{jk} \mu A_j.
+\end{gather*}
+Теперь домножим на $\mu B_k$ и просуммируем по $k$:
+\begin{gather*}
+\sum_{J, K} m_{jk} \mu(A_j \times B_k) \leq \sum_K I_*(\xi_k)\mu B_k \leq \sum_K I^*(\xi_k) \mu B_k \leq \sum_{J, K} M_{jk} \mu(A_j \times B_k).
+\end{gather*}
+Заметим, что самая левая часть неравенства равна $S_*(f, \{A_j \times B_k \})$, а самая правая --- $S^*(f, \{A_j \times B_k \})$.
+
+Зафиксируем произвольное $\eps > 0$ и найдем $\delta > 0$ такое, что для любого разбиения $T$ множества $\Pi_1 \times \Pi_2$ с диаметром меньшим $\delta$ верно, что $S^*(f, T) - S_*(f, T) < \eps$. Возьмем $A_j$ и $B_k$ так, что $\diam A_j \setminus B_k \leq \delta$. Тогда
+\begin{gather*}
+S_*(f, T) \leq I_* = I = I^* \leq S^*(f, T) \\
+I - \eps \leq \sum_K I_*(\xi_k) \mu B_k \leq I+\eps \\
+I - \eps \leq \sigma(I_*, \{ B_k \}, \{\xi_k \}) \leq I+\eps \\
+I_\eps \leq S_*(I_*, \{B_k\}) \leq S^*(I_*, \{B_k\}) \leq I +\eps \\
+S^*(I_*, \{B_k\}) - S_*(I_*, \{B_k\}) \leq 2\eps.
+\end{gather*}
+Вот мы и получили, что $I_* \in \Ri(\Pi_2)$. Аналогично доказывается для $I^*$.
+
+Осталось доказать равенство:
+\begin{gather}
+I - \eps \leq S_*(I_*, \{B_k\}) \leq I_*(I_*) = I(I_*) = I^*(I_*) \leq  S^*(I_*, \{B_k\}) \leq I+\eps.
+\end{gather}
+И в силу произвольности $\eps$ получаем, что $I = \int\limits_{\Pi_2} I_*(y)\dx$.
+\end{proof}
+
+
