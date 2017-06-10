@@ -1,0 +1,164 @@
+\section{Лекция 31 от 29.05.2017 \\ Криволинейные интегралы}
+\subsection{Криволинейные интегралы первого рода}
+Начнём сразу с нескольких определений. Пусть $\varphi\;\colon\; [a,b] \to \mathbb{R}$ --- непрерывное отрбражение. 
+\begin{Def}
+    Оторбражение $\varphi$ назовём путём в $\R^n$.
+\end{Def}
+\begin{Def}
+    Образ этого отображения будем называть кривой в $\R^n$.
+\end{Def}
+Пусть $T = \{x_0 < x_1 < \ldots < x_n\}$ --- разбиение отрезка $[a;b]$.
+\begin{Def}
+    Вписанной ломаной называются точки $t_i = \varphi(x_i)$, соединённые отрезками $[t_{i-1}; t_i]$.
+\end{Def}
+\usetikzlibrary{calc}
+\begin{center}
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (10.25,0) node[right] {$x$};
+    \draw[->] (0,0) -- (0,5) node[above] {$\varphi(x)$};
+    \draw[scale=1, domain=0:8.2, smooth,variable=\x, red] plot ({\x},{-0.0666667*\x*\x*\x + 0.6666667*\x*\x -1.066667*\x + 2});
+    \coordinate [label=left:$t_1$] ($t_0$) at ($ (0,2) + .1*(rand,rand) $);
+    \coordinate [label=below:$t_2$] ($t_1$) at ($ (1,1.53) + .1*(rand,rand) $);
+    \coordinate [label=below right:$t_3$] ($t_2$) at ($ (2,2) + .1*(rand,rand) $);
+    \coordinate [label=below right:$t_n$] ($t_n$) at ($ (8,2) + .1*(rand,rand) $);
+    \node [fill=black, inner sep = 1pt, label=below:$x_0$] ($x_0$) at ($ (0, 0) $) {};
+    \node [fill=black, inner sep = 1pt, label=below:$x_1$] ($t_1$) at ($ (1,0)$) {};
+    \node [fill=black, inner sep = 1pt, label=below:$x_2$] ($x_2$) at ($ (2,0) $) {};
+    \node [fill=black, inner sep = 1pt, label=below:$x_n$] ($x_n$) at ($ (8,0) $) {};
+    \draw[-|] (0,2) -- (1,1.53);
+    \draw[-|] (1,1.53) -- (2,2);
+    \draw[-|] (2,2) -- (3,3);
+    \draw[-|] (3, 3) -- (4, 4.133);
+    \draw[-|] (4, 4.133) -- (5, 5);
+    \draw[-|] (5, 5) -- (6, 5.2);
+    \draw[-|] (6, 5.2) -- (7, 4.333);
+    \draw[-|] (7, 4.333) -- (8, 2);
+    \end{tikzpicture}
+\end{center}
+\begin{Def}
+    Длина пути --- супремум длин вписанных ломаных. 
+\end{Def}
+\begin{Def}
+    Путь называется спрямляемым, если у него длина конечна.
+\end{Def}
+Существует пример неспрямляемого пути. Отметим на оси точки с координатой $1/2^n$ для всех натуральных $n$, значение функции в них равно нулю. В середине отрезков $[1/2^{k + 1}; 1/2^{k}]$ возьмём значение функции, равное $1/k$. Отмеченные точки соединим ломаной. Нетрудно понять, что для такого непрерывного отображения $[0;1] \to \R$ длина пути равна бесконечности.
+\begin{center}
+\begin{tikzpicture}[scale = 5]
+    \draw[->] (0,0) -- (1.25,0) node[right] {$y$};
+    \draw[->] (0,0) -- (0,1.25) node[above] {$x$};
+    \draw (1, 0) -- (0.75, 1) node[above] {$1$};
+    \draw (0.75, 1) -- (0.5, 0) node[below] {$\frac12$};
+    \draw (0.5, 0) -- (0.375, 0.5) node[above] {$1/2$};
+    \draw (0.375, 0.5) -- (0.25, 0) node[below] {$\frac14$};
+    \draw (0.25, 0) -- (0.175, 0.33333) node[above] {$1/3$};
+    \draw (0.175, 0.33333) -- (0.125, 0) node[below] {$\frac18$};
+    \coordinate [label = below:$1$] ($1$) at ($(1,0)$);
+\end{tikzpicture}
+\end{center}
+\begin{Comment}
+    Существует также эквивалентное определение. Длина пути --- предел длин вписанных ломаных при диаметре разбиения, стремящемся к нулю.
+\end{Comment}
+\begin{Def}
+    Путь называется гладким, если он задаётся функцией $f = (f_1(t), \ldots, f_n(t))\in C^1[a;b]$. Путь называется кусочно-гладким, если он получен стыковкой конечного числа гладких путей.
+\end{Def}
+\begin{Statement}
+    Всякий кусочно-гладкий путь спрямляется, и его длина равна $\int\limits_{a}^b ||f'(t)|| dt$.
+\end{Statement}
+\parЭто утверждение доказывать строго мы не будем. Более того, в физике это вообще принято за определение длины кривой, ибо зная скорость в каждой точке пути, мы никак не рассчитаем длину пути.
+\par Пусть Отображение $\varphi \colon [a; b] \to \R^n$ --- кусочно-гладкий путь, $\gamma = \varphi([a;b])$ --- кривая и есть некоторая функция $f\colon \gamma \to \R$.
+\begin{Def}
+    В принятых условиях криволинейным интегралом первого рода по кривой $\gamma$ называется
+    $$
+        \int\limits_\gamma fds =  \int\limits_{a}^{b} f(\varphi(t))||\varphi'(t)||dt.
+    $$
+\end{Def}
+\begin{Properties}
+    \begin{enumerate}
+        \item Если $f\in C(\gamma)$, то есть непрерывна на кривой $\gamma$, то интеграл существует.
+        \item $\int\limits_{\gamma} 1ds = l$ --- длина пути.
+    \end{enumerate}
+\end{Properties}
+Пусть $\varphi(t)\colon [a;b] \to \R^n$ и $\psi(\tau) \colon [\alpha; \beta] \to \R^n$ -- два гладких пути.
+\begin{Def}
+    Пути $\varphi$ и $\psi$ называются эквивалентными, если существует строго монотонное отображение $g\colon [a;b] \to [\alpha; \beta]$, дифференцируемое с $g' \neq 0$ такое, что $\psi(g(t)) = \phi(t)$. В таком случае $g$ называют допустимой заменой переменных.
+\end{Def}
+\begin{Statement}
+    Криволинейные интегралы непрерывно-дифференцируемой функции $f$ по эквивалентным гладким путям равны.
+\end{Statement}
+\begin{proof}
+    Запишем оба интеграла:
+    \begin{gather}
+        \int\limits_{a}^{b}f(\varphi(t))\sqrt{\varphi_1'(t)^2 + \varphi_2'(t)^2 + \ldots + \varphi_n'(t)^2}dt\\
+        \int\limits_{\alpha}^{\beta}f(\psi(\tau))\sqrt{\psi_1'(\tau)^2 + \psi_2'(\tau)^2 + \ldots + \psi_n'(\tau)^2}dt
+    \end{gather}
+    Рассмотрим случай возрастающей $g$. Сделаем замену $\tau = g(t)$. Тогда второй интеграл равен:
+    \begin{gather}
+        \int\limits_{a}^{b}f(\underbrace{\psi(g(t))}_{=\varphi(t)})\sqrt{\left(\frac{d\psi_1}{d\tau}\right)^2 + \ldots + \left(\frac{d\psi_n}{d\tau}\right)^2}\cdot \cfrac{dg}{dt}dt 
+        = \int\limits_{a}^{b}f(\varphi(t))\sqrt{\left(\frac{d\varphi_1}{dt}\right)^2 + \ldots + \left(\frac{d\varphi_n}{dt}\right)^2}dt
+    \end{gather}
+    Сравнивая с первым интегралом, замечаем равенство.
+\end{proof}
+\subsection{Криволинейные интегралы первого рода}
+Теперь перейдём к криволинейным интегралам второго рода. Пусть $\varphi\colon [a;b]$ --- кусочно-гладкий путь, $\gamma$ --- соответствующая ему кривая, вектор-функция $\overline{F} \colon \gamma \to \R^n$. Обозначим за $k(t) = \cfrac{\varphi'(t)}{||\varphi(t)||}$ --- единичный касательный вектор.
+\begin{Def}
+    Криволинейным интегралом второго рода поля $F$ по кривой $\gamma$ назывют
+    $$
+        \int\limits_\gamma Fds = \int\limits_{\gamma} (F, k)ds
+    $$
+    То есть интеграл второго рода выражается через интеграл первого рода.
+\end{Def}
+Криволинейный интеграл второго рода можно понимать как работу по перемещению материальной точки в поле сил $F$ вдоль кривой $\gamma$.
+\par Для удобства этот агрегат обозначают $\int\limits_\gamma F_1dx_1 + F_2dx_2 + \ldots F_ndx_n$. 
+\begin{Properties}[Свойства криволинейного интеграла второго рода]\ \\
+    \begin{enumerate}
+        \item Если $F$ непрерывна, то интеграл существует.
+        \item Допустимая замена координат с сохранением ориентации сохраняет значение интеграла. Без сохранения ориентации --- меняет знак интеграла.
+    \end{enumerate}
+\end{Properties}
+\subsection{Потенциальные поля}
+Пусть $\Omega$ --- область в $\R^n$.
+\begin{Def}
+    Скалярное поле $U\colon \Omega \to \R$ называется потенциалом векторного поля $F \colon \Omega \to \R^n$, если 
+    $$
+        F_1 = \cfrac{\partial U}{\partial x_1};\; F_2 = \cfrac{\partial U}{\partial x_2};\; \ldots F_n = \cfrac{\partial U}{\partial x_n}
+    $$
+    Или короче $\mathrm{grad}U\equiv F$ в $\Omega$.
+\end{Def}
+\begin{Def}
+    Векторное поле называется потенциальным, если у него существует потенциал.
+\end{Def}
+Пусть $F$ потенциально в области $\Omega$, $\varphi\colon [a;b] \to \R^n$ --- кусочно-гладкий путь, лежащий в $\Omega$ с началом в точке $x_{0}$, концом в точке $x_1$.
+\begin{Statement}[Формула Ньютона-Лейбница для потенциальных полей]
+    $$ \int\limits_\gamma Fds = U(x_1) - U(x_0) $$.
+\end{Statement}
+\begin{proof}
+    Можно и без слов:
+    \begin{gather}
+        \int\limits_\gamma Fds = \int\limits_a^b F_1(\varphi(t))\varphi_1'(t) + \ldots + F_n(\varphi(t))\varphi_n'(t)dt = \int\limits_a^b (U(\varphi_1(t), \ldots, \varphi_n(t)))'dt = U(x_1) - U(x_0)
+    \end{gather}
+    Последнее равенство взяли из формулы Ньютона-Лейбница для обычного интеграла Римана на отрезке.
+\end{proof}
+\begin{Statement}
+    Если криволинейный интеграл непрерывного поля $F$ по кусочно-гладкому контуру зависит только от начальной и конечной точки, то поле $F$ потенциально.
+\end{Statement}
+\begin{proof}
+    Зафиксируем произвольную точку $x_0 \in \Omega$ и рассмотрим произвольный кусочно-гладкий путь $\gamma$ из $x_0$ в $x$. Тогда обозначим на $U(x) = \int\limits_\gamma Fds$. Докажем, что $U$ --- потенциал. Действительно, в произвольной точке $(x_1, \ldots, x_n) \in \Omega$ 
+    \begin{gather}
+    \left.\frac{\partial U}{\partial x_1}\right|_{x_1, \ldots, x_n} = \lim\limits_{h \to 0}\cfrac{1}{h}(U(x_1 + h, x_2, \ldots, x_n) - U(x_1, x_2, \ldots, x_n)) =\\
+    = \lim\limits_{h\to 0}\int\limits_{0}^{h} F_1(x_1 + t, x_2, \ldots, x_n)dt = F_1(x_1, \ldots, x_n)
+    \end{gather}
+    Аналогично поступаем и с остальными переменными.
+\end{proof}
+\begin{Statement}[Необходимое условие потенциальности]
+    Пусть $F \in C^1(\Omega)$ потенциально. Тогда для всех $j,k \in \{1, \ldots, n\}$
+    $$
+        \cfrac{\partial F_j}{\partial x_k} = \cfrac{\partial F_k}{\partial x_j}
+    $$
+    в области $\Omega$.
+\end{Statement}
+\begin{proof}
+    Достаточно рассмотреть случай $j\neq k$. Рассмотрим $U$ --- потенциал $F$. Тогда
+    $$
+        \cfrac{\partial F_j}{x_k} = \cfrac{\partial}{\partial x_k}\cfrac{\partial U}{\partial x_j} = \cfrac{\partial}{\partial x_j}\cfrac{\partial U}{\partial x_k} = \cfrac{\partial F_k}{\partial x_j}
+    $$
+\end{proof}
