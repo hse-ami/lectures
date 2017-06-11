@@ -26,20 +26,21 @@ $$
 \begin{Lemma}
     Если $T_1 = \{B_k\}_{k=1}^{K}$ --- измельчение $T = \{A_j\}_{j =1}^{J}$, то 
     $$
-        s_* (f, T) \leqslant S^*(f, T_1)
+        S^* (f, T) \geqslant S^*(f, T_1)
     $$
 \end{Lemma}
 \begin{proof}
     Введём обозначения
     \begin{gather}
         M_k = \sup_{A_k}(f)\\
-        \widetilde{M}_k = \sup_{\widetilde{A}_k}(f)
+        \widetilde{M}_j = \sup_{B_j}(f)
     \end{gather}
     Тогда искомое неравенство есть следствие следующей цепочки неравенств:
     \begin{gather}
         S^*(f, T_1) = \sum\limits_{k = 1}^{K}\widetilde{M}_k\mu B_k =  \sum\limits_{j = 1}^{J} \sum\limits_{k\colon B_k \subset A_j} \widetilde{M}_k \mu B_k \leqslant \sum\limits_{j=1}^J  \sum\limits_{k\colon B_k \subset A_j} M_j \mu B_k = \sum\limits_{j=1}^J M_j \mu A_j = S^*(f, T)
     \end{gather}
 \end{proof}
+Абсолютно аналогично можно доказать и что $s_*(T_1) \geqslant s_*(T)$.
 \begin{Statement}
     Для любых разбиений $T_1$ и $T_2$, $s_*(f, T_1) \leqslant S^*(f, T_2)$.
 \end{Statement}
