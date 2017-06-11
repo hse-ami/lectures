@@ -94,6 +94,10 @@ $$
 \begin{Comment}
     Если $A$ и $B$ неперекрывающиеся и измеримы, то $\mu(A \cap B) = 0$.
 \end{Comment}
+\begin{Statement}
+    Измеримые множества $A$ и $B$ не перекрываются тогда и только тогда, когда $A \cap B \subset \delta A \cap \delta B$
+\end{Statement}
 \begin{proof}
-    От противного: пусть $A$ и $B$ перекрываются. Тогда $\exists x \in \mathrm{int} A \cap \mathrm{int}B$. Следовательно, существует такое множество $\delta > 0$, что $B_\delta \subset A \cap B$, отсюда следует $\mu(A \cap B) > \mu(B_\delta) > 0$. 
+    От противного: пусть $A$ и $B$ перекрываются. Тогда $\exists x \in \mathrm{int} A \cap \mathrm{int}B$. Следовательно, существует такое множество $\delta > 0$, что $B_\delta \subset A \cap B$, отсюда следует $\mu(A \cap B) > \mu(B_\delta) > 0$, а это невозможно так как в нашем предположении $\mu (\delta A \cap \delta B) = 0$ в силу измеримости. 
+    \par В обратную сторону всё довольно очевидно.
 \end{proof}
