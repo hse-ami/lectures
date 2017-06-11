@@ -9,7 +9,7 @@
 \end{Def}
 Принимая это определение во внимание, исходное равенство переписывается в более красивом виде:
 \[
-    \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = \left|\left|x\right|\right|^2 + \left|\left|e_n\right|\right|^2 \sum\limits_{n=1}^{N}(c_n - \x_n)^2 - \sum\limits_{n =1}^{N}\x_n^2 
+    \left|\left|x - \sum\limits_{n= 1}^{N}c_ne_n\right|\right|^2 = \left|\left|x\right|\right|^2 + \sum\limits_{n=1}^{N}(c_n - \x_n)^2 \left|\left|e_n\right|\right|^2 - \sum\limits_{n =1}^{N}\x_n^2 
     \left|\left|e_n\right|\right|^2. \tag{*}\label{16aster}
 \]
 \begin{Statement}[очевидное]
@@ -66,12 +66,12 @@
         0\leqslant ||(x_n + y_n) - (x + y)|| \leqslant ||x_n-x|| + ||y_n - y|| \underset{n\to\infty}{\to} 0.
     \end{gather*}
 \end{proof}
-Ряды из элементов вводятся абсолютно так же, как и числовые ряды, рассмотренные нами ранее (абсолютная сходимость определяется как сходимость ряда из норм элементов).
+Ряды из элементов нормированных пространств вводятся абсолютно так же, как и числовые ряды, рассмотренные нами ранее (абсолютная сходимость определяется как сходимость ряда из норм элементов).
 
 \subsection{Ряды Фурье}
 Теперь, когда мы ввели понятие сходимости в нормированных пространствах, будем двигаться дальше, к рядам Фурье. Вернемся к рассмотрению исходного пространства $H$ со скалярным произведением, в котором мы уже ввели понятие коэффициентов Фурье.
 \begin{Def}
-    Ряд $\sum\limits_{n}^{\infty} \hat{x}_ne_n$ называется рядом Фурье (разложением в ряд Фурье) элемента $x$ по ортогональной системе $\{e_n\}_{n=1}^{\infty}$.
+    Ряд $\sum\limits_{n=1}^{\infty} \hat{x}_ne_n$ называется рядом Фурье (разложением в ряд Фурье) элемента $x$ по ортогональной системе $\{e_n\}_{n=1}^{\infty}$.
 \end{Def}
 Из этого определения не следует, что ряд Фурье вообще сходится.
 \begin{Statement}
@@ -101,7 +101,7 @@
 \begin{Statement}
 Заметим, что если $\{e_n\}_{n=1}^{\infty}$ --- ортогональная система, то ряд $\sum\limits_{n=1}^{\infty} c_n e_n$ удовлетворяет условию Коши 
 $$
-    \forall \eps>0\; \exists N\in \N\; \forall m>N,\; p\in \N \  \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps
+    \forall \eps>0\; \exists N\in \N:\; \forall m>N,\; p\in \N \  \left|\left|\sum\limits_{n=m+1}^{m+p}c_ne_n \right|\right| < \eps
 $$
 тогда и только тогда, когда $\sum\limits_{n=1}^{\infty}c_n^2||e_n||^2$ сходится.
 \end{Statement}
@@ -124,7 +124,7 @@ $$
 Итак, в полных пространствах со скалярным произведением ряды Фурье сходятся, но отнюдь не всегда они сходятся куда надо.
 \begin{Def}
     Ортогональная система $\{e_n\}_{n=1}^{\infty}$ замкнута, если 
-    $$\forall x\in H, \forall \eps >0\; \exists e_{n_1}, e_{n_2}, \ldots, e_{n_K},\; c_1, c_2, \ldots, c_K \Rightarrow \left|\left|x - \sum\limits_{k=1}^{K} c_k e_{n_k}\right|\right|<\eps
+    $$\forall x\in H, \forall \eps >0\; \exists e_{n_1}, e_{n_2}, \ldots, e_{n_K},\; c_1, c_2, \ldots, c_K:\ \left|\left|x - \sum\limits_{k=1}^{K} c_k e_{n_k}\right|\right|<\eps.
     $$
 \end{Def}
 
@@ -132,9 +132,9 @@ $$
     Если ортогональная система $\{e_n\}_{n=1}^{\infty}$ замкнута, то $\forall x\in H\; x = \sum\limits_{n=1}^{\infty}\x_n e_{n}$.
 \end{Statement}
 \begin{proof}
-    Зафиксируем произвольное $\eps >0$, найдем такое $K_0$ и такие коэффициенты $c_1, \ldots, c_{K_0}$, что $\left|\left| x - \sum\limits_{n=1}^{K_0} c_ne_n \right|\right| < \eps$ (коэффициенты при $e_n$ не вошедших в список $ e_{n_1}, \ldots, e_{n_K}$ из определения замкнутости просто положим равными нулю). Тогда
+    Зафиксируем произвольное $\eps >0$, найдем такое $K_0$ и такие коэффициенты $c_1, \ldots, c_{K_0}$, что $\left|\left| x - \sum\limits_{n=1}^{K_0} c_ne_n \right|\right| < \eps$ (коэффициенты при $e_n$, не вошедших в список $ e_{n_1}, \ldots, e_{K_0}$ из определения замкнутости просто положим равными нулю). Тогда
     $$
         \forall N>K_0 \; \left|\left|x - \sum\limits_{n=1}^{N}\x_ne_n\right|\right|\leqslant \left|\left|x - \sum\limits_{k=1}^{K_0}c_ke_k \right|\right| < \eps,
     $$
-    то есть ряд $\sum\limits_{n=1}^{N}\x_ne_n$ сходится к $x$.
+    то есть ряд $\sum\limits_{n=1}^{\infty}\x_ne_n$ сходится к $x$.
 \end{proof}

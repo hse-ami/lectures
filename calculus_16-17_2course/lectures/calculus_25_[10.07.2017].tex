@@ -6,7 +6,9 @@
 Пусть $A$ --- ограниченное подмножество $\R^n$. Тогда следующие утверждения эквивалентны:
 \begin{enumerate}
     \item $A$ --- измеримо по Жордану;
-    \item $\mu^* \delta A = 0$, где $\delta A$ --- граница множества.
+    \item $\mu^* \partial
+ A = 0$, где $\partial
+ A$ --- граница множества.
 \end{enumerate}
 \end{Statement}
 Для доказательства $(2) \Rightarrow (1)$ нам потребуется лемма:
@@ -16,7 +18,8 @@
     \item $\Pi \cap \mathrm{int} A \neq \varnothing$
     \item $\Pi \cap \mathrm{ext} A \neq \varnothing$
 \end{enumerate}
-Тогда $\Pi \cap \delta A \neq \varnothing$.
+Тогда $\Pi \cap \partial
+ A \neq \varnothing$.
 \end{Lemma}
 И вначале ещё одно вспомогательное определение:
 \begin{Def}
@@ -36,10 +39,12 @@ $$
 , то есть, иначе говоря, индикатор множества $A$. Эта функция непрерывна во всех внутренних и внешних точках $A$, а значит, в нашем предположении, и на всём брусе. Рассмотрим другую функцию $\varphi(t) = f(a + t(b-a))$. Она непрерывна на отрезке $[0;1]$, при этом принимает на нём ровно два значения. Противоречие.
 \end{proof}
 \begin{proof}[Доказательство критерия измеримости]
-Найдём открытый брус $\Pi_0$, содержащий $A$. Зафиксируем произвольное $\eps >0$. Существует такое простое множество $P_0\supset \delta A$ и $\mu P_0 < \eps$. Будем считать $P_0 \subset \Pi_0$ (иначе возьмём вместо $P_0$ множество $P_0\cap \Pi_0$). Заметим, что $\Pi_0 \setminus P_0$). Заметим, что $\Pi_0 \setminus P_0$ --- простое множество. Представим его как пересечение попарно непересекающихся брусов.
+Найдём открытый брус $\Pi_0$, содержащий $A$. Зафиксируем произвольное $\eps >0$. Существует такое простое множество $P_0\supset \partial
+ A$ и $\mu P_0 < \eps$. Будем считать $P_0 \subset \Pi_0$ (иначе возьмём вместо $P_0$ множество $P_0\cap \Pi_0$). Заметим, что $\Pi_0 \setminus P_0$). Заметим, что $\Pi_0 \setminus P_0$ --- простое множество. Представим его как пересечение попарно непересекающихся брусов.
 \begin{gather}
     \Pi_0 \setminus P_0 = \pi_1 \sqcup \ldots \sqcup \pi_K\\
-    \pi_k \cap \delta A = \varnothing
+    \pi_k \cap \partial
+ A = \varnothing
 \end{gather}
 То есть либо $\pi_k \subset \mathrm{int}A$ либо $\pi_k \subset \mathrm{ext}A$. Положим $p = \bigsqcup\limits_{k\colon \pi_k \subset \mathrm{int}A} \pi_k$, $P = p \sqcup P_0 = \Pi_0 \setminus \bigsqcup\limits_{k\colon \pi_k \subset \mathrm{ext}A}\pi_k$.
 Заметим, что $p \subset A$, $P\supset A$. Тогда $\mu P \mu p = \mu(P \setminus p) = \mu(P_0) < \eps$. В силу произвольности $\eps$, получаем то, что нужно.
@@ -89,15 +94,24 @@ $$
 \end{gather}
 \end{proof}
 \begin{Def}
-    $A$ и $B$ будем называть неперекрывающимися, если их пересечение лежит в объединении границ: $A\cap B \subset \delta A \cup \delta B$.
+    $A$ и $B$ будем называть неперекрывающимися, если их пересечение лежит в объединении границ: $A\cap B \subset \partial
+ A \cup \partial
+ B$.
 \end{Def}
 \begin{Comment}
     Если $A$ и $B$ неперекрывающиеся и измеримы, то $\mu(A \cap B) = 0$.
 \end{Comment}
 \begin{Statement}
-    Измеримые множества $A$ и $B$ не перекрываются тогда и только тогда, когда $A \cap B \subset \delta A \cap \delta B$
+    Измеримые множества $A$ и $B$ не перекрываются тогда и только тогда, когда $A \cap B \subset \partial
+ A \cap \partial
+ B$
 \end{Statement}
 \begin{proof}
-    От противного: пусть $A$ и $B$ перекрываются. Тогда $\exists x \in \mathrm{int} A \cap \mathrm{int}B$. Следовательно, существует такое множество $\delta > 0$, что $B_\delta \subset A \cap B$, отсюда следует $\mu(A \cap B) > \mu(B_\delta) > 0$, а это невозможно так как в нашем предположении $\mu (\delta A \cap \delta B) = 0$ в силу измеримости. 
+    От противного: пусть $A$ и $B$ перекрываются. Тогда $\exists x \in \mathrm{int} A \cap \mathrm{int}B$. Следовательно, существует такое множество $\partial
+ > 0$, что $B_\partial
+ \subset A \cap B$, отсюда следует $\mu(A \cap B) > \mu(B_\partial
+) > 0$, а это невозможно так как в нашем предположении $\mu (\partial
+ A \cap \partial
+ B) = 0$ в силу измеримости. 
     \par В обратную сторону всё довольно очевидно.
 \end{proof}

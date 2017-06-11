@@ -48,12 +48,12 @@ $$
 \end{proof}
 
 \begin{Lemma}
-Пусть $f$ --- ограниченная равномерно-непрерывная на $\R$ функция, $K_n(t)$ --- неотрицательная непрерывная аппроксимативная единица на $\R$, $g_n(x):= f * K_n(x)$. Тогда $g_n \uconv{\R}{n \to \infty} f$.
+Пусть $f$ --- ограниченная равномерно непрерывная на $\R$ функция, $K_n(t)$ --- неотрицательная непрерывная аппроксимативная единица на $\R$, $g_n(x):= f * K_n(x)$. Тогда $g_n \uconv{\R}{n \to \infty} f$.
 \end{Lemma}
 \begin{proof}
-Зафиксируем произвольное $\eps > 0$. Найдем $C > 0$ такое, что $|f| < C$ на $\R$. Положим $\eps_1 = \dfrac{\eps}{2C + 2}$. Найдем $\delta > 0$ такое, что $\forall x_1, x_2 \in \R\  |x_1 - x_2| < \delta \ \colon |f(x_1) - f(x_2)| < \eps_1$. Для этого $\delta$ найдется такое $N \in \N$, что $\forall n > N\ \int\limits_{-\infty}^{-\delta}K_n(t)\d t + \int\limits_{\delta}^{\infty}K_n(t) \d t < \eps_1$.
+Зафиксируем произвольное $\eps > 0$. Найдем $C > 0$ такое, что $|f| < C$ на $\R$. Положим $\eps_1 = \dfrac{\eps}{2C + 2}$. Найдем $\delta > 0$ такое, что $\forall x_1, x_2 \in \R\  |x_1 - x_2| < \delta \Rightarrow |f(x_1) - f(x_2)| < \eps_1$. Для этого $\delta$ найдется такое $N \in \N$, что $\forall n > N\ \int\limits_{-\infty}^{-\delta}K_n(t)\d t + \int\limits_{\delta}^{\infty}K_n(t) \d t < \eps_1$.
 
-Тогда $\forall n > N\ \forall x \in \R$:
+Тогда $\forall n > N\ \forall x \in \R$
 \begin{gather*}
 |f(x) - g_n(x)| = \left| \int\limits_{-\infty}^{\infty}f(x)K_n(t)\d t - \int\limits_{-\infty}^{\infty}f(x - t)K_n(t)\d t \right| \leq \int\limits_{-\infty}^{\infty}|f(x) - f(x - t)|K_n(t)\d t = \\
 = \int\limits_{-\delta}^{\delta}|f(x) - f(x + t)| K_n(t)\d t + \int\limits_{-\infty}^{-\delta} |f(x) - f(x - t)|K_n(t)\d t + \int\limits_{\delta}^{\infty} |f(x) - f(x - t)|K_n(t)\d t \leq \\
@@ -82,11 +82,11 @@ $$
 $$
 g_n(x) = \int\limits_{-\infty}^{\infty}h(t)K_n(x - t)\d t = \int\limits_{0}^1h(t)K_n(x - t)\d t = \sum\limits_{k = 0}^K \int_0^1 h(t)p_k (t) x^k \d t = \sum\limits_{k = 10}^K \widetilde{c}_k x^k.
 $$
-Итого, $g_n(x)$ действительно является многочленом на отрезке $[0, 1]$. Что мы и хотели получить.
+Итого, $g_n(x)$ действительно является многочленом на отрезке $[0, 1]$. Остаётся лишь воспользоваться леммой 5.
 \end{proof}
 
 \begin{Theorem}
-Пусть $f \in C^N[a, b]$. тогда $\forall \eps > 0$ существует многочлен $P(x)$ такой, что $\forall x \in [a, b]$ и $\forall n \in \{0, 1, \ldots,N \}$ выполняется неравенство $|f^{(n)}(x) - P^{(n)}(x)| < \eps$.
+Пусть $f \in C^N[a, b]$. Тогда $\forall \eps > 0$ существует многочлен $P(x)$ такой, что $\forall x \in [a, b]$ и $\forall n \in \{0, 1, \ldots,N \}$ выполняется неравенство $|f^{(n)}(x) - P^{(n)}(x)| < \eps$.
 \end{Theorem}
 \begin{proof}
 Данное утверждение несложно доказывается по индукции. Для простоты мы рассмотрим доказательство для $N = 1$.
@@ -111,7 +111,7 @@ b_n(f) = \dfrac{1}{\pi} \int\limits_{-\pi}^\pi f(x) \sin nx \d x.
 Посмотрим, чему будут равны коэффициенты Фурье для производной $f'(x)$:
 \begin{align}
 & a_0(f') = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} f'(x) \d x = \dfrac{1}{\pi} f(x) \Big|_{-\pi}^{\pi} = 0; \\
-& a_n(f') = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} f'(x) \cos nx \d x = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} \cos nx \d f(x) = \dfrac{1}{\pi}\cos nx \cdot \underbrace{f(x)\Big|_{-\pi}^\pi}_{=0} + \dfrac{n}{\pi}\int\limits_{-\pi}^\pi f(x)\sin nx = nb_n(f);\\
+& a_n(f') = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} f'(x) \cos nx \d x = \dfrac{1}{\pi} \int\limits_{-\pi}^{\pi} \cos nx \d f(x) = \dfrac{1}{\pi}\underbrace{\cos nx \cdot f(x)\Big|_{-\pi}^\pi}_{=0} + \dfrac{n}{\pi}\int\limits_{-\pi}^\pi f(x)\sin nx\d x = nb_n(f);\\
 & b_n(f') = \ldots = - na_n(f).
 \end{align}
 
@@ -119,4 +119,4 @@ b_n(f) = \dfrac{1}{\pi} \int\limits_{-\pi}^\pi f(x) \sin nx \d x.
 $$
 f'(x) \rightsquigarrow \sum\limits_{n=1}^{\infty} nb_n(f)\cos nx - n a_n(f)\sin nx.
 $$
-Как можно заметить, это тот же ряд Фурье для $f(x)$, только почленно дифференцированный.
+Как можно заметить, это тот же ряд Фурье для $f(x)$, только почленно продифференцированный.

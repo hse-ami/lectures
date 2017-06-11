@@ -1,23 +1,13 @@
 \pagestyle{fancy}
 \section{Лекция 24 от 03.04.2017 \\ Простые множества. Измеримость по Жордану}
 
-\subsection{Простые множества}
-
-\begin{Def}
-Брус $\Pi$ называется \textit{невырожденным}, если его мера не равна нулю.
-\end{Def}
+\subsection{Свойства простых множеств}
 
 \begin{Statement}
 Если $I_1, \ldots, I_n$ --- невырожденные интервалы, то $\Pi = I_1 \times \ldots \times I_n$ --- открытое множество (открытый брус).
 
 Если $I_1, \ldots, I_n$ --- невырожденные отрезки, то $\Pi = I_1 \times \ldots \times I_n$ --- замкнутое множество (замкнутый брус).
 \end{Statement}
-
-\begin{Def}
-Множество, представимое в виде конечного объединения брусов --- \textit{простое множество}.
-
-Простое множество представимо в виде конечного объединения \textit{попарно непересекающихся} брусов.
-\end{Def}
 
 \begin{Statement}
 Объединение, пересечение и разность простых множеств --- простое множество.
@@ -26,13 +16,13 @@
 \begin{proof}\ \\
 Объединение --- все ясно.
 
-Пересечение: $\left( \bigcup\limits^J\Pi_j \right) \cap \left( \bigcup\limits^K\PPi_k \right) = \bigcup\limits^{J, K}\left(\underbrace{\Pi_j \cap \PPi_k}_{\text{брус}} \right)$.
+Пересечение: $\left( \bigcup\limits^J_{j=1}\Pi_j \right) \cap \left( \bigcup\limits^K_{k=1}\PPi_k \right) = \bigcup\limits^{J, K}_{j = 1, k=1}\left(\underbrace{\Pi_j \cap \PPi_k}_{\text{брус}} \right)$.
 
-Разность: $\left( \bigcup\limits^J\Pi_j \right) \setminus \left( \bigcup\limits^K\PPi_k \right) = \bigcup\limits^{J}\left( \Pi_j \setminus \bigcup\limits^K\PPi_k \right) = \bigcup\limits^J \overbrace{\left( \bigcap\limits^K\left(\underbrace{\Pi_j \setminus \PPi_k}_{\text{брус}} \right) \right)}^{\text{простое множество}}$.
+Разность: $\left( \bigcup\limits^J_{j=1}\Pi_j \right) \setminus \left( \bigcup\limits^K_{k=1}\PPi_k \right) = \bigcup\limits^{J}_{j=1}\left( \Pi_j \setminus \bigcup\limits^K_{k=1}\PPi_k \right) = \bigcup\limits^J_{j=1} \overbrace{\left( \bigcap\limits^K_{k=1}\left(\underbrace{\Pi_j \setminus \PPi_k}_{\substack{\text{простое}\\\text{множество}}} \right) \right)}^{\text{простое множество}}$.
 \end{proof}
 
 \begin{Def}
-Пусть $P = \bigsqcup\limits^J\Pi_j$ --- простое множество. Тогда $\mu P = \sum\limits^J \mu\Pi_j$.
+Пусть $P = \bigsqcup\limits^J_{j=1}\Pi_j$ --- простое множество. Тогда $\mu P = \sum\limits^J_{j=1} \mu\Pi_j$.
 \end{Def}
 
 \begin{Def}
@@ -40,19 +30,19 @@
 \end{Def}
 
 \begin{Statement}
-Если брус $\Pi$ является конечным объединением попарно не перекрывающихся брусьев $\pi_j$, то $\mu \Pi = \sum\limits^J \mu \pi_j$.
+Если брус $\Pi$ является конечным объединением попарно не перекрывающихся брусов $\pi_j$, то $\mu \Pi = \sum\limits^J_{j=1} \mu \pi_j$.
 \end{Statement}
 \begin{proof}[Идея доказательства]
 Проблема исключительно в том, что <<нарезка>> бруса $\Pi$ может быть нерегулярной (не <<сеточкой>>). Но в таком случае можно просто продлить все разрезы и получить таки регулярную нарезку.
 
-Рассмотрим регулярную нарезку в двумерном случае. Пусть ширину бруса мы разрезали на отрезки $I_1, \ldots, I_n$, а длину на $\I_1, \ldots, \I_m$. Тогда $\mu\Pi = (|I_1| + \ldots + |I_n|) \cdot (|\I_1| + \ldots + |\I_m|) \hm= \sum\limits^n\sum\limits^m|I_i||\I_k| = \sum\mu\pi_j$.
+Рассмотрим регулярную нарезку в двумерном случае. Пусть ширину бруса мы разрезали на отрезки $I_1, \ldots, I_n$, а длину на $\I_1, \ldots, \I_m$. Тогда $\mu\Pi = (|I_1| + \ldots + |I_n|) \cdot (|\I_1| + \ldots + |\I_m|) \hm= \sum\limits^n_i=1\sum\limits^m_k=1|I_i||\I_k| = \sum\mu\pi_j$.
 \end{proof}
 
 \begin{Statement}
 Определение меры простого множества корректно.
 \end{Statement}
 \begin{proof}
-Пусть простое множество представимо как объедение двух разных наборов брусьев: $P = \bigsqcup\limits^J\Pi_j = \bigsqcup\limits^K\PPi_k$. Пусть также $\Pi_j \cap \PPi_k = \Delta_{jk}$. Тогда $\sum\limits^J \mu\Pi_j = \sum\limits^J\left( \underbrace{\sum\limits^K \mu \Delta_{jk}}_{\mu\Pi_j}  \right)$ и $\sum\limits^K\mu \PPi_k = \sum\limits^K\left( \underbrace{\sum\limits^J\mu \Delta_{jk}}_{\mu\PPi_k} \right)$. Но фактически это одна и та же сумма, следовательно, мера простого равна $\sum\limits^j\mu\Pi_j = \mu P  = \sum\limits_K\PPi_k$ и определена корректно.
+Пусть простое множество представимо как объедение двух разных наборов брусов: $P = \bigsqcup\limits^J_{j=1}\Pi_j = \bigsqcup\limits^K_{k=1}\PPi_k$. Пусть также $\Pi_j \cap \PPi_k = \Delta_{jk}$. Тогда $\sum\limits^J_{j=1} \mu\Pi_j = \sum\limits^J_{j=1}\left( \underbrace{\sum\limits^K_{k=1} \mu \Delta_{jk}}_{\mu\Pi_j}  \right)$ и $\sum\limits^K_{k=1}\mu \PPi_k = \sum\limits^K_{k=1}\left( \underbrace{\sum\limits^J_{j=1}\mu \Delta_{jk}}_{\mu\PPi_k} \right)$. Но фактически это одна и та же сумма, следовательно, мера простого равна $\sum\limits^J_{j=1}\mu\Pi_j = \mu P  = \sum\limits^K_{k=1}\PPi_k$ и определена корректно.
 \end{proof}
 \begin{Statement}
 Пусть $P_1$ и $P_2$ --- простые множества. Тогда
@@ -70,24 +60,24 @@
 Пусть $A$ --- ограниченное подмножество $\R^n$.
 
 \begin{Def}\ \\
-\textit{Нижняя мера Жордана} множества $A$: $\mu_*A = \sup\limits_{\substack{P \text{ --- простые},\\ P \subset A}}. \mu P$.
+\textit{Нижняя мера Жордана} множества $A$: $\mu_*A = \sup\limits_{\substack{P \text{ --- простые},\\ P \subset A}} \mu P$.
 
-\textit{Верхняя мера Жордана} множества $A$: $\mu^*A = \inf\limits_{\substack{P \text{ --- простые},\\ A \subset P}}. \mu P$.
+\textit{Верхняя мера Жордана} множества $A$: $\mu^*A = \inf\limits_{\substack{P \text{ --- простые},\\ A \subset P}} \mu P$.
 \end{Def}
 
 \begin{Def}
-Множество $A$ называется \textit{измеримым по Жордану (по $J$)}, если $\mu_*A = \mu^*A$. В этом случае мера множества $A$ равна $\mu A = \mu^*A$ (иногда это обозначается как $\mu_J A$).
+Множество $A$ называется \textit{измеримым по Жордану (по $J$)}, если $\mu_*A = \mu^*A$. В этом случае мера множества $A$ равна $\mu A = \mu^*A=\mu_*A$ (иногда это обозначается как $\mu_J A$).
 \end{Def}
 
 \begin{Statement}
 Для любого ограниченного множества $A$ нижняя мера Жордана не больше верхней меры Жордана: $\mu_*A \leq \mu^*A$.
 \end{Statement}
 \begin{proof}
-Пусть $p$ и $P$ --- произвольные простые множества такие, что $p \subset A \subset P$. Очевидно, что $\mu p \leq \mu P$. Соответственно, $\mu_* A = \sup\limits_{p \subset A} \mu p \leq \mu P$. Аналогично, $\mu p \leq \inf\limits_{A \subset P} = \mu^* A$. Итого, $\mu_* A \leq \mu^* A$.
+Пусть $p$ и $P$ --- произвольные простые множества такие, что $p \subset A \subset P$. Очевидно, что $\mu p \leq \mu P$. Соответственно, $\mu_* A = \sup\limits_{p \subset A} \mu p \leq \mu P$. Значит, $\mu^A \leq \inf\limits_{A \subset P} = \mu^* A$. Итого, $\mu_* A \leq \mu^* A$.
 \end{proof}
 
 \begin{Statement}
-Если $A$ --- простое, то его мера по Жордану совпадает с его мерой в старом смысле.
+Если $A$ --- простое, то его мера Жордана совпадает с его мерой в старом смысле.
 \end{Statement}
 
 \begin{Statement}[Критерий измеримости 1]
@@ -105,11 +95,15 @@
 Пусть $A$ --- ограниченное подмножество $\R^n$. Тогда следующие утверждения эквивалентны:
 \begin{enumerate}
 \item $A$ --- измеримо по Жордану;
-\item $\mu^* \delta A = 0$, где $\delta A$ --- граница множества.
+\item $\mu^* \ A = 0$, где $\partial
+ A$ --- граница множества.
 \end{enumerate}
 \end{Statement}
 \begin{proof}\ \\
-$(1) \Rightarrow (2)$. Зафиксируем произвольное $\eps > 0$. Тогда существует такое открытое множество $p$ и замкнутое множество $P$ такие, что $p \subset A \subset P$ и $\mu P- \mu p < \eps$. Но $\delta A \subset P$ и $p \subset \mathrm{int} A$, где $\mathrm{int} A$ --- совокупность внутренних точек множества. Получается, что $P \setminus p \supset \delta A$. Но $P \setminus p$ --- простое множество меры меньше $\eps$, то есть имеющее меру ноль. Значит, $\mu^* \delta A = 0$.
+$(1) \Rightarrow (2)$. Зафиксируем произвольное $\eps > 0$. Тогда существуют открытое множество $p$ и замкнутое множество $P$ такие, что $p \subset A \subset P$ и $\mu P- \mu p < \eps$. Но $\partial
+ A \subset P$ и $p \subset \mathrm{int} A$, где $\mathrm{int} A$ --- совокупность внутренних точек множества. Получается, что $P \setminus p \supset \partial
+ A$. Но $P \setminus p$ --- простое множество меры меньше $\eps$. Значит, $\mu^* \partial
+ A = 0$.
 
 $(2) \Rightarrow (1)$. В следующий раз.
 \end{proof}
@@ -118,5 +112,5 @@ $(2) \Rightarrow (1)$. В следующий раз.
 На основе этого критерия строится классический пример неизмеримого по Жордану множества. Берем квадрат, и пусть в $A$ входят все его внутренние точки с рациональными координатами. Границей такого множества будет весь куб, и его мера очевидно не равна нулю, соответственно, множество $A$ не измеримо.
 \end{Comment}
 \begin{Comment}
-Из сходимости по Жордану следует сходимость по Лебегу, но не наоборот. Это связано с тем, что в сходимости по Лебегу используется не более чем \textit{счетное} объединение, а по Жордану --- \textit{конечное}.
+Из измеримости по Жордану следует измеримость по Лебегу, но не наоборот. Это связано с тем, что в сходимости по Лебегу используется не более чем \textit{счетное} объединение, а по Жордану --- \textit{конечное}.
 \end{Comment}

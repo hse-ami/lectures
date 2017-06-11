@@ -9,3 +9,5 @@
 *.bcf
 *.pdf
 _build/
+
+*.kilepr

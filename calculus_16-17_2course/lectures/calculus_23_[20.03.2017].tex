@@ -5,7 +5,7 @@
 	\begin{Def}
 		Средними Чезаро (иногда называемыми средними Фейера) порядка $N$ функции $f$ в точке $x$ будем называть:
 		$$
-			\sigma_N(x) = \cfrac{1}{N} \sum\limits_{n =1}^{N -1}S_n(x,f),
+			\sigma_N(x) = \cfrac{1}{N} \sum\limits_{n =0}^{N -1}S_n(x,f),
 		$$
 		 где $S_n(x,f)$ есть $n$-ая частичная сумма ряда Фурье по тригонометрической системе.
 	\end{Def}
@@ -30,7 +30,7 @@
 		Попытаемся переписать средние Фейера в удобной форме как свертку функций:
         \begin{multline}	
 			\sigma_n(x,f) = \cfrac{1}{N}\sum\limits_{n=0}^{N-1}S_n(x,f) = \cfrac{1}{N}\sum\limits_{n=0}^{N-1}\cfrac{1}{\pi}\int\limits_{-\pi}^{\pi}f(x-t)D_N(t)dt = \\ 
-            = \cfrac{1}{N\pi}\int\limits_{-\pi}^{\pi}f(x-t)\sum\limits_{n=0}^{N-1}D_n(t)dt =   \cfrac{1}{\pi}\int\limits_{-\pi}^{\pi}f(x-t)K_N(t)dt = \cfrac{1}{\pi}f*K_n(x)
+            = \cfrac{1}{N\pi}\int\limits_{-\pi}^{\pi}f(x-t)\sum\limits_{n=0}^{N-1}D_n(t)dt =   \cfrac{1}{\pi}\int\limits_{-\pi}^{\pi}f(x-t)K_N(t)dt = \cfrac{1}{\pi}f*K_n(x).
         \end{multline}
 		Нам будет вполне достаточно доказать, что $\left\{\frac{1}{\pi}K_n(t)\right\}_{n=1}^{\infty}$ --- \lmao. 
 		$2\pi$-периодичность и непрерывность очевидны. Далее
@@ -45,7 +45,7 @@
 		\begin{align}
 			K_N(t) =& \cfrac{1}{N}\sum\limits_{n=0}^{N-1} D_n(t) = \cfrac{1}{N}\sum\limits_{n}^{N-1} \cfrac{\sin((n + 1/2)t)}{2\sin(t/2)}\cdot\cfrac{\sin(t/2)}{\sin(t/2)} = \\
 			=& \cfrac{1}{N}\cdot \cfrac{1 - \cos(t) + \cos(t) - \cos(2t) + \cos(2t) - \ldots - \cos(Nt)}{2\cdot 2\sin^2(t/2)} = \cfrac{1}{N}\cdot \cfrac{1 - \cos(Nt)}{4\sin^2(t/2)} =\\
-			=&\cfrac{1}{N}\cdot \cfrac{\sin^2\left(\frac{Nt}{2}\right)}{2\sin(t/2)}
+			=&\cfrac{1}{N}\cdot \cfrac{\sin^2\left(\frac{Nt}{2}\right)}{2\sin^2(t/2)}
 	    \end{align}
 	    Отсюда следует неотрицательность.
 	    Далее для произвольного $\delta \in (0;\pi)$ грубо оценим интеграл
@@ -85,12 +85,12 @@
 		где значок $\sqcup$ означает объединение непересекающихся множеств.
 		Обозначим за $\Pi' = I_1 \times \ldots \times I_k$, $\widetilde{\Pi}' = \I_1 \times \ldots \times \I_k$. Тогда
 		$$
-			\Pi \setminus \widetilde{\Pi} = (\Pi' \times I_{k+1}) \setminus (\widetilde{\Pi}' \times \I_{k + 1}) = (\Pi' \setminus \widetilde{\Pi}')\times I_{k + 1} \sqcup (\Pi' \cap \widetilde{\Pi}')\times (I_{k + 1} \setminus \I_{k + 1})
+			\Pi \setminus \widetilde{\Pi} = (\Pi' \times I_{k+1}) \setminus (\widetilde{\Pi}' \times \I_{k + 1}) = (\Pi' \setminus \widetilde{\Pi}')\times I_{k + 1} \sqcup (\Pi' \cap \widetilde{\Pi}')\times (I_{k + 1} \setminus \I_{k + 1}).
 		$$
 		Применяя предположение индукции, получаем то, что нужно.
 		\par Теперь пусть $\Pi_1, \ldots, \Pi_k$ --- брусы. Докажем, что их объединение можно представить как объединение попарно непересекающихся брусов. Сделаем это индукцией по $k$. Для $k = 1$ это верно. Докажем для $k = k + 1$.
 		$$
-			\Pi_1 \cup \Pi_2 \ldots \cup \Pi_{k + 1} = \Pi_1 \cup \ldots \cup \Pi_{k} \sqcup \left(\Pi_{k + 1} \setminus \bigcup\limits_{n =1}^k\Pi_k\right)
+			\Pi_1 \cup \Pi_2 \ldots \cup \Pi_{k + 1} = \Pi_1 \cup \ldots \cup \Pi_{k} \sqcup \left(\Pi_{k + 1} \setminus \bigcup\limits_{n =1}^k\Pi_k\right).
 		$$
 		Первое объединение представимо в искомом виде по предположению индукции. Вторая разность есть ни что иное как
 		$$

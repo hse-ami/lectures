@@ -3,7 +3,7 @@
 \subsection{Теорема Вейерштрасса}
 В прошлый раз мы сформулировали теорему Вейерштрасса:
 \begin{Theorem}
-	Для всякой непрерывной на всей числовой прямой $2\pi$-периодической функции для всякого $\eps>0$ существует такой тригонометрический многочлен $T(x)$, что в каждой точке $x \in \R$ $$
+	Для всякой непрерывной на всей числовой прямой $2\pi$-периодической функции $f(x)$ и для всякого $\eps>0$ существует такой тригонометрический многочлен $T(x)$, что в каждой точке $x \in \R$ $$
 	 |f(x)-T(x)| < \eps.
 	$$
 \end{Theorem}
@@ -15,9 +15,9 @@
 \begin{Lemma}
 	Пусть $\{K_n(t)\}_{n=1}^{\infty}$ --- \lmao, $f(x)$ --- непрерывная $2\pi$-периодическая функция, $g_n(x) = f(x)*K_n(x)$. Тогда 
 	$$
-		\forall \eps>0\ \exists N\in \N\; \forall n>N\; \forall x\in\R\; |f(x) - g_n(x)| < \eps.
+		\forall \eps>0\ \exists N\in \N:\; \forall n>N\; \forall x\in\R\; |f(x) - g_n(x)| < \eps.
 	$$
-	Или, что то же самое, $g_n(x)$ сходятся к $f(x)$ равномерно на $\R$.
+	Или, что то же самое, $g_n(x)$ сходятся к $f(x)$ равномерно на $\R$ при $n \rarr \infty$.
 	\begin{proof}
 		Зафиксируем произвольное $\eps > 0$. Так как $f$ --- периодическая и непрерывная на $\R$, она равномерно непрерывна на $\R$. Найдём такое $C>0$, что $|f(x)| <C\; \forall x$. Для $\eps_1 = \eps/2$ найдём такое $\delta > 0$, что
 		$$
@@ -40,7 +40,7 @@
 \end{Lemma}
 \begin{proof}
 	\begin{align*}
-	f*T(x) = \int \limits_{-\pi}^{\pi}f(x)T(x - t)dt = \int \limits_{-\pi}^{\pi}f(t)\frac{\alpha_0}{2}dt +\sum\limits_{n=1}^{N} \int \limits_{-\pi}^{\pi}f(t)(\alpha_n(\cos(nx)\cos(nt) + \sin(nt)\sin(nx)) +\\+ \beta_n(\sin(nx)\cos(nt) - \cos(nx)\sin(nt)))dt = \frac{\widetilde{\alpha}_0}{2} + \sum \limits_{n=1}^{N}\left(\widetilde{\alpha}_n\cos(nx) + \widetilde{\beta}_n\sin(nx)\right)
+	f*T(x) = \int \limits_{-\pi}^{\pi}f(x)T(x - t)dt = \int \limits_{-\pi}^{\pi}f(t)\frac{\alpha_0}{2}dt +\sum\limits_{n=1}^{N} \int \limits_{-\pi}^{\pi}f(t)(\alpha_n(\cos(nx)\cos(nt) + \sin(nt)\sin(nx)) +\\+ \beta_n(\sin(nx)\cos(nt) - \cos(nx)\sin(nt)))dt = \frac{\widetilde{\alpha}_0}{2} + \sum \limits_{n=1}^{N}\left(\widetilde{\alpha}_n\cos(nx) + \widetilde{\beta}_n\sin(nx)\right).
 	\end{align*}
 	Здесь мы вынесли за знак интеграла выражения, не зависящие от $t$, а сами интегралы посчитали и обозначили их как константы $\widetilde{\alpha}_n$ и $\widetilde{\beta}_n$.
 \end{proof}
@@ -100,9 +100,9 @@ $$
 \begin{Examples}
 	Выведем формулу для суммы ряда обратных квадратов. Пусть $f(x) = x$. Тогда $a_n = 0$, ибо функция нечётная. Вычислим $b_n$:
 	\begin{gather*}
-		\frac{1}{\pi} \int \limits_{-\pi}^{\pi} x \sin(nx)dx = \frac{-2}{\pi n} \int \limits_{0}^{\pi}x d\cos(nx) = \frac{-2}{\pi}\left(x \cos(nx)\right)\biggr|_0^{\pi} - \int \limits_{0}^{\pi}\cos(nx) dx = \frac{2\cdot(-1)^{n+1}}{n}.
+		\frac{1}{\pi} \int \limits_{-\pi}^{\pi} x \sin(nx)dx = \frac{-2}{\pi n} \int \limits_{0}^{\pi}x d\cos(nx) = \frac{-2}{\pi n}\left(x \cos(nx)\right)\biggr|_0^{\pi} - \int \limits_{0}^{\pi}\cos(nx) dx = \frac{2\cdot(-1)^{n+1}}{n}.
 	\end{gather*}
-	Интеграл $x^2$ по отрезку $[-\pi;\pi]$ фукнции $x^2$ равен $\cfrac{x^3}{3}\biggr|_{-\pi}^{\pi} = \cfrac{2\pi^3}{3}$. Отсюда получаем по равенству Парсеваля:
+	Интеграл по отрезку $[-\pi;\pi]$ фунции $x^2$ равен $\cfrac{x^3}{3}\biggr|_{-\pi}^{\pi} = \cfrac{2\pi^3}{3}$. Отсюда получаем по равенству Парсеваля:
     $$
 		\cfrac{2\pi^2}{3} = \sum\limits_{n=1}^{\infty} \cfrac{4}{n^2}.
     $$
