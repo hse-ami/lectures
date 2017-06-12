@@ -1,39 +1,43 @@
 \pagestyle{fancy}
 \section{Лекции 27-28 от 15.05.2017 \\ Критерий Дарбу}
-Пусть $A$ --- непустое измеримое множество, и функция $f\colon A \to \R$, $T = \{A_k\}_{k =1}^{K}$ --- разбиение множества $A$. Обозначим за $m_i = \inf_{A_i} f, M_i = \sup_{A_i} f$.
+Пусть $A$ --- непустое измеримое множество, и функция $f\colon A \to \R$ ограничена на $A$, $T = \{A_k\}_{k =1}^{K}$ --- разбиение множества $A$. Обозначим за $m_i = \inf_{A_i} f, M_i = \sup_{A_i} f$.
 \begin{Def}
     Верхней и нижней суммами Дарбу называются соответственно $S^*$ и $s_*$, определённые следующим образом:
 \begin{gather}
-    S^*(f, T) = \sum\limits_{i =1}^{K} M_i \mu A_i\\
-    s_*(f, T) = \sum\limits_{i =1}^{K} m_i \mu A_i\\
+    S^*(f, T) = \sum\limits_{i =1}^{K} M_i \mu A_i,\\
+    s_*(f, T) = \sum\limits_{i =1}^{K} m_i \mu A_i.
 \end{gather}
 \end{Def}
-
 \begin{Def}
-    Разбиение $T_1 = \{B_j\}_{j =1}^{J}$ называется измельчением разбиения $T = \{A_k\}_{k=1}^{K}$ если для всякого множества $B_i$ из разбиения $T_1$ существует такое множество $A_k$ из разбиения $T$, что $B_i \subset A_k$. 
+    Разбиение $T_1 = \{B_j\}_{j =1}^{J}$ называется измельчением разбиения $T = \{A_k\}_{k=1}^{K}$ если для всякого множества $B_j$ из разбиения $T_1$ существует такое множество $A_k$ из разбиения $T$, что $B_j \subset A_k$. 
 \end{Def}
-Заметим, что если $B_j \subset A_{k_1}$ и $B_j \subset A_{k_2}$ при $k_1 \neq k_2$, то $\mu B_j = 0$. Далее будем подразумевать под $B_i$ множества, составляющие измельчение разбиения $A$ на множества $A_k$. 
+Заметим, что если $B_j \subset A_{k_1}$ и $B_j \subset A_{k_2}$ при $k_1 \neq k_2$, то $\mu B_j = 0$. Далее будем подразумевать под $B_j$ множества, составляющие измельчение разбиения $A$ на множества $A_k$. 
 \begin{Statement}
     $\sum \limits_{j\colon B_j \subset A_k}\mu B_j = \mu A_k$.
 \end{Statement}
 \begin{proof}
-    Обозначим за $\widetilde{A}_k = \bigcup\limits_{j\colon B_j \subset A_k}B_j$. Очевидно, что $\widetilde{A}_k \subset A_k$. Рассуждаем от противного: пусть $\mu \widetilde{A}_k < \mu A_k$, или, что то же самое $ \mu(A_k\setminus \widetilde{A}_k ) > 0$. Тогда найдётся такое $l$, что $\mu (B_l \cap (A_k \setminus \widetilde{A}_k)) > 0$. Тогда $A_k \setminus \widetilde{A}_k = \bigcap\limits_{l}((A_k \setminus \widetilde{A}_k)\cap B_l)$, и если бы $\mu((A_k \setminus \widetilde{A}_k)\cap B_l) = 0$ для всех $l$, то получили бы, что $\mu(A_k \setminus \widetilde{A}_k) = 0$. Значит, найдётся такой $k_1 \neq k$, что $B_l \subset A_k$ и $\mu(A_k \cap A_{k_1}) \geqslant \mu(A_k \cap B_l) > 0$. Противоречие.
+    Обозначим за $\widetilde{A}_k = \bigcup\limits_{j\colon B_j \subset A_k}B_j$. Очевидно, что $\widetilde{A}_k \subset A_k$. Рассуждаем от противного: пусть $\mu \widetilde{A}_k < \mu A_k$, или, что то же самое $ \mu(A_k\setminus \widetilde{A}_k ) > 0$. Тогда найдётся такое $l$, что $\mu (B_l \cap (A_k \setminus \widetilde{A}_k)) > 0$ ( $A_k \setminus \widetilde{A}_k = \bigcup\limits_{l}((A_k \setminus \widetilde{A}_k)\cap B_l)$, и если бы $\mu((A_k \setminus \widetilde{A}_k)\cap B_l) = 0$ для всех $l$, то получили бы, что $\mu(A_k \setminus \widetilde{A}_k) = 0$). Значит, найдётся такой $k_1 \neq k$, что $B_l \subset A_k$ и $\mu(A_k \cap A_{k_1}) \geqslant \mu(A_k \cap B_l) > 0$. Противоречие.
 \end{proof}
-Если $T_1 = \{A_k\}_{k =1}^{K}$ и $T_2 = \{\widetilde{A}_j)\}_{j=1}^{J}$ --- два разбиения множества $A$. Тогда существует разбиение множества измельчение $\widetilde{T}$ для обоих разбиений, определённое следующим образом:
+Пусть $T_1 = \{A_k\}_{k =1}^{K}$ и $T_2 = \{\widetilde{A}_j\}_{j=1}^{J}$ --- два разбиения множества $A$. Тогда существует разбиение множества, являющееся измельчением $\widetilde{T}$ для обоих разбиений сразу, определённое следующим образом:
 $$
-    \widetilde{T} =  \{A_k \cap \widetilde{A}_j\}_{k, j}
+    \widetilde{T} =  \{A_k \cap \widetilde{A}_j\}_{k, j}:  A_k \cap \widetilde{A}_j \neq \emptyset.
 $$
 \begin{Lemma}
     Если $T_1 = \{B_k\}_{k=1}^{K}$ --- измельчение $T = \{A_j\}_{j =1}^{J}$, то 
     $$
-        S^* (f, T) \geqslant S^*(f, T_1)
+        S^* (f, T) \geqslant S^*(f, T_1),
+    $$
+    $$
+    s^* (f, T) \leqslant s^*(f, T_1).
     $$
 \end{Lemma}
 \begin{proof}
+    Докажем первое неравенство (второе --- аналогично).
+    
     Введём обозначения
     \begin{gather}
-        M_k = \sup_{A_k}(f)\\
-        \widetilde{M}_j = \sup_{B_j}(f)
+        M_k = \sup_{A_k}(f),\\
+        \widetilde{M}_k = \sup_{B_k}(f).
     \end{gather}
     Тогда искомое неравенство есть следствие следующей цепочки неравенств:
     \begin{gather}
@@ -45,7 +49,7 @@ $$
     Для любых разбиений $T_1$ и $T_2$, $s_*(f, T_1) \leqslant S^*(f, T_2)$.
 \end{Statement}
 \begin{proof}
-    Пусть $\widetilde{T}$ --- изьмельчение $T_1$ и $T_2$. Тогдa,
+    Пусть $\widetilde{T}$ --- измельчение $T_1$ и $T_2$. Тогда,
     $$
         s_*(f, T_1) \leqslant s_*(f, \widetilde{T}) \leqslant S^*(f, \widetilde{T}) \leqslant S^*(f, T_2)
     $$
@@ -60,10 +64,10 @@ $$
 \end{Def}
 Сразу очевидное утверждениe
 \begin{Statement}
-    $I_* \leqslant I^*$
+    $I_* \leqslant I^*$.
 \end{Statement}
 \begin{proof}
-    Сразу следует из того, что для всяких $T_1, T_2$ --- разбиений $A$, $s_*(f, T_1) \leqslant S^*(f, T_2)$ и $I_* \leqslant S^*(f, T_2)$.
+    Сразу следует из того, что для всяких $T_1, T_2$ --- разбиений $A$, $s_*(f, T_1) \leqslant S^*(f, T_2)$. Тогда $I_* \leqslant S^*(f, T_2)$.
 \end{proof}
 \begin{Theorem}[Критерий Дарбу]
 Следующие утверждения эквивалентны:
@@ -77,22 +81,25 @@ $$
     $(1) \Rightarrow (2)$. Обозначим за $I = \int\limits_A fdx$. Зафиксируем произвольное $\eps > 0$. Существует такое $\delta > 0$, что для любого отмеченного разбиения $(T, \xi)$ диаметром, меньшим, чем $\delta$ выполнено $|\sigma(f, T, \xi) - I| < \eps$. Перепишем это как
     \begin{gather}
         I - \eps \leqslant \sigma(f, T, \xi) \leqslant 1 + \eps\\
-        I - \eps \leqslant S_*(f, T) = \inf_\xi \sigma(f, T, \xi) \leqslant \sup_\xi \sigma(f, T, \xi) = S^*(f, T) \leqslant I +\eps\\
-        I - \eps \leqslant S_*(f, T) \leqslant I_* < I^* \leqslant S^*(f, T) \leqslant I + \eps
+        I - \eps \leqslant s_*(f, T) = \inf_\xi \sigma(f, T, \xi) \leqslant \sup_\xi \sigma(f, T, \xi) = S^*(f, T) \leqslant I +\eps\\
+        I - \eps \leqslant s_*(f, T) \leqslant I_* < I^* \leqslant S^*(f, T) \leqslant I + \eps
     \end{gather}
-    То есть мы получили, что с одной стороны $|I - I_*| < \eps$, с другой --- $|I - I^*| < \eps$. Это возможно лишь когда $I^* = I = I_*$.\\
-    $(2) \Rightarrow (1)$. Обозначим за $C = \sup_A |f|$. Зафиксируем произвольное $\eps > 0$ и положим $\eps_1 = \frac{\eps}{100(1 + C\cdot\mu A)}$.
+    То есть мы получили, что с одной стороны $|I - I_*| < \eps$, с другой --- $|I - I^*| < \eps$. В силу произвольности $\eps$ это возможно лишь когда $I^* = I = I_*$.\\
+    
+    
+    
+    $(2) \Rightarrow (1)$. Обозначим за $C = \sup_A |f|$. Зафиксируем произвольное $\eps > 0$ и положим $\eps_1 = \frac{\eps}{100(1 + 2С)}$.
 
     Найдём такие разбиения $T_1$ и $T_2$, что 
     \begin{gather}
-        S_*(f, T_1) > I_* - \eps_1\\
+        s_*(f, T_1) > I_* - \eps_1\\
         S^*(f, T_2) < I^* + \eps_1
     \end{gather}
-    Найдём $T = \{A_k\}_{k =1}^{K}$ --- измельчение одновременно разбиений $T_1$ и $T_2$.
+    Найдём $T = \{A_k\}_{k =1}^{K}$ --- измельчение одновременно разбиений $T_1$ и $T_2$. Тогда
     $$
-        I - \eps_1 < S_*(f, T) < S^*(f, T) < 1 + \eps
+        I - \eps_1 < s_*(f, T) < S^*(f, T) < 1 + \eps
     $$
-    Положим $D = \bigcup\limits_{k=1}^K \delta A_k$, причём в силу измеримости множеств $\mu D =0$. Найдётся простое множество $P_1$ такое, что $P_1 \supset D$ и $\mu P_1 < \frac{\eps_1}{5^n}$ (напомним, что $n$ --- размерность нашего пространства). Это множество представить в виде дизъюнктного объединения множеств, а именно
+    Положим $D = \bigcup\limits_{k=1}^K \partial A_k$, причём в силу измеримости множеств $\mu D =0$. Найдётся простое множество $P_1$ такое, что $P_1 \supset D$ и $\mu P_1 < \frac{\eps_1}{5^n}$ (напомним, что $n$ --- размерность нашего пространства). Это множество представимо виде дизъюнктного объединения брусов, а именно
     \[
         P_1 = \bigsqcup\limits_{j=1}^J \Pi_j 
     \]
