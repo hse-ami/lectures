@@ -3,7 +3,7 @@
 \begin{Def}
 \textit{Тригонометрическим многочленом} называется выражение вида
 $$
-\frac{\alpha_0}{2} + \sum\limits_{n = 1}^N\left(\alpha_n \cos(nx) +\beta \sin(nx)\right).
+\frac{\alpha_0}{2} + \sum\limits_{n = 1}^N\left(\alpha_n \cos(nx) +\beta_n \sin(nx)\right).
 $$
 \end{Def}
 \begin{Theorem}[Вейерштрасса]
@@ -30,7 +30,7 @@ $$
     
     Обозначив количество точек разрыва за $N$ мы можем оценить $||h-g_m||_2$
    $$ ||h-g_m||_2 = \sqrt{\int\limits_{-\pi}^{\pi}(h(x)-g_m(x))^2dx}\leq\left(N\cdot\frac{2}{m}\cdot4C^2 \right) .$$
-   А значит $||h-g_m||_2\rarr0$ при $m \rarr 0$.
+   А значит $||h-g_m||_2\rarr0$ при $m \rarr \infty$.
 \end{proof}
 
 
