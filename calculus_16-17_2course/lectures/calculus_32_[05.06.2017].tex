@@ -87,8 +87,15 @@ $$
 
 Попытаемся теперь посчитать суммарную площадь таких треугольников:
 \begin{gather*}
-S = \lim\limits_{n, m \to \infty} m \cdot 2n \cdot S_\vartriangle = \lim 2mn R \sin \dfrac{\pi}{n}\sqrt{R^2(1 - \cos \pi/n + (H/m)^2)} =\\= \lim 2\pi R \sqrt{H^2 + R^2m^2 \pi^4/(4n^4) + o(1/n^4)} = [m = An^2] = 2\pi R\sqrt{H^2 + A^2R^2\pi^/4}.
+S_\vartriangle = R \sin \frac{\pi}{n} \sqrt{\left( \frac{H}{m} \right)^2 + R^2 \left( 1 - \cos \frac{\pi}{n} \right)^2};\\
+S =  m \cdot 2n \cdot S_\vartriangle = 2n R \sin \dfrac{\pi}{n}\sqrt{H^2 + R^2m^2 \left( 1 - \cos \frac{\pi}{n} \right)^2}.
 \end{gather*}
+
+Рассмотрим случай, когда $\lim \dfrac{n}{m^2} = A$. Тогда:
+$$
+\lim\limits_{n, m \to \infty} S = 2\pi R \sqrt{H^2 + \dfrac{\pi^4 R^2}{4}A^2}.
+$$
+
 А ведь $A$ может быть любым... Получается, площадь такой фигуры можно сделать сколь угодно большим!
 
 В общем, плохое приближение площади поверхности цилиндра. Очень плохое.
