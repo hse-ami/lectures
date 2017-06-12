@@ -61,7 +61,7 @@ $$
 \]
 Но определение ядра через сумму не очень удобно само по себе. Попробуем выписать её в более удобном виде. Пусть $\sin(u/2) \neq 0$. Тогда мы вправе умножить и разделить на него.
 \begin{gather}
-	D_N(u) = \cfrac{1}{2} + \sum\limits_{n=1}^{N}\cos(nu) = \cfrac{\sin(u/2)}{2\sin(u/2)} + \sum\limits_{n=1}^{\infty} \cfrac{\cos(nu)\sin(u/2)}{2\sin(u/2)} =\\
+	D_N(u) = \cfrac{1}{2} + \sum\limits_{n=1}^{N}\cos(nu) = \cfrac{\sin(u/2)}{2\sin(u/2)} + \sum\limits_{n=1}^{\infty} \cfrac{\cos(nu)\sin(u/2)}{\sin(u/2)} =\\
 	= \left[\cos(nu)\sin(u/2) = \cfrac{\sin((n + 1/2)u) - \sin((n-1/2)u)}{2}\right]=\\
 	= \cfrac{\sin(u/2) - \sin(u/2) + \sin(3u/2) - \sin(3u/2) + \ldots + \sin((N + 1/2)u)}{2\sin(u/2)} = \cfrac{\sin((N + 1/2)u)}{2\sin(u/2)}.
 \end{gather}
