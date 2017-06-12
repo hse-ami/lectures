@@ -2,12 +2,12 @@
 \subsection{Формула Грина}
 \begin{Def}
 Область $D$ \textit{элементарна относительно $Ox$}, если 
-$$D = \{ (x, y) \mid x \in (a, b), y \in (\phi(x), \psi(x) \},$$
+$$D = \{ (x, y) \mid x \in (a, b), y \in (\phi(x), \psi(x)) \},$$
 где $\phi, \psi \in C^{1}[a, b]$ и $\psi > \phi$ на $[a, b]$.
 \end{Def}
 \begin{Def}
 Область $D$ \textit{элементарна относительно $Oy$}, если 
-$$D = \{ (x, y) \mid y \in (c, d), x \in (\phi(y), \psi(y) \},$$
+$$D = \{ (x, y) \mid y \in (c, d), x \in (\phi(y), \psi(y)) \},$$
 где $\phi, \psi \in C^{1}[c, d]$ и $\psi > \phi$ на $[c, d]$.
 \end{Def}
 
@@ -23,7 +23,7 @@ $$
 $$
 Правая часть:
 $$
-\int\limits_a^b\dx\int\limits_{\phi(x)}^{\psi(x)} -P'y\d y = \int\limits_a^b-P(x, \phi(x)) - P(x, \phi(x))\dx.
+\int\limits_a^b\dx\int\limits_{\phi(x)}^{\psi(x)} -P'y\d y = \int\limits_a^bP(x, \phi(x)) - P(x, \psi(x))\dx.
 $$
 Как видим, они равны.
 \end{proof}
@@ -176,7 +176,7 @@ $$
 
 \begin{Def}
 Область $V$ в $\R^3$ \textit{элементарна относительно $Oz$}, если 
-$$V = \{ (x, y, z) \mid (x, y) \in D, z \in (\phi(y), \psi(y) \},$$
+$$V = \{ (x, y, z) \mid (x, y) \in D, z \in (\phi(y), \psi(y)) \},$$
  где $D$ --- область в $\R^2$, ограниченная простым кусочно-гладким замкнутым контуром,  где $\phi, \psi \in C^{1}(D)$, $\psi > \phi$ на $D$.
 \end{Def}
 

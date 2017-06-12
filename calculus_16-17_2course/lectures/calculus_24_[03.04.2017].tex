@@ -35,7 +35,7 @@
 \begin{proof}[Идея доказательства]
 Проблема исключительно в том, что <<нарезка>> бруса $\Pi$ может быть нерегулярной (не <<сеточкой>>). Но в таком случае можно просто продлить все разрезы и получить таки регулярную нарезку.
 
-Рассмотрим регулярную нарезку в двумерном случае. Пусть ширину бруса мы разрезали на отрезки $I_1, \ldots, I_n$, а длину на $\I_1, \ldots, \I_m$. Тогда $\mu\Pi = (|I_1| + \ldots + |I_n|) \cdot (|\I_1| + \ldots + |\I_m|) \hm= \sum\limits^n_i=1\sum\limits^m_k=1|I_i||\I_k| = \sum\mu\pi_j$.
+Рассмотрим регулярную нарезку в двумерном случае. Пусть ширину бруса мы разрезали на отрезки $I_1, \ldots, I_n$, а длину на $\I_1, \ldots, \I_m$. Тогда $\mu\Pi = (|I_1| + \ldots + |I_n|) \cdot (|\I_1| + \ldots + |\I_m|) \hm= \sum\limits^n_{i=1}\sum\limits^m_{k=1}|I_i||\I_k| = \sum\mu\pi_j$.
 \end{proof}
 
 \begin{Statement}
@@ -73,7 +73,7 @@
 Для любого ограниченного множества $A$ нижняя мера Жордана не больше верхней меры Жордана: $\mu_*A \leq \mu^*A$.
 \end{Statement}
 \begin{proof}
-Пусть $p$ и $P$ --- произвольные простые множества такие, что $p \subset A \subset P$. Очевидно, что $\mu p \leq \mu P$. Соответственно, $\mu_* A = \sup\limits_{p \subset A} \mu p \leq \mu P$. Значит, $\mu^A \leq \inf\limits_{A \subset P} = \mu^* A$. Итого, $\mu_* A \leq \mu^* A$.
+Пусть $p$ и $P$ --- произвольные простые множества такие, что $p \subset A \subset P$. Очевидно, что $\mu p \leq \mu P$. Соответственно, $\mu_* A = \sup\limits_{p \subset A} \mu p \leq \mu P$. Значит, $\mu_*A \leq \inf\limits_{A \subset P} = \mu^* A$. Итого, $\mu_* A \leq \mu^* A$.
 \end{proof}
 
 \begin{Statement}
@@ -95,7 +95,7 @@
 Пусть $A$ --- ограниченное подмножество $\R^n$. Тогда следующие утверждения эквивалентны:
 \begin{enumerate}
 \item $A$ --- измеримо по Жордану;
-\item $\mu^* \ A = 0$, где $\partial
+\item $\mu^* \partial A = 0$, где $\partial
  A$ --- граница множества.
 \end{enumerate}
 \end{Statement}
