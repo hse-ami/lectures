@@ -1,6 +1,6 @@
 \pagestyle{fancy}
 \section{Лекция 23 от 20.03.2017 \\ Средние Чезаро. Многомерный интеграл Римана (начало). Брусья и их свойства}
-	\subsection{Средние Чезаро. Ядро Фрейра}
+	\subsection{Средние Чезаро. Ядро Фейера}
 	Начнем сразу с определений в тему лекции:
 	\begin{Def}
 		Средними Чезаро (иногда называемыми средними Фейера) порядка $N$ функции $f$ в точке $x$ будем называть:
@@ -50,7 +50,7 @@
 	    Отсюда следует неотрицательность.
 	    Далее для произвольного $\delta \in (0;\pi)$ грубо оценим интеграл
 	    \begin{gather}
-	    	\cfrac{1}{\pi}\left(\int\limits_{-\pi}^{-\delta}K_N(t)dt + \int\limits_{\delta}^{\pi}K_N(t)dt\right) = \cfrac{2}{\pi}\int\limits_{\delta}^{\pi}\cfrac{\sin^2(Nt)}{2N\sin^2(t/2)}dt \leqslant \cfrac{2}{\pi}\int\limits_{\delta}^{\pi} \cfrac{1}{2N\sin^2(t/2)}dt \leqslant \cfrac{2}{\pi}\cfrac{\pi}{2N \sin^2(\delta/2)}.
+	    	\cfrac{1}{\pi}\left(\int\limits_{-\pi}^{-\delta}K_N(t)dt + \int\limits_{\delta}^{\pi}K_N(t)dt\right) = \cfrac{2}{\pi}\int\limits_{\delta}^{\pi}\cfrac{\sin^2(Nt/2)}{2N\sin^2(t/2)}dt \leqslant \cfrac{2}{\pi}\int\limits_{\delta}^{\pi} \cfrac{1}{2N\sin^2(t/2)}dt \leqslant \cfrac{2}{\pi}\cfrac{\pi}{2N \sin^2(\delta/2)}.
 	    \end{gather}
 	    И видно в последнем выражении, что оно стремится к 0 при $N \to \infty.$
 	\end{proof}

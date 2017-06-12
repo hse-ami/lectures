@@ -82,7 +82,7 @@ S^*(|f|, T) - s_*(|f|, T) =  \sum\osc(|f|, A_j)\mu A_j < \sum\osc(f, A_j)\mu A_j
 
 Сведем $f$ к ограниченной на $A$. Найдем такое $C$ что $\forall x\ f(x) < C$. Зафиксируем произвольное $\eps > 0$ и найдем такое разбиение $T$ множества $A$, что $S^*(f, T) - s_*(f, T) < \eps / 2C$. Тогда:
 \begin{gather*}
-S^*(f^2, T) - s_*(f^2, T) = \sum\left( \sup\limits_{A_j}f^2 - \inf\limits_{A_j}f^2 \right)\mu A_j \leq \sum 2C\sup\limits_{\widetilde{x}, \widetilde{y} \in A_j}(f(\widetilde{x}) - f(\widetilde{y})) =\\= 2C (S^*(f, T) - s_*(f, T)) < \eps.
+S^*(f^2, T) - s_*(f^2, T) = \sum\left( \sup\limits_{A_j}f^2 - \inf\limits_{A_j}f^2 \right)\mu A_j \leq \sum 2C\sup\limits_{\widetilde{x}, \widetilde{y} \in A_j}(f(\widetilde{x}) - f(\widetilde{y}))\mu A_j =\\= 2C (S^*(f, T) - s_*(f, T)) < \eps.
 \end{gather*}
 Здесь мы воспользовались тем, что $f^2(x) - f^2(y) = (f(x) - f(y))(f(x) + f(y))$, причем\\|$f(x) + f(y)| \hm\leq 2C$.
 \end{proof}
@@ -107,7 +107,7 @@ $I_*(\overline y), I^*(\overline{y}) \in \Ri(\Pi_2)$ и $\int\limits_{\Pi_1 \tim
 
 \begin{proof}
 
-Пусть $\{ A_j \}_{j=1}^{J}, \{ B_k \}_{k=1}^K$ --- разбиение на подбрусы брусов $\Pi_1$ и $\Pi_2$ соответственно. Тогда $\{ A_j \times B_k\}$ --- разбиение $\Pi_1 \times \Pi_1$.
+Пусть $\{ A_j \}_{j=1}^{J}, \{ B_k \}_{k=1}^K$ --- разбиение на подбрусы брусов $\Pi_1$ и $\Pi_2$ соответственно. Тогда $\{ A_j \times B_k\}$ --- разбиение $\Pi_1 \times \Pi_2$.
 
 Пусть $m_{jk} = \inf\limits_{A_j \times B_k} f, M_{jk} = \sup\limits_{A_j \times B_k} f$. Для фиксированного $y \in \Pi_2$ получим, что $m_j(y) = \inf\limits_{x \in A_j} f(x, y), M_j(y) = \sup\limits_{x \in A_j} f(x, y)$.
 
@@ -130,7 +130,7 @@ m_{jk} \leq m_j(\xi_k) \leq M_j(\xi_k) \leq M_{jk}.
 s_*(f, T) \leq I_* = I = I^* \leq S^*(f, T) \\
 I - \eps \leq \sum_K I_*(\xi_k) \mu B_k \leq I+\eps \\
 I - \eps \leq \sigma(I_*, \{ B_k \}, \{\xi_k \}) \leq I+\eps \\
-I_\eps \leq s_*(I_*, \{B_k\}) \leq S^*(I_*, \{B_k\}) \leq I +\eps \\
+I - \eps \leq s_*(I_*, \{B_k\}) \leq S^*(I_*, \{B_k\}) \leq I +\eps \\
 S^*(I_*, \{B_k\}) - s_*(I_*, \{B_k\}) \leq 2\eps.
 \end{gather*}
 Вот мы и получили, что $I_* \in \Ri(\Pi_2)$. Аналогично доказывается для $I^*$.
