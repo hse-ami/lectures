@@ -67,7 +67,7 @@ $$
     $I_* \leqslant I^*$.
 \end{Statement}
 \begin{proof}
-    Сразу следует из того, что для всяких $T_1, T_2$ --- разбиений $A$, $s_*(f, T_1) \leqslant S^*(f, T_2)$. Тогда $I_* \leqslant S^*(f, T_2)$.
+    Сразу следует из того, что для всяких $T_1, T_2$ --- разбиений $A$, $s_*(f, T_1) \leqslant S^*(f, T_2)$. Тогда $I_* \leqslant S^*(f, T_2)$ и значит $I_* \leq \inf \limits_{T_2}S^*(f; T_2) = I^*.$
 \end{proof}
 \begin{Theorem}[Критерий Дарбу]
 Следующие утверждения эквивалентны:
@@ -88,7 +88,7 @@ $$
     
     
     
-    $(2) \Rightarrow (1)$. Обозначим за $C = \sup_A |f|$. Зафиксируем произвольное $\eps > 0$ и положим $\eps_1 = \frac{\eps}{100(1 + 2С)}$.
+    $(2) \Rightarrow (1)$. Обозначим за $C = \sup_A |f|$ (напомним, что рассматриваются ограниченные функции $f$). Зафиксируем произвольное $\eps > 0$ и положим $\eps_1 = \frac{\eps}{100(1 + 2С)}$.
 
     Найдём такие разбиения $T_1$ и $T_2$, что 
     \begin{gather}
@@ -101,7 +101,7 @@ $$
     $$
     Положим $D = \bigcup\limits_{k=1}^K \partial A_k$, причём в силу измеримости множеств $\mu D =0$. Найдётся простое множество $P_1$ такое, что $P_1 \supset D$ и $\mu P_1 < \frac{\eps_1}{5^n}$ (напомним, что $n$ --- размерность нашего пространства). Это множество представимо виде дизъюнктного объединения брусов, а именно
     \[
-        P_1 = \bigsqcup\limits_{j=1}^J \Pi_j 
+        P_1 = \bigsqcup\limits_{j=1}^J \Pi_j.
     \]
     Если среди этих брусов есть вырожденные, то заменим их на невырожденные с сохранением неравенства (в силу строгости неравенства мы можем так сделать). Пусть $\delta > 0$ --- минимальная длина ребра полученных брусов. Через $\Pi_j^*$ обозначим раздутие бруса $\Pi_j$ в 5 раз (брус, полученный гомотетией относительно центра с коэффициентом 5), положим также $P = \bigcup\limits_{j=1}^J \Pi_j^*$. Заметим, что $\mu P < \eps_1$.\\
     Далее нам потребуется одна лемма.
@@ -114,18 +114,18 @@ $$
     Пусть $\widetilde{T} = \{B_j\}_{j=1}^{J}$ --- разбиение $A$ с $\mathrm{diam}\; \widetilde T < \delta$. Тогда про множество $B_j$ известно, что
     \begin{enumerate}
         \item Либо $B_j \subset A_i$ для некоторого $i$
-        \item Лиюо $B_j$ пересекает $\delta A_i$ для некоторого $i$.
+        \item Либо $B_j$ не лежит ни в одном $A_i$ для некоторого $i$.
     \end{enumerate}
     Легко понять, что во втором случае $B_j \subset P$, поскольку содержит точку границы и имеет диаметр не больше $\delta$. Тогда
     \begin{gather}
         \sigma(f, \widetilde{T}) = \sum\limits_{j =1}^{J} f(\xi_j)\mu B_j = \sum\limits_{k=1}^{K} \sum\limits_{j\colon B_j \subset A_k} f(\xi_j)\mu B_j + \sum\limits_{j \colon\not\subset A_i\forall i} f(\xi_j)\mu B_j\leqslant\\ \leqslant \sum\limits_{k=1}^K \sum\limits_{j\colon B_j\subset A_k}\sup_{B_j} f \mu B_j + \sum\limits_{j \colon\not\subset A_i\forall i} \sup_{A}|f| \mu B_j \leqslant \sum\limits_{k=1}^K \sum\limits_{j\colon B_j\subset A_k}\sup_{B_j} f \mu B_j + С\mu P \leqslant\\ \leqslant \sum\limits_{k = 1}^{K} \sup_{A_k}f\cdot\left(\mu A_k - \mu \left(A_k \setminus \bigcup_{B_j \in A_k} B_j\right)\right) + C\eps_1 \leqslant S^*(f, T) + 2C\eps_1 < I + \eps_1(1 + 2C) < I + \eps/2
     \end{gather}
-    Аналогично докажем, что $s_* > I- \eps/2$.
+    Аналогично докажем, что $\sigma(f; \tilde{T}) > I- \eps/2$. Таким образом интегрируемость $f$ доказана по определению.
 \end{proof}
 \begin{Statement}
     Если $f\in \mathcal{R}(A)$ и $f$ ограничена на $A$, то
     $$
-        \forall \eps > 0 \exists \delta > 0\colon \; \forall T \text{ --- разбиения } A,\; \mathrm{diam}(T)< \delta\; S^*(f,T) - s_*(f, T) < \eps
+        \forall \eps > 0 \exists \delta > 0\colon \; \forall T \text{ --- разбиения } A,\; \mathrm{diam}(T)< \delta\; S^*(f,T) - s_*(f, T) < \eps.
     $$
 \end{Statement}
 \begin{Statement}
@@ -137,5 +137,8 @@ $$
 \begin{Consequence}
     Если $f$ ограничена на $A$ и $B$ ($A \cap B = \varnothing$) и интегрируема нa $A$ и $B$, то $f \in \mathcal{R}(A \cup B)$.
 \end{Consequence}
+\begin{proof}
+    Действительно, $\forall \eps>0$ найдём $T_A$ и $T_B$ --- разбиения множеств $A$ и $B$ соответственно, такие что $S^*(f; T_A) - s_*(f; T_A) < \frac{\eps}{2}$ и $S^*(f; T_B) - s_*(f; T_B) < \frac{\eps}{2}$. Тогда $T_A \cup T_B$ --- разбиение $A\cup B$ и $S^*(f; T_A \cup T_B) - s_*(f; T_A \cup T_B) < \eps$. А значит $f \in \mathcal{R}(A \cup B)$.
+\end{proof}
 
 
