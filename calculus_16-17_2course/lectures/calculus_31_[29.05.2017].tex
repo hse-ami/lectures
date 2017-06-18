@@ -8,15 +8,15 @@
     Образ этого отображения будем называть кривой в $\R^n$.
 \end{Def}
 Пусть $T = \{x_0 < x_1 < \ldots < x_n\}$ --- разбиение отрезка $[a;b]$.
-\begin{Def}
-    Вписанной ломаной называются точки $t_i = \varphi(x_i)$, соединённые отрезками $[t_{i-1}; t_i]$.
+\begin{Def}  
+    Вписанной ломаной называется путь, состоящий их отрезков $[t_{i-1}, t_i]$ \\($i = 1\ldots n$), где $t_i = \varphi(x_i)$.
 \end{Def}
 \usetikzlibrary{calc}
 \begin{center}
     \begin{tikzpicture}
     \draw[->] (0,0) -- (10.25,0) node[right] {$x$};
     \draw[->] (0,0) -- (0,5) node[above] {$\varphi(x)$};
-    \draw[scale=1, domain=0:8.2, smooth,variable=\x, red] plot ({\x},{-0.0666667*\x*\x*\x + 0.6666667*\x*\x -1.066667*\x + 2});
+    \draw[scale=1, domain=0:8.0, smooth,variable=\x, red] plot ({\x},{-0.0666667*\x*\x*\x + 0.6666667*\x*\x -1.066667*\x + 2});
     \coordinate [label=left:$t_1$] ($t_0$) at ($ (0,2) + .1*(rand,rand) $);
     \coordinate [label=below:$t_2$] ($t_1$) at ($ (1,1.53) + .1*(rand,rand) $);
     \coordinate [label=below right:$t_3$] ($t_2$) at ($ (2,2) + .1*(rand,rand) $);
@@ -59,13 +59,15 @@
     Существует также эквивалентное определение. Длина пути --- предел длин вписанных ломаных при диаметре разбиения, стремящемся к нулю.
 \end{Comment}
 \begin{Def}
-    Путь называется гладким, если он задаётся функцией $f = (f_1(t), \ldots, f_n(t))\in C^1[a;b]$. Путь называется кусочно-гладким, если он получен стыковкой конечного числа гладких путей.
+    Путь называется гладким, если он задаётся функцией $\phi = (\phi_1(t), \ldots, \phi_n(t))\in C^1[a;b]$. Путь называется кусочно-гладким, если он получен стыковкой конечного числа гладких путей.
 \end{Def}
 \begin{Statement}
-    Всякий кусочно-гладкий путь спрямляется, и его длина равна $\int\limits_{a}^b ||f'(t)|| dt$.
+    Всякий кусочно-гладкий путь спрямляется, и его длина равна $\int\limits_{a}^b ||\phi'(t)|| dt$.
 \end{Statement}
-\parЭто утверждение доказывать строго мы не будем. Более того, в физике это вообще принято за определение длины кривой, ибо зная скорость в каждой точке пути, мы никак не рассчитаем длину пути.
-\par Пусть Отображение $\varphi \colon [a; b] \to \R^n$ --- кусочно-гладкий путь, $\gamma = \varphi([a;b])$ --- кривая и есть некоторая функция $f\colon \gamma \to \R$.
+
+Это утверждение доказывать строго мы не будем. Более того, в физике это вообще принято за определение длины кривой.
+
+Пусть отображение $\varphi \colon [a; b] \to \R^n$ --- кусочно-гладкий путь, $\gamma = \varphi([a;b])$ --- кривая, и есть некоторая функция $f\colon \gamma \to \R$.
 \begin{Def}
     В принятых условиях криволинейным интегралом первого рода по кривой $\gamma$ называется
     $$
@@ -80,7 +82,7 @@
 \end{Properties}
 Пусть $\varphi(t)\colon [a;b] \to \R^n$ и $\psi(\tau) \colon [\alpha; \beta] \to \R^n$ -- два гладких пути.
 \begin{Def}
-    Пути $\varphi$ и $\psi$ называются эквивалентными, если существует строго монотонное отображение $g\colon [a;b] \to [\alpha; \beta]$, дифференцируемое с $g' \neq 0$ такое, что $\psi(g(t)) = \phi(t)$. В таком случае $g$ называют допустимой заменой переменных.
+    Пути $\varphi$ и $\psi$ называются эквивалентными, если существует строго монотонная суръекция $g\colon [a;b] \to [\alpha; \beta]$, дифференцируемая с $g' \neq 0$ такая, что $\psi(g(t)) = \phi(t)$. В таком случае $g$ называют допустимой заменой переменных. Отображение $g$ может как возрастать (в этом случае говорят, что допустимая замена переменных сохраняет ориентацию), так и убывать (в этом случае говорят, что допустимая замена переменных меняет ориентацию пути).
 \end{Def}
 \begin{Statement}
     Криволинейные интегралы непрерывно-дифференцируемой функции $f$ по эквивалентным гладким путям равны.
@@ -88,8 +90,8 @@
 \begin{proof}
     Запишем оба интеграла:
     \begin{gather}
-        \int\limits_{a}^{b}f(\varphi(t))\sqrt{\varphi_1'(t)^2 + \varphi_2'(t)^2 + \ldots + \varphi_n'(t)^2}dt\\
-        \int\limits_{\alpha}^{\beta}f(\psi(\tau))\sqrt{\psi_1'(\tau)^2 + \psi_2'(\tau)^2 + \ldots + \psi_n'(\tau)^2}dt
+        \int\limits_{a}^{b}f(\varphi(t))\sqrt{\varphi_1'(t)^2 + \varphi_2'(t)^2 + \ldots + \varphi_n'(t)^2}dt,\\
+        \int\limits_{\alpha}^{\beta}f(\psi(\tau))\sqrt{\psi_1'(\tau)^2 + \psi_2'(\tau)^2 + \ldots + \psi_n'(\tau)^2}d\tau.
     \end{gather}
     Рассмотрим случай возрастающей $g$. Сделаем замену $\tau = g(t)$. Тогда второй интеграл равен:
     \begin{gather}
@@ -97,13 +99,15 @@
         = \int\limits_{a}^{b}f(\varphi(t))\sqrt{\left(\frac{d\varphi_1}{dt}\right)^2 + \ldots + \left(\frac{d\varphi_n}{dt}\right)^2}dt
     \end{gather}
     Сравнивая с первым интегралом, замечаем равенство.
+    
+    Случай убывающей $g$ рассматривается аналогично. Что касательно минусов, то один уйдет на внесение $\dfrac{\d g}{\d t}$ под корень, а второй --- на <<переворачивание>> интеграла.
 \end{proof}
 \subsection{Криволинейные интегралы второго рода}
 Теперь перейдём к криволинейным интегралам второго рода. Пусть $\varphi\colon [a;b]$ --- кусочно-гладкий путь, $\gamma$ --- соответствующая ему кривая, вектор-функция $\overline{F} \colon \gamma \to \R^n$. Обозначим за $k(t) = \cfrac{\varphi'(t)}{||\varphi(t)||}$ --- единичный касательный вектор.
 \begin{Def}
     Криволинейным интегралом второго рода поля $F$ по кривой $\gamma$ назывют
     $$
-        \int\limits_\gamma Fds = \int\limits_{\gamma} (F, k)ds
+        \int\limits_\gamma Fd \overline s = \int\limits_{\gamma} (F, k)ds
     $$
     То есть интеграл второго рода выражается через интеграл первого рода.
 \end{Def}
@@ -112,17 +116,17 @@
 \begin{Properties}[Свойства криволинейного интеграла второго рода]\ \\
     \begin{enumerate}
         \item Если $F$ непрерывна, то интеграл существует.
-        \item Допустимая замена координат с сохранением ориентации сохраняет значение интеграла. Без сохранения ориентации --- меняет знак интеграла.
+        \item Допустимая замена координат, сохраняющая ориентацию, сохраняет значение интеграла. Изменяющая ориентацию --- меняет знак интеграла.
     \end{enumerate}
 \end{Properties}
 \subsection{Потенциальные поля}
 Пусть $\Omega$ --- область в $\R^n$.
 \begin{Def}
-    Скалярное поле $U\colon \Omega \to \R$ называется потенциалом векторного поля $F \colon \Omega \to \R^n$, если 
+    Дифференцируемое скалярное поле $U\colon \Omega \to \R$ называется потенциалом векторного поля $F \colon \Omega \to \R^n$, если 
     $$
         F_1 = \cfrac{\partial U}{\partial x_1};\; F_2 = \cfrac{\partial U}{\partial x_2};\; \ldots F_n = \cfrac{\partial U}{\partial x_n}
     $$
-    Или короче $\mathrm{grad}U\equiv F$ в $\Omega$.
+    Или, короче, $\mathrm{grad}U\equiv F$ в $\Omega$.
 \end{Def}
 \begin{Def}
     Векторное поле называется потенциальным, если у него существует потенциал.
@@ -134,21 +138,28 @@
 \begin{proof}
     Можно и без слов:
     \begin{gather}
-        \int\limits_\gamma Fds = \int\limits_a^b F_1(\varphi(t))\varphi_1'(t) + \ldots + F_n(\varphi(t))\varphi_n'(t)dt = \int\limits_a^b (U(\varphi_1(t), \ldots, \varphi_n(t)))'dt = U(x_1) - U(x_0)
+        \int\limits_\gamma Fds = \int\limits_a^b  \left( F_1(\varphi(t))\varphi_1'(t) + \ldots + F_n(\varphi(t))\varphi_n'(t) \right) dt = \int\limits_a^b (U(\varphi_1(t), \ldots, \varphi_n(t)))'dt = U(x_1) - U(x_0)
     \end{gather}
     Последнее равенство взяли из формулы Ньютона-Лейбница для обычного интеграла Римана на отрезке.
 \end{proof}
 \begin{Statement}
-    Если криволинейный интеграл непрерывного поля $F$ по кусочно-гладкому контуру зависит только от начальной и конечной точки, то поле $F$ потенциально.
+    Если криволинейный интеграл непрерывного поля $F$ по кусочно-гладкому контуру зависит только от начальной и конечной точки контура, то поле $F$ потенциально.
 \end{Statement}
 \begin{proof}
-    Зафиксируем произвольную точку $x_0 \in \Omega$ и рассмотрим произвольный кусочно-гладкий путь $\gamma$ из $x_0$ в $x$. Тогда обозначим на $U(x) = \int\limits_\gamma Fds$. Докажем, что $U$ --- потенциал. Действительно, в произвольной точке $(x_1, \ldots, x_n) \in \Omega$ 
+    Зафиксируем произвольную точку $x_0 \in \Omega$ и рассмотрим произвольный кусочно-гладкий путь $\gamma$ из $x_0$ в $x$. Тогда обозначим за $U(x) = \int\limits_\gamma Fds$. Докажем, что $U$ --- потенциал. Действительно, в произвольной точке $(x_1, \ldots, x_n) \in \Omega$:
     \begin{gather}
-    \left.\frac{\partial U}{\partial x_1}\right|_{x_1, \ldots, x_n} = \lim\limits_{h \to 0}\cfrac{1}{h}(U(x_1 + h, x_2, \ldots, x_n) - U(x_1, x_2, \ldots, x_n)) =\\
-    = \lim\limits_{h\to 0}\int\limits_{0}^{h} F_1(x_1 + t, x_2, \ldots, x_n)dt = F_1(x_1, \ldots, x_n)
+    \left.\frac{\partial U}{\partial x_1}\right|_{(x_1, \ldots, x_n)} = \lim\limits_{h \to 0}\cfrac{1}{h}(U(x_1 + h, x_2, \ldots, x_n) - U(x_1, x_2, \ldots, x_n)) =\\
+    = \lim\limits_{h\to 0}\cfrac{1}{h}\int\limits_{0}^{h} F_1(x_1 + t, x_2, \ldots, x_n)dt = F_1(x_1, \ldots, x_n).
     \end{gather}
+    Здесь мы используем теорему о дифференцировании <<обычного>> интеграла Римана с переменным верхним пределом.
+    
     Аналогично поступаем и с остальными переменными.
 \end{proof}
+
+\begin{Comment}
+Утверждение остается верным, если рассматривать не все кусочно-гладкие контуры, а только ломанные.
+\end{Comment}
+
 \begin{Statement}[Необходимое условие потенциальности]
     Пусть $F \in C^1(\Omega)$ потенциально. Тогда для всех $j,k \in \{1, \ldots, n\}$
     $$
@@ -159,6 +170,6 @@
 \begin{proof}
     Достаточно рассмотреть случай $j\neq k$. Рассмотрим $U$ --- потенциал $F$. Тогда
     $$
-        \cfrac{\partial F_j}{x_k} = \cfrac{\partial}{\partial x_k}\cfrac{\partial U}{\partial x_j} = \cfrac{\partial}{\partial x_j}\cfrac{\partial U}{\partial x_k} = \cfrac{\partial F_k}{\partial x_j}
+        \cfrac{\partial F_j}{x_k} = \cfrac{\partial}{\partial x_k}\cfrac{\partial U}{\partial x_j} = \cfrac{\partial}{\partial x_j}\cfrac{\partial U}{\partial x_k} = \cfrac{\partial F_k}{\partial x_j}.
     $$
 \end{proof}
