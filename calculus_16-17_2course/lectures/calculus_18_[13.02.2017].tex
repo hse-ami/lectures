@@ -9,46 +9,50 @@ $$
 \begin{Theorem}[Вейерштрасса]
     Для любой непрерывной на $\R$ $2\pi$-периодической функции \\$\forall \eps>0\  \exists T$ --- тригонометрический многочлен, такой что $\forall x \in \R \ |f(x)-T(x)|<\eps.$
 \end{Theorem}
-Доказывать теорему Вейерштрасса мы сейчас не будем, но зато выясним, что из неё, когда мы её докажем, будет сразу следовать замкнутость тригонометрической системы. Для этого докажем несколько красиво подводящих нас к этому лемм.
-
+Доказывать теорему Вейерштрасса мы сейчас не будем, но зато выясним, что из неё, когда мы её докажем, будет сразу следовать замкнутость тригонометрической системы. Для этого докажем несколько подводящих нас к этому лемм.
+\begin{Comment}
+    В рамках этой лекции рассматриваются кусочно-постоянные функции с конечным числом точек разрыва.
+\end{Comment}
 \begin{Lemma}
-   $\forall f \in \mathcal{R}^2[-\pi;\pi] \forall \eps > 0$ существует функция $ h(x)$ --- кусочно-постоянная на $[-\pi, \pi]$, такая что $||f-g||_2 < \eps$.
+   $\forall f \in \mathcal{R}^2[-\pi;\pi]\ \forall \eps > 0$ существует функция $ h(x)$ --- кусочно-постоянная на $[-\pi, \pi]$, такая что $||f-h||_2 < \eps$.
 \end{Lemma}
 \begin{proof}
-    Зафиксируем произвольное $\eps >0$. Найдём $C>0$, такое что $\forall x \in [-\pi, \pi]\ |f(x)|~<~C$. Положим $\eps_1 = \frac{\eps^2}{100C}$. Существует разбиение  $\tau$ отрезка $[-\pi, \pi]$ такое что $S^*(\tau, f)- s_*(\tau, f) = \sum\limits_{n=1}^N (M_n-m_n)|\Delta_n|< \eps_1.$\\
-    Определим $h(x) = M_n$ при $x \in \Delta_n$, и $h_l(x) = m_n$ при $x \in \Delta_n$. Тогда 
-     \begin{multline} ||f-h||_2 = \sqrt{\int\limits_{-\pi}^{\pi}(f(x)-h(x))^2dx} \leq \sqrt{2C\int\limits_{-\pi}^{\pi}(h(x)-f(x))dx} \leq \sqrt{2C\int\limits_{-\pi}^{\pi}(h(x)-h_l(x))dx}\\ \leq \sqrt{2C\sum\limits_{n=1}^N (M_n-m_n)|\Delta_n|} < \sqrt{2C\eps_1} < \eps. \end{multline}
+    Начнём с того, что зафиксируем произвольное $\eps >0$. Теперь найдём $C>0$, такое что $\forall x \in [-\pi, \pi]\ |f(x)|~<~C$. Положим $\eps_1 = \frac{\eps^2}{100C}$. Существует разбиение  $\tau$ отрезка $[-\pi, \pi]$ такое что $S^*(\tau, f)- s_*(\tau, f) = \sum\limits_{n=1}^N (M_n-m_n)|\Delta_n|< \eps_1.$\\
+    Определим $h(x) = M_n$ при $x \in \Delta_n$. Тогда 
+     \begin{multline} ||f-h||_2 = \sqrt{\int\limits_{-\pi}^{\pi}(f(x)-h(x))^2\dx} \leq \sqrt{2C\int\limits_{-\pi}^{\pi}\left| h(x)-f(x)\right| \dx}\\ \leq \sqrt{2C\sum\limits_{n=1}^N (M_n-m_n)|\Delta_n|} < \sqrt{2C\eps_1} < \eps. \end{multline}
 \end{proof}
 
 \begin{Lemma}
     $\forall h$ --- кусочно-постоянной функции на $[-\pi, \pi]$, $ \forall \eps > 0\  $ существует функция $ g(x)\in C[-\pi, \pi]$, такая что $||h-g||_2 < \eps$.
 \end{Lemma}
 \begin{proof}
-    $\exists C: |g| < C.$
+    $\exists C: |h| < C.$
     
     Для всякого достаточно большого $m \in \N$ определим $g_m(x)$ следующим образом: на расстоянии больше или равном $\frac{1}{m}$ от точек разрыва функции $h$ наша $g_m(x) = h(x)$, а в  $\frac{1}{m}$-окрестности точек разрыва $g_m$ --- линейная функция, соединяющая значения $h$ слева и справа от разрыва.
     
-    Обозначив количество точек разрыва за $N$ мы можем оценить $||h-g_m||_2$
-   $$ ||h-g_m||_2 = \sqrt{\int\limits_{-\pi}^{\pi}(h(x)-g_m(x))^2dx}\leq\left(N\cdot\frac{2}{m}\cdot4C^2 \right) .$$
-   А значит $||h-g_m||_2\rarr0$ при $m \rarr \infty$.
+    Обозначив количество точек разрыва за $N$ мы можем оценить $||h-g_m||_2$:
+   $$ ||h-g_m||_2 = \sqrt{\int\limits_{-\pi}^{\pi}(h(x)-g_m(x))^2\dx}\leq\sqrt{N\cdot\frac{2}{m}\cdot4C^2 } .$$
+   А значит $||h-g_m||_2\rarr0$ при $m \rarr \infty$, то есть $\forall \eps>0 \exists m: ||h-g_m||_2 < \eps$ (а $g_m \in C[-\pi, \pi]$ по построению).
 \end{proof}
 
 
 \begin{Lemma}
-    $\forall g \in C[-\pi, \pi]\ \forall \eps > 0$\ существует $\tilde{g}(x)$ --- $2\pi$-периодическая, непрерывная на $\R$ на $[-\pi, \pi]$ функция, такая что $||f-g||_2 < \eps$.
+    $\forall g \in C[-\pi, \pi]\ \forall \eps > 0$\ существует $\tilde{g}(x)$ --- $2\pi$-периодическая, непрерывная на $\R$ функция, такая что $||g-\tilde{g}||_2 < \eps$.
 \end{Lemma}
 \begin{proof}
     Аналогично предыдущему доказательству, изменим функцию на линейную на $(\pi- \frac{1}{m}; \pi)$.
 \end{proof}
 Теперь наконец воспользуемся ранее сформулированной теоремой Вейерштрасса.
 \begin{Lemma}
-    $\forall \eps > 0\ \forall\tilde{g}(x)$ --- $2\pi$-периодической, непрерывной на $\R$ на $[-\pi, \pi]$ функции существует тригонометрический многочлен $T$, такой что $||\tilde{g}-T||_2 < \eps$.
+    $\forall \eps > 0\ \forall\tilde{g}(x)$ --- $2\pi$-периодической, непрерывной на $\R$ функции существует тригонометрический многочлен $T$, такой что $||\tilde{g}-T||_2 < \eps$.
 \end{Lemma}
 \begin{proof}
    Возьмём $\eps_1 = \frac{\eps}{\sqrt{100\pi}}$.
    Пусть $T$ --- многочлен из теоремы Вейерштрасса для $\tilde{g}$ и $\eps_1$.
    Тогда $$||\tilde{g}-T||_2=\sqrt{\int\limits_{-\pi}^{\pi}(\tilde{g}(x)-T)^2dx}\leq \sqrt{\int\limits_{-\pi}^{\pi}(\eps_1)^2dx} = \sqrt{2\pi(\eps_1)^2}=\eps_1\sqrt{2\pi} < \eps.$$
 \end{proof}
+Объединяя доказанные леммы получаем, что из теоремы Вейерштрасса следует, что $\forall \eps >0 \forall f \in \mathcal{R}^2[-\pi;\pi] \exists T$--- тригонометрический многочлен, такой что $||f-T||_2 < \epsilon$, то есть тригонометрическая система замкнута в $ \mathcal{R}^2[-\pi;\pi]$.
+
 \begin{Def}
     \textit{Сверткой} функций $f$ и $g$ на $\mathcal{R}^2[-\pi;\pi]$ называется
 	$$
@@ -57,9 +61,9 @@ $$
 \end{Def}
 
 \begin{Def}
-    Последовательность функций $\{K_n(t)\}_{n=1}^\infty$ называется  \textit{ $2\pi$-периодической непрерывной неотрицательной аппроксимативной единицей} если
+    Последовательность функций $\{K_n(t)\}_{n=1}^\infty$ называется  \textit{ $2\pi$-периодической непрерывной неотрицательной аппроксимативной единицей}, если
     \begin{enumerate}
-        \item все $K_n$ --- $2\pi$-периодические, непрерывные и неотрицательные функции на $\R$.
-        \item $\forall n \in \N\  \int\limits_{-\pi}^{\pi} K_n(t)dt = 1.$        \item $\forall \delta \in (0; \pi)\  \int\limits_{-\pi}^{-\delta} K_n(t)dt + \int\limits_{\delta}^{\pi} K_n(t)dt\rarr 0$ при $n \rarr \infty.$
+        \item все $K_n$ --- $2\pi$-периодические, непрерывные и неотрицательные функции на $\R$;
+        \item $\forall n \in \N\  \int\limits_{-\pi}^{\pi} K_n(t)dt = 1;$        \item $\forall \delta \in (0; \pi)\  \int\limits_{-\pi}^{-\delta} K_n(t)dt + \int\limits_{\delta}^{\pi} K_n(t)dt\rarr 0$ при $n \rarr \infty.$
     \end{enumerate}
 \end{Def}
