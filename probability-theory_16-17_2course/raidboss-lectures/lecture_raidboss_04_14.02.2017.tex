@@ -119,7 +119,7 @@ $\E{\xi_1} = 0, \D{\xi_1} = 1$) получаем, что
   $S_n = \xi_1 + \ldots + \xi_n$. Тогда $\forall a > 0$:
 
   \[
-    \Pr{\max\limits_{k \leq n} S_k \geq a} \leq 2\Pr{S_n \leq a}
+    \Pr{\max\limits_{k \leq n} S_k \geq a} \leq 2\Pr{S_n \geq a}
   \]
 \end{theorem}
 
@@ -203,7 +203,7 @@ $\E{\xi_1} = 0, \D{\xi_1} = 1$) получаем, что
       \lambda = 1 + \epsilon\\
       n_k = \lambda^k\\
       k_0: k \geq k_0, \text{ что } \ln\ln k > 1\\
-      C_k = \bigcup\limits_{\substack{n > n_{k - 1},\\n \leq n_k}} A_k
+      C_k = \bigcup\limits_{\substack{n > n_{k - 1},\\n \leq n_k}} A_n
     \end{cases}
   \]
 
