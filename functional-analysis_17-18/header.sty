@@ -1,0 +1,289 @@
+%% Начало шапки
+
+%% Настройка поддержки русского языка
+\usepackage{cmap}                   % Поиск по кириллице
+\usepackage{mathtext}               % Кириллица в формулах
+\usepackage[T1,T2A]{fontenc}        % Кодировки шрифтов
+\usepackage[utf8]{inputenc}         % Кодировка текста
+\usepackage[english,russian]{babel} % Подключение поддержки языков
+
+%% Отступы между абзацами и в начале абзаца
+\setlength{\parindent}{15pt}
+\setlength{\parskip}{\medskipamount}
+
+%% Настройка размеров полей
+\usepackage[top=0.7in, bottom=0.75in, left=0.625in, right=0.625in]{geometry}
+
+%% Графика
+\usepackage[pdftex]{graphicx}
+\graphicspath{{images/}}
+
+%% Математические пакеты
+\usepackage{mathtools}              % Тот же amsmath, только с некоторыми поправками
+\usepackage{amssymb}                % Математические символы
+\usepackage{amsthm}                 % Оформление теорем
+\usepackage{amstext}                % Текстовые вставки в формулы
+\usepackage{amsfonts}               % Математические шрифты
+\usepackage{icomma}                 % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{enumitem}               % Для выравнивания itemize (\begin{itemize}[align=left])
+\usepackage{array}                  % Таблицы и матрицы
+\usepackage{multirow}
+
+%% Алгоритмические пакеты и их настройки
+\usepackage{algcompatible}
+\usepackage{algorithm}             % Шапка алгоритма
+\usepackage{algorithmicx}           % Написание алгоритмов
+\usepackage[noend]{algpseudocode}   % Написание псевдокода; убраны end
+\usepackage{listings}               % Для кода на каком-либо языке программиования
+\renewcommand{\algorithmicrequire}{\textbf{Ввод: }}              % Ввод
+\renewcommand{\algorithmicensure}{\textbf{Вывод: }}              % Вывод
+\floatname{algorithm}{Алгоритм}                                 % Название алгоритма
+\renewcommand{\algorithmiccomment}[1]{\hspace*{\fill}\{// #1\}} % Комментарии
+\newcommand{\algname}[1]{\textsc{#1}}                           % Вызов функции в алгоритме
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%% Шрифты
+\usepackage{euscript}               % Шрифт Евклид
+\usepackage{mathrsfs}               % \mathscr{}
+
+%% Графика
+\usepackage[pdftex]{graphicx}       % Вставка картинок
+\graphicspath{{images/}}            % Стандартный путь к картинкам
+\usepackage{tikz}                   % Рисование всего
+\usepackage{pgfplots}               % Графики
+\usetikzlibrary{calc, matrix, intersections, fit}
+\usepackage{sidecap}
+\usepackage{wrapfig}
+
+%% Прочие пакеты
+\usepackage{indentfirst}                    % Красная строка в начале текста
+\usepackage{epigraph}                       % Эпиграфы
+\usepackage{fancybox,fancyhdr}              % Колонтитулы
+\usepackage[
+colorlinks = false, hidelinks
+]{hyperref}   % Ссылки
+\usepackage{titlesec}                       % Изменение формата заголовков
+\usepackage{tocloft}						% Изменение формата содержания
+\usepackage[normalem]{ulem}                 % Для зачёркиваний
+\usepackage[makeroom]{cancel}               % И снова зачёркивание (на этот раз косое)
+\usepackage{subfiles}						% \subfile
+\usepackage{lipsum} 
+\usepackage{blindtext}
+
+% Графики
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usetikzlibrary{calc,angles,positioning,intersections,quotes,decorations.markings,backgrounds,patterns}
+\usepgfplotslibrary{fillbetween}
+\usepackage{changepage}                     % Для изменения отсупов
+%Формат section и subsection
+\usepackage{titlesec}
+\titleformat{\section}
+{\vspace{1cm}\centering\LARGE\bfseries} % Стиль заголовка
+{}                        % префикс
+{0pt}                     % Расстояние между префиксом и заголовком
+{}                        % Как отображается префикс
+\titleformat{\subsection} % Аналогично для \subsection
+{\Large\bfseries}
+{}
+{0pt}
+{}
+\titleformat{\subsubsection} % Аналогично для \subsubsection
+{\large\bfseries}
+{}
+{0pt}
+{}
+
+%% Прочее
+\mathtoolsset{showonlyrefs=true}        % Показывать номера только у тех формул,
+% на которые есть \eqref{} в тексте.
+\renewcommand{\headrulewidth}{1.8pt}    % Изменяем размер верхнего отступа колонтитула
+\renewcommand{\footrulewidth}{0.0pt}    % Изменяем размер нижнего отступа колонтитула
+
+%Прочее
+%\usepackage{forest} % Деревья
+
+%% Для колонтитула
+\def\head{
+{\it \small  НИУ ВШЭ $\cdot$ Факультет компьютерных наук $\cdot$
+Прикладная математика и информатика}
+}
+
+
+\renewcommand{\Re}{\mathrm{Re\:}}
+\renewcommand{\Im}{\mathrm{Im\:}}
+\newcommand{\Arg}{\mathrm{Arg\:}}
+\renewcommand{\arg}{\mathrm{arg\:}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\M}{\mathrm{M}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\isom}{\xrightarrow{\sim}}
+\newcommand{\leftisom}{\xleftarrow{\sim}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Ker}{\mathrm{Ker}\:}
+\newcommand{\rk}{\mathrm{rk}\:}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\ort}{\mathrm{ort}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\vol}{\mathrm{vol\:}}
+\newcommand{\Tr}{\mathrm{tr\:}}
+\newcommand{\sgn}{\mathrm{sgn\:}}
+\newcommand{\al}{\alpha}
+
+%% Определения
+\newtheorem{oldlem}{Лемма}[section]
+\newenvironment{lemma}[1][]
+  {\begin{oldlem}[#1]\normalfont}
+  {\end{oldlem}}
+
+\newtheorem{oldprep}[oldlem]{Предложение}
+\newenvironment{preposition}[1][]
+  {\begin{oldprep}[#1]\normalfont}
+  {\end{oldprep}}
+
+\newtheorem{oldtheor}[oldlem]{Теорема}
+\newenvironment{theorem}[1][]
+  {\begin{oldtheor}[#1]\normalfont}
+  {\end{oldtheor}}
+
+\newtheorem{oldcorol}[oldlem]{Следствие}
+\newenvironment{corollary}[1][]
+  {\begin{oldcorol}[#1]\normalfont}
+  {\end{oldcorol}}
+
+\newtheorem{oldrem}[oldlem]{Замечание}
+\newenvironment{remark}[1][]
+  {\begin{oldrem}[#1]\normalfont}
+  {\end{oldrem}}
+
+\newtheorem{olddefi}[oldlem]{Определение}
+\newenvironment{definition}[1][]
+  {\begin{olddefi}[#1]\normalfont}
+  {\end{olddefi}}
+
+\newtheorem{oldstat}[oldlem]{Утверждение}
+\newenvironment{statement}[1][]
+  {\begin{oldstat}[#1]\normalfont}
+  {\end{oldstat}}
+
+\newtheorem{oldex}[oldlem]{Пример}
+\newenvironment{example}[1][]
+  {\begin{oldex}[#1]\normalfont}
+  {\end{oldex}}
+
+\newtheorem{oldprop}[oldlem]{Свойство}
+\newenvironment{property}[1][]
+  {\begin{oldprop}[#1]\normalfont}
+  {\end{oldprop}}
+
+\newtheorem{oldsign}[oldlem]{Обозначение}
+\newenvironment{sign}[1][]
+	{\begin{oldsign}[#1]\normalfont}
+	{\end{oldsign}}
+
+\newtheorem{oldtask}[oldlem]{Упражнение}
+\newenvironment{task}[1][]
+{\begin{oldtask}[#1]\normalfont}
+	{\end{oldtask}}
+
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\C}{\mathbb{C}}
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\L}{\mathscr{L}}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\qedsymbol}{\textbf{[:|||:]}}
+\newcommand{\e}{\mathbb{e}}
+\renewcommand{\l}{\lambda}
+\newcommand{\E}{\mathbb{E}}
+\def\eps{\varepsilon}
+\def\limref#1#2{{#1}\negmedspace\mid_{#2}}
+\newcommand{\vvector}[1]{\begin{pmatrix}{#1}_1 \\\vdots\\{#1}_n\end{pmatrix}}
+\renewcommand{\vector}[1]{({#1}_1, \ldots, {#1}_n)}
+
+\definecolor{Gray}{gray}{0.9}
+\newcolumntype{g}{>{\columncolor{Gray}}c}
+
+\newenvironment{proof_cor}
+  {\textit{Доказательство корректности.}}
+  {\qed \par}
+
+\renewenvironment{time}
+  {\textit{Время работы.}}
+  {\qed \par}
+
+
+\renewcommand{\titlepage}{\begingroup
+    \hbox{
+          \hspace*{0.12\textwidth}
+          \rule{1pt}{\textheight}
+          \hspace*{0.05\textwidth}
+          \parbox[b]{0.775\textwidth}{
+              {\includegraphics[scale=0.3283]{aist.eps}}
+              \\[2\baselineskip]
+              {\noindent\Huge\bfseries Функциональный анализ}
+              \\[\baselineskip]
+              {\large\textrm{Конспекты лекций}}
+              \\[3\baselineskip]
+              {\Large\textsc{Лектор: С. В. Шапошников}}
+              \\[\baselineskip]
+              {Орлов Никита, Гайдамашко Даниил}
+              \\[6\baselineskip]
+              {\noindent НИУ ВШЭ, 2018}
+              \\[\baselineskip]
+          }
+    }
+    \endgroup
+}
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} 			% точки в содержании
+\renewcommand{\cftsecpresnum}{\begin{lrbox}{0}}					% убираем цифру
+	\renewcommand{\cftsecaftersnum}{\end{lrbox}}
+\setlength{\cftsecnumwidth}{22pt}								% отступ от края страницы
+
+\newcommand*{\ShowIntersection}[3]{
+	\fill 
+	[name intersections={of=#1 and #2, name=i, total=\t}] 
+	[red, opacity=1, every node/.style={above left, black, opacity=1}] 
+	\foreach \s in {1,...,\t}{(i-\s) circle (2pt)
+		node [above left] {\s}};
+}
+
+
+\def\leftbracket{[}
+\def\rightbracket{]}
+
+\tikzset{my arrow/.style={
+		blue!60!black,
+		-latex
+	}
+}
+
+\newcommand*{\TODO}[1]{{\color{red}{TODO: \textit{#1}}}}
+
+\newenvironment{struct}[1]{
+	\begin{adjustwidth}{21pt}{}
+		\begin{algorithm}[H]
+			\textbf{struct} #1:
+			\caption{Структура #1}
+			\begin{algorithmic}
+			}{
+		\end{algorithmic}
+	\end{algorithm}
+\end{adjustwidth}
+}
+
+\newcommand*{\listnode}[1]{
+\begin{tabular}{|c|c|}
+	\hline
+	#1 & $\cdot$\\
+	\hline
+\end{tabular}
+}
