@@ -50,5 +50,5 @@ script:
 - cd ../functional-analysis_17-18
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build functional-analysis_17-18.tex
 - pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../_build functional-analysis_17-18.tex
-- cd ..
-- utils/upload_all.sh 
+- cd ../utils
+- ./upload_all.sh 
