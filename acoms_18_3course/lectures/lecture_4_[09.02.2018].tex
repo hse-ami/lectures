@@ -1,0 +1,373 @@
+\section{Лекция 4}
+\subsection{Теорема Бахадура и следствия из неё}
+На прошлой лекции мы сформулировали теорему Бахадура. Сейчас мы попытаемся доказать её. Но для начала потребуем выполнение следующих условий регулярности:
+\begin{enumerate}[label=(R\arabic*)]
+    \item $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка растущего размера из неизвестного распределения $\Pr \in \{\Pr_{\theta}, \theta \in \Theta\}$, где $\{\Pr_{\theta}, \theta \in \Theta\}$ "--- доминируемое семейство с плотностью $p_{\theta}(x)$ по мере $\mu$.
+    \item Будем считать, что $\theta$ есть одномерный параметр и $\Theta$ есть открытый интервал на $\mathbb{R}$.
+    \item Множество $A = \{x \colon p_{\theta}(x) > 0\}$ не зависит от $\theta$.
+    \item Функция $\ell(\theta, x) = \ln p_{\theta}(x)$ дважды непрерывно дифференцируема по $\theta$ для всех $x \in A$. Для удобства будем считать, что
+    \[
+        \ell^{(n)}(\theta, x) = \pdv[n]{\theta} \ell(\theta, x).
+    \]
+    \item Для всех $\theta \in \Theta$ $\EE_{\theta}[\ell'(\theta, X_{1})] = 0$ и $0 < \EE_{\theta}[(\ell'(\theta, X_{1}))^{2}] = i(\theta) < +\infty$. Стоит заметить, что $-\EE_{\theta}[\ell''(\theta, X_{1})] = i(\theta)$.
+    \item Для всех $\theta_{0} \in \Theta$ существует $\delta > 0$ и функция $M(x)$ такая, что для всех $\theta \in [\theta_{0} - \delta, \theta_{0} + \delta]$ $|\ell'(\theta, x)| \leq M(x)$ и $\EE_{\theta}[M(X_{1})] < +\infty$.
+\end{enumerate}
+\begin{theorem}
+    Пусть в условиях регулярности (R1)"--~(R6) для последовательности оценок $t_{n}(\vec{X})$ параметра $\theta$ выполнено условие асимптотической нормальности: для всех $\theta \in \Theta$
+    \[
+        \sqrt{n}(t_{n}(\vec{X}) - \theta) \xrightarrow{d_{\theta}} \mathcal{N}(0, \sigma^{2}(\theta)).
+    \]
+    Далее, зафиксируем $\theta_{0} \in \Theta$ и положим $\theta_{n} = \theta_{0} + n^{-1/2}$. Если
+    \[
+        \varliminf_{n \to \infty} \Pr_{\theta_{n}}(t_{n}(\vec{X}) \leq \theta_{n}) \leq \frac{1}{2},
+    \]
+    то $\sigma^{2}(\theta_{0}) \geq i^{-1}(\theta)$.
+\end{theorem}
+Для доказательства данной теоремы нужно сперва доказать несколько вспомогательных утверждений и ввести несколько обозначений. Начнём с того, что введём \emph{логарифмическую функцию правдоподобия}:
+\[
+    \Ell(\theta, \vec{X}) = \ln f_{\theta}(\vec{X}) = \sum_{i = 1}^{n} \ell(\theta, X_{i}).
+\]
+Далее введём следующую случайную величину:
+\[
+    T_{n} = \frac{1}{\sqrt{i(\theta_{0})}}\left(\Ell(\theta_{n}, \vec{X}) - \Ell(\theta_{0}, \vec{X}) + \frac{i(\theta_{0})}{2}\right).
+\]
+Теперь покажем, что для случайной величины $T_{n}$ выполнено одно интересное свойство:
+\begin{lemma}
+    При фиксированном $\theta_{0}$ последовательность случайных величин $T_{n}$ сходится по распределению к стандартному нормальному распределению: $T_{n} \xrightarrow{d_{\theta_{0}}} \mathcal{N}(0, 1)$.
+\end{lemma}
+\begin{proof}
+    Воспользуемся дважды непрерывной дифференцируемостью $\ell(\theta, x)$ и разложим $\Ell(\theta_{n}, \vec{X})$ по $\theta$ в окрестности $\theta_{0}$:
+    \begin{align*}
+        \Ell(\theta_{n}, \vec{X}) 
+        &= \Ell(\theta_{0}, \vec{X}) + \Ell'(\theta_{0}, \vec{X})(\theta_{n} - \theta_{0}) + \frac{1}{2}\Ell''(\tilde{\theta}_{n}, \vec{X})(\theta_{n} - \theta_{0})^{2} \\
+        &= \Ell(\theta_{0}, \vec{X}) + \frac{1}{\sqrt{n}}\Ell'(\theta_{0}, \vec{X}) + \frac{1}{2n}\Ell''(\tilde{\theta}_{n}, \vec{X}),
+    \end{align*}
+    где $\tilde{\theta}_{n} \in (\theta_{0}, \theta_{n})$. Далее, введём следующую случайную величину:
+    \[
+        \xi_{n} = \frac{1}{2n}\left(\Ell''(\tilde{\theta}_{n}, \vec{X}) - \Ell''(\theta_{0}, \vec{X})\right).
+    \]
+    Докажем, что эта последовательность стремится к нулю почти наверное: $\xi_{n} \xrightarrow{\Pr_{\theta_{0}}\text{-п.н.}} 0$. Для этого введём следующую функцию:
+    \[
+        A(x, \delta) = \sup_{\theta \in [\theta_{0} - \delta, \theta_{0} + \delta]} |\ell''(\theta, x) - \ell''(\theta_{0}, x)|.
+    \]
+    Далее, положим $m(\delta) = \EE_{\theta_{0}}[A(X_{1}, \delta)]$. Заметим, что если $\delta_{1} > \delta_{2}$, то $A(x, \delta_{1}) \geq A(x, \delta_{2})$ и при $\delta \to 0$ $A(x, \delta) \to 0$. Тогда $A(x, \delta)$ монотонно убывает к нулю при $\delta \to 0$. Далее, воспользуемся свойством регулярности (R6):
+    \[
+        A(x, \delta) = \sup_{\theta \in [\theta_{0} - \delta, \theta_{0} + \delta]} |\ell''(\theta, x) - \ell''(\theta_{0}, x)| \leq \sup_{\theta \in [\theta_{0} - \delta, \theta_{0} + \delta]} 2M(x) = 2M(x).
+    \]
+    Тем самым можно применить теорему Лебега о мажорируемой сходимости. Из неё следует, что $m(\delta) \to 0$ при $\delta \to 0$. Далее, заметим, что если взять $\delta > n^{-1/2}$, то
+    \[
+        |\xi_{n}| = \frac{1}{2n}\left|\sum_{i = 1}^{n}(\ell''(\tilde{\theta}_{n}, X_{i}) - \ell''(\theta_{0}, X_{i}))\right| \leq \frac{1}{2n}\sum_{i = 1}^{n}|\ell''(\tilde{\theta}_{n}, X_{i}) - \ell''(\theta_{0}, X_{i})| \leq \frac{1}{2n}\sum_{i = 1}^{n}A(X_{i}, \delta).
+    \]
+    Однако по усиленному закону больших чисел
+    \[
+        \frac{1}{2n}\sum_{i = 1}^{n}A(X_{i}, \delta) \xrightarrow{\Pr_{\theta_{0}}\text{-п.н.}} \frac{1}{2}m(\delta).
+    \]
+    Из вышесказанного следует, что для любого $\delta > 0$
+    \[
+        \varlimsup_{n \to \infty} |\xi_{n}| \leq \frac{1}{2}m(\delta) \quad \Pr_{\theta_{0}}\text{-п.н.}
+    \]
+    Следовательно, $\xi_{n} \xrightarrow{\Pr_{\theta_{0}}\text{-п.н.}} 0$.
+    
+    Теперь преобразуем $T_{n}$ следующим образом:
+    \begin{align*}
+        T_{n} 
+        &= \frac{1}{\sqrt{i(\theta_{0})}}\left(\Ell(\theta_{n}, \vec{X}) - \Ell(\theta_{0}, \vec{X}) + \frac{i(\theta_{0})}{2}\right) \\
+        &= \frac{1}{\sqrt{i(\theta_{0})}}\left(\Ell(\theta_{0}, \vec{X}) + \frac{1}{\sqrt{n}}\Ell'(\theta_{0}, \vec{X}) + \frac{1}{2n}\Ell''(\tilde{\theta}_{n}, \vec{X}) - \Ell(\theta_{0}, \vec{X}) + \frac{i(\theta_{0})}{2}\right) \\
+        &= \frac{1}{\sqrt{i(\theta_{0})}}\left(\frac{1}{\sqrt{n}}\Ell'(\theta_{0}, \vec{X}) + \xi_{n} + \frac{1}{2n}\Ell''(\theta_{0}, \vec{X}) + \frac{i(\theta_{0})}{2}\right).
+    \end{align*}
+    Осталось показать, что это стремится по распределению туда, куда нужно.
+    \begin{itemize}
+        \item Начнём с члена $n^{-1/2}\Ell'(\theta_{0}, \vec{X})$. Заметим, что из условия регулярности (R5) и центральной предельной теоремы следует, что
+        \[
+            \frac{1}{\sqrt{n}}\Ell'(\theta_{0}, \vec{X}) = \frac{1}{\sqrt{n}}\sum_{i = 1}^{n}\ell'(\theta_{0}, X_{i}) \xrightarrow{d_{\theta_{0}}} \mathcal{N}(0, i(\theta_{0})).
+        \]
+        \item Теперь рассмотрим член $(2n)^{-1}\Ell'(\theta_{0}, \vec{X})$. По усиленному закону больших чисел
+        \[
+            \frac{1}{2n}\Ell''(\theta_{0}, \vec{X})
+            = \frac{1}{2n}\sum_{i = 1}^{n}\ell''(\theta_{0}, X_{i}) 
+            \xrightarrow{\Pr_{\theta_{0}}\text{-п.н.}} \frac{1}{2}\EE_{\theta_{0}}[\ell''(\theta_{0}, X_{1})] = -\frac{i(\theta_{0})}{2}.
+        \]
+        \item Из пунктов выше следует, что
+        \[
+            \xi_{n} + \frac{1}{2n}\Ell''(\theta_{0}, \vec{X}) + \frac{i(\theta_{0})}{2} \xrightarrow{\Pr_{\theta_{0}}\text{-п.н.}} 0.
+        \]
+    \end{itemize}
+    В итоге по лемме Слуцкого получаем, что
+    \[
+        T_{n} \xrightarrow{d_{\theta_{0}}} \frac{1}{\sqrt{i(\theta_{0})}}\mathcal{N}(0, i(\theta_{0})) = \mathcal{N}(0, 1). \qedhere
+    \]
+\end{proof}
+
+Для доказательства следующей леммы нам понадобится достаточно известный факт, связанный с равномерной интегрируемостью.\footnote{Доказательство этого факта "--- дополнительный материал, который на лекции был оставлен в качестве упражнения.} Но перед этим докажем одно простое утверждение:
+\begin{lemma}[Абсолютная непрерывность математического ожидания]
+    Пусть $\xi$ "--- интегрируемая случайная величина. Тогда для любого $\epsilon > 0$ существует $\delta > 0$ такое, что для любого события $F$ такого, что $\Pr(F) < \delta$, выполнено $\EE[|\xi|[F]] < \epsilon$.
+\end{lemma}
+\begin{proof}
+    Пусть это не так. Тогда существует $\epsilon > 0$ и последовательность событий $F_{n}$ такая, что $\Pr(F_{n}) < 2^{-n}$ и $\EE[|\xi|[F]] \geq \epsilon$. Но $|\xi|[F_{n}] \to 0$ почти наверное и $|\xi|[F_{n}] \leq |\xi|$. Следовательно, по теореме Лебега о мажорируемой сходимости $\epsilon \leq \EE[|\xi|[F_{n}]] \to 0$. Противоречие.
+\end{proof}
+\begin{theorem}
+    Пусть $\xi_{n}$ "--- последовательность неотрицательных интегрируемых случайных величин таких, что $\xi_{n}$ сходится к $\xi$ по распределению. Тогда $\EE[\xi_{n}] \to \EE[\xi]$ тогда и только тогда, когда случайные величины $\xi_{n}$ равномерно интегрируемы, то есть
+    \[
+        \lim_{c \to +\infty} \sup_{n \in \mathbb{N}} \EE\left[\xi_{n}[\xi_{n} \geq c]\right] = 0.
+    \]
+\end{theorem}
+\begin{proof}
+    Начнём с доказательства в прямую сторону: то есть докажем, что из сходимости матожиданий следует равномерная интегрируемость. Заметим, что $\EE[|\xi_{n} - \xi|] \to 0$, так как случайные величины неотрицательны (и, следовательно, сходятся в $L_{1}$). Теперь нам нужно показать, что для любого $\epsilon > 0$ можно подобрать $c > 0$ такое, что для всех $n \in \mathbb{N}$ $\EE[\xi_{n}[\xi_{n} \geq c]] < 2\epsilon$.
+    
+    Хотелось бы сказать, что про теореме Лебега о мажорируемой сходимости несложно подобрать $c$ для каждой случайной величины $\xi_{n}$ по отдельности, после чего взять супремум. Но он не обязательно конечен. Поэтому будем действовать так: пусть для всех $n > N$ $\EE[|\xi_{n} - \xi|] < \epsilon$. Для всех $n \leq N$ подберём $c_{n}$ такие, что $\EE[\xi_{n}[\xi_{n} \geq c_{n}]] < 2\epsilon$, после чего возьмём максимальное из них. Поэтому конечное число членов спереди нас не пугает и достаточно рассмотреть только случай $n > N$. Заметим, что
+    \[
+        \EE[\xi_{n}[\xi_{n} > c]] \leq \EE[|\xi_{n} - \xi|[\xi_{n} > c]] + \EE[\xi[\xi_{n} > c]].
+    \]
+    С первым интегралом всё понятно: $\EE[|\xi_{n} - \xi|[\xi_{n} \geq c]] \leq \EE[|\xi_{n} - \xi|] < \epsilon$. Для второго заметим, что
+    \[
+        \Pr(\xi_{n} \geq c) \leq \frac{\EE[\xi_{n}]}{c} \leq \frac{\sup_{n > N}\EE[\xi_{n}]}{c} \leq \frac{\sup_{n > N}(\EE[\xi] + \EE[|\xi_{n} - \xi|])}{c} \leq \frac{\EE[\xi] + \epsilon}{c} \xrightarrow[c \to \infty]{} 0.
+    \]
+    Следовательно, можно найти $c$ такое, что можно воспользоваться абсолютной непрерывностью матожидания и получить, что $\EE[\xi[\xi_{n} \geq c]] < \epsilon$. Тем самым получается равномерная интегрируемость.
+    
+    Теперь докажем в другую сторону. Пусть последовательность $\xi_{n}$ равномерно интегрируема. Введём следующую функцию:
+    \[
+        f_{c}(x) = \begin{cases}
+        x, & x < c \\
+        0, & x \geq c + 1 \\
+        c - c(x - c), & c \leq x < c + 1
+        \end{cases}
+    \]
+    По сути, это отсечённая функция $y = x$, дополненная линейным куском до непрерывности. Далее, заметим, что по неравенству треугольника
+    \begin{align*}
+        \EE[|\xi_{n} - \xi|] 
+        &= \EE[|(\xi_{n} - f_{c}(\xi_{n})) - (\xi - f_{c}(\xi)) + (f_{c}(\xi_{n}) - f_{c}(\xi))|] \\
+        &\leq \EE[|\xi_{n} - f_{c}(\xi_{n})|] + \EE[|\xi - f_{c}(\xi)|] + \EE[|f_{c}(\xi_{n}) - f_{c}(\xi)|]
+    \end{align*}
+    
+    Теперь зафиксируем произвольный $\epsilon > 0$ и будем ограничивать все члены по отдельности:
+    \begin{itemize}
+        \item Начнём с того, что при $x \geq c$ $f_{c}(x) \leq x$. Поэтому $\EE[|\xi_{n} - f_{c}(\xi_{n})|] \leq \EE[\xi_{n}[\xi_{n} > c]]$. Но равномерная интегрируемость позволяет выбрать $c_{1} = c_{1}(\epsilon)$ такое, что $\EE[\xi_{n}[\xi_{n} > c]] < \epsilon/3$ для всех $n$.
+        \item Со вторым членом всё аналогично: выбираем $c_{2} = c_{2}(\epsilon)$ такое, что $\EE[\xi[\xi > c]] < \epsilon/3$ для всех $n$.
+        \item Для третьего достаточно вспомнить, что $\xi_{n}$ сходятся к $\xi$ по распределению и альтернативное определение сходимости по распределению. Из него следует, что $\EE[|f_{c}(\xi_{n}) - f_{c}(\xi)|] < \epsilon/3$ для любых $c$ и достаточно больших $n$.
+    \end{itemize}
+    Комбинируя эти три оценки, получим сходимость в $L_{1}$, из которой следует сходимость матожиданий.
+\end{proof}
+
+Теперь можно вернуться к нашей теореме.
+\begin{lemma}
+    Пусть $\Phi(x)$ "--- функция распределения стандартной нормальной случайной величины. Тогда для всех $y \in \mathbb{R}$
+    \[
+        \lim\limits_{n \to \infty} \Pr_{\theta_{n}}(T_{n} \geq y) = 1 - \Phi(y - \sqrt{i(\theta)}).
+    \]
+\end{lemma}
+\begin{proof}
+    Для удобства будем писать, что $T_{n}$ есть функция от выборки: $T_{n} = T_{n}(\vec{X})$. Теперь распишем $\Pr_{\theta_{n}}(T_{n} < y)$:
+    \begin{align*}
+        \Pr_{\theta_{n}}(T_{n}(\vec{X}) \geq y)
+        &= \int_{\vec{x} \colon T_{n}(\vec{x}) < y} p_{\theta_{n}}(\vec{x})\mu(\dd \vec{x}) = \int_{\vec{x} \colon T_{n}(\vec{x}) < y} \frac{p_{\theta_{n}}(\vec{x})}{p_{\theta_{0}}(\vec{x})} p_{\theta_{0}}(\vec{x}) \mu(\dd \vec{x}) \\
+        &= \int_{\vec{x} \colon T_{n}(\vec{x}) < y} \exp\left\{\Ell(\theta_{n}, \vec{X}) - \Ell(\theta_{0}, \vec{X})\right\} p_{\theta_{0}}(\vec{x}) \mu(\dd \vec{x}) \\
+        &= \int_{\vec{x} \colon T_{n}(\vec{x}) < y} \exp\left\{\sqrt{i(\theta_{0})}T_{n}(\vec{x}) - \frac{i(\theta)}{2}\right\} p_{\theta_{0}}(\vec{x}) \mu(\dd \vec{x}) \\
+        &= e^{-i(\theta)/2}\EE_{\theta_{0}} \left[e^{T_{n}(\vec{X})\sqrt{i(\theta_{0})}}[T_{n}(\vec{X}) < y]\right].
+    \end{align*}
+    Теперь воспользуемся тем, что $T_{n}(\vec{X}) \xrightarrow{d_{\theta_{0}}} \xi \sim \mathcal{N}(0, 1)$ и ограниченностью функции внутри матожидания (что даёт равномерную интегрируемость). Тогда можно сказать, что
+    \[
+        \EE_{\theta_{0}} \left[e^{T_{n}(\vec{X})\sqrt{i(\theta_{0})}}[T_{n}(\vec{X}) < y]\right] \to \EE\left[e^{\xi\sqrt{i(\theta_{0})}}[\xi < y]\right].
+    \]
+    Это матожидание достаточно легко считается:
+    \begin{align*}
+        \EE\left[e^{\xi\sqrt{i(\theta_{0})}}[\xi < y]\right]
+        &= \int_{-\infty}^{y} e^{z\sqrt{i(\theta_{0})}}\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}\dd z \\
+        &= \int_{-\infty}^{y} \frac{1}{\sqrt{2\pi}}\exp\left\{-\frac{z^{2}}{2} + z\sqrt{i(\theta_{0})} - \frac{i(\theta_{0})}{2} + \frac{i(\theta_{0})}{2}\right\}\dd z \\
+        &= e^{i(\theta_{0})/2}\int_{-\infty}^{y}\frac{1}{\sqrt{2\pi}}e^{-(z - \sqrt{i(\theta_{0})})^{2}/2}\dd z = e^{i(\theta_{0})/2}\Phi(y - \sqrt{i(\theta_{0})}).
+    \end{align*}
+    Тем самым получаем, что
+    \[
+        \lim\limits_{n \to \infty} \Pr_{\theta_{n}}(T_{n}(\vec{X}) < y) = \Phi(y - \sqrt{i(\theta_{0})}). \qedhere
+    \]
+\end{proof}
+Теперь можно приступить к доказательству теоремы, сформулированной ещё пару страниц назад.
+\begin{proof}
+    Зафиксируем $y > \sqrt{i(\theta_{0})}$ и введём два события: $D_{n} = \{t_{n} > \theta_{n}\}$ и $S_{n} = \{T_{n} \geq y\}$. Сразу же воспользуемся леммой выше и скажем, что
+    \[
+        \lim_{n \to \infty} \Pr_{\theta_{n}}(S_{n}) = 1 - \Phi(y - \sqrt{i(\theta_{0})}) < \frac{1}{2}.
+    \]
+    Теперь заметим следующее:
+    \[
+        \varliminf_{n \to \infty} \Pr_{\theta_{n}}(t_{n}(\vec{X}) \leq \theta_{n}) = \varliminf_{n \to \infty} (1 - \Pr_{\theta_{n}}(t_{n}(\vec{X}) > \theta_{n})) = 1 - \varlimsup_{n \to \infty} \Pr_{\theta_{n}}(t_{n}(\vec{X}) > \theta_{n}).
+    \]
+    Следовательно, согласно условию
+    \[
+        1 - \varlimsup_{n \to \infty} \Pr_{\theta_{n}}(t_{n}(\vec{X}) > \theta_{n}) \leq \frac{1}{2} \implies \varlimsup_{n \to \infty} \Pr_{\theta_{n}}(t_{n}(\vec{X}) > \theta_{n}) \geq \frac{1}{2}.
+    \]
+    Из этого следует, что существует подпоследовательность индексов $\{n_{k} \mid k \in \mathbb{N}\}$ такая, что
+    \[
+        \lim\limits_{k \to \infty} \Pr_{\theta_{n_{k}}}(D_{n_{k}}) \geq \frac{1}{2} > \lim\limits_{k \to \infty} \Pr_{\theta_{n_{k}}}(S_{n_{k}}).
+    \]
+    Это означает, что при достаточно больших $k$ $\Pr_{\theta_{n_{k}}}(D_{n_{k}}) > \Pr_{\theta_{n_{k}}}(S_{n_{k}})$. Теперь докажем ещё одну лемму:\footnote{Лемм много не бывает.}
+    \begin{lemma}
+        Для всех достаточно больших $k$ $\Pr_{\theta_{0}}(D_{n_{k}}) > \Pr_{\theta_{0}}(S_{n_{k}})$.
+    \end{lemma}
+    \begin{proof}
+        Пусть $n = n_{k}$ и $k$ достаточно велико для того, чтобы выполнялось условие $\Pr_{\theta_{n_{k}}}(D_{n_{k}}) > \Pr_{\theta_{n_{k}}}(S_{n_{k}})$. Заметим, что событие $S_{n}$ можно переписать следующим образом:
+        \begin{align*}
+            S_{n}
+            &= \left\{T_{n}(\vec{X}) \geq y\right\}
+            = \left\{\frac{1}{\sqrt{i(\theta_{0})}}\left(\Ell(\theta_{n}, \vec{X}) - \Ell(\theta_{0}, \vec{X}) + \frac{i(\theta_{0})}{2}\right) > y\right\} \\
+            &= \left\{\Ell(\theta_{n}, \vec{X}) - \Ell(\theta_{0}, \vec{X}) > y'\right\}
+            = \{p_{\theta_{n}}(\vec{X}) > \lambda p_{\theta_{0}}(\vec{X})\}.
+        \end{align*}
+        Теперь рассмотрим следующее неравенство:
+        \[
+            (p_{\theta_{n}}(\vec{x}) - \lambda p_{\theta_{0}}(\vec{x}))[\vec{x} \in S_{n}] \geq (p_{\theta_{n}}(\vec{x}) - \lambda p_{\theta_{0}}(\vec{x}))[\vec{x} \in D_{n}].
+        \]
+        Почему оно действительно выполняется?
+        \begin{itemize}
+            \item Пусть $\vec{x} \in S_{n}$. Тогда $[\vec{x} \in S_{n}] = 1$ и $[\vec{x} \in D_{n}] \leq 1$, что выполнено всегда.
+            \item Теперь пусть $\vec{x} \not\in S_{n}$. Тогда $[\vec{x} \in S_{n}]$ и $p_{\theta_{n}}(\vec{x}) - \lambda p_{\theta_{0}}(\vec{x}) < 0$. Так как индикатор принимает значения 0 или 1, то получается, что неположительное число не больше нуля, что похоже на правду. 
+        \end{itemize}
+        Проинтегрируем по мере $\mu$:
+        \[
+            \Pr_{\theta_{n}}(S_{n}) - \lambda\Pr_{\theta_{0}}(S_{n}) \geq \Pr_{\theta_{n}}(D_{n}) - \lambda\Pr_{\theta_{0}}(D_{n})
+        \]
+        Простой перегруппировкой мы получаем желаемое:
+        \[
+            \lambda(\Pr_{\theta_{0}}(D_{n}) - \Pr_{\theta_{0}}(S_{n})) \geq \Pr_{\theta_{n}}(D_{n}) - \Pr_{\theta_{n}}(S_{n}) > 0 \implies \Pr_{\theta_{0}}(D_{n}) > \Pr_{\theta_{0}}(S_{n}). \qedhere
+        \]
+    \end{proof}
+    Теперь покажем, что $\Pr_{\theta_{0}}(D_{n})$ и $\Pr_{\theta_{0}}(S_{n})$ на самом деле имеют пределы. По лемме про сходимость $T_{n}$ по распределению к $\mathcal{N}(0, 1)$
+    \[
+        \lim\limits_{n \to \infty} \Pr_{\theta_{0}}(S_{n}) = 1 - \Phi(y).
+    \]
+    Далее,
+    \begin{align*}
+        \lim\limits_{n \to \infty} \Pr_{\theta_{0}}(D_{n})
+        &= \lim\limits_{n \to \infty} \Pr_{\theta_{0}}\left(t_{n}(\vec{X}) \geq \theta_{0} + \frac{1}{\sqrt{n}}\right)
+        = \lim\limits_{n \to \infty} \Pr_{\theta_{0}}\left(\sqrt{n}(t_{n}(\vec{X}) - \theta_{0}) \geq 1\right) \\
+        &= \lim\limits_{n \to \infty} \Pr_{\theta_{0}}\left(\frac{\sqrt{n}(t_{n}(\vec{X}) - \theta_{0})}{\sigma(\theta_{0})} \geq \frac{1}{\sigma(\theta_{0})}\right).
+    \end{align*}
+    Однако по центральной предельной теореме левая часть неравенства сходится по распределению к $\mathcal{N}(0, 1)$. Следовательно, предел равен $1 - \Phi(\sigma^{-1}(\theta_{0}))$. Теперь воспользуеся результатом выше и скажем, что
+    \[
+        \lim\limits_{n \to \infty} \Pr_{\theta_{0}}(S_{n}) \leq \lim\limits_{n \to \infty} \Pr_{\theta_{0}}(D_{n}).
+    \]
+    Отсюда получаем, что
+    \[
+        1 - \Phi(y) \leq 1 - \Phi\left(\frac{1}{\sigma(\theta_{0})}\right) 
+        \implies 
+        \Phi\left(\frac{1}{\sigma(\theta_{0})}\right) \leq \Phi(y)
+        \implies
+        \frac{1}{\sigma(\theta_{0})} \leq y
+        \implies
+        \sigma^{2}(\theta_{0}) \geq \frac{1}{y^{2}}.
+    \]
+    Однако мы брали произвольное $y > \sqrt{i(\theta_{0})}$. Тогда $\sigma^{2}(\theta_{0}) \geq i^{-1}(\theta_{0})$, что и требовалось доказать.
+\end{proof}
+
+Теперь перейдём к самой теореме Бахадура.
+\begin{theorem}
+    Пусть в условиях регулярности (R1)"--~(R6) для последовательности оценок $t_{n}(\vec{X})$ параметра $\theta$ выполнено условие асимптотической нормальности: для всех $\theta \in \Theta$
+    \[
+        \sqrt{n}(t_{n}(\vec{X}) - \theta) \xrightarrow{d_{\theta}} \mathcal{N}(0, \sigma^{2}(\theta)).
+    \]
+    Тогда для всех $\theta_{0} \in \Theta$, кроме множества лебеговой меры 0, выполнено следующее условие:
+    \[
+        \varliminf_{n \to \infty} \Pr_{\theta_{n}}(t_{n}(\vec{X}) \leq \theta_{n}) \leq \frac{1}{2}.
+    \]
+\end{theorem}
+\begin{proof}
+    Рассмотрим следующую функцию:
+    \[
+        f_{n}(\theta) = \left|\Pr_{\theta}(t_{n}(\vec{X}) \leq \theta) - \frac{1}{2}\right| = \left|\Pr_{\theta}(\sqrt{n}(t_{n}(\vec{X}) - \theta) \leq 0) - \frac{1}{2}\right|.
+    \]
+    Тогда по центральной предельной теореме для любого фиксированного $\theta \in \Theta$ $f_{n}(\theta) \to 0$ при $n \to \infty$. Стоит заметить, что $f_{n}(\theta) \in [0, 1/2]$.
+    
+    Теперь введём две вещи: функцию $g_{n}(\theta) = f_{n}(\theta + n^{-1/2})$ и колмогоровскую тройку $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \QQ)$, где $\QQ$ "--- вероятностная мера стандартного нормального распределения. На этой тройке введём случайную величину $\xi$, действующую по правилу $\xi(x) = x$. Посчитаем матожидание $g_{n}(\xi)$:
+    \begin{align*}
+        \EE[g_{n}(\xi)]
+        &= \int_{-\infty}^{+\infty} g_{n}(x)\frac{1}{\sqrt{2\pi}}e^{-x^{2}/2}\dd x
+        = \int_{-\infty}^{+\infty} f_{n}\left(x + \frac{1}{\sqrt{n}}\right)\frac{1}{\sqrt{2\pi}}e^{-x^{2}/2}\dd x.
+    \end{align*}
+    Сделаем замену $y = x + n^{-1/2}$. Тогда
+    \begin{align*}
+        \EE[g_{n}(\xi)]
+        &= \int_{-\infty}^{+\infty} f_{n}(y)\frac{1}{\sqrt{2\pi}}\exp\left\{-\frac{1}{2}\left(y^{2} - \frac{2y}{\sqrt{n}} + \frac{1}{n}\right)\right\}\dd y \\
+        &= \int_{-\infty}^{+\infty} f_{n}(y)\exp\left\{\frac{y}{\sqrt{n}} - \frac{1}{2n}\right\}\frac{1}{\sqrt{2\pi}}e^{-y^{2}/2}\dd y \\
+        &= \EE\left[f_{n}(\xi)\exp\left\{\frac{\xi}{\sqrt{n}} - \frac{1}{2n}\right\}\right].
+    \end{align*}
+    Однако
+    \[
+        f_{n}(\xi)\exp\left\{\frac{\xi}{\sqrt{n}} - \frac{1}{2n}\right\} \xrightarrow{\QQ\text{-п.н.}} 0 \text{ и } f_{n}(\xi)\exp\left\{\frac{\xi}{\sqrt{n}} - \frac{1}{2n}\right\} \leq \max(e^{\xi}, 1).
+    \]
+    По теореме Лебега о мажорируемой сходимости получаем, что $\EE[g_{n}(\xi)] \to 0$. Так как $g_{n}(x) \in [0, 1/2]$, то это означает, что $g_{n}(\xi)$ сходится к нулю в $L_{1}$. Тогда $g_{n}(\xi)$ сходится по вероятностной мере $\QQ$ к нулю. Но тогда можно выбрать подпоследовательность индексов $\{n_{k}, k \in \mathbb{N}\}$ такую, что $g_{n_{k}}(\xi) \to 0$ $\QQ$-п.н.
+    
+    Из этого можно сделать вывод, что существует борелевское множество $B \in \mathcal{B}(\mathbb{R})$ такое, что $\QQ(B) = 0$ и для всех $x \not\in B$ $g_{n_{k}}(x) \to 0$. Так как мы использовали в качестве вероятностной меры вероятностную меру стандартного нормального распределения, то это означает, что множество $B$ имеет лебегову меру 0. Теперь заметим, что для всех $\theta \in \Theta \setminus B$
+    \[
+        g_{n_{k}}(\theta) \to 0 \implies P_{\theta_{n_{k}}}(t_{n_{k}}(\vec{X}) \leq \theta_{n_{k}}) \to \frac{1}{2} \implies \varliminf_{n \to \infty} \Pr_{\theta_{n}}(t_{n}(\vec{X}) \leq \theta_{n}) \leq \frac{1}{2}. \qedhere
+    \]
+\end{proof}
+
+На этом доказательство теоремы Бахадура заканчивается. Теперь можно и следствия посмотреть. Но для начала введём одно определение:
+\begin{definition}
+    Пусть $\hat{\theta}_{n}(\vec{X})$ "--- асимптотически нормальная оценка параметра $\theta$ с асимптотической дисперсией $\sigma^{2}(\theta)$. Если $\sigma^{2}(\theta) = i^{-1}(\theta)$, то будем называть оценку $\hat{\theta}_{n}(\vec{X})$ \emph{асимптотически эффективной}.
+\end{definition}
+\begin{consequence}
+    В условиях регулярности оценка максимального правдоподобия асимптотически эффективна. Поэтому считается, что оценка максимального правдоподобия "--- это <<почти>> наилучшая оценка в асимптотическом плане.
+\end{consequence}
+
+Оказывается, что у оценки максимального правдоподобия есть ещё одно интересное свойство.
+\begin{theorem}[Эффективность оценки максимального правдоподобия]
+    Если в условиях неравенства Рао-Крамера $\hat{\theta}(\vec{X})$ является эффективной оценкой $\theta$, то $\hat{\theta}(\vec{X})$ есть оценка максимального правдоподобия.
+\end{theorem}
+\begin{proof}
+    Воспользуемся критерием эффективности оценки:
+    \[
+        \hat{\theta}(\vec{X}) - \theta = \frac{1}{I_{\vec{X}}(\theta)}\pdv{\theta}\ln p_{\theta}(\vec{X}) = \frac{\Ell(\theta, \vec{X})}{I_{\vec{X}}(\theta)}.
+    \]
+    Так как информация Фишера положительна, то $\Ell(\theta, \vec{X})$ имеет тот же знак, что и $\hat{\theta}(\vec{X}) - \theta$: при $\theta < \hat{\theta}(\vec{X})$ $\Ell(\theta, \vec{X}) > 0$ и наоборот. Тогда получаем, что $\hat{\theta}(\vec{X})$ "--- это единственная точка максимума $f_{\theta}(\vec{X})$ (как функции от $\theta$), то есть $\hat{\theta}(\vec{X})$ есть оценка максимального правдоподобия.
+\end{proof}
+
+На этом с асимптотическим подходом заканчиваем. 
+
+\subsection{Байесовский подход}
+\hyperref[lec2:bayes]{Ранее} мы вводили так называемый байесовский подход к сравнению оценок. В нём задача поиска наилучшей оценки параметра $\theta$ вводилась следующим образом:
+\[
+    \hat{\theta}(\vec{X}) 
+    = \arg\min_{\theta^{*}(\vec{X})} R_{\QQ}(\theta^{*}, \theta) 
+    = \arg\min_{\theta^{*}(\vec{X})} \int_{\Theta} R(\theta^{*}(\vec{X}), t)q(t)\lambda(\dd t),
+\]
+где $\QQ$ "--- вероятностная мера на $\Theta$ с плотностью $q(t)$ по мере $\lambda$. У данной плотности есть своё название:
+\begin{definition}
+    Плотность $q(t)$ называют \emph{априорной плотностью} параметра $\theta$.
+\end{definition}
+Далее, будем считать, что $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- это выборка из неизвестного распределения $\Pr \in \{\Pr_{\theta} \mid \theta \in \Theta\}$, где $\{\Pr_{\theta} \mid \theta \in \Theta\}$ есть доминируемое семейство с плотностью $p_{\theta}(x)$ по мере $\mu$. Тогда можно ввести следующую штуку:
+\begin{definition}
+    \emph{Апостериорной плотностью} параметра $\theta$ называют
+    \[
+        q(t\,|\,\vec{x}) = \frac{q(t)p_{t}(\vec{x})}{\int_{\Theta} q(\tau)p_{\tau}(\vec{x})\lambda(\dd \tau)}.
+    \]
+\end{definition}
+
+На данный момент будем считать, что мы работаем с квадратичной функцией потерь: $R(\hat{\theta}(\vec{X}), \theta) = \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}]$. Можно ли получить решение с такой функцией потерь в общем случае? Можно.
+\begin{definition}
+    \emph{Байесовской оценкой} параметра $\theta$ будем называть
+    \[
+        \hat{\theta}_{\QQ}(\vec{X}) = \int_{\Theta} tq(t\,|\,\vec{X})\lambda(\dd t).
+    \]
+\end{definition}
+На следующей лекции мы докажем, что она является наилучшей оценкой в байесовском подходе. Для этого нам понадобится следующая теорема:
+\begin{theorem}[о наилучшем квадратичном прогнозе]
+    Пусть $\xi$ и $\eta$ "--- случайные величины. Тогда
+    \[
+        \EE[\xi\,|\,\eta] = \arg\min_{f(\eta)} \EE[(\xi - f(\eta))^{2}].
+    \]
+\end{theorem}
+\begin{proof}
+    Добавим и вычтем $\EE[\xi\,|\,\eta]$, после чего раскроем:
+    \begin{align*}
+        \EE[(\xi - f(\eta))^{2}]
+        &= \EE[(\xi - \EE[\xi\,|\,\eta] + \EE[\xi\,|\,\eta] - f(\eta))^{2}] \\
+        &= \EE[(\xi - \EE[\xi\,|\,\eta])^{2}] + 2\EE[(\xi - \EE[\xi\,|\,\eta])(\EE[\xi\,|\,\eta] - f(\eta))] + \EE[(\EE[\xi\,|\,\eta] - f(\eta))^{2}].
+    \end{align*}
+    Первое слагаемое никак не зависит от $f$. Докажем, что второе слагаемое равно нулю. Для этого воспользуемся формулой полной вероятности и тем, что функцию от условия можно вынести за условное матожидание:
+    \begin{align*}
+        \EE[(\xi - \EE[\xi\,|\,\eta])(\EE[\xi\,|\,\eta] - f(\eta))]
+        &= \EE[\EE[(\xi - \EE[\xi\,|\,\eta])(\EE[\xi\,|\,\eta] - f(\eta))]\,|\,\eta] \\
+        &= \EE[(\EE[\xi\,|\,\eta] - f(\eta))\EE[(\xi - \EE[\xi\,|\,\eta])\,|\,\eta]] \\
+        &= \EE[(\EE[\xi\,|\,\eta] - f(\eta))(\EE[\xi\,|\,\eta] - \EE[\xi\,|\,\eta])] = 0.
+    \end{align*}
+    Тем самым минимум достигается при $f(\eta) = \EE[\xi\,|\,\eta]$.
+\end{proof}

@@ -1,0 +1,328 @@
+\section{Лекция 5}
+\subsection{Байесовские оценки}
+Напомню, что в байесовском подходе задача нахождения наилучшей оценки параметра $\theta$ формулируется так:
+\[
+    \hat{\theta}(\vec{X}) = \arg\min_{\theta^{*}(\vec{X})} \int_{\Theta} R(\theta^{*}(\vec{X}), t) q(t)\lambda(\dd t),
+\]
+где $q(t)$ "--- плотность вероятностного распределения $\QQ$ на $\Theta$ по мере $\lambda$. Оказывается, что при некоторых условиях можно получить явное выражение для наилучшей оценки. Для доказательства этого факта сделаем несколько предположений:
+\begin{itemize}
+    \item Мы будем использовать квадратичную функцию потерь: $R(\hat{\theta}(\vec{X}, \theta)) = \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}]$.
+    \item $\vec{X}$ имеет неизвестное распределение $\Pr \in \{\Pr_{\theta} \mid \theta \in \Theta\}$, где $\{\Pr_{\theta} \mid \theta \in \Theta\}$ "--- доминируемое семейство распределений с плотностью $p_{\theta}(x)$ по мере $\mu$.
+    \item Будем считать, что параметр есть число: $\Theta \in \mathbb{R}$. Далее, зафиксируем вероятностное распределение $\QQ$ на $\Theta$ с плотностью $q(t)$ по мере $\lambda$.
+\end{itemize}
+
+Теперь докажем следующую теорему:
+\begin{theorem}[о байесовской оценке]
+    Байесовская оценка $\hat{\theta}_{\QQ}(\vec{X})$ "--- это наилучшая оценка параметра $\theta$ в байесовском подходе.
+\end{theorem}
+\begin{proof}
+    Введём следующую функцию: $f(t, \vec{x}) = q(t)p_{t}(\vec{x})$. Заметим, что
+    \[
+        \int_{\Theta \times \mathcal{X}} f(t, \vec{x})\lambda(\dd t)\mu(\dd \vec{x}) = \int_{\Theta} q(t) \left(\int_{\mathcal{X}} p_{t}(\vec{x})\mu(\dd \vec{x})\right) \lambda(\dd t) = \int_{\Theta} q(t) \lambda(\dd t) = 1.
+    \]
+    Тогда можно считать, что $f(t, \vec{x})$ есть плотность некоторого вероятностного распределения $\tilde{\Pr}$ на $\Theta \times \mathcal{X}$ по мере $\lambda \otimes \mu$. Далее, посмотрим на вектор $(\theta, \vec{X})$, как на случайный вектор на колмогоровской тройке $(\Theta \times \mathcal{X}, \mathcal{F}, \tilde{\Pr})$, где $\mathcal{F}$ "--- соответствующая сигма-алгебра, действующий по следующему правилу: $(\theta, \vec{X})(t, \vec{x}) = (t, \vec{x})$. Тогда легко заметить следующее:
+    \begin{align*}
+        \int_{\Theta} R(\hat{\theta}(\vec{X}), t) q(t)\lambda(\dd t)
+        &= \int_{\Theta} \EE_{t}[(\hat{\theta}(\vec{X}) - t)^{2}] q(t)\lambda(\dd t) \\
+        &= \int_{\Theta} \left(\int_{\mathcal{X}} (\hat{\theta}(\vec{x}) - t)^{2} p_{t}(\vec{x})\mu(\dd \vec{x})\right) q(t)\lambda(\dd t) \\
+        &= \int_{\Theta \times \mathcal{X}} (\hat{\theta}(\vec{x}) - t)^{2} f(t, \vec{x}) \lambda(\dd t)\mu(\dd \vec{x}).
+    \end{align*}
+    Но это есть ни что иное, как математическое ожидание $(\hat{\theta}(\vec{X}) - t)^{2}$ по вероятностной мере $\tilde{\Pr}$. Будем обозначать его через $\tilde{\EE}[(\hat{\theta}(\vec{X}) - t)^{2}]$. Тогда задача поиска наилучшей оценки сводится к следующей:
+    \[
+        \tilde{\EE}[(\hat{\theta}(\vec{X}) - t)^{2}] \to \min_{\hat{\theta}(\vec{X})}.
+    \]
+    Теорема о наилучшем квадратичном прогнозе говорит, что ответ есть $\tilde{\EE}[\theta\,|\,\vec{X}]$. Теперь осталось показать, что $\hat{\theta}_{\QQ}(\vec{X}) = \tilde{\EE}[\theta\,|\,\vec{X}]$. Для этого заметим, что
+    \begin{itemize}
+        \item $q(t)$ есть плотность $\theta$.
+        \item Выборка $\vec{X}$ имеет плотность
+        \[
+            g(\vec{x}) = \int_{\Theta} f(t, \vec{x}) \lambda(\dd t).
+        \]
+        \item Далее, условная плотность $\vec{X}$ относительно $\theta$ равна $f(t, x)/q(t) = p_{t}(x)$.\footnote{Из-за этого её часто обозначают $p(\vec{X}\,|\,\theta)$.}
+    \end{itemize} 
+    
+    Отсюда несложно получить условную плотность $\theta$ относительно $\vec{X}$. Она равна
+    \[
+       \frac{f(t, \vec{x})}{g(\vec{x})} = \frac{q(t)p_{t}(\vec{x})}{\int_{\Theta} q(\tau)p_{\tau}(\vec{x}) \lambda(\dd \tau)} =  q(t\,|\,\vec{x}).
+    \]
+    Тогда
+    \[
+        \tilde{\EE}[\theta\,|\,\vec{X} = \vec{x}] = \int_{\Theta} tq(t\,|\,\vec{x})\lambda(\dd t) = \hat{\theta}_{\QQ}(\vec{x}) \implies \hat{\theta}_{\QQ}(\vec{X}) = \tilde{\EE}[\theta\,|\,\vec{X}]. \qedhere
+    \]
+\end{proof}
+\begin{remark}
+    Стоит заметить, что считать условную плотность на самом деле не обязательно, так как байесовскую оценку можно представить в виде отношения интегралов по совместной плотности:
+    \[
+        \hat{\theta}_{\QQ}(\vec{X}) = \frac{\int_{\Theta} tf(t, \vec{X})\lambda(\dd t)}{\int_{\Theta} f(t, \vec{X})\lambda(\dd t)}.
+    \]
+\end{remark}
+
+Теперь рассмотрим какой-нибудь пример.
+\begin{problem}
+    Пусть $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка из равномерного распределения $\mathrm{U}(0, \theta)$, $\theta > 0$. Найдите байесовскую оценку параметра $\theta$, если априорная плотность распределения равна
+    \begin{enumerate}[label=(\alph*)]
+        \item $q(t) = [t \in [0, 1]]$,
+        \item $q(t) = t^{-2}[t \geq 1]$.
+    \end{enumerate}
+\end{problem}
+\begin{proof}[Решение]
+    Начнём с того, что посчитаем плотность выборки:
+    \[
+        p_{\theta}(\vec{X}) = \frac{1}{\theta^{n}}[0 \leq X_{(1)} \leq X_{(n)} \leq \theta] = \theta^{-n}[\theta \geq X_{(n)}].
+    \]
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item Совместная плотность равна $f(t, \vec{X}) = q(t)p_{t}(\vec{X})$. Так как $X_{(n)} \in [0, 1]$ почти наверное, то можно написать следующее:
+        \[
+            f(t, \vec{X}) = t^{-n}[t \in [0, 1], t \geq X_{(n)}] = t^{-n}[t \in [X_{(n)}, 1]].
+        \]
+        Тогда
+        \begin{align*}
+            \int_{\Theta} tf(t, \vec{X})\lambda(\dd t)
+            &= \int_{X_{(n)}}^{1} t^{1 - n}\dd t
+            = \left.\frac{x^{2 - n}}{2 - n}\right|_{X_{(n)}}^{1}
+            = \frac{1}{n - 2}(X_{(n)}^{2 - n} - 1) \\
+            \int_{\Theta} f(t, \vec{X})\lambda(\dd t)
+            &= \int_{X_{(n)}}^{1} t^{-n}\dd t
+            = \left.\frac{x^{1 - n}}{1 - n}\right|_{X_{(n)}}^{1}
+            = \frac{1}{n - 1}(X_{(n)}^{1 - n} - 1)
+        \end{align*}
+        
+        Отсюда получаем, что байесовской оценкой в таком случае будет
+        \[
+            \hat{\theta}_{\QQ}(\vec{X}) 
+            = \frac{n - 1}{n - 2}\frac{X_{(n)}^{2 - n} - 1}{X_{(n)}^{1 - n} - 1}
+            = \frac{n - 1}{n - 2}\frac{X_{(n)} - X_{(n)}^{n - 1}}{1 - X_{(n)}^{n - 1}}.
+        \]
+        
+        Стоит заметить, что при больших $n$ $\hat{\theta}_{\QQ}(\vec{X}) \sim X_{(n)}$.
+        
+        \item В данном случае совместная плотность устроена немного по-другому:
+        \[
+            f(t, \vec{X}) = t^{-(n + 2)}[t \geq 1, t \geq X_{(n)}] = t^{-(n + 2)}[t \geq \max(1, X_{(n)})].
+        \]
+        Тогда
+        \begin{align*}
+            \int_{\Theta} tf(t, \vec{X})\lambda(\dd t)
+            &= \int_{\max(1, X_{(n)})}^{+\infty} t^{-n - 1}\dd t
+            = \left.-\frac{x^{-n}}{n}\right|_{\max(1, X_{(n)})}^{+\infty}
+            = \frac{1}{n}(\max(1, X_{(n)}))^{-n} \\
+            \int_{\Theta} f(t, \vec{X})\lambda(\dd t)
+            &= \int_{\max(1, X_{(n)})}^{+\infty} t^{-n - 2}\dd t
+            = \left.-\frac{x^{-n - 1}}{n + 1}\right|_{\max(1, X_{(n)})}^{+\infty}
+            = \frac{1}{n + 1}(\max(1, X_{(n)}))^{-n - 1} 
+        \end{align*}
+        Отсюда получаем, что
+        \[
+            \hat{\theta}_{\QQ}(\vec{X}) = \frac{n + 1}{n}\max(1, X_{(n)}). \qedhere
+        \]
+    \end{enumerate}
+\end{proof}
+
+\subsection{Минимаксные оценки}
+Помимо байесовского подхода к сравнению оценок \hyperref[lec2:minimax]{вводился} так называемый минимаксный подход. В нём задача поиска наилучшей оценки ставится следующим образом:
+\[
+    \hat{\theta}(\vec{X}) = \arg\min_{\theta^{*}(\vec{X})}\sup_{\theta \in \Theta} R(\theta^{*}(\vec{X}), \theta).
+\]
+
+Сначала совершенно непонятно, можно ли вообще предьявить какой-то критерий минимаксности. Но он есть. Сделаем те же предположения, что делались для байесовских оценок:
+\begin{itemize}
+    \item Мы будем использовать квадратичную функцию потерь: $R(\hat{\theta}(\vec{X}, \theta)) = \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}]$.
+    \item $\vec{X}$ имеет неизвестное распределение $\Pr \in \{\Pr_{\theta} \mid \theta \in \Theta\}$, где $\{\Pr_{\theta} \mid \theta \in \Theta\}$ "--- доминируемое семейство распределений с плотностью $p_{\theta}(x)$ по мере $\mu$.
+    \item Будем считать, что параметр есть число: $\Theta \in \mathbb{R}$. Далее, зафиксируем вероятностное распределение $\QQ$ на $\Theta$ с плотностью $q(t)$ по мере $\lambda$.
+\end{itemize}
+\begin{lemma}[Достаточное условие минимаксности оценки]
+    Пусть $\hat{\theta}(\vec{X})$ "--- это оценка параметра $\theta$ такое, что существует вероятностное распределение $\QQ$ на $\Theta$ с плотностью $q(t)$ по мере $\lambda$, соответствующее следующему условию: для всех $\theta \in \Theta$
+    \[
+        \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}]
+        \leq \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t).
+    \]
+    Тогда $\hat{\theta}(\vec{X})$ есть минимаксная оценка, то есть это наилучшая оценка в минимаксном подходе.
+\end{lemma}
+\begin{proof}
+    Возьмём произвольную оценку $\theta^{*}(\vec{X})$. Заметим, что
+    \[
+        \int_{\Theta} \EE_{t}[(\theta^{*}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t) \leq  \int_{\Theta} \sup_{\theta \in \Theta} \EE_{\theta}[(\theta^{*}(\vec{X}) - \theta)^{2}]q(t)\lambda(\dd t) = \sup_{\theta \in \Theta} \EE_{\theta}[(\theta^{*}(\vec{X}) - \theta)^{2}].
+    \]
+    Однако данный интеграл можно ограничить снизу интегралом для байесовской оценки:
+    \[
+        \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t) \leq \int_{\Theta} \EE_{t}[(\theta^{*}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t)
+    \]
+    
+    Тем самым получаем цепочку неравенств, которая показывает минимаксность:
+    \[
+        \sup_{\theta \in \Theta} \EE_{\theta}[(\theta^{*}(\vec{X}) - \theta)^{2}] \geq \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t) \geq \sup_{\theta \in \Theta} \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}]. \qedhere
+    \]
+\end{proof}
+Из данного утверждения можно сделать очень интересное следствие:
+\begin{consequence}
+    Пусть для оценки $\hat{\theta}(\vec{X})$ существует такое вероятностное распределение $\QQ$ на $\Theta$ с плотностью $q(t)$ по мере $\lambda$ со следующими условиями:
+    \begin{enumerate}[label=(\alph*)]
+        \item Существует множество $\Psi \subseteq \Theta$ такое, что $\QQ(\Psi) = 1$ и для всех $\theta \in \Psi$ $\EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)] = c = \mathrm{const}$.
+        \item Для всех $\theta \not\in \Psi$ $\EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)] \leq c$
+        \item Оценка является байесовской оценкой для распределения $\QQ$: $\hat{\theta}(\vec{X}) = \hat{\theta}_{\QQ}(\vec{X})$
+    \end{enumerate}
+    Тогда $\hat{\theta}(\vec{X})$ есть минимаксная оценка.
+\end{consequence}
+Идея доказательства состоит в том, что
+\[
+    \sup_{\theta \in \Theta} \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}] = c = \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t).
+\]
+
+Теперь сделаем лирическое отступление. Допустим, что мы возьмём другое распределение $\tilde{\QQ}$. Что тогда можно сказать про отношение следующих интегралов:
+\[
+    \int_{\Theta} \EE_{t}[(\hat{\theta}_{\tilde{\QQ}}(\vec{X}) - t)^{2}]\tilde{q}(t)\lambda(\dd t) \text{ и } \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t)?
+\]
+На самом деле первый интеграл не больше второго. Действительно, $\hat{\theta}_{\tilde{\QQ}}(\vec{X})$ есть байесовская оценка для распределения $\tilde{\QQ}$. Тогда
+\begin{align*}
+    \int_{\Theta} \EE_{t}[(\hat{\theta}_{\tilde{\QQ}}(\vec{X}) - t)^{2}]\tilde{q}(t)\lambda(\dd t)
+    &\leq \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ}(\vec{X}) - t)^{2}]\tilde{q}(t)\lambda(\dd t) \\
+    &\leq \sup_{\theta \in \Theta} \EE_{\theta}[(\hat{\theta}_{\QQ}(\vec{X}) - \theta)^{2}] = \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ}(\vec{X}) - t)^{2}]q(t)\lambda(\dd t).
+\end{align*}
+
+То есть распределение $\QQ$ таково, что для него значение интеграла максимально. У такого распределения есть название:
+\begin{definition}
+    Вероятностное распределение $\QQ$ на $\Theta$ называется \emph{наихудшим априорным распределением}.
+\end{definition}
+
+Теперь попробуем посчитать минимаксную оценку.
+\begin{problem}
+    Пусть $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка из распределения Бернулли $\mathrm{Bern}(\theta)$. Найти минимаксную оценку для $\theta$.
+\end{problem}
+\begin{proof}[Решение]
+    Казалось бы, совершенно непонятно, как подступаться к этой задаче, даже с учётом достаточного условия выше. Начнём с того, что попробуем найти оценку, для которой функция потерь не зависит от параметра. Для этого поэкспериментируем с обычными оценками. Начнём с великолепной оценки "--- с выборочного среднего $\overline{\vec{X}}$. Для неё
+    \[
+        \EE_{\theta}[(\overline{\vec{X}} - \theta)^{2}] = \DD_{\theta}[\overline{\vec{X}}] = \frac{\theta(1 - \theta)}{n}.
+    \]
+    Как видно, для неё функция потерь зависит от параметра. Сделаем грязный трюк и будем искать оценку в виде $\hat{\theta}(\vec{X}) = a\overline{\vec{X}} + b$, где $a > 0$ и $b$ "--- некоторые константы. Тогда
+    \begin{align*}
+        \EE_{\theta}[(a\overline{\vec{X}} + b - \theta)^{2}]
+        &= \EE_{\theta}[(a(\overline{\vec{X}} - \theta) + (b - (1 - a)\theta))^{2}] \\
+        &= a^2\EE_{\theta}[(\overline{\vec{X}} - \theta)^{2}] + (b - (1 - a)\theta)^{2} \\
+        &= \frac{a^{2}(\theta - \theta^{2})}{n} + b^{2} - 2b\theta(1 - a) + \theta^{2}(1 - a)^{2} \\
+        &= \theta^{2}\left(-\frac{a^{2}}{n} + (1 - a)^{2}\right) + \theta\left(\frac{a^{2}}{n} - 2b(1 - a)\right) + b^{2}.
+    \end{align*}
+    Занулим коэффициенты перед $\theta$ и $\theta^{2}$. Тогда получается следующая система уравнений:
+    \[
+        \begin{cases}
+        n(1 - a)^{2} = a^{2} \\
+        2nb(1 - a) = a^{2}
+        \end{cases}
+        \implies
+        \begin{cases}
+        \sqrt{n} - \sqrt{n}a = a \\
+        2b = 1 - a
+        \end{cases}
+    \]
+    Тем самым получаем, что
+    \[
+        a = \frac{\sqrt{n}}{\sqrt{n} + 1}, \quad b = \frac{1}{2(\sqrt{n} + 1)}.
+    \]
+    Отсюда получаем, что в качестве кандидата можно рассматривать оценку
+    \[
+        \hat{\theta}(\vec{X}) = \frac{\sqrt{n}}{\sqrt{n} + 1}\overline{\vec{X}} + \frac{1}{2(\sqrt{n} + 1)}.
+    \]
+    Для неё функция риска будет равна
+    \[
+        \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}] = \frac{1}{4(\sqrt{n} + 1)^{2}}.
+    \]
+    Теперь попробуем найти распределение $\QQ$ такое, что для него $\hat{\theta}(\vec{X})$ будет байесовской оценкой. Для этого посмотрим на функцию правдоподобия выборки:
+    \[
+        p_{\theta}(\vec{X}) = \prod_{i = 1}^{n} p_{\theta}(X_{i}) = \prod_{i = 1}^{n} \theta^{X_{i}}(1 - \theta)^{1 - X_{i}} = \theta^{n\overline{\vec{X}}}(1 - \theta)^{n(1 - \overline{\vec{X}})}. 
+    \]
+    Теперь будем смотреть на неё, как на функцию от $\theta$. Ничего не напоминает? Правильно, это напоминает бета-распределение. Возьмём в качестве априорного распределения $\QQ$ бета-распределение $\mathrm{B}(\alpha, \beta)$:
+    \[
+        q(t) = \frac{t^{\alpha - 1}(1 - t)^{\beta - 1}}{B(\alpha, \beta)}.
+    \]
+    Тогда совместная плотность распределения равна
+    \[
+        q(\theta)p_{\theta}(\vec{X}) = \frac{\theta^{n\overline{\vec{X}} + \alpha - 1}(1 - \theta)^{n(1 - \overline{\vec{X}}) + \beta - 1}}{B(\alpha, \beta)}.
+    \]
+    Так как знаменатель при подсчёте будет только зависеть от $\vec{X}$, то можно смело сказать, что $q(t\,|\,\vec{X})$ равно плотности бета-распределения $\mathrm{B}(n\overline{\vec{X}} + \alpha, n(1 - \overline{\vec{X}}) + \beta)$.\footnote{Небольшое примечание: когда априорное $q(t)$ и апостериорное $q(t\,|\,\vec{X})$ распределения параметров относятся к одному типу, но могут различаться параметрами, то говорят, что распределение $q(t\,|\,\vec{X})$ есть \emph{сопряженное} распределению $p_{t}(\vec{X})$. В данном случае было показано, что сопряжённым для распределения Бернулли является бета-распределение.} Теперь найдём математическое ожидание случайной величины $\xi \sim \mathrm{B}(\alpha, 
+    \beta)$:
+    \[
+        \EE[\xi] = \frac{1}{B(\alpha, \beta)}\int_{0}^{1} t^{\alpha}(1 - t)^{\beta - 1}\dd t = \frac{B(\alpha + 1, \beta)}{B(\alpha, \beta)} = \frac{\Gamma(\alpha + 1)\Gamma(\beta)\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)\Gamma(\alpha + \beta + 1)} = \frac{\alpha}{\alpha + \beta}.
+    \]
+    Тогда
+    \[
+        \hat{\theta}_{\QQ}(\vec{X}) = \frac{n\overline{\vec{X}} + \alpha}{n + \alpha + \beta}.
+    \]
+    Теперь мы хотим подобрать параметры $\alpha$ и $\beta$ так, чтобы байесовская оценка $\hat{\theta}_{\QQ}(\vec{X})$ была равна нашей оценке $\hat{\theta}(\vec{X})$. Для этого заметим, что
+    \[
+        \hat{\theta}(\vec{X}) = \frac{2\sqrt{n}\overline{\vec{X}} + 1}{2\sqrt{n} + 2} = \frac{n\overline{\vec{X}} + \sqrt{n}/2}{n + n\sqrt{2}}.
+    \]
+    Тогда $\alpha = \beta = \sqrt{n}/2$. Следовательно, $\QQ = \mathrm{B}(\sqrt{n}/2, \sqrt{n}/2)$ есть наихудшее априорное распределение и $\hat{\theta}(\vec{X})$ есть минимаксная оценка.
+\end{proof}
+
+Иногда бывают случаи, когда наихудшее распределение найти не получается. В таких случаях спасает следующая лемма:
+\begin{lemma}
+    Пусть $\hat{\theta}(\vec{X})$ "--- оценка параметра $\theta$ такая, что существует последовательность вероятностных мер $\{\QQ_{k}, k \in \mathbb{N}\}$ на $\Theta$ с плотностями $q_{k}(t)$ по соответствующим мерам $\lambda_{k}$, удовлетворяющая следующему условию: для всех $\theta \in \Theta$
+    \[
+        \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}] \leq \varlimsup_{k \to \infty} \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ_{k}}(\vec{X}) - t)^{2}]q_{k}(t)\lambda_{k}(\dd t).
+    \]
+    Тогда $\hat{\theta}(\vec{X})$ есть минимаксная оценка.
+\end{lemma}
+\begin{proof}
+    Доказательство почти дословно повторяет доказательство в случае одной. Зафиксируем произвольную оценку $\theta^{*}(\vec{X})$. Далее, для любого натурального $k$
+    \[
+        \int_{\Theta} \EE_{t}[(\theta^{*}(\vec{X}) - t)^{2}]q_{k}(t)\lambda_{k}(\dd t) \leq  \int_{\Theta} \sup_{\theta \in \Theta} \EE_{\theta}[(\theta^{*}(\vec{X}) - \theta)^{2}]q_{k}(t)\lambda_{k}(\dd t) = \sup_{\theta \in \Theta} \EE_{\theta}[(\theta^{*}(\vec{X}) - \theta)^{2}].
+    \]
+    Однако данный интеграл можно ограничить снизу интегралом для байесовской оценки:
+    \[
+        \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ_{k}}(\vec{X}) - t)^{2}]q_{k}(t)\lambda_{k}(\dd t) \leq \int_{\Theta} \EE_{t}[(\theta^{*}(\vec{X}) - t)^{2}]q_{k}(t)\lambda_{k}(\dd t)
+    \]
+    
+    Следовательно, получаем желаемое:
+    \[
+        \sup_{\theta \in \Theta} \EE_{\theta}[(\theta^{*}(\vec{X}) - \theta)^{2}]
+        \geq \varlimsup_{k \to \infty} \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ_{k}}(\vec{X}) - t)^{2}]q_{k}(t)\lambda_{k}(\dd t)
+        \geq \sup_{\theta \in \Theta} \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}]. \qedhere
+    \]
+\end{proof}
+
+\begin{problem}
+    Пусть $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка из нормального распределения $\mathcal{N}(\theta, 1)$. Найти минимаксную оценку для $\theta$.
+\end{problem}
+\begin{proof}[Решение]
+    Для начала заметим, что оценка $\overline{\vec{X}}$ подходит в качестве претендента на минимаксность, так как функция потерь не зависит от параметра.
+    \[
+        \EE_{\theta}[(\overline{\vec{X}} - \theta)^{2}] = \DD_{\theta}[\overline{\vec{X}}] = \frac{1}{n}.
+    \]
+    
+    Далее посмотрим на функцию правдоподобия для выборки:
+    \[
+        p_{\theta}(\vec{X}) = \prod_{i = 1}^{n} p_{\theta}(X_{i}) = \frac{1}{(2\pi)^{n/2}}\exp\left\{-\frac{1}{2}\sum_{i = 1}^{n} (X_{i} - \theta)^{2}\right\}.
+    \]
+    Если посмотреть на неё, как на функцию от $\theta$, то выражение будет напоминать плотность нормального распределения. Скажем, что $\QQ_{k} = \mathcal{N}(0, \sigma^{2}_{k})$, где $\sigma_{k}^{2}$ есть некоторое положительное число. Тогда
+    \begin{align*}
+        q(t) &= \frac{1}{\sigma_{k}\sqrt{2\pi}}\exp\left\{-\frac{t^{2}}{2\sigma_{k}^{2}}\right\}, \\
+        q(t)p_{t}(\vec{X})
+        &= \frac{1}{\sigma_{k}^{2}(2\pi)^{(n + 1)/2}}\exp\left\{-\frac{1}{2}\left(\frac{t^{2}}{\sigma_{k}^{2}} + nt^{2} - 2tn\overline{\vec{X}} + \sum_{i = 1}^{n}X_{i}^{2}\right)\right\} \\
+        &\propto \exp\left\{-\frac{1}{2}\left(n + \frac{1}{\sigma^{2}}\right)\left(t - \frac{n}{n + \sigma_{k}^{-2}}\overline{\vec{X}}\right)^{2}\right\}
+    \end{align*}
+    Отсюда можно сделать вывод, что\footnote{Сопряжённое для нормального с известной дисперсией есть нормальное.}
+    \[
+        q(t\,|\,\vec{X}) \sim \mathcal{N}\left(\frac{n}{n + \sigma_{k}^{-2}}\overline{\vec{X}}, \frac{1}{n + \sigma_{k}^{-2}}\right).
+    \]
+    Тогда
+    \[
+        \hat{\theta}_{\QQ_{k}}(\vec{X}) = \frac{n}{n + \sigma_{k}^{-2}}\overline{\vec{X}}.
+    \]
+    
+    Великолепно, мы взяли какую-то последовательность вероятностных распределений. Но можно ли сказать, что будет выполнено условие леммы? Оказывается, что можно. Заметим, что
+    \begin{align*}
+        \int_{\Theta} \EE_{t}[(\hat{\theta}_{\QQ_{k}}(\vec{X}) - t)^{2}]q_{k}(t)\lambda_{k}(\dd t)
+        &= \int_{\mathbb{R}^{n}} \int_{\Theta} (\hat{\theta}_{\QQ_{k}}(\vec{x}) - t)^{2}q_{k}(t)p_{t}(\vec{x})\lambda_{k}(\dd t)\mu(\dd \vec{x}) \\
+        &= \int_{\mathbb{R}^{n}} \int_{\Theta} (t - \hat{\theta}_{ \QQ_{k}}(\vec{x}))^{2}q(t\,|\,\vec{x})g(\vec{x})\lambda_{k}(\dd t)\mu(\dd \vec{x}) \\
+        &= \int_{\mathbb{R}^{n}} \left(\int_{\Theta} (t - \hat{\theta}_{ \QQ_{k}}(\vec{x}))^{2}q(t\,|\,\vec{x})\lambda_{k}(\dd t)\right)g(\vec{x})\mu(\dd \vec{x}) \\
+        &= \int_{\mathbb{R}^{n}} \frac{1}{n + \sigma_{k}^{-2}}g(\vec{x})\mu(\dd \vec{x})
+        = \frac{1}{n + \sigma_{k}^{-2}}.
+    \end{align*}
+    
+    Тогда для минимаксности $\overline{\vec{X}}$ должно быть выполнено следующее условие:
+    \[
+        \frac{1}{n} \leq \varlimsup_{k \to \infty} \frac{1}{n + \sigma_{k}^{-2}}.
+    \]
+    Но для этого достаточно взять последовательность $\sigma_{k}^{2}$, которая будет стремиться к $+\infty$ (например, $\sigma_{k}^{2} = k$).
+\end{proof}
+

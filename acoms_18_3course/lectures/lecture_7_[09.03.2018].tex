@@ -1,0 +1,274 @@
+%!TEX root = ../main.tex
+\section{Лекция 7}
+\subsection{Достаточные статистики и оптимальные оценки}
+Ранее мы рассмотрели асимптотический, байесовский и минимаксный подходы. Теперь осталось рассмотреть самый сильный подход "--- \hyperref[lec2:uniform]{равномерный}. Напомню, что в нём поиск наилучшей оценки параметра $\theta$ устроен так:
+\[
+	\EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}] \to \min_{\hat{\theta}(\vec{X})} \text{ равномерно по всем } \theta \in \Theta.
+\]
+Однако, как обсуждалось ранее, если не сузить класс оценок, то эта задача будет бессмысленной (так как риск будет должен быть равен тождественному нулю). Поэтому скажем, что мы работаем в классе \emph{несмещённых} оценок. В таком случае $\EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta)^{2}] = \DD_{\theta}[\hat{\theta}(\vec{X})]$. Такая переформулировка сразу приводит нас к определнию оптимальной оценки.
+\begin{definition}
+	Пусть $\hat{\theta}(\vec{X})$ "--- несмещённая оценка параметра $\theta \in \mathbb{R}$. Будем говорить, что $\hat{\theta}(\vec{X})$ есть \emph{оптимальная} оценка, если у неё равномерно наименьшая дисперсия, то есть для любой другой несмещённой оценки $\theta^{*}(\vec{X})$
+	\[
+		\DD_{\theta}[\hat{\theta}(\vec{X})] \leq \DD_{\theta}[\theta^{*}(\vec{X})] \text{ для всех } \theta \in \Theta. 
+	\]
+\end{definition}
+Данное определение дословно переносится на многомерный случай, но там неравенство на дисперсии записывается следующим образом:
+\[
+	\DD_{\theta}[\hat{\theta}(\vec{X})] \preccurlyeq \DD_{\theta}[\theta^{*}(\vec{X})]
+	\iff
+	\DD_{\theta}[\theta^{*}(\vec{X})] - \DD_{\theta}[\hat{\theta}(\vec{X})] \text{ неотрицательно определена.}
+\]
+
+\begin{definition}
+	Пусть $\set{ \Pr_{\theta} \mid \theta \in \Theta}$ "--- некоторое семейство распределений, а $\vec{X}$ "--- наблюдение с неизвестным распределением $\Pr \in \set{ \Pr_{\theta} \mid \theta \in \Theta}$. Будем называть статистику $S(\vec{X})$ \emph{достаточной}, если существует вариант условного распределения $\Pr_{\theta}(\vec{X} \in B \mid S(\vec{X}) = s)$, который не зависит от параметра $\theta$, то есть существует измеримая функция $\Pr(B, s)$ такая, что
+	\[
+		\Pr_{\theta}(\vec{X} \in B \mid S(\vec{X}) = s) = \Pr(B, s) \text{ п.н. по распределению } S(\vec{X}).
+	\]
+\end{definition}
+
+\begin{theorem}[Колмогоров-Блэкуэлл-Рао]
+	Пусть $\hat{\theta}(\vec{X})$ "--- некоторая несмещённая оценка $\tau(\theta) \in \mathbb{R}$ с конечным матожиданием: $\EE_{\theta}[\hat{\theta}(\vec{X})] < +\infty$ для всех $\theta \in \Theta$. Далее, пусть $S(\vec{X})$ "--- это достаточная статистика для семейства распределений $\set{ \Pr_{\theta} \mid \theta \in \Theta}$. Тогда
+	\begin{itemize}
+		\item Пусть $\theta^{*}(\vec{X}) = \EE_{\theta}[\hat{\theta}(\vec{X}) \mid S(\vec{X})]$. Тогда $\theta^{*}(\vec{X})$ есть несмещённая оценка $\tau(\theta)$.
+		\item Для всех $\theta \in \Theta$ $\DD_{\theta}[\theta^{*}(\vec{X})] \leq \DD_{\theta}[\hat{\theta}(\vec{X})]$.
+		\item Равенство в неравенстве выше для всех $\theta \in \Theta$ достигается тогда и только тогда, когда $\hat{\theta}(\vec{X})$ является $S(\vec{X})$-измеримой функцией.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	Несмещённость $\theta^{*}(\vec{X})$ сразу же следует из формулы полной вероятности:
+	\[
+		\EE_{\theta}[\theta^{*}(\vec{X})]
+		= \EE_{\theta}[\EE_{\theta}[\hat{\theta}(\vec{X}) \mid S(\vec{X})]]
+		= \EE_{\theta}[\hat{\theta}(\vec{X})]
+		= \tau(\theta).
+	\]
+	Менее очевидным фактом является то, что это действительно оценка, то есть то, что $\theta^{*}(\vec{X})$ не зависит от $\theta$. Однако $\theta^{*}(\vec{X})$ есть интеграл $\hat{\theta}(\vec{X})$ по условному распределению $\vec{X}$ относительно $S(\vec{X})$. Но ни оно, ни функция $\hat{\theta}(\vec{x})$ не зависят от $\theta$. Тем самым получаем желаемое.
+
+	Теперь покажем, что ограничение на дисперсии действительно выполнено. Для этого заметим, что функция $h(x) = (x - \tau(\theta))^{2}$ выпукла. Тогда можно воспользоваться неравенством Йенсена:
+	\[
+		(\theta^{*}(\vec{X}) - \tau(\theta))^{2} 
+		= (\EE_{\theta}[\hat{\theta}(\vec{X}) \mid S(\vec{X})] - \tau(\theta))^{2}
+		\leq \EE_{\theta}[(\hat{\theta}(\vec{X}) - \tau(\theta))^{2} \mid S(\vec{X})]. 
+	\]
+	Возьмём матожидание с обеих сторон:
+	\[
+		\DD_{\theta}[\theta^{*}(\vec{X})] \leq \DD_{\theta}[\hat{\theta}(\vec{X})].
+	\]
+	Осталось понять, когда будет выполняться равенство в данном неравенстве. Для этого заметим, что
+	\begin{align*}
+		\DD_{\theta}[\hat{\theta}(\vec{X})] - \DD_{\theta}[\theta^{*}(\vec{X})]
+		&= \EE_{\theta}[(\hat{\theta}(\vec{X}) - \tau(\theta))^{2}] - \EE_{\theta}[(\theta^{*}(\vec{X}) - \tau(\theta))^{2}] \\
+		&= \EE_{\theta}[(\hat{\theta}(\vec{X}))^{2}] - \EE_{\theta}[(\theta^{*}(\vec{X}))^{2}] \\
+		&= \EE_{\theta}[\EE_{\theta}[(\hat{\theta}(\vec{X}))^{2} - (\theta^{*}(\vec{X}))^{2} \mid S(\vec{X})]] \\
+		&= \EE_{\theta}[\EE_{\theta}[(\hat{\theta}(\vec{X}))^{2} \mid S(\vec{X})] - (\theta^{*}(\vec{X}))^{2}].
+	\end{align*}
+	Выражение внутри матожидания напоминает условную дисперсию. Действительно, по линейности условного математического ожидания
+	\begin{align*}
+		\EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta^{*}(\vec{X}))^{2} \mid S(\vec{X})] 
+		&= \EE_{\theta}[(\hat{\theta}(\vec{X}))^{2} - 2\hat{\theta}(\vec{X})\theta^{*}(\vec{X}) + (\theta^{*}(\vec{X}))^{2} \mid S(\vec{X})] \\
+		&= \EE_{\theta}[(\hat{\theta}(\vec{X}))^{2} \mid S(\vec{X})] - 2\theta^{*}(\vec{X})\EE_{\theta}[\hat{\theta}(\vec{X}) \mid S(\vec{X})] + (\theta^{*}(\vec{X}))^{2} \\
+		&= \EE_{\theta}[(\hat{\theta}(\vec{X}))^{2} \mid S(\vec{X})] - (\theta^{*}(\vec{X}))^{2}.
+	\end{align*}
+	Тогда
+	\[
+		\DD_{\theta}[\hat{\theta}(\vec{X})] - \DD_{\theta}[\theta^{*}(\vec{X})]
+		= \EE_{\theta}[\EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta^{*}(\vec{X}))^{2} \mid S(\vec{X})]]
+		= \EE_{\theta}[(\hat{\theta}(\vec{X}) - \theta^{*}(\vec{X}))^{2}].
+	\]
+	Но данное матожидание равно нулю тогда и только тогда, когда $\hat{\theta}(\vec{X}) = \theta^{*}(\vec{X})$ $\Pr_{\theta}$-п.н. для всех $\theta \in \Theta$.
+\end{proof}
+
+\begin{consequence}
+	Теорема Колмогорова-Блэкуэлла-Рао верна и в многомерном случае.
+\end{consequence}
+\begin{proof}
+	Пусть $\tau(\theta) \in \mathbb{R}^{k}$. Возьмём произвольный ненулевой вектор $\vec{a} \in \mathbb{R}^{k}$. Тогда $\hat{\theta}_{\vec{a}}(\vec{X})$ есть несмещённая оценка $\langle \tau(\theta), \vec{a} \rangle$. Следовательно, по одномерному случаю
+	\[
+		\DD_{\theta}[\langle \theta^{*}(\vec{X}), \vec{a} \rangle] \leq \DD_{\theta}[\langle \hat{\theta}(\vec{X}), \vec{a} \rangle].
+	\]
+	Но это означает, что
+	\[
+		\vec{a}^{\top}\DD_{\theta}[\theta^{*}(\vec{X})]\vec{a} \leq \vec{a}^{\top}\DD_{\theta}[\hat{\theta}(\vec{X})]\vec{a}.
+	\]
+	Тогда $\DD_{\theta}[\theta^{*}(\vec{X})] \preccurlyeq \DD_{\theta}[\hat{\theta}(\vec{X})]$. Критерий равенства доказывается аналогично одномерному случаю.
+\end{proof}
+\begin{consequence}
+	Пусть в условиях теоремы Колмогорова-Блэкуэлла-Рао для $\tau(\theta)$ существует единственная $S(\vec{X})$-измеримая несмещённая оценка $\theta^{*}(\vec{X})$. Тогда $\theta^{*}(\vec{X})$ "--- оптимальная оценка $\tau(\theta)$.
+\end{consequence}
+\begin{proof}
+	Пусть оценка $\theta^{*}(\vec{X})$ не оптимальна. Тогда найдётся оценка $\hat{\theta}(\vec{X})$, которая будет лучше, то есть её дисперсия меньше. Но тогда по теореме Колмогорова-Блэкуэлла-Рао $\theta^{**}(\vec{X}) = \EE_{\theta}[\hat{\theta}(\vec{X}) \mid S(\vec{X})]$ будет не хуже, чем $\hat{\theta}(\vec{X})$. Однако и $\theta^{*}(\vec{X})$, и $\theta^{**}(\vec{X})$ $S(\vec{X})$-измеримы. Следовательно, они равны и $\theta^{*}(\vec{X})$ не хуже, чем $\hat{\theta}(\vec{X})$. Противоречие с тем, что $\hat{\theta}(\vec{X})$ лучше, чем $\theta^{*}(\vec{X})$. Следовательно, $\theta^{*}(\vec{X})$ оптимальна.
+\end{proof}
+
+\begin{definition}
+	Статистика $S(\vec{X})$ называется \emph{полной} для семейства $\set{\Pr_{\theta} \mid \theta \in \Theta}$, если из того, что 
+	\[
+		\EE_{\theta}[f(S(\vec{X}))] = 0 \text{ для любого } \theta \in \Theta
+	\]
+	следует, что $f(S(\vec{X})) = 0$ $\Pr_{\theta}$-п.н. для всех $\theta \in \Theta$.
+\end{definition}
+
+\begin{theorem}[об оптимальной оценке]
+	Пусть $S(\vec{X})$ "--- полная достаточная статистика для семейства $\set{\Pr_{\theta} \mid \theta \in \Theta}$. Тогда если $\phi(S(\vec{X}))$ есть несмещённая оценка $\tau(\theta)$, то она будет оптимальной оценкой.
+\end{theorem}
+\begin{proof}
+	Пусть $\psi(S(\vec{X}))$ "--- другая несмещённая оценка $\tau(\theta)$. Тогда для любого $\theta \in \Theta$
+	\[
+		\EE_{\theta}[\phi(S(\vec{X})) - \psi(S(\vec{X}))] = 0.
+	\]
+	Но тогда по полноте $\phi(S(\vec{X})) = \psi(S(\vec{X}))$ $\Pr_{\theta}$-п.н. Отсюда получаем, что $\phi(S(\vec{X}))$ есть единственная $S(\vec{X})$-измеримая несмещённая оценка $\tau(\theta)$. Следовательно, она оптимальна.
+\end{proof}
+
+Тем самым, если есть полная достаточная статистика, то можно легко находить оптимальные оценки для $\tau(\theta)$, решая \emph{уравнение несмещённости}
+\[
+	\EE_{\theta}[\phi(S(\vec{X}))] = \tau(\theta).
+\]
+
+Для примера разберём одну задачу.
+\begin{problem}
+	Пусть $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка из распределения Бернулли $\mathrm{Bern}(\theta)$, $\theta \in (0, 1)$. Найти полную и достаточную статистику.
+\end{problem}
+\begin{proof}
+	Ранее мы не вводили никаких методов поиска полных и достаточных статистик, поэтому придётся угадывать. Начнём с самого очевидного кандидата "--- выборочного среднего $\overline{\vec{X}}$, а точнее, с суммы элементов $S(\vec{X}) = \sum_{i = 1}^{n} X_{i}$. Проверим, что она полна. Так как распределение Бернулли дискретно, то достаточно проверить, что для любого $\vec{x} \in \set{0, 1}^{n}$ условная вероятность $\Pr_{\theta}(\vec{X} = \vec{x} \mid S(\vec{X}) = k)$ не зависит от $\theta$. Раскроем по определению:
+	\[
+		\Pr_{\theta}(\vec{X} = \vec{x} \mid S(\vec{X}) = k)
+		= \frac{\Pr_{\theta}(\vec{X} = \vec{x}, S(\vec{X}) = k)}{\Pr_{\theta}(S(\vec{X}) = k)}
+	\]
+	Теперь возникает два случая. Если $\sum_{i = 1}^{n} x_{i} \neq k$, то события в вероятности в числителе несовместны и $Pr_{\theta}(\vec{X} = \vec{x} \mid S(\vec{X}) = k) = 0$. Иначе же событие $S(\vec{X}) = k$ включается в событие $\vec{X} = \vec{x}$ и
+	\begin{align*}
+		\Pr_{\theta}(\vec{X} = \vec{x} \mid S(\vec{X}) = k)
+		&= \frac{\Pr_{\theta}(\vec{X} = \vec{x}}{\Pr_{\theta}(S(\vec{X}) = k)}\mathbf{1}_{\sum_{i = 1}^{n} x_{i} = k} \\
+		&= \frac{\theta^{k}(1 - \theta)^{n - k}}{\binom{n}{k}\theta^{k}(1 - \theta)^{n - k}}\mathbf{1}_{\sum_{i = 1}^{n} x_{i} = k}
+		= \binom{n}{k}^{-1}\mathbf{1}_{\sum_{i = 1}^{n} x_{i} = k}.
+	\end{align*} 
+	Тем самым получаем, что условная вероятность действительно не зависит от $\theta$ и $S(\vec{X})$ будет достаточной статистикой. Теперь проверим полноту. Для этого возьмём произвольную функцию $f$ и посчитаем матожидание $\EE_{\theta}[f(S(\vec{X}))]$ по определению, пользуясь тем, что $S(\vec{X}) \sim \mathrm{Bin}(n, \theta)$:
+	\[
+		\EE_{\theta}[f(S(\vec{X}))]
+		= \sum_{k = 0}^{n} f(k)\binom{n}{k}\theta^{k}(1 - \theta)^{n - k}.
+	\]
+	Далее допустим, что это матожидание равно нулю для любого $\theta \in (0, 1)$. Но это многочлен от $\theta$ степени $n$, то есть у него не может быть континуум корней, если он не есть тождественный ноль. Но есть одна проблема: отсюда не следует, что $f(k) = 0$ для всех $k \in \set{1, 2, \ldots, n}$. Для этого преобразуем многочлен:
+	\[
+		\sum_{k = 0}^{n} f(k)\binom{n}{k}\theta^{k}(1 - \theta)^{n - k}
+		= (1 - \theta)^{n}\sum_{k = 0}^{n} f(k)\binom{n}{k}\left(\frac{\theta}{1 - \theta}\right)^{k}.
+	\] 
+	Так как $1 - \theta > 0$, то получаем, что для всех $k \in \set{1, 2, \ldots, n}$ $f(k)\binom{n}{k} = 0$. Следовательно, $f(k) = 0$ для всех $k \in \set{1, 2, \ldots, n}$ и $f(S(\vec{X})) = 0$ $\Pr_{\theta}$-п.н. для всех $\theta \in (0, 1)$. Тогда $S(\vec{X})$ есть полная статистика.
+\end{proof}
+\begin{consequence}
+	$\overline{\vec{X}}$ есть оптимальная оценка $\theta$ в схеме Бернулли.
+\end{consequence}
+
+\subsection{Критерий факторизации Неймана-Фишера}
+В примере выше нам сильно повезло, что мы сразу угадали полную достаточную статистику. Но как быть в общем случае? То есть возникает два относительно фундаментальных вопроса:
+\begin{itemize}
+	\item Как находить достаточную статистику?
+	\item Как проверять достаточные статистики на полноту?
+\end{itemize}
+
+На первый вопрос даёт ответ следующая теорема.
+\begin{theorem}[Критерий факторизации Неймана-Фишера]
+	Пусть $\set{\Pr_{\theta} \mid \theta \in \Theta}$ "--- это доминируемое семейство с плотностью $p_{\theta}(x)$. Тогда статистика $S(\vec{X})$ будет достаточной для данного семейства тогда и только тогда, когда существует представление $p_{\theta}(x)$ в виде
+	\[
+		p_{\theta}(x)
+		= h(x)\psi_{\theta}(S(x)),
+	\]
+	где $\psi_{\theta}$ и $h$ "--- некоторые неотрицательные борелевские функции.
+\end{theorem}
+\begin{proof}[Доказательство для дискретного случая]
+	Для начала покажем, что из того, что $S(\vec{X})$ есть достаточная статистика, следует нужное представление. Для этого заметим, что
+	\[
+		\Pr_{\theta}(\vec{X} = \vec{x})
+		= \Pr_{\theta}(\vec{X} = \vec{x} \mid S(\vec{X}) = S(\vec{x})) \Pr_{\theta}(S(\vec{X}) = S(\vec{x})).
+	\]
+	Первый множитель в произведении не зависит от $\theta$ по достаточности $S(\vec{X})$, а второй зависит только от $\theta$ и $S(\vec{X})$. Тогда 
+	\[
+		\Pr_{\theta}(\vec{X} = \vec{x})
+		= h(\vec{x})\psi_{\theta}(S(\vec{x})),
+	\]
+	где $h(\vec{x}) = \Pr_{\theta}(\vec{X} = \vec{x} \mid S(\vec{X}) = S(\vec{x}))$, а $\psi_{\theta}(S(\vec{x})) = \Pr_{\theta}(S(\vec{X}) = S(\vec{x}))$.
+
+	Теперь предположим, что существует представление $\Pr_{\theta}(\vec{X} = \vec{x})$ в виде $h(\vec{x})\psi_{\theta}(S(\vec{x}))$. Тогда
+	\begin{align*}
+		\Pr_{\theta}(\vec{X} = \vec{x} \mid S(\vec{X}) = s)
+		&= \frac{\Pr_{\theta}(\vec{X} = \vec{x}, S(\vec{X}) = s)}{\Pr_{\theta}(S(\vec{X}) = s)}
+		= \frac{\Pr_{\theta}(\vec{X} = \vec{x})}{\Pr_{\theta}(S(\vec{X}) = s)}\mathbf{1}_{ S(\vec{x}) = s} \\
+		&= \frac{\Pr_{\theta}(\vec{X} = \vec{x})}{\sum_{\vec{y}: S(\vec{y}) = S(\vec{x})} \Pr_{\theta}(\vec{X} = \vec{y})}\mathbf{1}_{ S(\vec{x}) = s} \\
+		&= \frac{h(\vec{x})\psi_{\theta}(S(\vec{x}))}{\sum_{\vec{y}: S(\vec{y}) = S(\vec{x})} h(\vec{y})\psi_{\theta}(S(\vec{y}))}\mathbf{1}_{ S(\vec{x}) = s} \\
+		&= \frac{h(\vec{x})}{\sum_{\vec{y}: S(\vec{y}) = S(\vec{x})} h(\vec{y})}\mathbf{1}_{S(\vec{x}) = s}
+	\end{align*}
+	Тем самым получаем, что условная вероятность не зависит от $\theta$. Следовательно, $S(\vec{X})$ есть достаточная статистика.
+\end{proof}
+
+Заметьте, что это было доказательство для дискретного случая. Доказательство для непрерывного случая не такое тривиальное.\footnote{Владимир Васильевич, ну не аналогично они доказываются, не аналогично!} Для него требуется теорема о пересчёте условных математических ожиданий. Но для того, чтобы её сформулировать, нужно ввести несколько вещей.
+\begin{definition}
+	Пусть $(\Omega, \mathcal{F}, \Pr)$ "--- вероятностное пространство. Далее, пусть $\QQ$ "--- это другая вероятностная мера на измеримом пространстве $(\Omega, \mathcal{F})$. Будем говорить, что вероятностная мера $\QQ$ абсолютно непрерывна относительно вероятностой меры $\Pr$, если для любого $A \in \mathcal{F}$ такого, что $\Pr(A) = 0$, выполнено, что $\QQ(A) = 0$. Обозначение: $\QQ \ll \Pr$.
+\end{definition}
+\begin{example}
+	Пусть $(\Omega, \mathcal{F}) = (\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Далее, пусть $\Pr = \mathcal{N}(0, 1)$, а $\QQ = \mathrm{Exp}(1)$. Несложно понять, что $\QQ \ll \Pr$. Однако в другую сторону это неверно, так как если взять $A = (-\infty, 0]$, то $\QQ(A) = 0$, но $\Pr(A) = 1/2 \neq 0$.
+\end{example}
+
+\begin{theorem}[Радон, Никодим]
+	Пусть $(\Omega, \mathcal{F})$ есть измеримое пространство, а $\Pr$ и $\tilde{\Pr}$ "--- две вероятностные меры на нём, причём $\tilde{\Pr} \ll \Pr$. Тогда существует единственная $\Pr$-п.н. случайная величина $\xi$ такая, что для любого $A \in \mathcal{F}$
+	\[
+		\tilde{\Pr}(A) = \EE[\xi\mathbf{1}_{\xi \in A}], 
+	\]
+	где $\EE$ означает взятие матожидания по вероятностой мере $\Pr$. Такую случайную величину называют \emph{производной Радона-Никодима} и обозначают
+	\[
+		\xi = \dv{\tilde{\Pr}}{\Pr}.
+	\]
+\end{theorem}
+Если кому интересно доказательство теоремы, то обращайтесь к учебнику по функциональному анализу (к тому же Колмогорову-Фомину).
+
+Теперь докажем один достаточно простой факт.
+\begin{theorem}
+	Пусть $\xi$ "--- это произвольная случайная величина, а $\tilde{\Pr} \ll \Pr$"--- две вероятностные меры на измеримом пространстве $(\Omega, \mathcal{F})$. Тогда
+	\[
+		\tilde{\EE}[\xi] = \EE\left[\xi\dv{\tilde{\Pr}}{\Pr}\right],
+	\]
+	где $\tilde{\EE}$ означает, что мы берём матожидание по вероятностной мере $\tilde{\Pr}$.
+\end{theorem}
+\begin{proof}
+	Пусть $\xi(\omega) = \mathbf{1}_{\omega \in A}$, где $A \in \mathcal{F}$. Тогда по теореме Радона-Никодима
+	\[
+		\tilde{\EE}[\mathbf{1}_{A}] 
+		= \tilde{\Pr}(A)
+		= \EE\left[\mathbf{1}_{A}\dv{\tilde{\Pr}}{\Pr}\right].
+	\]
+	То есть условие теоремы выполнено для индикаторов. Отсюда по линейности матожидания несложно получить это утверждение для простых случайных величин. Далее возьмём последовательность простых случайных величин $\xi_{n}$, монотонно приближающих $\xi$. Пользуясь теоремой о монотонной сходимости, получим желаемое.
+\end{proof}
+
+\begin{theorem}[Пересчёт условных математических ожиданий]
+	Пусть $\tilde{\Pr} \ll \Pr$ "--- две вероятностные меры на измеримом пространстве $(\Omega, \mathcal{F})$. Далее, пусть $\xi$ и $\eta$ "--- случайные величины, причём $\EE[|\xi|] < +\infty$. Тогда
+	\[
+		\tilde{\EE}[\xi \mid \eta] = \frac{\EE\left[\xi \dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}{\EE\left[\dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}
+	\]
+\end{theorem}
+\begin{proof}
+	Покажем, что правая часть равенства удовлетворяет свойствам условного математического ожидания. Действительно, она есть отношение измеримых функций от $\eta$, то есть это измеримая функция от $\eta$. Далее проверим интегральное свойство: для произвольного борелевского множества $B$
+	\begin{align*}
+		\tilde{\EE}\left[\frac{\EE\left[\xi \dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}{\EE\left[\dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}\mathbf{1}_{\eta \in B}\right]
+		&= \EE\left[\frac{\EE\left[\xi \dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}{\EE\left[\dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}\mathbf{1}_{\eta \in B}\dv{\tilde{\Pr}}{\Pr}\right] \\
+		&= \EE\left[\EE\left[\frac{\EE\left[\xi \dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}{\EE\left[\dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]}\mathbf{1}_{\eta \in B}\dv{\tilde{\Pr}}{\Pr} \,\middle|\, \eta\right]\right] \\
+		&= \EE\left[\EE\left[\xi \dv{\tilde{\Pr}}{\Pr}\,\middle|\,\eta\right]\mathbf{1}_{\eta \in B}\right]
+		= \EE\left[\xi \dv{\tilde{\Pr}}{\Pr}\mathbf{1}_{\eta \in B}\right]
+		= \tilde{\EE}[\xi\mathbf{1}_{\eta \in B}].
+	\end{align*}
+	Тем самым интегральное свойство выполнено и правая часть равенства действительно есть условное математическое ожидание.
+\end{proof}
+
+В доказательстве был опущен один момент: делить на ноль нельзя, а проверка на то, что знаменатель не ноль, была пропущена. Но несложно показать, что он действительно не ноль.
+\begin{problem}
+    Докажите, что 
+    \[
+        \tilde{\Pr}\left(\EE\left[\dv{\tilde{\Pr}}{\Pr}\,\middle|\, \eta\right] = 0\right) = 0.
+    \]
+\end{problem}
+\begin{proof}
+    Для удобства скажем, что $\xi = \dv{\tilde{\Pr}}{\Pr}$. Далее, по формуле полной вероятности:
+    \begin{align*}
+        \tilde{\Pr}(\EE[\xi\,|\, \eta] = 0)
+        &= \tilde{\EE}[\bm{1}_{\EE[\xi\,|\, \eta] = 0}]
+        = \EE[\xi\bm{1}_{\EE[\xi\,|\, \eta] = 0}]
+        = \EE[\EE[\xi\bm{1}_{\EE[\xi\,|\, \eta] = 0}\,|\,\eta]]
+        = \EE[\EE[\xi\,|\,\eta]\bm{1}_{\EE[\xi\,|\, \eta] = 0}]
+        = 0. \qedhere
+    \end{align*}
+\end{proof}

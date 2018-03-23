@@ -1,0 +1,540 @@
+% TODO: дополнить по видеозаписи
+\section{Лекция 2}
+\subsection{Сравнение оценок}
+Начнём с такой темы, как сравнение оценок. Очевидно, что оценок можно придумать навалом, можно и много оценок с хорошими свойствами наподобие состоятельности или асимптотической нормальности и прочими. Вопрос: кто из них лучше и как сравнивать их?
+
+Пусть $\hat{\theta}(\vec{X})$ и $\theta^{*}(\vec{X})$ "--- оценки неизвестного параметра $\theta$ с <<хорошими>> свойствами. Грубо говоря, если оценка не состоятельна, то она нам не интересна глобально. Возникает вопрос: как сравнивать оценки $\hat{\theta}(\vec{X})$ и $\theta^{*}(\vec{X})$?
+
+Базовый принцип сравнения завязан на так называемых функциях потерь и риска. 
+\begin{definition}
+	Функцию $\rho(x, y) \geq 0$ называют \emph{функцией потерь}.
+\end{definition}
+Простыми словами, функция потерь считает, сколько мы потеряем, если вместо $x$ подставим $y$. Данная функция обычно должна иметь некоторые хорошие свойства (если она метрика "--- то это вообще прекрасно, но это не обязательно).
+
+Приведём несколько примеров:
+\begin{enumerate}[label=(\alph*)]
+	\item Самый базовый пример "--- это квадратичная функция потерь: $\rho(x, y) = (x - y)^{2}$ ($x, y \in \mathbb{R}$).
+	\item $\rho(x, y) = |x - y|$ "--- $L_{1}$-метрика.
+	\item $\rho(\vec{x}, \vec{y}) = \langle \matr{A}(\vec{x} - \vec{y}), \vec{x} - \vec{y}\rangle$, где $\vec{x}, \vec{y} \in \mathbb{R}^{n}$, $\matr{A} \in \mathbb{R}^{n \times n}$, $\matr{A} \succ 0$ (это означает, что матрица положительно определена).
+\end{enumerate}
+
+\begin{definition}
+	\emph{Функцией риска} оценки $\hat{\theta}(\vec{X})$ параметра $\theta$ называется средний размер потерь нашей оценки:
+	\[
+		R(\theta, \hat{\theta}(\vec{X})) = \EE_{\theta}[\rho(\theta, \hat{\theta}(\vec{X}))].
+	\]
+\end{definition}
+
+Как мы можем сравнивать оценки с помощью функции риска? Для этого есть аж четыре подхода.
+\begin{enumerate}
+	\item\label{lec2:uniform} Самый банальный подход называется \textit{равномерным подходом}. Суть его крайне проста: просто сравниваем функции риска.
+	\begin{definition}
+		Пусть $\hat{\theta}(\vec{X})$ и $\theta^{*}(\vec{X})$ "--- оценки $\theta$. Будем говорить, что оценка $\hat{\theta}(\vec{X})$ лучше, чем оценка $\theta^{*}(\vec{X})$ (в равномерном смысле), если для всех $\theta \in \Theta$ функция риска для $\hat{\theta}(\vec{X})$ не превосходит функцию риска для $\theta^{*}(\vec{X})$:
+		\[
+			R(\theta, \hat{\theta}(\vec{X})) \leq R(\theta, \theta^{*}(\vec{X})),
+		\]
+		причём существует параметр $\theta_{0} \in \Theta$ такой, что в нём неравенство будет строгим: $R(\theta_{0}, \hat{\theta}(\vec{X})) < R(\theta_{0}, \theta^{*}(\vec{X}))$.
+	\end{definition}
+	
+	Как правило, если мы взяли хорошую функцию потерь (наподобие квадратичной), то равество функций риска везде означает равенство оценок, так что последнее требование не совсем обязательно.
+	
+	Что теперь напрашивется? Поиск лучшей оценки. Будем называть оценку $\hat{\theta}(\vec{X})$ наилучшей, если она лучше любой другой в равномерном подходе. Однако поиск наилучшей оценки "--- это достаточно бессмысленная задача, так как мы её не найдём. Рассмотрим следующий пример. Пусть $\rho(x, y) = (x - y)^{2}$ "--- квадратичная функция потерь, параметр $\theta \in [0, 1]$, а оценка возвращает тождественный ноль: $\hat{\theta}(\vec{X}) \equiv 0$. Тогда функция риска будет равна
+	\[
+		R(\theta, \hat{\theta}(\vec{X})) = \EE_{\theta}[(\theta - \hat{\theta}(\vec{X}))^{2}] = \theta^{2}.
+	\]
+	Однако, если $\theta = 0$, то $R(\theta, \hat{\theta}(\vec{X})) = 0$. Аналогично, если оценка возвращает не 0, а какое-то $\theta_{0} \in [0, 1]$, то $R(\theta_{0}, \hat{\theta}(\vec{X})) = 0$. Но тогда если бы у нас была наилучшая оценка $\theta^{*}(\vec{X})$, то у неё должен быть тождественно нулевой риск: $R(\theta, \theta^{*}(\vec{X})) \equiv 0$. Тем самым мы получаем, что $\hat{\theta}(\vec{X}) = \theta$. Следовательно, наилучшей оценки в равномерном смысле просто нет.
+	
+	Как тогда быть? Можно сказать, что будем смотреть не на все оценки, а только лишь на какой-то класс. Тогда можно ввести следующее определение:
+	\begin{definition}
+		Оценка $\hat{\theta}(\vec{X})$ называется наилучшей оценкой в классе оценок $\mathcal{K}$, если она лучше, чем любая другая оценка $\theta^{*}(\vec{X}) \in \mathcal{K}$. Если при подсчёте функции риска используется квадратичная функция потерь, то оценку $\hat{\theta}(\vec{X})$ называют \emph{оптимальной} в классе оценок $\mathcal{K}$.
+	\end{definition}
+	В качестве примера класса оценок можно сказать, что $\mathcal{K}$ "--- это все несмещённые оценки $\tau(\theta)$.
+	
+	\item \emph{Байесовский подход}.\label{lec2:bayes} Смысл этого подхода состоит в следующем: равномерный подход пытается считать, что все параметры в каком-то смымле равноправны и мы должны иметь неравенство для каждого $\theta \in \Theta$. Байесовский подход утверждает, что параметры не равноправны и некоторые параметры более вероятны, чем другие и мы пытаемя рассматривать параметр $\theta$ как случайную величину. Тогда нам важно выполнение неравенства на главных значениях, а на маловероятных уже без разницы. Формализуем это:
+	\begin{definition}
+		Пусть $\QQ$ "--- некоторое вероятностное распределение на $\Theta$ с плотностью $q(t)$, а $\hat{\theta}(\vec{X})$ и $\theta^{*}(\vec{X})$ есть оценки $\theta$. Тогда будем говорить, что оценка $\hat{\theta}(\vec{X})$ лучше оценки $\theta^{*}(\vec{X})$, если
+		\[
+			R_{\QQ}(\hat{\theta}(\vec{X})) < R_{\QQ}(\theta^{*}(\vec{X})), \text{ где } R_{\QQ}(\hat{\theta}(\vec{X})) = \int_{\Theta} R(\theta, \hat{\theta}(\vec{X}))q(\theta) \diff \theta.
+		\]
+		
+		Далее, будем называть оценку $\hat{\theta}(\vec{X})$ \emph{наилучшей}, если для неё $R_{\QQ}$ минимально:
+		\[
+			R_{\QQ}(\hat{\theta}(\vec{X})) = \inf_{\theta^{*}(\vec{X})} R_{\QQ}(\theta^{*}(\vec{X})).
+		\]
+		
+		Стоит заметить, что наилучшая оценка зависит от выбора распределения $\QQ$, то есть байесовский подход зависит от выбора распределения. По сути, на $\QQ$ можно смотреть, как на априорное представление о том, какие значения могут принимать параметры. Грубо говоря, мы можем пытаться делать какие-то такие вещи: если какая-то оценка оказалась ближе к истине, чем другие, но их мы откидывать не хотим, тогда просто возьмём их с какими-то весами.
+		
+		В качестве классического примера можно взять задачу про однорукого бандита.\footnote{На самом деле это задача так называемого \emph{последовательного анализа}.} Допустим, что есть игральный автомат, у которого несколько ручек "--- для красоты будем считать, что ручек две, и вероятность выигрыша у одной ручки больше, чем у другой. Наша задача "---  оптимизировать стратегию среднего выигрыша. Самый простой подход состоит в следующем: прокрутим обе ручки по 100 раз и посмотрим, с какой ручки больше выигрыша (пусть вышло так, что с первой). Равномерный подход говорит, что первая ручка лучше и достаточно крутить только её. Байесовский же подход утверждает, что могло случиться так, что вторая ручка лучше, но мы её просто не использовали слишком малое количество раз и нам просто не повезло "--- если бы взяли миллион раз, то было бы лучше. Поэтому стратегия байесовского подхода будет в таком стиле: десять раз крутим первую ручку и один раз вторую.
+	\end{definition} 
+	
+	\item \emph{Минимаксный подход}.\label{lec2:minimax} Этот подход достаточно тесно связан с байесовским подходом. Он апеллирует к следующему: мы вообще не хотим больших значений функций потерь, то есть если она мала для всех значений $\theta \in \Theta$, то нас это устраивает.
+	\begin{definition}
+		Пусть $\hat{\theta}(\vec{X})$ и $\theta^{*}(\vec{X})$ "--- оценки $\theta$. Будем говорить, что оценка $\hat{\theta}(\vec{X})$ лучше, чем оценка $\theta^{*}(\vec{X})$ (в минимаксном смысле), если
+		\[
+		\sup_{\theta \in \Theta} R(\theta, \hat{\theta}(\vec{X})) < \sup_{\theta \in \Theta} R(\theta, \theta^{*}(\vec{X})).
+		\]
+		
+		Оценку $\hat{\theta}(\vec{X})$ будем называть наилучшей, если для неё выполнено следующее равенство:
+		\[
+			\sup_{\theta \in \Theta} R(\theta, \hat{\theta}(\vec{X})) = \inf_{\theta^{*}(\vec{X})} \sup_{\theta \in \Theta} R(\theta, \theta^{*}(\vec{X})).
+		\]
+	\end{definition}
+\end{enumerate}
+
+\begin{wrapfigure}[16]{r}{0.5\textwidth}
+	\vspace{-10pt}
+	\begin{tikzpicture}
+	\begin{axis}[
+	axis lines = left,
+	xlabel = $\theta$,
+	ylabel = {$R$},
+	ymin = 0,
+	ymax = 2.9,
+	title = {Функции риска для $\hat{\theta}(\vec{X})$ и $\theta^{*}(\vec{X})$},
+	]
+	\addplot[domain=0:1,samples=300,color=blue,]{2.5 * e^(-(x - 0.5)^2/0.001)};
+	\addlegendentry{$R(\theta, \hat{\theta}(\vec{X}))$};
+	\addplot[domain=0:1,samples=300,color=red,]{2 - (2.3 * (x - 0.5))^4};
+	\addlegendentry{$R(\theta, \theta^{*}(\vec{X}))$};
+	\end{axis}
+	\end{tikzpicture}
+\end{wrapfigure}
+Пусть у нас есть две оценки $\hat{\theta}(\vec{X})$ и $\theta^{*}(\vec{X})$ для параметра $\theta \in [0, 1]$ cо следующими функциями риска (см. рисунок справа). Что можно сказать про эти оценки?
+\begin{itemize}
+	\item Если в байесовском подходе сказать, что мы берём равномерное распределение, то есть $\QQ = \mathrm{U}(0, 1)$, то оценка $\hat{\theta}(\vec{X})$ будет лучше оценки $\theta^{*}(\vec{X})$, так как у неё меньше площадь под кривой.
+	\item Теперь рассмотрим минимаксный подход. В нём оценка $\theta^{*}(\vec{X})$ будет лучше оценки $\hat{\theta}(\vec{X})$, так как у неё меньше максимальное значение.
+	\item В равномерном же подходе эти оценки несравнимы, так как есть и участки, где $R(\theta, \hat{\theta}(\vec{X})) > R(\theta, \theta^{*}(\vec{X}))$, так и участки, где $R(\theta, \hat{\theta}(\vec{X})) < R(\theta, \theta^{*}(\vec{X}))$.
+\end{itemize}
+
+Стоит заметить, что если в байесовском подходе взять распределение, сосредоточенное в центре, то оценка $\theta^{*}(\vec{X})$ будет лучше, чем $\hat{\theta}(\vec{X})$.
+
+Всё это сравнение оценок приводит к понятию \emph{допустимой оценки}. Суть в том, что равномерный подход наиболее сильный "--- если оценка лучше в равномерном подходе, то она будет лучше и в байесовском, и в минимаксном подходе. Поэтому имеет смысл смотреть только те оценки, для которых нет более хороших оценок в равномерном смысле, так как иначе можно просто взять более хорошую.
+\begin{definition}
+	Будем называть оценку $\hat{\theta}(\vec{X})$ \emph{допустимой}, если не существует оценки $\theta^{*}(\vec{X})$ такой, что $\theta^{*}(\vec{X})$ лучше, чем $\hat{\theta}(\vec{X})$ в равномерном подходе.
+\end{definition}
+
+Есть ещё один подход для сравнения оценок, но он принципиально отличается от предыдущих тем, что он не использует функции риска и он работает только для асимптотически нормальных оценок.
+
+\begin{enumerate}[resume]
+	\item \emph{Асимптотический подход}. Он завязан на определении асимптотической дисперсии.
+	\begin{definition}
+		Пусть $\hat{\theta}_{n}(\vec{X})$ и $\theta^{*}_{n}(\vec{X})$ "--- асимптотически нормальные оценки параметра $\theta$ с асимптотическими дисперсиями $\sigma_{1}^{2}(\theta)$ и $\sigma_{2}^{2}(\theta)$ соответственно. В таком случае будем говорить, что оценка $\hat{\theta}_{n}(\vec{X})$ лучше, чем оценка $\theta^{*}_{n}(\vec{X})$, если для всех $\theta \in \Theta$ $\sigma_{1}^{2}(\theta) \leq \sigma_{2}^{2}(\theta)$.
+	\end{definition}
+	Интуитивно на это можно смотреть, как на равномерное ограничение предельного среднеквадратичного уклонения. Почему это может быть важно? С помощью асимптотической дисперсии можно строить доверительные интервалы, и при её уменьшении будет уменьшаться длина интервала, что хорошо.
+	
+	Для примера попробуем сравнить какие-нибудь оценки.
+	\begin{problem}
+		Пусть $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка из $\mathcal{N}(\theta, 1)$, $\overline{\vec{X}}$ "--- выборочное среднее, а $\hat{\mu}(\vec{X})$ "--- выборочная медиана. Сравните эти оценки в асимптотическом подходе.
+	\end{problem}
+	\begin{proof}[Решение]
+		Для начала сразу же уточним, что для нормального распределения математическое ожидание является медианой, поэтому оценивается одна и та же величина и задача действительно осмысленна. Далее, согласно центральной предельной теореме выборочне среднее является асимптотически нормальной оценкой:
+		\[
+			\sqrt{n}(\overline{\vec{X}} - \theta) \xrightarrow{d_{\theta}} \mathcal{N}(0, \DD_{\theta}[X_{1}]) = \mathcal{N}(0, 1).
+		\]
+		Заметим, что плотность $f(x)$ нормального распределения непрерывно дифференцируема и положительна. Следовательно, можно воспользоваться теоремой об асимптотической нормальности выборочной медианы:
+		\[
+			\sqrt{n}(\hat{\mu}(\vec{X}) - \theta) \xrightarrow[n \to \infty]{d_{\theta}} \mathcal{N}\left(0, \frac{1}{4f^{2}(\theta)}\right) = \mathcal{N}\left(0, \frac{\pi}{2}\right).
+		\]
+		Но тогда выборочная медиана хуже в асимптотическом подходе, чем выборочное среднее. И это неспроста.
+	\end{proof}
+	Этот факт кажется не самым очевидным, так как известно, что медиана более устойчива к выбросам в выборке.
+\end{enumerate}
+
+\subsection{Неравенство Рaо-Крамeра}
+Будем считать, что мы работаем в классе $\mathcal{K}$ несмещённых оценок $\tau(\theta)$. Поставим следующую задачу: как найти оптимальную оценку в этом классе? Другими словами, нам нужно решить следующую задачу: если $\hat{\theta}(\vec{X})$ "--- это несмещённая оценка $\tau(\theta)$, то нам нужно равномерно по всем $\theta \in \Theta$ минимизровать $\EE_{\theta}[(\hat{\theta}(\vec{X}) - \tau(\theta))^{2}] = \DD_{\theta}[\hat{\theta}(\vec{X})]$.
+
+Оказывается, что если наложить так называемые \emph{условия регулярности}, то можно предоставить нижнюю оценку для дисперсии оценки. Сформулируем эти условия:
+\begin{enumerate}
+	\item Пусть множество параметров $\Theta$ "--- это открытый интервал на $\mathbb{R}$. 
+	
+	\item Далее, пусть параметрическое семейство распределений $\{\Pr_{\theta}\colon \theta \in \Theta\}$ является доминируемым с плотностью $p_{\theta}(x)$. Немного разъясним это требование.
+	\begin{definition}
+		Параметрическое семейство распределений называется \emph{доминируемым}, если все распределения в нём принадлежат к одному типу (абсолютно непрерывному или дискретному).
+		
+		Если все распределения абсолютно непрерывны, то под плотностью $p_{\theta}(x)$ подразумевается обычная плотность вероятностного распределения $\Pr_{\theta}$. Если же все распределения дискретны, то $p_{\theta}(x) = \Pr_{\theta}(\{x\})$.
+	\end{definition}
+	В таком случае удобно ввести понятие \emph{правдоподобия}. Это просто плотность выборки $\vec{X}$ и она равна
+	\[
+		p_{\theta}(\vec{X}) = \prod_{i = 1}^{n} p_{\theta}(X_{i}).
+	\]
+	\item Пусть $A = \{\vec{x} \colon p_{\theta}(\vec{x}) > 0\}$. Тогда $A$ не зависит от $\theta$.
+\end{enumerate}
+Сделаем небольшое отступление: для того, чтобы доказывать некоторые утверждения одновременно и для дискретных, и для абсолютно непрерывных распределений, скажем, что\footnote{В принципе, это связано с ремаркой из первой лекции, ибо здесь под $\mu$ подразумевается мера Лебега.}
+\[
+	\int_{A} p_{\theta}(\vec{x})\mu(\diff \vec{x}) = \begin{cases}
+	\int_{A} p_{\theta}(\vec{x})\diff \vec{x}, & \Pr_{\theta} \text{ абсолютно непрерывна} \\
+	\sum_{x \in A} p_{\theta}(\vec{x}), & \Pr_{\theta} \text{ дискретна}
+	\end{cases}
+\]
+\begin{enumerate}[resume]
+	\item Для любой статистики $S(\vec{X})$ такой, что $\EE_{\theta}[S^{2}(\vec{X})] < +\infty$, есть возможность дифференцирования под знаком интеграла:
+	\[
+		\pdv{\theta}\EE_{\theta}[S(\vec{X})] = \EE_{\theta}[S(\vec{X})U_{\theta}(\vec{X})], \text{ где } U_{\theta}(\vec{X}) = \pdv{\theta}\ln p_{\theta}(\vec{X}).
+	\]
+	Теперь покажем, почему это то же самое, что и дифференцирование под знаком интеграла:
+	\begin{align*}
+		\pdv{\theta}\EE_{\theta}[S(\vec{X})]
+		&= \pdv{\theta} \int_{A} S(\vec{x})p_{\theta}(\vec{x})\mu(\diff \vec{x})
+		= \int_{A} S(\vec{x})\frac{\partial p_{\theta}(\vec{x})}{\partial \theta}\mu(\diff \vec{x}) \\
+		&= \int_{A} S(\vec{x}) \left(\frac{1}{p_{\theta}(\vec{x})} \frac{\partial p_{\theta}(\vec{x})}{\partial \theta}\right) p_{\theta}(\vec{x})\mu(\diff \vec{x}) \\
+		&= \int_{A} S(\vec{x})\frac{\partial \ln p_{\theta}(\vec{x})}{\partial \theta}p_{\theta}(\vec{x})\mu(\diff \vec{x})
+		= \EE_{\theta}[S(\vec{X})U_{\theta}(\vec{X})].
+	\end{align*}
+	
+	Функцию $U_{\theta}(\vec{X})$ называют \emph{вкладом} наблюдения $\vec{X}$.
+	
+	\item Величина
+	\[
+		I_{\vec{X}}(\theta) = \EE_{\theta}\left[\left(\pdv{\theta} \ln p_{\theta}(\vec{X})\right)^{2}\right],
+	\]
+	называемая \emph{информацией} (по Фишеру) выборки $\vec{X}$, должна быть положительна и конечна для любых $\theta \in \Theta$.
+\end{enumerate}
+
+Теперь можно сформулировать теорему, которая будет давать оценку снизу.
+\begin{theorem}[Неравенство Рао-Крам\'{е}ра]
+	Пусть $\tau$ "--- это дифференцируемая функция от параметра. Далее, пусть $\hat{\theta}(\vec{X})$ "--- это несмещённая оценка $\tau(\theta)$ такая, что $\EE_{\theta}[\hat{\theta}^{2}(\vec{X})] < +\infty$ и выполнены условия регулярности. Тогда для всех $\theta \in \Theta$
+	\[
+		\DD_{\theta}[\hat{\theta}(\vec{X})] \geq \frac{(\tau'(\theta))^{2}}{I_{\vec{X}}(\theta)}.
+	\]
+\end{theorem}
+\begin{proof}
+	Воспользуемся четвёртым условием регулярности, подставив в неё $S(\vec{X}) \equiv 1$:
+	\begin{align*}
+		\pdv{\theta}\EE_{\theta}[S(\vec{X})]
+		&= \pdv{\theta}\EE_{\theta}[1] = 0, \\
+		\EE_{\theta}[S(\vec{X})U_{\theta}(\vec{X})]
+		&= \EE_{\theta}[U_{\theta}(\vec{X})].
+	\end{align*}
+	Следовательно, $\EE_{\theta}[U_{\theta}(\vec{X})] = 0$.
+	
+	Далее, снова воспользуемся четвёртым свойством регулярности, подставив в него $S(\vec{X}) = \hat{\theta}(\vec{X})$:
+	\begin{align*}
+		\pdv{\theta}\EE_{\theta}[S(\vec{X})]
+		&= \pdv{\theta}\EE_{\theta}[\hat{\theta}(\vec{X})] = \tau'(\theta), \\
+		\EE_{\theta}[S(\vec{X})U_{\theta}(\vec{X})] 
+		&= \EE_{\theta}[\hat{\theta}(\vec{X})U_{\theta}(\vec{X})]
+		= \EE_{\theta}[(\hat{\theta}(\vec{X}) - \tau(\theta))U_{\theta}(\vec{X})]
+	\end{align*}
+	Тем самым $\tau'(\theta) = \EE_{\theta}[(\hat{\theta}(\vec{X}) - \tau(\theta))U_{\theta}(\vec{X})]$. Теперь вспомним неравенство Коши-Буняковского-Шварца: для любых случайных величин $X$, $Y$ с конечными вторыми моментами
+	\[
+		\EE^{2}[XY] \leq \EE[X^{2}]\EE[Y^{2}].
+	\]
+	Тогда согласно этому неравенству
+	\[
+		(\tau'(\theta))^{2} \leq \EE_{\theta}[(\hat{\theta}(\vec{X}) - \tau(\theta))^{2}]\EE_{\theta}[U_{\theta}^{2}(\vec{X})] = \DD_{\theta}[\hat{\theta}(\vec{X})]I_{\vec{X}}(\theta).
+	\]
+	Отсюда получаем желаемое:
+	\[
+		\DD_{\theta}[\hat{\theta}(\vec{X})] \geq \frac{(\tau'(\theta))^{2}}{I_{\vec{X}}(\theta)}. \qedhere
+	\]
+\end{proof}
+
+А можно ли вообще достичь эту оценку? В некоторых случах можно.
+\begin{definition}
+	Пусть $\hat{\theta}(\vec{X})$ "--- несмещённая оценка для $\tau(\theta)$. Будем называть её \emph{эффективной}, если для неё достигается равенство в неравенстве Рао-Крамера, то есть для всех $\theta \in \Theta$
+	\[
+		\DD_{\theta}[\hat{\theta}(\vec{X})] = \frac{(\tau'(\theta))^{2}}{I_{\vec{X}}(\theta)}.
+	\]
+\end{definition}
+Оказывается, для проверки оценки на эффективность даже есть критерий.
+\begin{theorem}[Критерий эффективности]
+	В условиях неравенства Рао-Крамера $\hat{\theta}(\vec{X})$ будет эффективной оценкой $\tau(\theta)$ тогда и только тогда, когда 
+	\[
+		\hat{\theta}(\vec{X}) - \tau(\theta) = c(\theta)U_{\theta}(\vec{X}), \text{ где } c(\theta) = \frac{\tau'(\theta)}{I_{\vec{X}}(\theta)}.
+	\]
+\end{theorem}
+\begin{proof}
+	Как известно, в неравенстве Коши-Буняковского-Шварца равенство достигается тогда и только тогда, когда между случайными величинами есть линейная зависимость. Следовательно, $\hat{\theta}(\vec{X})$ будет эффективной оценкой для $\tau(\theta)$ только в том случае, если существуют функции $c(\theta)$ и $a(\theta)$ такие, что
+	\[
+		\hat{\theta}(\vec{X}) - \tau(\theta) = c(\theta)U_{\theta}(\vec{X}) + a(\theta).
+	\]
+	
+	Теперь посчитаем эти функции.
+	\begin{itemize}
+		\item Для начала возьмём матожидание:
+		\[
+			\EE_{\theta}[\hat{\theta}(\vec{X}) - \tau(\theta)] = \EE_{\theta}[c(\theta)U_{\theta}(\vec{X}) + a(\theta)].
+		\]
+		Тогда
+		\[
+			\tau(\theta) - \tau(\theta) = c(\theta) \cdot 0 + a(\theta) \implies a(\theta) = 0.
+		\]
+		
+		\item Теперь помножим обе части равенства на $U_{\theta}(\vec{X})$ и возьмём матожидание:
+		\[
+			\EE_{\theta}[(\hat{\theta}(\vec{X}) - \tau(\theta))U_{\theta}(\vec{X})] = \EE_{\theta}[c(\theta)U_{\theta}^{2}(\vec{X})].
+		\]
+		Но тогда
+		\[
+			\tau'(\theta) = c(\theta)I_{\vec{X}}(\theta) \implies c(\theta) = \frac{\tau'(\theta)}{I_{\vec{X}}(\theta)}.
+		\]
+	\end{itemize}
+	Тем самым получаем желаемое.
+\end{proof}
+
+Теперь попробуем применить этот критерий.
+\begin{problem}
+	Пусть $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка из распределения Бернулли $\mathrm{Bin}(1, \theta)$, где $\theta \in (0, 1)$. Найти эффективную оценку $\theta$ и информацию $I_{\vec{X}}(\theta)$.
+\end{problem}
+\begin{proof}[Решение]
+	Воспользуемся критерием эффективности. Для этого нужно посчитать вклад. Начнём с того, что запишем плотность выборки.
+	
+	Небольшое отступление: если нам известно, что случайная величина $\xi$ принимает значения $x_{1}, \ldots, x_{m}$ с вероятностями $p_{1}, \ldots, p_{m}$, то плотность можно записать следующим образом:
+	\[
+		p_{\xi}(x) = \prod_{i = 1}^{m} p_{i}^{[x = x_{i}]}.
+	\]
+	
+	Воспользуемся этим и запишем правдоподобие:
+	\[
+		p_{\theta}(\vec{X}) 
+		= \prod_{i = 1}^{n} p_{\theta}(X_{i}) 
+		= \prod_{i = 1}^{n} \theta^{[X_{i} = 1]}(1 - \theta)^{[X_{i} = 0]}
+		= \prod_{i = 1}^{n} \theta^{X_{i}}(1 - \theta)^{1 - X_{i}}
+	\]
+	Теперь несложно посчитать правдоподобие:
+	\begin{align*}
+		\ln p_{\theta}(\vec{X})
+		&= \sum_{k = 1}^{n} X_{i}\ln\theta + (1 - X_{i})\ln(1 - \theta) \\
+		U_{\theta}(\vec{X})
+		&= \frac{X_{1} + \ldots + X_{n}}{\theta} - \frac{n - X_{1} - \ldots - X_{n}}{1 - \theta} \\
+		&= n\left(\frac{\overline{\vec{X}}}{\theta} - \frac{1 - \overline{\vec{X}}}{1 - \theta}\right) 
+		= \frac{n}{\theta(1 - \theta)}(\overline{\vec{X}} - \theta).
+	\end{align*}
+	Отсюда видно, что $\overline{\vec{X}}$ является эффективной оценкой $\theta$ и информация Фишера равна
+	\[
+		I_{\vec{X}}(\theta) = \frac{n}{\theta(1 - \theta)}. \qedhere
+	\]
+\end{proof}
+
+\subsection{Информация Фишера}
+Начнём с того, что обобщим понятие информации по Фишеру:
+\begin{definition}
+	Пусть $S(\vec{X})$ "--- это некоторая статистика с плотностью $g_{\theta}(x)$. Тогда \emph{информацией Фишера} статистики $S(\vec{X})$ называется
+	\[
+		I_{S}(\theta) = \EE_{\theta}\left[\left(\pdv{\theta} \ln g_{\theta}(S(\vec{X}))\right)^{2}\right].
+	\]
+\end{definition}
+У информации Фишера есть несколько свойств, которые оправдывают её название.
+\begin{enumerate}
+	\item Допустим, что распределение $S(\vec{X})$ не зависит от $\theta$. Тогда $I_{S}(\theta) = 0$.
+\end{enumerate}
+\begin{proof}
+	Это достаточно очевидное утверждение, так как в таком случае $\ln g_{\theta}(S(\vec{X}))$ не будет зависеть от $\theta$ и при дифференцировании по нему обратится в 0, а матожидание нуля есть ноль.
+\end{proof}
+\begin{enumerate}[resume]
+	\item Пусть $S(\vec{X})$ и $T(\vec{X})$ "--- независимые статистики для всех $\theta \in \Theta$ и выполнены условия регулярности. Тогда
+	\[
+		I_{(S, T)}(\theta) = I_{S}(\theta) + I_{T}(\theta).
+	\]
+\end{enumerate}
+\begin{proof}
+	Пусть статистики $S(\vec{X})$ и $T(\vec{X})$ имеют плотности $f_{\theta}(s)$ и $g_{\theta}(t)$ соответственно. Тогда случайный вектор $(S(\vec{X}), T(\vec{X}))$ имеет совместную плотность $h_{\theta}(s, t) = f_{\theta}(s)g_{\theta}(t)$. Следовательно,
+	\[
+		\ln h_{t}(s, t) = \ln f_{\theta}(s) + \ln g_{\theta}(t).
+	\]
+	Из этого можно сделать вывод, что
+	\[
+		\EE_{\theta}\left[\pdv{\theta} \ln h_{\theta}(S(\vec{X}), T(\vec{X}))\right] 
+		= \EE_{\theta}\left[\pdv{\theta} \ln f_{\theta}(S(\vec{X}))\right] + \EE_{\theta}\left[\pdv{\theta} \ln g_{\theta}(T(\vec{X}))\right]
+		= 0.
+	\] 
+	Но тогда
+	\begin{align*}
+		I_{(S, T)}(\theta) 
+		&= \DD_{\theta}\left[\pdv{\theta} \ln h_{\theta}(S(\vec{X}), T(\vec{X}))\right] \\
+		&= \DD_{\theta}\left[\pdv{\theta} \ln f_{\theta}(S(\vec{X}))\right] + \DD_{\theta}\left[\pdv{\theta} \ln g_{\theta}(T(\vec{X}))\right]
+		= I_{S}(\theta) + I_{T}(\theta). \qedhere
+	\end{align*}
+\end{proof}
+У этого свойства есть достаточно приятное следствие. Пусть
+\[
+	i(\theta) = \EE_{\theta}\left[\left(\pdv{\theta} \ln p_{\theta}(X_{1})\right)^{2}\right].
+\]
+Тогда
+\[
+	I_{\vec{X}}(\theta) = \sum_{i = 1}^{n} I_{X_{i}}(\theta) = nI_{X_{1}}(\theta) = ni(\theta).
+\]
+
+\begin{enumerate}[resume]
+	\item Для любой статистики $S(\vec{X})$ $I_{S}(\theta) \leq I_{\vec{X}}(\theta)$.
+\end{enumerate}
+\begin{proof}
+	Для начала покажем, что если у статистики $S(\vec{X})$ есть плотность $g_{\theta}(s)$, то
+	\[
+		\EE_{\theta}\left[\pdv{\theta}\ln p_{\theta}(\vec{X})\,\middle|\, S(\vec{X})\right] = \pdv{\theta}\ln g_{\theta}(S(\vec{X})).
+	\]
+	
+	Будем делать это по определению условного математического ожидания. Начнём с того, что функция справа является борелевской функцией от $S(\vec{X})$. Осталось проверить интегральное свойство: для любого борелевского множества $B$
+	\[
+		\EE_{\theta}\left[\pdv{\theta}\ln p_{\theta}(\vec{X})[S(\vec{X}) \in B]\right]
+		= \EE_{\theta}\left[\pdv{\theta}\ln g_{\theta}(S(\vec{X})) [S(\vec{X}) \in B]\right].
+	\]
+	Заметим, что
+	\begin{align*}
+		\EE_{\theta}\left[\pdv{\theta}\ln p_{\theta}(\vec{X})[S(\vec{X}) \in B]\right]
+		&= \int_{A} \frac{\partial \ln p_{\theta}(\vec{x})}{\partial \theta} p_{\theta}(\vec{x}) [S(\vec{x}) \in B] \mu(\diff \vec{x})
+		= \int_{A} \frac{\partial p_{\theta}(\vec{x})}{\partial \theta} [S(\vec{x}) \in B] \mu(\diff \vec{x}) \\
+		&= \pdv{\theta} \int_{A} p_{\theta}(\vec{x}) [S(\vec{x}) \in B] \mu(\diff \vec{x})
+		= \pdv{\theta} \Pr_{\theta}(S(\vec{X}) \in B)
+	\end{align*}
+	Но, с другой стороны
+	\begin{align*}
+		\pdv{\theta} \Pr_{\theta}(S(\vec{X}) \in B)
+		&= \pdv{\theta} \int_{B} g_{\theta}(\vec{s}) \mu'(\diff \vec{s})
+		= \int_{B} \frac{\partial \ln p_{\theta}(\vec{s})}{\partial \theta} g_{\theta}(\vec{s}) \mu'(\diff \vec{s}) \\
+		&= \EE_{\theta}\left[\pdv{\theta}\ln g_{\theta}(S(\vec{X})) [S(\vec{X}) \in B]\right].
+	\end{align*}
+	
+	Теперь будем смотреть на следующую величину:
+	\[
+		M = \EE_{\theta}\left[\pdv{\ln p_{\theta}(\vec{X})}{\theta}\pdv{\ln g_{\theta}(S(\vec{X}))}{\theta}\right].
+	\]
+	Согласно неравенству Коши-Буняковского-Шварца
+	\[
+		M^{2} 
+		\leq \EE_{\theta}\left[\left(\pdv{\theta} \ln p_{\theta}(\vec{X})\right)^{2}\right] \EE_{\theta}\left[\left(\pdv{\theta} \ln g_{\theta}(S(\vec{X}))\right)^{2}\right]
+		= I_{\vec{X}}(\theta)I_{S}(\theta).
+	\]
+	Теперь докажем, что $M = I_{S}(\theta)$. Для этого заметим, что
+	\[
+		\EE_{\theta}\left[\pdv{\ln p_{\theta}(\vec{X})}{\theta} \pdv{\ln g_{\theta}(S(\vec{X}))}{\theta}\right]
+		= \EE_{\theta}\left[\EE_{\theta}\left[\pdv{\ln p_{\theta}(\vec{X})}{\theta} \pdv{\ln g_{\theta}(S(\vec{X}))}{\theta}\,\middle|\, S(\vec{X})\right]\right].
+	\]
+	Далее, функцию от условия можно вынести из условного математического ожидания. Тогда
+	\begin{align*}
+		\EE_{\theta}\left[\pdv{\ln p_{\theta}(\vec{X})}{\theta} \pdv{\ln g_{\theta}(S(\vec{X}))}{\theta}\right]
+		&= \EE_{\theta}\left[\pdv{\ln g_{\theta}(S(\vec{X}))}{\theta} \EE_{\theta}\left[\pdv{\ln p_{\theta}(\vec{X})}{\theta} \,\middle|\, S(\vec{X})\right]\right] \\
+		&= \EE_{\theta}\left[\left(\pdv{\ln g_{\theta}(S(\vec{X}))}{\theta}\right)^{2}\right] 
+		= I_{\vec{S}}(\theta).
+	\end{align*}
+	Тогда 
+	\[
+		I_{S}^{2}(\theta) \leq I_{\vec{X}}(\theta)I_{S}(\theta)
+		\implies
+		I_{S}(\theta) \leq I_{\vec{X}}(\theta). \qedhere
+	\]
+\end{proof}
+\begin{enumerate}[resume]
+	\item Оценка $S(\vec{X})$ будет достаточной тогда и только тогда, когда для всех $\theta \in \Theta$ $I_{S}(\theta) = I_{\vec{X}}(\theta)$.
+\end{enumerate}
+\begin{proof}
+	Это свойство будет доказано позднее.
+\end{proof}
+
+Рассмотрим пример.
+\begin{problem}
+	Пусть $\vec{X} = (X_{1}, \ldots, X_{n})$ "--- выборка из экспоненциального распределения $\mathrm{Exp}(\theta)$. Далее, пусть $X_{(1)} = \min_{1 \leq i \leq n} X_{i}$. Найти $I_{X_{(1)}}(\theta)$ и $I_{\vec{X}}(\theta)$.
+\end{problem}
+\begin{proof}[Решение]
+	Начнём с того, что найдём распределение $X_{(1)}$. Для этого заметим, что
+	\[
+		\Pr_{\theta}(X_{(1)} \leq x) = 1 - \Pr_{\theta}(X_{(1)} \geq x) = 1 - \prod_{i = 1}^{n} \Pr_{\theta}(X_{i} \geq x) = 1 - e^{-n\theta x}.
+	\]
+	Следовательно, $X_{(1)} \sim \mathrm{Exp}(n\theta)$. 
+	
+	Теперь можно считать информации Фишера. Начнём с $I_{\vec{X}}(\theta)$. Вспомним, что $I_{\vec{X}}(\theta) = ni(\theta)$. Тогда
+	\[
+		\pdv{\theta} \ln p_{\theta}(X_{1}) = \pdv{\theta}(\ln \theta - \theta X_{1}) = \frac{1}{\theta} - X_{1}.
+	\]
+	Тогда
+	\[
+		i(\theta) = \EE_{\theta}\left[\left(X_{1} - \frac{1}{\theta}\right)^{2}\right] = \DD_{\theta}[X_{1}] = \frac{1}{\theta^{2}} \implies I_{\vec{X}}(\theta) = \frac{n}{\theta^{2}}.
+	\]
+	
+	Теперь посчитаем $I_{X_{(1)}}(\theta)$ аналогичным образом. Заметим, что
+	\[
+		\pdv{\theta} \ln p_{\theta}(X_{(1)}) = \pdv{\theta}(\ln n + \ln \theta - n\theta X_{1}) = \frac{1}{\theta} - nX_{1}.
+	\]
+	Тогда 
+	\[
+		I_{X_{1}}(\theta) = \EE_{\theta}\left[\left(nX_{(1)} - \frac{1}{\theta}\right)^{2}\right] = n^{2}\DD_{\theta}[X_{(1)}] = \frac{1}{\theta^{2}}. \qedhere
+	\]
+\end{proof}
+
+\subsection{Многомерное неравенство Рао-Крамера}
+
+У неравенства Рао-Крамера есть многомерный аналог. Но для его доказательства нужно одно неравенство.
+\begin{theorem}[Матричное неравенство Коши-Буняковского-Шварца]
+	Пусть $\matr{\Psi}$ и $\matr{H}$ "--- случайные матрицы одного и того же размера и матрица $\EE_{\theta}[\matr{H}\matr{H}^{\top}]$ обратима. Тогда\footnote{Запись $\matr{A} \succcurlyeq \matr{B}$ означает, что матрица $\matr{A} - \matr{B}$ неотрицательно определена.}
+	\[
+		\EE_{\theta}[\matr{\Psi}\matr{\Psi}^{\top}] \succcurlyeq \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}](\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1}\EE_{\theta}[\matr{H}\matr{\Psi}^{\top}],
+	\]
+	причём равенство достигается тогда и только тогда, когда $\matr{\Psi} = \matr{Z}\matr{H}$, где
+	\[
+		\matr{Z} = \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}](\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1}.
+	\]
+\end{theorem}
+\begin{proof}
+	Для начала заметим, что для любой матрицы $\matr{A}$ матрица $\matr{A}\matr{A}^{\top} \succcurlyeq 0$. Тогда для любой матрицы $\matr{Z}$ выполнено следующее:
+	\[
+		(\matr{\Psi} - \matr{Z}\matr{H})(\matr{\Psi} - \matr{Z}\matr{H})^{\top} \succcurlyeq 0
+	\]
+	Возьмём матожидание:
+	\[
+		\EE_{\theta}[(\matr{\Psi} - \matr{Z}\matr{H})(\matr{\Psi} - \matr{Z}\matr{H})^{\top}] \succcurlyeq 0
+	\]
+	Теперь раскроем матожидание по линейности:
+	\[
+		\EE_{\theta}[\matr{\Psi}\matr{\Psi}^{\top}] - \matr{Z}\EE_{\theta}[\matr{H}\matr{\Psi}^{\top}] - \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}]\matr{Z}^{\top} + \matr{Z}\EE_{\theta}[\matr{H}\matr{H}^{\top}]\matr{Z}^{\top} \succcurlyeq 0
+	\]
+	Возьмём $\matr{Z} = \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1}$ и попробуем упростить выражение:
+	\begin{align*}
+		\matr{Z}\EE_{\theta}[\matr{H}\matr{\Psi}^{\top}]
+		&= \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1} \EE_{\theta}[\matr{H}\matr{\Psi}^{\top}], \\
+		\EE_{\theta}[\matr{\Psi}\matr{H}^{\top}]\matr{Z}^{\top}
+		&= \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1})^{\top} \\
+		&= \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] ((\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1})^{\top} (\EE_{\theta}[\matr{\Psi}\matr{H}^{\top}])^{\top} \\
+		&= \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1} \EE_{\theta}[\matr{H}\matr{\Psi}^{\top}], \\
+		\matr{Z}\EE_{\theta}[\matr{H}\matr{H}^{\top}]\matr{Z}^{\top}
+		&= \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1} \EE_{\theta}[\matr{H}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1} \EE_{\theta}[\matr{H}\matr{\Psi}^{\top}] \\
+		&= \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1} \EE_{\theta}[\matr{H}\matr{\Psi}^{\top}].
+	\end{align*}
+	
+	Следовательно,
+	\[
+		\EE_{\theta}[\matr{\Psi}\matr{\Psi}^{\top}] - \EE_{\theta}[\matr{\Psi}\matr{H}^{\top}] (\EE_{\theta}[\matr{H}\matr{H}^{\top}])^{-1} \EE_{\theta}[\matr{H}\matr{\Psi}^{\top}] \succcurlyeq 0.
+	\]
+	
+	Для критерия равенства нужно заметить, что
+	\[
+		\EE_{\theta}[(\matr{\Psi} - \matr{Z}\matr{H})(\matr{\Psi} - \matr{Z}\matr{H})^{\top}] = \matr{0} \iff \matr{\Psi} = \matr{Z}\matr{H}. \qedhere
+	\]
+\end{proof}
+
+Дело осталось за малым.
+\begin{theorem}[Многомерное неравенство Рао-Крамера]
+	Пусть пространство параметров $\Theta \subseteq \mathbb{R}^{k}$, $k > 1$. Далее, пусть $\tau \colon \Theta \mapsto \mathbb{R}^{k}$ "--- это некоторая дифференцируемая по $\vec{\theta}$ функция и её якобиан равен
+	\[
+		\tau'(\vec{\theta}) = \left\|\pdv{(\tau(\vec{\theta}))_{i}}{\vec{\theta}_{j}}\right\|_{i, j = 1}^{k} \in \mathbb{R}^{k \times k}.
+	\]
+	Далее, $\hat{\theta}(\vec{X}) \in \mathbb{R}^{k}$ "--- это несмещённая оценка для $\tau(\theta)$ с матрицей ковариаций
+	\[
+		\DD_{\vec{\theta}}[\hat{\theta}(\vec{X})] = \EE_{\vec{\theta}}[(\hat{\theta}(\vec{X}) - \tau(\vec{\theta}))(\hat{\theta}(\vec{X}) - \tau(\vec{\theta}))^{\top}]
+	\]
+	Пусть $I_{\vec{X}}(\theta)$ "--- информация Фишера:
+	\[
+		I_{\vec{X}}(\vec{\theta}) = \left\|\EE_{\vec{\theta}}\left[\pdv{\ln p_{\theta}(\vec{X})}{\vec{\theta}_{i}} \pdv{\ln p_{\theta}(\vec{X})}{\vec{\theta}_{j}}\right]\right\|_{i, j = 1}^{k} \in \mathbb{R}^{k \times k}
+	\]
+	Другими словами, это матрица ковариаций вклада
+	\[
+		U_{\vec{\theta}}(\vec{X}) =  \left(\pdv{\vec{\theta}_{1}} \ln p_{\theta}(\vec{X}), \ldots, \pdv{\vec{\theta}_{k}} \ln p_{\theta}(\vec{X})\right)^{\top}
+	\]
+	Многомерное неравенство Рао-Крамера утверждает, что в условиях регулярности
+	\[
+		\DD_{\vec{\theta}}[\hat{\theta}(\vec{X})] \succcurlyeq \tau'(\vec{\theta})I_{\vec{X}}^{-1}(\vec{\theta})(\tau'(\vec{\theta}))^{\top}.
+	\]
+\end{theorem}
+\begin{proof}
+	Рассуждая ровно так же, как и в одномерном случае, получаем, что $\EE_{\vec{\theta}}[U_{\vec{\theta}}(\vec{X})] = \vec{0}$ и
+	\[
+		\tau'(\vec{\theta}) 
+		= \EE_{\vec{\theta}}[\hat{\theta}(\vec{X})(U_{\vec{\theta}}(\vec{X}))^{\top}]
+		= \EE_{\vec{\theta}}[(\hat{\theta}(\vec{X}) - \tau(\vec{\theta}))(U_{\vec{\theta}}(\vec{X}))^{\top}].
+	\]
+	
+	Далее, по матричному неравенству Коши-Буняковского-Шварца получаем, что
+	\[
+		\DD_{\vec{\theta}}[\hat{\theta}(\vec{X})] \succcurlyeq \tau'(\vec{\theta})I_{\vec{X}}^{-1}(\vec{\theta})(\tau'(\vec{\theta}))^{\top}. \qedhere
+	\]
+	
+\end{proof}
